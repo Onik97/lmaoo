@@ -1,13 +1,13 @@
-<?php require("User/user.php");
+<?php require("../User/user.php");
 session_start(); 
 ?>
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="../Css/HomePage.css">
-<title>Home</title>
-
+<link rel="stylesheet" href="AboutPage.css">
+<title>About</title>
 <head>
+
 <nav class="navbar navbar-default navbar-fixed-top">
 
 <!-- Navbar Container -->
@@ -15,7 +15,7 @@ session_start();
 	<!-- Navbar Header [contains both toggle button and navbar brand] -->
 	<div class="navbar-header">
         <!-- Toggle Button [handles opening navbar components on mobile screens]-->
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#exampleNavComponents" aria-expanded="false">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#exampleNavComponents" aria-expanded"false">
 			<i class="glyphicon glyphicon-align-center"></i>
         </button>
 		<p class="navbar-text text-right">
@@ -41,14 +41,14 @@ session_start();
 
     <!-- Navbar Menu -->
             <ul class="nav navbar-nav navbar-right">
-                <li class="active">
-                    <a class="two" href="#">Home</a>
-                </li>
                 <li>
-                    <a href="About/index.php">About</a>
+                    <a href="../index.php">Home</a>
+                </li>
+                <li class="active">
+                    <a href="#">About</a>
                 </li>
 				<li>
-					<a href="Ticket/index.php">Ticket</a>
+					<a href="../Ticket/index.php">Ticket</a>
                 <!-- Navbar link with a dropdown menu -->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account
@@ -73,10 +73,19 @@ session_start();
 </nav>
 	</head>
 <body>
+
+
          <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-         
-<?php echo "Home Page is currently on maintenance"; ?>
+<?php echo "About page is currently on progress"; ?>
+
+<div class="container">
+
+<div class="top-buffer">
+<h1 class="one">Welcome to the About page</h1>
+<p class="one">Our website is about project managment and organizing for all the people which are working on the project at the time.</p>
+</div>
+</div>
 </body>
 
 </html>
