@@ -30,7 +30,7 @@ session_start();
                         }
                         else
                         {
-                            echo "Welcome to Lmaoo! Please login for full access!";
+                            echo "Welcome to Lmaoo! Please login for full access! Checking if automatic changes work!";
                         }
                         ?>
                 </p>
