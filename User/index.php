@@ -18,7 +18,7 @@ session_start();
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#exampleNavComponents" aria-expanded"false">
 			<i class="glyphicon glyphicon-align-center"></i>
         </button>
-		<p class="navbar-text text-right">Login Required</p>
+		<p class="navbar-text text-right"></p>
         </div>
 
     <!-- Navbar Collapse [contains navbar components such as navbar menu and forms ] -->
