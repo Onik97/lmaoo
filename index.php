@@ -35,7 +35,6 @@ session_start();
                         ?>
                 </p>
         </div>
-
     <!-- Navbar Collapse [contains navbar components such as navbar menu and forms ] -->
         <div class="collapse navbar-collapse" id="exampleNavComponents">
 
