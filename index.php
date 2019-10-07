@@ -35,7 +35,6 @@ session_start();
                         ?>
                 </p>
         </div>
-
     <!-- Navbar Collapse [contains navbar components such as navbar menu and forms ] -->
         <div class="collapse navbar-collapse" id="exampleNavComponents">
 
@@ -57,13 +56,13 @@ session_start();
                     <ul class="dropdown-menu">
                         <?php if (!isset($userLoggedIn)) 
                                 { ?>
-                            <li><a href="../User/register.php">Register</a></li>
-                            <li><a href="../User/index.php">Login</a></li>
+                            <li><a href="User/register.php">Register</a></li>
+                            <li><a href="User/index.php">Login</a></li>
                         <?php   } 
                               else
                                 { ?>
-                                    <li><a href="../User/editUser.php">Edit Account</a></li>   
-                                    <li><a href="../User/logout.php">Logout</a></li>
+                                    <li><a href="User/editUser.php">Edit Account</a></li>   
+                                    <li><a href="User/logout.php">Logout</a></li>
                         <?php   } ?>
                     </ul>
                 </li>
