@@ -61,7 +61,7 @@ session_start();
                         <?php   } 
                               else if ($userLoggedIn->getLevel() == "1")
                                 { ?>
-                                    <li><a href="User/editUser.php">Edit Account</a></li>   
+                                    <li><a href="User/editUser.php">Edit Account</a></li> 
                                     <li><a href="User/logout.php">Logout</a></li>
                         <?php   } else 
                                 { ?>
