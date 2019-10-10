@@ -3,6 +3,8 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="../Css/admin.css">
 <title>About</title>
@@ -71,6 +73,11 @@ session_start();
 </nav>
     </head>
 <body>
-    <p>Testing</p>
+    <p>This is the admin page</p>
+    <?php if ($userLoggedIn->getLevel() == "1") { ?>
+        <p>403 Forbidden</p>
+    <?php } else { ?>
+    <p>Allowed</p>
+    <?php } ?>
 </body>
 </html>
