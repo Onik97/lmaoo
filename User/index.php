@@ -1,4 +1,4 @@
-<?php require("../User/user.php");
+    <?php require("../User/user.php");
 session_start(); 
 ?>
 <!DOCTYPE html>

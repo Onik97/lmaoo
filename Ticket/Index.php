@@ -60,13 +60,18 @@ session_start();
                     <ul class="dropdown-menu">
                         <?php if (!isset($userLoggedIn)) 
                                 { ?>
-                            <li><a href="../User/register.php">Register</a></li>
-                            <li><a href="../User/index.php">Login</a></li>
+                            <li><a href="User/register.php">Register</a></li>
+                            <li><a href="User/index.php">Login</a></li>
                         <?php   } 
-                              else
+                              else if ($userLoggedIn->getLevel() == "1")
                                 { ?>
-                                    <li><a href="../User/editUser.php">Edit Account</a></li>   
-                                    <li><a href="../User/logout.php">Logout</a></li>
+                                    <li><a href="User/editUser.php">Edit Account</a></li>   
+                                    <li><a href="User/logout.php">Logout</a></li>
+                        <?php   } else 
+                                { ?>
+                                    <li><a href="User/editUser.php">Edit Account</a></li>   
+                                    <li><a href="User/logout.php">Logout</a></li>
+                                    <li><a href="User/admin.php">Admin</a></li>
                         <?php   } ?>
                     </ul>
                 
