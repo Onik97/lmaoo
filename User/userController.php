@@ -1,7 +1,7 @@
 <?php  
 require('../connection.php');
 require('user.php');
-error_reporting(0); // Removes undefined - Remove this if you are having problems
+error_reporting(0); // Removes undefined errors - Remove this if you are having problems
 $forename = $_POST['forename'];
 $surname = $_POST['surname'];
 $username = $_POST['username'];
@@ -86,7 +86,12 @@ function failedLogin()
 
 function getAllUsers()
 {
-	echo "Works from different php file";
+	$pdo = logindb('user', 'pass');
+	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+	$stmt = $pdo->prepare("SELECT * FROM user");
+	$stmt->execute();
+	$users = $stmt->fetchAll();
+	return $users;
 }
 
 
