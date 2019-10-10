@@ -73,14 +73,38 @@
 <body>
     <p>This is the admin page</p>
     
-    <?php if ($userLoggedIn->getLevel() == "1") { ?>
+    <?php if ($userLoggedIn->getLevel() == "1") 
+            { ?>
                 <p>403 Forbidden</p>
-                
-                <?php } else { ?>
-                
+                <?php 
+            } 
+            else 
+            { ?>  
                 <h1>User Table</h1>
-                <p><?php getAllUsers(); ?></p>
-                
-                <?php } ?>
+            <?php $allUsers = getAllUsers(); ?>
+            <table align="center" style="width:75%">
+                <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Forename</th>
+                <th>Surname</th>
+                <th>Level</th>
+                <th>Action</th>
+                </tr>
+                <tr>
+                <?php
+                foreach ($allUsers as $user) 
+                { ?>
+                    <tr>
+                    <td><?php echo $user->userId; ?></td>
+                    <td><?php echo $user->username; ?></td>
+                    <td><?php echo $user->forename; ?></td>
+                    <td><?php echo $user->surname; ?></td>
+                    <td><?php echo $user->level; ?></td>
+                    <td><a href="#">Edit</a> <a href="#">Delete</a> <a href="#">View</a></td>
+                    </tr>
+          <?php } 
+            } ?>
+                </tr>
 </body>
 </html>
