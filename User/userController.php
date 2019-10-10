@@ -42,7 +42,7 @@ function login()
 
 	if (password_verify($loginPassword, $user->password))
 	{
-		$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password);
+		$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level);
 		session_start();
 		$_SESSION['userLoggedIn'] = $userLoggedIn;
 		header("Location: ../Ticket/index.php");
@@ -65,7 +65,8 @@ function register()
 	$pdo = logindb('user', 'pass');
 	$stmt = $pdo->prepare("INSERT INTO user (userId, username, password, forename, surname) VALUES (null, ?, ?, ?, ?)");
 	$stmt->execute([$username, $hashedPassword, $forename, $surname]);
-	echo "Register Success";
+	session_start();
+    $_SESSION['message'] = 'Register Successful';
 	header("Location: index.php");
 }
 
@@ -80,7 +81,7 @@ function logout()
 function failedLogin()
 {
     session_start();
-    $_SESSION['errorMessage'] = 'Login attempted failed';
+    $_SESSION['message'] = 'Login attempted failed';
 	header("Location: index.php");
 }
 
