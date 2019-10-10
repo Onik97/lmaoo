@@ -1,6 +1,4 @@
-<?php require("../User/user.php");
-session_start(); 
-?>
+<?php require_once("../User/userController.php"); session_start(); ?>
 <!DOCTYPE html>
 <html>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -74,10 +72,15 @@ session_start();
     </head>
 <body>
     <p>This is the admin page</p>
+    
     <?php if ($userLoggedIn->getLevel() == "1") { ?>
-        <p>403 Forbidden</p>
-    <?php } else { ?>
-    <p>Allowed</p>
-    <?php } ?>
+                <p>403 Forbidden</p>
+                
+                <?php } else { ?>
+                
+                <h1>User Table</h1>
+                <p><?php getAllUsers(); ?></p>
+                
+                <?php } ?>
 </body>
 </html>

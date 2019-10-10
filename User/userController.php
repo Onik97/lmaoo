@@ -1,7 +1,7 @@
 <?php  
 require('../connection.php');
 require('user.php');
-
+error_reporting(0); // Removes undefined - Remove this if you are having problems
 $forename = $_POST['forename'];
 $surname = $_POST['surname'];
 $username = $_POST['username'];
@@ -9,7 +9,6 @@ $password = $_POST['password'];
 $loginUsername = $_POST['loginUsername'];
 $loginPassword = $_POST['loginPassword'];
 $logout = $_POST['logout'];
-
 
 if (isset($loginUsername, $loginPassword))
 {
@@ -25,7 +24,7 @@ else if (isset($logout))
 }
 else
 {
-	echo "ERROR";
+	
 }
 
 
@@ -84,5 +83,11 @@ function failedLogin()
     $_SESSION['message'] = 'Login attempted failed';
 	header("Location: index.php");
 }
+
+function getAllUsers()
+{
+	echo "Works from different php file";
+}
+
 
 ?>
