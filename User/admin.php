@@ -50,8 +50,8 @@
                     <ul class="dropdown-menu">
                         <?php if (!isset($userLoggedIn)) 
                                 { ?>
-                            <li><a href="User/register.php">Register</a></li>
-                            <li><a href="User/index.php">Login</a></li>
+                            <li><a href="../User/register.php">Register</a></li>
+                            <li><a href="../User/index.php">Login</a></li>
                         <?php   } 
                               else if ($userLoggedIn->getLevel() == "1")
                                 { ?>
@@ -96,12 +96,15 @@
                 foreach ($allUsers as $user) 
                 { ?>
                     <tr>
-                    <td><?php echo $user->userId; ?></td>
-                    <td><?php echo $user->username; ?></td>
-                    <td><?php echo $user->forename; ?></td>
-                    <td><?php echo $user->surname; ?></td>
-                    <td><?php echo $user->level; ?></td>
-                    <td><a href="#">Edit</a> <a href="#">Delete</a> <a href="#">View</a></td>
+                        <td><?php echo $user->userId; ?></td>
+                        <td><?php echo $user->username; ?></td>
+                        <td><?php echo $user->forename; ?></td>
+                        <td><?php echo $user->surname; ?></td>
+                        <td><?php echo $user->level; ?></td>
+                        <td><a href="#">Edit</a> 
+                            <a href="#">Delete</a> 
+                            <a href="#">View</a>
+                        </td>
                     </tr>
           <?php } 
             } ?>
