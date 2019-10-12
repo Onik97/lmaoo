@@ -95,4 +95,14 @@ function getAllUsers()
 }
 
 
+function getUserById($userId)
+{
+	$pdo = logindb('user', 'pass');
+	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+	$stmt = $pdo->prepare("SELECT * FROM user where userId = ?");
+	$stmt->execute([$userId]);
+	$users = $stmt->fetch();
+	return $user;
+}
+
 ?>
