@@ -1,4 +1,4 @@
-<?php require("../User/user.php");
+    <?php require("../User/user.php");
 session_start(); 
 ?>
 <!DOCTYPE html>
@@ -15,7 +15,7 @@ session_start();
 	<!-- Navbar Header [contains both toggle button and navbar brand] -->
 	<div class="navbar-header">
         <!-- Toggle Button [handles opening navbar components on mobile screens]-->
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#exampleNavComponents" aria-expanded"false">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#exampleNavComponents" aria-expanded="false">
 			<i class="glyphicon glyphicon-align-center"></i>
         </button>
 		<p class="navbar-text text-right"></p>
@@ -63,7 +63,7 @@ session_start();
 		<input type="password" name="loginPassword">
 		<input class="one" type="submit" value="Submit"> <br><br>
 		<a href="/lmaoo/User/register.php">Not Registered? Click here!</a>
-            <p> <?php if (isset($_SESSION['errorMessage'])) { echo $_SESSION['errorMessage']; session_unset(); } ?> </p>
+            <p><?php if(isset($_SESSION['message'])){echo$_SESSION['message'];session_unset();}?></p>
 		</form>
 	</div>
 </div>
