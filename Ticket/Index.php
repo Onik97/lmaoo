@@ -11,7 +11,7 @@ session_start();
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Ticket</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="Style.css">	
+        <link rel="stylesheet" href="../Css/ticketPage.css">	
 
 <nav class="navbar navbar-default navbar-fixed-top">		
     <!-- Navbar Container -->
@@ -63,13 +63,17 @@ session_start();
                             <li><a href="../User/register.php">Register</a></li>
                             <li><a href="../User/index.php">Login</a></li>
                         <?php   } 
-                              else
+                              else if ($userLoggedIn->getLevel() == "1")
+                                { ?>
+                                    <li><a href="../User/editUser.php">Edit Account</a></li> 
+                                    <li><a href="../User/logout.php">Logout</a></li>
+                        <?php   } else 
                                 { ?>
                                     <li><a href="../User/editUser.php">Edit Account</a></li>   
                                     <li><a href="../User/logout.php">Logout</a></li>
+                                    <li><a href="../User/admin.php">Admin</a></li>
                         <?php   } ?>
                     </ul>
-                
                 </li>
             </ul>
         </div>
@@ -78,14 +82,50 @@ session_start();
 <!-- End of Navigation Bar -->
 </head>
 <body>
-    <div>
-    <!--Row with two equal columns-->
-    <div class="row">
-        <div class="col-md-6">Column left</div>
-        <div class="col-md-6">Column right</div>
-    </div>
-    </div>
+	<div ID="ticketContainer">
+    		<div ID="ticketBrief">
+    		  <h1> Brief Description </h1>
+    		</div>
+
+    		<div ID="ticketPeople">
+    		  <h1> People <h1>
+    		</div>
+
+    		<div ID="ticketDetails">
+    		  <h1 align=""> Details </h1>
+    		</div>
+
+    		<div ID="ticketDate"> 
+    		  <h1> Dates </h1>
+                
+                <div ID="dates1">   
+                <p>Created Date:</p> <p>Stephen Help!</p> <!-- Note: Stephen, could you make sure that the 'Stephen Help' paragraphs the same line as the Date paragrahs? -->
+                <p>Start Date:</p> <p>Stephen Help!</p>
+                </div>
+    		    <div ID="dates2">
+                <p>Updated Date:</p> <p>Stephen Help!</p>
+                <p>Deadline:</p> <p>Stephen Help!</p>
+                </div>
+
+            </div>
+
+            <div ID="detailsSubBug">
+            <h1>Sub Bug</h1>
+            </div>
+
+    		<div ID="ticketMessages">
+    		<h1> Dev Messages </h1>
+    		</div>
+	</div>
+		  <div ID="ticketCreate">
+		      <h1> Comment Creator <h1>
+		  </div>
+		  <div ID="ticketComments">
+		      <h1> Comment Section </h1>
+		  </div>
+<footer>
+</footer>
+
 </body>
-        <footer>
-        </footer>
+
 </html>
