@@ -11,7 +11,7 @@ session_start();
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Ticket</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="Style.css">	
+        <link rel="stylesheet" href="ticket.css">	
 
 <nav class="navbar navbar-default navbar-fixed-top">		
     <!-- Navbar Container -->
