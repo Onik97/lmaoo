@@ -24,8 +24,7 @@
                         {
                             $userLoggedIn = $_SESSION['userLoggedIn'];
                             echo "Welcome " . $userLoggedIn->getForename() . " " . $userLoggedIn->getSurname();
-                        ?>
-                            
+                        ?>   
                         <?php
                         }
                         else
@@ -101,9 +100,9 @@
                         <td><?php echo $user->forename; ?></td>
                         <td><?php echo $user->surname; ?></td>
                         <td><?php echo $user->level; ?></td>
-                        <td><a href="#">Edit</a> 
-                            <a href="#">Delete</a> 
-                            <a href="#">View</a>
+                        <td><a href="adminController.php?edit=<?php echo $user->userId; ?>">Edit</a> 
+                            <a href="adminController.php?delete=<?php echo $user->userId; ?>">Delete</a> 
+                            <a href="adminController.php?view=<?php echo $user->userId; ?>">View</a>
                         </td>
                     </tr>
           <?php } 
