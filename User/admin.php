@@ -82,37 +82,32 @@
             { ?>  
                 <h1>User Table</h1>
             <?php $allUsers = getAllUsers(); ?>
-            <div class="container">
-                <table class="table table-hover" style="width:75%">
+            <table align="center" style="width:75%">
+                <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Forename</th>
+                <th>Surname</th>
+                <th>Level</th>
+                <th>Action</th>
+                </tr>
+                <tr>
+                <?php
+                foreach ($allUsers as $user) 
+                { ?>
                     <tr>
-                        <th>User ID</th>
-                        <th>Username</th>
-                        <th>Forename</th>
-                        <th>Surname</th>
-                        <th>Level</th>
-                        <th>Action</th>
+                        <td><?php echo $user->userId; ?></td>
+                        <td><?php echo $user->username; ?></td>
+                        <td><?php echo $user->forename; ?></td>
+                        <td><?php echo $user->surname; ?></td>
+                        <td><?php echo $user->level; ?></td>
+                        <td><a href="#">Edit</a> 
+                            <a href="#">Delete</a> 
+                            <a href="#">View</a>
+                        </td>
                     </tr>
-                    <tr>
-                    <?php
-                    foreach ($allUsers as $user) 
-                    { ?>
-                        <tr>
-                            <td><?php echo $user->userId; ?></td>
-                            <td><?php echo $user->username; ?></td>
-                            <td><?php echo $user->forename; ?></td>
-                            <td><?php echo $user->surname; ?></td>
-                            <td><?php echo $user->level; ?></td>
-                            <td>
-                                <div class="btn-group btn-group-xs" role="group">
-                                    <a href="#" class="btn btn-default">Edit</a> 
-                                    <a href="#" class="btn btn-default">Delete</a> 
-                                    <a href="#" class="btn btn-default">View</a>
-                                </div>
-                            </td>
-                        </tr>
-            <?php } 
-                } ?>
-                </table>
-            </div>
+          <?php } 
+            } ?>
+                </tr>
 </body>
 </html>
