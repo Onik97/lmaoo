@@ -1,3 +1,20 @@
+<<<<<<< HEAD
+h1.one {
+	position: Relative;
+	left: 600px;
+	top: 100px;
+	font-size: 40px;
+}
+
+p.one {
+	position: Relative;
+	left: 300px;
+	top: 100px;
+	font-size: 20px;
+}
+
+=======
 body { 
     padding-top: 65px; 
 }
+>>>>>>> 33f64ffd8dcfb4211b9cff3484e2b4c54d185db2
