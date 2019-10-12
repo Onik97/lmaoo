@@ -5,6 +5,8 @@ session_start();
 <html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="../Css/HomePage.css">
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Home</title>
 
 <head>
@@ -77,8 +79,7 @@ session_start();
 </nav>
 	</head>
 <body>
-         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
          
 <?php echo "Home Page is currently on maintenance"; ?>
 </body>
