@@ -83,32 +83,46 @@ session_start();
 </head>
 <body>
 	<div ID="ticketContainer">
-		<div ID="ticketBrief">
-		<h1> Brief Description </h1>
-		</div>
-		<div ID="ticketPeople">
-		<h1> People <h1>
-		</div>
-		<div ID="ticketDetails">
-		<h1> Details </h1>
-		</div>
-		<div ID="ticketDate">
-		<h1> Dates </h1>
-		</div>
-		<div ID="ticketDetails2">
-		<h1></h1>
-		</div>
-		<div ID="ticketMessages">
-		<h1> Dev Messages </h1>
-		</div>
-	</div>
+    		<div ID="ticketBrief">
+    		  <h1> Brief Description </h1>
+    		</div>
 
-		<div ID="ticketCreate">
-		<h1> Comment Creator <h1>
-		</div>
-		<div ID="ticketComments">
-		<h1> Comment Section </h1>
-		</div>
+    		<div ID="ticketPeople">
+    		  <h1> People <h1>
+    		</div>
+
+    		<div ID="ticketDetails">
+    		  <h1 align=""> Details </h1>
+    		</div>
+
+    		<div ID="ticketDate"> 
+    		  <h1> Dates </h1>
+                
+                <div ID="dates1">   
+                <p>Created Date:</p> <p>Stephen Help!</p> <!-- Note: Stephen, could you make sure that the 'Stephen Help' paragraphs the same line as the Date paragrahs? -->
+                <p>Start Date:</p> <p>Stephen Help!</p>
+                </div>
+    		    <div ID="dates2">
+                <p>Updated Date:</p> <p>Stephen Help!</p>
+                <p>Deadline:</p> <p>Stephen Help!</p>
+                </div>
+
+            </div>
+
+            <div ID="detailsSubBug">
+            <h1>Sub Bug</h1>
+            </div>
+
+    		<div ID="ticketMessages">
+    		<h1> Dev Messages </h1>
+    		</div>
+	</div>
+		  <div ID="ticketCreate">
+		      <h1> Comment Creator <h1>
+		  </div>
+		  <div ID="ticketComments">
+		      <h1> Comment Section </h1>
+		  </div>
 <footer>
 </footer>
 
