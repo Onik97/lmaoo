@@ -78,7 +78,7 @@ session_start();
 <!-- End of Navigation Bar -->
 </head>
 <body>
-	<div>
+	<div ID="ticketContainer">
 		<div ID="ticketBrief">
 		<h1> Brief Description </h1>
 		</div>
@@ -91,16 +91,20 @@ session_start();
 		<div ID="ticketDate">
 		<h1> Dates </h1>
 		</div>
+		<div ID="ticketDetails2">
+		<h1></h1>
+		</div>
 		<div ID="ticketMessages">
 		<h1> Dev Messages </h1>
 		</div>
+	</div>
+
 		<div ID="ticketCreate">
 		<h1> Comment Creator <h1>
 		</div>
 		<div ID="ticketComments">
 		<h1> Comment Section </h1>
 		</div>
-	</div>
 <footer>
 </footer>
 
