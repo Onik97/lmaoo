@@ -1,1 +1,72 @@
+<<<<<<< HEAD
 Marcus confirm you see this!
+=======
+#ticketContainer {
+	Margin-top: 100px;
+	display: grid;
+	text-align: centre;
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+
+#ticketBrief {
+	grid-column: 1 / 2;
+	width: 490px;
+	background-color: #e60000;
+	text-align: centre;
+}
+
+#ticketPeople {
+	grid-column: 2 / 2;
+	width: 290px;
+	background-color: #ff751a;
+	text-align: centre;
+}
+
+#ticketDetails {
+    grid-column: 1 / 2;
+	width: 490px;
+	background-color: #00e6e6;
+	text-align: centre;
+}
+
+#ticketDate {
+	grid-column: 2 / 2;
+	width: 290px;
+	background-color: #ffff1a;
+	text-align: centre;
+}
+
+#ticketDetails2 {
+	grid-column: 1 / 2;
+	width: 490px;
+	background-color: #00e6e6;
+	text-align: centre;
+}
+
+#ticketMessages {
+	grid-column: 2 / 2;
+	width: 290px;
+	background-color: #00e600;
+	text-align: centre;
+}
+
+#ticketCreate {
+
+	text-align: centre;
+	width: 790px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #800080;
+}
+
+#ticketComments {
+	text-align: centre;
+	width: 790px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color:  #ff1aff;
+}
+>>>>>>> 33f64ffd8dcfb4211b9cff3484e2b4c54d185db2
