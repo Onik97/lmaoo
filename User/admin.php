@@ -1,4 +1,4 @@
-<?php require_once("../User/userController.php"); session_start(); ?>
+<?php require("../User/userController.php"); session_start(); ?>
 <!DOCTYPE html>
 <html>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
