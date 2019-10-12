@@ -2,7 +2,7 @@
 	Margin-top: 100px;
 	display: grid;
 	text-align: centre;
-	width: 800px;
+	width: 1500px;
 	margin-left: auto;
 	margin-right: auto;
 	
@@ -10,42 +10,59 @@
 
 #ticketBrief {
 	grid-column: 1 / 2;
-	width: 490px;
+	width: 990px;
 	background-color: #e60000;
 	text-align: centre;
 }
 
 #ticketPeople {
 	grid-column: 2 / 2;
-	width: 290px;
+	width: 490px;
 	background-color: #ff751a;
 	text-align: centre;
 }
 
 #ticketDetails {
     grid-column: 1 / 2;
-	width: 490px;
+	width: 990px;
 	background-color: #00e6e6;
 	text-align: centre;
 }
 
 #ticketDate {
 	grid-column: 2 / 2;
-	width: 290px;
+	width: 490px;
 	background-color: #ffff1a;
 	text-align: centre;
 }
 
-#ticketDetails2 {
+#dates1 {
+	background-color: cyan;
+	width: 240px;
+	float: left;
+}
+
+#dates2 {
+	background-color: red;
+	width: 240px;
+	float: right;
+}
+
+#preDates {
+	background-color: #ffff1a;
+	outline-color: #ffff1a;
+}
+
+#detailsSubBug {
 	grid-column: 1 / 2;
-	width: 490px;
-	background-color: #00e6e6;
+	width: 990px;
+	background-color: grey;
 	text-align: centre;
 }
 
 #ticketMessages {
 	grid-column: 2 / 2;
-	width: 290px;
+	width: 490px;
 	background-color: #00e600;
 	text-align: centre;
 }
@@ -53,7 +70,7 @@
 #ticketCreate {
 
 	text-align: centre;
-	width: 790px;
+	width: 1490px;
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #800080;
@@ -61,7 +78,7 @@
 
 #ticketComments {
 	text-align: centre;
-	width: 790px;
+	width: 1490px;
 	margin-left: auto;
 	margin-right: auto;
 	background-color:  #ff1aff;
