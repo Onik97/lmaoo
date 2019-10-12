@@ -2,3 +2,12 @@ body {
     padding-top: 65px;
     padding-left: 10px;
 }
+
+th {
+    width: 16.666%;
+    text-align: center;
+}
+
+table {
+    text-align: center;
+}
