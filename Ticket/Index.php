@@ -78,14 +78,32 @@ session_start();
 <!-- End of Navigation Bar -->
 </head>
 <body>
-    <div>
-    <!--Row with two equal columns-->
-    <div class="row">
-        <div class="col-md-6">Column left</div>
-        <div class="col-md-6">Column right</div>
-    </div>
-    </div>
+	<div>
+		<div ID="ticketBrief">
+		<h1> Brief Description </h1>
+		</div>
+		<div ID="ticketPeople">
+		<h1> People <h1>
+		</div>
+		<div ID="ticketDetails">
+		<h1> Details </h1>
+		</div>
+		<div ID="ticketDate">
+		<h1> Dates </h1>
+		</div>
+		<div ID="ticketMessages">
+		<h1> Dev Messages </h1>
+		</div>
+		<div ID="ticketCreate">
+		<h1> Comment Creator <h1>
+		</div>
+		<div ID="ticketComments">
+		<h1> Comment Section </h1>
+		</div>
+	</div>
+<footer>
+</footer>
+
 </body>
-        <footer>
-        </footer>
+
 </html>
