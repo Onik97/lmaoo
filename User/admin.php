@@ -24,8 +24,7 @@
                         {
                             $userLoggedIn = $_SESSION['userLoggedIn'];
                             echo "Welcome " . $userLoggedIn->getForename() . " " . $userLoggedIn->getSurname();
-                        ?>
-                            
+                        ?>   
                         <?php
                         }
                         else

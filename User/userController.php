@@ -27,7 +27,6 @@ else
 	
 }
 
-
 function login()
 {
 	$loginUsername = $_POST['loginUsername'];
@@ -94,15 +93,12 @@ function getAllUsers()
 	return $users;
 }
 
-
-function getUserById($userId)
+function userInfoById($userId)
 {
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-	$stmt = $pdo->prepare("SELECT * FROM user where userId = ?");
+	$stmt = $pdo->prepare("SELECT * FROM user WHERE userId = ?");
 	$stmt->execute([$userId]);
-	$users = $stmt->fetch();
-	return $user;
+	$user = $stmt->fetch();
 }
-
 ?>
