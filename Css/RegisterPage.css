@@ -9,4 +9,7 @@ input.one {
 	width: 60px;
 	top: 5px;
 	left: 40px;	
+
+.top-buffer { margin-top: 100px; 
+			  margin-left: 600px;
 }
