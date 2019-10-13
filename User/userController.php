@@ -1,7 +1,7 @@
-<?php  
+ <?php  
 require('../connection.php');
 require('user.php');
-
+error_reporting(0); // Removes undefined errors - Remove this if you are having problems
 $forename = $_POST['forename'];
 $surname = $_POST['surname'];
 $username = $_POST['username'];
@@ -9,7 +9,6 @@ $password = $_POST['password'];
 $loginUsername = $_POST['loginUsername'];
 $loginPassword = $_POST['loginPassword'];
 $logout = $_POST['logout'];
-
 
 if (isset($loginUsername, $loginPassword))
 {
@@ -25,9 +24,8 @@ else if (isset($logout))
 }
 else
 {
-	echo "ERROR";
+	
 }
-
 
 function login()
 {
@@ -42,7 +40,7 @@ function login()
 
 	if (password_verify($loginPassword, $user->password))
 	{
-		$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password);
+		$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level);
 		session_start();
 		$_SESSION['userLoggedIn'] = $userLoggedIn;
 		header("Location: ../Ticket/index.php");
@@ -65,7 +63,8 @@ function register()
 	$pdo = logindb('user', 'pass');
 	$stmt = $pdo->prepare("INSERT INTO user (userId, username, password, forename, surname) VALUES (null, ?, ?, ?, ?)");
 	$stmt->execute([$username, $hashedPassword, $forename, $surname]);
-	echo "Register Success";
+	session_start();
+    $_SESSION['message'] = 'Register Successful';
 	header("Location: index.php");
 }
 
@@ -80,8 +79,26 @@ function logout()
 function failedLogin()
 {
     session_start();
-    $_SESSION['errorMessage'] = 'Login attempted failed';
+    $_SESSION['message'] = 'Login attempted failed';
 	header("Location: index.php");
 }
 
+function getAllUsers()
+{
+	$pdo = logindb('user', 'pass');
+	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+	$stmt = $pdo->prepare("SELECT * FROM user");
+	$stmt->execute();
+	$users = $stmt->fetchAll();
+	return $users;
+}
+
+function userInfoById($userId)
+{
+	$pdo = logindb('user', 'pass');
+	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+	$stmt = $pdo->prepare("SELECT * FROM user WHERE userId = ?");
+	$stmt->execute([$userId]);
+	$user = $stmt->fetch();
+}
 ?>

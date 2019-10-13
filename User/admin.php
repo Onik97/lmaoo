@@ -1,12 +1,10 @@
-<?php require("../User/user.php");
-session_start(); 
-?>
+<?php require("../User/userController.php"); session_start(); ?>
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="../Css/AboutPage.css">
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="../Css/admin.css">
 <title>About</title>
 <head>
 
@@ -14,20 +12,19 @@ session_start();
 
 <!-- Navbar Container -->
 <div class="container">
-	<!-- Navbar Header [contains both toggle button and navbar brand] -->
-	<div class="navbar-header">
+    <!-- Navbar Header [contains both toggle button and navbar brand] -->
+    <div class="navbar-header">
         <!-- Toggle Button [handles opening navbar components on mobile screens]-->
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#exampleNavComponents" aria-expanded"false">
-			<i class="glyphicon glyphicon-align-center"></i>
+            <i class="glyphicon glyphicon-align-center"></i>
         </button>
-		<p class="navbar-text text-right">
+        <p class="navbar-text text-right">
                         <?php
                         if(isset($_SESSION['userLoggedIn']))
                         {
                             $userLoggedIn = $_SESSION['userLoggedIn'];
                             echo "Welcome " . $userLoggedIn->getForename() . " " . $userLoggedIn->getSurname();
-                        ?>
-                            
+                        ?>   
                         <?php
                         }
                         else
@@ -39,17 +36,11 @@ session_start();
         </div>
     <!-- Navbar Collapse [contains navbar components such as navbar menu and forms ] -->
         <div class="collapse navbar-collapse" id="exampleNavComponents">
-
     <!-- Navbar Menu -->
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="../index.php">Home</a>
-                </li>
-                <li class="active">
-                    <a href="#">About</a>
-                </li>
-				<li>
-					<a href="../Ticket/index.php">Ticket</a>
+                <li><a href="../index.php">Home</a></li>
+                <li class="active"><a href="../About/index.php">About</a></li>
+                <li><a href="../Ticket/index.php">Ticket</a></li>
                 <!-- Navbar link with a dropdown menu -->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account
@@ -77,17 +68,45 @@ session_start();
         </div>
     </div>
 </nav>
-	</head>
+    </head>
 <body>
-
-<?php echo "About page is currently on progress"; ?>
-
-<div class="container">
-
-<div class="top-buffer">
-<h1 class="one">Welcome to the About page</h1>
-<p class="one">Our website is about project managment and organizing for all the people which are working on the project at the time.</p>
-</div>
-</div>
+    <p>This is the admin page</p>
+    
+    <?php if ($userLoggedIn->getLevel() == "1") 
+            { ?>
+                <p>403 Forbidden</p>
+                <?php 
+            } 
+            else 
+            { ?>  
+                <h1>User Table</h1>
+            <?php $allUsers = getAllUsers(); ?>
+            <table align="center" style="width:75%">
+                <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Forename</th>
+                <th>Surname</th>
+                <th>Level</th>
+                <th>Action</th>
+                </tr>
+                <tr>
+                <?php
+                foreach ($allUsers as $user) 
+                { ?>
+                    <tr>
+                        <td><?php echo $user->userId; ?></td>
+                        <td><?php echo $user->username; ?></td>
+                        <td><?php echo $user->forename; ?></td>
+                        <td><?php echo $user->surname; ?></td>
+                        <td><?php echo $user->level; ?></td>
+                        <td><a href="adminController.php?edit=<?php echo $user->userId; ?>">Edit</a> 
+                            <a href="adminController.php?delete=<?php echo $user->userId; ?>">Delete</a> 
+                            <a href="adminController.php?view=<?php echo $user->userId; ?>">View</a>
+                        </td>
+                    </tr>
+          <?php } 
+            } ?>
+                </tr>
 </body>
 </html>
