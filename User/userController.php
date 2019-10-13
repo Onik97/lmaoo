@@ -1,4 +1,4 @@
-<?php  
+ <?php  
 require('../connection.php');
 require('user.php');
 error_reporting(0); // Removes undefined errors - Remove this if you are having problems

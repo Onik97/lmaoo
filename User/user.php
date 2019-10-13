@@ -6,16 +6,14 @@ class user
 	private $password;
 	private $forename;
 	private $surname;
-	private $level;
 
-	function __construct($id, $forename, $surname, $username, $password, $level)
+	function __construct($id, $forename, $surname, $username, $password)
 	{
 		$this->id = $id;
 		$this->forename = $forename;
 		$this->surname = $surname;
 		$this->username = $username;
 		$this->password = $password;
-		$this->level = $level;
 	}
 
 	public function setId($id)
@@ -66,16 +64,6 @@ class user
 	public function getSurname()
 	{
 		return $this->surname;
-	}
-
-	public function setLevel($level)
-	{
-		$this->level = $level;
-	}
-
-	public function getLevel()
-	{
-		return $this->level;
 	}
 }
 ?>
