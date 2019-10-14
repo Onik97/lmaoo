@@ -1,11 +1,12 @@
 <?php require("../User/userController.php"); session_start(); ?>
 <!DOCTYPE html>
 <html>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="../Css/admin.css">
+<title>About</title>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../Css/admin.css">
-    <title>About</title>
-</head>
 
 <nav class="navbar navbar-default navbar-fixed-top">
 
@@ -14,7 +15,7 @@
     <!-- Navbar Header [contains both toggle button and navbar brand] -->
     <div class="navbar-header">
         <!-- Toggle Button [handles opening navbar components on mobile screens]-->
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#exampleNavComponents" aria-expanded="false">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#exampleNavComponents" aria-expanded"false">
             <i class="glyphicon glyphicon-align-center"></i>
         </button>
         <p class="navbar-text text-right">
@@ -67,7 +68,7 @@
         </div>
     </div>
 </nav>
-
+    </head>
 <body>
     <p>This is the admin page</p>
     
@@ -80,39 +81,32 @@
             { ?>  
                 <h1>User Table</h1>
             <?php $allUsers = getAllUsers(); ?>
-            <div class="container">
-                <table class="table table-hover">
+            <table align="center" style="width:75%">
+                <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Forename</th>
+                <th>Surname</th>
+                <th>Level</th>
+                <th>Action</th>
+                </tr>
+                <tr>
+                <?php
+                foreach ($allUsers as $user) 
+                { ?>
                     <tr>
-                    <th>User ID</th>
-                    <th>Username</th>
-                    <th>Forename</th>
-                    <th>Surname</th>
-                    <th>Level</th>
-                    <th>Action</th>
+                        <td><?php echo $user->userId; ?></td>
+                        <td><?php echo $user->username; ?></td>
+                        <td><?php echo $user->forename; ?></td>
+                        <td><?php echo $user->surname; ?></td>
+                        <td><?php echo $user->level; ?></td>
+                        <td><a href="adminController.php?edit=<?php echo $user->userId; ?>">Edit</a> 
+                            <a href="adminController.php?delete=<?php echo $user->userId; ?>">Delete</a> 
+                            <a href="adminController.php?view=<?php echo $user->userId; ?>">View</a>
+                        </td>
                     </tr>
-                    <?php
-                    foreach ($allUsers as $user) 
-                    { ?>
-                        <tr>
-                            <td><?php echo $user->userId; ?></td>
-                            <td><?php echo $user->username; ?></td>
-                            <td><?php echo $user->forename; ?></td>
-                            <td><?php echo $user->surname; ?></td>
-                            <td><?php echo $user->level; ?></td>
-                            <td>
-                                <div class="btn-group btn-group-xs" role="group">
-                                    <a href="adminController.php?edit=<?php echo $user->userId; ?>" class="btn btn-default">Edit</a> 
-                                    <a href="adminController.php?delete=<?php echo $user->userId; ?>" class="btn btn-default">Delete</a> 
-                                    <a href="adminController.php?view=<?php echo $user->userId; ?>" class="btn btn-default">View</a>
-                                </div>
-                            </td>
-                        </tr>
-                <?php }
+          <?php } 
             } ?>
-                </table>
-            </div>    
-    <!--  -->
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+                </tr>
 </body>
 </html>
