@@ -13,6 +13,25 @@
 	width: 990px;
 	background-color: #e60000;
 	text-align: centre;
+	
+}
+
+#ticketBrief1 {
+	float: left;
+	width: 495px;
+	text-align: centre;
+}
+
+#ticketBrief2 {
+	float: right;
+	width: 495px;
+	text-align: centre;
+}
+
+#ticketBrief1 {
+	grid-column: 2 / 2;
+	width: 495px;
+	text-align: centre;
 }
 
 #ticketPeople {

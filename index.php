@@ -83,5 +83,4 @@ session_start();
          
 <?php echo "Home Page is currently on maintenance"; ?>
 </body>
-
 </html>

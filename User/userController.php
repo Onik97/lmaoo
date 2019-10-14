@@ -1,4 +1,4 @@
-<?php  
+ <?php  
 require('../connection.php');
 require('user.php');
 error_reporting(0); // Removes undefined errors - Remove this if you are having problems
@@ -100,5 +100,6 @@ function userInfoById($userId)
 	$stmt = $pdo->prepare("SELECT * FROM user WHERE userId = ?");
 	$stmt->execute([$userId]);
 	$user = $stmt->fetch();
+	return $user;
 }
 ?>
