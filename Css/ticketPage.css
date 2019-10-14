@@ -28,8 +28,7 @@
 	text-align: centre;
 }
 
-#ticketBrief1 {
-	grid-column: 2 / 2;
+#ticketBrief3 {
 	width: 495px;
 	text-align: centre;
 }
@@ -39,6 +38,19 @@
 	width: 490px;
 	background-color: #ff751a;
 	text-align: centre;
+}
+
+#ticketPeople1 {
+	margin: 10px;
+	text-align: centre;
+}
+
+#ticketPeople2 {
+	margin: 10px;
+}
+
+#ticketPeople3 {
+	margin-left: 150px;
 }
 
 #ticketDetails {
