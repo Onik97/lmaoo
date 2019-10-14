@@ -1,4 +1,4 @@
-<?php  
+ <?php  
 require('../connection.php');
 require('user.php');
 error_reporting(0); // Removes undefined errors - Remove this if you are having problems
@@ -26,7 +26,6 @@ else
 {
 	
 }
-
 
 function login()
 {
@@ -94,5 +93,12 @@ function getAllUsers()
 	return $users;
 }
 
-
+function userInfoById($userId)
+{
+	$pdo = logindb('user', 'pass');
+	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+	$stmt = $pdo->prepare("SELECT * FROM user WHERE userId = ?");
+	$stmt->execute([$userId]);
+	$user = $stmt->fetch();
+}
 ?>

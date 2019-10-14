@@ -84,7 +84,10 @@ session_start();
 <body>
 	<div ID="ticketContainer">
     		<div ID="ticketBrief">
-    		  <h1> Brief Description </h1>
+    		<p ID="ticketBrief1"> Project Name:            '' </p>
+			<p ID="ticketBrief2"> Ticket ID:               '' </p> 
+			<p ID="ticketBrief3"> Ticket Name:             '' </p>
+ 
     		</div>
 
     		<div ID="ticketPeople">
@@ -127,5 +130,4 @@ session_start();
 </footer>
 
 </body>
-
 </html>
