@@ -100,5 +100,6 @@ function userInfoById($userId)
 	$stmt = $pdo->prepare("SELECT * FROM user WHERE userId = ?");
 	$stmt->execute([$userId]);
 	$user = $stmt->fetch();
+	return $user;
 }
 ?>
