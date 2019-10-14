@@ -91,7 +91,9 @@ session_start();
     		</div>
 
     		<div ID="ticketPeople">
-    		  <h1> People <h1>
+    		  <p ID="ticketPeople1"> Reporter:  '[]' </p>
+			  <p ID="ticketPeople2"> Assignee:  '[]' </p>
+			  <a ID="ticketPeople3" href=""> Click here to assign it to yourself </a>
     		</div>
 
     		<div ID="ticketDetails">
