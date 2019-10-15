@@ -64,7 +64,7 @@
   Password:<br> <input type="password" name="password"> <br>
   Confirm Password:<br> <input type="password" name="password2"> <br>
   <input class="one" type="submit" value="Submit"> <br><br>
-  <a href="/lmaoo/User/index.php">Register? Login here!</a>
+  <a href="../User/index.php">Register? Login here!</a>
 </form>
     </div>
     </div>
