@@ -63,7 +63,7 @@ session_start();
 			Password:<br>
 		<input type="password" name="loginPassword">
 		<input class="one" type="submit" value="Submit"> <br><br>
-		<a href="/lmaoo/User/register.php">Not Registered? Click here!</a>
+		<a href="../User/register.php">Not Registered? Click here!</a>
             <p><?php if(isset($_SESSION['message'])){echo$_SESSION['message'];session_unset();}?></p>
 		</form>
 	</div>
