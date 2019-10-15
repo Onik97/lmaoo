@@ -104,12 +104,12 @@ session_start();
     		  <h1> Dates </h1>
                 
                 <div ID="dates1">   
-                <p>Created Date:</p> <p>Stephen Help!</p> <!-- Note: Stephen, could you make sure that the 'Stephen Help' paragraphs the same line as the Date paragrahs? -->
-                <p>Start Date:</p> <p>Stephen Help!</p>
+                <p>Created Date:</p> <br>
+                <p>Start Date:</p> <br>
                 </div>
     		    <div ID="dates2">
-                <p>Updated Date:</p> <p>Stephen Help!</p>
-                <p>Deadline:</p> <p>Stephen Help!</p>
+                <p>Updated Date:</p> <br>
+                <p>Deadline:</p> <br> 
                 </div>
 
             </div>
