@@ -81,9 +81,7 @@ session_start();
 <body>
 
 <?php echo "About page is currently on progress"; ?>
-
 <div>
-
 <div class="top-buffer">
 <h1 class="one">Welcome to the About page</h1>
 <p class="one">Our website is about project managment and organizing for all the people which are working on the project at the time.</p>
