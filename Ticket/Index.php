@@ -60,6 +60,8 @@ session_start();
 		  <div ID="ticketComments">
 		      <h1> Comment Section </h1>
 		  </div>
+		  
+		  <?php include("../Global/editUserModal.php"); ?>
 <footer>
 </footer>
 
