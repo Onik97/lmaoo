@@ -12,5 +12,6 @@ session_start();
 <?php include("../Global/navBar.php"); ?>
 <body>       
 <?php echo "Home Page is currently on maintenance"; ?>
+<?php include("../Global/editUserModal.php"); ?>
 </body>
 </html>

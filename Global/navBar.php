@@ -1,5 +1,5 @@
-<nav class="navbar navbar-default navbar-fixed-top">
 
+<nav class="navbar navbar-default navbar-fixed-top">
 <!-- Navbar Container -->
 <div class="container">
 	<!-- Navbar Header [contains both toggle button and navbar brand] -->
@@ -43,11 +43,11 @@
                         <?php   } 
                               else if ($userLoggedIn->getLevel() == "1")
                                 { ?>
-                                    <li><a href="../User/editUser.php">Edit Account</a></li> 
+                                    <li><a data-toggle="modal" data-target="#view-modal">Edit Account</a></li> 
                                     <li><a href="../User/logout.php">Logout</a></li>
                         <?php   } else 
                                 { ?>
-                                    <li><a href="../User/editUser.php">Edit Account</a></li>   
+                                    <li><a data-toggle="modal" data-target="#view-modal">Edit Account</a></li>   
                                     <li><a href="../User/logout.php">Logout</a></li>
                                     <li><a href="../User/admin.php">Admin</a></li>
                         <?php   } ?>

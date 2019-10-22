@@ -21,5 +21,6 @@ session_start();
 <p class="one"> We are currently working on the Main frame for our website with being able to login, Register, and write/view/delete bug tickets. </p>
 </div>
 </div>
+<?php include("../Global/editUserModal.php"); ?>
 </body>
 </html>

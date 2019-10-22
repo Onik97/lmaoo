@@ -5,3 +5,7 @@ background-color: black;
  .two {
 color: green;
 }
+
+body {
+    padding-top: 65px;
+}
