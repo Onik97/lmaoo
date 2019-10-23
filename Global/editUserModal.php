@@ -8,29 +8,29 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                     </div>
+                    <form action="../User/userController.php" method="POST">
                    <div class="modal-body">
-                   <form action="../User/userController.php" method="POST">
                     <div class="form-group">
-                        <label>Forename</label>
-                        <input class="form-control" value=<?php echo $userLoggedIn->getId();?> readonly>
+                        <label>ID</label>
+                        <input class="form-control" value=<?php echo $userLoggedIn->getId();?> name="editID" readonly>
                     </div>
                     <div class="form-group">
                         <label>Forename</label>
-                        <input class="form-control" value=<?php echo $userLoggedIn->getForename(); ?> >
+                        <input class="form-control" value=<?php echo $userLoggedIn->getForename(); ?>  name="editForename" >
                     </div>
                     <div class="form-group">
                         <label>Surname</label>
-                        <input class="form-control" value=<?php echo $userLoggedIn->getSurname(); ?> >
+                        <input class="form-control" value=<?php echo $userLoggedIn->getSurname(); ?>  name="editSurname">
                     </div>
                     <div class="form-group">
                         <label>Username</label>
-                        <input class="form-control" value=<?php echo $userLoggedIn->getUsername(); ?> >
+                        <input class="form-control" value=<?php echo $userLoggedIn->getUsername(); ?> name="editUsername">
                     </div>
-                    </form>
                     </div>
                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                 <input class="btn btn-primary" type="submit" value="Save Changes">
                 </div>
+                </form>
                  </div>
             </div>
         </div>
