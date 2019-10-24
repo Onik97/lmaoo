@@ -21,9 +21,11 @@ session_start();
 		<input type="password" name="loginPassword">
 		<input class="one" type="submit" value="Submit"> <br><br>
 		<a href="../User/register.php">Not Registered? Click here!</a>
-            <p><?php if(isset($_SESSION['message'])){echo$_SESSION['message'];session_unset();}?></p>
 		</form>
 	</div>
+</div>
+<div ID="return">
+    <p><b><?php if(isset($_SESSION['message'])){echo$_SESSION['message'];session_unset();}?></b></p>
 </div>
 </body>
 </html>
