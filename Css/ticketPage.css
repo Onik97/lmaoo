@@ -60,6 +60,39 @@
 	text-align: centre;
 }
 
+#ticketDetails1 {
+	float: left;
+	text-align: centre;
+	width: 495px;
+}
+
+#ticketDetails2 {
+	float: right;
+	text-align: centre;
+	width: 495px;
+}
+
+#ticketDetails3 {
+	float: left;
+	text-align: centre;
+	width: 495px;
+}
+
+#ticketDetails4 {
+	float: right;
+	text-align: centre;
+	width: 495px;
+}
+
+#ticketDetails5 {
+	width: 990px;
+	border: 5px solid black;
+	border-width: 5px;
+	background-color: #4293f5;
+	text-align: center;
+}
+
+
 #ticketDate {
 	grid-column: 2 / 2;
 	width: 490px;
