@@ -1,1 +1,0 @@
-<?php echo 'This is the Controller' ?>

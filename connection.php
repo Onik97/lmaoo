@@ -10,6 +10,7 @@ function logindb($user, $password)
 	catch(PDOException $e)
 	{
 		print "Error!: " . $e->getMessage() . "<br/>";
+		echo "lol";
 	}
 	return $pdo;
 }

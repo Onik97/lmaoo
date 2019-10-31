@@ -1,61 +1,46 @@
  <?php  
 require('../connection.php');
 require('user.php');
-//error_reporting(0); // Removes undefined errors - Remove this if you are having problems
-$function = $_POST['function'];
+error_reporting(0); // Removes undefined errors - Remove this if you are having problems
 $forename = $_POST['forename'];
 $surname = $_POST['surname'];
 $username = $_POST['username'];
 $password = $_POST['password'];
+$loginUsername = $_POST['loginUsername'];
+$loginPassword = $_POST['loginPassword'];
+$editId = $_POST['editID'];
+$editForename = $_POST['editForename'];
+$editSurname = $_POST['editSurname'];
+$editUsername = $_POST['editUsername'];
 $logout = $_POST['logout'];
 
-if ($function == "login")
+if (isset($loginUsername, $loginPassword))
 {
 	login();
 }
-else if ($function == "register")
+else if (isset($forename, $surname, $username, $password))
 {
 	register();
-}
-else if ($function == "edit")
-{
-	editUser();
 }
 else if (isset($logout))
 {
 	logout();
 }
+else if (isset($editForename, $editSurname, $editId, $editUsername))
+{
+	updateUser();
+}
 else
 {
-
+	
 }
 
-function hasDuplications()
-{
-	$indicator;
-	$username = $_POST['username'];
-
-	$pdo = logindb('user', 'pass');
-	$stmt = $pdo->prepare("SELECT username FROM user WHERE username = ?");
-	$stmt->execute([$username]);
-
-	if ($stmt->rowCount() > 0)
-	{
-		$indicator = true;
-	}
-	else
-	{
-		$indicator = false;
-	}
-	return $indicator;
-}
-
-function editUser()
+function updateUser()
 {
 	$editId = $_POST['editID'];
-	$editForename = $_POST['forename'];
-	$editSurname = $_POST['surname'];
-	$editUsername = $_POST['username'];
+	$editForename = $_POST['editForename'];
+	$editSurname = $_POST['editSurname'];
+	$editUsername = $_POST['editUsername'];
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 	$stmt = $pdo->prepare("UPDATE user SET forename=?, surname=?, username=? WHERE userId=?");
@@ -98,7 +83,7 @@ function login()
 	}
 	else
 	{
-		failedMessage("Login has failed", "index.php");
+		failedLogin();
 	}
 
 }
@@ -127,11 +112,11 @@ function logout()
 	header("Location: index.php");
 }
 
-function failedMessage($message, $location)
+function failedLogin()
 {
     session_start();
-    $_SESSION['message'] = $message;
-	header("Location: " . $location);
+    $_SESSION['message'] = 'Login attempted failed';
+	header("Location: index.php");
 }
 
 function getAllUsers()
