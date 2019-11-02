@@ -28,8 +28,7 @@
 	text-align: centre;
 }
 
-#ticketBrief1 {
-	grid-column: 2 / 2;
+#ticketBrief3 {
 	width: 495px;
 	text-align: centre;
 }
@@ -41,12 +40,58 @@
 	text-align: centre;
 }
 
+#ticketPeople1 {
+	margin: 10px;
+	text-align: centre;
+}
+
+#ticketPeople2 {
+	margin: 10px;
+}
+
+#ticketPeople3 {
+	margin-left: 150px;
+}
+
 #ticketDetails {
     grid-column: 1 / 2;
 	width: 990px;
 	background-color: #00e6e6;
 	text-align: centre;
 }
+
+#ticketDetails1 {
+	float: left;
+	text-align: centre;
+	width: 495px;
+}
+
+#ticketDetails2 {
+	float: right;
+	text-align: centre;
+	width: 495px;
+}
+
+#ticketDetails3 {
+	float: left;
+	text-align: centre;
+	width: 495px;
+}
+
+#ticketDetails4 {
+	float: right;
+	text-align: centre;
+	width: 495px;
+}
+
+#ticketDetails5 {
+	width: 990px;
+	border: 5px solid black;
+	border-width: 5px;
+	background-color: #4293f5;
+	text-align: center;
+}
+
 
 #ticketDate {
 	grid-column: 2 / 2;
@@ -84,6 +129,10 @@
 	width: 490px;
 	background-color: #00e600;
 	text-align: centre;
+}
+
+#ticketMessages1 {
+	margin-left: 371px;
 }
 
 #ticketCreate {

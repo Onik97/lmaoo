@@ -8,6 +8,10 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 $loginUsername = $_POST['loginUsername'];
 $loginPassword = $_POST['loginPassword'];
+$editId = $_POST['editID'];
+$editForename = $_POST['editForename'];
+$editSurname = $_POST['editSurname'];
+$editUsername = $_POST['editUsername'];
 $logout = $_POST['logout'];
 
 if (isset($loginUsername, $loginPassword))
@@ -22,9 +26,41 @@ else if (isset($logout))
 {
 	logout();
 }
+else if (isset($editForename, $editSurname, $editId, $editUsername))
+{
+	updateUser();
+}
 else
 {
 	
+}
+
+function updateUser()
+{
+	$editId = $_POST['editID'];
+	$editForename = $_POST['editForename'];
+	$editSurname = $_POST['editSurname'];
+	$editUsername = $_POST['editUsername'];
+	$pdo = logindb('user', 'pass');
+	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+	$stmt = $pdo->prepare("UPDATE user SET forename=?, surname=?, username=? WHERE userId=?");
+	$stmt->execute([$editForename, $editSurname, $editUsername, $editId]);
+	session_start();
+	session_unset();
+	session_destroy();
+	session_start();
+	$_SESSION['message'] = 'Your changes has been saved! Please login!';
+	header("Location: index.php");
+}
+
+function userInfoById($userId)
+{
+	$pdo = logindb('user', 'pass');
+	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+	$stmt = $pdo->prepare("SELECT * FROM user WHERE userId = ?");
+	$stmt->execute([$userId]);
+	$user = $stmt->fetch();
+	return $user;
 }
 
 function login()
@@ -91,14 +127,5 @@ function getAllUsers()
 	$stmt->execute();
 	$users = $stmt->fetchAll();
 	return $users;
-}
-
-function userInfoById($userId)
-{
-	$pdo = logindb('user', 'pass');
-	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-	$stmt = $pdo->prepare("SELECT * FROM user WHERE userId = ?");
-	$stmt->execute([$userId]);
-	$user = $stmt->fetch();
 }
 ?>
