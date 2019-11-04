@@ -1,34 +1,29 @@
- <?php  
+<?php  
 require('../connection.php');
 require('user.php');
-error_reporting(0); // Removes undefined errors - Remove this if you are having problems
+//error_reporting(0);
 $forename = $_POST['forename'];
 $surname = $_POST['surname'];
 $username = $_POST['username'];
 $password = $_POST['password'];
-$loginUsername = $_POST['loginUsername'];
-$loginPassword = $_POST['loginPassword'];
-$editId = $_POST['editID'];
-$editForename = $_POST['editForename'];
-$editSurname = $_POST['editSurname'];
-$editUsername = $_POST['editUsername'];
+$function = $_POST['function'];
 $logout = $_POST['logout'];
 
-if (isset($loginUsername, $loginPassword))
+if ($function == "login")
 {
 	login();
 }
-else if (isset($forename, $surname, $username, $password))
+else if ($function == "register")
 {
 	register();
+}
+else if ($function == 'update')
+{
+	updateUser();
 }
 else if (isset($logout))
 {
 	logout();
-}
-else if (isset($editForename, $editSurname, $editId, $editUsername))
-{
-	updateUser();
 }
 else
 {
@@ -37,14 +32,13 @@ else
 
 function updateUser()
 {
-	$editId = $_POST['editID'];
-	$editForename = $_POST['editForename'];
-	$editSurname = $_POST['editSurname'];
-	$editUsername = $_POST['editUsername'];
+	$editForename = $_POST['forename'];
+	$editSurname = $_POST['surname'];
+	$editUsername = $_POST['username'];
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-	$stmt = $pdo->prepare("UPDATE user SET forename=?, surname=?, username=? WHERE userId=?");
-	$stmt->execute([$editForename, $editSurname, $editUsername, $editId]);
+	$stmt = $pdo->prepare("UPDATE user SET forename=?, surname=? WHERE username=?");
+	$stmt->execute([$editForename, $editSurname, $editUsername]);
 	session_start();
 	session_unset();
 	session_destroy();
@@ -65,8 +59,8 @@ function userInfoById($userId)
 
 function login()
 {
-	$loginUsername = $_POST['loginUsername'];
-	$loginPassword = $_POST['loginPassword'];
+	$loginUsername = $_POST['username'];
+	$loginPassword = $_POST['password'];
 
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
