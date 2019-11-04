@@ -1,50 +1,70 @@
- <?php  
+<?php  
 require('../connection.php');
 require('user.php');
-error_reporting(0); // Removes undefined errors - Remove this if you are having problems
-$forename = $_POST['forename'];
-$surname = $_POST['surname'];
-$username = $_POST['username'];
-$password = $_POST['password'];
-$loginUsername = $_POST['loginUsername'];
-$loginPassword = $_POST['loginPassword'];
-$editId = $_POST['editID'];
-$editForename = $_POST['editForename'];
-$editSurname = $_POST['editSurname'];
-$editUsername = $_POST['editUsername'];
+//error_reporting(0);
+$function = $_POST['function'];
 $logout = $_POST['logout'];
 
-if (isset($loginUsername, $loginPassword))
+if ($function == "login")
 {
 	login();
 }
-else if (isset($forename, $surname, $username, $password))
+else if ($function == "register")
 {
-	register();
+	$checker = hasDup();
+	if ($checker == "1")
+	{
+		session_start();
+    	$_SESSION['message'] = 'Username already exist! Try logging in!';
+		header("Location: index.php");
+	}
+	else
+	{
+		register();
+	}
+}
+else if ($function == 'update')
+{
+	updateUser();
 }
 else if (isset($logout))
 {
 	logout();
 }
-else if (isset($editForename, $editSurname, $editId, $editUsername))
-{
-	updateUser();
-}
 else
 {
-	
+	//Nothing should happen
+}
+
+function hasDup()
+{
+	$boolean = false;
+	$username = $_POST['username'];
+	$pdo = logindb('user', 'pass');
+	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+	$stmt = $pdo->prepare("SELECT username FROM user WHERE username = ?");
+	$stmt->execute([$username]);
+
+	if($stmt->rowCount() > 0)
+	{
+		$boolean = true;
+	}
+	else
+	{
+		// Should stay False
+	}
+	return $boolean;
 }
 
 function updateUser()
 {
-	$editId = $_POST['editID'];
 	$editForename = $_POST['editForename'];
 	$editSurname = $_POST['editSurname'];
 	$editUsername = $_POST['editUsername'];
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-	$stmt = $pdo->prepare("UPDATE user SET forename=?, surname=?, username=? WHERE userId=?");
-	$stmt->execute([$editForename, $editSurname, $editUsername, $editId]);
+	$stmt = $pdo->prepare("UPDATE user SET forename=?, surname=? WHERE username=?");
+	$stmt->execute([$editForename, $editSurname, $editUsername]);
 	session_start();
 	session_unset();
 	session_destroy();
@@ -65,8 +85,8 @@ function userInfoById($userId)
 
 function login()
 {
-	$loginUsername = $_POST['loginUsername'];
-	$loginPassword = $_POST['loginPassword'];
+	$loginUsername = $_POST['username'];
+	$loginPassword = $_POST['password'];
 
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
