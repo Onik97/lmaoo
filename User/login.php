@@ -18,7 +18,7 @@ session_start();
 		<input type="text" name="username">
 		<br>
 			Password:<br>
-		<input type="password" name="passowrd">
+		<input type="password" name="password">
 		<input type="hidden" name="function" value="login">
 		<input class="one" type="submit" value="Submit"> <br><br>
 		<a href="../User/register.php">Not Registered? Click here!</a>
