@@ -25,7 +25,7 @@ session_start();
 		</form>
 	</div>
 </div>
-<div ID="return">
+<div class="return">
     <p><b><?php if(isset($_SESSION['message'])){echo$_SESSION['message'];session_unset();}?></b></p>
 </div>
 </body>
