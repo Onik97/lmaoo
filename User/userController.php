@@ -32,9 +32,9 @@ else
 
 function updateUser()
 {
-	$editForename = $_POST['forename'];
-	$editSurname = $_POST['surname'];
-	$editUsername = $_POST['username'];
+	$editForename = $_POST['editForename'];
+	$editSurname = $_POST['editSurname'];
+	$editUsername = $_POST['editUsername'];
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 	$stmt = $pdo->prepare("UPDATE user SET forename=?, surname=? WHERE username=?");
