@@ -2,10 +2,6 @@
 require('../connection.php');
 require('user.php');
 //error_reporting(0);
-$forename = $_POST['forename'];
-$surname = $_POST['surname'];
-$username = $_POST['username'];
-$password = $_POST['password'];
 $function = $_POST['function'];
 $logout = $_POST['logout'];
 
@@ -15,7 +11,17 @@ if ($function == "login")
 }
 else if ($function == "register")
 {
-	register();
+	$checker = hasDup();
+	if ($checker == "1")
+	{
+		session_start();
+    	$_SESSION['message'] = 'Username already exist! Try logging in!';
+		header("Location: index.php");
+	}
+	else
+	{
+		register();
+	}
 }
 else if ($function == 'update')
 {
@@ -27,7 +33,27 @@ else if (isset($logout))
 }
 else
 {
-	
+	//Nothing should happen
+}
+
+function hasDup()
+{
+	$boolean = false;
+	$username = $_POST['username'];
+	$pdo = logindb('user', 'pass');
+	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+	$stmt = $pdo->prepare("SELECT username FROM user WHERE username = ?");
+	$stmt->execute([$username]);
+
+	if($stmt->rowCount() > 0)
+	{
+		$boolean = true;
+	}
+	else
+	{
+		// Should stay False
+	}
+	return $boolean;
 }
 
 function updateUser()
