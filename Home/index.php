@@ -11,7 +11,7 @@ session_start();
 <head></head>
 <?php include("../Global/navBar.php"); ?>
 <body>       
-<?php echo "Home Page is currently being worked on"; ?>
+<?php echo "This message has been auto deployed"; ?>
 <?php include("../Global/editUserModal.php"); ?>
 </body>
 </html>
