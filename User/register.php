@@ -17,6 +17,7 @@
   Username:<br> <input type="text" name="username"> <br>
   Password:<br> <input type="password" name="password"> <br>
   Confirm Password:<br> <input type="password" name="password2"> <br>
+  <input type="hidden" name="function" value="register">
   <input class="one" type="submit" value="Submit"> <br><br>
   <a href="../User/index.php">Register? Login here!</a>
 </form>

@@ -11,10 +11,6 @@
                     <form action="../User/userController.php" method="POST">
                    <div class="modal-body">
                     <div class="form-group">
-                        <label>ID</label>
-                        <input class="form-control" value=<?php echo $userLoggedIn->getId();?> name="editID" readonly>
-                    </div>
-                    <div class="form-group">
                         <label>Forename</label>
                         <input class="form-control" value=<?php echo $userLoggedIn->getForename(); ?>  name="editForename" >
                     </div>
@@ -27,6 +23,7 @@
                         <input class="form-control" value=<?php echo $userLoggedIn->getUsername(); ?> name="editUsername">
                     </div>
                     </div>
+                    <input type="hidden" name="function" value="update">
                  <div class="modal-footer">
                  <input class="btn btn-primary" type="submit" value="Save Changes">
                 </div>
