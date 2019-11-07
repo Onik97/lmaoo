@@ -2,10 +2,9 @@
 			  margin-left: 600px;
 }
 
-.return {
-	width: 190px;
-	margin-top: 20px;
-	margin-left: 615px;
-	font-size: 16px;
-	border: 5px solid black;
-}
+.alert {
+	width:40%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+ }

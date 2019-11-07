@@ -1,7 +1,7 @@
 <?php  
 require('../connection.php');
 require('user.php');
-//error_reporting(0);
+error_reporting(0);
 $function = $_POST['function'];
 $logout = $_POST['logout'];
 
