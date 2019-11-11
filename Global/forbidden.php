@@ -20,7 +20,7 @@
             </g>
           </svg>
 <h1>You are not allowed to enter here</h1>
-<h2>Go <a target="_blank" href="../index.php">Home!</a></h2>
+<h2>Go <a href="../index.php">Home!</a></h2>
 <script type="text/javascript">
   var root = document.documentElement;
 var eyef = document.getElementById('eyef');

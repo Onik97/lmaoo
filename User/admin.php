@@ -12,11 +12,8 @@
 <body>
     <p>This is the admin page</p>
     
-    <?php if ($userLoggedIn->getLevel() == "1") 
-            { ?>
-                <p>403 Forbidden</p>
-                <?php 
-            } 
+    <?php if (!isset($_SESSION['userLoggedIn']) || $userLoggedIn->getLevel() == "1") 
+            { header("Location: ../Global/forbidden.php"); } 
             else 
             { ?>  
                 <h1>User Table</h1>
