@@ -1,4 +1,4 @@
-            <!-- Modal -->
+<?php if (!isset($userLoggedIn))  { return; } else { ?>
             <div class="modal fade" id="view-modal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -30,4 +30,4 @@
                 </form>
                  </div>
             </div>
-        </div>
+</div> <?php } ?>
