@@ -113,7 +113,7 @@ function register()
 	$forename = $_POST['forename'];
 	$surname = $_POST['surname'];
 	$username = $_POST['username'];
-	$password = $_POST['password'];
+	$password = $_POST['password1'];
 	$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
 	$pdo = logindb('user', 'pass');
