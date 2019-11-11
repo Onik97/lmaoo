@@ -10,6 +10,7 @@ function checkPassword(form)
                 }
                 else
                 {
+                    // Should not do anything as it should just register
                     return true; 
                 } 
             } 
