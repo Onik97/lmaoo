@@ -12,6 +12,7 @@
 <body>
 <div class="top-buffer">
 	<div class="container">
+  <p id=validateMessage></p>
 	<form action="userController.php" onSubmit="return checkPassword(this)" method='POST'>
   Forename:<br> <input type="text" name="forename" required> <br>
   Surname:<br> <input type="text" name="surname" required> <br>
