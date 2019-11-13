@@ -13,7 +13,7 @@ session_start();
 <?php include("../Global/navBar.php"); ?>
 <body>
 	<div ID="ticketContainer">
-			
+	<p><?php if(isset($_GET['ticketId'])) { echo "I got the ticket ID!";} else {}?></p>
 			<div ID="ticketBrief">
 			<?php include("brief.php"); ?>	
     		</div>
