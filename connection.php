@@ -9,11 +9,8 @@ function logindb($user, $password)
 	}
 	catch(PDOException $e)
 	{
-		print "Error!: " . $e->getMessage() . "<br/>";
-		//echo "lol";
+		die("Error!: " . $e->getMessage() . "<br/>" . "Database not found! Connect to the VPN!");
 	}
 	return $pdo;
 }
-
-logindb("user","pass");
 ?>
