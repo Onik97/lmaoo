@@ -1,0 +1,10 @@
+body {
+    padding-top: 65px;
+}
+
+.row {
+    padding-top: 30px;
+    padding-left: 250px;
+    padding-right: 250px;
+    align-content: center;
+}

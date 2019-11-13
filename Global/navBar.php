@@ -29,6 +29,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li> <a href="../Home/index.php">Home</a> </li>
                 <li> <a href="../About/index.php">About</a> </li>
+                <li> <a href="../Project/index.php">Project</a> </li>
 				<li> <a href="../Ticket/index.php">Ticket</a>
                 <!-- Navbar link with a dropdown menu -->
                 <li class="dropdown">
