@@ -14,7 +14,7 @@ session_start();
 <?php include("../Global/navBar.php"); ?>
 <body>
 <div class="row">
-  <div class="col-md-6 bg-primary">
+  <div id="projectDiv" class="col-md-6 bg-primary">
     <h1>Projects</h1>
     <?php $allProjects = getProjectList();
     foreach ($allProjects as $project) { ?>
