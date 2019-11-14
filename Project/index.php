@@ -18,16 +18,16 @@ session_start();
     <h1>Projects</h1>
     <?php $allProjects = getProjectList();
     foreach ($allProjects as $project) { ?>
-    <button class="btn btn-primary" onclick="getProjectId(this.value)" value="<?php echo $project->projectId ?>"> <?php echo $project->name; ?></button> <br>
+    <button class="btn btn-primary" onclick="getProjectId(this.value);getProjectName(this.innerHTML);" value="<?php echo $project->projectId ?>"> <?php echo $project->name; ?></button> <br>
     <?php } ?>
   </div>
 
-  <div id="ticketDiv" class="col-md-6 bg-info">
-    <h1>Tickets</h1>
+  <div id="tickets" class="col-md-6 bg-info">
+    <h1 id="ticketMessage">Tickets</h1>
+    <div id=ticketDiv></div>
   </div>
 </div>
 </body>
 </html>
 <?php include("../Global/editUserModal.php"); 
-// https://www.youtube.com/watch?v=ejN-oAw9vC0
 ?>
