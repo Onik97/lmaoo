@@ -8,3 +8,18 @@ body {
     padding-right: 250px;
     align-content: center;
 }
+
+#ticketDiv td, #ticketDiv th {
+	border: 1px solid #ddd;
+}
+
+#ticketDiv tr:nth-child(even) {background-color: #f2f2f2;}
+
+#ticketDiv tr:hover {background-color: #ddd;}
+
+#ticketDiv th {
+	font-size: 15px;
+	padding: 12px, 0px, 12px, 0px;
+	background-color: #de1a10;
+	color: white;
+}
