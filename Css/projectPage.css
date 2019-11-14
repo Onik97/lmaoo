@@ -9,6 +9,20 @@ body {
     align-content: center;
 }
 
+#projectDiv {
+	font-size: 20px;
+	color: white;
+}
+
+#projectDiv button {
+	font-size: 15px;
+	padding: 12px, 0px, 12px, 0px;
+	border: 1px solid black;
+	color: black;
+}
+
+#projectDiv button:hover {background-color: #ddd;}
+
 #ticketDiv td, #ticketDiv th {
 	border: 1px solid #ddd;
 }
