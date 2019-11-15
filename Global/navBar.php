@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-default navbar-fixed-top">
 <!-- Navbar Container -->
 <div class="container">
