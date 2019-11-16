@@ -25,7 +25,7 @@ class user
 
 	public function getId()
 	{
-		return $this->id;
+		return htmlspecialchars($this->id, ENT_QUOTES, 'UTF-8');
 	}
 
 	public function setUsername($username)
