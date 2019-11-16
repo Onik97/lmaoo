@@ -50,6 +50,5 @@ session_start();
 		  <?php include("../Global/editUserModal.php"); ?>
 <footer>
 </footer>
-
 </body>
 </html>

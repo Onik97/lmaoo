@@ -29,7 +29,7 @@ if(isset($_SESSION['userLoggedIn'])){header("Location: ../Ticket/index.php");}
 	if (isset($_SESSION['message']))
 	{ ?>
 		<div class="alert alert-warning"> <?php
-		echo$_SESSION['message'];session_unset(); ?>
+		echo $_SESSION['message'];session_unset(); ?>
   		</div><?php
 	} ?>
 </body>
