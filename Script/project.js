@@ -4,7 +4,7 @@ function getProjectName(name)
    document.getElementById("ticketMessage").innerHTML = "Tickets for " + name;
 }
 
-function getProjectId(id)
+function getTicketWithProjectId(id)
 {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "projectController.php?projectId="+id, true)
