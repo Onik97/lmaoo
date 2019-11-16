@@ -25,7 +25,7 @@ class user
 
 	public function getId()
 	{
-		return $this->id;
+		return htmlspecialchars($this->id, ENT_QUOTES, 'UTF-8');
 	}
 
 	public function setUsername($username)
@@ -35,7 +35,7 @@ class user
 
 	public function getUsername()
 	{
-		return $this->username;
+		return htmlspecialchars($this->username, ENT_QUOTES, 'UTF-8');
 	}
 
 	public function setPassword($password)
@@ -55,7 +55,7 @@ class user
 
 	public function getForename()
 	{
-		return $this->forename;
+		return htmlspecialchars($this->forename, ENT_QUOTES, 'UTF-8');
 	}
 
 	public function setSurname($surname)
@@ -65,7 +65,7 @@ class user
 
 	public function getSurname()
 	{
-		return $this->surname;
+		return htmlspecialchars($this->surname, ENT_QUOTES, 'UTF-8');
 	}
 
 	public function setLevel($level)
