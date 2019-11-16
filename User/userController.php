@@ -77,7 +77,7 @@ function userInfoById($userId)
 {
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-	$stmt = $pdo->prepare("SELECT * FROM user WHERE userId = ?");
+	$stmt = $pdo->prepare("SELECT userId, forename, surname, username, level FROM user WHERE userId = ?");
 	$stmt->execute([$userId]);
 	$user = $stmt->fetch();
 	return $user;
