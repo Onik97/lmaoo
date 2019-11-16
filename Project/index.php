@@ -18,7 +18,7 @@ session_start();
     <h1>Projects</h1>
     <?php $allProjects = getProjectList();
     foreach ($allProjects as $project) { ?>
-    <button class="btn btn-primary" onclick="getProjectId(this.value);getProjectName(this.innerHTML);" value="<?php echo $project->projectId ?>"> <?php echo $project->name; ?></button> <br>
+    <button class="btn btn-primary" onclick="getTicketWithProjectId(this.value);getProjectName(this.innerHTML);" value="<?php echo $project->projectId ?>"> <?php echo $project->name; ?></button> <br>
     <?php } ?>
   </div>
 
