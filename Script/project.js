@@ -1,14 +1,21 @@
-function getProjectId(id)
+
+function getProjectName(name)
+{
+   document.getElementById("ticketMessage").innerHTML = "Tickets for " + name;
+}
+
+function getTicketWithProjectId(id)
 {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "projectController.php?projectId="+id, true)
     xmlhttp.send();
-    xmlhttp.onreadystatechange = function() {
+    xmlhttp.onreadystatechange = function() 
+    {
         if (this.readyState == 4 && this.status == 200)
         {
             var ticketJSON = JSON.parse(this.responseText);
                 document.getElementById("ticketDiv").innerHTML = 
-                `<h1>Tickets</h1>
+                `
                 <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -32,5 +39,4 @@ function getProjectId(id)
                 `;
         }
     }
-
 }
