@@ -46,6 +46,7 @@ session_start();
 		  </div>
 		  
 		  <?php include("../Global/editUserModal.php"); ?>
+		  <?php include("../Global/CreateCommentModal.php"); ?>
 <footer>
 </footer>
 </body>

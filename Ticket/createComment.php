@@ -11,3 +11,4 @@
 
     <textarea id="createComment" class=createComment name="editordata" required></textarea>
     <button onclick="saveComment()">Save</button>
+	<a data-toggle="modal" data-target="#view-modal2" role="button">Create Comment</a>
