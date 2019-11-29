@@ -43,11 +43,11 @@
                         <?php   } 
                               else if ($userLoggedIn->getLevel() == "1")
                                 { ?>
-                                    <li><a data-toggle="modal" data-target="#view-modal">Edit Account</a></li> 
+                                    <li><a data-toggle="modal" data-target="#view-modal" role="button">Edit Account</a></li> 
                                     <li><a href="../User/logout.php">Logout</a></li>
                         <?php   } else 
                                 { ?>
-                                    <li><a data-toggle="modal" data-target="#view-modal">Edit Account</a></li>   
+                                    <li><a data-toggle="modal" data-target="#view-modal" role="button">Edit Account</a></li>   
                                     <li><a href="../User/logout.php">Logout</a></li>
                                     <li><a href="../User/admin.php">Admin</a></li>
                         <?php   } ?>
