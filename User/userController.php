@@ -61,10 +61,11 @@ function updateUser()
 	$editForename = $_POST['editForename'];
 	$editSurname = $_POST['editSurname'];
 	$editUsername = $_POST['editUsername'];
+	$editUserId = $_POST['editUserId'];
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-	$stmt = $pdo->prepare("UPDATE user SET forename=?, surname=? WHERE username=?");
-	$stmt->execute([$editForename, $editSurname, $editUsername]);
+	$stmt = $pdo->prepare("UPDATE user SET forename=?, surname=?, username=? WHERE userId=?");
+	$stmt->execute([$editForename, $editSurname, $editUsername, $editUserId]);
 	session_start();
 	session_unset();
 	session_destroy();
