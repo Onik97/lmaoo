@@ -10,9 +10,13 @@ session_start();
 <?php include("../Global/head.php"); ?>
 </head>
 <?php include("../Global/navBar.php"); ?>
-<body>
+<body> 
+	<?php if (isset($userLoggedIn)) 
+	{ if(isset($_GET['ticketId'])) 
+		{ $ticketId = $_GET['ticketId']; ?>
+	
 	<div ID="ticketContainer">
-	<p><?php if(isset($_GET['ticketId'])) { echo "I got the ticket ID!";} else {}?></p>
+			
 			<div ID="ticketBrief">
 			<?php include("brief.php"); ?>	
     		</div>
@@ -44,9 +48,12 @@ session_start();
 		  <div ID="ticketComments">
 		  <?php include("viewComments.php"); ?>	
 		  </div>
-		  
+ 
+<?php } else { echo "<p id='loginMessage'> You need to select a Ticket </p>"; }
+	} else { echo "<p id='loginMessage'> You need to login to access this page </p>"; } 
+	?>
 		  <?php include("../Global/editUserModal.php"); ?>
+</body>
 <footer>
 </footer>
-</body>
 </html>
