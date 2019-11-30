@@ -14,6 +14,8 @@ session_start();
 <?php include("../Global/navBar.php"); ?>
 <body>
 <div class="row">
+<?php if (isset($userLoggedIn)) { ?>
+
   <div id="projectDiv" class="col-md-6 bg-primary">
     <h1>Projects</h1>
     <?php $allProjects = getProjectList();
@@ -26,7 +28,13 @@ session_start();
     <h1 id="ticketMessage">Tickets</h1>
     <div id=ticketDiv></div>
   </div>
+
 </div>
+
+<?php } else {
+	echo "<p> You need to login to access this page </p>";
+} ?>
+
 </body>
 </html>
 <?php include("../Global/editUserModal.php"); 
