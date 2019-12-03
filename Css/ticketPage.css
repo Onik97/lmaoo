@@ -151,3 +151,8 @@
 	margin-right: auto;
 	background-color:  #ff1aff;
 }
+
+#loginMessage
+{
+	padding-top: 65px; 
+}
