@@ -25,8 +25,8 @@ error_reporting(0);
 
     if ($_GET['projectId'])
     {
-       // echo "This is from PHP";
        echo json_encode(getTicketList($_GET['projectId']));
+       // Echo is made to ensure XMLHttpRequest gets it
     }
     else
     {
