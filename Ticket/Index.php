@@ -53,6 +53,7 @@ session_start();
 	} else { echo "<p id='loginMessage'> You need to login to access this page </p>"; } 
 	?>
 		  <?php include("../Global/editUserModal.php"); ?>
+		  <?php include("../Global/editCommentModal.php"); ?>
 </body>
 <footer>
 </footer>
