@@ -1,0 +1,39 @@
+body {
+    padding-top: 65px;
+}
+
+.row {
+    padding-top: 30px;
+    padding-left: 250px;
+    padding-right: 250px;
+    align-content: center;
+}
+
+#projectDiv {
+	font-size: 20px;
+	color: white;
+}
+
+#projectDiv button {
+	font-size: 15px;
+	padding: 12px, 0px, 12px, 0px;
+	border: 1px solid black;
+	color: black;
+}
+
+#projectDiv button:hover {background-color: #ddd;}
+
+#ticketDiv td, #ticketDiv th {
+	border: 1px solid #ddd;
+}
+
+#ticketDiv tr:nth-child(even) {background-color: #f2f2f2;}
+
+#ticketDiv tr:hover {background-color: #ddd;}
+
+#ticketDiv th {
+	font-size: 15px;
+	padding: 12px, 0px, 12px, 0px;
+	background-color: grey;
+	color: white;
+}

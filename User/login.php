@@ -1,5 +1,6 @@
 <?php require("../User/user.php");
-session_start(); 
+session_start();
+if(isset($_SESSION['userLoggedIn'])){header("Location: ../Ticket/index.php");}
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,18 +16,21 @@ session_start();
 	<div class="container">
 		<form action="userController.php" method='POST'>
 			Username:<br>
-		<input type="text" name="username">
-		<br>
+		<input type="text" name="username" required> <br>
 			Password:<br>
-		<input type="password" name="password">
+		<input type="password" name="password" required>
 		<input type="hidden" name="function" value="login">
 		<input class="one" type="submit" value="Submit"> <br><br>
 		<a href="../User/register.php">Not Registered? Click here!</a>
 		</form>
 	</div>
 </div>
-<div class="return">
-    <p><b><?php if(isset($_SESSION['message'])){echo$_SESSION['message'];session_unset();}?></b></p>
-</div>
+	<?php 
+	if (isset($_SESSION['message']))
+	{ ?>
+		<div class="alert alert-warning"> <?php
+		echo $_SESSION['message'];session_unset(); ?>
+  		</div><?php
+	} ?>
 </body>
 </html>

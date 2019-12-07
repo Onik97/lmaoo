@@ -1,4 +1,4 @@
-            <!-- Modal -->
+<?php if (!isset($userLoggedIn))  { return; } else { ?>
             <div class="modal fade" id="view-modal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -24,10 +24,27 @@
                     </div>
                     </div>
                     <input type="hidden" name="function" value="update">
+                    <input type="hidden" name="editUserId" value="<?php echo $userLoggedIn->getId();?>">
                  <div class="modal-footer">
                  <input class="btn btn-primary" type="submit" value="Save Changes">
                 </div>
                 </form>
                  </div>
             </div>
+</div> <?php } ?>
         </div>
+<script>
+		$('form')
+		.each(function(){
+			$(this).data('serialized', $(this).serialize())
+		})
+        .on('change input', function(){
+            $(this)				
+                .find('input:submit, button:submit')
+                    .attr('disabled', $(this).serialize() == $(this).data('serialized'))
+            ;
+         })
+		.find('input:submit, button:submit')
+			.attr('disabled', true)
+	;
+</script>

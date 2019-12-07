@@ -141,7 +141,11 @@
 	width: 1490px;
 	margin-left: auto;
 	margin-right: auto;
-	background-color: #800080;
+	background-color: #00ffd5;
+}
+
+.Createcommentbutton {
+	margin-right: 5px;
 }
 
 #ticketComments {
@@ -150,4 +154,14 @@
 	margin-left: auto;
 	margin-right: auto;
 	background-color:  #ff1aff;
+}
+
+#loginMessage
+{
+	padding-top: 65px; 
+}
+
+.CenterText {
+	margin-left: auto;
+	margin-right: auto;
 }

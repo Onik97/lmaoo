@@ -1,17 +1,20 @@
-<?php require("../User/user.php");
+<?php 
+require("../User/user.php");
 session_start(); 
 ?>
 <!DOCTYPE html>
 <html>
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Ticket</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../Css/ticketPage.css">
-<head></head>
+<title>Ticket</title>
+<link rel="stylesheet" href="../Css/ticketPage.css">
+<head>
+<?php include("../Global/head.php"); ?>
+</head>
 <?php include("../Global/navBar.php"); ?>
-<body>
+<body> 
+	<?php if (isset($userLoggedIn)) 
+	{ if(isset($_GET['ticketId'])) 
+		{ $ticketId = $_GET['ticketId']; ?>
+	
 	<div ID="ticketContainer">
 			
 			<div ID="ticketBrief">
@@ -37,8 +40,7 @@ session_start();
     		<div ID="ticketMessages">
     		<?php include("messages.php"); ?>	
     		</div>
-	</div>
-		  
+	</div>  
 		  <div ID="ticketCreate">
 		  <?php include("createComment.php"); ?>	
 		  </div>
@@ -46,10 +48,13 @@ session_start();
 		  <div ID="ticketComments">
 		  <?php include("viewComments.php"); ?>	
 		  </div>
-		  
+ 
+<?php } else { echo "<p id='loginMessage'> You need to select a Ticket </p>"; }
+	} else { echo "<p id='loginMessage'> You need to login to access this page </p>"; } 
+	?>
 		  <?php include("../Global/editUserModal.php"); ?>
+		  <?php include("../Global/editCommentModal.php"); ?>
+</body>
 <footer>
 </footer>
-
-</body>
 </html>

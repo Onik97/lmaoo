@@ -1,7 +1,7 @@
 <?php  
 require('../connection.php');
 require('user.php');
-//error_reporting(0);
+error_reporting(0);
 $function = $_POST['function'];
 $logout = $_POST['logout'];
 
@@ -61,10 +61,11 @@ function updateUser()
 	$editForename = $_POST['editForename'];
 	$editSurname = $_POST['editSurname'];
 	$editUsername = $_POST['editUsername'];
+	$editUserId = $_POST['editUserId'];
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-	$stmt = $pdo->prepare("UPDATE user SET forename=?, surname=? WHERE username=?");
-	$stmt->execute([$editForename, $editSurname, $editUsername]);
+	$stmt = $pdo->prepare("UPDATE user SET forename=?, surname=?, username=? WHERE userId=?");
+	$stmt->execute([$editForename, $editSurname, $editUsername, $editUserId]);
 	session_start();
 	session_unset();
 	session_destroy();
@@ -77,7 +78,7 @@ function userInfoById($userId)
 {
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-	$stmt = $pdo->prepare("SELECT * FROM user WHERE userId = ?");
+	$stmt = $pdo->prepare("SELECT userId, forename, surname, username, level FROM user WHERE userId = ?");
 	$stmt->execute([$userId]);
 	$user = $stmt->fetch();
 	return $user;
@@ -99,7 +100,7 @@ function login()
 		$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level);
 		session_start();
 		$_SESSION['userLoggedIn'] = $userLoggedIn;
-		header("Location: ../Ticket/index.php");
+		header("Location: ../Project/index.php");
 	}
 	else
 	{
@@ -113,7 +114,7 @@ function register()
 	$forename = $_POST['forename'];
 	$surname = $_POST['surname'];
 	$username = $_POST['username'];
-	$password = $_POST['password'];
+	$password = $_POST['password1'];
 	$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
 	$pdo = logindb('user', 'pass');

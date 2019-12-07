@@ -6,17 +6,15 @@
     <link rel="stylesheet" href="../Css/admin.css">
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../Script/admin.js"></script>
     <title>About</title>
 </head>
 <?php include("../Global/navBar.php"); ?>
 <body>
     <p>This is the admin page</p>
     
-    <?php if ($userLoggedIn->getLevel() == "1") 
-            { ?>
-                <p>403 Forbidden</p>
-                <?php 
-            } 
+    <?php if (!isset($_SESSION['userLoggedIn']) || $userLoggedIn->getLevel() == "1") 
+            { header("Location: ../Global/forbidden.php"); } 
             else 
             { ?>  
                 <h1>User Table</h1>
@@ -42,9 +40,9 @@
                             <td><?php echo $user->level; ?></td>
                             <td>
                                 <div class="btn-group btn-group-xs" role="group">
-                                    <a href="adminController.php?edit=<?php echo $user->userId; ?>" class="btn btn-default">Edit</a> 
-                                    <a href="adminController.php?delete=<?php echo $user->userId; ?>" class="btn btn-default">Delete</a> 
-                                    <a href="adminController.php?view=<?php echo $user->userId; ?>" class="btn btn-default">View</a>
+                                    <a id="<?php echo $user->userId;?>" data-toggle="modal" data-target="#function-modal" onclick="editUser(this.id)" class="btn btn-default">Edit</a> 
+                                    <a id="<?php echo $user->userId;?>" data-toggle="modal" data-target="#function-modal" onclick="deleteUser(this.id)" class="btn btn-default">Delete</a> 
+                                    <a id="<?php echo $user->userId;?>" data-toggle="modal" data-target="#function-modal" onclick="viewUser(this.id)" class="btn btn-default">View</a>
                                 </div>
                             </td>
                         </tr>
@@ -53,5 +51,21 @@
                 </table>
             </div>    
             <?php include("../Global/editUserModal.php"); ?>
+
+<div class="modal fade" id="function-modal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+            </div>    
+            <div class="modal-body">
+                <div id="modalContent">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

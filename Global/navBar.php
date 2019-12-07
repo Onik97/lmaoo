@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-default navbar-fixed-top">
 <!-- Navbar Container -->
 <div class="container">
@@ -29,6 +28,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li> <a href="../Home/index.php">Home</a> </li>
                 <li> <a href="../About/index.php">About</a> </li>
+                <li> <a href="../Project/index.php">Project</a> </li>
 				<li> <a href="../Ticket/index.php">Ticket</a>
                 <!-- Navbar link with a dropdown menu -->
                 <li class="dropdown">
@@ -43,11 +43,11 @@
                         <?php   } 
                               else if ($userLoggedIn->getLevel() == "1")
                                 { ?>
-                                    <li><a data-toggle="modal" data-target="#view-modal">Edit Account</a></li> 
+                                    <li><a data-toggle="modal" data-target="#view-modal" role="button">Edit Account</a></li> 
                                     <li><a href="../User/logout.php">Logout</a></li>
                         <?php   } else 
                                 { ?>
-                                    <li><a data-toggle="modal" data-target="#view-modal">Edit Account</a></li>   
+                                    <li><a data-toggle="modal" data-target="#view-modal" role="button">Edit Account</a></li>   
                                     <li><a href="../User/logout.php">Logout</a></li>
                                     <li><a href="../User/admin.php">Admin</a></li>
                         <?php   } ?>
