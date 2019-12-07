@@ -3,29 +3,23 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                     <h5 class="modal-title" id="exampleModalLongTitle">Create New Comment</h5>
+                     <h5 class="modal-title" id="exampleModalLongTitle"><b>Edit Comment</b></h5>
                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                     </div>
-                    <form action="../User/userController.php" method="POST">
                    <div class="modal-body">
                     <div class="form-group">
-                        <label>Forename</label>
-                        <input class="form-control" value=<?php echo $userLoggedIn->getForename(); ?>  name="editForename" >
-                    </div>
-                    <div class="form-group">
-                        <label>Surname</label>
-                        <input class="form-control" value=<?php echo $userLoggedIn->getSurname(); ?>  name="editSurname">
-                    </div>
-                    <div class="form-group">
-                        <label>Username</label>
-                        <input class="form-control" value=<?php echo $userLoggedIn->getUsername(); ?> name="editUsername">
-                    </div>
+                        <label class="CenterText">Edit Comment Here</label>
+                        <script type="text/javascript" src="../Script/commentController.js"></script>
+						<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+						<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+						<textarea id="createComment" class=createComment name="editordata" required>Insert PHP/JS/Power of god & anime to load comments from DB inside. not sure how to currently.</textarea>
                     </div>
                     <input type="hidden" name="function" value="update">
                  <div class="modal-footer">
                  <input class="btn btn-primary" type="submit" value="Save Changes">
+				 <input class="btn btn-primary" type="submit" value="Delete Comment">
                 </div>
                 </form>
                  </div>

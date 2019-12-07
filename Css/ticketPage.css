@@ -144,6 +144,10 @@
 	background-color: #00ffd5;
 }
 
+.Createcommentbutton {
+	margin-right: 5px;
+}
+
 #ticketComments {
 	text-align: centre;
 	width: 1490px;
@@ -155,4 +159,9 @@
 #loginMessage
 {
 	padding-top: 65px; 
+}
+
+.CenterText {
+	margin-left: auto;
+	margin-right: auto;
 }
