@@ -100,7 +100,7 @@ function login()
 		$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level);
 		session_start();
 		$_SESSION['userLoggedIn'] = $userLoggedIn;
-		header("Location: ../Ticket/index.php");
+		header("Location: ../Project/index.php");
 	}
 	else
 	{
