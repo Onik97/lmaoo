@@ -8,4 +8,4 @@ var ticketId = "<?php echo $ticketId; ?>";
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 
 <textarea id="createComment" class=createComment name="editordata" required></textarea>
-<button onclick="saveComment()">Save</button>
+<button class="Createcommentbutton" data-toggle="modal" data-target="#view-modal2">Edit Comment</button>
