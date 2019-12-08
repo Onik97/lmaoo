@@ -12,3 +12,4 @@ var ticketId = "<?php echo $ticketId; ?>";
     <p>$Username Added a comment</p>
 	<p>$Comment Content goes here</p>
 </div>
+<?php include("editCommentModal.php"); ?>
