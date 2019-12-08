@@ -27,8 +27,23 @@ function loadComments()
     if (this.readyState == 4 && this.status == 200)
       {
         var ticketJSON = JSON.parse(this.responseText);
-        console.log(ticketJSON);
+                document.getElementById("commentList").innerHTML = 
+                `
+                ${ticketJSON.map(function(comment)
+                    {
+                        return `
+                        <div id="comments">
+                            <img class="CommentImages" src="../Images/paperclip.png"></img>
+                            <img class="CommentImages" value=${comment.commentId} src="../Images/delete.png"></img>
+                            <img class="CommentImages" value=${comment.commentId} src="../Images/edit.png" data-toggle="modal" data-target="#editCommentModal" role="button"></img>
+                            <p>Comment by ${comment.forename + " " + comment.surname}</p>
+                            <p>${comment.commentContent}</p>
+                        </div>
+                        `;
+                    }).join('')}
+                `;
       }
+      
   }
   xhr.send(data);
 }
