@@ -6,7 +6,11 @@ var ticketId = "<?php echo $ticketId; ?>";
 <button onclick="loadComments()">Load Comments - Check Console (F12 - Console) </button>
 
 <div id="commentList">
-    I put stuff here
+	<img class="CommentImages" src="../Images/AttachmentIcon.png"></img>
+	<img class="CommentImages" src="../Images/EditIcon.png"></img>
+	<img class="CommentImages" src="../Images/DeleteIcon.png"></img>
+    <p>$Username Added a comment</p>
+	<p>$Comment Content goes here</p>
 </div>
 
 
