@@ -156,6 +156,24 @@
 	background-color:  #ff1aff;
 }
 
+#commentList {
+	background-color: white;
+	width: 1350px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-left: 5px;
+	margin-bottom: 10px;
+
+}
+
+.CommentImages {
+	width: 40px;
+	height: 40px;
+	margin-left: 10px;
+	padding-left: 5px;
+	float: right;
+}
+
 #loginMessage
 {
 	padding-top: 65px; 

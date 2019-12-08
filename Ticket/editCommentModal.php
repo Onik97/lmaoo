@@ -1,5 +1,5 @@
 <?php if (!isset($userLoggedIn))  { return; } else { ?>
-            <div class="modal fade" id="view-modal2" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
+            <div class="modal fade" id="editCommentModal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
@@ -19,9 +19,7 @@
                     <input type="hidden" name="function" value="update">
                  <div class="modal-footer">
                  <input class="btn btn-primary" type="submit" value="Save Changes">
-				 <input class="btn btn-primary" type="submit" value="Delete Comment">
                 </div>
-                </form>
                  </div>
             </div>
 </div> <?php } ?>
