@@ -169,6 +169,7 @@
 .CommentImages {
 	width: 40px;
 	height: 40px;
+	margin-left: 10px;
 	padding-left: 5px;
 	float: right;
 }
