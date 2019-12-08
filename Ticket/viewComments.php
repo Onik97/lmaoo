@@ -6,9 +6,10 @@ var ticketId = "<?php echo $ticketId; ?>";
 <button onclick="loadComments()">Load Comments - Check Console (F12 - Console) </button>
 
 <div id="commentList">
-	<img class="CommentImages" src="../Images/AttachmentIcon.png"></img>
-	<img class="CommentImages" src="../Images/EditIcon.png" data-toggle="modal" data-target="#editCommentModal" role="button"></img>
-	<img class="CommentImages" src="../Images/DeleteIcon.png"></img>
-    <p>$Username Added a comment</p>
-	<p>$Comment Content goes here</p>
+	<img class="CommentImages" src="../Images/paperclip.png"></img>
+	<img class="CommentImages" src="../Images/delete.png"></img>
+	<img class="CommentImages" src="../Images/edit.png" data-toggle="modal" data-target="#editCommentModal" role="button"></img>
+    <p>$Username Added a comment Username </p>
+	<p>$Comment Content</p>
 </div>
+<?php include("editCommentModal.php"); ?>

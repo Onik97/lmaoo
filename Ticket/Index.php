@@ -48,12 +48,12 @@ session_start();
 		  <div ID="ticketComments">
 		  <?php include("viewComments.php"); ?>	
 		  </div>
+
+		  <?php include("../Global/editUserModal.php"); ?>
  
 <?php } else { echo "<p id='loginMessage'> You need to select a Ticket </p>"; }
 	} else { echo "<p id='loginMessage'> You need to login to access this page </p>"; } 
 	?>
-		  <?php include("../Global/editUserModal.php"); ?>
-		  <?php include("../Ticket/editCommentModal.php"); ?>
 </body>
 <footer>
 </footer>
