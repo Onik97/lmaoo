@@ -10,8 +10,7 @@ function editUser(userId)
         {
             var userStuff = JSON.parse(this.responseText);
             document.getElementById("modalTitle").innerHTML = "Editing User";
-            document.getElementById("modalContent").innerHTML =
-            `
+            document.getElementById("modalContent").innerHTML = `
             <form action="../User/adminController.php" method="POST">
             <div class="modal-body">
             <div class="form-group">
