@@ -1,5 +1,7 @@
 $(document).ready(function() 
 {
+  loadComments();
+
   $('.createComment').summernote
   ({
       height: 150,
@@ -10,10 +12,7 @@ $(document).ready(function()
         ['para', ['ul', 'ol',]],
       ]
   });
-});
 
-$(document).ready(function() 
-{
   $('.editComment').summernote
   ({
       height: 150,
@@ -67,16 +66,14 @@ function saveComment()
   var commentContent = $('.createComment').summernote('code');
   if ($('.createComment').summernote("isEmpty"))
   {
-    console.log("Comment Section is empty")
 		document.getElementById("notenoughchars").removeAttribute("hidden");
 		document.getElementById("manychars").setAttribute("hidden");
 		
   }		
   else if (commentContent.length > 255)
   {
-    console.log("Comment is too big")
 		document.getElementById("manychars").removeAttribute("hidden");
-		document.getElementById("notenoughchars").setAttribute("hidden");		// Should give a warning to the user - Lewis do you want to do this?
+		document.getElementById("notenoughchars").setAttribute("hidden");
   }
   else 
   {
@@ -97,11 +94,10 @@ function saveComment()
         {
           console.log(this.responseText);
           $('.createComment').summernote('code', ""); // Empties the Comments once it is submitted
-          loadComments(); // Loads comments automatically once the comment has been submitted
+          loadComments(); // Loads comments once you submit it
         }
     }
     xhr.send(data);
-    
   }
 }
 
