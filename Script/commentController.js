@@ -9,7 +9,7 @@ $(document).ready(function()
       [
         ['style', ['bold', 'italic', 'underline', 'clear']],
         ['font', ['strikethrough' ]],
-        ['para', ['ul', 'ol',]],
+        ['para', ['ul', 'ol']],
       ]
   });
 
@@ -20,7 +20,7 @@ $(document).ready(function()
       [
         ['style', ['bold', 'italic', 'underline', 'clear']],
         ['font', ['strikethrough' ]],
-        ['para', ['ul', 'ol',]],
+        ['para', ['ul', 'ol'  ]],
       ]
   });
 });
@@ -47,8 +47,8 @@ function loadComments()
                         return `
                         <div id="comments">
                             <img class="CommentImages" src="../Images/paperclip.png"></img>
-                            <img class="CommentImages" value=${comment.commentId} src="../Images/delete.png" data-toggle="modal" data-target="#CommentModal" onclick="deleteComment()" role="button"></img>
-                            <img class="CommentImages" value=${comment.commentId} src="../Images/edit.png" data-toggle="modal" data-target="#CommentModal" onclick="editComment()" role="button"></img>
+                            <img class="CommentImages" src="../Images/delete.png" data-toggle="modal" data-target="#CommentModal" onclick="deletePrompt(${comment.commentId})" role="button"></img>
+                            <img class="CommentImages" src="../Images/edit.png" data-toggle="modal" data-target="#CommentModal" onclick=editPrompt(${comment.commentId}) role="button"></img>
                             <p>Comment by ${comment.forename + " " + comment.surname}</p>
                             <p>${comment.commentContent}</p>
                         </div>
@@ -102,7 +102,7 @@ function saveComment()
 }
 
 
-function editComment()
+function editPrompt(commentId)
 {
   document.getElementById("Modal-head").innerHTML = "Edit Comment";
   document.getElementById("prompt").style.display = "none"
@@ -110,12 +110,12 @@ function editComment()
 	document.getElementById("Modal-footer").innerHTML = 
 	`
 	<div class="modal-footer">
-		<input class="btn btn-primary" type="submit" value="Update Changes">
+		<input class="btn btn-primary" type="submit" value="Update Changes" onclick="editComment(${commentId})">
     </div>
 	`;
 }
 
-function deleteComment()
+function deletePrompt(commentId)
 {
   document.getElementById("Modal-head").innerHTML = "Delete Comment";
   document.getElementById("summernoteDiv").style.display = "none"
@@ -123,7 +123,19 @@ function deleteComment()
   document.getElementById("prompt").innerHTML = "Are you sure you want to delete this comment?";
 	document.getElementById("Modal-footer").innerHTML = `
 	<div class="modal-footer">
-		<input class="btn btn-primary" type="submit" value="Delete Comment">
+		<input class="btn btn-primary" type="submit" value="Delete Comment" onclick="deleteComment(${commentId})">
     </div>
 	`;
+}
+
+function editComment(commentId)
+{
+  console.log(commentId);
+  $('#CommentModal').modal('hide');
+}
+
+function deleteComment(commentId)
+{
+  console.log(commentId);
+  $('#CommentModal').modal('hide');
 }
