@@ -10,6 +10,18 @@ else if ($function == "loadComments")
 {
     echo json_encode(loadComments($_POST['ticketId']));
 }
+else if ($function == "updateComment")
+{
+    echo updateComment($_POST['commentId'], $_POST['newComment']);
+}
+else if ($function == "deleteComment")
+{
+    echo deleteComment($_POST['commentId']);
+}
+else
+{
+    
+}
 
 
 function createComment($commentContent, $ticketId, $userId)
@@ -21,19 +33,13 @@ function createComment($commentContent, $ticketId, $userId)
     echo "Success"; // Using echo for XMLHttpRequest
 }
 
-function createBugs($userId, $projectId)
+function updateComment($commentId, $newComment)
 {
-
-}
-
-function deleteComment($commentId)
-{
-
-}
-
-function deleteBugs($bugId)
-{
-
+    $pdo = logindb('user', 'pass');
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("UPDATE comment SET commentContent = ? WHERE commentId = ?");
+    $stmt->execute([$newComment, $commentId]);
+    echo "Success"; // Using echo for XMLHttpRequest
 }
 
 function loadComments($ticketId)
@@ -46,6 +52,25 @@ function loadComments($ticketId)
     $stmt->execute([$ticketId]);
     $comments = $stmt->fetchAll();
     return $comments;
+}
+
+function deleteComment($commentId)
+{
+    $pdo = logindb('user', 'pass');
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("DELETE FROM comment WHERE commentId = ?");
+    $stmt->execute([$commentId]);
+    echo "Success"; // Using echo for XMLHttpRequest
+}
+
+function createBugs($userId, $projectId)
+{
+
+}
+
+function deleteBugs($bugId)
+{
+
 }
 
 function loadBugs($ticketId)
