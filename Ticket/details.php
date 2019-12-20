@@ -14,6 +14,10 @@
 	<div>
 		<p>File Directory: ''</p>
 	</div>
+	
+	<div>
+	<button data-toggle="modal" data-target="#CommentModal"  onclick="Details()">Details Modal(wip)</button> 
+	</div>
 </div>
 
 <div ID="ticketDetails5">
