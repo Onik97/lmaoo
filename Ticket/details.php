@@ -16,7 +16,7 @@
 	</div>
 	
 	<div>
-	<button data-toggle="modal" data-target="#CommentModal"  onclick="Details()">Details Modal(wip)</button> 
+	<button id="detailsButtonModal" data-toggle="modal" data-target="#CommentModal"  onclick="Details()">Details Modal(wip)</button> 
 	</div>
 </div>
 

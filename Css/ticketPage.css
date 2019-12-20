@@ -33,6 +33,11 @@
 	text-align: centre;
 }
 
+#ticketBriefModal {
+	margin-left: 872.5px;
+	margin-top: 10px;
+}
+
 #ticketPeople {
 	grid-column: 2 / 2;
 	width: 490px;
@@ -50,7 +55,7 @@
 }
 
 #ticketPeople3 {
-	margin-left: 150px;
+	margin-left: 358px;
 }
 
 #ticketDetails {
@@ -90,6 +95,10 @@
 	border-width: 5px;
 	background-color: #4293f5;
 	text-align: center;
+}
+
+#detailsButtonModal {
+		margin-left: 858.5px;
 }
 
 
