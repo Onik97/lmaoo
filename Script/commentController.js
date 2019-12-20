@@ -185,13 +185,12 @@ function deleteComment(commentId)
     {
       if (this.readyState == 4 && this.status == 200)
         {
-          console.log(this.responseText);
+          console.log(this.responseText);   
+          loadComments();
+          $('#CommentModal').modal('hide'); 
         }
     }
     xhr.send(data);
-
-  $('#CommentModal').modal('hide'); // This should close the modal, make sure this is in the last line of this function
-  loadComments();
  }
  
  function briefDescription()
