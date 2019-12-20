@@ -33,15 +33,28 @@ function loadComments()
                 `
                 ${ticketJSON.map(function(comment)
                     {
+                      if (userId == comment.userId || userLevel == 2)
+                      {
                         return `
                         <div id="comments">
                             <img class="CommentImages" src="../Images/paperclip.png"></img>
                             <img class="CommentImages" src="../Images/delete.png" data-toggle="modal" data-target="#CommentModal" onclick="deletePrompt(${comment.commentId})" role="button"></img>
-                            <img class="CommentImages" src="../Images/edit.png" onclick=editComment(${comment.commentId}) role="button"></img>
+                            <img class="CommentImages" src="../Images/edit.png" onclick=editComment(${comment.commentId}) role="button"></img>   
                             <p>Comment by ${comment.forename + " " + comment.surname}</p>
                             <div class="comment${comment.commentId}">${comment.commentContent}</div>
                         </div>
                         `;
+                      }
+                      else 
+                      {
+                        return `
+                        <div id="comments">
+                            <img class="CommentImages" src="../Images/paperclip.png"></img> 
+                            <p>Comment by ${comment.forename + " " + comment.surname}</p>
+                            <div class="comment${comment.commentId}">${comment.commentContent}</div>
+                        </div>
+                        `;
+                      }
                     }).join('')}
                 `;
       }
@@ -172,13 +185,12 @@ function deleteComment(commentId)
     {
       if (this.readyState == 4 && this.status == 200)
         {
-          console.log(this.responseText);
+          console.log(this.responseText);   
+          loadComments();
+          $('#CommentModal').modal('hide'); 
         }
     }
     xhr.send(data);
-
-  $('#CommentModal').modal('hide'); // This should close the modal, make sure this is in the last line of this function
-  loadComments();
  }
  
  function briefDescription()
