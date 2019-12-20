@@ -50,6 +50,7 @@ session_start();
 		  </div>
 
 		  <?php include("../Global/editUserModal.php"); ?>
+		  <?php include("ticketModal.php"); ?>
  
 <?php } else { echo "<p id='loginMessage'> You need to select a Ticket </p>"; }
 	} else { echo "<p id='loginMessage'> You need to login to access this page </p>"; } 
