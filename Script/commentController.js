@@ -160,6 +160,23 @@ function deletePrompt(commentId)
 
 function deleteComment(commentId)
 {
-  console.log("Still needs to be implemented.." + "Comment id is " + commentId);
+    // variable userId is available for User Id logged in
+    // variable ticketId is available for Ticket Id
+    var data = new FormData();
+    data.append('function', "deleteComment");
+    data.append('commentId', commentId);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'ticketController.php', true);
+    xhr.onreadystatechange = function() 
+    {
+      if (this.readyState == 4 && this.status == 200)
+        {
+          console.log(this.responseText);
+        }
+    }
+    xhr.send(data);
+
   $('#CommentModal').modal('hide'); // This should close the modal, make sure this is in the last line of this function
-}
+  loadComments();
+ }
