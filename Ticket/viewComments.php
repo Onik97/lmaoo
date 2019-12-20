@@ -6,4 +6,4 @@ var ticketId = "<?php echo $ticketId; ?>";
 <h1> Comment Section </h1>
 <div id="commentList">
 </div>
-<?php include("CommentModal.php"); ?>
+<?php include("ticketModal.php"); ?>

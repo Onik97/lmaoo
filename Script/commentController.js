@@ -160,6 +160,62 @@ function deletePrompt(commentId)
 
 function deleteComment(commentId)
 {
-  console.log("Still needs to be implemented.." + "Comment id is " + commentId);
+    // variable userId is available for User Id logged in
+    // variable ticketId is available for Ticket Id
+    var data = new FormData();
+    data.append('function', "deleteComment");
+    data.append('commentId', commentId);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'ticketController.php', true);
+    xhr.onreadystatechange = function() 
+    {
+      if (this.readyState == 4 && this.status == 200)
+        {
+          console.log(this.responseText);
+        }
+    }
+    xhr.send(data);
+
   $('#CommentModal').modal('hide'); // This should close the modal, make sure this is in the last line of this function
+  loadComments();
+ }
+ 
+ function briefDescription()
+{
+  document.getElementById("Modal-head").innerHTML = "Brief Description";
+  document.getElementById("summernoteDiv").style.display = "none"
+  document.getElementById("prompt").style.display = "block"
+  document.getElementById("prompt").innerHTML = "Testing";
+  document.getElementById("Modal-footer").innerHTML = `
+	<div class="modal-footer">
+		<input class="btn btn-primary" type="submit" value="wip">
+    </div>
+	`;
+}
+
+ function People()
+{
+  document.getElementById("Modal-head").innerHTML = "People";
+  document.getElementById("summernoteDiv").style.display = "none"
+  document.getElementById("prompt").style.display = "block"
+  document.getElementById("prompt").innerHTML = "Testing / Click here to assign to yourself";
+  document.getElementById("Modal-footer").innerHTML = `
+	<div class="modal-footer">
+		<input class="btn btn-primary" type="submit" value="wip">
+    </div>
+	`;
+}
+
+ function Details()
+{
+  document.getElementById("Modal-head").innerHTML = "Details infomation";
+  document.getElementById("summernoteDiv").style.display = "none"
+  document.getElementById("prompt").style.display = "block"
+  document.getElementById("prompt").innerHTML = "Testing";
+  document.getElementById("Modal-footer").innerHTML = `
+	<div class="modal-footer">
+		<input class="btn btn-primary" type="submit" value="wip">
+    </div>
+	`;
 }
