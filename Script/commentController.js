@@ -193,7 +193,7 @@ function deleteComment(commentId)
     xhr.send(data);
  }
  
- function briefDescription()
+function briefDescription()
 {
   document.getElementById("Modal-head").innerHTML = "Brief Description";
   document.getElementById("summernoteDiv").style.display = "none"
@@ -206,20 +206,7 @@ function deleteComment(commentId)
 	`;
 }
 
- function People()
-{
-  document.getElementById("Modal-head").innerHTML = "People";
-  document.getElementById("summernoteDiv").style.display = "none"
-  document.getElementById("prompt").style.display = "block"
-  document.getElementById("prompt").innerHTML = "Testing / Click here to assign to yourself";
-  document.getElementById("Modal-footer").innerHTML = `
-	<div class="modal-footer">
-		<input class="btn btn-primary" type="submit" value="wip">
-    </div>
-	`;
-}
-
- function Details()
+function Details()
 {
   document.getElementById("Modal-head").innerHTML = "Details infomation";
   document.getElementById("summernoteDiv").style.display = "none"
