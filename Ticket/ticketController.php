@@ -18,6 +18,10 @@ else if ($function == "deleteComment")
 {
     echo deleteComment($_POST['commentId']);
 }
+else if ($function == "loadPeople")
+{
+    echo json_encode(loadPeople($$_POST['ticketId']));
+}
 else
 {
     
@@ -78,5 +82,19 @@ function loadBugs($ticketId)
 
 }
 
+function loadPeople($ticketId)
+{
+    $pdo = logindb('user', 'pass');
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("SELECT reporter, assignee FROM ticket WHERE ticketId = ?");
+    $stmt->execute([$ticketId]);
+    $people = $stmt->fetchAll();
+    return $people;
+}
+
+function updatePeople($ticketId)
+{
+
+}
 
 ?>
