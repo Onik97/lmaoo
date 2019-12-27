@@ -1,8 +1,12 @@
 <?php
 require('../connection.php');
-$function = $_POST['function'];
+if(!isset($_POST['ticketId'])) { $function = null; } else { $function = $_POST['function']; }
 
-if ($function == "createComment")
+if ($function == "checkTicket")
+{
+    ticketExistance($_GET['ticketId']);
+}
+else if ($function == "createComment")
 {
     createComment($_POST['commentContent'], $_POST['ticketId'], $_POST['userId']);
 }
@@ -20,13 +24,29 @@ else if ($function == "deleteComment")
 }
 else if ($function == "loadPeople")
 {
-    echo json_encode(loadPeople($$_POST['ticketId']));
+    echo json_encode(loadPeople($_POST['ticketId']));
 }
 else
 {
-    
+
 }
 
+function ticketExistance($ticketId)
+{
+    $pdo = logindb("user", "pass");
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("SELECT ticketId FROM ticket WHERE ticketId = ?");
+    $stmt->execute([$ticketId]);
+    
+    if ($stmt->fetchColumn() == 0)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
 
 function createComment($commentContent, $ticketId, $userId)
 {
