@@ -36,7 +36,17 @@ function loadPeople(ticketId)
     xhr.send(data);
 }
 
+function saveAssigneeAsYourself(ticketId, name)
+{
+  console.log("Ticket ID is " + ticketId + " Your name is " + name);
+}
+
 function savePeople(ticketId, userId)
 {
   console.log("The Ticket ID is " + ticketId + " with the userId who is logged in being " + userId);
+  // You need to send 
+  // function - peopleYourself
+  // ticketId - ticketId
+  // userId - userId
+  // I have tested Back-end, it is working correctly
 }
