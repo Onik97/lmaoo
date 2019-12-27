@@ -26,7 +26,11 @@ else if ($function == "loadPeople")
 {
     echo json_encode(loadPeople($_POST['ticketId']));
 }
-else
+else if ($function == "peopleYourself")
+{
+    peopleYourself($_POST['fullName'], $_POST['ticketId']);
+}
+else 
 {
 
 }
@@ -110,6 +114,15 @@ function loadPeople($ticketId)
     $stmt->execute([$ticketId]);
     $people = $stmt->fetchAll();
     return $people;
+}
+
+function peopleYourself($fullName, $ticketId)
+{
+    $pdo = logindb('user', 'pass');
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("UPDATE ticket SET reporter = ? WHERE ticketId = ?");
+    $stmt->execute([$fullName, $ticketId]);
+    echo "Success"; // Using echo for XMLHttpRequest
 }
 
 function updatePeople($ticketId)
