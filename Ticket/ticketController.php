@@ -20,7 +20,7 @@ else if ($function == "deleteComment")
 }
 else if ($function == "loadPeople")
 {
-    echo json_encode(loadPeople($$_POST['ticketId']));
+    echo json_encode(loadPeople($_POST['ticketId']));
 }
 else
 {
