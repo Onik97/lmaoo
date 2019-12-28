@@ -161,7 +161,6 @@ function saveComment()
 function deletePrompt(commentId)
 {
   document.getElementById("Modal-head").innerHTML = "Delete Comment";
-  document.getElementById("summernoteDiv").style.display = "none"
   document.getElementById("prompt").style.display = "block"
   document.getElementById("prompt").innerHTML = "Are you sure you want to delete this comment?";
 	document.getElementById("Modal-footer").innerHTML = `
@@ -196,7 +195,6 @@ function deleteComment(commentId)
 function briefDescription()
 {
   document.getElementById("Modal-head").innerHTML = "Brief Description";
-  document.getElementById("summernoteDiv").style.display = "none"
   document.getElementById("prompt").style.display = "block"
   document.getElementById("prompt").innerHTML = "Testing";
   document.getElementById("Modal-footer").innerHTML = `
@@ -209,7 +207,6 @@ function briefDescription()
 function Details()
 {
   document.getElementById("Modal-head").innerHTML = "Details infomation";
-  document.getElementById("summernoteDiv").style.display = "none"
   document.getElementById("prompt").style.display = "block"
   document.getElementById("prompt").innerHTML = "Testing";
   document.getElementById("Modal-footer").innerHTML = `

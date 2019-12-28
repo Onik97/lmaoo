@@ -6,7 +6,6 @@ $(document).ready(function()
 function People()
 {
    document.getElementById("Modal-head").innerHTML = "People";
-   document.getElementById("summernoteDiv").style.display = "none"
    document.getElementById("prompt").style.display = "block"
    document.getElementById("prompt").innerHTML = "Testing / Click here to assign to yourself";
    document.getElementById("Modal-footer").innerHTML = `
