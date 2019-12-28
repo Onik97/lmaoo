@@ -37,8 +37,6 @@ function loadPeople(ticketId)
 
 function saveAssigneeAsYourself(ticketId, fullName)
 {
-  console.log("Ticket ID is " + ticketId + " Your name is " + fullName);
-    
   var data = new FormData();
   data.append('function', "peopleYourself");
   data.append('ticketId', ticketId)
@@ -51,19 +49,13 @@ function saveAssigneeAsYourself(ticketId, fullName)
 	  if (this.readyState == 4 && this.status == 200)
 	  {
 		  console.log(this.responseText);
-		  loadPeople();
+		  loadPeople(ticketId);
 	  }
   }
   xhr.send(data);
 }
-  // You need to send 
-  // function - peopleYourself
-  // ticketId - ticketId
-  // userId - userId
-  // I have tested Back-end, it is working correctly
 
 function savePeople(ticketId, userId)
 {
   console.log("The Ticket ID is " + ticketId + " with the userId who is logged in being " + userId);
-
 }
