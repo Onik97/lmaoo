@@ -1,6 +1,7 @@
 <?php
 require('../connection.php');
-if(!isset($_POST['ticketId'])) { $function = null; } else { $function = $_POST['function']; }
+error_reporting(0);
+$function = $_POST['function'];
 
 if ($function == "checkTicket")
 {
@@ -32,7 +33,7 @@ else if ($function == "peopleYourself")
 }
 else 
 {
-
+    return;
 }
 
 function ticketExistance($ticketId)
