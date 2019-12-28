@@ -6,7 +6,6 @@ $(document).ready(function()
 function People()
 {
    document.getElementById("Modal-head").innerHTML = "People";
-   document.getElementById("summernoteDiv").style.display = "none"
    document.getElementById("prompt").style.display = "block"
    document.getElementById("prompt").innerHTML = "Testing / Click here to assign to yourself";
    document.getElementById("Modal-footer").innerHTML = `
@@ -36,17 +35,27 @@ function loadPeople(ticketId)
     xhr.send(data);
 }
 
-function saveAssigneeAsYourself(ticketId, name)
+function saveAssigneeAsYourself(ticketId, fullName)
 {
-  console.log("Ticket ID is " + ticketId + " Your name is " + name);
+  var data = new FormData();
+  data.append('function', "peopleYourself");
+  data.append('ticketId', ticketId)
+  data.append('fullName', fullName)
+  
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'ticketController.php', true);
+  xhr.onreadystatechange = function()
+  {
+	  if (this.readyState == 4 && this.status == 200)
+	  {
+		  console.log(this.responseText);
+		  loadPeople(ticketId);
+	  }
+  }
+  xhr.send(data);
 }
 
 function savePeople(ticketId, userId)
 {
   console.log("The Ticket ID is " + ticketId + " with the userId who is logged in being " + userId);
-  // You need to send 
-  // function - peopleYourself
-  // ticketId - ticketId
-  // userId - userId
-  // I have tested Back-end, it is working correctly
 }
