@@ -16,8 +16,6 @@ $(document).ready(function()
 
 function loadComments()
 {
-  // variable userId is available for User Id logged in
-  // variable ticketId is available for Ticket Id
   var data = new FormData();
   data.append('function', "loadComments");
   data.append('ticketId', ticketId);
@@ -85,15 +83,16 @@ function editComment(commentId)
         
         if ($('.comment'+commentId).summernote("isEmpty") || newCommentStripped.trim().length == 0)
         {
-          console.log("Field is Empty");
+          $.notify("Comment too small!", "warn");
         }		
         else if (newComment.length > 255)
         {
-          console.log("Too much characters");
+          $.notify("Comment too large!", "warn");
         }
         else 
         {
           updateComment(commentId, newComment);
+          $.notify("Comment updated successfully!", "success");
           $('.comment'+commentId).summernote('destroy');       
         }
       }
@@ -125,13 +124,11 @@ function saveComment()
   var newCommentStripped = commentContent.replace(/<[^>]*>?/gm, "");
   if ($('.createComment').summernote("isEmpty") || newCommentStripped.trim().length == 0)
   {
-		document.getElementById("notenoughchars").removeAttribute("hidden");
-		document.getElementById("manychars").setAttribute("hidden");	
+    $.notify("Comment too small!", "warn");
   }		
-  else if (commentContent.length > 255)
+  else if (newComment.length > 255)
   {
-		document.getElementById("manychars").removeAttribute("hidden");
-		document.getElementById("notenoughchars").setAttribute("hidden");
+    $.notify("Comment too large!", "warn");
   }
   else 
   {
