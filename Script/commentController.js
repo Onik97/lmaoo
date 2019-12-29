@@ -124,7 +124,10 @@ function saveComment()
   var newCommentStripped = commentContent.replace(/<[^>]*>?/gm, "");
   if ($('.createComment').summernote("isEmpty") || newCommentStripped.trim().length == 0)
   {
-    $.notify("Comment too small!", "warn");
+    $('.navbar navbar-default navbar-fixed-top').overhang({
+      type: 'success',
+      message: 'Your message'
+     });
   }		
   else if (newComment.length > 255)
   {
