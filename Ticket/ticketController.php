@@ -121,7 +121,7 @@ function peopleYourself($fullName, $ticketId)
 {
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("UPDATE ticket SET reporter = ? WHERE ticketId = ?");
+    $stmt = $pdo->prepare("UPDATE ticket SET assignee = ? WHERE ticketId = ?");
     $stmt->execute([$fullName, $ticketId]);
     echo "Success"; // Using echo for XMLHttpRequest
 }
