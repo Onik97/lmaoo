@@ -31,6 +31,10 @@ else if ($function == "peopleYourself")
 {
     peopleYourself($_POST['fullName'], $_POST['ticketId']);
 }
+else if ($function == "loadUsers")
+{
+    echo json_encode(loadUsers());
+}
 else 
 {
     return;
@@ -51,6 +55,16 @@ function ticketExistance($ticketId)
     {
         return true;
     }
+}
+
+function loadUsers()
+{
+    $pdo = logindb('user', 'pass');
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("SELECT forename, surname, username FROM user");
+    $stmt->execute();
+    $users = $stmt->fetchAll();
+    return $users;
 }
 
 function createComment($commentContent, $ticketId, $userId)
