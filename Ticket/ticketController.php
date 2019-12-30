@@ -75,7 +75,7 @@ function loadComments($ticketId)
 {
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("SELECT comment.commentId, comment.commentContent, user.userId, user.forename, user.surname 
+    $stmt = $pdo->prepare("SELECT comment.commentId, comment.commentContent, comment.commentCreated, user.userId, user.forename, user.surname 
                            FROM comment INNER JOIN user on user.userId = comment.userId
                            WHERE comment.ticketId = ?");
     $stmt->execute([$ticketId]);
