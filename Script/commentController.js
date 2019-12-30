@@ -38,7 +38,7 @@ function loadComments()
                             <img class="CommentImages" src="../Images/paperclip.png"></img>
                             <img class="CommentImages" src="../Images/delete.png" data-toggle="modal" data-target="#CommentModal" onclick="deletePrompt(${comment.commentId})" role="button"></img>
                             <img class="CommentImages" src="../Images/edit.png" onclick=editComment(${comment.commentId}) role="button"></img>   
-                            <p>Comment by ${comment.forename + " " + comment.surname}</p>
+                            <p>Comment by ${comment.forename + " " + comment.surname} at <label>${comment.commentCreated}</label></p>
                             <div class="comment${comment.commentId}">${comment.commentContent}</div>
                         </div>
                         `;
@@ -124,7 +124,10 @@ function saveComment()
   var newCommentStripped = commentContent.replace(/<[^>]*>?/gm, "");
   if ($('.createComment').summernote("isEmpty") || newCommentStripped.trim().length == 0)
   {
-    $.notify("Comment too small!", "warn");
+    $('.navbar navbar-default navbar-fixed-top').overhang({
+      type: 'success',
+      message: 'Your message'
+     });
   }		
   else if (newComment.length > 255)
   {

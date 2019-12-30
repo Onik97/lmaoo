@@ -31,6 +31,10 @@ else if ($function == "peopleYourself")
 {
     peopleYourself($_POST['fullName'], $_POST['ticketId']);
 }
+else if ($function == "loadUsers")
+{
+    echo json_encode(loadUsers());
+}
 else 
 {
     return;
@@ -51,6 +55,16 @@ function ticketExistance($ticketId)
     {
         return true;
     }
+}
+
+function loadUsers()
+{
+    $pdo = logindb('user', 'pass');
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("SELECT forename, surname, username FROM user");
+    $stmt->execute();
+    $users = $stmt->fetchAll();
+    return $users;
 }
 
 function createComment($commentContent, $ticketId, $userId)
@@ -75,7 +89,7 @@ function loadComments($ticketId)
 {
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("SELECT comment.commentId, comment.commentContent, user.userId, user.forename, user.surname 
+    $stmt = $pdo->prepare("SELECT comment.commentId, comment.commentContent, comment.commentCreated, user.userId, user.forename, user.surname 
                            FROM comment INNER JOIN user on user.userId = comment.userId
                            WHERE comment.ticketId = ?");
     $stmt->execute([$ticketId]);
@@ -121,7 +135,7 @@ function peopleYourself($fullName, $ticketId)
 {
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("UPDATE ticket SET reporter = ? WHERE ticketId = ?");
+    $stmt = $pdo->prepare("UPDATE ticket SET assignee = ? WHERE ticketId = ?");
     $stmt->execute([$fullName, $ticketId]);
     echo "Success"; // Using echo for XMLHttpRequest
 }

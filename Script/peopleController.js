@@ -1,6 +1,8 @@
 $(document).ready(function() 
 {
   loadPeople(ticketId);
+  var usersArray = loadUsersAsArray();
+  console.log(usersArray);
 });
 
 function People()
@@ -13,6 +15,29 @@ function People()
          <input class="btn btn-primary" type="submit" value="Save" onclick=savePeople(${ticketId},${userId})>
      </div>
      `;
+}
+
+function loadUsersAsArray()
+{
+  var userArray = [];
+  var data = new FormData();
+  data.append('function', "loadUsers");
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'ticketController.php', true);
+  xhr.onreadystatechange = function() 
+  {
+    if (this.readyState == 4 && this.status == 200)
+      {
+        var users = JSON.parse(this.responseText);
+        users.map(function(user)
+        {
+          userArray.push(user.forename + " " + user.surname + " - Username(" + user.username + ")");
+        }).join('')
+      }
+  }
+  xhr.send(data);
+  return userArray;
 }
 
 function loadPeople(ticketId)
