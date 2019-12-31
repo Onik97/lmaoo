@@ -70,13 +70,10 @@ function loadUsersAsSelect()
           option = document.createElement('option');
           option.text = users[i].forename + " " + users[i].surname;
           option.value = users[i].username;
-          if (users[i].forename + " " + users[i].surname == assignee)
-          {
-
-          }
-          else
-          {
-          selectUsers.add(option);
+          if (users[i].forename + " " + users[i].surname == assignee) {}
+          else 
+          { 
+            selectUsers.add(option); 
           }
         }
       }
