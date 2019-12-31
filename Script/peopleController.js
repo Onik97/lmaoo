@@ -47,8 +47,24 @@ function savePeople(ticketId)
 {
   var selectElement = document.getElementById("selectUsers");
   var selectedUser = selectElement.options[selectElement.selectedIndex].text;
-  console.log("The Ticket ID " + ticketId + ", the user select is " + selectedUser);
-  //$('#CommentModal').modal('hide'); // Shouldnt we use a different Modal? Should we just rename it to ticketModal? I will leave that decision to you Lewis
+
+  var data = new FormData();
+  data.append('function', "savePeople");
+  data.append('ticketId', ticketId);
+  data.append('newAssignee', selectedUser);
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'ticketController.php', true);
+  xhr.onreadystatechange = function() 
+  {
+    if (this.readyState == 4 && this.status == 200)
+      {
+        console.log(this.responseText);
+        loadPeople(ticketId);
+        $('#CommentModal').modal('hide'); // Shouldnt we use a different Modal? Should we just rename it to ticketModal? I will leave that decision to you Lewis
+      }
+  }
+  xhr.send(data);
 }
 
 function loadUsersAsSelect()
