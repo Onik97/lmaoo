@@ -27,6 +27,10 @@ else if ($function == "loadPeople")
 {
     echo json_encode(loadPeople($_POST['ticketId']));
 }
+else if ($function == "savePeople")
+{
+    echo savePeople($_POST['ticketId'], $_POST['newAssignee']);
+}
 else if ($function == "peopleYourself")
 {
     peopleYourself($_POST['fullName'], $_POST['ticketId']);
@@ -140,9 +144,13 @@ function peopleYourself($fullName, $ticketId)
     echo "Success"; // Using echo for XMLHttpRequest
 }
 
-function updatePeople($ticketId)
+function savePeople($ticketId, $newAssignee)
 {
-
+    $pdo = logindb('user', 'pass');
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("UPDATE ticket SET assignee = ? WHERE ticketId = ?");
+    $stmt->execute([$newAssignee, $ticketId]);
+    echo "Success"; // Using echo for XMLHttpRequest
 }
 
 ?>
