@@ -65,7 +65,7 @@ function loadUsers()
 {
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("SELECT forename, surname, username FROM user");
+    $stmt = $pdo->prepare("SELECT userId, forename, surname FROM user");
     $stmt->execute();
     $users = $stmt->fetchAll();
     return $users;

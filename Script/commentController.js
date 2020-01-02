@@ -83,17 +83,17 @@ function editComment(commentId)
         
         if ($('.comment'+commentId).summernote("isEmpty") || newCommentStripped.trim().length == 0)
         {
-          $.notify("Comment too small!", "warn");
+          overHang("error", "Comment too small!");
         }		
         else if (newComment.length > 255)
         {
-          $.notify("Comment too large!", "warn");
+          overHang("error", "Comment too large!");
         }
         else 
         {
           updateComment(commentId, newComment);
-          $.notify("Comment updated successfully!", "success");
-          $('.comment'+commentId).summernote('destroy');       
+          $('.comment'+commentId).summernote('destroy');
+          overHang("success", "Comment updated successfully!");      
         }
       }
     });
@@ -121,17 +121,14 @@ function updateComment(id, newContent)
 function saveComment()
 {
   var commentContent = $('.createComment').summernote('code');
-  var newCommentStripped = commentContent.replace(/<[^>]*>?/gm, "");
-  if ($('.createComment').summernote("isEmpty") || newCommentStripped.trim().length == 0)
+  var commentContentStripped = commentContent.replace(/<[^>]*>?/gm, "");
+  if ($('.createComment').summernote("isEmpty") || commentContentStripped.trim().length == 0)
   {
-    $('.navbar navbar-default navbar-fixed-top').overhang({
-      type: 'success',
-      message: 'Your message'
-     });
+    overHang("error", "Comment too small!");
   }		
-  else if (newComment.length > 255)
+  else if (commentContent.length > 255)
   {
-    $.notify("Comment too large!", "warn");
+    overHang("error", "Comment too large!");
   }
   else 
   {
@@ -152,6 +149,7 @@ function saveComment()
           console.log(this.responseText);
           $('.createComment').summernote('code', ""); // Empties the Comments once it is submitted
           loadComments(); // Loads comments once you submit it
+          overHang("success", "New comment added successfully!");
         }
     }
     xhr.send(data);
@@ -187,6 +185,7 @@ function deleteComment(commentId)
           console.log(this.responseText);   
           loadComments();
           $('#CommentModal').modal('hide'); 
+          overHang("warn", "Comment deleted successfully!");
         }
     }
     xhr.send(data);
