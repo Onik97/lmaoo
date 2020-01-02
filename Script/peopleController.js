@@ -6,21 +6,20 @@ $(document).ready(function()
 function People()
 {
   var assignee = document.getElementById("assignee").innerHTML;
-   document.getElementById("Modal-head").innerHTML = "People";
-   document.getElementById("prompt").style.display = "block"
-   document.getElementById("prompt").innerHTML = 
-   `
-   <p>Select Assignee below</p>
-   <select id="selectUsers">
-   <option value="" disabled selected>${assignee}</option>
-   </select>
-   `;
-   loadUsersAsSelect();
-   document.getElementById("Modal-footer").innerHTML = `
-     <div class="modal-footer">
-         <input class="btn btn-primary" type="submit" value="Save" onclick=savePeople(${ticketId})>
-     </div>
-     `;
+  document.getElementById("Modal-head").innerHTML = "People";
+  document.getElementById("prompt").style.display = "block"
+  document.getElementById("prompt").innerHTML = 
+  `
+  <p>Select Assignee below</p>
+  <select id="selectUsers">
+  </select>
+  `;
+  loadUsersAsSelect();
+  document.getElementById("Modal-footer").innerHTML = `
+    <div class="modal-footer">
+        <input class="btn btn-primary" type="submit" value="Save" onclick=savePeople(${ticketId})>
+    </div>
+    `;
 }
 
 function loadPeople(ticketId)
@@ -85,8 +84,14 @@ function loadUsersAsSelect()
         {
           option = document.createElement('option');
           option.text = users[i].forename + " " + users[i].surname;
-          option.value = users[i].username;
-          if (users[i].forename + " " + users[i].surname == assignee) {}
+          option.value = users[i].userId;
+          if (users[i].forename + " " + users[i].surname == assignee) 
+          {
+            $("#selectUsers").prepend("<option value="+ users[i].userId +" disabled selected>" + users[i].forename + " " + users[i].surname + "</option>");
+            // selectUsers.add(option);
+            // $(option).prop("selected", true);
+            // $(option).prop("disabled", true);
+          }
           else 
           { 
             selectUsers.add(option); 
