@@ -6,3 +6,13 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 <link rel="stylesheet" type="text/css" href="../addons/overhang/dist/overhang.min.css" />
 <script type="text/javascript" src="../addons/overhang/dist/overhang.min.js"></script>
+<script>
+function overHang(type, message)
+{
+  $("body").overhang({
+    type: type,
+    message: message,
+    closeConfirm: true
+  }); 
+}
+</script>
