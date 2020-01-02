@@ -88,9 +88,7 @@ function loadUsersAsSelect()
           if (users[i].forename + " " + users[i].surname == assignee) 
           {
             $("#selectUsers").prepend("<option value="+ users[i].userId +" disabled selected>" + users[i].forename + " " + users[i].surname + "</option>");
-            // selectUsers.add(option);
-            // $(option).prop("selected", true);
-            // $(option).prop("disabled", true);
+            // selectUsers.add(option); $(option).prop("selected", true); $(option).prop("disabled", true);
           }
           else 
           { 
