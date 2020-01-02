@@ -60,6 +60,7 @@ function savePeople(ticketId)
         console.log(this.responseText);
         loadPeople(ticketId);
         $('#CommentModal').modal('hide'); // Shouldnt we use a different Modal? Should we just rename it to ticketModal? I will leave that decision to you Lewis
+        overHang("success", "Ticket assigned to "+ selectedUser);
       }
   }
   xhr.send(data);
@@ -113,7 +114,8 @@ function saveAssigneeAsYourself(ticketId, fullName)
 	  if (this.readyState == 4 && this.status == 200)
 	  {
 		  console.log(this.responseText);
-		  loadPeople(ticketId);
+      loadPeople(ticketId);
+      overHang("success", "Ticket assigned to yourself!");
 	  }
   }
   xhr.send(data);
