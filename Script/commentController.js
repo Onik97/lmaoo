@@ -83,16 +83,15 @@ function editComment(commentId)
         
         if ($('.comment'+commentId).summernote("isEmpty") || newCommentStripped.trim().length == 0)
         {
-          $.notify("Comment too small!", "warn");
+          
         }		
         else if (newComment.length > 255)
         {
-          $.notify("Comment too large!", "warn");
+
         }
         else 
         {
           updateComment(commentId, newComment);
-          $.notify("Comment updated successfully!", "success");
           $('.comment'+commentId).summernote('destroy');       
         }
       }
@@ -131,7 +130,6 @@ function saveComment()
   }		
   else if (newComment.length > 255)
   {
-    $.notify("Comment too large!", "warn");
   }
   else 
   {
