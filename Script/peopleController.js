@@ -5,7 +5,6 @@ $(document).ready(function()
 
 function People()
 {
-  var assignee = document.getElementById("assignee").innerHTML;
   document.getElementById("Modal-head").innerHTML = "People";
   document.getElementById("prompt").style.display = "block"
   document.getElementById("prompt").innerHTML = 
