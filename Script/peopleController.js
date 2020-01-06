@@ -45,6 +45,7 @@ function savePeople(ticketId)
 {
   var selectElement = document.getElementById("selectUsers");
   var selectedUser = selectElement.options[selectElement.selectedIndex].text;
+  var selectedUserValue = selectElement.options[selectElement.selectedIndex].value;  
 
   var data = new FormData();
   data.append('function', "savePeople");
@@ -58,6 +59,7 @@ function savePeople(ticketId)
     if (this.readyState == 4 && this.status == 200)
       {
         console.log(this.responseText);
+        saveAssigneeKey(selectedUserValue, ticketId);
         loadPeople(ticketId);
         $('#CommentModal').modal('hide'); // Shouldnt we use a different Modal? Should we just rename it to ticketModal? I will leave that decision to you Lewis
         overHang("success", "Ticket assigned to "+ selectedUser);
@@ -113,7 +115,8 @@ function saveAssigneeAsYourself(ticketId, fullName)
   {
 	  if (this.readyState == 4 && this.status == 200)
 	  {
-		  console.log(this.responseText);
+      console.log(this.responseText);
+      saveAssigneeKey(userId, ticketId);
       loadPeople(ticketId);
       overHang("success", "Ticket assigned to yourself!");
 	  }
@@ -121,3 +124,21 @@ function saveAssigneeAsYourself(ticketId, fullName)
   xhr.send(data);
 }
 
+function saveAssigneeKey(ticketId, key)
+{
+  var data = new FormData();
+  data.append('function', "assigneeKeyUpdate");
+  data.append('ticketId', ticketId);
+  data.append('key', key)
+    
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'ticketController.php', true);
+  xhr.onreadystatechange = function()
+  {
+	  if (this.readyState == 4 && this.status == 200)
+	  {
+		  console.log(this.responseText);
+	  }
+  }
+  xhr.send(data);
+}

@@ -39,6 +39,10 @@ else if ($function == "loadUsers")
 {
     echo json_encode(loadUsers());
 }
+else if ($function == "assigneeKeyUpdate")
+{
+    echo assigneeKey($_POST['key'], $_POST['ticketId']);
+}
 else 
 {
     return;
@@ -150,6 +154,15 @@ function savePeople($ticketId, $newAssignee)
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("UPDATE ticket SET assignee = ? WHERE ticketId = ?");
     $stmt->execute([$newAssignee, $ticketId]);
+    echo "Success"; // Using echo for XMLHttpRequest
+}
+
+function assigneeKey($ticketId, $key)
+{
+    $pdo = logindb('user', 'pass');
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("UPDATE ticket SET assignee_key = ? WHERE ticketId = ?");
+    $stmt->execute([$key, $ticketId]);
     echo "Success"; // Using echo for XMLHttpRequest
 }
 
