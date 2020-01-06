@@ -15,7 +15,7 @@ function getTicketWithProjectId(id)
         {
             var ticketJSON = JSON.parse(this.responseText);
                 document.getElementById("ticketDiv").innerHTML = 
-                `
+                `<button>Create Ticket</button>
                 <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -39,4 +39,31 @@ function getTicketWithProjectId(id)
                 `;
         }
     }
+}
+
+function createTicketPrompt()
+{
+    document.getElementById("projectModalBody").innerHTML = `
+        <form action="projectController.php" method="POST">
+            Project Name<br>
+            <input type="text" name="projectName">
+            <br>
+            Status:<br>
+            <select id ="projectStatus" name="projectStatus">
+                <option value="" selected disabled></option>
+                <option value="Back-log">Back-Log</option>
+                <option value="Developement">Development</option>
+                <option value="QA">QA</option>
+                <option value="Releasing">Releasing</option>
+                <option value="Released">Released</option>
+            </select>
+            <br><br>
+            <input type="hidden" name="function" value="createTicket">
+            <input class="btn btn-primary" type="submit" value="Create Ticket">
+        </form>
+    `;
+
+    document.getElementById("projectModalFooter").innerHTML = `
+    `;
+
 }
