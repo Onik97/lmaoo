@@ -6,7 +6,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="../Css/projectPage.css">
-<script type="text/javascript" src="../Script/project.js"></script>
+<script type="text/javascript" src="../Script/projectController.js"></script>
 <title>Home</title>
 <head>
 <?php include("../Global/head.php"); ?>
@@ -17,7 +17,8 @@ session_start();
 <?php if (isset($userLoggedIn)) { ?>
 
   <div id="projectDiv" class="col-md-6 bg-primary">
-    <h1>Projects</h1>
+  <a data-toggle="modal" data-target="#projectModal" role="button" onclick="createTicketPrompt()">Create Ticket</a>
+    <h1>Projects</h1> 
     <?php $allProjects = getProjectList();
     foreach ($allProjects as $project) { ?>
     <button class="btn btn-primary" onclick="getTicketWithProjectId(this.value);getProjectName(this.innerHTML);" value="<?php echo $project->projectId ?>"> <?php echo $project->name; ?></button> <br>
@@ -30,6 +31,8 @@ session_start();
   </div>
 
 </div>
+
+<?php include("projectModal.php"); ?>
 
 <?php } else {
 	echo "<p> You need to login to access this page </p>";
