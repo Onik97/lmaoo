@@ -5,6 +5,10 @@ if ($_GET['projectId'])
 {
    echo json_encode(getTicketList($_GET['projectId']));
 }
+else if($_POST['function'] == "loadTickets")
+{
+    echo json_encode(getProjectList());
+}
 else if($_POST['function'] == "createProject")
 {
     createNewProject($_POST['projectName'], $_POST['projectStatus']);
@@ -24,20 +28,16 @@ function createNewProject($projectName, $projectStatus)
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("INSERT INTO project (projectId, name, status) VALUES (null, ?, ?)");
     $stmt->execute([$projectName, $projectStatus]);
-    session_start();
-    $_SESSION['message'] = "New Project Created!";
-    header("Location: index.php");
+    print_r($stmt->errorInfo());
 }
 
 function createNewTicket($projectId, $task, $reporter, $reporterKey)
 {
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("INSERT INTO ticket (ticketId, task, projectId, reporter, reporterKey) VALUES (null, ?, ?, ?, ?)");
-    $stmt->execute([$projectId, $task, $reporter, $reporterKey]);
-    session_start();
-    $_SESSION['message'] = "New ticket Created!";
-    header("Location: index.php");
+    $stmt = $pdo->prepare("INSERT INTO ticket (ticketId, task, projectId, reporter, reporter_key) VALUES (null, ?, ?, ?, ?)");
+    $stmt->execute([$task, $projectId, $reporter, $reporterKey]);
+    print_r($stmt->errorInfo());
 }
 
 function getProjectList()
