@@ -15,7 +15,7 @@ function getTicketWithProjectId(id)
         {
             var ticketJSON = JSON.parse(this.responseText);
                 document.getElementById("ticketDiv").innerHTML = 
-                `<button>Create Ticket</button>
+                `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>
                 <table class="table">
                 <thead class="thead-dark">
                     <tr>
@@ -41,16 +41,15 @@ function getTicketWithProjectId(id)
     }
 }
 
-function createTicketPrompt()
+function createProjectPrompt()
 {
     document.getElementById("projectModalBody").innerHTML = `
         <form action="projectController.php" method="POST">
             Project Name<br>
-            <input type="text" name="projectName">
-            <br>
+            <input type="text" name="projectName" required> <br>
             Status:<br>
-            <select id ="projectStatus" name="projectStatus">
-                <option value="" selected disabled></option>
+            <select id ="projectStatus" required name="projectStatus">
+                <option value="" selected disabled ></option>
                 <option value="Back-log">Back-Log</option>
                 <option value="Developement">Development</option>
                 <option value="QA">QA</option>
@@ -58,7 +57,7 @@ function createTicketPrompt()
                 <option value="Released">Released</option>
             </select>
             <br><br>
-            <input type="hidden" name="function" value="createTicket">
+            <input type="hidden" name="function" value="createProject">
             <input class="btn btn-primary" type="submit" value="Create Ticket">
         </form>
     `;
@@ -66,4 +65,26 @@ function createTicketPrompt()
     document.getElementById("projectModalFooter").innerHTML = `
     `;
 
+}
+
+function createTicketPrompt(projectId)
+{
+    document.getElementById("projectModalBody").innerHTML = `
+    <form action="projectController.php" method="POST">
+    <label>Project ID</label> <br>
+    <input type="text" name="projectId" value="${projectId}" disabled> <br>
+    <label>Reporter</label> <br>
+    <input type="text" name="reporter" value="${userForename + " " + userSurname}" disabled> <br>
+    <label>Task</label> <br>
+    <input type="text" name="task" required> <br>
+    <label>Progress</label> <br>
+    <input type="text" name="progress" required> <br>
+    <input type="hidden" name="reporterKey" value="${userId}"> 
+    <input type="hidden" name="function" value="createTicket"> <br>
+    <input class="btn btn-primary" type="submit" value="Create Ticket">
+    </form>
+    `;
+
+    document.getElementById("projectModalFooter").innerHTML = `
+    `;
 }

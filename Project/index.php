@@ -15,9 +15,15 @@ session_start();
 <body>
 <div class="row">
 <?php if (isset($userLoggedIn)) { ?>
+<script>
+var userId = "<?php echo $userLoggedIn->getId(); ?>"; 
+var userForename = "<?php echo $userLoggedIn->getForename(); ?>";
+var userSurname = "<?php echo $userLoggedIn->getSurname(); ?>";
+var userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
+</script>
 
   <div id="projectDiv" class="col-md-6 bg-primary">
-  <a data-toggle="modal" data-target="#projectModal" role="button" onclick="createTicketPrompt()">Create Ticket</a>
+  <a data-toggle="modal" data-target="#projectModal" role="button" onclick="createProjectPrompt()">Create Project</a>
     <h1>Projects</h1> 
     <?php $allProjects = getProjectList();
     foreach ($allProjects as $project) { ?>
@@ -33,6 +39,15 @@ session_start();
 </div>
 
 <?php include("projectModal.php"); ?>
+
+<?php 
+if(isset($_SESSION['message'])) 
+{ ?>
+<script>
+overHang("success", "<?php echo $_SESSION['message'] ?>");
+</script> <?php
+}   
+?>
 
 <?php } else {
 	echo "<p> You need to login to access this page </p>";
