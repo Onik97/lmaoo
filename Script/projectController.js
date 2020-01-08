@@ -16,9 +16,12 @@ function loadProjects()
         if (this.readyState == 4 && this.status == 200)
         {
             var ticketJSON = JSON.parse(this.responseText);
-            
-            document.getElementById("projectDiv").innerHTML = `
-            <a data-toggle="modal" data-target="#projectModal" role="button" onclick="createProjectPrompt()">Create Project</a>
+            if (userLevel == 2) 
+            {
+                document.getElementById("projectDiv").innerHTML = `
+                <button data-toggle="modal" data-target="#projectModal" role="button" onclick="createProjectPrompt()">Create Project</button>`
+            }
+            document.getElementById("projectDiv").innerHTML += `
             <h1>Projects</h1>
             ${ticketJSON.map(function(ticket)
             {
@@ -47,9 +50,13 @@ function getTicketWithProjectId(id)
         if (this.readyState == 4 && this.status == 200)
         {
             var ticketJSON = JSON.parse(this.responseText);
+            if (userLevel == 2)
+            {
+                document.getElementById("ticketBtnDiv").innerHTML = 
+                `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
+            }
             document.getElementById("ticketDiv").innerHTML = 
-            `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>
-            <table class="table">
+            `<table class="table">
             <thead class="thead-dark">
                 <tr>
                 <th scope="col">Ticket ID</th>
