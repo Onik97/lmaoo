@@ -27,6 +27,7 @@ var userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
 
   <div id="tickets" class="col-md-6 bg-info">
     <h1 id="ticketMessage">Tickets</h1>
+    <div id="ticketBtnDiv"></div>
     <div id=ticketDiv></div>
   </div>
 
