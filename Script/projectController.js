@@ -16,9 +16,12 @@ function loadProjects()
         if (this.readyState == 4 && this.status == 200)
         {
             var ticketJSON = JSON.parse(this.responseText);
-            
-            document.getElementById("projectDiv").innerHTML = `
-            <a data-toggle="modal" data-target="#projectModal" role="button" onclick="createProjectPrompt()">Create Project</a>
+            if (userLevel == 2) 
+            {
+                document.getElementById("projectDiv").innerHTML = `
+                <button data-toggle="modal" data-target="#projectModal" role="button" onclick="createProjectPrompt()">Create Project</button>`
+            }
+            document.getElementById("projectDiv").innerHTML += `
             <h1>Projects</h1>
             ${ticketJSON.map(function(ticket)
             {
