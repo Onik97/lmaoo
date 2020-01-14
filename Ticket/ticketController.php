@@ -43,6 +43,11 @@ else if ($function == "assigneeKeyUpdate")
 {
     echo assigneeKey($_POST['key'], $_POST['ticketId']);
 }
+else if ($function == "loadDates")
+{
+
+    echo json_encode(loadDates($_POST['ticketId']));
+}
 else 
 {
     return;
@@ -164,6 +169,16 @@ function assigneeKey($ticketId, $key)
     $stmt = $pdo->prepare("UPDATE ticket SET assignee_key = ? WHERE ticketId = ?");
     $stmt->execute([$key, $ticketId]);
     echo "Success"; // Using echo for XMLHttpRequest
+}
+
+function loadDates($ticketId)
+{
+    $pdo = logindb('user', 'pass');
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("SELECT created, updated FROM ticket WHERE ticketId = ?");
+    $stmt->execute([$ticketId]);
+    $dates = $stmt->fetchAll();
+    return $dates;
 }
 
 ?>
