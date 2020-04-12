@@ -85,7 +85,7 @@ function createProjectPrompt()
 {
     document.getElementById("projectModalBody").innerHTML = `
             Project Name<br>
-            <input type="text" id="projectName" onload="projectConfirmation()" required> <br>
+            <input type="text" id="projectName" onkeyup="projectConfirmation()" required> <br>
             Status:<br>
             <select id ="projectStatus" required name="projectStatus">
                 <option value="" selected disabled ></option>
