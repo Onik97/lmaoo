@@ -100,15 +100,13 @@ function createProjectPrompt()
     `;
 
     document.getElementById("projectModalFooter").innerHTML = `
-    <button id="saveProjectPrompt" class="btn btn-primary" onclick="createProject()">Save</button>
+    <button id="saveProjectPrompt" class="btn btn-primary" onclick="createProject()" disabled >Save</button>
     `;
 }
 
 function projectConfirmation() {
     if(document.getElementById("projectName").value==="") { 
-           document.getElementById('saveProjectPrompt').disabled = true; 
-       } else { 
-           document.getElementById('saveProjectPrompt').disabled = false;
+        document.getElementById("Button").disabled = false;
        }
    }
  /*
