@@ -103,7 +103,7 @@ function createProjectPrompt()
     <button id="saveProjectPrompt" class="btn btn-primary" onclick="createProject()" disabled >Save</button>
     `;
 }
-
+/*
 function projectConfirmation() {
     if(document.getElementById("projectName").value==="") { 
         document.getElementById("saveProjectPrompt").disabled = true;
@@ -112,7 +112,7 @@ function projectConfirmation() {
         
        }
    }
- 
+ */
    window.onload=function()
    {
        document.getElementById("projectStatus").onchange=function()
