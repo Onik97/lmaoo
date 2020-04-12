@@ -106,7 +106,7 @@ function createProjectPrompt()
 
 function projectConfirmation() {
     if(document.getElementById("projectName").value==="") { 
-        document.getElementById("Button").disabled = false;
+        document.getElementById("saveProjectPrompt").disabled = false;
        }
    }
  /*
