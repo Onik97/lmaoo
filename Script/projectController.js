@@ -112,12 +112,12 @@ function projectConfirmation() {
         
        }
    }
- /*
+ 
    window.onload=function()
    {
        document.getElementById("projectStatus").onchange=function()
        {
-           if(this.options[this.selectedIndex].value>="1")
+           if(this.options[this.selectedIndex].value==="")
            {
                document.getElementById("saveProjectPrompt").disabled=true;
            }
@@ -127,7 +127,7 @@ function projectConfirmation() {
            }
        }
    }
-*/
+
 function createProject()
 {
     var e = document.getElementById("projectStatus");
