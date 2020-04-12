@@ -23,11 +23,12 @@ var userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
 </script>
 
   <div id="projectDiv" class="col-md-6 bg-primary">
+  <button ID="projectModalButton" data-toggle="modal" data-target="#projectModal">Create Project</button>
   </div>
 
   <div id="tickets" class="col-md-6 bg-info">
     <h1 id="ticketMessage">Tickets</h1>
-    <div id="ticketBtnDiv"></div>
+    <div id="ticketBtnDiv"><button ID="ticketModalButton" data-toggle="modal" data-target="#projectModal">Create Ticket</button></div>
     <div id=ticketDiv></div>
   </div>
 
