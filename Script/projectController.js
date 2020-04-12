@@ -88,7 +88,7 @@ function createProjectPrompt()
             <input type="text" id="projectName" onkeyup="projectConfirmation()" required> <br>
             Status:<br>
             <select id ="projectStatus" required name="projectStatus">
-                <option value="" selected disabled ></option>
+                <option value="0" selected disabled ></option>
                 <option value="Back-log">Back-Log</option>
                 <option value="Developement">Development</option>
                 <option value="QA">QA</option>
@@ -117,7 +117,7 @@ function projectConfirmation() {
    {
        document.getElementById("projectStatus").onchange=function()
        {
-           if(this.options[this.selectedIndex].value==="")
+           if(this.options[this.selectedIndex].value==="0")
            {
                document.getElementById("saveProjectPrompt").disabled=true;
            }
