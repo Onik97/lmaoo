@@ -85,7 +85,7 @@ function createProjectPrompt()
 {
     document.getElementById("projectModalBody").innerHTML = `
             Project Name<br>
-            <input type="text" id="projectName" onkeyup="projectConfirmation()" placeholder="Must be Filled." required> <br>
+            <input type="text" id="projectName" onload="projectConfirmation()" placeholder="Must be Filled." required> <br>
             Status:<br>
             <select id ="projectStatus" required name="projectStatus">
                 <option value="" selected disabled ></option>
@@ -111,7 +111,20 @@ function projectConfirmation() {
            document.getElementById('saveProjectPrompt').disabled = false;
        }
    }
-
+   window.onload=function()
+   {
+       document.getElementById("projectStatus").onchange=function()
+       {
+           if(this.options[this.selectedIndex].value=="")
+           {
+               document.getElementById("saveProjectPrompt").disabled=true;
+           }
+           else
+           {
+               document.getElementById("saveProjectPrompt").disabled=false;
+           }
+       }
+   }
 function createProject()
 {
     var e = document.getElementById("projectStatus");
