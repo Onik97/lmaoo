@@ -10,13 +10,12 @@ function editUser(userId)
         {
             var userStuff = JSON.parse(this.responseText);
             document.getElementById("modalTitle").innerHTML = "Editing User";
-            document.getElementById("modalContent").innerHTML =
-            `
+            document.getElementById("modalContent").innerHTML = `
             <form action="../User/adminController.php" method="POST">
             <div class="modal-body">
             <div class="form-group">
-                 <label>Forename</label>
-                 <input class="form-control" value=${userStuff.userId} name="userId" disabled>
+                 <label>User ID</label>
+                 <input class="form-control" value=${userStuff.userId} name="userId" readonly>
              </div>
              <div class="form-group">
                  <label>Forename</label>
@@ -31,8 +30,12 @@ function editUser(userId)
                  <input class="form-control" value=${userStuff.username} name="editUsername">
              </div>
              <div class="form-group">
-                 <label>Level</label>
-                 <input class="form-control" value=${userStuff.level} name="editLevel">
+             <label>Level</label> <br>
+             <select class="form-control" name="userSelect" required>
+             <option value="" selected disabled></option>
+             <option value="1">Standard</option>
+             <option value="2">Admin</option>
+             </select>
              </div>
              </div>
              <input type="hidden" name="function" value="adminUpdate">

@@ -1,5 +1,4 @@
 <?php require('userController.php'); 
-error_reporting(0);	
 
 $userId = $_GET['userId'];
 $function = $_POST['function'];
@@ -12,6 +11,15 @@ if(isset($userId))
 
 if($function == "adminUpdate")
 {
-    echo "I got the edit :)";
+    adminUpdate($_POST['editForename'], $_POST['editSurname'], $_POST['editUsername'], $_POST['userSelect'], $_POST['userId']);
+}
+
+function adminUpdate($forename, $surname, $username, $level, $userId)
+{
+    $pdo = logindb('user', 'pass');
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("UPDATE user SET forename = ?, surname = ?, username = ?, level = ? WHERE userId = ?");
+    $stmt->execute([$forename, $surname, $username, $level, $userId]);
+    header("Location: admin.php");
 }
 ?>

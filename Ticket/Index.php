@@ -1,5 +1,6 @@
 <?php 
 require("../User/user.php");
+require("ticketController.php");
 session_start(); 
 ?>
 <!DOCTYPE html>
@@ -12,7 +13,7 @@ session_start();
 <?php include("../Global/navBar.php"); ?>
 <body> 
 	<?php if (isset($userLoggedIn)) 
-	{ if(isset($_GET['ticketId'])) 
+	{ if(isset($_GET['ticketId']) && ticketExistance($_GET['ticketId'])) 
 		{ $ticketId = $_GET['ticketId']; ?>
 	
 	<div ID="ticketContainer">
@@ -48,12 +49,13 @@ session_start();
 		  <div ID="ticketComments">
 		  <?php include("viewComments.php"); ?>	
 		  </div>
+
+		  <?php include("../Global/editUserModal.php"); ?>
+		  <?php include("ticketModal.php"); ?>
  
-<?php } else { echo "<p id='loginMessage'> You need to select a Ticket </p>"; }
+<?php } else { echo "<p id='loginMessage'> Ticket ID is invalid! </p>"; }
 	} else { echo "<p id='loginMessage'> You need to login to access this page </p>"; } 
 	?>
-		  <?php include("../Global/editUserModal.php"); ?>
-		  <?php include("../Global/editCommentModal.php"); ?>
 </body>
 <footer>
 </footer>

@@ -33,6 +33,11 @@
 	text-align: centre;
 }
 
+#ticketBriefModal {
+	margin-left: 872.5px;
+	margin-top: 10px;
+}
+
 #ticketPeople {
 	grid-column: 2 / 2;
 	width: 490px;
@@ -50,7 +55,7 @@
 }
 
 #ticketPeople3 {
-	margin-left: 150px;
+	margin-left: 358px;
 }
 
 #ticketDetails {
@@ -90,6 +95,10 @@
 	border-width: 5px;
 	background-color: #4293f5;
 	text-align: center;
+}
+
+#detailsButtonModal {
+		margin-left: 858.5px;
 }
 
 
@@ -153,7 +162,30 @@
 	width: 1490px;
 	margin-left: auto;
 	margin-right: auto;
-	background-color:  #ff1aff;
+	background-color:  #e2e2e2;
+}
+
+#commentList {
+	margin-left: 75px;
+}
+
+#comments {
+	background-color: white;
+	width: 1350px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-left: 0px;
+	margin-bottom: 10px;
+	border-width:5px; 
+	border-style:groove;
+	padding-top: 10px;
+}
+.CommentImages {
+	width: 25px;
+	height: 20px;
+	margin-left: 10px;
+	padding-left: 5px;
+	float: right;
 }
 
 #loginMessage

@@ -33,7 +33,7 @@ else if (isset($logout))
 }
 else
 {
-	//Nothing should happen
+	return;
 }
 
 function hasDup()
