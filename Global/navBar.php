@@ -26,7 +26,7 @@
 
     <!-- Navbar Menu -->
             <ul class="nav navbar-nav navbar-right">
-                <li> <a id="welcomeMessage" href="../Home/index.php">Home</a> </li>
+                <li> <a id="homeNav" href="../Home/index.php">Home</a> </li>
                 <li> <a id="aboutNav" href="../About/index.php">About</a> </li>
                 <li> <a id="projectNav" href="../Project/index.php">Project</a> </li>
 				<li> <a href="../Ticket/index.php">Ticket</a>
