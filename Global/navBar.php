@@ -7,7 +7,7 @@
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#exampleNavComponents" aria-expanded="false">
 			<i class="glyphicon glyphicon-align-center"></i>
         </button>
-		<p class="navbar-text text-right">
+		<p id="welcomeMessage" class="navbar-text text-right">
                         <?php
                         if(isset($_SESSION['userLoggedIn']))
                         {
@@ -26,9 +26,9 @@
 
     <!-- Navbar Menu -->
             <ul class="nav navbar-nav navbar-right">
-                <li> <a href="../Home/index.php">Home</a> </li>
-                <li> <a href="../About/index.php">About</a> </li>
-                <li> <a href="../Project/index.php">Project</a> </li>
+                <li> <a id="welcomeMessage" href="../Home/index.php">Home</a> </li>
+                <li> <a id="aboutNav" href="../About/index.php">About</a> </li>
+                <li> <a id="projectNav" href="../Project/index.php">Project</a> </li>
 				<li> <a href="../Ticket/index.php">Ticket</a>
                 <!-- Navbar link with a dropdown menu -->
                 <li class="dropdown">
