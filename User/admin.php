@@ -4,6 +4,7 @@
 <title>About</title>
 <head>
 <?php include("../Global/head.php"); ?>
+<script type="text/javascript" src="../Script/admin.js"></script>
 </head>
 <?php include("../Global/navBar.php"); ?>
 <body>
