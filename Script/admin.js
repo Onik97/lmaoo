@@ -55,10 +55,3 @@ function deleteUser(userId)
     document.getElementById("modalContent").innerHTML = "Are you sure?";
     console.log("Your ID is " + userId);
 }
-
-function viewUser(userId)
-{
-    document.getElementById("modalTitle").innerHTML = "Viewing User";
-    console.log("Your ID is " + userId);
-}
-
