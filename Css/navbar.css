@@ -7,8 +7,8 @@ ul.one {
 }
 
 li {
-  float: left;
-  border-right:1px solid #bbb;
+  float: right;
+  border-right: 1px solid #bbb;
 }
 
 li:last-child {
@@ -16,6 +16,7 @@ li:last-child {
 }
 
 li a {
+  float: right;
   display: block;
   color: white;
   text-align: center;
