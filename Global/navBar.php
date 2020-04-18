@@ -50,7 +50,7 @@
                             <a class="dropdown-item" id="registerNav" href="../User/register.php">Register</a>
                             <a class="dropdown-item" id="loginNav" href="../User/index.php">Login</a>
                         <?php   } 
-                              else if ($userLoggedIn->getLevel() == "1")
+                              else if ($userLoggedIn->getLevel() <= 2)
                                 { ?>
                                     <a class="dropdown-item" id="editAccountNav" data-toggle="modal" data-target="#view-modal" role="button">Edit Account</a> 
                                     <a class="dropdown-item" id="logoutNav" href="../User/logout.php">Logout</a>
