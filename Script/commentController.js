@@ -2,21 +2,21 @@ $(document).ready(function()
 {
   loadComments();
 
-$('.createComment').summernote({
-  height: 150,
-  toolbar: 
-  [
-    ['style', ['bold', 'italic', 'underline', 'clear']],
-    ['font', ['strikethrough' ]],
-    ['para', ['ul', 'ol']],
-  ],
-  popover: 
-  {
-    image: [],
-    link: [],
-    air: [],
-  }
-  });
+  $('.createComment').summernote({
+    height: 150,
+    toolbar: 
+    [
+      ['style', ['bold', 'italic', 'underline', 'clear']],
+      ['font', ['strikethrough' ]],
+      ['para', ['ul', 'ol']],
+    ],
+    popover: 
+    {
+      image: [],
+      link: [],
+      air: [],
+    }
+    });
 });
 
 function loadComments()
