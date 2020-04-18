@@ -1,13 +1,9 @@
 <?php require("../User/userController.php"); session_start(); ?>
 <!DOCTYPE html>
 <html>
+<title>About</title>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../Css/admin.css">
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../Script/admin.js"></script>
-    <title>About</title>
+<?php include("../Global/head.php"); ?>
 </head>
 <?php include("../Global/navBar.php"); ?>
 <body>
