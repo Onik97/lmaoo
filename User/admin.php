@@ -13,7 +13,7 @@
 <body>
     <p>This is the admin page</p>
     
-    <?php if (!isset($_SESSION['userLoggedIn']) || $userLoggedIn->getLevel() == "1") 
+    <?php if (!isset($_SESSION['userLoggedIn']) || $userLoggedIn->getLevel() == "1" || $userLoggedIn->getLevel() == "2") 
             { header("Location: ../Global/forbidden.php"); } 
             else 
             { ?>  
@@ -42,7 +42,6 @@
                                 <div class="btn-group btn-group-xs" role="group">
                                     <a id="<?php echo $user->userId;?>" data-toggle="modal" data-target="#function-modal" onclick="editUser(this.id)" class="btn btn-default">Edit</a> 
                                     <a id="<?php echo $user->userId;?>" data-toggle="modal" data-target="#function-modal" onclick="deleteUser(this.id)" class="btn btn-default">Delete</a> 
-                                    <a id="<?php echo $user->userId;?>" data-toggle="modal" data-target="#function-modal" onclick="viewUser(this.id)" class="btn btn-default">View</a>
                                 </div>
                             </td>
                         </tr>
