@@ -14,17 +14,17 @@
 
                     <div class="form-group">
                         <label>Forename</label>
-                        <input class="form-control" value=<?php echo $userLoggedIn->getForename(); ?>  name="editForename" >
+                        <input class="form-control" value=<?php echo $userLoggedIn->getForename(); ?>  name="editForename" required>
                     </div>
 
                     <div class="form-group">
                         <label>Surname</label>
-                        <input class="form-control" value=<?php echo $userLoggedIn->getSurname(); ?>  name="editSurname">
+                        <input class="form-control" value=<?php echo $userLoggedIn->getSurname(); ?>  name="editSurname" required>
                     </div>
 
                     <div class="form-group">
                         <label>Username</label>
-                        <input class="form-control" value=<?php echo $userLoggedIn->getUsername(); ?> name="editUsername">
+                        <input class="form-control" value=<?php echo $userLoggedIn->getUsername(); ?> name="editUsername" required>
                     </div>
 
                 </div>
