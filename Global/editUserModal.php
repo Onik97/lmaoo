@@ -9,7 +9,7 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="../User/userController.php" method="POST" onSubmit="return userDupCheck()">
+            <form action="../User/userController.php" method="POST" onSubmit="return updateEditUser()">
                 <div class="modal-body">
 
                     <p id="editUserMessage" hidden></p>
