@@ -34,9 +34,6 @@
                 <li class="nav-item">
                     <a class="nav-link" id="projectNav" href="../Project/index.php">Project</a>
                 </li>
-				<li class="nav-item">
-                    <a class="nav-link" href="../Ticket/index.php">Ticket</a>
-                </li>
 
                 <!-- Navbar link with a dropdown menu -->
                 <li class="nav-item dropdown">
