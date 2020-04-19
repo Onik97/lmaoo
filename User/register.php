@@ -3,24 +3,32 @@
 <html>
 <title>Register Page</title>
 <head>
+ <link rel="stylesheet" href="../css/RegisterPage.css">
 <?php include("../Global/head.php"); ?>
 </head>
 <?php include("../Global/navBar.php"); ?>
+
 <body>
 <div class="top-buffer">
 	<div class="container">
-  <p id=validateMessage></p>
+    <div class="wrap">
+
 	<form action="userController.php" onSubmit="return checkPassword(this)" method='POST'>
-  Forename:<br> <input type="text" name="forename" id="forenameRegister" required> <br>
-  Surname:<br> <input type="text" name="surname" id="surnameRegister" required> <br>
-  Username:<br> <input type="text" name="username" id="usernameRegister" required> <br>
-  Password:<br> <input type="password" name="password1" id="password1Register" required> <br>
-  Confirm Password:<br> <input type="password" name="password2" id="password2Register" required> <br>
+  
+  <input type="text" name="forename" id="forenameRegister" required placeholder="First Name"> 
+  <input type="text" name="surname" id="surnameRegister" required placeholder="Last Name"> 
+  <input type="text" name="username" id="usernameRegister" required placeholder="Username"> 
+  <input type="password" name="password1" id="password1Register" required placeholder="Password"> 
+  <input type="password" name="password2" id="password2Register" required placeholder="Re-Type Password"> 
+  
   <input type="hidden" name="function" value="register">
-  <input class="one" type="submit" value="Submit"> <br><br>
-  <a href="../User/index.php">Register? Login here!</a>
+  <input class="one" type="submit" value="Submit"> 
+  <br>
+  <a href="../User/index.php"> <br> Already Registered? <br>Login here!</a>
+    <p id=validateMessage></p>
 </form>
     </div>
     </div>
+  </div>
 </body>
-</html>
+</html
