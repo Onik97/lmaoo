@@ -3,15 +3,34 @@ body {
 	margin: 0;
 }
 
-#projectDiv {
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+#sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1;
+    background: #7386D5;
+    color: #fff;
+	transition: all 0.3s;
+	/* opacity: 0.3; */
+}
+
+#projectHeader {
 	font-size: 20px;
 	color: white;
+	text-align: center;
+	background-color: black;
 }
 
 #projectDiv button {
 	font-size: 15px;
 	padding: 12px, 0px, 12px, 0px;
-	border: 1px solid black;
 	color: black;
 }
 

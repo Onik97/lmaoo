@@ -19,14 +19,27 @@ function loadProjects()
             if (userLevel == 2) 
             {
                 document.getElementById("projectDiv").innerHTML = `
-                <button data-toggle="modal" data-target="#projectModal" role="button" onclick="createProjectPrompt()">Create Project</button>`
+                <button class="btn btn-light" data-toggle="modal" data-target="#projectModal" role="button" onclick="createProjectPrompt()">Create Project</button>`
             }
             document.getElementById("projectDiv").innerHTML += `
-            <h1>Projects</h1>
+            <div class="wrapper">
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h1>Projects<h1>
+                </div>
+                
+                <ul class="list-unstyled components">
+
             ${ticketJSON.map(function(ticket)
             {
             return `
-            <button class="btn btn-primary" onclick="getProjectName(this.innerHTML); getTicketWithProjectId(this.value)" value="${ticket.projectId}">${ticket.name}</button> <br>   
+                    
+                        <li>
+                            <button class="btn btn-secondary" onclick="getProjectName(this.innerHTML); getTicketWithProjectId(this.value)" value="${ticket.projectId}">${ticket.name}</button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
             `;
             }).join('')}
             `;

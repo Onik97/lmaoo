@@ -22,10 +22,11 @@ var userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
 </script>
 
 <div class="row">
-      <div id="projectDiv" class="col-3 bg-primary">
+
+<div id="projectDiv" class="col bg-primary">
       </div>
 
-      <div id="tickets" class="col-9 bg-info">
+      <div id="tickets" class="col bg-info">
         <h1 id="ticketMessage">Tickets</h1>
         <div id="ticketBtnDiv"></div>
         <div id=ticketDiv></div>
