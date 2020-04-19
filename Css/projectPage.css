@@ -3,13 +3,6 @@ body {
 	margin: 0;
 }
 
-.row {
-    padding-top: 30px;
-    padding-left: 250px;
-    padding-right: 250px;
-    align-content: center;
-}
-
 #projectDiv {
 	font-size: 20px;
 	color: white;
