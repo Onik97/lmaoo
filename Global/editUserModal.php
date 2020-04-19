@@ -9,22 +9,24 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="../User/userController.php" method="POST">
+            <form action="../User/userController.php" method="POST" onSubmit="return userDupCheck()">
                 <div class="modal-body">
+
+                    <p id="editUserMessage" hidden></p>
 
                     <div class="form-group">
                         <label>Forename</label>
-                        <input class="form-control" value=<?php echo $userLoggedIn->getForename(); ?>  name="editForename" required>
+                        <input class="form-control" value=<?php echo $userLoggedIn->getForename(); ?>  id="editForename" name="editForename" required>
                     </div>
 
                     <div class="form-group">
                         <label>Surname</label>
-                        <input class="form-control" value=<?php echo $userLoggedIn->getSurname(); ?>  name="editSurname" required>
+                        <input class="form-control" value=<?php echo $userLoggedIn->getSurname(); ?>  id="editSurname" name="editSurname" required>
                     </div>
 
                     <div class="form-group">
                         <label>Username</label>
-                        <input class="form-control" value=<?php echo $userLoggedIn->getUsername(); ?> name="editUsername" required>
+                        <input class="form-control" value=<?php echo $userLoggedIn->getUsername(); ?> id="editUsername" name="editUsername" required>
                     </div>
 
                 </div>
@@ -41,4 +43,4 @@
 </div> 
 
 <?php } ?>
-<script type="text/javascript" src="../Script/navBar.js"></script>
+<script type="text/javascript" src="../Script/navBar.js"></script>     
