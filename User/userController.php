@@ -31,6 +31,17 @@ else if (isset($logout))
 {
 	logout();
 }
+else if ($function == "checkUsername")
+{
+	if (hasDup())
+	{
+		echo "True"; // Echo for XMLHTTPRequest
+	}
+	else if (!hasDup())
+	{
+		echo "False"; // Echo for XMLHTTPRequest
+	}
+}
 else
 {
 	return;
