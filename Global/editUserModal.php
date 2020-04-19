@@ -43,4 +43,4 @@
 </div> 
 
 <?php } ?>
-<script type="text/javascript" src="../Script/navBar.js"></script>     
+<script type="text/javascript" src="../Script/editUser.js"></script>
