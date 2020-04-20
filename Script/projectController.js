@@ -97,36 +97,39 @@ function createProjectPrompt()
             </select>
             <br><br>
             <input type="hidden" name="function" value="createProject">
-    `;
+    `; 
+
+
 
     document.getElementById("projectModalFooter").innerHTML = `
     <button id="saveProjectPrompt" class="btn btn-primary" onclick="createProject()" disabled >Save</button>
     `;
 }
-/*
+
+
 function projectConfirmation() {
-    if(document.getElementById("projectName").value==="") { 
+    if(document.getElementById("projectName").value.trim() == "" || document.getElementById("projectStatus").value == 0) 
+    { 
         document.getElementById("saveProjectPrompt").disabled = true;
-    } else{ 
+    } 
+    else
+    { 
         document.getElementById("saveProjectPrompt").disabled = false;
-        
-       }
-   }
- */
-   window.onload=function()
-   {
-       document.getElementById("projectStatus").onchange=function()
-       {
-           if(this.options[this.selectedIndex].value==="0")
-           {
-               document.getElementById("saveProjectPrompt").disabled=true;
-           }
-           else
-           {
-               document.getElementById("saveProjectPrompt").disabled=false;
-           }
-       }
-   }
+    }
+}
+
+// document.getElementById("projectName").onchange= function textBoxConfirmation() {
+//     if (document.getElementById("projectName").value <= 0)
+//     {
+//         document.getElementById("saveProjectPrompt").disabled = true;
+//     }
+//     else
+//     {
+//         document.getElementById("saveProjectPrompt").disabled = false;
+//     }
+// };
+
+
 
 function createProject()
 {
@@ -146,7 +149,7 @@ function createProject()
         {
             console.log(this.responseText);
             loadProjects();
-            overHang("success", "Project has been successfully created!");
+            // overHang("success", "Project has been successfully created!");
             $('#projectModal').modal('hide');
         }
     }
