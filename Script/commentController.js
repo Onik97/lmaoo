@@ -2,16 +2,21 @@ $(document).ready(function()
 {
   loadComments();
 
-  $('.createComment').summernote
-  ({
-      height: 150,
-      toolbar: 
-      [
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['font', ['strikethrough' ]],
-        ['para', ['ul', 'ol']],
-      ]
-  });
+  $('.createComment').summernote({
+    height: 150,
+    toolbar: 
+    [
+      ['style', ['bold', 'italic', 'underline', 'clear']],
+      ['font', ['strikethrough' ]],
+      ['para', ['ul', 'ol']],
+    ],
+    popover: 
+    {
+      image: [],
+      link: [],
+      air: [],
+    }
+    });
 });
 
 function loadComments()
@@ -63,18 +68,22 @@ function loadComments()
 
 function editComment(commentId)
 {
-    $('.comment'+commentId).summernote
-    ({
-      focus: true,
-      enter: false,
-      toolbar: 
-      [
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['font', ['strikethrough' ]],
-        ['para', ['ul', 'ol']],        
-      ]
+  $('.comment'+commentId).summernote({
+    height: 150,
+    toolbar: 
+    [
+      ['style', ['bold', 'italic', 'underline', 'clear']],
+      ['font', ['strikethrough' ]],
+      ['para', ['ul', 'ol']],
+    ],
+    popover: 
+    {
+      image: [],
+      link: [],
+      air: [],
+    }
     });
-
+    
     $('.comment'+commentId).on('summernote.keydown', function(we, e) {
       if(e.shiftKey && e.keyCode == 13)
       {

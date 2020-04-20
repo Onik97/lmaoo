@@ -35,6 +35,7 @@ function editUser(userId)
              <option value="" selected disabled></option>
              <option value="1">Standard</option>
              <option value="2">Admin</option>
+             <option value="3">Super</option>
              </select>
              </div>
              </div>
@@ -54,10 +55,3 @@ function deleteUser(userId)
     document.getElementById("modalContent").innerHTML = "Are you sure?";
     console.log("Your ID is " + userId);
 }
-
-function viewUser(userId)
-{
-    document.getElementById("modalTitle").innerHTML = "Viewing User";
-    console.log("Your ID is " + userId);
-}
-
