@@ -35,11 +35,13 @@ else if ($function == "checkUsername")
 {
 	if (hasDup())
 	{
-		echo "True"; // Echo for XMLHTTPRequest
+		$json->fromServer = "True";
+		echo json_encode($json);
 	}
 	else if (!hasDup())
 	{
-		echo "False"; // Echo for XMLHTTPRequest
+		$json->fromServer = "False";
+		echo json_encode($json);
 	}
 }
 else
@@ -49,7 +51,7 @@ else
 
 function hasDup()
 {
-	$boolean = false;
+	$boolean = false;	
 	$username = $_POST['username'];
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
