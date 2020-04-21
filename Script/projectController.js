@@ -100,18 +100,18 @@ function createProjectPrompt()
     `; 
 
     document.getElementById("projectModalFooter").innerHTML = `
-    <button id="saveProjectPrompt" class="btn btn-primary" onclick="createProject()" disabled >Save</button>
+    <button id="saveProjectBtn" class="btn btn-primary" onclick="createProject()" disabled >Save</button>
     `;
 }
 
 function projectConfirmation() {
     if(document.getElementById("projectName").value.trim() == "" || document.getElementById("projectStatus").value == 0) 
     { 
-        document.getElementById("saveProjectPrompt").disabled = true;
+        document.getElementById("saveProjectBtn").disabled = true;
     } 
     else
     { 
-        document.getElementById("saveProjectPrompt").disabled = false;
+        document.getElementById("saveProjectBtn").disabled = false;
     }
 }
 
@@ -148,16 +148,27 @@ function createTicketPrompt(projectId)
     <label>Reporter</label> <br>
     <input type="text" id="reporter" value="${userForename + " " + userSurname}" disabled> <br>
     <label>Task</label> <br>
-    <input type="text" id="task" required> <br>
+    <input type="text" id="task" onkeyup="ticketConfirmation()" required> <br>
     <label>Progress</label> <br>
-    <input type="text" id="progress" required> <br>
+    <input type="text" id="progress" onkeyup="ticketConfirmation()" required> <br>
     <input type="hidden" id="reporterKey" value="${userId}"> 
     <input type="hidden" id="function" value="createTicket"> <br>
     `;
 
     document.getElementById("projectModalFooter").innerHTML = `
-    <button class="btn btn-primary" type=submit onclick="createTicket()">Save</button>
+    <button id="saveTicketBtn" class="btn btn-primary" type=submit onclick="createTicket()" disabled >Save</button>
     `;
+}
+
+function ticketConfirmation() {
+    if(document.getElementById("task").value.trim() == "" || document.getElementById("progress").value.trim() == "")
+    {
+        document.getElementById("saveTicketBtn").disabled = true;
+    }
+    else
+    {
+        document.getElementById("saveTicketBtn").disabled = false;
+    }
 }
 
 function createTicket()
