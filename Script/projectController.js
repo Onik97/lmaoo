@@ -148,16 +148,27 @@ function createTicketPrompt(projectId)
     <label>Reporter</label> <br>
     <input type="text" id="reporter" value="${userForename + " " + userSurname}" disabled> <br>
     <label>Task</label> <br>
-    <input type="text" id="task" required> <br>
+    <input type="text" id="task" onkeyup="ticketConfirmation()" required> <br>
     <label>Progress</label> <br>
-    <input type="text" id="progress" required> <br>
+    <input type="text" id="progress" onkeyup="ticketConfirmation()" required> <br>
     <input type="hidden" id="reporterKey" value="${userId}"> 
     <input type="hidden" id="function" value="createTicket"> <br>
     `;
 
     document.getElementById("projectModalFooter").innerHTML = `
-    <button class="btn btn-primary" type=submit onclick="createTicket()">Save</button>
+    <button id="saveTicketPrompt" class="btn btn-primary" type=submit onclick="createTicket()" disabled >Save</button>
     `;
+}
+
+function ticketConfirmation() {
+    if(document.getElementById("task").value.trim() == "" || document.getElementById("progress").value.trim() == "")
+    {
+        document.getElementById("saveTicketPrompt").disabled = true;
+    }
+    else
+    {
+        document.getElementById("saveTicketPrompt").disabled = false;
+    }
 }
 
 function createTicket()
