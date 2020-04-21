@@ -99,13 +99,10 @@ function createProjectPrompt()
             <input type="hidden" name="function" value="createProject">
     `; 
 
-
-
     document.getElementById("projectModalFooter").innerHTML = `
     <button id="saveProjectPrompt" class="btn btn-primary" onclick="createProject()" disabled >Save</button>
     `;
 }
-
 
 function projectConfirmation() {
     if(document.getElementById("projectName").value.trim() == "" || document.getElementById("projectStatus").value == 0) 
@@ -117,19 +114,6 @@ function projectConfirmation() {
         document.getElementById("saveProjectPrompt").disabled = false;
     }
 }
-
-// document.getElementById("projectName").onchange= function textBoxConfirmation() {
-//     if (document.getElementById("projectName").value <= 0)
-//     {
-//         document.getElementById("saveProjectPrompt").disabled = true;
-//     }
-//     else
-//     {
-//         document.getElementById("saveProjectPrompt").disabled = false;
-//     }
-// };
-
-
 
 function createProject()
 {
@@ -155,7 +139,6 @@ function createProject()
     }
     xhr.send(data);
 }
-
 
 function createTicketPrompt(projectId)
 {
