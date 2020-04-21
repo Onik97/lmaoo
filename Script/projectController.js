@@ -100,18 +100,18 @@ function createProjectPrompt()
     `; 
 
     document.getElementById("projectModalFooter").innerHTML = `
-    <button id="saveProjectPrompt" class="btn btn-primary" onclick="createProject()" disabled >Save</button>
+    <button id="saveProjectBtn" class="btn btn-primary" onclick="createProject()" disabled >Save</button>
     `;
 }
 
 function projectConfirmation() {
     if(document.getElementById("projectName").value.trim() == "" || document.getElementById("projectStatus").value == 0) 
     { 
-        document.getElementById("saveProjectPrompt").disabled = true;
+        document.getElementById("saveProjectBtn").disabled = true;
     } 
     else
     { 
-        document.getElementById("saveProjectPrompt").disabled = false;
+        document.getElementById("saveProjectBtn").disabled = false;
     }
 }
 
@@ -156,18 +156,18 @@ function createTicketPrompt(projectId)
     `;
 
     document.getElementById("projectModalFooter").innerHTML = `
-    <button id="saveTicketPrompt" class="btn btn-primary" type=submit onclick="createTicket()" disabled >Save</button>
+    <button id="saveTicketBtn" class="btn btn-primary" type=submit onclick="createTicket()" disabled >Save</button>
     `;
 }
 
 function ticketConfirmation() {
     if(document.getElementById("task").value.trim() == "" || document.getElementById("progress").value.trim() == "")
     {
-        document.getElementById("saveTicketPrompt").disabled = true;
+        document.getElementById("saveTicketBtn").disabled = true;
     }
     else
     {
-        document.getElementById("saveTicketPrompt").disabled = false;
+        document.getElementById("saveTicketBtn").disabled = false;
     }
 }
 
