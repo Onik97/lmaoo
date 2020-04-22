@@ -36,4 +36,5 @@ function checkUserDup()
             document.getElementById("editUserMessage").setAttribute("hidden");
         }
     })
+    .catch((response) => {})
 }
