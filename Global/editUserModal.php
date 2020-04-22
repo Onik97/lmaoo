@@ -9,7 +9,7 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="../User/userController.php" method="POST" onSubmit="return updateEditUser()">
+            <form action="../User/userController.php" method="POST" onkeyup="checkUserDup()">
                 <div class="modal-body">
 
                     <p id="editUserMessage" hidden></p>
@@ -35,7 +35,7 @@
                 <input type="hidden" name="editUserId" value="<?php echo $userLoggedIn->getId();?>">
 
                     <div class="modal-footer">
-                        <input class="btn btn-primary" type="submit" value="Save Changes">
+                        <input id="editUserBtn" class="btn btn-primary" type="submit" value="Save Changes">
                     </div>
             </form>
         </div>

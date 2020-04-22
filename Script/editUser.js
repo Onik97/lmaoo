@@ -11,30 +11,29 @@ $('form')
 .find('input:submit, button:submit')
     .attr('disabled', true);
 
-function userDupCheck()
-{
+function checkUserDup()
+{   
     var editUsername = document.getElementById("editUsername").value;
     var data = new FormData();
     data.append('function', "checkUsername");
     data.append('username', editUsername);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../User/userController.php',);
-    xhr.send(data); 
-    xhr.onreadystatechange = function() 
+    checkUsernameFromServer(data)
+    .then((response) =>
     {
-      if (this.readyState == 4 && this.status == 200)
+        var responseFromServer = response.data.fromServer;
+
+        if (responseFromServer == "True")
         {
-            var response = this.responseText;
-            return response; 
-        }    
-    }
-}
-
-function updateEditUser()
-{
-    var response = userDupCheck();
-    console.log(response);
-
-    return false;
+            document.getElementById("editUserBtn").disabled = true;
+            document.getElementById("editUserMessage").innerHTML = "Username Taken! Try another!";
+            document.getElementById("editUserMessage").removeAttribute("hidden");
+        }
+        else
+        {
+            document.getElementById("editUserBtn").disabled = false;
+            document.getElementById("editUserMessage").innerHTML = "";
+            document.getElementById("editUserMessage").setAttribute("hidden");
+        }
+    })
 }
