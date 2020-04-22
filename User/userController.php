@@ -51,7 +51,7 @@ else
 
 function hasDup()
 {
-	$boolean = false;	
+	$boolean = false;
 	$username = $_POST['username'];
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
