@@ -9,6 +9,8 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
 <link rel="stylesheet" type="text/css" href="../addons/overhang/dist/overhang.min.css" />
 <script type="text/javascript" src="../addons/overhang/dist/overhang.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="../Script/server.js"></script>
 <script type="text/javascript" src="../Script/navBar.js"></script>
 <script>
 function overHang(type, message)
