@@ -11,7 +11,6 @@
 <script type="text/javascript" src="../addons/overhang/dist/overhang.min.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript" src="../Script/server.js"></script>
-<script type="text/javascript" src="../Script/navBar.js"></script>
 <script>
 function overHang(type, message)
 {
