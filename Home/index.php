@@ -14,4 +14,6 @@ session_start();
 <?php echo "This page is still under maintenance"; ?>
 <?php include("../Global/editUserModal.php"); ?>
 </body>
+<p id="navBarActive" hidden>homePage</p>
+<script type="text/javascript" src="../Script/navBarActive.js"></script>
 </html>

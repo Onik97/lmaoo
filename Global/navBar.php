@@ -26,18 +26,18 @@
             <!-- Navbar Menu -->
             <ul class="nav navbar-nav ml-auto mr-5">
                 <li class="nav-item">
-                    <a class="nav-link active" id="homeNav" href="../Home/index.php">Home</a>
+                    <a class="nav-link" id="homeNav" href="../Home/index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" id="aboutNav" href="../About/index.php">About</a>
+                    <a class="nav-link" id="aboutNav" href="../About/index.php">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" id="projectNav" href="../Project/index.php">Project</a>
+                    <a class="nav-link" id="projectNav" href="../Project/index.php">Project</a>
                 </li>
 
                 <!-- Navbar link with a dropdown menu -->
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account
+                    <a id="accountNav" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account
                         <span class="caret"></span>
                     </a>
     

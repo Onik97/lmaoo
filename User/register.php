@@ -23,4 +23,6 @@
     </div>
     </div>
 </body>
+<p id="navBarActive" hidden>registerPage</p>
+<script type="text/javascript" src="../Script/navBarActive.js"></script>
 </html>

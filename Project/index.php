@@ -40,6 +40,8 @@ var userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
 } ?>
 
 </body>
+<p id="navBarActive" hidden>projectPage</p>
+<script type="text/javascript" src="../Script/navBarActive.js"></script>
 </html>
 <?php include("../Global/editUserModal.php"); 
 ?>
