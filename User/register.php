@@ -4,6 +4,7 @@
 <title>Register Page</title>
 <head>
 <?php include("../Global/head.php"); ?>
+<link rel="stylesheet" href="../Css/RegisterPage.css">
 </head>
 <?php include("../Global/navBar.php"); ?>
 <body>
