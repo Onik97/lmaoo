@@ -9,16 +9,46 @@ body {
 }
 
 #sidebar {
+	height: 100vh;
     width: 250px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    z-index: 1;
     background: #7386D5;
     color: #fff;
 	transition: all 0.3s;
-	/* opacity: 0.3; */
+}
+
+#sidebar .sidebar-header {
+	padding: 20px;
+	background: #6d7fcc;
+}
+
+#sidebar ul.components {
+	padding: 20px 0;
+	border-bottom: #47748b;
+}
+
+#sidebar ul button {
+    color: #fff;
+	padding: 10px;
+	border: none;
+	background: none;
+}
+
+#sidebar ul li button {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar ul li button:hover {
+    color: #7386D5;
+    background: #fff;
+}
+
+#content {
+    width: 70%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
 }
 
 #projectHeader {

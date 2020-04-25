@@ -59,13 +59,15 @@ function getTicketWithProjectId(id)
         if (this.readyState == 4 && this.status == 200)
         {
             var ticketJSON = JSON.parse(this.responseText);
+            console.log(this.responseText);
             if (userLevel == 2)
             {
                 document.getElementById("ticketBtnDiv").innerHTML = 
                 `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
             }
-            document.getElementById("ticketDiv").innerHTML = 
-            `<table class="table">
+            document.getElementById("ticketDiv").innerHTML += 
+            `
+            <table class="table">
             <thead class="thead-dark">
                 <tr>
                 <th scope="col">Ticket ID</th>

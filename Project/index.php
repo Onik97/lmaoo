@@ -21,17 +21,13 @@ var userSurname = "<?php echo $userLoggedIn->getSurname(); ?>";
 var userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
 </script>
 
-<div class="row">
-
-<div id="projectDiv" class="col bg-primary">
-      </div>
-
-      <div id="tickets" class="col bg-info">
-        <h1 id="ticketMessage">Tickets</h1>
-        <div id="ticketBtnDiv"></div>
-        <div id=ticketDiv></div>
-      </div>
+<div id="projectDiv"></div>
+<div id="ticketDiv">
+  <div class="content">
+    <h1 id="ticketMessage">Tickets</h1>
+    <div id="ticketBtnDiv"></div>
   </div>
+</div>
 
 <?php include("projectModal.php"); ?>
 
