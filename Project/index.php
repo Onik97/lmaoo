@@ -22,7 +22,9 @@ var userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
 </script>
 
 <div class="wrapper">
-<div id="projectDiv"></div>
+<div id="projectDiv">
+
+</div>
   <div id="createProject"></div>
   <div class="content">
     <div id="ticketDiv">

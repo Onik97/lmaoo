@@ -3,13 +3,13 @@ $(document).ready(function()
   loadProjects();
 }); 
 
-function loadProjects()
+function loadProjects1()
 {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "projectController.php", true)
 
     var data = new FormData();
-    data.append('function', "loadTickets");
+    data.append('function', "loadProjects");
 
     xmlhttp.onreadystatechange = function() 
     {
@@ -17,7 +17,7 @@ function loadProjects()
         {
             var ticketJSON = JSON.parse(this.responseText);
             
-            document.getElementById("projectDiv").innerHTML += `
+            document.getElementById("projectDiv").innerHTML = `
                 <nav id="sidebar">
                     <div class="sidebar-header"><h1>Projects<h1></div>    
                         <ul class="list-unstyled components">
@@ -33,13 +33,44 @@ function loadProjects()
             {
                 document.getElementById("projectDiv").innerHTML += `
                 <li data-toggle="modal" data-target="#projectModal" onclick="createProjectPrompt()">Create Project</li>
-                    </ul>
-                </nav>
                 `
             };
         }
     }
     xmlhttp.send(data);
+}
+
+function loadProjects()
+{
+    var data = new FormData();
+    data.append('function', "loadProjects");
+
+    loadProjectsFromServer(data)
+    .then((response) =>
+    {
+        var json = response.data;
+        console.log(json);
+        var projectDiv = document.getElementById("projectDiv");
+        projectDiv.innerHTML = 
+        `
+        <nav id="sidebar">
+        <div class="sidebar-header"><h1>Projects<h1></div>    
+            <ul class="list-unstyled components">
+        `
+        for (i = 0; i < json.length; i++)
+        {
+            projectDiv.innerHTML += 
+            `
+            <li onclick="getProjectName(this.innerHTML); getTicketWithProjectId(this.value)" value="${json[i].projectId}">${json[i].name}</li>
+            `
+        }
+        projectDiv.innerHTML += 
+        `                    
+            </ul>
+        </nav>
+        `
+    })
+    .catch((response) => {})
 }
 
 function getProjectName(name)
