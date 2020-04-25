@@ -41,7 +41,8 @@ body {
 
 #sidebar ul li:hover {
     color: #7386D5;
-    background: #fff;
+	background: #fff;
+	cursor: pointer;
 }
 
 #sidebar ul li:active {
