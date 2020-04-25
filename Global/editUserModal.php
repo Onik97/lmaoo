@@ -12,8 +12,6 @@
             <form action="../User/userController.php" method="POST" onkeyup="checkUserDup()">
                 <div class="modal-body">
 
-                    <p id="editUserMessage" hidden></p>
-
                     <div class="form-group">
                         <label>Forename</label>
                         <input class="form-control" value=<?php echo $userLoggedIn->getForename(); ?>  id="editForename" name="editForename" required>
@@ -27,6 +25,7 @@
                     <div class="form-group">
                         <label>Username</label>
                         <input class="form-control" value=<?php echo $userLoggedIn->getUsername(); ?> id="editUsername" name="editUsername" required>
+                        <small id="editUsernameMessage" class="text-danger" hidden></small> 
                     </div>
 
                 </div>

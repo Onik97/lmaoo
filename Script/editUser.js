@@ -26,14 +26,16 @@ function checkUserDup()
         if (responseFromServer == "True")
         {
             document.getElementById("editUserBtn").disabled = true;
-            document.getElementById("editUserMessage").innerHTML = "Username Taken! Try another!";
-            document.getElementById("editUserMessage").removeAttribute("hidden");
+            document.getElementById("editUsernameMessage").innerHTML = "Username Taken! Try another!";
+            document.getElementById("editUsername").classList.add("is-invalid"); 
+            document.getElementById("editUsernameMessage").removeAttribute("hidden");  
         }
         else
         {
             document.getElementById("editUserBtn").disabled = false;
-            document.getElementById("editUserMessage").innerHTML = "";
-            document.getElementById("editUserMessage").setAttribute("hidden");
+            document.getElementById("editUsernameMessage").innerHTML = "";
+            document.getElementById("editUsername").classList.remove("is-invalid"); 
+            document.getElementById("editUsernameMessage").setAttribute("hidden");
         }
     })
     .catch((response) => {})
