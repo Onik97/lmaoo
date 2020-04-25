@@ -9,6 +9,9 @@ if(isset($_SESSION['userLoggedIn'])){header("Location: ../Ticket/index.php");}
 <?php include("../Global/head.php"); ?>
 </head>
 <?php include("../Global/navBar.php"); ?>
+<head>
+<link rel="stylesheet" href="../Css/UserPage.css">
+</head>
 <body>
 <div class="top-buffer">
 	<div class="container">
