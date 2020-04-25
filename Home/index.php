@@ -10,7 +10,7 @@ session_start();
 <?php include("../Global/head.php"); ?>
 </head>
 <?php include("../Global/navBar.php"); ?>
-<body>       
+<body>
 <?php echo "This page is still under maintenance"; ?>
 <?php include("../Global/editUserModal.php"); ?>
 </body>

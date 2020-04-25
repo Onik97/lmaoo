@@ -31,6 +31,19 @@ else if (isset($logout))
 {
 	logout();
 }
+else if ($function == "checkUsername")
+{
+	if (hasDup())
+	{
+		$json->fromServer = "True";
+		echo json_encode($json);
+	}
+	else if (!hasDup())
+	{
+		$json->fromServer = "False";
+		echo json_encode($json);
+	}
+}
 else
 {
 	return;

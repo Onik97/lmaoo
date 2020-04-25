@@ -22,7 +22,7 @@ var userSurname = "<?php echo $userLoggedIn->getSurname(); ?>";
 var userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
 </script>
 
-  <div id="projectDiv" class="col-md-6 bg-primary">
+  <div id="projectDiv" class="col-md-3 bg-primary">
   </div>
 
   <div id="tickets" class="col-md-6 bg-info">

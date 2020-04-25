@@ -85,10 +85,10 @@ function createProjectPrompt()
 {
     document.getElementById("projectModalBody").innerHTML = `
             Project Name<br>
-            <input type="text" id="projectName" required> <br>
+            <input type="text" id="projectName" onkeyup="projectConfirmation()" required> <br>
             Status:<br>
             <select id ="projectStatus" required name="projectStatus">
-                <option value="" selected disabled ></option>
+                <option value="0" selected disabled ></option>
                 <option value="Back-log">Back-Log</option>
                 <option value="Developement">Development</option>
                 <option value="QA">QA</option>
@@ -97,11 +97,22 @@ function createProjectPrompt()
             </select>
             <br><br>
             <input type="hidden" name="function" value="createProject">
-    `;
+    `; 
 
     document.getElementById("projectModalFooter").innerHTML = `
-    <button class="btn btn-primary" onclick="createProject()">Save</button>
+    <button id="saveProjectBtn" class="btn btn-primary" onclick="createProject()" disabled >Save</button>
     `;
+}
+
+function projectConfirmation() {
+    if(document.getElementById("projectName").value.trim() == "" || document.getElementById("projectStatus").value == 0) 
+    { 
+        document.getElementById("saveProjectBtn").disabled = true;
+    } 
+    else
+    { 
+        document.getElementById("saveProjectBtn").disabled = false;
+    }
 }
 
 function createProject()
@@ -122,13 +133,12 @@ function createProject()
         {
             console.log(this.responseText);
             loadProjects();
-            overHang("success", "Project has been successfully created!");
+            // overHang("success", "Project has been successfully created!");
             $('#projectModal').modal('hide');
         }
     }
     xhr.send(data);
 }
-
 
 function createTicketPrompt(projectId)
 {
@@ -138,16 +148,27 @@ function createTicketPrompt(projectId)
     <label>Reporter</label> <br>
     <input type="text" id="reporter" value="${userForename + " " + userSurname}" disabled> <br>
     <label>Task</label> <br>
-    <input type="text" id="task" required> <br>
+    <input type="text" id="task" onkeyup="ticketConfirmation()" required> <br>
     <label>Progress</label> <br>
-    <input type="text" id="progress" required> <br>
+    <input type="text" id="progress" onkeyup="ticketConfirmation()" required> <br>
     <input type="hidden" id="reporterKey" value="${userId}"> 
     <input type="hidden" id="function" value="createTicket"> <br>
     `;
 
     document.getElementById("projectModalFooter").innerHTML = `
-    <button class="btn btn-primary" type=submit onclick="createTicket()">Save</button>
+    <button id="saveTicketBtn" class="btn btn-primary" type=submit onclick="createTicket()" disabled >Save</button>
     `;
+}
+
+function ticketConfirmation() {
+    if(document.getElementById("task").value.trim() == "" || document.getElementById("progress").value.trim() == "")
+    {
+        document.getElementById("saveTicketBtn").disabled = true;
+    }
+    else
+    {
+        document.getElementById("saveTicketBtn").disabled = false;
+    }
 }
 
 function createTicket()
