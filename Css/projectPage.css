@@ -5,7 +5,7 @@ body {
 
 .wrapper {
     display: flex;
-    width: 100%;
+	width: 100%;
 }
 
 #sidebar {
@@ -26,26 +26,31 @@ body {
 	border-bottom: #47748b;
 }
 
-#sidebar ul button {
+#sidebar ul {
     color: #fff;
 	padding: 10px;
 	border: none;
 	background: none;
 }
 
-#sidebar ul li button {
+#sidebar ul li {
     padding: 10px;
     font-size: 1.1em;
     display: block;
 }
 
-#sidebar ul li button:hover {
+#sidebar ul li:hover {
+    color: #7386D5;
+    background: #fff;
+}
+
+#sidebar ul li:active {
     color: #7386D5;
     background: #fff;
 }
 
 #content {
-    width: 70%;
+    width: 100%;
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;

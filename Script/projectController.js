@@ -16,29 +16,27 @@ function loadProjects()
         if (this.readyState == 4 && this.status == 200)
         {
             var ticketJSON = JSON.parse(this.responseText);
-            if (userLevel >= 2) 
-            {
-                document.getElementById("projectDiv").innerHTML = `
-                <button class="btn btn-light" data-toggle="modal" data-target="#projectModal" role="button" onclick="createProjectPrompt()">Create Project</button>`
-            }
+            
             document.getElementById("projectDiv").innerHTML += `
-            <div class="wrapper">
                 <nav id="sidebar">
                     <div class="sidebar-header"><h1>Projects<h1></div>    
                         <ul class="list-unstyled components">
             ${ticketJSON.map(function(ticket)
             { // Tufan delete these comments after, this is where the loops starts
             return `
-            <li>
-                <button class="btn btn-secondary" onclick="getProjectName(this.innerHTML); getTicketWithProjectId(this.value)" value="${ticket.projectId}">${ticket.name}</button>
-            </li>
+            <li onclick="getProjectName(this.innerHTML); getTicketWithProjectId(this.value)" value="${ticket.projectId}">${ticket.name}</li>
             `;
             }).join('') // Loop ends after the blue closed curly bracket
             }
-                        </ul>
+            `
+            if (userLevel >= 2) 
+            {
+                document.getElementById("projectDiv").innerHTML += `
+                <li data-toggle="modal" data-target="#projectModal" onclick="createProjectPrompt()">Create Project</li>
+                    </ul>
                 </nav>
-            </div>
-            `;
+                `
+            };
         }
     }
     xmlhttp.send(data);

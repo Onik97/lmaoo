@@ -21,11 +21,14 @@ var userSurname = "<?php echo $userLoggedIn->getSurname(); ?>";
 var userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
 </script>
 
+<div class="wrapper">
 <div id="projectDiv"></div>
-<div id="ticketDiv">
+  <div id="createProject"></div>
   <div class="content">
-    <h1 id="ticketMessage">Tickets</h1>
-    <div id="ticketBtnDiv"></div>
+    <div id="ticketDiv">
+        <h1 id="ticketMessage">Tickets</h1>
+        <div id="ticketBtnDiv"></div>
+      </div>
   </div>
 </div>
 
