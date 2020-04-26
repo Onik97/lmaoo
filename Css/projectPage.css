@@ -8,6 +8,8 @@ body {
 	width: 100%;
 }
 
+/* SIDEBAR */
+
 #sidebar {
 	height: 100vh;
     width: 250px;
@@ -62,47 +64,69 @@ body {
 	cursor: pointer;
 }
 
-#content {
+/* MAIN CONTENT: TICKETS SECTION */
+
+.content {
+	padding: 10px;
     width: 100%;
-    padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
 }
 
-#projectHeader {
-	font-size: 20px;
-	color: white;
-	text-align: center;
-	background-color: black;
-}
-
-#projectDiv button {
-	font-size: 15px;
-	padding: 12px, 0px, 12px, 0px;
-	color: black;
-}
-
-#projectDiv button:hover {background-color: #ddd;}
-
 #ticketMessage {
 	padding: 24px;
 	background: #DCDCDC;
-	min-width: 100%;
 }
 
-#ticketDiv td, #ticketDiv th {
-	border: 1px solid #ddd;
-	padding: 15px;
-	text-align: left;
+.table {
+	width: 100%;
 }
 
-#ticketDiv tr:nth-child(even) {background-color: #f2f2f2;}
+th, td {
+	padding-right: 10px;
+  }
 
-#ticketDiv tr:hover {background-color: #ddd;}
+  .col1 {
+	width: 20%;
+	padding-left: 20px;
+  }
+  
+  .col2 {
+	width: 20%;
+  }
+  
+  .col3 {
+	width: 50%;
+  }
+  
+  .col4 {
+	width: 16%;
+  }
 
-#ticketDiv th {
+  .tableHead {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+  }
+  
+  .tableBody {
+	max-height: 585px;
+	overflow: auto;
+  }
+
+  .table th {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	color: #fff;
+	line-height: 1.4;
+  
+	background-color: #2F4F4F;
+  }
+
+  .table td {
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 15px;
-	padding: 12px, 0px, 12px, 0px;
-	background-color: grey;
-	color: white;
-}
+	color: #2F4F4F;
+	line-height: 1.4;
+  }

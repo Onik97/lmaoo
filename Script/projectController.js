@@ -51,23 +51,27 @@ function getTicketWithProjectId(id)
             document.getElementById("ticketDiv").innerHTML = 
             `
             <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                <th scope="col">Ticket ID</th>
-                <th scope="col">Task</th>
-                <th scope="col">Progress</th>
-                <th scope="col">View</th>
-                </tr>
-            </thead>
+            <div class="tableHead">
+                <thead>
+                    <tr>
+                    <th class="col1" scope="col">Ticket ID</th>
+                    <th class="col2" scope="col">Task</th>
+                    <th class="col3" scope="col">Progress</th>
+                    <th class="col4" scope="col">View</th>
+                    </tr>
+                </thead>
+            </div>
             ${ticketJSON.map(function(ticket)
                 {
                     return `
+                    <div class="tableBody">
                     <tr>
                     <th scope="row">${ticket.ticketId}</th>
-                    <td>${ticket.task}</td>
-                    <td>Not included in the database</td>
-                    <td><a class="btn btn-info" href="../Ticket/index.php?ticketId=${ticket.ticketId}">View</a></td>
+                        <td>${ticket.task}</td>
+                        <td>Not included in the database</td>
+                        <td><a class="btn btn-info" href="../Ticket/index.php?ticketId=${ticket.ticketId}">View</a></td>
                     </tr>
+                    </div>
                     `;
                 }
                 ).join('')}
