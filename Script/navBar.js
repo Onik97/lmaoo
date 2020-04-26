@@ -1,43 +1,31 @@
-let homeNav = document.getElementById("homeNav");
-let aboutNav = document.getElementById("aboutNav");
-let projectNav = document.getElementById("projectNav");
-let accountNav = document.getElementById("accountNav");
+let navBarActive = document.getElementById("navBarActive").innerHTML;
 
-
-window.addEventListener("pageshow", checkForActive);
-
-
-function checkForActive() {
-    if (homeNav.classList.contains("active"))
+if (navBarActive == "homePage")
     {
-        document.getElementById("aboutNav").classList.replace("active", "notActive")
-        document.getElementById("projectNav").classList.replace("active", "notActive")
-        document.getElementById("accountNav").classList.replace("active", "notActive")
-        console.log("homeNav is active")
+        document.getElementById("homeNav").classList.add("active")
+        console.log("homepage is open")
     }
-    else if (aboutNav.classList.contains("active"))
+    else if (navBarActive == "aboutPage")
     {
-        document.getElementById("homeNav").classList.replace("active", "notActive")
-        document.getElementById("projectNav").classList.replace("active", "notActive" )
-        document.getElementById("accountNav").classList.replace("active", "notActive")
-        console.log("aboutNav is active")
+        document.getElementById("aboutNav").classList.add("active")
+        console.log("aboutPage is open")
     }
-    else if (projectNav.classList.contains("active"))
+    else if (navBarActive == "projectPage")
     {
-        document.getElementById("homeNav").classList.replace("active", "notActive")
-        document.getElementById("aboutNav").classList.replace("active", "notActive" )
-        document.getElementById("accountNav").classList.replace("active", "notActive")
-        console.log("projectNav is active")
+        document.getElementById("projectNav").classList.add("active")
+        console.log("projectPage is open")
     }
-    else if (accountNav.classList.contains("active"))
+    else if (navBarActive == "loginPage")
     {
-        document.getElementById("homeNav").classList.replace("active", "notActive")
-        document.getElementById("aboutNav").classList.replace("active", "notActive" )
-        document.getElementById("projectNav").classList.replace("active", "notActive")
-        console.log("accountNav is active")
+        document.getElementById("accountNav").classList.add("active")
+        console.log("accountPage is open")
     }
-    else
+    else if (navBarActive == "registerPage")
     {
-        console.log("nothing is active.")
+        document.getElementById("accountNav").classList.add("active")
+        console.log("accountPage is open")
     }
-}
+    else 
+    {
+        console.log("nothing is open")
+    }
