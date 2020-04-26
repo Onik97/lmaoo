@@ -46,8 +46,20 @@ body {
 }
 
 #sidebar ul li:active {
-    color: #7386D5;
+    color: #2F4F4F;
     background: #fff;
+}
+
+#createProjectBtn {
+	color: #2F4F4F;
+	background: #DCDCDC;
+	cursor: pointer;
+}
+
+#createProjectBtn:hover {
+	color: #DCDCDC;
+	background: #2F4F4F;
+	cursor: pointer;
 }
 
 #content {
@@ -73,9 +85,9 @@ body {
 #projectDiv button:hover {background-color: #ddd;}
 
 #ticketMessage {
-	padding: 20px;
+	padding: 24px;
 	background: #DCDCDC;
-	width: 100%;
+	min-width: 100%;
 }
 
 #ticketDiv td, #ticketDiv th {
