@@ -18,6 +18,7 @@
   <input type="text" name="forename" id="forenameRegister" required placeholder="First Name"> 
   <input type="text" name="surname" id="surnameRegister" required placeholder="Last Name"> 
   <input type="text" name="username" id="usernameRegister" required placeholder="Username"> 
+  
   <input type="password" name="password1" id="password1Register" required placeholder="Password"> 
   <input type="password" name="password2" id="password2Register" required placeholder="Re-Type Password"> 
   
