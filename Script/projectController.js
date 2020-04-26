@@ -3,43 +3,6 @@ $(document).ready(function()
   loadProjects();
 }); 
 
-function loadProjects1()
-{
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "projectController.php", true)
-
-    var data = new FormData();
-    data.append('function', "loadProjects");
-
-    xmlhttp.onreadystatechange = function() 
-    {
-        if (this.readyState == 4 && this.status == 200)
-        {
-            var ticketJSON = JSON.parse(this.responseText);
-            
-            document.getElementById("projectDiv").innerHTML = `
-                <nav id="sidebar">
-                    <div class="sidebar-header"><h1>Projects<h1></div>    
-                        <ul class="list-unstyled components">
-            ${ticketJSON.map(function(ticket)
-            { // Tufan delete these comments after, this is where the loops starts
-            return `
-            <li onclick="getProjectName(this.innerHTML); getTicketWithProjectId(this.value)" value="${ticket.projectId}">${ticket.name}</li>
-            `;
-            }).join('') // Loop ends after the blue closed curly bracket
-            }
-            `
-            if (userLevel >= 2) 
-            {
-                document.getElementById("projectDiv").innerHTML += `
-                <li data-toggle="modal" data-target="#projectModal" onclick="createProjectPrompt()">Create Project</li>
-                `
-            };
-        }
-    }
-    xmlhttp.send(data);
-}
-
 function loadProjects()
 {
     var data = new FormData();
@@ -50,25 +13,11 @@ function loadProjects()
     {
         var json = response.data;
         console.log(json);
-        var projectDiv = document.getElementById("projectDiv");
-        projectDiv.innerHTML = 
-        `
-        <nav id="sidebar">
-        <div class="sidebar-header"><h1>Projects<h1></div>    
-            <ul class="list-unstyled components">
-        `
         for (i = 0; i < json.length; i++)
         {
-            projectDiv.innerHTML += 
-            `
-            <li onclick="getProjectName(this.innerHTML); getTicketWithProjectId(this.value)" value="${json[i].projectId}">${json[i].name}</li>
-            `
+            document.getElementById("listOfProjects").innerHTML += 
+            `<li onclick="getProjectName(this.innerHTML); getTicketWithProjectId(this.value)" value="${json[i].projectId}">${json[i].name}</li>`
         }
-        projectDiv.innerHTML += 
-        `                    
-            </ul>
-        </nav>
-        `
     })
     .catch((response) => {})
 }
@@ -94,7 +43,7 @@ function getTicketWithProjectId(id)
                 document.getElementById("ticketBtnDiv").innerHTML = 
                 `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
             }
-            document.getElementById("ticketDiv").innerHTML += 
+            document.getElementById("ticketDiv").innerHTML = 
             `
             <table class="table">
             <thead class="thead-dark">
