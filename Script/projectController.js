@@ -75,6 +75,7 @@ function getTicketWithProjectId(id)
     .then((response) => 
     {
         var json = response.data;
+        var ticketDiv = document.getElementById("ticketDiv");
         document.getElementById("ticketDiv").innerHTML =
         `
         <table class="table">
@@ -86,9 +87,21 @@ function getTicketWithProjectId(id)
             <th scope="col">View</th>
             </tr>
         </thead>
-        <tr></tr>
         `
+        
+        for (i = 0; i < json.length; i++)
+        {
+            document.getElementById("ticketDiv").innerHTML += 
+            `<tr>
+            <th scope="row">${json[i].ticketId}</th>
+            <td>${json[i].task}</td>
+            <td>Not included in the database</td>
+            <td><a class="btn btn-info" href="../Ticket/index.php?ticketId=${json[i].ticketId}">View</a></td>
+            </tr>`;
+        }
+        ticketDiv.innerHTML += `</table>`
     })
+    .catch((response) => {})
 }
 
 function createProjectPrompt()

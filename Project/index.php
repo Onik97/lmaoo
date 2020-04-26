@@ -28,6 +28,7 @@ var userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
       <ul id="listOfProjects" class="list-unstyled components"></ul>
     </nav>
   </div>
+  
   <div id="createProject"></div>
   <div class="content">
   <h1 id="ticketMessage">Tickets</h1>

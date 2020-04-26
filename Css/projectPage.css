@@ -72,6 +72,12 @@ body {
 
 #projectDiv button:hover {background-color: #ddd;}
 
+#ticketMessage {
+	padding: 20px;
+	background: #DCDCDC;
+	width: 100%;
+}
+
 #ticketDiv td, #ticketDiv th {
 	border: 1px solid #ddd;
 }
