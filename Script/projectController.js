@@ -26,7 +26,7 @@ function getProjectName(name)
    document.getElementById("ticketMessage").innerHTML = "Tickets for " + name;
 }
 
-function getTicketWithProjectId1(id)
+function getTicketWithProjectId(id)
 {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "projectController.php?projectId="+id, true)
@@ -36,8 +36,7 @@ function getTicketWithProjectId1(id)
         if (this.readyState == 4 && this.status == 200)
         {
             var ticketJSON = JSON.parse(this.responseText);
-            console.log(this.responseText);
-            if (userLevel == 2)
+            if (userLevel >= 2)
             {
                 document.getElementById("ticketBtnDiv").innerHTML = 
                 `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
@@ -63,45 +62,11 @@ function getTicketWithProjectId1(id)
                     <td><a class="btn btn-info" href="../Ticket/index.php?ticketId=${ticket.ticketId}">View</a></td>
                     </tr>
                     `;
-                }).join('')}
+                }
+                ).join('')}
             `;
         }
     }
-}
-
-function getTicketWithProjectId(id)
-{
-    loadTicketsFromServer(id)
-    .then((response) => 
-    {
-        var json = response.data;
-        var ticketDiv = document.getElementById("ticketDiv");
-        document.getElementById("ticketDiv").innerHTML =
-        `
-        <table class="table">
-        <thead class="thead-dark">
-            <tr>
-            <th scope="col">Ticket ID</th>
-            <th scope="col">Task</th>
-            <th scope="col">Progress</th>
-            <th scope="col">View</th>
-            </tr>
-        </thead>
-        `
-        
-        for (i = 0; i < json.length; i++)
-        {
-            document.getElementById("ticketDiv").innerHTML += 
-            `<tr>
-            <th scope="row">${json[i].ticketId}</th>
-            <td>${json[i].task}</td>
-            <td>Not included in the database</td>
-            <td><a class="btn btn-info" href="../Ticket/index.php?ticketId=${json[i].ticketId}">View</a></td>
-            </tr>`;
-        }
-        ticketDiv.innerHTML += `</table>`
-    })
-    .catch((response) => {})
 }
 
 function createProjectPrompt()

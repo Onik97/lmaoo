@@ -33,8 +33,8 @@ var userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
   <div class="content">
   <h1 id="ticketMessage">Tickets</h1>
     <div id="ticketDiv">
-        <div id="ticketBtnDiv"></div>
     </div>
+    <div id="ticketBtnDiv"></div>
   </div>
 </div>
 
