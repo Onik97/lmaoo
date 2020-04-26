@@ -7,15 +7,21 @@
 
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
-<link rel="stylesheet" type="text/css" href="../addons/overhang/dist/overhang.min.css" />
-<script type="text/javascript" src="../addons/overhang/dist/overhang.min.js"></script>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="../Script/server.js"></script>
+
+<link rel="stylesheet" href="../Css/notifications.css">
+<script src="../Script/notifications.js"></script>
+
 <script>
-function overHang(type, message)
+const myNotification = window.createNotification({});
+function overHang(theme, message)
 {
-  $("body").overhang({
-    type: type,
-    message: message,
-    closeConfirm: true
-  }); 
+  myNotification({
+  theme: theme,
+  message: message,
+  showDuration: 3500
+  });
 }
 </script>

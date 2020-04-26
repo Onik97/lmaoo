@@ -5,6 +5,7 @@
 <head>
  <link rel="stylesheet" href="../css/RegisterPage.css">
 <?php include("../Global/head.php"); ?>
+<link rel="stylesheet" href="../Css/RegisterPage.css">
 </head>
 <?php include("../Global/navBar.php"); ?>
 
