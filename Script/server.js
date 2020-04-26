@@ -23,3 +23,15 @@ function loadProjectsFromServer(formdata)
 
     return response;
 }
+
+function loadTicketsFromServer(id)
+{
+    const response = axios(
+        {
+            method: 'get',
+            url: '../Project/projectController.php?projectId='+id,
+            headers: {'Content-Type': 'multipart/form-data' }
+        })
+    
+        return response;
+}

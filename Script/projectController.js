@@ -12,7 +12,6 @@ function loadProjects()
     .then((response) =>
     {
         var json = response.data;
-        console.log(json);
         for (i = 0; i < json.length; i++)
         {
             document.getElementById("listOfProjects").innerHTML += 
@@ -27,7 +26,7 @@ function getProjectName(name)
    document.getElementById("ticketMessage").innerHTML = "Tickets for " + name;
 }
 
-function getTicketWithProjectId(id)
+function getTicketWithProjectId1(id)
 {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "projectController.php?projectId="+id, true)
@@ -68,6 +67,28 @@ function getTicketWithProjectId(id)
             `;
         }
     }
+}
+
+function getTicketWithProjectId(id)
+{
+    loadTicketsFromServer(id)
+    .then((response) => 
+    {
+        var json = response.data;
+        document.getElementById("ticketDiv").innerHTML =
+        `
+        <table class="table">
+        <thead class="thead-dark">
+            <tr>
+            <th scope="col">Ticket ID</th>
+            <th scope="col">Task</th>
+            <th scope="col">Progress</th>
+            <th scope="col">View</th>
+            </tr>
+        </thead>
+        <tr></tr>
+        `
+    })
 }
 
 function createProjectPrompt()
@@ -122,7 +143,7 @@ function createProject()
         {
             console.log(this.responseText);
             loadProjects();
-            // overHang("success", "Project has been successfully created!");
+            overHang("success", "Project has been successfully created!");
             $('#projectModal').modal('hide');
         }
     }

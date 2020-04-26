@@ -30,10 +30,10 @@ var userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
   </div>
   <div id="createProject"></div>
   <div class="content">
+  <h1 id="ticketMessage">Tickets</h1>
     <div id="ticketDiv">
-        <h1 id="ticketMessage">Tickets</h1>
         <div id="ticketBtnDiv"></div>
-      </div>
+    </div>
   </div>
 </div>
 
