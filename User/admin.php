@@ -6,6 +6,7 @@
 <?php include("../Global/head.php"); ?>
 <script type="text/javascript" src="../Script/admin.js"></script>
 </head>
+<p id="navBarActive" hidden>adminPage</p>
 <?php include("../Global/navBar.php"); ?>
 <body>
     <p>This is the admin page</p>
