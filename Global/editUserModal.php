@@ -44,4 +44,3 @@
 
 <?php } ?>
 <script type="text/javascript" src="../Script/editUser.js"></script>
-<p id="navBarActive" hidden>userModalPage</p>
