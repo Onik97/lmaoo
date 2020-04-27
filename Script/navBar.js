@@ -20,7 +20,3 @@ if (navBarActive == "homePage")
     {
         document.getElementById("accountNav").classList.add("active")
     }
-    else 
-    {
-      
-    }
