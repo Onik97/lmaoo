@@ -16,11 +16,7 @@ if (navBarActive == "homePage")
     {
         document.getElementById("accountNav").classList.add("active")
     }
-    else if (navBarActive == "registerPage")
-    {
-        document.getElementById("accountNav").classList.add("active")
-    }
-    else if (navBarActive == "userModalPage")
+    else if (navBarActive == "registerPage" || navBarActive == "userModalPage")
     {
         document.getElementById("accountNav").classList.add("active")
     }
