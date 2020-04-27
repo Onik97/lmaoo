@@ -18,7 +18,7 @@ function loadProjects()
             `<li onclick="getProjectName(this.innerHTML); getTicketWithProjectId(this.value)" value="${json[i].projectId}">${json[i].name}</li>`
         }
 
-        if (userLevel >= 2) 
+        if (userLevel >= 3) 
             {
                 document.getElementById("listOfProjects").innerHTML += `
                 <li id="createProjectBtn" data-toggle="modal" data-target="#projectModal" onclick="createProjectPrompt()"> + Create Project</li>

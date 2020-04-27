@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../Css/navbar.css">
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
     
 <!-- Navbar Container -->
