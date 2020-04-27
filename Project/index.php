@@ -11,6 +11,7 @@ session_start();
 <link rel="stylesheet" href="../Css/projectPage.css">
 <script type="text/javascript" src="../Script/projectController.js"></script>
 </head>
+<p id="navBarActive" hidden>projectPage</p>
 <?php include("../Global/navBar.php"); ?>
 <body>
 <?php if (isset($userLoggedIn)) { ?>

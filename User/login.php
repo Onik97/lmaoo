@@ -8,6 +8,7 @@ if(isset($_SESSION['userLoggedIn'])){header("Location: ../Ticket/index.php");}
 <head>
 <?php include("../Global/head.php"); ?>
 </head>
+<p id="navBarActive" hidden>loginPage</p>
 <?php include("../Global/navBar.php"); ?>
 <head>
 <link rel="stylesheet" href="../Css/UserPage.css">

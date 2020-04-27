@@ -6,6 +6,7 @@
 <?php include("../Global/head.php"); ?>
 <link rel="stylesheet" href="../Css/RegisterPage.css">
 </head>
+<p id="navBarActive" hidden>registerPage</p>
 <?php include("../Global/navBar.php"); ?>
 <body>
 <div class="top-buffer">

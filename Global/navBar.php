@@ -37,15 +37,15 @@
 
                 <!-- Navbar link with a dropdown menu -->
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account
+                    <a id="accountNav" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account
                         <span class="caret"></span>
                     </a>
     
                     <div class="dropdown-menu">
                         <?php if (!isset($userLoggedIn)) 
                                 { ?>
-                            <a class="dropdown-item" id="registerNav" href="../User/register.php">Register</a>
-                            <a class="dropdown-item" id="loginNav" href="../User/index.php">Login</a>
+                                    <a class="dropdown-item" id="registerNav" href="../User/register.php">Register</a>
+                                    <a class="dropdown-item" id="loginNav" href="../User/index.php">Login</a>
                         <?php   } 
                               else if ($userLoggedIn->getLevel() <= 2)
                                 { ?>
@@ -63,3 +63,4 @@
         </div>
     </div>
 </nav>
+<script type="text/javascript" src="../Script/navBar.js"></script>
