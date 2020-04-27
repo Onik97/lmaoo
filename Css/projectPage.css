@@ -3,38 +3,130 @@ body {
 	margin: 0;
 }
 
-.row {
-    padding-top: 30px;
-    padding-left: 250px;
-    padding-right: 250px;
-    align-content: center;
+.wrapper {
+    display: flex;
+	width: 100%;
 }
 
-#projectDiv {
-	font-size: 20px;
-	color: white;
+/* SIDEBAR */
+
+#sidebar {
+	height: 100vh;
+    width: 250px;
+    background: #396060;
+    color: #fff;
+	transition: all 0.3s;
 }
 
-#projectDiv button {
+#sidebar .sidebar-header {
+	padding: 20px;
+	background: #2F4F4F;
+}
+
+#sidebar ul.components {
+	padding: 20px 0;
+	border-bottom: #47748b;
+}
+
+#sidebar ul {
+    color: #fff;
+	padding: 10px;
+	border: none;
+	background: none;
+}
+
+#sidebar ul li {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar ul li:hover {
+    color: #2F4F4F;
+	background: #DCDCDC;
+	cursor: pointer;
+}
+
+#sidebar ul li:active {
+    color: #2F4F4F;
+    background: #fff;
+}
+
+#createProjectBtn {
+	color: #2F4F4F;
+	background: #DCDCDC;
+	cursor: pointer;
+}
+
+#createProjectBtn:hover {
+	color: #DCDCDC;
+	background: #2F4F4F;
+	cursor: pointer;
+}
+
+/* MAIN CONTENT: TICKETS SECTION */
+
+.content {
+	padding: 10px;
+    width: 100%;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+#ticketMessage {
+	padding: 24px;
+	background: #DCDCDC;
+}
+
+.table {
+	width: 100%;
+}
+
+th, td {
+	padding-right: 10px;
+  }
+
+  .col1 {
+	width: 10%;
+	padding-left: 20px;
+  }
+  
+  .col2 {
+	width: 20%;
+  }
+  
+  .col3 {
+	width: 50%;
+  }
+  
+  .col4 {
+	width: 16%;
+  }
+
+  .tableHead {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+  }
+  
+  .tableBody {
+	max-height: 585px;
+	overflow: auto;
+  }
+
+  .table th {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	color: #fff;
+	line-height: 1.4;
+  
+	background-color: #2F4F4F;
+  }
+
+  .table td {
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 15px;
-	padding: 12px, 0px, 12px, 0px;
-	border: 1px solid black;
-	color: black;
-}
-
-#projectDiv button:hover {background-color: #ddd;}
-
-#ticketDiv td, #ticketDiv th {
-	border: 1px solid #ddd;
-}
-
-#ticketDiv tr:nth-child(even) {background-color: #f2f2f2;}
-
-#ticketDiv tr:hover {background-color: #ddd;}
-
-#ticketDiv th {
-	font-size: 15px;
-	padding: 12px, 0px, 12px, 0px;
-	background-color: grey;
-	color: white;
-}
+	color: #2F4F4F;
+	line-height: 1.4;
+  }

@@ -13,7 +13,6 @@ session_start();
 </head>
 <?php include("../Global/navBar.php"); ?>
 <body>
-<div class="row">
 <?php if (isset($userLoggedIn)) { ?>
 <script>
 var userId = "<?php echo $userLoggedIn->getId(); ?>"; 
@@ -22,15 +21,21 @@ var userSurname = "<?php echo $userLoggedIn->getSurname(); ?>";
 var userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
 </script>
 
-  <div id="projectDiv" class="col-md-3 bg-primary">
+<div class="wrapper">
+  <div id="projectDiv"> 
+    <nav id="sidebar">
+      <div id="sidebar-header" class="sidebar-header"><h1>Projects<h1></div>
+      <ul id="listOfProjects" class="list-unstyled components"></ul>
+    </nav>
   </div>
-
-  <div id="tickets" class="col-md-6 bg-info">
-    <h1 id="ticketMessage">Tickets</h1>
+  
+  <div id="createProject"></div>
+  <div class="content">
+  <h1 id="ticketMessage">Tickets</h1>
+    <div id="ticketDiv">
+    </div>
     <div id="ticketBtnDiv"></div>
-    <div id=ticketDiv></div>
   </div>
-
 </div>
 
 <?php include("projectModal.php"); ?>

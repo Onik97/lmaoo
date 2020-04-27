@@ -5,7 +5,7 @@ if ($_GET['projectId'])
 {
    echo json_encode(getTicketList($_GET['projectId']));
 }
-else if($_POST['function'] == "loadTickets")
+else if($_POST['function'] == "loadProjects")
 {
     echo json_encode(getProjectList());
 }

@@ -5,34 +5,27 @@ $(document).ready(function()
 
 function loadProjects()
 {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "projectController.php", true)
-
     var data = new FormData();
-    data.append('function', "loadTickets");
+    data.append('function', "loadProjects");
 
-    xmlhttp.onreadystatechange = function() 
+    loadProjectsFromServer(data)
+    .then((response) =>
     {
-        if (this.readyState == 4 && this.status == 200)
+        var json = response.data;
+        for (i = 0; i < json.length; i++)
         {
-            var ticketJSON = JSON.parse(this.responseText);
-            if (userLevel == 2) 
-            {
-                document.getElementById("projectDiv").innerHTML = `
-                <button data-toggle="modal" data-target="#projectModal" role="button" onclick="createProjectPrompt()">Create Project</button>`
-            }
-            document.getElementById("projectDiv").innerHTML += `
-            <h1>Projects</h1>
-            ${ticketJSON.map(function(ticket)
-            {
-            return `
-            <button class="btn btn-primary" onclick="getProjectName(this.innerHTML); getTicketWithProjectId(this.value)" value="${ticket.projectId}">${ticket.name}</button> <br>   
-            `;
-            }).join('')}
-            `;
+            document.getElementById("listOfProjects").innerHTML += 
+            `<li onclick="getProjectName(this.innerHTML); getTicketWithProjectId(this.value)" value="${json[i].projectId}">${json[i].name}</li>`
         }
-    }
-    xmlhttp.send(data);
+
+        if (userLevel >= 2) 
+            {
+                document.getElementById("listOfProjects").innerHTML += `
+                <li id="createProjectBtn" data-toggle="modal" data-target="#projectModal" onclick="createProjectPrompt()"> + Create Project</li>
+                `
+            };
+    })
+    .catch((response) => {})
 }
 
 function getProjectName(name)
@@ -50,32 +43,38 @@ function getTicketWithProjectId(id)
         if (this.readyState == 4 && this.status == 200)
         {
             var ticketJSON = JSON.parse(this.responseText);
-            if (userLevel == 2)
+            if (userLevel >= 2)
             {
                 document.getElementById("ticketBtnDiv").innerHTML = 
                 `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
             }
             document.getElementById("ticketDiv").innerHTML = 
-            `<table class="table">
-            <thead class="thead-dark">
-                <tr>
-                <th scope="col">Ticket ID</th>
-                <th scope="col">Task</th>
-                <th scope="col">Progress</th>
-                <th scope="col">View</th>
-                </tr>
-            </thead>
+            `
+            <table class="table">
+            <div class="tableHead">
+                <thead>
+                    <tr>
+                    <th class="col1" scope="col">Ticket ID</th>
+                    <th class="col2" scope="col">Task</th>
+                    <th class="col3" scope="col">Progress</th>
+                    <th class="col4" scope="col">View</th>
+                    </tr>
+                </thead>
+            </div>
             ${ticketJSON.map(function(ticket)
                 {
                     return `
+                    <div class="tableBody">
                     <tr>
                     <th scope="row">${ticket.ticketId}</th>
-                    <td>${ticket.task}</td>
-                    <td>Not included in the database</td>
-                    <td><a class="btn btn-info" href="../Ticket/index.php?ticketId=${ticket.ticketId}">View</a></td>
+                        <td>${ticket.task}</td>
+                        <td>Not included in the database</td>
+                        <td><a class="btn btn-info" href="../Ticket/index.php?ticketId=${ticket.ticketId}">View</a></td>
                     </tr>
+                    </div>
                     `;
-                }).join('')}
+                }
+                ).join('')}
             `;
         }
     }
@@ -133,7 +132,7 @@ function createProject()
         {
             console.log(this.responseText);
             loadProjects();
-            // overHang("success", "Project has been successfully created!");
+            overHang("success", "Project has been successfully created!");
             $('#projectModal').modal('hide');
         }
     }
