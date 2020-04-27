@@ -44,8 +44,8 @@
                     <div class="dropdown-menu">
                         <?php if (!isset($userLoggedIn)) 
                                 { ?>
-                            <a class="dropdown-item" id="registerNav" href="../User/register.php">Register</a>
-                            <a class="dropdown-item" id="loginNav" href="../User/index.php">Login</a>
+                                    <a class="dropdown-item" id="registerNav" href="../User/register.php">Register</a>
+                                    <a class="dropdown-item" id="loginNav" href="../User/index.php">Login</a>
                         <?php   } 
                               else if ($userLoggedIn->getLevel() <= 2)
                                 { ?>
