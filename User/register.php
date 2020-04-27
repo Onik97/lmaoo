@@ -5,6 +5,7 @@
 <head>
 <?php include("../Global/head.php"); ?>
 </head>
+<p id="navBarActive" hidden>registerPage</p>
 <?php include("../Global/navBar.php"); ?>
 <body>
 <div class="top-buffer">
@@ -23,5 +24,4 @@
     </div>
     </div>
 </body>
-<p id="navBarActive" hidden>registerPage</p>
 </html>
