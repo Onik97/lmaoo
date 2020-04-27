@@ -12,11 +12,7 @@ else if (navBarActive == "projectPage")
 {
     document.getElementById("projectNav").classList.add("active")
 }
-else if (navBarActive == "loginPage")
-{
-    document.getElementById("accountNav").classList.add("active")
-}
-else if (navBarActive == "registerPage" || navBarActive == "userModalPage")
+else if (navBarActive == "registerPage" || navBarActive == "loginPage" || navBarActive == "adminPage")
 {
     document.getElementById("accountNav").classList.add("active")
 }
