@@ -8,6 +8,7 @@ if(isset($_SESSION['userLoggedIn'])){header("Location: ../Ticket/index.php");}
 <head>
 <?php include("../Global/head.php"); ?>
 </head>
+<p id="navBarActive" hidden>loginPage</p>
 <?php include("../Global/navBar.php"); ?>
 <body>
 <div class="top-buffer">
@@ -31,5 +32,4 @@ if(isset($_SESSION['userLoggedIn'])){header("Location: ../Ticket/index.php");}
   		</div><?php
 	} ?>
 </body>
-<p id="navBarActive" hidden>loginPage</p>
 </html>

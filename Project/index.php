@@ -11,6 +11,7 @@ session_start();
 <link rel="stylesheet" href="../Css/projectPage.css">
 <script type="text/javascript" src="../Script/projectController.js"></script>
 </head>
+<p id="navBarActive" hidden>projectPage</p>
 <?php include("../Global/navBar.php"); ?>
 <body>
 <div class="row">
@@ -40,7 +41,6 @@ var userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
 } ?>
 
 </body>
-<p id="navBarActive" hidden>projectPage</p>
 </html>
 <?php include("../Global/editUserModal.php"); 
 ?>

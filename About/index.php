@@ -9,6 +9,7 @@ session_start();
 <head>
 <?php include("../Global/head.php"); ?>
 </head>
+<p id="navBarActive" hidden>aboutPage</p>
 <?php include("../Global/navBar.php"); ?>
 <body>
 <?php echo "About page is currently on progress"; ?>
@@ -21,5 +22,4 @@ session_start();
 </div>
 <?php include("../Global/editUserModal.php"); ?>
 </body>
-<p id="navBarActive" hidden>aboutPage</p>
 </html>
