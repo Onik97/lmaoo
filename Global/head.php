@@ -30,4 +30,15 @@ function overHang(type, message)
     message: message,
   });
 }
+<?php 
+if(isset($_SESSION['userLoggedIn']))
+{
+  $userLoggedIn = $_SESSION['userLoggedIn'];
+  include_once("../User/user.php");
+  ?>
+const userId = "<?php echo $userLoggedIn->getId(); ?>"; 
+const userForename = "<?php echo $userLoggedIn->getForename(); ?>";
+const userSurname = "<?php echo $userLoggedIn->getSurname(); ?>";
+const userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
+<?php } ?>
 </script>

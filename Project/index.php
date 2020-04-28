@@ -15,13 +15,6 @@ session_start();
 <?php include("../Global/navBar.php"); ?>
 <body>
 <?php if (isset($userLoggedIn)) { ?>
-<script>
-var userId = "<?php echo $userLoggedIn->getId(); ?>"; 
-var userForename = "<?php echo $userLoggedIn->getForename(); ?>";
-var userSurname = "<?php echo $userLoggedIn->getSurname(); ?>";
-var userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
-</script>
-
 <div class="wrapper">
   <div id="projectDiv"> 
     <nav id="sidebar">
