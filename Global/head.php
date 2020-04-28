@@ -39,6 +39,7 @@ if(isset($_SESSION['userLoggedIn']))
 const userId = "<?php echo $userLoggedIn->getId(); ?>"; 
 const userForename = "<?php echo $userLoggedIn->getForename(); ?>";
 const userSurname = "<?php echo $userLoggedIn->getSurname(); ?>";
+const userUsername = "<?php echo $userLoggedIn->getUsername(); ?>";
 const userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
 <?php } ?>
 </script>
