@@ -15,13 +15,19 @@
 <script src="../Script/notifications.js"></script>
 
 <script>
-const myNotification = window.createNotification({});
-function overHang(theme, message)
+function overHang(type, message)
 {
-  myNotification({
-  theme: theme,
-  message: message,
-  showDuration: 3500
+  const myNotification = window.createNotification(
+  {
+    theme: type,
+    showDuration: 3500,
+    displayCloseButton: true,
+    closeOnClick: true
+  });
+  
+  myNotification(
+  {
+    message: message,
   });
 }
 </script>
