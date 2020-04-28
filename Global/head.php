@@ -15,13 +15,31 @@
 <script src="../Script/notifications.js"></script>
 
 <script>
-const myNotification = window.createNotification({});
-function overHang(theme, message)
+function overHang(type, message)
 {
-  myNotification({
-  theme: theme,
-  message: message,
-  showDuration: 3500
+  const myNotification = window.createNotification(
+  {
+    theme: type,
+    showDuration: 3500,
+    displayCloseButton: true,
+    closeOnClick: true
+  });
+  
+  myNotification(
+  {
+    message: message,
   });
 }
+<?php 
+if(isset($_SESSION['userLoggedIn']))
+{
+  $userLoggedIn = $_SESSION['userLoggedIn'];
+  include_once("../User/user.php");
+  ?>
+const userId = "<?php echo $userLoggedIn->getId(); ?>"; 
+const userForename = "<?php echo $userLoggedIn->getForename(); ?>";
+const userSurname = "<?php echo $userLoggedIn->getSurname(); ?>";
+const userUsername = "<?php echo $userLoggedIn->getUsername(); ?>";
+const userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
+<?php } ?>
 </script>
