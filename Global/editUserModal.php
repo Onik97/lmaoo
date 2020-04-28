@@ -25,7 +25,7 @@
                     <div class="form-group">
                         <label>Username</label>
                         <input class="form-control" value=<?php echo $userLoggedIn->getUsername(); ?> id="editUsername" name="editUsername" required>
-                        <small id="editUsernameMessage" class="text-danger" hidden></small> 
+                        <small id="editUsernameMessage" hidden></small> 
                     </div>
 
                 </div>
