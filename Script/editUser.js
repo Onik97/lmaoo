@@ -18,25 +18,40 @@ function checkUserDup()
     data.append('function', "checkUsername");
     data.append('username', editUsername);
 
-    checkUsernameFromServer(data)
-    .then((response) =>
+    if (userUsername == editUsername)
     {
-        var responseFromServer = response.data.fromServer;
+        document.getElementById("editUserBtn").disabled = true;
+        document.getElementById("editUsernameMessage").innerHTML = "This is already your username";
+        document.getElementById("editUsername").classList.add("is-valid");
+        document.getElementById("editUsernameMessage").classList.add("text-success"); 
+        document.getElementById("editUsernameMessage").removeAttribute("hidden");  
+    }
+    else 
+    {
+        checkUsernameFromServer(data)
+        .then((response) =>
+        {
+            var responseFromServer = response.data.fromServer;
 
-        if (responseFromServer == "True")
-        {
-            document.getElementById("editUserBtn").disabled = true;
-            document.getElementById("editUsernameMessage").innerHTML = "Username Taken! Try another!";
-            document.getElementById("editUsername").classList.add("is-invalid"); 
-            document.getElementById("editUsernameMessage").removeAttribute("hidden");  
-        }
-        else
-        {
-            document.getElementById("editUserBtn").disabled = false;
-            document.getElementById("editUsernameMessage").innerHTML = "";
-            document.getElementById("editUsername").classList.remove("is-invalid"); 
-            document.getElementById("editUsernameMessage").setAttribute("hidden");
-        }
-    })
-    .catch((response) => {})
+            if (responseFromServer == "True")
+            {
+                document.getElementById("editUserBtn").disabled = true;
+                document.getElementById("editUsernameMessage").innerHTML = "Username Taken! Try another!";
+                document.getElementById("editUsernameMessage").classList.add("text-danger"); 
+                document.getElementById("editUsername").classList.add("is-invalid"); 
+                document.getElementById("editUsernameMessage").removeAttribute("hidden");  
+            }
+            else
+            {
+                document.getElementById("editUserBtn").disabled = false;
+                document.getElementById("editUsernameMessage").innerHTML = "";
+                document.getElementById("editUsername").classList.toggle("is-invalid", false); 
+                document.getElementById("editUsername").classList.toggle("is-valid", false); 
+                document.getElementById("editUsernameMessage").classList.toggle("text-danger", false); 
+                document.getElementById("editUsernameMessage").classList.toggle("text-success", false); 
+                document.getElementById("editUsernameMessage").setAttribute("hidden");
+            }
+        })
+        .catch((response) => {})
+    }
 }
