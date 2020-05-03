@@ -18,6 +18,10 @@ session_start();
 	
 	<div ID="ticketContainer">
 
+			<div ID="ticketDetails">
+			<?php include("details.php"); ?>	
+    		</div>
+
     		<div ID="ticketPeople">
 			<?php include("people.php"); ?>	
     		</div>

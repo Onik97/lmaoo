@@ -9,23 +9,12 @@
 		<p>Priority: ''</p>
 	</div>
 	<div ID="ticketDetails4">
-		<p>File Name: ''</p>
+		<p>File ID: ''</p>
 	</div>
 	<div>
-		<p>File Directory: ''</p>
+		<p>File Description: ''</p>
 	</div>
 	
-	<div>
-	<button id="detailsButtonModal" data-toggle="modal" data-target="#CommentModal"  onclick="Details()">Details Modal(wip)</button> 
-	</div>
 </div>
 
-<div ID="ticketDetails5">
-	<div>
-		<p>Handover Notes<p>
-	</div>
-	<div>
-		<p>'type your handover notes here'</p>
-	</div>
-</div>
 	

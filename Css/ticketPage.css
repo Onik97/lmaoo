@@ -8,7 +8,7 @@
 	
 }
 
-#ticketBrief {
+/*#ticketBrief {
 	grid-column: 1 / 2;
 	width: 990px;
 	background-color: #f3f3f3;
@@ -36,12 +36,12 @@
 #ticketBriefModal {
 	margin-left: 872.5px;
 	margin-top: 10px;
-}
+}*/
 
 #ticketPeople {
 	grid-column: 2 / 2;
 	width: 490px;
-	background-color: #ff751a;
+	background-color: #E0FFFF;
 	text-align: centre;
 }
 
@@ -60,7 +60,7 @@
 
 #ticketDetails {
     grid-column: 1 / 2;
-	width: 990px;
+	width: 600px;
 	background-color: #00e6e6;
 	text-align: centre;
 }
@@ -68,29 +68,29 @@
 #ticketDetails1 {
 	float: left;
 	text-align: centre;
-	width: 495px;
+	width: 100px;
 }
 
 #ticketDetails2 {
-	float: right;
+	float: left;
 	text-align: centre;
-	width: 495px;
+	width: 100px;
 }
 
 #ticketDetails3 {
 	float: left;
 	text-align: centre;
-	width: 495px;
+	width: 100px;
 }
 
 #ticketDetails4 {
-	float: right;
+	float: left;
 	text-align: centre;
-	width: 495px;
+	width: 100px;
 }
 
 #ticketDetails5 {
-	width: 990px;
+	width: 300px;
 	border: 5px solid black;
 	border-width: 5px;
 	background-color: #4293f5;
@@ -105,28 +105,28 @@
 #ticketDate {
 	grid-column: 2 / 2;
 	width: 490px;
-	background-color: #ffff1a;
+	background-color: #E6E6FA;
 	text-align: centre;
 }
 
 #dates1 {
-	background-color: cyan;
+	background-color: #F0F8FF;
 	width: 240px;
 	float: left;
 }
 
 #dates2 {
-	background-color: red;
+	background-color: #F0F8FF;
 	width: 240px;
 	float: right;
 }
 
 #preDates {
-	background-color: #ffff1a;
-	outline-color: #ffff1a;
+	background-color: #F0F8FF;
+	outline-color: #F0F8FF;
 }
 
-#detailsSubBug {
+/*#detailsSubBug {
 	grid-column: 1 / 2;
 	width: 990px;
 	background-color: grey;
@@ -138,7 +138,7 @@
 	width: 490px;
 	background-color: #00e600;
 	text-align: centre;
-}
+}*/
 
 #ticketMessages1 {
 	margin-left: 371px;
@@ -147,7 +147,7 @@
 #ticketCreate {
 
 	text-align: centre;
-	width: 1490px;
+	width: 995px;
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #00ffd5;
@@ -159,7 +159,7 @@
 
 #ticketComments {
 	text-align: centre;
-	width: 1490px;
+	width: 995px;
 	margin-left: auto;
 	margin-right: auto;
 	background-color:  #e2e2e2;
@@ -171,7 +171,7 @@
 
 #comments {
 	background-color: white;
-	width: 1350px;
+	width: 995px;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	margin-left: 0px;
