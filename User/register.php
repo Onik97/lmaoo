@@ -3,7 +3,7 @@
 <html>
 <title>Register Page</title>
 <head>
- <link rel="stylesheet" href="../css/RegisterPage.css">
+ <link rel="stylesheet" href="../Css/RegisterPage.css">
 <?php include("../Global/head.php"); ?>
 </head>
 <?php include("../Global/navBar.php"); ?>

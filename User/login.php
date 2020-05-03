@@ -6,7 +6,7 @@ if(isset($_SESSION['userLoggedIn'])){header("Location: ../Ticket/index.php");}
 <html>
 <title>Login</title>
 <head>
-<link rel="stylesheet" href="../css/Login.css">
+<link rel="stylesheet" href="../Css/Login.css">
 <?php include("../Global/head.php"); ?>
 </head>
 <?php include("../Global/navBar.php"); ?>
