@@ -80,8 +80,8 @@
 }
 
 #detailsButtonModal {
-		margin-top: 162px;
-		margin-left: 300px;
+		margin-top: 186px;
+		margin-left: 367.5px;
 }
 
 
@@ -92,45 +92,25 @@
 	text-align: centre;
 }
 
-#datesHeading {
-	width: 240px;
-	float: left;
-	margin-top: 100px;
-}
-
 #dates1 {
 	background-color: rgb(255, 0, 0);
 	width: 200px;
 	height: 200px;
 	float: left;
-	margin-top: 100px;
+	margin-top: 40px;
 }
 
 #dates2 {
 	background-color: rgb(255, 0, 0);
 	width: 200px;
 	height: 200px;
-	margin-top: 50px;
+	margin-top: 40px;
 }
 
 #preDates {
 	background-color: #F0F8FF;
 	outline-color: #F0F8FF;
 }
-
-/*#detailsSubBug {
-	grid-column: 1 / 2;
-	width: 990px;
-	background-color: grey;
-	text-align: centre;
-}
-
-#ticketMessages {
-	grid-column: 2 / 2;
-	width: 490px;
-	background-color: #00e600;
-	text-align: centre;
-}*/
 
 #ticketMessages1 {
 	margin-left: 371px;
@@ -139,7 +119,8 @@
 #ticketCreate {
 
 	text-align: centre;
-	width: 995px;
+	width: 1185px;
+	margin-top: 100px;
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #00ffd5;
@@ -151,14 +132,19 @@
 
 #ticketComments {
 	text-align: centre;
-	width: 995px;
+	width: 1185px;
 	margin-left: auto;
 	margin-right: auto;
 	background-color:  #e2e2e2;
 }
 
 #commentList {
-	margin-left: 75px;
+	margin-left: 50px;
+}
+
+.scrollBar
+{
+	float: right;
 }
 
 #comments {
