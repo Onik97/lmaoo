@@ -35,16 +35,17 @@ function getProjectName(name)
 
 function getTicketWithProjectId(id)
 {
+    if (userLevel >= 2)
+    {
+        document.getElementById("ticketBtnDiv").innerHTML = 
+        `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
+    }
+
     loadTicketsFromServer(id)
     .then((response) => 
     {
         var json = response.data;
-        console.log(json);
-        if (userLevel >= 2)
-        {
-            document.getElementById("ticketBtnDiv").innerHTML = 
-            `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
-        }
+        $("#ticketTable").find("tr:gt(0)").remove();
 
         for (i = 0; i < json.length; i++)
         {
@@ -58,7 +59,7 @@ function getTicketWithProjectId(id)
 
             let ticketId = document.createTextNode(json[i].ticketId);
             let task = document.createTextNode(json[i].task);
-            let progress = document.createTextNode("Current in progress");
+            let progress = document.createTextNode("Not included in the database");
             let viewBtnContent = document.createTextNode("View");
             
             var viewBtn = document.createElement("a");
