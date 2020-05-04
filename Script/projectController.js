@@ -35,49 +35,45 @@ function getProjectName(name)
 
 function getTicketWithProjectId(id)
 {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "projectController.php?projectId="+id, true)
-    xmlhttp.send();
-    xmlhttp.onreadystatechange = function() 
+    loadTicketsFromServer(id)
+    .then((response) => 
     {
-        if (this.readyState == 4 && this.status == 200)
+        var json = response.data;
+        console.log(json);
+        if (userLevel >= 2)
         {
-            var ticketJSON = JSON.parse(this.responseText);
-            if (userLevel >= 2)
-            {
-                document.getElementById("ticketBtnDiv").innerHTML = 
-                `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
-            }
-            document.getElementById("ticketDiv").innerHTML = 
-            `
-            <table class="table">
-            <div class="tableHead">
-                <thead>
-                    <tr>
-                    <th class="col1" scope="col">Ticket ID</th>
-                    <th class="col2" scope="col">Task</th>
-                    <th class="col3" scope="col">Progress</th>
-                    <th class="col4" scope="col">View</th>
-                    </tr>
-                </thead>
-            </div>
-            ${ticketJSON.map(function(ticket)
-                {
-                    return `
-                    <div class="tableBody">
-                    <tr>
-                    <th scope="row">${ticket.ticketId}</th>
-                        <td>${ticket.task}</td>
-                        <td>Not included in the database</td>
-                        <td><a class="btn btn-info" href="../Ticket/index.php?ticketId=${ticket.ticketId}">View</a></td>
-                    </tr>
-                    </div>
-                    `;
-                }
-                ).join('')}
-            `;
+            document.getElementById("ticketBtnDiv").innerHTML = 
+            `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
         }
-    }
+
+        for (i = 0; i < json.length; i++)
+        {
+            let tableRef = document.getElementById("ticketTable");
+            let newRow = tableRef.insertRow(-1);
+
+            let ticketIdCell = newRow.insertCell(0);
+            let taskCell = newRow.insertCell(1);
+            let progressCell = newRow.insertCell(2);
+            let viewCell = newRow.insertCell(3);
+
+            let ticketId = document.createTextNode(json[i].ticketId);
+            let task = document.createTextNode(json[i].task);
+            let progress = document.createTextNode("Current in progress");
+            let viewBtnContent = document.createTextNode("View");
+            
+            var viewBtn = document.createElement("a");
+            viewBtn.classList.add("btn");
+            viewBtn.classList.add("btn-info");
+            viewBtn.appendChild(viewBtnContent);
+            viewBtn.setAttribute('href', "../Ticket/index.php?ticketId=+"+json[i].ticketId);
+
+            ticketIdCell.appendChild(ticketId);
+            taskCell.appendChild(task);
+            progressCell.appendChild(progress);
+            viewCell.appendChild(viewBtn);
+        }
+    })
+    .catch((response) => console.log(response))
 }
 
 function createProjectPrompt()

@@ -27,9 +27,19 @@ session_start();
   <div class="content">
   <h1 id="ticketMessage">Tickets</h1>
     <div id="ticketDiv">
-    </div>
     <div id="ticketBtnDiv"></div>
-  </div>
+      <table id="ticketTable" class="table">
+          <thead>
+              <tr>
+              <th class="col1" scope="col">Ticket ID</th>
+              <th class="col2" scope="col">Task</th>
+              <th class="col3" scope="col">Progress</th>
+              <th class="col4" scope="col">View</th>
+              </tr>
+          </thead>
+      </table>
+    </div>
+</div>
 </div>
 
 <?php include("projectModal.php"); ?>
