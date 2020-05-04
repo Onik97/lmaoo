@@ -32,10 +32,11 @@ function editUser(userId)
              <div class="form-group">
              <label>Level</label> <br>
              <select class="form-control" name="userSelect" required>
-             <option value="" selected disabled></option>
+             <option value="0" selected disabled></option>
              <option value="1">Standard</option>
-             <option value="2">Admin</option>
-             <option value="3">Super</option>
+             <option value="2">Ticket Manager</option>
+             <option value="3">Admin</option>
+             <option value="4">Super User</option>
              </select>
              </div>
              </div>
