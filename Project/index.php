@@ -27,7 +27,6 @@ session_start();
   <div class="content">
   <h1 id="ticketMessage">Tickets</h1>
     <div id="ticketDiv">
-    <div id="ticketBtnDiv"></div>
       <table id="ticketTable" class="table">
           <thead>
               <tr>
@@ -38,6 +37,7 @@ session_start();
               </tr>
           </thead>
       </table>
+      <div id="ticketBtnDiv"></div>
     </div>
 </div>
 </div>
