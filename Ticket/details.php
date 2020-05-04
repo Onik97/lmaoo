@@ -11,9 +11,10 @@
 	<div ID="ticketDetails4">
 		<p>File ID: ''</p>
 	</div>
-	<div>
+	<div ID="ticketDetails5">
 		<p>File Description: ''</p>
 	</div>
+	<button ID="detailsButtonModal" data-toggle="modal" data-target="#CommentModal"  onclick="Details()">Brief Modal(wip)</button>
 	
 </div>
 

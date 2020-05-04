@@ -26,10 +26,6 @@ session_start();
 			<?php include("people.php"); ?>	
     		</div>
 
-    		<div ID="ticketDate"> 
-			<?php include("dates.php"); ?>	
-            </div>
-
 	</div>  
 		  <div ID="ticketCreate">
 		  <?php include("createComment.php"); ?>	
