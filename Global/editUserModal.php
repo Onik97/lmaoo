@@ -1,4 +1,5 @@
 <?php if (!isset($userLoggedIn))  { return; } else { ?>
+<link rel="stylesheet" href="../Css/editUserModal.css">
             
 <div class="modal fade" id="view-modal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -11,6 +12,13 @@
             </div>
             <form action="../User/userController.php" method="POST" onkeyup="checkUserDup()">
                 <div class="modal-body">
+                    <div>
+                        <label>Upload Image here</label>
+                    </div>
+                    <div class="custom-file" ID="uploadImage">
+                        <input type="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Upload Profile Image</label>
+                    </div>
 
                     <div class="form-group">
                         <label>Forename</label>
@@ -28,14 +36,12 @@
                         <small id="editUsernameMessage" hidden></small> 
                     </div>
 
-                </div>
-
                 <input type="hidden" name="function" value="update">
                 <input type="hidden" name="editUserId" value="<?php echo $userLoggedIn->getId();?>">
 
-                    <div class="modal-footer">
-                        <input id="editUserBtn" class="btn btn-primary" type="submit" value="Save Changes">
-                    </div>
+                <div class="modal-footer">
+                    <input id="editUserBtn" class="btn btn-primary" type="submit" value="Save Changes">
+                </div>
             </form>
         </div>
     </div>
