@@ -10,20 +10,22 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="../User/userController.php" method="POST" onkeyup="checkUserDup()">
+            
                 <div class="modal-body">
-                    <div>
+                    
+                    <div class="upload-group">
                         <label>Upload Profile Picture</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <button class="input-group-text" id="inputGroupFileAddon01" disabled >Upload</button>
+                                <button class="input-group-text" id="inputGroupFileAddon01" disabled onclick="uploadImage()">Upload</button>
                             </div>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onchange="validateImage()">
                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             </div>
                         </div>
-
+                    </div>
+                    <form action="../User/userController.php" method="POST" onkeyup="checkUserDup()">
                     <div class="form-group">
                         <label>Forename</label>
                         <input class="form-control" value=<?php echo $userLoggedIn->getForename(); ?>  id="editForename" name="editForename" required>
