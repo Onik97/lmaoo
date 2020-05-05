@@ -56,26 +56,28 @@ function checkUserDup()
     }
 }
 
-$(".custom-file-input").on("change", function(e) 
-{
-    var fileName = e.target.files[0].name;
-    $('.custom-file-label').html(fileName);
-});
-
 function validateImage() 
 {
     var formData = new FormData();
     let ImageFile = document.getElementById("inputGroupFile01").files[0];
 
     formData.append("Filedata", ImageFile);
-    let t = ImageFile.target.files[0].name.split(".").pop().toLowerCase();
+    let t = ImageFile.type.split("/").pop().toLowerCase();
+
     if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") 
     {
         alert('Please select a valid image file');
-        document.getElementById("inputGroupFile01").value = '';
+        $('.custom-file-label').html("Choose file");
+        document.getElementById("inputGroupFileAddon01").disabled = true;
     }
     else
     {
+        $('.custom-file-label').html(ImageFile.name); // To ensure that if an invalid file is put, no errors will appear
         document.getElementById("inputGroupFileAddon01").disabled = false;
     }
-};
+}
+
+function uploadImage()
+{
+    console.log("Hello World");
+}
