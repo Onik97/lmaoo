@@ -60,3 +60,21 @@ $(".custom-file-input").on("change", function() {
 var fileName = $(this).val().split("\\").pop();
 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
 });
+
+function validateImage() {
+    var formData = new FormData();
+ 
+    let Imagefile = document.getElementById("customFile").files[0];
+ 
+    formData.append("Filedata", Imagefile);
+    let t = Imagefile.type.split('/').pop().toLowerCase();
+    if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") {
+        alert('Please select a valid image file'); // will add notify.js instead, not sure how to do so leaving this for the moment.
+        document.getElementById("customFile").value = '';
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+};

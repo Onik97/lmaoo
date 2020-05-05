@@ -16,7 +16,7 @@
                         <label>Upload Image here</label>
                     </div>
                     <div class="custom-file" ID="uploadImageDiv">
-                        <input type="file" id="UploadImage" class="custom-file-input" id="customFile">
+                        <input type="file" class="custom-file-input" id="customFile" onchange="validateImage()">
                         <label class="custom-file-label" for="customFile">Upload Profile Image</label>
                     </div>
 
