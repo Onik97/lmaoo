@@ -65,18 +65,17 @@ $(".custom-file-input").on("change", function(e)
 function validateImage() 
 {
     var formData = new FormData();
-    let Imagefile = document.getElementById("customFile").files[0];
- 
-    formData.append("Filedata", Imagefile);
-    let t = Imagefile.type.split('/').pop().toLowerCase();
+    let ImageFile = document.getElementById("inputGroupFile01").files[0];
+
+    formData.append("Filedata", ImageFile);
+    let t = ImageFile.target.files[0].name.split(".").pop().toLowerCase();
     if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") 
     {
-        alert('Please select a valid image file'); // will add notify.js instead, not sure how to do so leaving this for the moment.
-        document.getElementById("customFile").value = '';
-        return false;
+        alert('Please select a valid image file');
+        document.getElementById("inputGroupFile01").value = '';
     }
     else
     {
-        return true; // This validation will break the button checks, better the add an upload button and make the upload button disabled
+        document.getElementById("inputGroupFileAddon01").disabled = false;
     }
 };

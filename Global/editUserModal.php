@@ -13,12 +13,16 @@
             <form action="../User/userController.php" method="POST" onkeyup="checkUserDup()">
                 <div class="modal-body">
                     <div>
-                        <label>Upload Image here</label>
-                    </div>
-                    <div class="custom-file" ID="uploadImageDiv">
-                        <input type="file" class="custom-file-input" id="customFile" onchange="validateImage()">
-                        <label class="custom-file-label" for="customFile">Upload Profile Image</label>
-                    </div>
+                        <label>Upload Profile Picture</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <button class="input-group-text" id="inputGroupFileAddon01" disabled >Upload</button>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onchange="validateImage()">
+                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                            </div>
+                        </div>
 
                     <div class="form-group">
                         <label>Forename</label>
