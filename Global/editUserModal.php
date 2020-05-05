@@ -4,28 +4,28 @@
 <div class="modal fade" id="view-modal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
+            
             <div class="modal-header">
                 <h5 class="modal-title" id="EditUserModalTitle">Account Details</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            
-                <div class="modal-body">
+                
+            <div class="modal-body">
                     
-                    <div class="upload-group">
-                        <label>Upload Profile Picture</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <button class="input-group-text" id="inputGroupFileAddon01" disabled onclick="uploadImage()">Upload</button>
-                            </div>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onchange="validateImage()">
-                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                            </div>
-                        </div>
+                <label>Upload Profile Picture</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button class="input-group-text" id="inputGroupFileAddon01" disabled onclick="uploadImage()">Upload</button>
                     </div>
-                    <form action="../User/userController.php" method="POST" onkeyup="checkUserDup()">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onchange="validateImage()">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                </div>
+                
+                <form action="../User/userController.php" method="POST" onkeyup="checkUserDup()">
                     <div class="form-group">
                         <label>Forename</label>
                         <input class="form-control" value=<?php echo $userLoggedIn->getForename(); ?>  id="editForename" name="editForename" required>
@@ -42,16 +42,19 @@
                         <small id="editUsernameMessage" hidden></small> 
                     </div>
 
-                <input type="hidden" name="function" value="update">
-                <input type="hidden" name="editUserId" value="<?php echo $userLoggedIn->getId();?>">
+                    <input type="hidden" name="function" value="update">
+                    <input type="hidden" name="editUserId" value="<?php echo $userLoggedIn->getId();?>">
 
-                <div class="modal-footer">
-                    <input id="editUserBtn" class="btn btn-primary" type="submit" value="Save Changes">
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <input id="editUserBtn" class="btn btn-primary" type="submit" value="Save Changes">
+                    </div>
+                </form>
+                
+            </div>
+
         </div>
-    </div>
-</div> 
+    </div> 
+</div>
 
 <?php } ?>
 <script type="text/javascript" src="../Script/editUser.js"></script>
