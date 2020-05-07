@@ -17,11 +17,11 @@
                 <label>Upload Profile Picture</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <button class="input-group-text" id="inputGroupFileAddon01" disabled onclick="uploadImage()">Upload</button>
+                        <button class="input-group-text" id="uploadImageBtn" disabled onclick="uploadImage()">Upload</button>
                     </div>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onchange="validateImage()">
-                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        <input type="file" class="custom-file-input" id="uploadImage" aria-describedby="uploadImageBtn" onchange="validateImage()">
+                        <label class="custom-file-label" for="uploadImage">Choose file</label>
                     </div>
                 </div>
                 

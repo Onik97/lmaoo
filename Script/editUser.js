@@ -58,22 +58,19 @@ function checkUserDup()
 
 function validateImage() 
 {
-    var formData = new FormData();
-    let ImageFile = document.getElementById("inputGroupFile01").files[0];
-
-    formData.append("Filedata", ImageFile);
-    let t = ImageFile.type.split("/").pop().toLowerCase();
+    let imageFile = document.getElementById("uploadImage").files[0];
+    let t = imageFile.type.split("/").pop().toLowerCase();
 
     if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") 
     {
         alert('Please select a valid image file');
         $('.custom-file-label').html("Choose file");
-        document.getElementById("inputGroupFileAddon01").disabled = true;
+        document.getElementById("uploadImageBtn").disabled = true;
     }
     else
     {
-        $('.custom-file-label').html(ImageFile.name); // To ensure that if an invalid file is put, no errors will appear
-        document.getElementById("inputGroupFileAddon01").disabled = false;
+        $('.custom-file-label').html(imageFile.name);
+        document.getElementById("uploadImageBtn").disabled = false;
     }
 }
 
