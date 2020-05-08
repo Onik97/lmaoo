@@ -25,6 +25,7 @@
                     <th>Forename</th>
                     <th>Surname</th>
                     <th>Level</th>
+                    <th>Active</th>
                     <th>Action</th>
                     </tr>
                     <?php
@@ -36,10 +37,11 @@
                             <td><?php echo $user->forename; ?></td>
                             <td><?php echo $user->surname; ?></td>
                             <td><?php echo $user->level; ?></td>
+                            <td><?php echo $user->isActive ?></td>
                             <td>
                                 <div class="btn-group btn-group-xs" role="group">
                                     <a id="<?php echo $user->userId;?>" data-toggle="modal" data-target="#function-modal" onclick="editUser(this.id)" class="btn btn-default">Edit</a> 
-                                    <a id="<?php echo $user->userId;?>" data-toggle="modal" data-target="#function-modal" onclick="deleteUser(this.id)" class="btn btn-default">Delete</a> 
+                                    <a id="<?php echo $user->userId;?>" data-toggle="modal" data-target="#function-modal" onclick="deactivateUser(this.id)" class="btn btn-default">Deactivate</a> 
                                 </div>
                             </td>
                         </tr>
