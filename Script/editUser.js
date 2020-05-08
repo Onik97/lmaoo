@@ -55,3 +55,26 @@ function checkUserDup()
         .catch((response) => {})
     }
 }
+
+function validateImage() 
+{
+    let imageFile = document.getElementById("uploadImage").files[0];
+    let t = imageFile.type.split("/").pop().toLowerCase();
+
+    if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") 
+    {
+        overHang("error", "Please select a valid image file");
+        $('.custom-file-label').html("Choose file");
+        document.getElementById("uploadImageBtn").disabled = true;
+    }
+    else
+    {
+        $('.custom-file-label').html(imageFile.name);
+        document.getElementById("uploadImageBtn").disabled = false;
+    }
+}
+
+function uploadImage()
+{
+    console.log("Hello World");
+}
