@@ -6,17 +6,18 @@ if(isset($_SESSION['userLoggedIn'])){header("Location: ../Ticket/index.php");}
 <html>
 <title>Login</title>
 <head>
+<link rel="stylesheet" href="../Css/Login.css">
 <?php include("../Global/head.php"); ?>
 </head>
 <p id="navBarActive" hidden>loginPage</p>
 <?php include("../Global/navBar.php"); ?>
-<head>
-<link rel="stylesheet" href="../Css/UserPage.css">
-</head>
+
 <body>
 <div class="top-buffer">
-	<div class="container">
+<div class="container">
+	<div class="wrap">
 		<form action="userController.php" method='POST'>
+			
 			Username:<br>
 		<input type="text" name="username" id="usernameLogin" required> <br>
 			Password:<br>
