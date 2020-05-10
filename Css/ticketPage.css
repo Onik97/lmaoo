@@ -11,11 +11,11 @@
 #ticketPeople {
 	grid-column: 2 / 2;
 	width: 500px;
-	height: 600px;
-	background-color: rgb(255, 0, 0);
+	height: 700px;
+	background-color: #F5F5F5;
 	text-align: centre;
-	margin-left: 180px;
-} /* (For Adil) the orginal color for this Div is #E0FFFF, Changed while editting for more clear changes. */
+	margin-left: 80px;
+}
 
 #ticketPeople1 {
 	margin: 10px;
@@ -38,43 +38,43 @@
 #ticketDetails {
     grid-column: 1 / 2;
 	width: 500px;
-	height: 600px;
-	background-color: #00e6e6;
+	height: 700px;
+	background-color: #F0F8FF;
 	text-align: centre;
-	margin-left: -150px;
+	margin-left: -95px;
 }
 
 #ticketDetails1 {
 	float: left;
 	text-align: centre;
-	width: 100px;
+	width: 500px;
 	padding-bottom: 20px;
 }
 
 #ticketDetails2 {
 	text-align: centre;
-	width: 100px;
+	width: 500px;
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
 
 #ticketDetails3 {
 	text-align: centre;
-	width: 100px;
+	width: 500px;
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
 
 #ticketDetails4 {
 	text-align: centre;
-	width: 100px;
+	width: 500px;
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
 
 #ticketDetails5 {
 	text-align: centre;
-	width: 100px;
+	width: 500px;
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
@@ -88,29 +88,22 @@
 #ticketDate {
 	width: 400px;
 	height: 300px;
-	background-color: rgb(255, 0, 0);
 	text-align: centre;
-} /* (For Adil) the orginal color for this Div is #E6E6FA, Changed while editting for more clear changes. */
+} 
 
 #dates1 {
-	background-color: rgb(255, 0, 0);
-	width: 200px;
+	width: 500px;
 	height: 200px;
 	float: left;
 	margin-top: 40px;
-} /* (For Adil) the orginal color for this Div is #F0F8FF, Changed while editting for more clear changes. */
+}
 
 #dates2 {
-	background-color: rgb(255, 0, 0);
-	width: 200px;
+	width: 500px;
 	height: 200px;
 	margin-top: 40px;
 }
 
-#preDates {
-	background-color: #F0F8FF;
-	outline-color: #F0F8FF;
-}
 
 #ticketMessages1 {
 	margin-left: 371px;
@@ -119,7 +112,7 @@
 #ticketCreate {
 
 	text-align: centre;
-	width: 1185px;
+	width: 1090px;
 	margin-top: 100px;
 	margin-left: auto;
 	margin-right: auto;
@@ -132,7 +125,7 @@
 
 #ticketComments {
 	text-align: centre;
-	width: 1185px;
+	width: 1090px;
 	margin-left: auto;
 	margin-right: auto;
 	background-color:  #e2e2e2;

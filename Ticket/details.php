@@ -1,4 +1,7 @@
 <div>
+
+	<h1> Project Details </h1>
+
 	<div ID="ticketDetails1">
 		<p>Type: ''</p>
 	</div>
@@ -14,7 +17,6 @@
 	<div ID="ticketDetails5">
 		<p>File Description: ''</p>
 	</div>
-	<button ID="detailsButtonModal" data-toggle="modal" data-target="#CommentModal"  onclick="Details()">Brief Modal(wip)</button>
 	
 </div>
 
