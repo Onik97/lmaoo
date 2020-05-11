@@ -63,12 +63,17 @@ function validateImage()
 
     if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") 
     {
-        overHang("error", "Please select a valid image file");
+        document.getElementById("uploadImageText").classList.add("text-danger");
+        document.getElementById("uploadImage").classList.add("is-invalid");
+        document.getElementById("uploadImageText").hidden = false;
         $('.custom-file-label').html("Choose file");
         document.getElementById("uploadImageBtn").disabled = true;
     }
     else
     {
+        document.getElementById("uploadImageText").classList.toggle("text-danger", false);
+        document.getElementById("uploadImage").classList.toggle("is-invalid", false);
+        document.getElementById("uploadImageText").hidden = true;
         $('.custom-file-label').html(imageFile.name);
         document.getElementById("uploadImageBtn").disabled = false;
     }

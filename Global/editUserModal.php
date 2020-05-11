@@ -12,8 +12,7 @@
                 </button>
             </div>
                 
-            <div class="modal-body">
-                    
+            <div class="modal-body">    
                 <label>Upload Profile Picture</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -23,6 +22,9 @@
                         <input type="file" class="custom-file-input" id="uploadImage" aria-describedby="uploadImageBtn" onchange="validateImage()">
                         <label class="custom-file-label" for="uploadImage">Choose file</label>
                     </div>
+                </div>
+                <div id="uploadImageText" hidden>
+                    <small>Invalid file type.</small>
                 </div>
                 
                 <form action="../User/userController.php" method="POST" onkeyup="checkUserDup()">
@@ -49,9 +51,7 @@
                         <input id="editUserBtn" class="btn btn-primary" type="submit" value="Save Changes">
                     </div>
                 </form>
-                
             </div>
-
         </div>
     </div> 
 </div>
