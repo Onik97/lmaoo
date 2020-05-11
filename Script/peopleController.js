@@ -36,7 +36,6 @@ function loadPeople(ticketId)
   .then(response => 
     {
       var res = response.data;
-      console.log(res);
       $("#reporter").html(res[0].reporter);
       $("#assignee").html(res[0].assignee);
     })
