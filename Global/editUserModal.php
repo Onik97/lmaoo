@@ -12,8 +12,7 @@
                 </button>
             </div>
                 
-            <div class="modal-body">
-                    
+            <div class="modal-body">    
                 <label>Upload Profile Picture</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -52,9 +51,7 @@
                         <input id="editUserBtn" class="btn btn-primary" type="submit" value="Save Changes">
                     </div>
                 </form>
-                
             </div>
-
         </div>
     </div> 
 </div>
