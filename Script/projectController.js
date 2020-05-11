@@ -79,10 +79,17 @@ function getTicketWithProjectId(id)
 
 function createProjectPrompt()
 {
+    document.getElementById("projectModalHead").innerHTML = `
+            Project Creation Modal
+    `;
+
     document.getElementById("projectModalBody").innerHTML = `
-            Project Name<br>
+        <div class="projectModalSelection1">    
+            <b>Project Name:</b><br>
             <input type="text" id="projectName" onkeyup="projectConfirmation()" required> <br>
-            Status:<br>
+        </div>
+        <div class="projectModalSelection2">
+            <b>Status:</b><br>
             <select id ="projectStatus" required name="projectStatus">
                 <option value="0" selected disabled ></option>
                 <option value="Back-log">Back-Log</option>
@@ -91,6 +98,7 @@ function createProjectPrompt()
                 <option value="Releasing">Releasing</option>
                 <option value="Released">Released</option>
             </select>
+        </div>
             <br><br>
             <input type="hidden" name="function" value="createProject">
     `; 
@@ -138,14 +146,18 @@ function createProject()
 
 function createTicketPrompt(projectId)
 {
+    document.getElementById("projectModalHead").innerHTML = `
+            Ticket Creation Modal
+    `;
+
     document.getElementById("projectModalBody").innerHTML = `
-    <label>Project ID</label> <br>
+    <label class="projectModalSelection1">Project ID</label> <br>
     <input type="text" id="projectId" value="${projectId}" disabled> <br>
-    <label>Reporter</label> <br>
+    <label class="projectModalSelection2">Reporter</label> <br>
     <input type="text" id="reporter" value="${userForename + " " + userSurname}" disabled> <br>
-    <label>Task</label> <br>
+    <label class="projectModalSelection2">Task</label> <br>
     <input type="text" id="task" onkeyup="ticketConfirmation()" required> <br>
-    <label>Progress</label> <br>
+    <label class="projectModalSelection2">Progress</label> <br>
     <input type="text" id="progress" onkeyup="ticketConfirmation()" required> <br>
     <input type="hidden" id="reporterKey" value="${userId}"> 
     <input type="hidden" id="function" value="createTicket"> <br>

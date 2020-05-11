@@ -130,3 +130,26 @@ th, td {
 	color: #2F4F4F;
 	line-height: 1.4;
   }
+
+  /* Modal Content: Project */
+
+.modal-header {
+  background: #396060;
+}
+
+#projectModalHead {
+	margin-left: 125px;
+	margin-right: auto;
+	color: white;
+}
+
+.projectModalSelection1 {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.projectModalSelection2 {
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+
