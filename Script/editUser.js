@@ -63,12 +63,13 @@ function validateImage()
 
     if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") 
     {
-        overHang("error", "Please select a valid image file");
+        document.getElementById("uploadImageText").hidden = false;
         $('.custom-file-label').html("Choose file");
         document.getElementById("uploadImageBtn").disabled = true;
     }
     else
     {
+        document.getElementById("uploadImageText").hidden = true;
         $('.custom-file-label').html(imageFile.name);
         document.getElementById("uploadImageBtn").disabled = false;
     }

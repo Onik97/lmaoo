@@ -24,6 +24,9 @@
                         <label class="custom-file-label" for="uploadImage">Choose file</label>
                     </div>
                 </div>
+                <div id="uploadImageText" hidden>
+                    <small>Invalid file type.</small>
+                </div>
                 
                 <form action="../User/userController.php" method="POST" onkeyup="checkUserDup()">
                     <div class="form-group">
