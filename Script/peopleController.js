@@ -123,22 +123,3 @@ function saveAssigneeAsYourself(ticketId, fullName)
   }
   xhr.send(data);
 }
-
-function saveAssigneeKey(ticketId, key)
-{
-  var data = new FormData();
-  data.append('function', "assigneeKeyUpdate");
-  data.append('ticketId', ticketId);
-  data.append('key', key)
-    
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'ticketController.php', true);
-  xhr.onreadystatechange = function()
-  {
-	  if (this.readyState == 4 && this.status == 200)
-	  {
-		  console.log(this.responseText);
-	  }
-  }
-  xhr.send(data);
-}

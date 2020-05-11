@@ -45,7 +45,6 @@ else if ($function == "assigneeKeyUpdate")
 }
 else if ($function == "loadDates")
 {
-
     echo json_encode(loadDates($_POST['ticketId']));
 }
 else 
