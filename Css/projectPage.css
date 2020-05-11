@@ -131,7 +131,7 @@ th, td {
 	line-height: 1.4;
   }
 
-  /* Modal Content: Project */
+  /* Modal Content: Project&ticket */
 
 .modal-header {
   background: #396060;
@@ -152,4 +152,3 @@ th, td {
 	margin-top: 15px;
 	margin-bottom: 10px;
 }
-
