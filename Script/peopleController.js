@@ -21,24 +21,25 @@ function People()
     `;
 }
 
+function loadUsers()
+{
+  loadUsersFromServer()
+  .then(response => 
+    {
+      console.log(response.data);
+    })
+}
+
 function loadPeople(ticketId)
 {
-    var data = new FormData();
-    data.append('function', "loadPeople");
-    data.append('ticketId', ticketId);
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'ticketController.php', true);
-    xhr.onreadystatechange = function() 
+  loadPeopleFromServer(ticketId)
+  .then(response => 
     {
-      if (this.readyState == 4 && this.status == 200)
-        {
-          var response = JSON.parse(this.responseText)[0];
-          $("#reporter").html(response.reporter);
-          $("#assignee").html(response.assignee);
-        }
-    }
-    xhr.send(data);
+      var res = response.data;
+      console.log(res);
+      $("#reporter").html(res[0].reporter);
+      $("#assignee").html(res[0].assignee);
+    })
 }
 
 function savePeople(ticketId)
