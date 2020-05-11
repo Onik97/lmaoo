@@ -63,7 +63,7 @@ function validateImage()
 
     if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") 
     {
-        document.getElementById("uploadImageText").classList.add("text-danger")
+        document.getElementById("uploadImageText").classList.add("text-danger");
         document.getElementById("uploadImage").classList.add("is-invalid");
         document.getElementById("uploadImageText").hidden = false;
         $('.custom-file-label').html("Choose file");
