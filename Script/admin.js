@@ -50,9 +50,24 @@ function editUser(userId)
     }
 }
 
-function deleteUser(userId)
+function deactivateUser(userId)
 {
-    document.getElementById("modalTitle").innerHTML = "Deleting User";
-    document.getElementById("modalContent").innerHTML = "Are you sure?";
+    document.getElementById("modalTitle").innerHTML = "Deactivating User";
+    document.getElementById("modalContent").innerHTML = 
+    `
+    <form action="../User/adminController.php" method="POST">
+    <div class="modal-body">
+    
+    <div class="form-group">
+        <label>User ID</label>
+        <input class="form-control" value=${userId} name="userId" readonly>
+    </div>
+    
+    <input type="hidden" name="function" value="deactivateUser">
+    
+    <div class="modal-footer">
+        <input class="btn btn-primary" type="submit" value="Deactivate">
+    </div>
+    `
     console.log("Your ID is " + userId);
 }

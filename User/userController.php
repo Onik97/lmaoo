@@ -110,10 +110,19 @@ function login()
 
 	if (password_verify($loginPassword, $user->password))
 	{
-		$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level);
-		session_start();
-		$_SESSION['userLoggedIn'] = $userLoggedIn;
-		header("Location: ../Project/index.php");
+		if($user->isActive == true)
+		{
+			$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive);
+			session_start();
+			$_SESSION['userLoggedIn'] = $userLoggedIn;
+			header("Location: ../Project/index.php");
+		}
+		else
+		{
+			session_start();
+			$_SESSION['message'] = 'User deactivated, contact the administrator';
+			header("Location: index.php");
+		}
 	}
 	else
 	{
