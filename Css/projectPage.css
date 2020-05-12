@@ -120,7 +120,6 @@ th, td {
 	font-size: 18px;
 	color: #fff;
 	line-height: 1.4;
-  
 	background-color: #2F4F4F;
   }
 
@@ -130,9 +129,3 @@ th, td {
 	color: #2F4F4F;
 	line-height: 1.4;
   }
-
-  /* Modal Content: Project&ticket */
-
-.modal-header {
-  background: #396060;
-}

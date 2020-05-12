@@ -7,6 +7,10 @@
     margin-top: 10px;
 }
 
+.modal-header {
+	background: #396060;
+}
+
 .modal-title-custom {
 	margin-left: 125px;
 	margin-right: auto;
