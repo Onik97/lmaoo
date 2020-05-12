@@ -136,19 +136,3 @@ th, td {
 .modal-header {
   background: #396060;
 }
-
-.modal-title-custom {
-	margin-left: 125px;
-	margin-right: auto;
-	color: white;
-}
-
-.projectModalSelection1 {
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-.projectModalSelection2 {
-	margin-top: 15px;
-	margin-bottom: 10px;
-}

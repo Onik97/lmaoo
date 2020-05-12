@@ -1,0 +1,24 @@
+#uploadImageDiv {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#uploadImagelabel {
+    margin-top: 10px;
+}
+
+.modal-title-custom {
+	margin-left: 125px;
+	margin-right: auto;
+	color: white;
+}
+
+.projectModalSelection1 {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.projectModalSelection2 {
+	margin-top: 15px;
+	margin-bottom: 10px;
+}

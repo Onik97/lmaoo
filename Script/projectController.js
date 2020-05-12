@@ -79,7 +79,7 @@ function getTicketWithProjectId(id)
 
 function createProjectPrompt()
 {
-    document.getElementById("projectModalHead").innerHTML = ` "Create Project" `;
+    document.getElementById("projectModalHead").innerHTML = "Create Project"
 
     document.getElementById("projectModalBody").innerHTML = `
         <div class="form-group projectModalSelection1">    
@@ -144,7 +144,7 @@ function createProject()
 
 function createTicketPrompt(projectId)
 {
-    document.getElementById("projectModalHead").innerHTML = ` "Create Ticket" `;
+    document.getElementById("projectModalHead").innerHTML = "Create Ticket"
 
     document.getElementById("projectModalBody").innerHTML = `
     <div class="form-group">
