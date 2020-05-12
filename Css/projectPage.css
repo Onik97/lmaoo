@@ -137,7 +137,7 @@ th, td {
   background: #396060;
 }
 
-#projectModalHead {
+.modal-title-custom {
 	margin-left: 125px;
 	margin-right: auto;
 	color: white;
