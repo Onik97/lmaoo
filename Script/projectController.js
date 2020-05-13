@@ -82,11 +82,11 @@ function createProjectPrompt()
     document.getElementById("projectModalHead").innerHTML = "Create Project"
 
     document.getElementById("projectModalBody").innerHTML = `
-        <div class="form-group projectModalSelection1">    
+        <div class="form-group modal-content-1">    
             <label for="projectName">Project Name:</label><br>
             <input class="form-control" type="text" id="projectName" onkeyup="projectConfirmation()" required> <br>
         </div>
-        <div class="projectModalSelection2 form-group">
+        <div class="modal-content-2 form-group">
             <label for="projectStatus">Status:</label><br>
             <select id ="projectStatus" class="form-control" required name="projectStatus">
                 <option value="0" selected disabled ></option>
@@ -148,13 +148,13 @@ function createTicketPrompt(projectId)
 
     document.getElementById("projectModalBody").innerHTML = `
     <div class="form-group">
-        <label for="projectId" class="projectModalSelection1">Project ID</label> <br>
+        <label for="projectId" class="modal-content-1">Project ID</label> <br>
         <input type="text" id="projectId" class="form-control" value="${projectId}" disabled> <br>
-        <label for="reporter" class="projectModalSelection2">Reporter</label> <br>
+        <label for="reporter" class="modal-content-2">Reporter</label> <br>
         <input type="text" id="reporter" class="form-control" value="${userForename + " " + userSurname}" disabled> <br>
-        <label for="task" class="projectModalSelection2">Task</label> <br>
+        <label for="task" class="modal-content-2">Task</label> <br>
         <input type="text" id="task" class="form-control" onkeyup="ticketConfirmation()" required> <br>
-        <label for="progress" class="projectModalSelection2">Progress</label> <br>
+        <label for="progress" class="modal-content-2">Progress</label> <br>
         <input type="text" id="progress" class="form-control" onkeyup="ticketConfirmation()" required> <br>
         <input type="hidden" id="reporterKey" value="${userId}">
         <input type="hidden" id="function" value="createTicket"> <br>
