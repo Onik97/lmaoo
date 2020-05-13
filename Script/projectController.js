@@ -79,11 +79,16 @@ function getTicketWithProjectId(id)
 
 function createProjectPrompt()
 {
+    document.getElementById("projectModalHead").innerHTML = "Create Project"
+
     document.getElementById("projectModalBody").innerHTML = `
-            Project Name<br>
-            <input type="text" id="projectName" onkeyup="projectConfirmation()" required> <br>
-            Status:<br>
-            <select id ="projectStatus" required name="projectStatus">
+        <div class="form-group modal-content-1">    
+            <label for="projectName">Project Name:</label><br>
+            <input class="form-control" type="text" id="projectName" onkeyup="projectConfirmation()" required> <br>
+        </div>
+        <div class="modal-content-2 form-group">
+            <label for="projectStatus">Status:</label><br>
+            <select id ="projectStatus" class="form-control" required name="projectStatus">
                 <option value="0" selected disabled ></option>
                 <option value="Back-log">Back-Log</option>
                 <option value="Developement">Development</option>
@@ -91,6 +96,7 @@ function createProjectPrompt()
                 <option value="Releasing">Releasing</option>
                 <option value="Released">Released</option>
             </select>
+        </div>
             <br><br>
             <input type="hidden" name="function" value="createProject">
     `; 
@@ -138,17 +144,21 @@ function createProject()
 
 function createTicketPrompt(projectId)
 {
+    document.getElementById("projectModalHead").innerHTML = "Create Ticket"
+
     document.getElementById("projectModalBody").innerHTML = `
-    <label>Project ID</label> <br>
-    <input type="text" id="projectId" value="${projectId}" disabled> <br>
-    <label>Reporter</label> <br>
-    <input type="text" id="reporter" value="${userForename + " " + userSurname}" disabled> <br>
-    <label>Task</label> <br>
-    <input type="text" id="task" onkeyup="ticketConfirmation()" required> <br>
-    <label>Progress</label> <br>
-    <input type="text" id="progress" onkeyup="ticketConfirmation()" required> <br>
-    <input type="hidden" id="reporterKey" value="${userId}"> 
-    <input type="hidden" id="function" value="createTicket"> <br>
+    <div class="form-group">
+        <label for="projectId" class="modal-content-1">Project ID</label> <br>
+        <input type="text" id="projectId" class="form-control" value="${projectId}" disabled> <br>
+        <label for="reporter" class="modal-content-2">Reporter</label> <br>
+        <input type="text" id="reporter" class="form-control" value="${userForename + " " + userSurname}" disabled> <br>
+        <label for="task" class="modal-content-2">Task</label> <br>
+        <input type="text" id="task" class="form-control" onkeyup="ticketConfirmation()" required> <br>
+        <label for="progress" class="modal-content-2">Progress</label> <br>
+        <input type="text" id="progress" class="form-control" onkeyup="ticketConfirmation()" required> <br>
+        <input type="hidden" id="reporterKey" value="${userId}">
+        <input type="hidden" id="function" value="createTicket"> <br>
+    </div>
     `;
 
     document.getElementById("projectModalFooter").innerHTML = `
