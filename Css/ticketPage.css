@@ -11,73 +11,40 @@
 #ticketPeople {
 	grid-column: 2 / 2;
 	width: 500px;
-	height: 700px;
+	height: 720px;
 	background-color: #F5F5F5;
 	text-align: centre;
 	margin-left: 80px;
 }
 
-#ticketPeople1 {
+#ticketPeople1, #ticketPeople2 {
 	margin: 10px;
 	text-align: centre;
 }
 
-#ticketPeople2 {
-	margin: 10px;
-}
 
-#ticketPeopleChooseAssignee {
+#ticketPeopleChooseAssignee, #ticketPeopleSelfAssignee {
 	margin-left: 358px;
 	margin-top: 100px;
 }
 
-#ticketPeopleSelfAssignee {
-	margin-left: 358px;
-}
 
 #ticketDetails {
     grid-column: 1 / 2;
 	width: 500px;
-	height: 700px;
+	height: 720px;
 	background-color: #F0F8FF;
 	text-align: centre;
 	margin-left: -95px;
 }
 
-#ticketDetails1 {
+#ticketDetails1, #ticketDetails2, #ticketDetails3, #ticketDetails4, #ticketDetails5 {
 	float: left;
 	text-align: centre;
 	width: 500px;
 	padding-bottom: 20px;
 }
 
-#ticketDetails2 {
-	text-align: centre;
-	width: 500px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-#ticketDetails3 {
-	text-align: centre;
-	width: 500px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-#ticketDetails4 {
-	text-align: centre;
-	width: 500px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-#ticketDetails5 {
-	text-align: centre;
-	width: 500px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
 
 #detailsButtonModal {
 		margin-top: 186px;
@@ -90,18 +57,13 @@
 	text-align: centre;
 } 
 
-#dates1 {
+#dates1, #dates2 {
 	width: 500px;
 	height: 200px;
 	float: left;
 	margin-top: 40px;
 }
 
-#dates2 {
-	width: 500px;
-	height: 200px;
-	margin-top: 40px;
-}
 
 #ticketMessages1 {
 	margin-left: 371px;

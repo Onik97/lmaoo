@@ -66,7 +66,7 @@ function getTicketWithProjectId(id)
             viewBtn.classList.add("btn");
             viewBtn.classList.add("btn-info");
             viewBtn.appendChild(viewBtnContent);
-            viewBtn.setAttribute('href', "../Ticket/index.php?ticketId=+"+json[i].ticketId);
+            viewBtn.setAttribute('href', "../Ticket/index.php?ticketId="+json[i].ticketId);
 
             ticketIdCell.appendChild(ticketId);
             taskCell.appendChild(task);
