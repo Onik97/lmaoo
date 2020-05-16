@@ -118,21 +118,6 @@ function deleteComment($commentId)
     echo "Success"; // Using echo for XMLHttpRequest
 }
 
-function createBugs($userId, $projectId)
-{
-
-}
-
-function deleteBugs($bugId)
-{
-
-}
-
-function loadBugs($ticketId)
-{
-
-}
-
 function loadPeople($ticketId)
 {
     $pdo = logindb('user', 'pass');
