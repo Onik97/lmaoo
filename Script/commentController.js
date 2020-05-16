@@ -36,7 +36,7 @@ function loadComments()
                 `
                 ${ticketJSON.map(function(comment)
                     {
-                      if (userId == comment.userId || userLevel == 2)
+                      if (userId == comment.userId || userLevel == 4)
                       {
                         return `
                         <div id="comments">

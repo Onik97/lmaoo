@@ -14,18 +14,18 @@ if(isset($_SESSION['userLoggedIn'])){header("Location: ../Ticket/index.php");}
 
 <body>
 <div class="top-buffer">
-<div class="container">
-	<div class="wrap">
-		<form action="userController.php" method='POST'>
-			
+	<div class="container">
+		<div class="wrap">
+			<form action="userController.php" method='POST'>
 			Username:<br>
-		<input type="text" name="username" id="usernameLogin" required> <br>
+			<input type="text" name="username" id="usernameLogin" required> <br>
 			Password:<br>
-		<input type="password" name="password" id="passwordLogin" required>
-		<input type="hidden" name="function" value="login">
-		<input class="one" type="submit" value="Submit"> <br><br>
-		<a href="../User/register.php">Not Registered? Click here!</a>
-		</form>
+			<input type="password" name="password" id="passwordLogin" required>
+			<input type="hidden" name="function" value="login">
+			<input class="one" type="submit" value="Submit"> <br><br>
+			<a href="../User/register.php">Not Registered? Click here!</a>
+			</form>
+		</div>	
 	</div>
 </div>
 	<?php 
