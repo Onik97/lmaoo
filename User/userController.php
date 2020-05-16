@@ -44,10 +44,6 @@ else if ($function == "checkUsername")
 		echo json_encode($json);
 	}
 }
-else if($function == "loadAllUsers")
-{
-	echo json_encode(loadAllUsers());
-}
 else
 {
 	return;
@@ -171,16 +167,6 @@ function getAllUsers() // This is used in Admin
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 	$stmt = $pdo->prepare("SELECT * FROM user");
-	$stmt->execute();
-	$users = $stmt->fetchAll();
-	return $users;
-}
-
-function loadAllUsers()
-{
-	$pdo = logindb('user', 'pass');
-	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-	$stmt = $pdo->prepare("SELECT userId, username, forename, surname, isActive, level FROM user");
 	$stmt->execute();
 	$users = $stmt->fetchAll();
 	return $users;
