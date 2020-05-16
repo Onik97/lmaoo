@@ -36,16 +36,17 @@ function loadTicketsFromServer(id)
         return response;
 }
 
-function loadUsersFromServer()
+function loadAssigneeFromServer(ticketId)
 {
     var formData = new FormData();
-    formData.append('function', "loadAllUsers");
+    formData.append('function', "loadAssignee");
+    formData.append('ticketId', ticketId);
 
     const response = axios(
         {
             method: 'post',
             data: formData,
-            url: '../User/userController.php',
+            url: '../Ticket/ticketController.php',
             headers: {'Content-Type': 'multipart/form-data' }
         })
     
@@ -55,7 +56,24 @@ function loadUsersFromServer()
 function loadPeopleFromServer(ticketId)
 {
     var data = new FormData();
-    data.append('function', "loadPeople");
+    data.append('function', "loadAssignee");
+    data.append('ticketId', ticketId);
+
+    const response = axios(
+        {
+            method: 'post',
+            data: data,
+            url: '../Ticket/ticketController.php',
+            headers: {'Content-Type': 'multipart/form-data' }
+        })
+    
+        return response;
+}
+
+function loadReporterFromServer(ticketId)
+{
+    var data = new FormData();
+    data.append('function', "loadReporter");
     data.append('ticketId', ticketId);
 
     const response = axios(
