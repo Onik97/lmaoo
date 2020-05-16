@@ -53,23 +53,6 @@ function loadAssigneeFromServer(ticketId)
         return response;
 }
 
-function loadPeopleFromServer(ticketId)
-{
-    var data = new FormData();
-    data.append('function', "loadAssignee");
-    data.append('ticketId', ticketId);
-
-    const response = axios(
-        {
-            method: 'post',
-            data: data,
-            url: '../Ticket/ticketController.php',
-            headers: {'Content-Type': 'multipart/form-data' }
-        })
-    
-        return response;
-}
-
 function loadReporterFromServer(ticketId)
 {
     var data = new FormData();
