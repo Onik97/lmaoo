@@ -1,6 +1,7 @@
 $(document).ready(function() 
 {
-  loadPeople(ticketId);
+    loadAssignee();
+    loadReporter();
 });
 
 function People()
@@ -21,23 +22,27 @@ function People()
     `;
 }
 
-function loadUsers()
+function loadAssignee()
 {
-  loadUsersFromServer()
+  var url = new URL(window.location.href);
+  ticketId = url.searchParams.get("ticketId");
+  loadAssigneeFromServer(ticketId)
   .then(response => 
     {
-      console.log(response.data);
+        var res = response.data;
+        $("#assignee").html(res[0].forename + " " + res[0].surname);
     })
 }
 
-function loadPeople(ticketId)
+function loadReporter()
 {
-  loadPeopleFromServer(ticketId)
+  var url = new URL(window.location.href);
+  ticketId = url.searchParams.get("ticketId");
+  loadReporterFromServer(ticketId)
   .then(response => 
     {
-      var res = response.data;
-      $("#reporter").html(res[0].reporter);
-      $("#assignee").html(res[0].assignee);
+        var res = response.data;
+        $("#reporter").html(res[0].forename + " " + res[0].surname);
     })
 }
 
