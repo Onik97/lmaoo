@@ -162,7 +162,7 @@ function failedLogin()
 	header("Location: index.php");
 }
 
-function getAllUsers()
+function getAllUsers() // This is used in Admin
 {
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);

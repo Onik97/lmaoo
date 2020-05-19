@@ -1,6 +1,7 @@
 $(document).ready(function() 
 {
-  loadPeople(ticketId);
+    loadAssignee();
+    loadReporter();
 });
 
 function People()
@@ -21,24 +22,28 @@ function People()
     `;
 }
 
-function loadPeople(ticketId)
+function loadAssignee()
 {
-    var data = new FormData();
-    data.append('function', "loadPeople");
-    data.append('ticketId', ticketId);
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'ticketController.php', true);
-    xhr.onreadystatechange = function() 
+  var url = new URL(window.location.href);
+  ticketId = url.searchParams.get("ticketId");
+  loadAssigneeFromServer(ticketId)
+  .then(response => 
     {
-      if (this.readyState == 4 && this.status == 200)
-        {
-          var response = JSON.parse(this.responseText)[0];
-          $("#reporter").html(response.reporter);
-          $("#assignee").html(response.assignee);
-        }
-    }
-    xhr.send(data);
+        var res = response.data;
+        $("#assignee").html(res[0].forename + " " + res[0].surname);
+    })
+}
+
+function loadReporter()
+{
+  var url = new URL(window.location.href);
+  ticketId = url.searchParams.get("ticketId");
+  loadReporterFromServer(ticketId)
+  .then(response => 
+    {
+        var res = response.data;
+        $("#reporter").html(res[0].forename + " " + res[0].surname);
+    })
 }
 
 function savePeople(ticketId)
@@ -119,25 +124,6 @@ function saveAssigneeAsYourself(ticketId, fullName)
       saveAssigneeKey(userId, ticketId);
       loadPeople(ticketId);
       overHang("success", "Ticket assigned to yourself!");
-	  }
-  }
-  xhr.send(data);
-}
-
-function saveAssigneeKey(ticketId, key)
-{
-  var data = new FormData();
-  data.append('function', "assigneeKeyUpdate");
-  data.append('ticketId', ticketId);
-  data.append('key', key)
-    
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'ticketController.php', true);
-  xhr.onreadystatechange = function()
-  {
-	  if (this.readyState == 4 && this.status == 200)
-	  {
-		  console.log(this.responseText);
 	  }
   }
   xhr.send(data);

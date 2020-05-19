@@ -45,8 +45,15 @@ else if ($function == "assigneeKeyUpdate")
 }
 else if ($function == "loadDates")
 {
-
     echo json_encode(loadDates($_POST['ticketId']));
+}
+else if ($function == "loadAssignee")
+{
+    echo json_encode(loadAssignee($_POST["ticketId"]));
+}
+else if ($function == "loadReporter")
+{
+    echo json_encode(loadReporter($_POST['ticketId']));
 }
 else 
 {
@@ -119,21 +126,6 @@ function deleteComment($commentId)
     echo "Success"; // Using echo for XMLHttpRequest
 }
 
-function createBugs($userId, $projectId)
-{
-
-}
-
-function deleteBugs($bugId)
-{
-
-}
-
-function loadBugs($ticketId)
-{
-
-}
-
 function loadPeople($ticketId)
 {
     $pdo = logindb('user', 'pass');
@@ -181,4 +173,27 @@ function loadDates($ticketId)
     return $dates;
 }
 
+function loadAssignee($ticketId)
+{
+    $pdo = logindb('user', 'pass');
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("SELECT user.forename, user.surname FROM ticket 
+                           INNER JOIN user on user.userId = ticket.assignee_key
+                           WHERE ticket.ticketId = ?");
+    $stmt->execute([$ticketId]);
+    $assignee = $stmt->fetchAll();
+    return $assignee;
+}
+
+function loadReporter($ticketId)
+{
+    $pdo = logindb('user', 'pass');
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("SELECT user.forename, user.surname FROM ticket 
+                           INNER JOIN user on user.userId = ticket.reporter_key
+                           WHERE ticket.ticketId = ?");
+    $stmt->execute([$ticketId]);
+    $reporter = $stmt->fetchAll();
+    return $reporter;
+}
 ?>

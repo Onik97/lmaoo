@@ -35,3 +35,37 @@ function loadTicketsFromServer(id)
     
         return response;
 }
+
+function loadAssigneeFromServer(ticketId)
+{
+    var formData = new FormData();
+    formData.append('function', "loadAssignee");
+    formData.append('ticketId', ticketId);
+
+    const response = axios(
+        {
+            method: 'post',
+            data: formData,
+            url: '../Ticket/ticketController.php',
+            headers: {'Content-Type': 'multipart/form-data' }
+        })
+    
+        return response;
+}
+
+function loadReporterFromServer(ticketId)
+{
+    var data = new FormData();
+    data.append('function', "loadReporter");
+    data.append('ticketId', ticketId);
+
+    const response = axios(
+        {
+            method: 'post',
+            data: data,
+            url: '../Ticket/ticketController.php',
+            headers: {'Content-Type': 'multipart/form-data' }
+        })
+    
+        return response;
+}
