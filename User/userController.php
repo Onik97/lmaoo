@@ -171,4 +171,14 @@ function getAllUsers() // This is used in Admin
 	$users = $stmt->fetchAll();
 	return $users;
 }
+function getActiveUsers()
+{
+	$isActive = '1';
+	$pdo = logindb('user', 'pass');
+	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+	$stmt = $pdo->prepare('SELECT * FROM user WHERE isActive = ?');
+	$stmt->execute([$isActive]);
+	$activeUsers = $stmt->fetchall();
+	return $activeUsers;
+};
 ?>
