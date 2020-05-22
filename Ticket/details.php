@@ -15,7 +15,4 @@
 	<div ID="ticketDetails5">
 		<p>File Description: ''</p>
 	</div>
-	<div>
-		<button onclick="getActiveUsers()">test</button>
-	<div>
 </div>
