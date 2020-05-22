@@ -175,6 +175,7 @@ function getAllUsers() // This is used in Admin
 	$users = $stmt->fetchAll();
 	return $users;
 }
+
 function getActiveUsers()
 {
 	$pdo = logindb('user', 'pass');
