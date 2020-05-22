@@ -44,7 +44,11 @@ else if ($function == "checkUsername")
 		echo json_encode($json);
 	}
 }
-else
+else if ($function == "getActiveUsers")
+{
+	getActiveUsers();
+}
+else 
 {
 	return;
 }
@@ -177,8 +181,8 @@ function getActiveUsers()
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 	$stmt = $pdo->prepare('SELECT * FROM user WHERE isActive = ?');
-	$stmt->execute([$isActive]);
+	$stmt->execute();
 	$activeUsers = $stmt->fetchall();
 	return $activeUsers;
-};
+}
 ?>

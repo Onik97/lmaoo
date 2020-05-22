@@ -69,3 +69,19 @@ function loadReporterFromServer(ticketId)
     
         return response;
 }
+function getActiveUsers()
+{
+    var data = new FormData();
+    data.append('function', "getActiveUsers");
+    data.append('activeUsers', activeUsers);
+
+    const response = axios(
+        {
+            method: 'post',
+            data: data,
+            url: '../User/userController.php',
+            headers: {'Content-Type': 'multipart/form-data' }
+        })
+    
+        return response;
+}
