@@ -42,7 +42,6 @@
                                 <div class="btn-group btn-group-xs" role="group">
                                     <a id="<?php echo $user->userId;?>" data-toggle="modal" data-target="#function-modal" onclick="editUser(this.id)" class="btn btn-default">Edit</a> 
                                     <a id="<?php echo $user->userId;?>" data-toggle="modal" data-target="#function-modal" onclick="deactivateUser(this.id)" class="btn btn-default">Deactivate</a>
-                                    <button onclick="getActiveUsers()">test</button>
                                 </div>
                             </td>
                         </tr>

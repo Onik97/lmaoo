@@ -73,7 +73,6 @@ function getActiveUsers()
 {
     var data = new FormData();
     data.append('function', "getActiveUsers");
-    data.append('activeUsers', activeUsers);
 
     const response = axios(
         {

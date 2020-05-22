@@ -46,7 +46,7 @@ else if ($function == "checkUsername")
 }
 else if ($function == "getActiveUsers")
 {
-	getActiveUsers();
+	echo json_encode(getActiveUsers());
 }
 else 
 {
@@ -177,10 +177,9 @@ function getAllUsers() // This is used in Admin
 }
 function getActiveUsers()
 {
-	$isActive = '1';
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-	$stmt = $pdo->prepare('SELECT * FROM user WHERE isActive = ?');
+	$stmt = $pdo->prepare("SELECT userId, forename, surname, username FROM user WHERE isActive = 1");
 	$stmt->execute();
 	$activeUsers = $stmt->fetchall();
 	return $activeUsers;
