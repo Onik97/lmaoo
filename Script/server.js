@@ -70,7 +70,7 @@ function loadReporterFromServer(ticketId)
         return response;
 }
 
-function GetActiveUsersFromServer()
+function getActiveUsersFromServer()
 {
     var data = new FormData();
     data.append('function', "getActiveUsers");
