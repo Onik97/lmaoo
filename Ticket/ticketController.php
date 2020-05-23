@@ -177,7 +177,7 @@ function loadAssignee($ticketId)
 {
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("SELECT user.forename, user.surname FROM ticket 
+    $stmt = $pdo->prepare("SELECT user.forename, user.surname, user.userId FROM ticket 
                            INNER JOIN user on user.userId = ticket.assignee_key
                            WHERE ticket.ticketId = ?");
     $stmt->execute([$ticketId]);
@@ -189,7 +189,7 @@ function loadReporter($ticketId)
 {
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("SELECT user.forename, user.surname FROM ticket 
+    $stmt = $pdo->prepare("SELECT user.forename, user.surname, user.userId FROM ticket 
                            INNER JOIN user on user.userId = ticket.reporter_key
                            WHERE ticket.ticketId = ?");
     $stmt->execute([$ticketId]);
