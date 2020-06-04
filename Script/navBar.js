@@ -8,7 +8,7 @@ else if (navBarActive == "aboutPage")
 {
     document.getElementById("aboutNav").classList.add("active")
 }
-else if (navBarActive == "projectPage")
+else if (navBarActive == "projectPage" || navBarActive == "ticketPage")
 {
     document.getElementById("projectNav").classList.add("active")
 }

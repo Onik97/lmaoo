@@ -11,7 +11,8 @@ session_start();
 <?php include("../Global/head.php"); ?>
 </head>
 <?php include("../Global/navBar.php"); ?>
-<body> 
+<p id="navBarActive" hidden>ticketPage</p>
+<body>
 	<?php if (isset($userLoggedIn)) 
 	{ if(isset($_GET['ticketId']) && ticketExistance($_GET['ticketId'])) 
 		{ $ticketId = $_GET['ticketId']; ?>
@@ -43,5 +44,6 @@ session_start();
 	?>
 </body>
 <footer>
+<script type="text/javascript" src="../Script/navBar.js"></script>
 </footer>
 </html>

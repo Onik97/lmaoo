@@ -22,4 +22,5 @@ session_start();
 </div>
 <?php include("../Global/editUserModal.php"); ?>
 </body>
+<script type="text/javascript" src="../Script/navBar.js"></script>
 </html>

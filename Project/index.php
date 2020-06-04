@@ -49,6 +49,7 @@ session_start();
 } ?>
 
 </body>
+<script type="text/javascript" src="../Script/navBar.js"></script>
 </html>
 <?php include("../Global/editUserModal.php"); 
 ?>

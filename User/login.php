@@ -36,4 +36,5 @@ if(isset($_SESSION['userLoggedIn'])){header("Location: ../Ticket/index.php");}
   		</div><?php
 	} ?>
 </body>
+<script type="text/javascript" src="../Script/navBar.js"></script>
 </html>
