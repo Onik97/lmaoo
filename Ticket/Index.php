@@ -44,6 +44,6 @@ session_start();
 	?>
 </body>
 <footer>
-<script type="text/javascript" src="../Script/navBar.js"></script>
+<?php include("../Global/foot.php"); ?>
 </footer>
 </html>

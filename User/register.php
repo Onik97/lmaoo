@@ -31,5 +31,5 @@
     </div>
   </div>
 </body>
-<script type="text/javascript" src="../Script/navBar.js"></script>
+<?php include("../Global/foot.php"); ?>
 </html>

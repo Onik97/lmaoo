@@ -49,7 +49,7 @@ session_start();
 } ?>
 
 </body>
-<script type="text/javascript" src="../Script/navBar.js"></script>
+<?php include("../Global/foot.php"); ?>
 </html>
 <?php include("../Global/editUserModal.php"); 
 ?>
