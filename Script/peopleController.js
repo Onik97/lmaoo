@@ -50,6 +50,7 @@ function saveSelectedAssignee()
 {
   var ticketId = new URL(window.location.href).searchParams.get("ticketId");
   var assigneeId = document.getElementById("selectUsers").options[document.getElementById("selectUsers").selectedIndex].value;
+  var assigneeName = document.getElementById("selectUsers").options[document.getElementById("selectUsers").selectedIndex].text;
   
   var data = new FormData();
   data.append('function', "saveSelectedAssignee");
@@ -67,6 +68,7 @@ function saveSelectedAssignee()
     {
       loadAssignee();
       $('#CommentModal').modal('hide'); // We should rename this -> Will make a ticket on this
+      overHang("success", "Ticket assigned to " + assigneeName);
     })
 }
 
@@ -97,24 +99,26 @@ function loadUsersInAssigneeModal()
   })
 }
 
-function saveAssigneeAsYourself(ticketId, fullName)
+function saveAssigneeAsYourself()
 {
+  var ticketId = new URL(window.location.href).searchParams.get("ticketId");
+
   var data = new FormData();
-  data.append('function', "peopleYourself");
+  data.append('function', "assigneeSelf");
   data.append('ticketId', ticketId)
-  data.append('fullName', fullName)
+  data.append('selfId', userUserId)
   
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'ticketController.php', true);
-  xhr.onreadystatechange = function()
-  {
-	  if (this.readyState == 4 && this.status == 200)
-	  {
-      console.log(this.responseText);
-      saveAssigneeKey(userId, ticketId);
-      loadPeople(ticketId);
+  axios(
+    {
+        method: 'post',
+        url: '../Ticket/ticketController.php',
+        data: data,
+        headers: {'Content-Type': 'multipart/form-data' }
+    })
+  .then(res => 
+    {
+      loadAssignee();
+      $('#CommentModal').modal('hide'); // We should rename this -> Will make a ticket on this
       overHang("success", "Ticket assigned to yourself!");
-	  }
-  }
-  xhr.send(data);
+    })
 }
