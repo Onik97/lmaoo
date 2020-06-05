@@ -24,8 +24,7 @@ function People()
 
 function loadAssignee()
 {
-  var url = new URL(window.location.href);
-  ticketId = url.searchParams.get("ticketId");
+  var ticketId = new URL(window.location.href).searchParams.get("ticketId");
   loadAssigneeFromServer(ticketId)
   .then(response => 
     {
@@ -37,8 +36,7 @@ function loadAssignee()
 
 function loadReporter()
 {
-  var url = new URL(window.location.href);
-  ticketId = url.searchParams.get("ticketId");
+  var ticketId = new URL(window.location.href).searchParams.get("ticketId");
   loadReporterFromServer(ticketId)
   .then(response => 
     {
@@ -48,10 +46,11 @@ function loadReporter()
     })
 }
 
-function savePeople(ticketId)
+function savePeople()
 {
+  var ticketId = new URL(window.location.href).searchParams.get("ticketId");
+
   var selectElement = document.getElementById("selectUsers");
-  var selectedUser = selectElement.options[selectElement.selectedIndex].text;
   var selectedUserValue = selectElement.options[selectElement.selectedIndex].value;  
 
   var data = new FormData();
