@@ -1,3 +1,5 @@
+// This class is used to get a response from the server, this will help tidy up code
+
 function checkUsernameFromServer(formdata)
 {
     const response = axios(
