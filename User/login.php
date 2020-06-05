@@ -36,5 +36,4 @@ if(isset($_SESSION['userLoggedIn'])){header("Location: ../Ticket/index.php");}
   		</div><?php
 	} ?>
 </body>
-<?php include("../Global/foot.php"); ?>
 </html>

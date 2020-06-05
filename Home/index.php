@@ -15,5 +15,4 @@ session_start();
 <?php echo "This page is still under maintenance"; ?>
 <?php include("../Global/editUserModal.php"); ?>
 </body>
-<?php include("../Global/foot.php"); ?>
 </html>

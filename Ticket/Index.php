@@ -9,9 +9,9 @@ session_start();
 <link rel="stylesheet" href="../Css/ticketPage.css">
 <head>
 <?php include("../Global/head.php"); ?>
+<p id="navBarActive" hidden>ticketPage</p>
 </head>
 <?php include("../Global/navBar.php"); ?>
-<p id="navBarActive" hidden>ticketPage</p>
 <body>
 	<?php if (isset($userLoggedIn)) 
 	{ if(isset($_GET['ticketId']) && ticketExistance($_GET['ticketId'])) 
@@ -44,6 +44,5 @@ session_start();
 	?>
 </body>
 <footer>
-<?php include("../Global/foot.php"); ?>
 </footer>
 </html>

@@ -31,5 +31,4 @@
     </div>
   </div>
 </body>
-<?php include("../Global/foot.php"); ?>
 </html>

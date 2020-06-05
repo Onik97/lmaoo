@@ -22,5 +22,4 @@ session_start();
 </div>
 <?php include("../Global/editUserModal.php"); ?>
 </body>
-<?php include("../Global/foot.php"); ?>
 </html>

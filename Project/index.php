@@ -49,7 +49,6 @@ session_start();
 } ?>
 
 </body>
-<?php include("../Global/foot.php"); ?>
 </html>
 <?php include("../Global/editUserModal.php"); 
 ?>
