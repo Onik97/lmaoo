@@ -17,7 +17,7 @@ function People()
   loadUsersInAssigneeModal();
   document.getElementById("Modal-footer").innerHTML = `
     <div class="modal-footer">
-        <input class="btn btn-primary" type="submit" value="Save" onclick=savePeople(${ticketId})>
+        <input class="btn btn-primary" type="submit" value="Save" onclick="saveSelectedAssignee()">
     </div>
     `;
 }
@@ -46,32 +46,28 @@ function loadReporter()
     })
 }
 
-function savePeople()
+function saveSelectedAssignee()
 {
   var ticketId = new URL(window.location.href).searchParams.get("ticketId");
-
-  var selectElement = document.getElementById("selectUsers");
-  var selectedUserValue = selectElement.options[selectElement.selectedIndex].value;  
-
+  var assigneeId = document.getElementById("selectUsers").options[document.getElementById("selectUsers").selectedIndex].value;
+  
   var data = new FormData();
-  data.append('function', "savePeople");
+  data.append('function', "saveSelectedAssignee");
   data.append('ticketId', ticketId);
-  data.append('newAssignee', selectedUser);
+  data.append('assigneeId', assigneeId);
 
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'ticketController.php', true);
-  xhr.onreadystatechange = function() 
-  {
-    if (this.readyState == 4 && this.status == 200)
-      {
-        console.log(this.responseText);
-        saveAssigneeKey(selectedUserValue, ticketId);
-        loadPeople(ticketId);
-        $('#CommentModal').modal('hide'); // Shouldnt we use a different Modal? Should we just rename it to ticketModal? I will leave that decision to you Lewis
-        overHang("success", "Ticket assigned to "+ selectedUser);
-      }
-  }
-  xhr.send(data);
+  axios(
+    {
+        method: 'post',
+        url: '../Ticket/ticketController.php',
+        data: data,
+        headers: {'Content-Type': 'multipart/form-data' }
+    })
+  .then(res => 
+    {
+      loadAssignee();
+      $('#CommentModal').modal('hide'); // We should rename this -> Will make a ticket on this
+    })
 }
 
 function loadUsersInAssigneeModal()
