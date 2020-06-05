@@ -1,10 +1,8 @@
 <script src="../Script/peopleController.js"></script>
-<script> 
-var ticketId = "<?php echo $ticketId; ?>";
-var fullName = "<?php echo $userLoggedIn->getForename() . " " . $userLoggedIn->getSurname() ?>";
-</script>
 <p ID="ticketPeople1">Reporter: <label id="reporter"><label></p>
+<p id="reporterUserId" hidden></p>
 <p ID="ticketPeople2">Assignee: <label id="assignee"><label></p>
+<p id="assigneeUserId" hidden></p>
 <button ID="ticketPeopleChooseAssignee" data-toggle="modal" data-target="#CommentModal" onclick="People()">Pick Assignee</button>
 <button id="ticketPeopleSelfAssignee" onclick="saveAssigneeAsYourself(ticketId, fullName)">Assigned to myself</button>
 
