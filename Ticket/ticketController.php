@@ -23,25 +23,13 @@ else if ($function == "deleteComment")
 {
     echo deleteComment($_POST['commentId']);
 }
-else if ($function == "loadPeople")
+else if ($function == "saveSelectedAssignee")
 {
-    echo json_encode(loadPeople($_POST['ticketId']));
-}
-else if ($function == "savePeople")
-{
-    echo savePeople($_POST['ticketId'], $_POST['newAssignee']);
-}
-else if ($function == "peopleYourself")
-{
-    peopleYourself($_POST['fullName'], $_POST['ticketId']);
+    echo saveSelectedAssignee($_POST['ticketId'], $_POST['assigneeId']);
 }
 else if ($function == "loadUsers")
 {
     echo json_encode(loadUsers());
-}
-else if ($function == "assigneeKeyUpdate")
-{
-    echo assigneeKey($_POST['key'], $_POST['ticketId']);
 }
 else if ($function == "loadDates")
 {
@@ -126,30 +114,11 @@ function deleteComment($commentId)
     echo "Success"; // Using echo for XMLHttpRequest
 }
 
-function loadPeople($ticketId)
+function saveSelectedAssignee($ticketId, $newAssignee)
 {
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("SELECT reporter, assignee FROM ticket WHERE ticketId = ?");
-    $stmt->execute([$ticketId]);
-    $people = $stmt->fetchAll();
-    return $people;
-}
-
-function peopleYourself($fullName, $ticketId)
-{
-    $pdo = logindb('user', 'pass');
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("UPDATE ticket SET assignee = ? WHERE ticketId = ?");
-    $stmt->execute([$fullName, $ticketId]);
-    echo "Success"; // Using echo for XMLHttpRequest
-}
-
-function savePeople($ticketId, $newAssignee)
-{
-    $pdo = logindb('user', 'pass');
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("UPDATE ticket SET assignee = ? WHERE ticketId = ?");
+    $stmt = $pdo->prepare("UPDATE ticket SET assignee_key = ? WHERE ticketId = ?");
     $stmt->execute([$newAssignee, $ticketId]);
     echo "Success"; // Using echo for XMLHttpRequest
 }
