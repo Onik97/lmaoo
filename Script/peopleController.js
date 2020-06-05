@@ -51,7 +51,7 @@ function saveSelectedAssignee()
   var ticketId = new URL(window.location.href).searchParams.get("ticketId");
   var assigneeId = document.getElementById("selectUsers").options[document.getElementById("selectUsers").selectedIndex].value;
   var assigneeName = document.getElementById("selectUsers").options[document.getElementById("selectUsers").selectedIndex].text;
-  
+
   var data = new FormData();
   data.append('function', "saveSelectedAssignee");
   data.append('ticketId', ticketId);
@@ -106,8 +106,8 @@ function saveAssigneeAsYourself()
   var data = new FormData();
   data.append('function', "assigneeSelf");
   data.append('ticketId', ticketId)
-  data.append('selfId', userUserId)
-  
+  data.append('selfId', userId)
+    
   axios(
     {
         method: 'post',
