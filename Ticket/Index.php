@@ -9,9 +9,10 @@ session_start();
 <link rel="stylesheet" href="../Css/ticketPage.css">
 <head>
 <?php include("../Global/head.php"); ?>
+<p id="navBarActive" hidden>ticketPage</p>
 </head>
 <?php include("../Global/navBar.php"); ?>
-<body> 
+<body>
 	<?php if (isset($userLoggedIn)) 
 	{ if(isset($_GET['ticketId']) && ticketExistance($_GET['ticketId'])) 
 		{ $ticketId = $_GET['ticketId']; ?>
