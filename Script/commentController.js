@@ -21,6 +21,8 @@ $(document).ready(function()
 
 function loadComments()
 {
+  var ticketId = new URL(window.location.href).searchParams.get("ticketId");
+
   var data = new FormData();
   data.append('function', "loadComments");
   data.append('ticketId', ticketId);
@@ -199,27 +201,3 @@ function deleteComment(commentId)
     }
     xhr.send(data);
  }
- 
-function briefDescription()
-{
-  document.getElementById("Modal-head").innerHTML = "Brief Description";
-  document.getElementById("prompt").style.display = "block"
-  document.getElementById("prompt").innerHTML = "Testing";
-  document.getElementById("Modal-footer").innerHTML = `
-	<div class="modal-footer">
-		<input class="btn btn-primary" type="submit" value="wip">
-    </div>
-	`;
-}
-
-function Details()
-{
-  document.getElementById("Modal-head").innerHTML = "Details infomation";
-  document.getElementById("prompt").style.display = "block"
-  document.getElementById("prompt").innerHTML = "Testing";
-  document.getElementById("Modal-footer").innerHTML = `
-	<div class="modal-footer">
-		<input class="btn btn-primary" type="submit" value="wip">
-    </div>
-	`;
-}
