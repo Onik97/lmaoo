@@ -91,20 +91,9 @@ function editComment(commentId)
   {
       if(e.shiftKey && e.keyCode == 13)
       {
-        var newComment = $('.comment'+commentId).summernote('code');
-        var newCommentStripped = newComment.replace(/<[^>]*>?/gm, "");
-        
-        if ($('.comment'+commentId).summernote("isEmpty") || newCommentStripped.trim().length == 0)
+        if (commentValidation('.comment'+commentId))
         {
-          overHang("error", "Comment too small!");
-        }		
-        else if (newComment.length > 255)
-        {
-          overHang("error", "Comment too large!");
-        }
-        else 
-        {
-          updateComment(commentId, newComment);
+          updateComment(commentId);
           $('.comment'+commentId).summernote('destroy');
           overHang("success", "Comment updated successfully!");      
         }
@@ -136,15 +125,7 @@ function saveComment()
   var ticketId = new URL(window.location.href).searchParams.get("ticketId");
   var commentContent = $('.createComment').summernote('code');
   var commentContentStripped = commentContent.replace(/<[^>]*>?/gm, "");
-  if ($('.createComment').summernote("isEmpty") || commentContentStripped.trim().length == 0)
-  {
-    overHang("error", "Comment too small!");
-  }		
-  else if (commentContent.length > 255)
-  {
-    overHang("error", "Comment too large!");
-  }
-  else 
+  if (commentValidation(".createComment"))
   {
     // variable userId is available for User Id logged in
     // variable ticketId is available for Ticket Id
@@ -197,7 +178,7 @@ function deleteComment(commentId)
         {
           loadComments();
           $('#CommentModal').modal('hide'); 
-          overHang("warn", "Comment deleted successfully!");
+          overHang("succes", "Comment deleted successfully!");
         }
     }
     xhr.send(data);
