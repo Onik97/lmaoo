@@ -87,3 +87,20 @@ function getActiveUsersFromServer()
     
         return response;
 }
+
+function loadCommentsFromServer(ticketId)
+{
+    var data = new FormData();
+    data.append('function', "loadComments");
+    data.append('ticketId', ticketId);
+
+    const response = axios(
+        {
+            method: 'post',
+            data: data,
+            url: '../Ticket/ticketController.php',
+            headers: {'Content-Type': 'multipart/form-data' }
+        })
+    
+        return response;
+}
