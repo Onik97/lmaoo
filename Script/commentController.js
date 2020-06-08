@@ -1,8 +1,12 @@
 $(document).ready(function() 
 {
   loadComments();
+  loadSummerNote(".createComment");
+});
 
-  $('.createComment').summernote({
+function loadSummerNote(summerNoteId)
+{
+  $(summerNoteId).summernote({
     height: 150,
     toolbar: 
     [
@@ -17,76 +21,52 @@ $(document).ready(function()
       air: [],
     }
     });
-});
+}
 
 function loadComments()
 {
   var ticketId = new URL(window.location.href).searchParams.get("ticketId");
 
-  var data = new FormData();
-  data.append('function', "loadComments");
-  data.append('ticketId', ticketId);
-
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'ticketController.php', true);
-  xhr.onreadystatechange = function() 
-  {
-    if (this.readyState == 4 && this.status == 200)
+  loadCommentsFromServer(ticketId)
+  .then(response =>
+    {
+      var json = response.data;
+      for (i = 0; i < json.length; i++)
       {
-        var ticketJSON = JSON.parse(this.responseText);
-                document.getElementById("commentList").innerHTML = 
-                `
-                ${ticketJSON.map(function(comment)
-                    {
-                      if (userId == comment.userId || userLevel == 4)
-                      {
-                        return `
-                        <div id="comments">
-                            <img class="CommentImages" src="../Images/paperclip.png"></img>
-                            <img class="CommentImages" src="../Images/delete.png" data-toggle="modal" data-target="#CommentModal" onclick="deletePrompt(${comment.commentId})" role="button"></img>
-                            <img class="CommentImages" src="../Images/edit.png" onclick=editComment(${comment.commentId}) role="button"></img>   
-                            <p>Comment by ${comment.forename + " " + comment.surname} at <label>${comment.commentCreated}</label></p>
-                            <div class="comment${comment.commentId}">${comment.commentContent}</div>
-                        </div>
-                        `;
-                      }
-                      else 
-                      {
-                        return `
-                        <div id="comments">
-                            <img class="CommentImages" src="../Images/paperclip.png"></img> 
-                            <p>Comment by ${comment.forename + " " + comment.surname}</p>
-                            <div class="comment${comment.commentId}">${comment.commentContent}</div>
-                        </div>
-                        `;
-                      }
-                    }).join('')}
-                `;
+        if (userId == json[i].userId || userLevel == 4)
+        {
+          document.getElementById("commentList").innerHTML +=
+          `
+          <div id="comments">
+            <img class="CommentImages" src="../Images/paperclip.png"></img>
+            <img class="CommentImages" src="../Images/delete.png" data-toggle="modal" data-target="#CommentModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
+            <img class="CommentImages" src="../Images/edit.png" onclick=editComment(${json[i].commentId}) role="button"></img>   
+            <p>Comment by ${json[i].forename + " " + json[i].surname} at <label>${json[i].commentCreated}</label></p>
+            <div class="comment${json[i].commentId}">${json[i].commentContent}</div>
+          </div>
+          `
+        }
+        else 
+        {
+          document.getElementById("commentList").innerHTML +=
+          `
+          <div id="comments">
+            <img class="CommentImages" src="../Images/paperclip.png"></img> 
+            <p>Comment by ${json[i].forename + " " + json[i].surname}</p>
+            <div class="comment${json[i].commentId}">${json[i].commentContent}</div>
+          </div>
+          `
+        }
       }
-      
-  }
-  xhr.send(data);
+    })
 }
 
 function editComment(commentId)
 {
-  $('.comment'+commentId).summernote({
-    height: 150,
-    toolbar: 
-    [
-      ['style', ['bold', 'italic', 'underline', 'clear']],
-      ['font', ['strikethrough' ]],
-      ['para', ['ul', 'ol']],
-    ],
-    popover: 
-    {
-      image: [],
-      link: [],
-      air: [],
-    }
-    });
-    
-    $('.comment'+commentId).on('summernote.keydown', function(we, e) {
+  loadSummerNote('.comment'+commentId);
+
+  $('.comment'+commentId).on('summernote.keydown', (we, e) =>
+  {
       if(e.shiftKey && e.keyCode == 13)
       {
         var newComment = $('.comment'+commentId).summernote('code');
@@ -107,7 +87,7 @@ function editComment(commentId)
           overHang("success", "Comment updated successfully!");      
         }
       }
-    });
+  });
 }
 
 function updateComment(id, newContent)
