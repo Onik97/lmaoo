@@ -4,7 +4,7 @@
 <p ID="ticketPeople2">Assignee: <label id="assignee"><label></p>
 <p id="assigneeUserId" hidden></p>
 <button ID="ticketPeopleChooseAssignee" data-toggle="modal" data-target="#CommentModal" onclick="People()">Pick Assignee</button>
-<button id="ticketPeopleSelfAssignee" onclick="saveAssigneeAsYourself(ticketId, fullName)">Assigned to myself</button>
+<button id="ticketPeopleSelfAssignee" onclick="saveAssigneeAsYourself()">Assigned to myself</button>
 
 <div ID="dates1">
 <h1> Dates </h1>

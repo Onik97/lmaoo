@@ -17,15 +17,14 @@ function People()
   loadUsersInAssigneeModal();
   document.getElementById("Modal-footer").innerHTML = `
     <div class="modal-footer">
-        <input class="btn btn-primary" type="submit" value="Save" onclick=savePeople(${ticketId})>
+        <input class="btn btn-primary" type="submit" value="Save" onclick="saveSelectedAssignee()">
     </div>
     `;
 }
 
 function loadAssignee()
 {
-  var url = new URL(window.location.href);
-  ticketId = url.searchParams.get("ticketId");
+  var ticketId = new URL(window.location.href).searchParams.get("ticketId");
   loadAssigneeFromServer(ticketId)
   .then(response => 
     {
@@ -37,8 +36,7 @@ function loadAssignee()
 
 function loadReporter()
 {
-  var url = new URL(window.location.href);
-  ticketId = url.searchParams.get("ticketId");
+  var ticketId = new URL(window.location.href).searchParams.get("ticketId");
   loadReporterFromServer(ticketId)
   .then(response => 
     {
@@ -48,31 +46,30 @@ function loadReporter()
     })
 }
 
-function savePeople(ticketId)
+function saveSelectedAssignee()
 {
-  var selectElement = document.getElementById("selectUsers");
-  var selectedUser = selectElement.options[selectElement.selectedIndex].text;
-  var selectedUserValue = selectElement.options[selectElement.selectedIndex].value;  
+  var ticketId = new URL(window.location.href).searchParams.get("ticketId");
+  var assigneeId = document.getElementById("selectUsers").options[document.getElementById("selectUsers").selectedIndex].value;
+  var assigneeName = document.getElementById("selectUsers").options[document.getElementById("selectUsers").selectedIndex].text;
 
   var data = new FormData();
-  data.append('function', "savePeople");
+  data.append('function', "saveSelectedAssignee");
   data.append('ticketId', ticketId);
-  data.append('newAssignee', selectedUser);
+  data.append('assigneeId', assigneeId);
 
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'ticketController.php', true);
-  xhr.onreadystatechange = function() 
-  {
-    if (this.readyState == 4 && this.status == 200)
-      {
-        console.log(this.responseText);
-        saveAssigneeKey(selectedUserValue, ticketId);
-        loadPeople(ticketId);
-        $('#CommentModal').modal('hide'); // Shouldnt we use a different Modal? Should we just rename it to ticketModal? I will leave that decision to you Lewis
-        overHang("success", "Ticket assigned to "+ selectedUser);
-      }
-  }
-  xhr.send(data);
+  axios(
+    {
+        method: 'post',
+        url: '../Ticket/ticketController.php',
+        data: data,
+        headers: {'Content-Type': 'multipart/form-data' }
+    })
+  .then(res => 
+    {
+      loadAssignee();
+      $('#CommentModal').modal('hide'); // We should rename this -> Will make a ticket on this
+      overHang("success", "Ticket assigned to " + assigneeName);
+    })
 }
 
 function loadUsersInAssigneeModal()
@@ -102,24 +99,26 @@ function loadUsersInAssigneeModal()
   })
 }
 
-function saveAssigneeAsYourself(ticketId, fullName)
+function saveAssigneeAsYourself()
 {
+  var ticketId = new URL(window.location.href).searchParams.get("ticketId");
+
   var data = new FormData();
-  data.append('function', "peopleYourself");
+  data.append('function', "assigneeSelf");
   data.append('ticketId', ticketId)
-  data.append('fullName', fullName)
-  
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'ticketController.php', true);
-  xhr.onreadystatechange = function()
-  {
-	  if (this.readyState == 4 && this.status == 200)
-	  {
-      console.log(this.responseText);
-      saveAssigneeKey(userId, ticketId);
-      loadPeople(ticketId);
+  data.append('selfId', userId)
+    
+  axios(
+    {
+        method: 'post',
+        url: '../Ticket/ticketController.php',
+        data: data,
+        headers: {'Content-Type': 'multipart/form-data' }
+    })
+  .then(res => 
+    {
+      loadAssignee();
+      $('#CommentModal').modal('hide'); // We should rename this -> Will make a ticket on this
       overHang("success", "Ticket assigned to yourself!");
-	  }
-  }
-  xhr.send(data);
+    })
 }
