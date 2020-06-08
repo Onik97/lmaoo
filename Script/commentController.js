@@ -110,12 +110,11 @@ function saveComment(summernoteId, commentId)
   data.append('userId', userId);
  
   if (commentId != 0) data.append("commentId", commentId);
-  console.log(commentId);
   commentId == 0 ? data.append('function', "createComment") : data.append('function', "updateComment") ; // Ternary Condition
 
   if (commentValidation(summernoteId))
   {
-    const response = axios(
+    axios(
     {
       method: 'post',
       data: data,
@@ -151,16 +150,17 @@ function deleteComment(commentId)
     data.append('function', "deleteComment");
     data.append('commentId', commentId);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'ticketController.php', true);
-    xhr.onreadystatechange = function() 
+    axios(
+      {
+          method: 'post',
+          data: data,
+          url: '../Ticket/ticketController.php',
+          headers: {'Content-Type': 'multipart/form-data' }
+      })
+    .then( () =>
     {
-      if (this.readyState == 4 && this.status == 200)
-        {
-          loadComments();
-          $('#CommentModal').modal('hide'); 
-          overHang("succes", "Comment deleted successfully!");
-        }
-    }
-    xhr.send(data);
+      $('#CommentModal').modal('hide'); 
+      overHang("succes", "Comment deleted successfully!");
+      loadComments();
+    })
  }
