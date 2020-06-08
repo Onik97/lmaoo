@@ -23,6 +23,27 @@ function loadSummerNote(summerNoteId)
     });
 }
 
+function commentValidation(summerNoteId)
+{
+  var newComment = $(summerNoteId).summernote('code');
+  var newCommentStripped = newComment.replace(/<[^>]*>?/gm, "");
+
+  if ($(summerNoteId).summernote("isEmpty") || newCommentStripped.trim().length == 0)
+  {
+    overHang("error", "Comment too small!");
+    return false;
+  }		
+  else if (newComment.length > 255)
+  {
+    overHang("error", "Comment too large!");
+    return false
+  }
+  else
+  {
+    return true;
+  }
+}
+
 function loadComments()
 {
   var ticketId = new URL(window.location.href).searchParams.get("ticketId");
@@ -112,6 +133,7 @@ function updateComment(id, newContent)
 
 function saveComment()
 {
+  var ticketId = new URL(window.location.href).searchParams.get("ticketId");
   var commentContent = $('.createComment').summernote('code');
   var commentContentStripped = commentContent.replace(/<[^>]*>?/gm, "");
   if ($('.createComment').summernote("isEmpty") || commentContentStripped.trim().length == 0)
@@ -138,7 +160,6 @@ function saveComment()
     {
       if (this.readyState == 4 && this.status == 200)
         {
-          console.log(this.responseText);
           $('.createComment').summernote('code', ""); // Empties the Comments once it is submitted
           loadComments(); // Loads comments once you submit it
           overHang("success", "New comment added successfully!");
@@ -174,7 +195,6 @@ function deleteComment(commentId)
     {
       if (this.readyState == 4 && this.status == 200)
         {
-          console.log(this.responseText);   
           loadComments();
           $('#CommentModal').modal('hide'); 
           overHang("warn", "Comment deleted successfully!");
