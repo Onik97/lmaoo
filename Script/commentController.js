@@ -30,6 +30,7 @@ function loadComments()
   loadCommentsFromServer(ticketId)
   .then(response =>
     {
+      document.getElementById("commentList").innerHTML = ""; // Empties for edit/delete comments
       var json = response.data;
       for (i = 0; i < json.length; i++)
       {
