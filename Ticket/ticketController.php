@@ -17,7 +17,7 @@ else if ($function == "loadComments")
 }
 else if ($function == "updateComment")
 {
-    echo updateComment($_POST['commentId'], $_POST['newComment']);
+    echo updateComment($_POST['commentId'], $_POST['commentContent']);
 }
 else if ($function == "deleteComment")
 {
