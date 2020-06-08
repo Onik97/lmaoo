@@ -93,60 +93,41 @@ function editComment(commentId)
       {
         if (commentValidation('.comment'+commentId))
         {
-          updateComment(commentId);
-          $('.comment'+commentId).summernote('destroy');
-          overHang("success", "Comment updated successfully!");      
+          saveComment('.comment'+commentId, commentId);
+          $('.comment'+commentId).summernote('destroy');  
         }
       }
   });
 }
 
-function updateComment(id, newContent)
-{
-  var data = new FormData();
-  data.append('function', "updateComment");
-  data.append('commentId', id);
-  data.append('newComment', newContent)
-
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'ticketController.php', true);
-  xhr.onreadystatechange = function() 
-  {
-    if (this.readyState == 4 && this.status == 200)
-      {
-        console.log(this.responseText);
-      }
-  }
-  xhr.send(data);
-}
-
-function saveComment()
+function saveComment(summernoteId, commentId)
 {
   var ticketId = new URL(window.location.href).searchParams.get("ticketId");
-  var commentContent = $('.createComment').summernote('code');
-  var commentContentStripped = commentContent.replace(/<[^>]*>?/gm, "");
-  if (commentValidation(".createComment"))
-  {
-    // variable userId is available for User Id logged in
-    // variable ticketId is available for Ticket Id
-    var data = new FormData();
-    data.append('function', "createComment");
-    data.append('commentContent', commentContent);
-    data.append('ticketId', ticketId);
-    data.append('userId', userId);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'ticketController.php', true);
-    xhr.onreadystatechange = function() 
+  var data = new FormData();
+  data.append('commentContent', $(summernoteId).summernote('code'));
+  data.append('ticketId', ticketId);
+  data.append('userId', userId);
+ 
+  if (commentId != 0) data.append("commentId", commentId);
+  console.log(commentId);
+  commentId == 0 ? data.append('function', "createComment") : data.append('function', "updateComment") ; // Ternary Condition
+
+  if (commentValidation(summernoteId))
+  {
+    const response = axios(
     {
-      if (this.readyState == 4 && this.status == 200)
-        {
-          $('.createComment').summernote('code', ""); // Empties the Comments once it is submitted
-          loadComments(); // Loads comments once you submit it
-          overHang("success", "New comment added successfully!");
-        }
-    }
-    xhr.send(data);
+      method: 'post',
+      data: data,
+      url: '../Ticket/ticketController.php',
+      headers: {'Content-Type': 'multipart/form-data' }
+    })
+    .then(() =>
+    {
+      if (commentId == 0) $('.createComment').summernote('code', "");
+      commentId == 0 ? overHang("success", "New comment added successfully!") : overHang("success", "Comment Edited!"); 
+      loadComments(); // Loads comments once you submit it
+    })
   }
 }
 
