@@ -95,15 +95,10 @@ function createProjectPrompt()
     `;
 }
 
-function projectConfirmation() {
-    if(document.getElementById("projectName").value.trim() == "" || document.getElementById("projectStatus").value == 0) 
-    { 
-        document.getElementById("saveProjectBtn").disabled = true;
-    } 
-    else
-    { 
-        document.getElementById("saveProjectBtn").disabled = false;
-    }
+function projectConfirmation() 
+{
+    document.getElementById("projectName").value.trim() == "" || document.getElementById("projectStatus").value == 0
+    ? document.getElementById("saveProjectBtn").disabled = true : document.getElementById("saveProjectBtn").disabled = false;
 }
 
 function createProject()
@@ -144,15 +139,10 @@ function createTicketPrompt(projectId)
     `;
 }
 
-function ticketConfirmation() {
-    if(document.getElementById("task").value.trim() == "")
-    {
-        document.getElementById("saveTicketBtn").disabled = true;
-    }
-    else
-    {
-        document.getElementById("saveTicketBtn").disabled = false;
-    }
+function ticketConfirmation() 
+{
+    (document.getElementById("task").value.trim() == "")
+    ? document.getElementById("saveTicketBtn").disabled = true : document.getElementById("saveTicketBtn").disabled = false;
 }
 
 function createTicket()
