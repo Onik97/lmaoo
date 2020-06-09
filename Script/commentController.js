@@ -89,7 +89,7 @@ function editComment(commentId)
 
   $('.comment'+commentId).on('summernote.keydown', (we, e) =>
   {
-      if(e.shiftKey && e.keyCode == 13)
+      if(e.shiftKey && e.keyCode == 13) // Shift + Enter
       {
         if (commentValidation('.comment'+commentId))
         {
