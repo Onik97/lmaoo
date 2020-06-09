@@ -119,19 +119,13 @@ function createProject()
     data.append('projectName', document.getElementById("projectName").value);
     data.append('projectStatus', projectStatus);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'projectController.php', true);
-    xhr.onreadystatechange = function() 
+    axios.post("../Project/projectController.php", data)
+    .then( () => 
     {
-      if (this.readyState == 4 && this.status == 200)
-        {
-            console.log(this.responseText);
-            loadProjects();
-            overHang("success", "Project has been successfully created!");
-            $('#projectModal').modal('hide');
-        }
-    }
-    xhr.send(data);
+        overHang("success", "Project has been successfully created!");
+        loadProjects();
+        $('#projectModal').modal('hide');
+    })
 }
 
 function createTicketPrompt(projectId)
@@ -177,7 +171,6 @@ function createTicket()
     data.append('reporterKey', document.getElementById("reporterKey").value);
     data.append('reporter', document.getElementById("reporter").value);
     data.append('task', document.getElementById("task").value);
-    //data.append('progress', document.getElementById("progress").value);
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'projectController.php', true);
