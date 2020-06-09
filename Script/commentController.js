@@ -118,7 +118,7 @@ function saveComment(summernoteId, commentId)
     .then(() =>
     {
       if (commentId == null) $('.createComment').summernote('code', "");
-      commentId == null ? overHang("success", "New comment added successfully!") : overHang("success", "Comment Edited!"); 
+      commentId == null ? overHang("success", "New comment added successfully!") : overHang("success", "Comment successfully edited!"); 
       loadComments(); // Loads comments once you submit it
     })
   }
@@ -138,8 +138,6 @@ function deletePrompt(commentId)
 
 function deleteComment(commentId)
 {
-    // variable userId is available for User Id logged in
-    // variable ticketId is available for Ticket Id
     var data = new FormData();
     data.append('function', "deleteComment");
     data.append('commentId', commentId);
