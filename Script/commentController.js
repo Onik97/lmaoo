@@ -109,8 +109,8 @@ function saveComment(summernoteId, commentId)
   data.append('ticketId', ticketId);
   data.append('userId', userId);
  
-  if (commentId != 0) data.append("commentId", commentId);
-  commentId == 0 ? data.append('function', "createComment") : data.append('function', "updateComment") ; // Ternary Condition
+  if (commentId != null) data.append("commentId", commentId);
+  commentId == null ? data.append('function', "createComment") : data.append('function', "updateComment") ; // Ternary Condition
 
   if (commentValidation(summernoteId))
   {
@@ -123,8 +123,8 @@ function saveComment(summernoteId, commentId)
     })
     .then(() =>
     {
-      if (commentId == 0) $('.createComment').summernote('code', "");
-      commentId == 0 ? overHang("success", "New comment added successfully!") : overHang("success", "Comment Edited!"); 
+      if (commentId == null) $('.createComment').summernote('code', "");
+      commentId == null ? overHang("success", "New comment added successfully!") : overHang("success", "Comment Edited!"); 
       loadComments(); // Loads comments once you submit it
     })
   }
