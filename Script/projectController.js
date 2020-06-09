@@ -120,7 +120,7 @@ function createProject()
     data.append('projectStatus', projectStatus);
 
     axios.post("../Project/projectController.php", data)
-    .then( () => 
+    .then(() => 
     {
         overHang("success", "Project has been successfully created!");
         loadProjects();
