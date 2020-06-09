@@ -22,7 +22,7 @@ function loadProjectsFromServer()
     {
         method: 'post',
         url: '../Project/projectController.php',
-        data: formdata,
+        data: data,
         headers: {'Content-Type': 'multipart/form-data' }
     })
 
