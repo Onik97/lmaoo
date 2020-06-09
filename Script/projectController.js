@@ -44,33 +44,27 @@ function getTicketWithProjectId(id)
     .then((response) => 
     {
         var json = response.data;
-        $("#ticketTable").find("tr:gt(0)").remove();
+        $("#ticketTable").find("tr:gt(0)").remove(); // Clears table
 
         for (i = 0; i < json.length; i++)
         {
-            let tableRef = document.getElementById("ticketTable");
-            let newRow = tableRef.insertRow(-1);
-
-            let ticketIdCell = newRow.insertCell(0);
-            let taskCell = newRow.insertCell(1);
-            let progressCell = newRow.insertCell(2);
-            let viewCell = newRow.insertCell(3);
-
             let ticketId = document.createTextNode(json[i].ticketId);
             let task = document.createTextNode(json[i].task);
             let progress = document.createTextNode("Not included in the database");
             let viewBtnContent = document.createTextNode("View");
-            
+
             var viewBtn = document.createElement("a");
             viewBtn.classList.add("btn");
             viewBtn.classList.add("btn-info");
             viewBtn.appendChild(viewBtnContent);
             viewBtn.setAttribute('href', "../Ticket/index.php?ticketId="+json[i].ticketId);
+            
+            let newRow = document.getElementById("ticketTable").insertRow(-1);
 
-            ticketIdCell.appendChild(ticketId);
-            taskCell.appendChild(task);
-            progressCell.appendChild(progress);
-            viewCell.appendChild(viewBtn);
+            newRow.insertCell(0).appendChild(ticketId);
+            newRow.insertCell(1).appendChild(task);
+            newRow.insertCell(2).appendChild(progress);
+            newRow.insertCell(3).appendChild(viewBtn);
         }
     })
 }
