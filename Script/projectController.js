@@ -25,7 +25,6 @@ function loadProjects()
                 `
             };
     })
-    .catch((response) => {})
 }
 
 function getProjectName(name)
@@ -74,7 +73,6 @@ function getTicketWithProjectId(id)
             viewCell.appendChild(viewBtn);
         }
     })
-    .catch((response) => console.log(response))
 }
 
 function createProjectPrompt()
