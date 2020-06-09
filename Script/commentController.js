@@ -144,13 +144,7 @@ function deleteComment(commentId)
     data.append('function', "deleteComment");
     data.append('commentId', commentId);
 
-    axios(
-      {
-          method: 'post',
-          data: data,
-          url: '../Ticket/ticketController.php',
-          headers: {'Content-Type': 'multipart/form-data' }
-      })
+    axios.post("../Ticket/ticketController.php", data)
     .then( () =>
     {
       $('#CommentModal').modal('hide'); 
