@@ -57,13 +57,7 @@ function saveSelectedAssignee()
   data.append('ticketId', ticketId);
   data.append('assigneeId', assigneeId);
 
-  axios(
-    {
-        method: 'post',
-        url: '../Ticket/ticketController.php',
-        data: data,
-        headers: {'Content-Type': 'multipart/form-data' }
-    })
+  axios.post('../Ticket/ticketController.php', data)
   .then(res => 
     {
       loadAssignee();
@@ -108,13 +102,7 @@ function saveAssigneeAsYourself()
   data.append('ticketId', ticketId)
   data.append('selfId', userId)
     
-  axios(
-    {
-        method: 'post',
-        url: '../Ticket/ticketController.php',
-        data: data,
-        headers: {'Content-Type': 'multipart/form-data' }
-    })
+  axios.post('../Ticket/ticketController.php', data)
   .then(res => 
     {
       loadAssignee();
