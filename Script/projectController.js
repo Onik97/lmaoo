@@ -5,10 +5,7 @@ $(document).ready(function()
 
 function loadProjects()
 {
-    var data = new FormData();
-    data.append('function', "loadProjects");
-
-    loadProjectsFromServer(data)
+    loadProjectsFromServer()
     .then((response) =>
     {
         var json = response.data;
@@ -19,11 +16,11 @@ function loadProjects()
         }
 
         if (userLevel >= 3) 
-            {
-                document.getElementById("listOfProjects").innerHTML += `
-                <li id="createProjectBtn" data-toggle="modal" data-target="#projectModal" onclick="createProjectPrompt()"> + Create Project</li>
-                `
-            };
+        {
+            document.getElementById("listOfProjects").innerHTML += `
+            <li id="createProjectBtn" data-toggle="modal" data-target="#projectModal" onclick="createProjectPrompt()"> + Create Project</li>
+            `
+        };
     })
 }
 
@@ -111,8 +108,7 @@ function projectConfirmation() {
 
 function createProject()
 {
-    var e = document.getElementById("projectStatus");
-    var projectStatus = e.options[e.selectedIndex].text;
+    var projectStatus = document.getElementById("projectStatus").options[document.getElementById("projectStatus").selectedIndex].text;
 
     var data = new FormData();
     data.append('function', "createProject");

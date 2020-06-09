@@ -13,8 +13,11 @@ function checkUsernameFromServer(formdata)
     return response;
 }
 
-function loadProjectsFromServer(formdata)
+function loadProjectsFromServer()
 {
+    var data = new FormData();
+    data.append('function', "loadProjects");
+
     const response = axios(
     {
         method: 'post',
