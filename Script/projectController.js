@@ -121,7 +121,7 @@ function createProject()
 
 function createTicketPrompt(projectId)
 {
-    document.getElementById("projectModalHead").innerHTML = "Create Ticket"
+    document.getElementById("projectModalHead").innerHTML = "Create Ticket";
 
     document.getElementById("projectModalBody").innerHTML = `
     <div class="form-group">
