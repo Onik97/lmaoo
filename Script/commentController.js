@@ -114,13 +114,7 @@ function saveComment(summernoteId, commentId)
 
   if (commentValidation(summernoteId))
   {
-    axios(
-    {
-      method: 'post',
-      data: data,
-      url: '../Ticket/ticketController.php',
-      headers: {'Content-Type': 'multipart/form-data' }
-    })
+    axios.post("../Ticket/ticketController.php", data)
     .then(() =>
     {
       if (commentId == null) $('.createComment').summernote('code', "");
