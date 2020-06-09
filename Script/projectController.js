@@ -132,12 +132,8 @@ function createTicketPrompt(projectId)
     <div class="form-group">
         <label for="projectId" class="modal-content-1">Project ID</label> <br>
         <input type="text" id="projectId" class="form-control" value="${projectId}" disabled> <br>
-        <label for="reporter" class="modal-content-2">Reporter</label> <br>
-        <input type="text" id="reporter" class="form-control" value="${userForename + " " + userSurname}" disabled> <br>
         <label for="task" class="modal-content-2">Task</label> <br>
         <input type="text" id="task" class="form-control" onkeyup="ticketConfirmation()" required> <br>
-        <label for="progress" class="modal-content-2">Progress</label> <br>
-        <input type="text" id="progress" class="form-control" onkeyup="ticketConfirmation()" required> <br>
         <input type="hidden" id="reporterKey" value="${userId}">
         <input type="hidden" id="function" value="createTicket"> <br>
     </div>
@@ -149,7 +145,7 @@ function createTicketPrompt(projectId)
 }
 
 function ticketConfirmation() {
-    if(document.getElementById("task").value.trim() == "" || document.getElementById("progress").value.trim() == "")
+    if(document.getElementById("task").value.trim() == "")
     {
         document.getElementById("saveTicketBtn").disabled = true;
     }
@@ -165,20 +161,13 @@ function createTicket()
     data.append('function', "createTicket");
     data.append('projectId', document.getElementById("projectId").value);
     data.append('reporterKey', document.getElementById("reporterKey").value);
-    data.append('reporter', document.getElementById("reporter").value);
     data.append('task', document.getElementById("task").value);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'projectController.php', true);
-    xhr.onreadystatechange = function() 
+    axios.post("../Project/projectController.php", data)
+    .then(() =>
     {
-      if (this.readyState == 4 && this.status == 200)
-        {
-            console.log(this.responseText);
-            getTicketWithProjectId(document.getElementById("projectId").value);
-            overHang("success", "Ticket has been successfully created!");
-            $('#projectModal').modal('hide');
-        }
-    }
-    xhr.send(data);
+        getTicketWithProjectId(document.getElementById("projectId").value);
+        overHang("success", "Ticket has been successfully created!");
+        $('#projectModal').modal('hide');
+    })
 }
