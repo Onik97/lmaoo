@@ -104,3 +104,20 @@ function loadCommentsFromServer(ticketId)
     
         return response;
 }
+
+function loadDatesFromServer(ticketId)
+{
+    var data = new FormData();
+    data.append('function', "loadDates");
+    data.append('ticketId', ticketId);
+
+    const response = axios(
+        {
+            method: 'post',
+            data: data,
+            url: '../Ticket/ticketController.php',
+            headers: {'Content-Type': 'multipart/form-data' }
+        })
+    
+        return response;
+}
