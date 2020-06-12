@@ -32,18 +32,24 @@ function loadAssignee()
         $("#assignee").html(res[0].forename + " " + res[0].surname);
         $("#assigneeUserId").html(res[0].userId);
     })
+  .catch(response =>
+  {
+    console.log("response failed.")      
+  })
 }
 
 function loadReporter()
 {
   var ticketId = new URL(window.location.href).searchParams.get("ticketId");
   loadReporterFromServer(ticketId)
-  .then(response => 
+  .then((response) => 
+  {
     {
         var res = response.data;
         $("#reporter").html(res[0].forename + " " + res[0].surname);
         $("#reporterUserId").html(res[0].userId);
-    })
+    }
+  })
 }
 
 function saveSelectedAssignee()
