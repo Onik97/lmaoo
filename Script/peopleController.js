@@ -27,14 +27,12 @@ function loadAssignee()
   var ticketId = new URL(window.location.href).searchParams.get("ticketId");
   loadAssigneeFromServer(ticketId)
   .then(response => 
-    {
-        var res = response.data;
-        $("#assignee").html(res[0].forename + " " + res[0].surname);
-        $("#assigneeUserId").html(res[0].userId);
-    })
-  .catch(response =>
   {
-    console.log("response failed.")      
+    if (response.data.length == 0) return;
+
+    var res = response.data;
+    $("#assignee").html(res[0].forename + " " + res[0].surname);
+    $("#assigneeUserId").html(res[0].userId);
   })
 }
 
