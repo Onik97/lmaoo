@@ -27,23 +27,25 @@ function loadAssignee()
   var ticketId = new URL(window.location.href).searchParams.get("ticketId");
   loadAssigneeFromServer(ticketId)
   .then(response => 
-    {
-        var res = response.data;
-        $("#assignee").html(res[0].forename + " " + res[0].surname);
-        $("#assigneeUserId").html(res[0].userId);
-    })
+  {
+    if (response.data.length == 0) return;
+
+    var res = response.data;
+    $("#assignee").html(res[0].forename + " " + res[0].surname);
+    $("#assigneeUserId").html(res[0].userId);
+  })
 }
 
 function loadReporter()
 {
   var ticketId = new URL(window.location.href).searchParams.get("ticketId");
   loadReporterFromServer(ticketId)
-  .then(response => 
+  .then(response =>
     {
         var res = response.data;
         $("#reporter").html(res[0].forename + " " + res[0].surname);
         $("#reporterUserId").html(res[0].userId);
-    })
+  })
 }
 
 function saveSelectedAssignee()

@@ -71,12 +71,15 @@
 
 #ticketCreate {
 
-	text-align: centre;
+	text-align: left;
 	width: 1090px;
-	margin-top: 100px;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: #00ffd5;
+	margin: 100px auto 0px auto;
+	background-color: #F0F8FF;
+}
+
+#saveComment {
+	margin-left: 967px;
+	background-color: #F0F8FF;
 }
 
 .Createcommentbutton {
