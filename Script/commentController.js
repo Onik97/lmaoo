@@ -146,7 +146,7 @@ function deleteComment(commentId)
     .then( () =>
     {
       $('#CommentModal').modal('hide'); 
-      overHang("succes", "Comment deleted successfully!");
+      overHang("success", "Comment deleted successfully!");
       loadComments();
     })
  }
