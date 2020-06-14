@@ -89,7 +89,7 @@ function editComment(commentId)
 
   $('.comment'+commentId).on('summernote.keydown', (we, e) =>
   {
-      if(e.shiftKey && e.keyCode == 13)
+      if(e.shiftKey && e.keyCode == 13) // Shift + Enter
       {
         if (commentValidation('.comment'+commentId))
         {
@@ -114,17 +114,11 @@ function saveComment(summernoteId, commentId)
 
   if (commentValidation(summernoteId))
   {
-    axios(
-    {
-      method: 'post',
-      data: data,
-      url: '../Ticket/ticketController.php',
-      headers: {'Content-Type': 'multipart/form-data' }
-    })
+    axios.post("../Ticket/ticketController.php", data)
     .then(() =>
     {
       if (commentId == null) $('.createComment').summernote('code', "");
-      commentId == null ? overHang("success", "New comment added successfully!") : overHang("success", "Comment Edited!"); 
+      commentId == null ? overHang("success", "New comment added successfully!") : overHang("success", "Comment successfully edited!"); 
       loadComments(); // Loads comments once you submit it
     })
   }
@@ -144,19 +138,11 @@ function deletePrompt(commentId)
 
 function deleteComment(commentId)
 {
-    // variable userId is available for User Id logged in
-    // variable ticketId is available for Ticket Id
     var data = new FormData();
     data.append('function', "deleteComment");
     data.append('commentId', commentId);
 
-    axios(
-      {
-          method: 'post',
-          data: data,
-          url: '../Ticket/ticketController.php',
-          headers: {'Content-Type': 'multipart/form-data' }
-      })
+    axios.post("../Ticket/ticketController.php", data)
     .then( () =>
     {
       $('#CommentModal').modal('hide'); 

@@ -5,10 +5,7 @@ $(document).ready(function()
 
 function loadProjects()
 {
-    var data = new FormData();
-    data.append('function', "loadProjects");
-
-    loadProjectsFromServer(data)
+    loadProjectsFromServer()
     .then((response) =>
     {
         var json = response.data;
@@ -19,13 +16,12 @@ function loadProjects()
         }
 
         if (userLevel >= 3) 
-            {
-                document.getElementById("listOfProjects").innerHTML += `
-                <li id="createProjectBtn" data-toggle="modal" data-target="#projectModal" onclick="createProjectPrompt()"> + Create Project</li>
-                `
-            };
+        {
+            document.getElementById("listOfProjects").innerHTML += `
+            <li id="createProjectBtn" data-toggle="modal" data-target="#projectModal" onclick="createProjectPrompt()"> + Create Project</li>
+            `
+        };
     })
-    .catch((response) => {})
 }
 
 function getProjectName(name)
@@ -45,36 +41,29 @@ function getTicketWithProjectId(id)
     .then((response) => 
     {
         var json = response.data;
-        $("#ticketTable").find("tr:gt(0)").remove();
+        $("#ticketTable").find("tr:gt(0)").remove(); // Clears table
 
         for (i = 0; i < json.length; i++)
         {
-            let tableRef = document.getElementById("ticketTable");
-            let newRow = tableRef.insertRow(-1);
-
-            let ticketIdCell = newRow.insertCell(0);
-            let taskCell = newRow.insertCell(1);
-            let progressCell = newRow.insertCell(2);
-            let viewCell = newRow.insertCell(3);
-
             let ticketId = document.createTextNode(json[i].ticketId);
             let task = document.createTextNode(json[i].task);
             let progress = document.createTextNode("Not included in the database");
             let viewBtnContent = document.createTextNode("View");
-            
+
             var viewBtn = document.createElement("a");
             viewBtn.classList.add("btn");
             viewBtn.classList.add("btn-info");
             viewBtn.appendChild(viewBtnContent);
             viewBtn.setAttribute('href', "../Ticket/index.php?ticketId="+json[i].ticketId);
+            
+            let newRow = document.getElementById("ticketTable").insertRow(-1);
 
-            ticketIdCell.appendChild(ticketId);
-            taskCell.appendChild(task);
-            progressCell.appendChild(progress);
-            viewCell.appendChild(viewBtn);
+            newRow.insertCell(0).appendChild(ticketId);
+            newRow.insertCell(1).appendChild(task);
+            newRow.insertCell(2).appendChild(progress);
+            newRow.insertCell(3).appendChild(viewBtn);
         }
     })
-    .catch((response) => console.log(response))
 }
 
 function createProjectPrompt()
@@ -106,56 +95,40 @@ function createProjectPrompt()
     `;
 }
 
-function projectConfirmation() {
-    if(document.getElementById("projectName").value.trim() == "" || document.getElementById("projectStatus").value == 0) 
-    { 
-        document.getElementById("saveProjectBtn").disabled = true;
-    } 
-    else
-    { 
-        document.getElementById("saveProjectBtn").disabled = false;
-    }
+function projectConfirmation() 
+{
+    document.getElementById("projectName").value.trim() == "" || document.getElementById("projectStatus").value == 0
+    ? document.getElementById("saveProjectBtn").disabled = true : document.getElementById("saveProjectBtn").disabled = false;
 }
 
 function createProject()
 {
-    var e = document.getElementById("projectStatus");
-    var projectStatus = e.options[e.selectedIndex].text;
+    var projectStatus = document.getElementById("projectStatus").options[document.getElementById("projectStatus").selectedIndex].text;
 
     var data = new FormData();
     data.append('function', "createProject");
     data.append('projectName', document.getElementById("projectName").value);
     data.append('projectStatus', projectStatus);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'projectController.php', true);
-    xhr.onreadystatechange = function() 
+    axios.post("../Project/projectController.php", data)
+    .then(() => 
     {
-      if (this.readyState == 4 && this.status == 200)
-        {
-            console.log(this.responseText);
-            loadProjects();
-            overHang("success", "Project has been successfully created!");
-            $('#projectModal').modal('hide');
-        }
-    }
-    xhr.send(data);
+        overHang("success", "Project has been successfully created!");
+        loadProjects();
+        $('#projectModal').modal('hide');
+    })
 }
 
 function createTicketPrompt(projectId)
 {
-    document.getElementById("projectModalHead").innerHTML = "Create Ticket"
+    document.getElementById("projectModalHead").innerHTML = "Create Ticket";
 
     document.getElementById("projectModalBody").innerHTML = `
     <div class="form-group">
         <label for="projectId" class="modal-content-1">Project ID</label> <br>
         <input type="text" id="projectId" class="form-control" value="${projectId}" disabled> <br>
-        <label for="reporter" class="modal-content-2">Reporter</label> <br>
-        <input type="text" id="reporter" class="form-control" value="${userForename + " " + userSurname}" disabled> <br>
         <label for="task" class="modal-content-2">Task</label> <br>
         <input type="text" id="task" class="form-control" onkeyup="ticketConfirmation()" required> <br>
-        <label for="progress" class="modal-content-2">Progress</label> <br>
-        <input type="text" id="progress" class="form-control" onkeyup="ticketConfirmation()" required> <br>
         <input type="hidden" id="reporterKey" value="${userId}">
         <input type="hidden" id="function" value="createTicket"> <br>
     </div>
@@ -166,15 +139,10 @@ function createTicketPrompt(projectId)
     `;
 }
 
-function ticketConfirmation() {
-    if(document.getElementById("task").value.trim() == "" || document.getElementById("progress").value.trim() == "")
-    {
-        document.getElementById("saveTicketBtn").disabled = true;
-    }
-    else
-    {
-        document.getElementById("saveTicketBtn").disabled = false;
-    }
+function ticketConfirmation() 
+{
+    (document.getElementById("task").value.trim() == "")
+    ? document.getElementById("saveTicketBtn").disabled = true : document.getElementById("saveTicketBtn").disabled = false;
 }
 
 function createTicket()
@@ -183,21 +151,13 @@ function createTicket()
     data.append('function', "createTicket");
     data.append('projectId', document.getElementById("projectId").value);
     data.append('reporterKey', document.getElementById("reporterKey").value);
-    data.append('reporter', document.getElementById("reporter").value);
     data.append('task', document.getElementById("task").value);
-    //data.append('progress', document.getElementById("progress").value);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'projectController.php', true);
-    xhr.onreadystatechange = function() 
+    axios.post("../Project/projectController.php", data)
+    .then(() =>
     {
-      if (this.readyState == 4 && this.status == 200)
-        {
-            console.log(this.responseText);
-            getTicketWithProjectId(document.getElementById("projectId").value);
-            overHang("success", "Ticket has been successfully created!");
-            $('#projectModal').modal('hide');
-        }
-    }
-    xhr.send(data);
+        getTicketWithProjectId(document.getElementById("projectId").value);
+        overHang("success", "Ticket has been successfully created!");
+        $('#projectModal').modal('hide');
+    })
 }

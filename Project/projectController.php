@@ -15,7 +15,7 @@ else if($_POST['function'] == "createProject")
 }
 else if($_POST['function'] == "createTicket")
 {
-    createNewTicket($_POST['projectId'], $_POST['task'], $_POST['reporter'], $_POST['reporterKey']);
+    createNewTicket($_POST['projectId'], $_POST['task'], $_POST['reporterKey']);
 }
 else 
 {
@@ -26,18 +26,16 @@ function createNewProject($projectName, $projectStatus)
 {
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("INSERT INTO project (projectId, name, status) VALUES (null, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO project (name, status) VALUES (?, ?)");
     $stmt->execute([$projectName, $projectStatus]);
-    print_r($stmt->errorInfo());
 }
 
-function createNewTicket($projectId, $task, $reporter, $reporterKey)
+function createNewTicket($projectId, $task, $reporterKey)
 {
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("INSERT INTO ticket (ticketId, task, projectId, reporter, reporter_key) VALUES (null, ?, ?, ?, ?)");
-    $stmt->execute([$task, $projectId, $reporter, $reporterKey]);
-    print_r($stmt->errorInfo());
+    $stmt = $pdo->prepare("INSERT INTO ticket (task, projectId, reporter_key) VALUES (?, ?, ?)");
+    $stmt->execute([$task, $projectId, $reporterKey]);
 }
 
 function getProjectList()
