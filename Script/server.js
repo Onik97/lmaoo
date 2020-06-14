@@ -13,13 +13,16 @@ function checkUsernameFromServer(formdata)
     return response;
 }
 
-function loadProjectsFromServer(formdata)
+function loadProjectsFromServer()
 {
+    var data = new FormData();
+    data.append('function', "loadProjects");
+
     const response = axios(
     {
         method: 'post',
         url: '../Project/projectController.php',
-        data: formdata,
+        data: data,
         headers: {'Content-Type': 'multipart/form-data' }
     })
 
@@ -92,6 +95,23 @@ function loadCommentsFromServer(ticketId)
 {
     var data = new FormData();
     data.append('function', "loadComments");
+    data.append('ticketId', ticketId);
+
+    const response = axios(
+        {
+            method: 'post',
+            data: data,
+            url: '../Ticket/ticketController.php',
+            headers: {'Content-Type': 'multipart/form-data' }
+        })
+    
+        return response;
+}
+
+function loadDatesFromServer(ticketId)
+{
+    var data = new FormData();
+    data.append('function', "loadDates");
     data.append('ticketId', ticketId);
 
     const response = axios(

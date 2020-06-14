@@ -89,7 +89,7 @@ function editComment(commentId)
 
   $('.comment'+commentId).on('summernote.keydown', (we, e) =>
   {
-      if(e.shiftKey && e.keyCode == 13)
+      if(e.shiftKey && e.keyCode == 13) // Shift + Enter
       {
         if (commentValidation('.comment'+commentId))
         {
@@ -109,22 +109,16 @@ function saveComment(summernoteId, commentId)
   data.append('ticketId', ticketId);
   data.append('userId', userId);
  
-  if (commentId != 0) data.append("commentId", commentId);
-  commentId == 0 ? data.append('function', "createComment") : data.append('function', "updateComment") ; // Ternary Condition
+  if (commentId != null) data.append("commentId", commentId);
+  commentId == null ? data.append('function', "createComment") : data.append('function', "updateComment") ; // Ternary Condition
 
   if (commentValidation(summernoteId))
   {
-    axios(
-    {
-      method: 'post',
-      data: data,
-      url: '../Ticket/ticketController.php',
-      headers: {'Content-Type': 'multipart/form-data' }
-    })
+    axios.post("../Ticket/ticketController.php", data)
     .then(() =>
     {
-      if (commentId == 0) $('.createComment').summernote('code', "");
-      commentId == 0 ? overHang("success", "New comment added successfully!") : overHang("success", "Comment Edited!"); 
+      if (commentId == null) $('.createComment').summernote('code', "");
+      commentId == null ? overHang("success", "New comment added successfully!") : overHang("success", "Comment successfully edited!"); 
       loadComments(); // Loads comments once you submit it
     })
   }
@@ -144,23 +138,15 @@ function deletePrompt(commentId)
 
 function deleteComment(commentId)
 {
-    // variable userId is available for User Id logged in
-    // variable ticketId is available for Ticket Id
     var data = new FormData();
     data.append('function', "deleteComment");
     data.append('commentId', commentId);
 
-    axios(
-      {
-          method: 'post',
-          data: data,
-          url: '../Ticket/ticketController.php',
-          headers: {'Content-Type': 'multipart/form-data' }
-      })
+    axios.post("../Ticket/ticketController.php", data)
     .then( () =>
     {
       $('#CommentModal').modal('hide'); 
-      overHang("succes", "Comment deleted successfully!");
+      overHang("success", "Comment deleted successfully!");
       loadComments();
     })
  }

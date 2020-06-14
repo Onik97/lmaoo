@@ -27,7 +27,7 @@ function overHang(type, message)
   
   myNotification(
   {
-    message: message,
+    message: message
   });
 }
 <?php 
