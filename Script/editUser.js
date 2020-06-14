@@ -18,22 +18,13 @@ function checkUserDup()
     data.append('function', "checkUsername");
     data.append('username', editUsername);
 
-    if (userUsername == editUsername)
-    {
-        document.getElementById("editUserBtn").disabled = true;
-        document.getElementById("editUsernameMessage").innerHTML = "This is already your username";
-        document.getElementById("editUsername").classList.add("is-valid");
-        document.getElementById("editUsernameMessage").classList.add("text-success"); 
-        document.getElementById("editUsernameMessage").removeAttribute("hidden");  
-    }
+    if (userUsername == editUsername) {} 
     else 
     {
         checkUsernameFromServer(data)
         .then((response) =>
         {
-            var responseFromServer = response.data.fromServer;
-
-            if (responseFromServer == "True")
+            if (response.data.fromServer == "True")
             {
                 document.getElementById("editUserBtn").disabled = true;
                 document.getElementById("editUsernameMessage").innerHTML = "Username Taken! Try another!";
@@ -49,10 +40,9 @@ function checkUserDup()
                 document.getElementById("editUsername").classList.toggle("is-valid", false); 
                 document.getElementById("editUsernameMessage").classList.toggle("text-danger", false); 
                 document.getElementById("editUsernameMessage").classList.toggle("text-success", false); 
-                document.getElementById("editUsernameMessage").setAttribute("hidden");
+                document.getElementById("editUsernameMessage").setAttribute("hidden" , false);
             }
         })
-        .catch((response) => {})
     }
 }
 
