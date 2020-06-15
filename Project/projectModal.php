@@ -11,10 +11,8 @@
 
         <div class="modal-body" id="projectModalBody">  
         </div>
-
         <div class="modal-footer" id="projectModalFooter">
         </div>
-
         </div>
     </div>
 </div> 
