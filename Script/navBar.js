@@ -1,18 +1,7 @@
 let navBarActive = document.getElementById("navBarActive").innerHTML;
 
-if (navBarActive == "homePage")
-{
-    document.getElementById("homeNav").classList.add("active")
-}
-else if (navBarActive == "aboutPage")
-{
-    document.getElementById("aboutNav").classList.add("active")
-}
-else if (navBarActive == "projectPage" || navBarActive == "ticketPage")
-{
-    document.getElementById("projectNav").classList.add("active")
-}
-else if (navBarActive == "registerPage" || navBarActive == "loginPage" || navBarActive == "adminPage")
-{
-    document.getElementById("accountNav").classList.add("active")
-}
+(navBarActive == ("homePage")) ? (document.getElementById("homeNav").classList.add("active"))
+    : (navBarActive == ("aboutPage")) ? (document.getElementById("aboutNav").classList.add("active"))
+    : (navBarActive == ("projectPage") || ("ticketPage")) ? (document.getElementById("projectNav").classList.add("active"))
+    : (navBarActive == ("registerPage") || ("loginPage") || ("adminPage")) ? (document.getElementById("accountNav").classList.add("active"))
+    : console.log("end");
