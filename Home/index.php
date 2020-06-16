@@ -2,10 +2,10 @@
 
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" href="../Css/HomePage.css">
-    <title>Home</title>
     <head> 
+        <link rel="stylesheet" href="../Css/HomePage.css">
         <?php include("../Global/head.php"); ?> 
+        <title>Home</title>
     </head>
 
     <body>
