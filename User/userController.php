@@ -85,7 +85,8 @@ function updateUser()
 	$stmt = $pdo->prepare("UPDATE user SET forename=?, surname=?, username=? WHERE userId=?");
 	$stmt->execute([$editForename, $editSurname, $editUsername, $editUserId]);
 
-	$userLoggedIn = $_SESSION['userLoggedIn'];
+	session_start();
+	$userLoggedIn = $_SESSION["userLoggedIn"];
 	$userLoggedIn->setForename($editForename);
 	$userLoggedIn->setSurname($editSurname);
 	$userLoggedIn->setUsername($editUsername);
