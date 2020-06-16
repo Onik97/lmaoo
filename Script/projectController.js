@@ -15,12 +15,8 @@ function loadProjects()
             `<li onclick="getProjectName(this.innerHTML); getTicketWithProjectId(this.value)" value="${json[i].projectId}">${json[i].name}</li>`
         }
 
-        if (userLevel >= 3) 
-        {
-            document.getElementById("listOfProjects").innerHTML += `
-            <li id="createProjectBtn" data-toggle="modal" data-target="#projectModal" onclick="createProjectPrompt()"> + Create Project</li>
-            `
-        };
+        if (userLevel >= 3) document.getElementById("listOfProjects").innerHTML += 
+            `<li id="createProjectBtn" data-toggle="modal" data-target="#projectModal" onclick="createProjectPrompt()"> + Create Project</li>`
     })
 }
 
@@ -31,11 +27,8 @@ function getProjectName(name)
 
 function getTicketWithProjectId(id)
 {
-    if (userLevel >= 2)
-    {
-        document.getElementById("ticketBtnDiv").innerHTML = 
+    if (userLevel >= 2) document.getElementById("ticketBtnDiv").innerHTML = 
         `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
-    }
 
     loadTicketsFromServer(id)
     .then((response) => 
@@ -70,24 +63,25 @@ function createProjectPrompt()
 {
     document.getElementById("projectModalHead").innerHTML = "Create Project"
 
-    document.getElementById("projectModalBody").innerHTML = `
-        <div class="form-group modal-content-1">    
-            <label for="projectName">Project Name:</label><br>
-            <input class="form-control" type="text" id="projectName" onkeyup="projectConfirmation()" required> <br>
-        </div>
-        <div class="modal-content-2 form-group">
-            <label for="projectStatus">Status:</label><br>
-            <select id ="projectStatus" class="form-control" required name="projectStatus">
-                <option value="0" selected disabled ></option>
-                <option value="Back-log">Back-Log</option>
-                <option value="Developement">Development</option>
-                <option value="QA">QA</option>
-                <option value="Releasing">Releasing</option>
-                <option value="Released">Released</option>
-            </select>
-        </div>
-            <br><br>
-            <input type="hidden" name="function" value="createProject">
+    document.getElementById("projectModalBody").innerHTML = 
+    `
+    <div class="form-group modal-content-1">    
+        <label for="projectName">Project Name:</label><br>
+        <input class="form-control" type="text" id="projectName" onkeyup="projectConfirmation()" required> <br>
+    </div>
+    <div class="modal-content-2 form-group">
+        <label for="projectStatus">Status:</label><br>
+        <select id ="projectStatus" class="form-control" required name="projectStatus">
+            <option value="0" selected disabled ></option>
+            <option value="Back-log">Back-Log</option>
+            <option value="Development">Development</option>
+            <option value="QA">QA</option>
+            <option value="Releasing">Releasing</option>
+            <option value="Released">Released</option>
+        </select>
+    </div>
+        <br><br>
+        <input type="hidden" name="function" value="createProject">
     `; 
 
     document.getElementById("projectModalFooter").innerHTML = `
@@ -121,9 +115,10 @@ function createProject()
 
 function createTicketPrompt(projectId)
 {
-    document.getElementById("projectModalHead").innerHTML = "Create Ticket";
+    $("#projectModalHead").html("Create Ticket");
 
-    document.getElementById("projectModalBody").innerHTML = `
+    document.getElementById("projectModalBody").innerHTML = 
+    `
     <div class="form-group">
         <label for="projectId" class="modal-content-1">Project ID</label> <br>
         <input type="text" id="projectId" class="form-control" value="${projectId}" disabled> <br>
@@ -134,14 +129,15 @@ function createTicketPrompt(projectId)
     </div>
     `;
 
-    document.getElementById("projectModalFooter").innerHTML = `
+    document.getElementById("projectModalFooter").innerHTML = 
+    `
     <button id="saveTicketBtn" class="btn btn-primary" type=submit onclick="createTicket()" disabled >Save</button>
     `;
 }
 
 function ticketConfirmation() 
 {
-    (document.getElementById("task").value.trim() == "")
+    document.getElementById("task").value.trim() == ""
     ? document.getElementById("saveTicketBtn").disabled = true : document.getElementById("saveTicketBtn").disabled = false;
 }
 
