@@ -74,7 +74,7 @@ function loadUsersInAssigneeModal()
   var selectUsers = document.getElementById("selectUsers");
 
   getActiveUsersFromServer()
-  .then((response) => 
+  .then(response => 
   {
     var usersJson = response.data;
     for (let i = 0; i < usersJson.length; i++)

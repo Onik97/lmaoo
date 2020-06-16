@@ -6,7 +6,7 @@ $(document).ready(function()
 function loadProjects()
 {
     loadProjectsFromServer()
-    .then((response) =>
+    .then(response =>
     {
         var json = response.data;
         for (i = 0; i < json.length; i++)
@@ -31,7 +31,7 @@ function getTicketWithProjectId(id)
         `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
 
     loadTicketsFromServer(id)
-    .then((response) => 
+    .then(response => 
     {
         var json = response.data;
         $("#ticketTable").find("tr:gt(0)").remove(); // Clears table

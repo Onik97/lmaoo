@@ -15,7 +15,7 @@ function checkUserDup()
     if (userUsername == editUsername) return;
 
     checkUsernameFromServer(data)
-    .then((response) =>
+    .then(response =>
     {
         if (response.data.fromServer == "True")
         {
