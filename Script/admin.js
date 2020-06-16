@@ -69,5 +69,4 @@ function deactivateUser(userId)
         <input class="btn btn-primary" type="submit" value="Deactivate">
     </div>
     `
-    console.log("Your ID is " + userId);
 }

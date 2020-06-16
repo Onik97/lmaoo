@@ -2,15 +2,13 @@
 
 function checkUsernameFromServer(formdata)
 {
-    const response = axios(
+    return response = axios(
     {
         method: 'post',
         url: '../User/userController.php',
         data: formdata,
         headers: {'Content-Type': 'multipart/form-data' }
     })
-
-    return response;
 }
 
 function loadProjectsFromServer()
@@ -18,27 +16,23 @@ function loadProjectsFromServer()
     var data = new FormData();
     data.append('function', "loadProjects");
 
-    const response = axios(
+    return response = axios(
     {
         method: 'post',
         url: '../Project/projectController.php',
         data: data,
         headers: {'Content-Type': 'multipart/form-data' }
     })
-
-    return response;
 }
 
 function loadTicketsFromServer(id)
 {
-    const response = axios(
-        {
-            method: 'get',
-            url: '../Project/projectController.php?projectId='+id,
-            headers: {'Content-Type': 'multipart/form-data' }
-        })
-    
-        return response;
+    return response = axios(
+    {
+        method: 'get',
+        url: '../Project/projectController.php?projectId='+id,
+        headers: {'Content-Type': 'multipart/form-data' }
+    })
 }
 
 function loadAssigneeFromServer(ticketId)
@@ -47,15 +41,14 @@ function loadAssigneeFromServer(ticketId)
     formData.append('function', "loadAssignee");
     formData.append('ticketId', ticketId);
 
-    const response = axios(
-        {
-            method: 'post',
-            data: formData,
-            url: '../Ticket/ticketController.php',
-            headers: {'Content-Type': 'multipart/form-data' }
-        })
-    
-        return response;
+    return response = axios(
+    {
+        method: 'post',
+        data: formData,
+        url: '../Ticket/ticketController.php',
+        headers: {'Content-Type': 'multipart/form-data' }
+    })
+
 }
 
 function loadReporterFromServer(ticketId)
@@ -64,15 +57,13 @@ function loadReporterFromServer(ticketId)
     data.append('function', "loadReporter");
     data.append('ticketId', ticketId);
 
-    const response = axios(
-        {
-            method: 'post',
-            data: data,
-            url: '../Ticket/ticketController.php',
-            headers: {'Content-Type': 'multipart/form-data' }
-        })
-    
-        return response;
+    return response = axios(
+    {
+        method: 'post',
+        data: data,
+        url: '../Ticket/ticketController.php',
+        headers: {'Content-Type': 'multipart/form-data' }
+    })
 }
 
 function getActiveUsersFromServer()
@@ -80,15 +71,13 @@ function getActiveUsersFromServer()
     var data = new FormData();
     data.append('function', "getActiveUsers");
 
-    const response = axios(
-        {
-            method: 'post',
-            data: data,
-            url: '../User/userController.php',
-            headers: {'Content-Type': 'multipart/form-data' }
-        })
-    
-        return response;
+    return response = axios(
+    {
+        method: 'post',
+        data: data,
+        url: '../User/userController.php',
+        headers: {'Content-Type': 'multipart/form-data' }
+    })
 }
 
 function loadCommentsFromServer(ticketId)
@@ -97,15 +86,13 @@ function loadCommentsFromServer(ticketId)
     data.append('function', "loadComments");
     data.append('ticketId', ticketId);
 
-    const response = axios(
-        {
-            method: 'post',
-            data: data,
-            url: '../Ticket/ticketController.php',
-            headers: {'Content-Type': 'multipart/form-data' }
-        })
-    
-        return response;
+    return response = axios(
+    {
+        method: 'post',
+        data: data,
+        url: '../Ticket/ticketController.php',
+        headers: {'Content-Type': 'multipart/form-data' }
+    })
 }
 
 function loadDatesFromServer(ticketId)
@@ -114,13 +101,11 @@ function loadDatesFromServer(ticketId)
     data.append('function', "loadDates");
     data.append('ticketId', ticketId);
 
-    const response = axios(
-        {
-            method: 'post',
-            data: data,
-            url: '../Ticket/ticketController.php',
-            headers: {'Content-Type': 'multipart/form-data' }
-        })
-    
-        return response;
+    return response = axios(
+    {
+        method: 'post',
+        data: data,
+        url: '../Ticket/ticketController.php',
+        headers: {'Content-Type': 'multipart/form-data' }
+    })
 }

@@ -11,15 +11,15 @@ function People()
   document.getElementById("prompt").innerHTML = 
   `
   <p>Select Assignee below</p>
-  <select id="selectUsers">
-  </select>
+  <select id="selectUsers"></select>
   `;
   loadUsersInAssigneeModal();
-  document.getElementById("Modal-footer").innerHTML = `
-    <div class="modal-footer">
-        <input class="btn btn-primary" type="submit" value="Save" onclick="saveSelectedAssignee()">
-    </div>
-    `;
+  document.getElementById("Modal-footer").innerHTML = 
+  `
+  <div class="modal-footer">
+    <input class="btn btn-primary" type="submit" value="Save" onclick="saveSelectedAssignee()">
+  </div>
+  `;
 }
 
 function loadAssignee()
@@ -41,10 +41,10 @@ function loadReporter()
   var ticketId = new URL(window.location.href).searchParams.get("ticketId");
   loadReporterFromServer(ticketId)
   .then(response =>
-    {
-        var res = response.data;
-        $("#reporter").html(res[0].forename + " " + res[0].surname);
-        $("#reporterUserId").html(res[0].userId);
+  {
+    var res = response.data;
+    $("#reporter").html(res[0].forename + " " + res[0].surname);
+    $("#reporterUserId").html(res[0].userId);
   })
 }
 
@@ -60,10 +60,10 @@ function saveSelectedAssignee()
   data.append('assigneeId', assigneeId);
 
   axios.post('../Ticket/ticketController.php', data)
-  .then(res => 
+  .then(() => 
     {
       loadAssignee();
-      $('#CommentModal').modal('hide'); // We should rename this -> Will make a ticket on this
+      $('#CommentModal').modal('hide');
       overHang("success", "Ticket assigned to " + assigneeName);
     })
 }
@@ -74,23 +74,18 @@ function loadUsersInAssigneeModal()
   var selectUsers = document.getElementById("selectUsers");
 
   getActiveUsersFromServer()
-  .then((response) => 
+  .then(response => 
   {
     var usersJson = response.data;
     for (let i = 0; i < usersJson.length; i++)
     {
-      if (usersJson[i].userId == assigneeUserId)
-      {
-        $("#selectUsers")
-        .prepend("<option value="+ usersJson[i].userId +" disabled selected>" + usersJson[i].forename + " " + usersJson[i].surname + "</option>");
-      }
-      else 
-      {
-        var option = document.createElement('option');
-        option.text = usersJson[i].forename + " " + usersJson[i].surname;
-        option.value = usersJson[i].userId;
-        selectUsers.add(option);
-      }
+      if (usersJson[i].userId == assigneeUserId) $("#selectUsers")
+      .prepend("<option value="+ usersJson[i].userId +" disabled selected>" + usersJson[i].forename + " " + usersJson[i].surname + "</option>");
+
+      var option = document.createElement('option');
+      option.text = usersJson[i].forename + " " + usersJson[i].surname;
+      option.value = usersJson[i].userId;
+      selectUsers.add(option);
     }
   })
 }
@@ -105,10 +100,10 @@ function saveAssigneeAsYourself()
   data.append('selfId', userId)
     
   axios.post('../Ticket/ticketController.php', data)
-  .then(res => 
-    {
-      loadAssignee();
-      $('#CommentModal').modal('hide'); // We should rename this -> Will make a ticket on this
-      overHang("success", "Ticket assigned to yourself!");
-    })
+  .then(() => 
+  {
+    loadAssignee();
+    $('#CommentModal').modal('hide');
+    overHang("success", "Ticket assigned to yourself!");
+  })
 }
