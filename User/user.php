@@ -7,8 +7,9 @@ class user
 	private $forename;
 	private $surname;
 	private $level;
+	private $isActive;
 
-	function __construct($id, $forename, $surname, $username, $password, $level)
+	function __construct($id, $forename, $surname, $username, $password, $level, $isActive)
 	{
 		$this->id = $id;
 		$this->forename = $forename;
@@ -16,6 +17,7 @@ class user
 		$this->username = $username;
 		$this->password = $password;
 		$this->level = $level;
+		$this->isActive = $isActive;
 	}
 
 	public function setId($id)
@@ -76,6 +78,16 @@ class user
 	public function getLevel()
 	{
 		return $this->level;
+	}
+
+	public function setIsActive($isActive)
+	{
+		$this->isActive = $isActive;
+	}
+
+	public function getIsActive()
+	{
+		return $this->isActive;
 	}
 }
 ?>

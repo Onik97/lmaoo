@@ -1,4 +1,5 @@
 <div>
+	<h1> Project Details </h1>
 	<div ID="ticketDetails1">
 		<p>Type: ''</p>
 	</div>
@@ -9,23 +10,9 @@
 		<p>Priority: ''</p>
 	</div>
 	<div ID="ticketDetails4">
-		<p>File Name: ''</p>
+		<p>File ID: ''</p>
 	</div>
-	<div>
-		<p>File Directory: ''</p>
-	</div>
-	
-	<div>
-	<button id="detailsButtonModal" data-toggle="modal" data-target="#CommentModal"  onclick="Details()">Details Modal(wip)</button> 
+	<div ID="ticketDetails5">
+		<p>File Description: ''</p>
 	</div>
 </div>
-
-<div ID="ticketDetails5">
-	<div>
-		<p>Handover Notes<p>
-	</div>
-	<div>
-		<p>'type your handover notes here'</p>
-	</div>
-</div>
-	

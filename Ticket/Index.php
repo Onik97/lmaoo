@@ -9,38 +9,24 @@ session_start();
 <link rel="stylesheet" href="../Css/ticketPage.css">
 <head>
 <?php include("../Global/head.php"); ?>
+<p id="navBarActive" hidden>ticketPage</p>
 </head>
 <?php include("../Global/navBar.php"); ?>
-<body> 
+<body>
 	<?php if (isset($userLoggedIn)) 
 	{ if(isset($_GET['ticketId']) && ticketExistance($_GET['ticketId'])) 
 		{ $ticketId = $_GET['ticketId']; ?>
 	
 	<div ID="ticketContainer">
-			
-			<div ID="ticketBrief">
-			<?php include("brief.php"); ?>	
+
+			<div ID="ticketDetails">
+			<?php include("details.php"); ?>	
     		</div>
 
     		<div ID="ticketPeople">
 			<?php include("people.php"); ?>	
     		</div>
 
-    		<div ID="ticketDetails">
-			<?php include("details.php"); ?>	
-    		</div>
-
-    		<div ID="ticketDate"> 
-			<?php include("dates.php"); ?>	
-            </div>
-
-            <div ID="detailsSubBug">
-            <?php include("subBug.php"); ?>	
-            </div>
-
-    		<div ID="ticketMessages">
-    		<?php include("messages.php"); ?>	
-    		</div>
 	</div>  
 		  <div ID="ticketCreate">
 		  <?php include("createComment.php"); ?>	

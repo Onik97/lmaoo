@@ -11,26 +11,35 @@ session_start();
 <link rel="stylesheet" href="../Css/projectPage.css">
 <script type="text/javascript" src="../Script/projectController.js"></script>
 </head>
+<p id="navBarActive" hidden>projectPage</p>
 <?php include("../Global/navBar.php"); ?>
 <body>
-<div class="row">
 <?php if (isset($userLoggedIn)) { ?>
-<script>
-var userId = "<?php echo $userLoggedIn->getId(); ?>"; 
-var userForename = "<?php echo $userLoggedIn->getForename(); ?>";
-var userSurname = "<?php echo $userLoggedIn->getSurname(); ?>";
-var userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
-</script>
-
-  <div id="projectDiv" class="col-md-6 bg-primary">
+<div class="wrapper">
+  <div id="projectDiv"> 
+    <nav id="sidebar">
+      <div id="sidebar-header" class="sidebar-header"><h1>Projects<h1></div>
+      <ul id="listOfProjects" class="list-unstyled components"></ul>
+    </nav>
   </div>
-
-  <div id="tickets" class="col-md-6 bg-info">
-    <h1 id="ticketMessage">Tickets</h1>
-    <div id="ticketBtnDiv"></div>
-    <div id=ticketDiv></div>
-  </div>
-
+  
+  <div id="createProject"></div>
+  <div class="content">
+  <h1 id="ticketMessage">Tickets</h1>
+    <div id="ticketDiv">
+      <table id="ticketTable" class="table">
+          <thead>
+              <tr>
+              <th class="col1" scope="col">Ticket ID</th>
+              <th class="col2" scope="col">Task</th>
+              <th class="col3" scope="col">Progress</th>
+              <th class="col4" scope="col">View</th>
+              </tr>
+          </thead>
+      </table>
+      <div id="ticketBtnDiv"></div>
+    </div>
+</div>
 </div>
 
 <?php include("projectModal.php"); ?>

@@ -5,34 +5,19 @@ $(document).ready(function()
 
 function loadProjects()
 {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "projectController.php", true)
-
-    var data = new FormData();
-    data.append('function', "loadTickets");
-
-    xmlhttp.onreadystatechange = function() 
+    loadProjectsFromServer()
+    .then(response =>
     {
-        if (this.readyState == 4 && this.status == 200)
+        var json = response.data;
+        for (i = 0; i < json.length; i++)
         {
-            var ticketJSON = JSON.parse(this.responseText);
-            if (userLevel == 2) 
-            {
-                document.getElementById("projectDiv").innerHTML = `
-                <button data-toggle="modal" data-target="#projectModal" role="button" onclick="createProjectPrompt()">Create Project</button>`
-            }
-            document.getElementById("projectDiv").innerHTML += `
-            <h1>Projects</h1>
-            ${ticketJSON.map(function(ticket)
-            {
-            return `
-            <button class="btn btn-primary" onclick="getProjectName(this.innerHTML); getTicketWithProjectId(this.value)" value="${ticket.projectId}">${ticket.name}</button> <br>   
-            `;
-            }).join('')}
-            `;
+            document.getElementById("listOfProjects").innerHTML += 
+            `<li onclick="getProjectName(this.innerHTML); getTicketWithProjectId(this.value)" value="${json[i].projectId}">${json[i].name}</li>`
         }
-    }
-    xmlhttp.send(data);
+
+        if (userLevel >= 3) document.getElementById("listOfProjects").innerHTML += 
+            `<li id="createProjectBtn" data-toggle="modal" data-target="#projectModal" onclick="createProjectPrompt()"> + Create Project</li>`
+    })
 }
 
 function getProjectName(name)
@@ -42,112 +27,118 @@ function getProjectName(name)
 
 function getTicketWithProjectId(id)
 {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "projectController.php?projectId="+id, true)
-    xmlhttp.send();
-    xmlhttp.onreadystatechange = function() 
+    if (userLevel >= 2) document.getElementById("ticketBtnDiv").innerHTML = 
+        `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
+
+    loadTicketsFromServer(id)
+    .then(response => 
     {
-        if (this.readyState == 4 && this.status == 200)
+        var json = response.data;
+        $("#ticketTable").find("tr:gt(0)").remove(); // Clears table
+
+        for (i = 0; i < json.length; i++)
         {
-            var ticketJSON = JSON.parse(this.responseText);
-            if (userLevel == 2)
-            {
-                document.getElementById("ticketBtnDiv").innerHTML = 
-                `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
-            }
-            document.getElementById("ticketDiv").innerHTML = 
-            `<table class="table">
-            <thead class="thead-dark">
-                <tr>
-                <th scope="col">Ticket ID</th>
-                <th scope="col">Task</th>
-                <th scope="col">Progress</th>
-                <th scope="col">View</th>
-                </tr>
-            </thead>
-            ${ticketJSON.map(function(ticket)
-                {
-                    return `
-                    <tr>
-                    <th scope="row">${ticket.ticketId}</th>
-                    <td>${ticket.task}</td>
-                    <td>Not included in the database</td>
-                    <td><a class="btn btn-info" href="../Ticket/index.php?ticketId=${ticket.ticketId}">View</a></td>
-                    </tr>
-                    `;
-                }).join('')}
-            `;
+            let ticketId = document.createTextNode(json[i].ticketId);
+            let task = document.createTextNode(json[i].task);
+            let progress = document.createTextNode("Not included in the database");
+            let viewBtnContent = document.createTextNode("View");
+
+            var viewBtn = document.createElement("a");
+            viewBtn.classList.add("btn");
+            viewBtn.classList.add("btn-info");
+            viewBtn.appendChild(viewBtnContent);
+            viewBtn.setAttribute('href', "../Ticket/index.php?ticketId="+json[i].ticketId);
+            
+            let newRow = document.getElementById("ticketTable").insertRow(-1);
+
+            newRow.insertCell(0).appendChild(ticketId);
+            newRow.insertCell(1).appendChild(task);
+            newRow.insertCell(2).appendChild(progress);
+            newRow.insertCell(3).appendChild(viewBtn);
         }
-    }
+    })
 }
 
 function createProjectPrompt()
 {
-    document.getElementById("projectModalBody").innerHTML = `
-            Project Name<br>
-            <input type="text" id="projectName" required> <br>
-            Status:<br>
-            <select id ="projectStatus" required name="projectStatus">
-                <option value="" selected disabled ></option>
-                <option value="Back-log">Back-Log</option>
-                <option value="Developement">Development</option>
-                <option value="QA">QA</option>
-                <option value="Releasing">Releasing</option>
-                <option value="Released">Released</option>
-            </select>
-            <br><br>
-            <input type="hidden" name="function" value="createProject">
-    `;
+    document.getElementById("projectModalHead").innerHTML = "Create Project"
+
+    document.getElementById("projectModalBody").innerHTML = 
+    `
+    <div class="form-group modal-content-1">    
+        <label for="projectName">Project Name:</label><br>
+        <input class="form-control" type="text" id="projectName" onkeyup="projectConfirmation()" required> <br>
+    </div>
+    <div class="modal-content-2 form-group">
+        <label for="projectStatus">Status:</label><br>
+        <select id ="projectStatus" class="form-control" required name="projectStatus">
+            <option value="0" selected disabled ></option>
+            <option value="Back-log">Back-Log</option>
+            <option value="Development">Development</option>
+            <option value="QA">QA</option>
+            <option value="Releasing">Releasing</option>
+            <option value="Released">Released</option>
+        </select>
+    </div>
+        <br><br>
+        <input type="hidden" name="function" value="createProject">
+    `; 
 
     document.getElementById("projectModalFooter").innerHTML = `
-    <button class="btn btn-primary" onclick="createProject()">Save</button>
+    <button id="saveProjectBtn" class="btn btn-primary" onclick="createProject()" disabled >Save</button>
     `;
+}
+
+function projectConfirmation() 
+{
+    document.getElementById("projectName").value.trim() == "" || document.getElementById("projectStatus").value == 0
+    ? document.getElementById("saveProjectBtn").disabled = true : document.getElementById("saveProjectBtn").disabled = false;
 }
 
 function createProject()
 {
-    var e = document.getElementById("projectStatus");
-    var projectStatus = e.options[e.selectedIndex].text;
+    var projectStatus = document.getElementById("projectStatus").options[document.getElementById("projectStatus").selectedIndex].text;
 
     var data = new FormData();
     data.append('function', "createProject");
     data.append('projectName', document.getElementById("projectName").value);
     data.append('projectStatus', projectStatus);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'projectController.php', true);
-    xhr.onreadystatechange = function() 
+    axios.post("../Project/projectController.php", data)
+    .then(() => 
     {
-      if (this.readyState == 4 && this.status == 200)
-        {
-            console.log(this.responseText);
-            loadProjects();
-            overHang("success", "Project has been successfully created!");
-            $('#projectModal').modal('hide');
-        }
-    }
-    xhr.send(data);
+        overHang("success", "Project has been successfully created!");
+        loadProjects();
+        $('#projectModal').modal('hide');
+    })
 }
-
 
 function createTicketPrompt(projectId)
 {
-    document.getElementById("projectModalBody").innerHTML = `
-    <label>Project ID</label> <br>
-    <input type="text" id="projectId" value="${projectId}" disabled> <br>
-    <label>Reporter</label> <br>
-    <input type="text" id="reporter" value="${userForename + " " + userSurname}" disabled> <br>
-    <label>Task</label> <br>
-    <input type="text" id="task" required> <br>
-    <label>Progress</label> <br>
-    <input type="text" id="progress" required> <br>
-    <input type="hidden" id="reporterKey" value="${userId}"> 
-    <input type="hidden" id="function" value="createTicket"> <br>
+    $("#projectModalHead").html("Create Ticket");
+
+    document.getElementById("projectModalBody").innerHTML = 
+    `
+    <div class="form-group">
+        <label for="projectId" class="modal-content-1">Project ID</label> <br>
+        <input type="text" id="projectId" class="form-control" value="${projectId}" disabled> <br>
+        <label for="task" class="modal-content-2">Task</label> <br>
+        <input type="text" id="task" class="form-control" onkeyup="ticketConfirmation()" required> <br>
+        <input type="hidden" id="reporterKey" value="${userId}">
+        <input type="hidden" id="function" value="createTicket"> <br>
+    </div>
     `;
 
-    document.getElementById("projectModalFooter").innerHTML = `
-    <button class="btn btn-primary" type=submit onclick="createTicket()">Save</button>
+    document.getElementById("projectModalFooter").innerHTML = 
+    `
+    <button id="saveTicketBtn" class="btn btn-primary" type=submit onclick="createTicket()" disabled >Save</button>
     `;
+}
+
+function ticketConfirmation() 
+{
+    document.getElementById("task").value.trim() == ""
+    ? document.getElementById("saveTicketBtn").disabled = true : document.getElementById("saveTicketBtn").disabled = false;
 }
 
 function createTicket()
@@ -156,21 +147,13 @@ function createTicket()
     data.append('function', "createTicket");
     data.append('projectId', document.getElementById("projectId").value);
     data.append('reporterKey', document.getElementById("reporterKey").value);
-    data.append('reporter', document.getElementById("reporter").value);
     data.append('task', document.getElementById("task").value);
-    //data.append('progress', document.getElementById("progress").value);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'projectController.php', true);
-    xhr.onreadystatechange = function() 
+    axios.post("../Project/projectController.php", data)
+    .then(() =>
     {
-      if (this.readyState == 4 && this.status == 200)
-        {
-            console.log(this.responseText);
-            getTicketWithProjectId(document.getElementById("projectId").value);
-            overHang("success", "Ticket has been successfully created!");
-            $('#projectModal').modal('hide');
-        }
-    }
-    xhr.send(data);
+        getTicketWithProjectId(document.getElementById("projectId").value);
+        overHang("success", "Ticket has been successfully created!");
+        $('#projectModal').modal('hide');
+    })
 }

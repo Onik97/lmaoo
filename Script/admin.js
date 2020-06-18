@@ -32,9 +32,11 @@ function editUser(userId)
              <div class="form-group">
              <label>Level</label> <br>
              <select class="form-control" name="userSelect" required>
-             <option value="" selected disabled></option>
+             <option value="0" selected disabled></option>
              <option value="1">Standard</option>
-             <option value="2">Admin</option>
+             <option value="2">Ticket Manager</option>
+             <option value="3">Admin</option>
+             <option value="4">Super User</option>
              </select>
              </div>
              </div>
@@ -48,16 +50,23 @@ function editUser(userId)
     }
 }
 
-function deleteUser(userId)
+function deactivateUser(userId)
 {
-    document.getElementById("modalTitle").innerHTML = "Deleting User";
-    document.getElementById("modalContent").innerHTML = "Are you sure?";
-    console.log("Your ID is " + userId);
+    document.getElementById("modalTitle").innerHTML = "Deactivating User";
+    document.getElementById("modalContent").innerHTML = 
+    `
+    <form action="../User/adminController.php" method="POST">
+    <div class="modal-body">
+    
+    <div class="form-group">
+        <label>User ID</label>
+        <input class="form-control" value=${userId} name="userId" readonly>
+    </div>
+    
+    <input type="hidden" name="function" value="deactivateUser">
+    
+    <div class="modal-footer">
+        <input class="btn btn-primary" type="submit" value="Deactivate">
+    </div>
+    `
 }
-
-function viewUser(userId)
-{
-    document.getElementById("modalTitle").innerHTML = "Viewing User";
-    console.log("Your ID is " + userId);
-}
-
