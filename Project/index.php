@@ -36,7 +36,8 @@ var userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
 <?php include("projectModal.php"); ?>
 
 <?php } else {
-	echo "<p> You need to login to access this page </p>";
+  session_start();
+  $_SESSION['message'] = "Login Required to access Project Page";
 } ?>
 
 </body>
