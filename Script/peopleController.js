@@ -31,7 +31,7 @@ function loadAssignee()
     if (response.data.length == 0) return;
 
     var res = response.data;
-    $("#assignee").html(res[0].forename + " " + res[0].surname);
+    $("#assignee").html(res[0].forename + " " + res[0].surname + " " + "(" + res[0].username + ")");
     $("#assigneeUserId").html(res[0].userId);
   })
 }
@@ -43,7 +43,7 @@ function loadReporter()
   .then(response =>
   {
     var res = response.data;
-    $("#reporter").html(res[0].forename + " " + res[0].surname);
+    $("#reporter").html(res[0].forename + " " + res[0].surname + " " + "(" + res[0].username + ")");
     $("#reporterUserId").html(res[0].userId);
   })
 }
