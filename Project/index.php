@@ -1,7 +1,7 @@
 <?php 
 require("../User/user.php");
 require("projectController.php");
-session_start(); 
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,8 +45,8 @@ session_start();
 <?php include("projectModal.php"); ?>
 
 <?php } else {
-  session_start();
   $_SESSION['message'] = "Login Required to access Project Page";
+  header("Location: ../User/login.php");
 } ?>
 
 </body>
