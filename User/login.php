@@ -2,7 +2,7 @@
 session_start();
 if(isset($_SESSION['userLoggedIn'])){header("Location: ../Ticket/index.php");}
 ?>
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 	<title>Login</title>
 	<head>
