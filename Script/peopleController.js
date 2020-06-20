@@ -80,10 +80,10 @@ function loadUsersInAssigneeModal()
     for (let i = 0; i < usersJson.length; i++)
     {
       if (usersJson[i].userId == assigneeUserId) $("#selectUsers")
-      .prepend("<option value="+ usersJson[i].userId +" disabled selected>" + usersJson[i].forename + " " + usersJson[i].surname + "</option>");
+      .prepend(`<option value=${usersJson[i].userId} disabled selected> ${usersJson[i].forename} ${usersJson[i].surname} (${usersJson[i].username})</option>`);
 
       var option = document.createElement('option');
-      option.text = usersJson[i].forename + " " + usersJson[i].surname;
+      option.text = `${usersJson[i].forename} ${usersJson[i].surname} (${usersJson[i].username})`;
       option.value = usersJson[i].userId;
       selectUsers.add(option);
     }
