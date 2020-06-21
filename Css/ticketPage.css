@@ -1,20 +1,23 @@
 #ticketContainer {
 	Margin-top: 100px;
-	display: grid;
 	text-align: centre;
-	width: 900px;
-	margin-left: auto;
-	margin-right: auto;
+	margin-left: 20px;
+	margin-right: 20px;
 	
 }
 
 #ticketPeople {
-	grid-column: 2 / 2;
-	width: 500px;
+	/* width: 500px; */
 	height: 720px;
 	background-color: #F5F5F5;
 	text-align: centre;
-	margin-left: 80px;
+}
+
+#ticketDetails {
+	/* width: 500px; */
+	height: 720px;
+	background-color: #F0F8FF;
+	text-align: centre;
 }
 
 #ticketPeople1, #ticketPeople2 {
@@ -26,16 +29,6 @@
 #ticketPeopleChooseAssignee, #ticketPeopleSelfAssignee {
 	margin-left: 358px;
 	margin-top: 100px;
-}
-
-
-#ticketDetails {
-    grid-column: 1 / 2;
-	width: 500px;
-	height: 720px;
-	background-color: #F0F8FF;
-	text-align: centre;
-	margin-left: -95px;
 }
 
 #ticketDetails1, #ticketDetails2, #ticketDetails3, #ticketDetails4, #ticketDetails5 {

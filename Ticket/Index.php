@@ -16,17 +16,26 @@ session_start();
 	<?php if (isset($userLoggedIn)) 
 	{ if(isset($_GET['ticketId']) && ticketExistance($_GET['ticketId'])) 
 		{ $ticketId = $_GET['ticketId']; ?>
+
+		<div id="ticketActions">
+			
+
+		</div>
 	
 	<div ID="ticketContainer">
-
-			<div ID="ticketDetails">
-			<?php include("details.php"); ?>	
+		<div class="row">
+			<div class="col-4">
+				<div ID="ticketPeople">
+					<?php include("people.php"); ?>	
+    			</div>
     		</div>
 
-    		<div ID="ticketPeople">
-			<?php include("people.php"); ?>	
-    		</div>
-
+			<div class="col-8">
+				<div ID="ticketDetails">
+					<?php include("details.php"); ?>	
+				</div>
+			</div>
+		</div>
 	</div>  
 		  <div ID="ticketCreate">
 		  <?php include("createComment.php"); ?>	
