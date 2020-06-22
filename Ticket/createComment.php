@@ -1,3 +1,4 @@
 <script type="text/javascript" src="../Script/commentController.js"></script>
-<textarea id="createComment" class=createComment name="editordata"></textarea>
-<button id="saveComment" onclick="saveComment('.createComment')">Add Comment</button> 
+<div class="form-group">
+    <textarea id="createComment" class="form-control createComment" name="editordata"></textarea>
+</div>
