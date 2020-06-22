@@ -4,9 +4,15 @@ $(document).ready(function()
   loadSummerNote(".createComment");
 });
 
+$(".createComment").on('summernote.keydown', (we, e) =>
+{
+  if (e.shiftKey && e.keyCode == 13) saveComment(".createComment");
+});
+
 function loadSummerNote(summerNoteId)
 {
   $(summerNoteId).summernote({
+    placeholder: "Enter your comment here, Shift + Enter to save",
     height: 150,
     toolbar: 
     [
