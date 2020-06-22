@@ -81,6 +81,7 @@ function loadUsersInAssigneeModal()
     {
       if (usersJson[i].userId == assigneeUserId) $("#selectUsers")
       .prepend(`<option value=${usersJson[i].userId} disabled selected> ${usersJson[i].forename} ${usersJson[i].surname} (${usersJson[i].username})</option>`);
+      else if (usersJson[i].userId == userId);
       else 
       {
         var option = document.createElement('option');
