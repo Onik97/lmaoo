@@ -5,6 +5,16 @@
 .col-9 {
 	background-color: #d1e5e0;
 	text-align: centre;
+	align-items: center;
+}
+
+#ticketPeople {
+	margin: auto;
+}
+
+.ticketDetails {
+	margin-top: 50px;
+	margin-left: 80px;
 }
 
 .ticketDetails > p::after {
@@ -24,23 +34,30 @@
 	margin-top: 20px;
 }
 
-#ticketCreate {
+/* #ticketCreateComment {
+	margin-top: 10px;
+	margin: auto;
+	align-items: center;
 	text-align: left;
 	background-color: #F0F8FF;
-}
+} */
 
 #saveComment {
+	float: right;
 	background-color: #F0F8FF;
 }
 
 #ticketComments {
+	margin-top: 30px;
+	margin: auto;
 	text-align: centre;
-	background-color: #e2e2e2;
+	align-items: center;
 }
 
 #comments {
+	width: 1000px;
 	background-color: white;
-	border-width:5px; 
+	border-width: 5px;
 	border-style:groove;
 }
 
