@@ -7,6 +7,7 @@ $(document).ready(function()
 function loadSummerNote(summerNoteId)
 {
   $(summerNoteId).summernote({
+    placeholder: "Enter your comment here, CTRL + Enter to save",
     height: 150,
     toolbar: 
     [
