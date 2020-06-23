@@ -13,7 +13,8 @@ function loadSummerNote(summerNoteId)
 {
   $(summerNoteId).summernote({
     placeholder: "Enter your comment here, Shift + Enter to save",
-    height: 150,
+    followingToolbar: false,
+    height: 125,
     toolbar: 
     [
       ['style', ['bold', 'italic', 'underline', 'clear']],
@@ -27,6 +28,7 @@ function loadSummerNote(summerNoteId)
       air: [],
     }
     });
+    $('.note-statusbar').hide();
 }
 
 function commentValidation(summerNoteId)
