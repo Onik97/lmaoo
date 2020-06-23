@@ -1,15 +1,9 @@
-$('form')
-.each(function(){
-    $(this).data('serialized', $(this).serialize())
+$('form').each(() => $(this).data('serialized', $(this).serialize())
+.on('change input', () => 
+{
+    $(this).find('input:submit, button:submit').attr('disabled', $(this).serialize() == $(this).data('serialized'));
 })
-.on('change input', function(){
-    $(this)				
-        .find('input:submit, button:submit')
-            .attr('disabled', $(this).serialize() == $(this).data('serialized'))
-    ;
- })
-.find('input:submit, button:submit')
-    .attr('disabled', true);
+.find('input:submit, button:submit').attr('disabled', true));
 
 function checkUserDup()
 {   
@@ -18,40 +12,37 @@ function checkUserDup()
     data.append('function', "checkUsername");
     data.append('username', editUsername);
 
-    if (userUsername == editUsername) {} 
-    else 
+    if (userUsername == editUsername) return;
+
+    checkUsernameFromServer(data)
+    .then(response =>
     {
-        checkUsernameFromServer(data)
-        .then((response) =>
+        if (response.data.fromServer == "True")
         {
-            if (response.data.fromServer == "True")
-            {
-                document.getElementById("editUserBtn").disabled = true;
-                document.getElementById("editUsernameMessage").innerHTML = "Username Taken! Try another!";
-                document.getElementById("editUsernameMessage").classList.add("text-danger"); 
-                document.getElementById("editUsername").classList.add("is-invalid"); 
-                document.getElementById("editUsernameMessage").removeAttribute("hidden");  
-            }
-            else
-            {
-                document.getElementById("editUserBtn").disabled = false;
-                document.getElementById("editUsernameMessage").innerHTML = "";
-                document.getElementById("editUsername").classList.toggle("is-invalid", false); 
-                document.getElementById("editUsername").classList.toggle("is-valid", false); 
-                document.getElementById("editUsernameMessage").classList.toggle("text-danger", false); 
-                document.getElementById("editUsernameMessage").classList.toggle("text-success", false); 
-                document.getElementById("editUsernameMessage").setAttribute("hidden" , false);
-            }
-        })
-    }
+            document.getElementById("editUserBtn").disabled = true;
+            document.getElementById("editUsernameMessage").innerHTML = "Username Taken! Try another!";
+            document.getElementById("editUsernameMessage").classList.add("text-danger"); 
+            document.getElementById("editUsername").classList.add("is-invalid"); 
+            document.getElementById("editUsernameMessage").removeAttribute("hidden");  
+        }
+        else
+        {
+            document.getElementById("editUserBtn").disabled = false;
+            document.getElementById("editUsername").classList.toggle("is-invalid", false); 
+            document.getElementById("editUsernameMessage").classList.toggle("text-danger", false); 
+            document.getElementById("editUsernameMessage").classList.toggle("text-success", false); 
+            document.getElementById("editUsernameMessage").setAttribute("hidden" , false);
+        }
+    })
+    
 }
 
 function validateImage() 
 {
     let imageFile = document.getElementById("uploadImage").files[0];
-    let t = imageFile.type.split("/").pop().toLowerCase();
+    let imgExt = imageFile.type.split("/").pop().toLowerCase();
 
-    if (t != "jpeg" && t != "jpg" && t != "png" && t != "bmp" && t != "gif") 
+    if (imgExt != "jpeg" && imgExt != "jpg" && imgExt != "png" && imgExt != "bmp" && imgExt != "gif") 
     {
         document.getElementById("uploadImageText").classList.add("text-danger");
         document.getElementById("uploadImage").classList.add("is-invalid");

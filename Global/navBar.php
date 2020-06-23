@@ -13,11 +13,11 @@
                         }
                         else
                         {
+                            ob_start();
                             echo "Welcome to Lmaoo! Please login for full access!";
                         }
                         ?>
-                </p>
-
+                        </p>
         <!-- Navbar Collapse [contains navbar components such as navbar menu and forms ] -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="exampleNavComponents">
             <span class="navbar-toggler-icon"></span>

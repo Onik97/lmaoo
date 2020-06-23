@@ -4,9 +4,15 @@ $(document).ready(function()
   loadSummerNote(".createComment");
 });
 
+$(".createComment").on('summernote.keydown', (we, e) =>
+{
+  if (e.shiftKey && e.keyCode == 13) saveComment(".createComment");
+});
+
 function loadSummerNote(summerNoteId)
 {
   $(summerNoteId).summernote({
+    placeholder: "Enter your comment here, Shift + Enter to save",
     height: 150,
     toolbar: 
     [
@@ -32,7 +38,7 @@ function commentValidation(summerNoteId)
   {
     overHang("error", "Comment too small!");
     return false;
-  }		
+  }
   else if (newComment.length > 255)
   {
     overHang("error", "Comment too large!");
@@ -87,7 +93,7 @@ function editComment(commentId)
 {
   loadSummerNote('.comment'+commentId);
 
-  $('.comment'+commentId).on('summernote.keydown', (we, e) =>
+  $('.comment'+commentId).on('summernote.keydown', (we, e) => 
   {
       if(e.shiftKey && e.keyCode == 13) // Shift + Enter
       {
@@ -108,9 +114,8 @@ function saveComment(summernoteId, commentId)
   data.append('commentContent', $(summernoteId).summernote('code'));
   data.append('ticketId', ticketId);
   data.append('userId', userId);
- 
+  commentId == null ? data.append('function', "createComment") : data.append('function', "updateComment");
   if (commentId != null) data.append("commentId", commentId);
-  commentId == null ? data.append('function', "createComment") : data.append('function', "updateComment") ; // Ternary Condition
 
   if (commentValidation(summernoteId))
   {
@@ -132,7 +137,7 @@ function deletePrompt(commentId)
 	document.getElementById("Modal-footer").innerHTML = `
 	<div class="modal-footer">
 		<input class="btn btn-primary" type="submit" value="Delete Comment" onclick="deleteComment(${commentId})">
-    </div>
+  </div>
 	`;
 }
 
@@ -143,7 +148,7 @@ function deleteComment(commentId)
     data.append('commentId', commentId);
 
     axios.post("../Ticket/ticketController.php", data)
-    .then( () =>
+    .then(() =>
     {
       $('#CommentModal').modal('hide'); 
       overHang("success", "Comment deleted successfully!");

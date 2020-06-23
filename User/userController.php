@@ -79,16 +79,19 @@ function updateUser()
 	$editSurname = $_POST['editSurname'];
 	$editUsername = $_POST['editUsername'];
 	$editUserId = $_POST['editUserId'];
+
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 	$stmt = $pdo->prepare("UPDATE user SET forename=?, surname=?, username=? WHERE userId=?");
 	$stmt->execute([$editForename, $editSurname, $editUsername, $editUserId]);
+
 	session_start();
-	session_unset();
-	session_destroy();
-	session_start();
-	$_SESSION['message'] = 'Your changes has been saved! Please login!';
-	header("Location: index.php");
+	$userLoggedIn = $_SESSION["userLoggedIn"];
+	$userLoggedIn->setForename($editForename);
+	$userLoggedIn->setSurname($editSurname);
+	$userLoggedIn->setUsername($editUsername);
+	$_SESSION['message'] = 'Your User Details has been updated';
+	header("Location: ../Home/index.php");
 }
 
 function userInfoById($userId)
