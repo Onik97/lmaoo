@@ -80,7 +80,6 @@ function createProjectPrompt()
             <option value="Released">Released</option>
         </select>
     </div>
-        <br><br>
         <input type="hidden" name="function" value="createProject">
     `; 
 
@@ -120,12 +119,12 @@ function createTicketPrompt(projectId)
     document.getElementById("projectModalBody").innerHTML = 
     `
     <div class="form-group">
-        <label for="projectId" class="modal-content-1">Project ID</label> <br>
-        <input type="text" id="projectId" class="form-control" value="${projectId}" disabled> <br>
-        <label for="task" class="modal-content-2">Task</label> <br>
-        <input type="text" id="task" class="form-control" onkeyup="ticketConfirmation()" required> <br>
+        <label for="projectId" class="modal-content-1">Project ID</label> 
+        <input type="text" id="projectId" class="form-control" value="${projectId}" disabled> 
+        <label for="task" class="modal-content-2">Task</label> 
+        <input type="text" id="task" class="form-control" onkeyup="ticketConfirmation()" required>
         <input type="hidden" id="reporterKey" value="${userId}">
-        <input type="hidden" id="function" value="createTicket"> <br>
+        <input type="hidden" id="function" value="createTicket">
     </div>
     `;
 
