@@ -65,6 +65,7 @@ function saveSelectedAssignee()
       loadAssignee();
       $('#CommentModal').modal('hide');
       overHang("success", "Ticket assigned to " + assigneeName);
+      loadDates();
     })
 }
 
@@ -108,5 +109,6 @@ function saveAssigneeAsYourself()
     loadAssignee();
     $('#CommentModal').modal('hide');
     overHang("success", "Ticket assigned to yourself!");
+    loadDates();
   })
 }
