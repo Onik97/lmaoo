@@ -66,9 +66,9 @@ function loadComments()
           document.getElementById("commentList").innerHTML +=
           `
           <div id="comments">
-            <img class="CommentImages" src="../Images/paperclip.png"></img>
-            <img class="CommentImages" src="../Images/delete.png" data-toggle="modal" data-target="#CommentModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
-            <img class="CommentImages" src="../Images/edit.png" onclick=editComment(${json[i].commentId}) role="button"></img>   
+            <img class="CommentImages" src="../Images/paperclip.svg"></img>
+            <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#CommentModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
+            <img class="CommentImages" src="../Images/pencilsquare.svg" onclick=editComment(${json[i].commentId}) role="button"></img>   
             <p>Comment by ${json[i].forename + " " + json[i].surname} at <label>${json[i].commentCreated}</label></p>
             <div class="comment${json[i].commentId}">${json[i].commentContent}</div>
           </div>
