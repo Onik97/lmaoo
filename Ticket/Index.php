@@ -21,7 +21,7 @@ session_start();
 	
 
 		<div class="row no-gutters">
-			<div class="col-3">
+			<div id="info" class="col-sm-12 col-md-3">
 				<div id="ticketPeople">
 					<?php include("people.php"); ?>
 				</div>
@@ -30,20 +30,20 @@ session_start();
 				</div>
 			</div>
 
-			<div class="col-9">
+			<div id="main" class="col-sm-12 col-md-9">
 				<div class="row no-gutters">
 					<div id="ticketDetails">
 						<?php include("details.php"); ?>
 					</div>
 				</div>
 
-					<div class="row no-gutters">
-						<div id="ticketCreateComment">
+					<div class="row no-gutters mt-3">
+						<div id="ticketCreate">
 							<?php include("createComment.php"); ?>	
 						</div>
 					</div>
 
-					<div class="row no-gutters">
+					<div class="row no-gutters mt-3">
 						<div id="ticketComments">
 		  					<?php include("viewComments.php"); ?>	
 		  				</div>
