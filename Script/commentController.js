@@ -13,7 +13,7 @@ function loadSummerNote(summerNoteId)
 {
   $(summerNoteId).summernote({
     placeholder: "Enter your comment here, Shift + Enter to save",
-    height: 150,
+    height: 125,
     toolbar: 
     [
       ['style', ['bold', 'italic', 'underline', 'clear']],
@@ -27,6 +27,7 @@ function loadSummerNote(summerNoteId)
       air: [],
     }
     });
+    $('.note-statusbar').hide();
 }
 
 function commentValidation(summerNoteId)
@@ -65,12 +66,27 @@ function loadComments()
         {
           document.getElementById("commentList").innerHTML +=
           `
-          <div id="comments">
-            <img class="CommentImages" src="../Images/paperclip.svg"></img>
-            <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#CommentModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
-            <img class="CommentImages" src="../Images/pencilsquare.svg" onclick=editComment(${json[i].commentId}) role="button"></img>   
-            <p>Comment by ${json[i].forename + " " + json[i].surname} at <label>${json[i].commentCreated}</label></p>
-            <div class="comment${json[i].commentId}">${json[i].commentContent}</div>
+          <div id="comments" class="row">
+            <div class="col-1">
+              <div id="commentThumbnail">
+                <img class="profilePicture" src="../Images/profilePictures/avatar.jpg"></img>
+              </div>
+            </div>
+
+            <div class="col-8">
+                <div id="commentBody">
+                    <h6>${json[i].forename + " " + json[i].surname}</h6>
+                    <span>${json[i].commentCreated}</span>
+                </div>
+
+                <div id="mainComment" class="comment${json[i].commentId}">${json[i].commentContent}</div>
+            </div>
+
+                <div class="col-2" id="commentActions">
+                    <img class="CommentImages" src="../Images/pencilsquare.svg" onclick=editComment(${json[i].commentId}) role="button"></img>
+                    <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#CommentModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
+                    <img class="CommentImages" src="../Images/paperclip.svg"></img>
+                </div>
           </div>
           `
         }
@@ -78,11 +94,26 @@ function loadComments()
         {
           document.getElementById("commentList").innerHTML +=
           `
-          <div id="comments">
-            <img class="CommentImages" src="../Images/paperclip.png"></img> 
-            <p>Comment by ${json[i].forename + " " + json[i].surname}</p>
-            <div class="comment${json[i].commentId}">${json[i].commentContent}</div>
-          </div>
+            <div id="comments" class="row">
+            <div class="col-1">
+              <div id="commentThumbnail">
+                <img class="profilePicture" src="../Images/profilePictures/avatar.jpg"></img>
+              </div>
+            </div>
+
+            <div class="col-8">
+                <div id="commentBody">
+                    <h6>${json[i].forename + " " + json[i].surname}</h6>
+                    <span>${json[i].commentCreated}</span>
+                </div>
+
+                <div id="mainComment" class="comment${json[i].commentId}">${json[i].commentContent}</div>
+            </div>
+
+                <div class="col-2" id="commentActions">
+                    <img class="CommentImages" src="../Images/paperclip.svg"></img>
+                </div>
+            </div>
           `
         }
       }

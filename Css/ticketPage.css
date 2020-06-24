@@ -1,134 +1,113 @@
-#ticketContainer {
-	Margin-top: 100px;
-	display: grid;
+#info {
+	background-color: rgb(229, 241, 216);
+}
+
+#main {
+	background-color: rgb(247,250,243);
 	text-align: centre;
-	width: 900px;
-	margin-left: auto;
-	margin-right: auto;
-	
+	align-items: center;
 }
 
 #ticketPeople {
-	grid-column: 2 / 2;
-	width: 500px;
-	height: 720px;
-	background-color: #F5F5F5;
-	text-align: centre;
+	padding: 25px;
+	margin: auto;
+}
+
+#ticketDetails {
+	margin-top: 50px;
 	margin-left: 80px;
 }
 
-#ticketPeople1, #ticketPeople2 {
-	margin: 10px;
-	text-align: centre;
-}
-
-
-#ticketPeopleChooseAssignee, #ticketPeopleSelfAssignee {
-	margin-left: 358px;
-	margin-top: 100px;
-}
-
-
-#ticketDetails {
-    grid-column: 1 / 2;
-	width: 500px;
-	height: 720px;
-	background-color: #F0F8FF;
-	text-align: centre;
-	margin-left: -95px;
-}
-
-#ticketDetails1, #ticketDetails2, #ticketDetails3, #ticketDetails4, #ticketDetails5 {
+#ticketDetails > p::after {
+	content: "\a"; /* adds new line */
 	float: left;
 	text-align: centre;
-	width: 500px;
-	padding-bottom: 20px;
 }
 
-
-#detailsButtonModal {
-		margin-top: 186px;
-		margin-left: 367.5px;
-}
-
-#ticketDate {
-	width: 400px;
+#ticketDates {
+	padding: 25px;
+	width: 200px;
 	height: 300px;
 	text-align: centre;
 } 
 
 #dates1, #dates2 {
-	width: 500px;
-	height: 200px;
 	float: left;
-	margin-top: 40px;
+	margin-top: 20px;
 }
 
-
-#ticketMessages1 {
-	margin-left: 371px;
-}
-
-#ticketCreate {
-
+#ticketCreate, #ticketComments {
+	padding: 0;
+	margin: auto;
+	width: 800px;
+	max-width: 1000px;
+	min-width: 150px;
 	text-align: left;
-	width: 1090px;
-	margin: 100px auto 0px auto;
-	background-color: #F0F8FF;
 }
 
-#saveComment {
-	margin-left: 967px;
-	background-color: #F0F8FF;
-}
-
-.Createcommentbutton {
-	margin-right: 5px;
-}
-
-#ticketComments {
-	text-align: centre;
-	width: 1090px;
-	margin-left: auto;
-	margin-right: auto;
-	background-color:  #e2e2e2;
-}
-
-#commentList {
-	margin-left: 50px;
-}
-
-.scrollBar
-{
-	float: right;
+.note-editor, .note-editing-area {
+	border-radius: 6px;
 }
 
 #comments {
-	background-color: white;
-	width: 995px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	margin-left: 0px;
-	margin-bottom: 10px;
-	border-width:5px; 
-	border-style:groove;
-	padding-top: 10px;
+	border-radius: 10px;
 }
 
-.CommentImages {
-	width: 25px;
-	height: 20px;
+#commentBody {
 	margin-left: 10px;
-	padding-left: 5px;
+	margin-top: 10px;
+}
+
+#commentBody > h6 {
+	display: inline-block;
+}
+
+#commentBody > span {
+	font-size: 10px;
+}
+
+#mainComment {
+	margin-left: 10px;
+}
+
+#commentActions {
+	text-align: justify;
+	margin-top: 10px;
+}
+
+#commentActions > img {
+	width: 16px; /* Declare your value. Can be in relative units. */
+  	display: inline-block;
+  	vertical-align: top;
+}
+
+#commentActions:after {
+	content: "";
+  	width: 25%;
+  	display: inline-block;
+}
+
+.profilePicture {
+	margin-top: 5px;
+	width: 65px;
+	height: 65px;
+	border-radius: 50px;
+}
+
+.reporterName {
+	margin-bottom: 20px;
+}
+
+#ticketPeopleChooseAssignee, #ticketPeopleSelfAssignee {
 	float: right;
+	background-color: rgb(213, 229, 187);
+}
+
+#ticketPeopleChooseAssignee:hover, #ticketPeopleSelfAssignee:hover {
+	background-color: rgb(172, 205, 122);
 }
 
 #loginMessage
 {
-	padding-top: 65px; 
-}
-
-.CenterText {
-	margin-left: auto;
-	margin-right: auto;
+	padding-top: 65px;
 }
