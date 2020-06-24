@@ -15,6 +15,7 @@
     <div class="top-buffer">
       <div class="container">
         <div class="wrap">
+        <p class="alert alert-warning" id="validateMessage" hidden></p>
           <form action="userController.php" onSubmit="return checkPassword(this)" method='POST'>
 
             <input type="text" name="forename" id="forenameRegister" required placeholder="First Name"> 
@@ -27,7 +28,6 @@
             <a href="../User/index.php">Already Registered? Login here!</a>
             
           </form>
-          <p class="alert alert-warning" id="validateMessage" hidden></p>
         </div>
       </div>
     </div>
