@@ -13,7 +13,6 @@ function loadSummerNote(summerNoteId)
 {
   $(summerNoteId).summernote({
     placeholder: "Enter your comment here, Shift + Enter to save",
-    followingToolbar: false,
     height: 125,
     toolbar: 
     [
