@@ -9,21 +9,23 @@
 }
 
 #ticketPeople {
+	padding: 25px;
 	margin: auto;
 }
 
-.ticketDetails {
+#ticketDetails {
 	margin-top: 50px;
 	margin-left: 80px;
 }
 
-.ticketDetails > p::after {
+#ticketDetails > p::after {
 	content: "\a"; /* adds new line */
 	float: left;
 	text-align: centre;
 }
 
 #ticketDates {
+	padding: 25px;
 	width: 200px;
 	height: 300px;
 	text-align: centre;
@@ -43,11 +45,6 @@
 	text-align: left;
 }
 
-#ticketComments {
-	text-align: centre;
-	align-items: center;
-}
-
 .note-editor, .note-editing-area {
 	border-radius: 6px;
 }
@@ -56,18 +53,45 @@
 	border-radius: 10px;
 }
 
-.profilePicture {
-	width: 70px;
-	height: 70px;
-	border-radius: 50px;
+#commentBody {
+	margin-left: 10px;
+	margin-top: 10px;
 }
 
-.CommentImages {
-	width: 25px;
-	height: 20px;
+#commentBody > h6 {
+	display: inline-block;
+}
+
+#commentBody > span {
+	font-size: 10px;
+}
+
+#mainComment {
 	margin-left: 10px;
-	padding-left: 5px;
-	float: right;
+}
+
+#commentActions {
+	text-align: justify;
+	margin-top: 10px;
+}
+
+#commentActions > img {
+	width: 16px; /* Declare your value. Can be in relative units. */
+  	display: inline-block;
+  	vertical-align: top;
+}
+
+#commentActions:after {
+	content: "";
+  	width: 25%;
+  	display: inline-block;
+}
+
+.profilePicture {
+	margin-top: 5px;
+	width: 65px;
+	height: 65px;
+	border-radius: 50px;
 }
 
 #loginMessage
