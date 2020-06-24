@@ -15,7 +15,6 @@
     <div class="top-buffer">
       <div class="container">
         <div class="wrap">
-
           <form action="userController.php" onSubmit="return checkPassword(this)" method='POST'>
 
             <input type="text" name="forename" id="forenameRegister" required placeholder="First Name"> 
@@ -24,15 +23,14 @@
             <input type="password" name="password1" id="password1Register" required placeholder="Password"> 
             <input type="password" name="password2" id="password2Register" required placeholder="Re-Type Password"> 
             <input type="hidden" name="function" value="register">
-            <input class="one" type="submit" value="Submit"> 
-            
+            <input class="one" type="submit" value="Submit">
             <a href="../User/index.php">Already Registered? Login here!</a>
-            <p id=validateMessage></p>
-
+            
           </form>
-        
+          <p class="alert alert-warning" id="validateMessage" hidden></p>
         </div>
       </div>
     </div>
   </body>
 </html>
+<script src="../Script/User/passwordchecker.js"></script>
