@@ -32,21 +32,15 @@ session_start();
 
 			<div id="main" class="col-sm-12 col-md-9">
 				<div class="row no-gutters">
-					<div id="ticketDetails">
-						<?php include("details.php"); ?>
-					</div>
+					<div id="ticketDetails"><?php include("details.php"); ?></div>
 				</div>
 
 					<div class="row no-gutters mt-3">
-						<div id="ticketCreate">
-							<?php include("createComment.php"); ?>	
-						</div>
+						<div id="ticketCreate"><?php include("createComment.php"); ?></div>
 					</div>
 
 					<div class="row no-gutters mt-3">
-						<div id="ticketComments">
-		  					<?php include("viewComments.php"); ?>	
-		  				</div>
+						<div id="ticketComments"><?php include("viewComments.php"); ?></div>
 					</div>
 			</div>
 		</div>
