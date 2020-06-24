@@ -94,6 +94,19 @@
 	border-radius: 50px;
 }
 
+.reporterName {
+	margin-bottom: 20px;
+}
+
+#ticketPeopleChooseAssignee, #ticketPeopleSelfAssignee {
+	float: right;
+	background-color: rgb(213, 229, 187);
+}
+
+#ticketPeopleChooseAssignee:hover, #ticketPeopleSelfAssignee:hover {
+	background-color: rgb(172, 205, 122);
+}
+
 #loginMessage
 {
 	padding-top: 65px;
