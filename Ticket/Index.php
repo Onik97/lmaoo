@@ -54,7 +54,7 @@ session_start();
 		<?php include("../Global/editUserModal.php"); ?>
 		<?php include("ticketModal.php"); ?>
 		<?php } else { echo "<p id='loginMessage'> Ticket ID is invalid! </p>"; }
-			} else { echo "<p id='loginMessage'> You need to login to access this page </p>"; } 
+			}  
 			?>
 </body>
 </html>
