@@ -95,7 +95,7 @@ function loadComments()
           document.getElementById("commentList").innerHTML +=
           `
           <div id="comments">
-            <img class="CommentImages" src="../Images/paperclip.png"></img> 
+            <img class="CommentImages" src="../Images/paperclip.svg"></img> 
             <p>Comment by ${json[i].forename + " " + json[i].surname}</p>
             <div class="comment${json[i].commentId}">${json[i].commentContent}</div>
           </div>
