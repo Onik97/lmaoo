@@ -6,7 +6,7 @@ $(document).ready(function()
 
 $(".createComment").on('summernote.keydown', (we, e) =>
 {
-  if (e.shiftKey && e.keyCode == 13) saveComment(".createComment");
+  if (e.shiftKey && e.keyCode == 13) saveComment(".createComment"); // Shift + Enter
 });
 
 function loadSummerNote(summerNoteId)
@@ -108,18 +108,27 @@ function loadComments()
 function editComment(commentId)
 {
   loadSummerNote('.comment'+commentId);
+  let commentBefore = $('.comment'+commentId).summernote('code');
 
   $('.comment'+commentId).on('summernote.keydown', (we, e) => 
   {
-      if(e.shiftKey && e.keyCode == 13) // Shift + Enter
+    if(e.keyCode == 27) cancelComment('.comment'+commentId, commentBefore);
+
+    if(e.shiftKey && e.keyCode == 13) // Shift + Enter
+    {
+      if (commentValidation('.comment'+commentId))
       {
-        if (commentValidation('.comment'+commentId))
-        {
-          saveComment('.comment'+commentId, commentId);
-          $('.comment'+commentId).summernote('destroy');  
-        }
+        saveComment('.comment'+commentId, commentId);
+        $('.comment'+commentId).summernote('destroy');
       }
+    }
   });
+}
+
+function cancelComment(summernoteId, commentBefore)
+{
+  $(summernoteId).summernote("code", commentBefore);
+  $(summernoteId).summernote("destroy");
 }
 
 function saveComment(summernoteId, commentId)
