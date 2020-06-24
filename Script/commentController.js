@@ -68,11 +68,25 @@ function loadComments()
           document.getElementById("commentList").innerHTML +=
           `
           <div id="comments">
-            <img class="CommentImages" src="../Images/paperclip.svg"></img>
-            <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#CommentModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
-            <img class="CommentImages" src="../Images/pencilsquare.svg" onclick=editComment(${json[i].commentId}) role="button"></img>   
-            <p>Comment by ${json[i].forename + " " + json[i].surname} at <label>${json[i].commentCreated}</label></p>
-            <div class="comment${json[i].commentId}">${json[i].commentContent}</div>
+            <div class="col-4">
+              <div id="commentThumbnail">
+                <img class="profilePicture" src="../Images/profilePictures/avatar.jpg"></img>
+              </div>
+            </div>
+
+            <div class="col-8">
+                <div id="commentBody">
+                    <h6>${json[i].forename + " " + json[i].surname}</h6>
+                    <p><label>${json[i].commentCreated}</label></p>
+                </div>
+
+                <div id="commentActions">
+                    <img class="CommentImages" src="../Images/paperclip.svg"></img>
+                    <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#CommentModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
+                    <img class="CommentImages" src="../Images/pencilsquare.svg" onclick=editComment(${json[i].commentId}) role="button"></img>
+                </div>
+                <div class="comment${json[i].commentId}">${json[i].commentContent}</div>
+            </div>
           </div>
           `
         }
