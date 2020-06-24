@@ -1,11 +1,11 @@
 <script type="text/javascript" src="../Script/dateController.js"></script>
 
 <div ID="dates1">
-    <h3>Date created:</h3>
+    <h6>Date created:</h6>
     <label id="createDate"></label>
 </div>
 
 <div ID="dates2">
-    <p>Date updated:</p>
+    <h6>Date updated:</h6>
     <label id="updateDate"></label>
 </div>
