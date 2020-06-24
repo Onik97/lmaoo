@@ -1,8 +1,8 @@
-.col-3 {
+#info {
 	background-color: rgb(229, 241, 216);
 }
 
-.col-9 {
+#main {
 	background-color: rgb(247,250,243);
 	text-align: centre;
 	align-items: center;
@@ -54,6 +54,12 @@
 
 #comments {
 	border-radius: 10px;
+}
+
+.profilePicture {
+	width: 70px;
+	height: 70px;
+	border-radius: 50px;
 }
 
 .CommentImages {
