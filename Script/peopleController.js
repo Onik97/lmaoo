@@ -4,7 +4,7 @@ $(document).ready(function()
     loadReporter();
 });
 
-function People()
+function peoplePrompt()
 {
   document.getElementById("Modal-head").innerHTML = "Select Assignee";
   document.getElementById("modal-body").innerHTML = ""; // Makes it empty first to avoid multiple append childs

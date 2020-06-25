@@ -11,6 +11,6 @@
         <label id="assignee"></label>
         <p id="assigneeUserId" hidden></p>
 
-    <button id="ticketPeopleChooseAssignee" class="btn btn-sm" data-toggle="modal" data-target="#CommentModal" onclick="People()">Choose Assignee</button>
+    <button id="ticketPeopleChooseAssignee" class="btn btn-sm" data-toggle="modal" data-target="#CommentModal" onclick="peoplePrompt()">Choose Assignee</button>
     <button id="ticketPeopleSelfAssignee"class="btn btn-sm" onclick="saveAssigneeAsYourself()">Assigned to myself</button>
 </div>
