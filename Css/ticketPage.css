@@ -8,6 +8,21 @@
 	align-items: center;
 }
 
+#myTab {
+	margin-top: 50px;
+	margin-left: 350px;
+	margin-right: 350px;
+	margin-bottom: 50px;
+}
+
+#comment-content {
+	background-color: rgb(247,250,243);
+}
+
+#notes-content {
+	background-color: rgb(247,250,243);
+}
+
 #ticketPeople {
 	padding: 25px;
 	margin: auto;

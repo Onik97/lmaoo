@@ -31,16 +31,33 @@ session_start();
 			</div>
 
 			<div id="main" class="col-sm-12 col-md-9">
-				<div class="row no-gutters">
-					<div id="ticketDetails"><?php include("details.php"); ?></div>
-				</div>
+					<h1>Ticket name: </h1>
 
 					<div class="row no-gutters mt-3">
 						<div id="ticketCreate"><?php include("createComment.php"); ?></div>
 					</div>
 
-					<div class="row no-gutters mt-3">
-						<div id="ticketComments"><?php include("viewComments.php"); ?></div>
+					<ul class="nav nav-tabs" id="myTab" role="tablist">
+						<li class="nav-item">
+							<a class="nav-link active" id="comment-tab" data-toggle="tab" href="#comment-content" role="tab" aria-controls="home" aria-selected="true">Comments</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes-content" role="tab" aria-controls="profile" aria-selected="false">Notes</a>
+						</li>
+					</ul>
+
+
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane fade show active" id="comment-content" role="tabpanel" aria-labelledby="home-tab">
+
+							<div class="row no-gutters mt-3">
+								<div id="ticketComments"><?php include("viewComments.php"); ?></div>
+							</div>
+						</div>
+							
+						<div class="tab-pane fade" id="notes-content" role="tabpanel" aria-labelledby="profile-tab">
+							<div id="ticketDetails"><?php include("details.php"); ?></div>
+						</div>
 					</div>
 			</div>
 		</div>
