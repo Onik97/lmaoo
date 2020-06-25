@@ -4,22 +4,27 @@ $(document).ready(function()
     loadReporter();
 });
 
-function People()
+function peoplePrompt()
 {
-  document.getElementById("Modal-head").innerHTML = "People";
-  document.getElementById("prompt").style.display = "block"
-  document.getElementById("prompt").innerHTML = 
-  `
-  <p>Select Assignee below</p>
-  <select id="selectUsers"></select>
-  `;
+  document.getElementById("Modal-head").innerHTML = "Select Assignee";
+  document.getElementById("modal-body").innerHTML = ""; // Makes it empty first to avoid multiple append childs
+  
+  let modalBody = document.querySelector("#modal-body");
+  let selectUsers = document.createElement("select");
+  selectUsers.setAttribute("id", "selectUsers");
+  modalBody.appendChild(selectUsers);
+  
   loadUsersInAssigneeModal();
-  document.getElementById("Modal-footer").innerHTML = 
-  `
-  <div class="modal-footer">
-    <input class="btn btn-primary" type="submit" value="Save" onclick="saveSelectedAssignee()">
-  </div>
-  `;
+
+  let modalFooter = document.querySelector("#modal-footer");
+  document.getElementById("modal-footer").innerHTML = ""; // Makes it empty first to avoid multiple append childs
+  let input = document.createElement("input");
+  input.setAttribute("class", "btn btn-primary");
+  input.setAttribute("type", "submit");
+  input.setAttribute("value", "Save");
+  input.setAttribute("onclick", "saveSelectedAssignee()");
+
+  modalFooter.appendChild(input);
 }
 
 function loadAssignee()
