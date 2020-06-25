@@ -46,17 +46,17 @@ session_start();
 						</li>
 					</ul>
 
-
 					<div class="tab-content" id="myTabContent">
 						<div class="tab-pane fade show active" id="comment-content" role="tabpanel" aria-labelledby="home-tab">
-
 							<div class="row no-gutters mt-3">
 								<div id="ticketComments"><?php include("viewComments.php"); ?></div>
 							</div>
 						</div>
-							
+						
 						<div class="tab-pane fade" id="notes-content" role="tabpanel" aria-labelledby="profile-tab">
-							<div id="ticketDetails"><?php include("details.php"); ?></div>
+							<div class="row no-gutters mt-3">
+								<div id="ticketDetails"><?php include("details.php"); ?></div>
+							</div>
 						</div>
 					</div>
 			</div>
