@@ -35,8 +35,6 @@
 
 #ticketDetails > p::after {
 	content: "\a"; /* adds new line */
-	float: left;
-	text-align: centre;
 }
 
 #ticketDates {
@@ -51,7 +49,7 @@
 	margin-top: 20px;
 }
 
-#ticketCreate, #ticketComments {
+#ticketCreate, #ticketComments, #ticketDetails{
 	padding: 0;
 	margin: auto;
 	width: 800px;
