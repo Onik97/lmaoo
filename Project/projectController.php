@@ -51,7 +51,7 @@ function getTicketList($projectId)
 {
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("SELECT ticketId, summary, created, updated, progress, projectId FROM ticket WHERE projectId = ?");
+    $stmt = $pdo->prepare("SELECT ticketId, summary, progress, assignee_key FROM ticket WHERE projectId = ?");
     $stmt->execute([$projectId]);
     return $stmt->fetchAll();
 }
