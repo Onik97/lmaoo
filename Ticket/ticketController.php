@@ -58,15 +58,8 @@ function ticketExistance($ticketId)
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("SELECT ticketId FROM ticket WHERE ticketId = ?");
     $stmt->execute([$ticketId]);
-    
-    if ($stmt->fetchColumn() == 0)
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
+
+    return $stmt->fetchColumn() == 0 ? false : true;
 }
 
 function loadUsers()
@@ -75,8 +68,7 @@ function loadUsers()
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("SELECT userId, forename, surname FROM user");
     $stmt->execute();
-    $users = $stmt->fetchAll();
-    return $users;
+    return $stmt->fetchAll();
 }
 
 function createComment($commentContent, $ticketId, $userId)
@@ -85,7 +77,6 @@ function createComment($commentContent, $ticketId, $userId)
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("INSERT INTO comment (commentId, commentContent, ticketId, userId) VALUES (null, ?, ?, ?)");
     $stmt->execute([$commentContent, $ticketId, $userId]);
-    echo "Success"; // Using echo for XMLHttpRequest
 }
 
 function updateComment($commentId, $newComment)
@@ -94,7 +85,6 @@ function updateComment($commentId, $newComment)
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("UPDATE comment SET commentContent = ? WHERE commentId = ?");
     $stmt->execute([$newComment, $commentId]);
-    echo "Success"; // Using echo for XMLHttpRequest
 }
 
 function loadComments($ticketId)
@@ -105,8 +95,7 @@ function loadComments($ticketId)
                            FROM comment INNER JOIN user on user.userId = comment.userId
                            WHERE comment.ticketId = ?");
     $stmt->execute([$ticketId]);
-    $comments = $stmt->fetchAll();
-    return $comments;
+    return $stmt->fetchAll();
 }
 
 function deleteComment($commentId)
@@ -115,7 +104,6 @@ function deleteComment($commentId)
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("DELETE FROM comment WHERE commentId = ?");
     $stmt->execute([$commentId]);
-    echo "Success"; // Using echo for XMLHttpRequest
 }
 
 function saveSelectedAssignee($ticketId, $newAssignee)
@@ -124,7 +112,6 @@ function saveSelectedAssignee($ticketId, $newAssignee)
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("UPDATE ticket SET assignee_key = ? WHERE ticketId = ?");
     $stmt->execute([$newAssignee, $ticketId]);
-    echo "Success"; // Using echo for XMLHttpRequest
 }
 
 function assigneeYourself($ticketId, $selfKey)
@@ -133,7 +120,6 @@ function assigneeYourself($ticketId, $selfKey)
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("UPDATE ticket SET assignee_key = ? WHERE ticketId = ?");
     $stmt->execute([$selfKey, $ticketId]);
-    echo "Success"; // Using echo for XMLHttpRequest
 }
 
 function loadDates($ticketId)
@@ -142,8 +128,7 @@ function loadDates($ticketId)
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("SELECT created, updated FROM ticket WHERE ticketId = ?");
     $stmt->execute([$ticketId]);
-    $dates = $stmt->fetchAll();
-    return $dates;
+    return $stmt->fetchAll();
 }
 
 function loadAssignee($ticketId)
@@ -154,8 +139,7 @@ function loadAssignee($ticketId)
                            INNER JOIN user on user.userId = ticket.assignee_key
                            WHERE ticket.ticketId = ?");
     $stmt->execute([$ticketId]);
-    $assignee = $stmt->fetchAll();
-    return $assignee;
+    return $stmt->fetchAll();
 }
 
 function loadReporter($ticketId)
@@ -166,7 +150,6 @@ function loadReporter($ticketId)
                            INNER JOIN user on user.userId = ticket.reporter_key
                            WHERE ticket.ticketId = ?");
     $stmt->execute([$ticketId]);
-    $reporter = $stmt->fetchAll();
-    return $reporter;
+    return $stmt->fetchAll();
 }
 ?>
