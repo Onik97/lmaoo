@@ -42,19 +42,17 @@ function getProjectList()
 {
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("SELECT * FROM project");
+    $stmt = $pdo->prepare("SELECT projectId, name, status FROM project");
     $stmt->execute();
-    $projects = $stmt->fetchAll();
-    return $projects;
+    return $stmt->fetchAll();
 }
 
 function getTicketList($projectId)
 {
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("SELECT * FROM ticket WHERE projectId = ?");
+    $stmt = $pdo->prepare("SELECT ticketId, summary, created, updated, progress, projectId FROM ticket WHERE projectId = ?");
     $stmt->execute([$projectId]);
-    $tickets = $stmt->fetchAll();
-    return $tickets;
+    return $stmt->fetchAll();
 }
 ?>
