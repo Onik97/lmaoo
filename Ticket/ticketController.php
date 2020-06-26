@@ -58,15 +58,8 @@ function ticketExistance($ticketId)
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("SELECT ticketId FROM ticket WHERE ticketId = ?");
     $stmt->execute([$ticketId]);
-    
-    if ($stmt->fetchColumn() == 0)
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
+
+    return $stmt->fetchColumn() == 0 ? false : true;
 }
 
 function loadUsers()
