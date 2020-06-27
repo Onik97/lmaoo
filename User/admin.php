@@ -12,9 +12,7 @@
     <body>
     <?php include("../Global/navBar.php"); ?>
     
-    <?php if (!isset($_SESSION['userLoggedIn']) || $userLoggedIn->getLevel() < 3) header("Location: ../Global/forbidden.php");
-            else 
-            { ?>  
+    <?php if (!isset($_SESSION['userLoggedIn']) || $userLoggedIn->getLevel() < 3) header("Location: ../Global/forbidden.php"); ?>
                 <h1>User Table</h1>
             <?php $allUsers = getAllUsers(); ?>
             <div class="container">
@@ -45,8 +43,7 @@
                                 </div>
                             </td>
                         </tr>
-                <?php }
-            } ?>
+                <?php } ?>
                 </table>
             </div>    
             <?php include("../Global/editUserModal.php"); ?>
