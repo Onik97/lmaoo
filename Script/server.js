@@ -109,3 +109,18 @@ function loadDatesFromServer(ticketId)
         headers: {'Content-Type': 'multipart/form-data' }
     })
 }
+
+function updateTicketTime(ticketId)
+{
+    var data = new FormData();
+    data.append('function', "updateTicketTime");
+    data.append('ticketId', ticketId);
+
+    return response = axios(
+    {
+        method: 'post',
+        data: data,
+        url: '../Ticket/ticketController.php',
+        headers: {'Content-Type': 'multipart/form-data' }
+    })
+}
