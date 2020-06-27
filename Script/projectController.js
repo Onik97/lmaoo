@@ -40,7 +40,7 @@ function getTicketWithProjectId(id)
         {
             let ticketId = document.createTextNode(json[i].ticketId);
             let task = document.createTextNode(json[i].task);
-            let progress = document.createTextNode("Not included in the database");
+            let progress = document.createTextNode(json[i].progress);
             let viewBtnContent = document.createTextNode("View");
 
             var viewBtn = document.createElement("a");
