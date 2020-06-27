@@ -47,9 +47,21 @@ else if ($function == "loadReporter")
 {
     echo json_encode(loadReporter($_POST['ticketId']));
 }
+else if ($function == "updateUpdatedTime")
+{
+    updateTicketTime($_POST["ticketId"]);
+}
 else 
 {
     return;
+}
+
+function updateTicketTime($ticketId)
+{
+    $pdo = logindb("user", "pass");
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("UPDATE ticket SET updated = ? WHERE ticketId = ?");
+    $stmt->execute([date("Y-m-d H:i:s", time() - 3600), $ticketId]);
 }
 
 function ticketExistance($ticketId)
