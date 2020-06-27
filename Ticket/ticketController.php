@@ -47,7 +47,7 @@ else if ($function == "loadReporter")
 {
     echo json_encode(loadReporter($_POST['ticketId']));
 }
-else if ($function == "updateUpdatedTime")
+else if ($function == "updateTicketTime")
 {
     updateTicketTime($_POST["ticketId"]);
 }
