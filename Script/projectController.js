@@ -8,6 +8,7 @@ function loadProjects()
     loadProjectsFromServer()
     .then(response =>
     {
+        document.getElementById("listOfProjects").innerHTML = "";
         var json = response.data;
         for (i = 0; i < json.length; i++)
         {
