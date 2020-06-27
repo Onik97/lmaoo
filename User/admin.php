@@ -15,7 +15,7 @@
         <?php if (!isset($_SESSION['userLoggedIn']) || $userLoggedIn->getLevel() < 3) header("Location: ../Global/forbidden.php"); ?>
 
         <div class="container" id="adminContainer">
-            <table class="table table-hover">
+            <table class="table table-hover" id="admin-table">
                 <tr>
                 <th>User ID</th>
                 <th>Username</th>
