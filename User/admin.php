@@ -12,8 +12,7 @@
     <body>
     <?php include("../Global/navBar.php"); ?>
     
-    <?php if (!isset($_SESSION['userLoggedIn']) || $userLoggedIn->getLevel() == "1" || $userLoggedIn->getLevel() == "2") 
-            { header("Location: ../Global/forbidden.php"); } 
+    <?php if (!isset($_SESSION['userLoggedIn']) || $userLoggedIn->getLevel() < 3) header("Location: ../Global/forbidden.php");
             else 
             { ?>  
                 <h1>User Table</h1>
