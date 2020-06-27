@@ -121,7 +121,7 @@ function createTicketPrompt(projectId)
     <div class="form-group">
         <label for="projectId" class="modal-content-1">Project ID</label> 
         <input type="text" id="projectId" class="form-control" value="${projectId}" disabled> 
-        <label for="summary" class="modal-content-2">summary</label> 
+        <label for="summary" class="modal-content-2">Summary</label> 
         <input type="text" id="summary" class="form-control" onkeyup="ticketConfirmation()" required>
         <input type="hidden" id="reporterKey" value="${userId}">
         <input type="hidden" id="function" value="createTicket">
