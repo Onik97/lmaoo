@@ -39,7 +39,7 @@ function getTicketWithProjectId(id)
         for (i = 0; i < json.length; i++)
         {
             let ticketId = document.createTextNode(json[i].ticketId);
-            let task = document.createTextNode(json[i].task);
+            let task = document.createTextNode(json[i].summary);
             let progress = document.createTextNode(json[i].progress);
             let viewBtnContent = document.createTextNode("View");
 
