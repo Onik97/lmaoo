@@ -39,7 +39,7 @@ function getTicketWithProjectId(id)
         for (i = 0; i < json.length; i++)
         {
             let ticketId = document.createTextNode(json[i].ticketId);
-            let task = document.createTextNode(json[i].summary);
+            let summary = document.createTextNode(json[i].summary);
             let progress = document.createTextNode(json[i].progress);
             let viewBtnContent = document.createTextNode("View");
 
@@ -52,7 +52,7 @@ function getTicketWithProjectId(id)
             let newRow = document.getElementById("ticketTable").insertRow(-1);
 
             newRow.insertCell(0).appendChild(ticketId);
-            newRow.insertCell(1).appendChild(task);
+            newRow.insertCell(1).appendChild(summary);
             newRow.insertCell(2).appendChild(progress);
             newRow.insertCell(3).appendChild(viewBtn);
         }
@@ -121,8 +121,8 @@ function createTicketPrompt(projectId)
     <div class="form-group">
         <label for="projectId" class="modal-content-1">Project ID</label> 
         <input type="text" id="projectId" class="form-control" value="${projectId}" disabled> 
-        <label for="task" class="modal-content-2">Task</label> 
-        <input type="text" id="task" class="form-control" onkeyup="ticketConfirmation()" required>
+        <label for="summary" class="modal-content-2">summary</label> 
+        <input type="text" id="summary" class="form-control" onkeyup="ticketConfirmation()" required>
         <input type="hidden" id="reporterKey" value="${userId}">
         <input type="hidden" id="function" value="createTicket">
     </div>
@@ -136,7 +136,7 @@ function createTicketPrompt(projectId)
 
 function ticketConfirmation() 
 {
-    document.getElementById("task").value.trim() == ""
+    document.getElementById("summary").value.trim() == ""
     ? document.getElementById("saveTicketBtn").disabled = true : document.getElementById("saveTicketBtn").disabled = false;
 }
 
@@ -146,7 +146,7 @@ function createTicket()
     data.append('function', "createTicket");
     data.append('projectId', document.getElementById("projectId").value);
     data.append('reporterKey', document.getElementById("reporterKey").value);
-    data.append('task', document.getElementById("task").value);
+    data.append('summary', document.getElementById("summary").value);
 
     axios.post("../Project/projectController.php", data)
     .then(() =>
