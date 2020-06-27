@@ -1,15 +1,16 @@
 <?php require("../User/userController.php"); session_start(); ?>
+
 <!DOCTYPE html>
 <html>
-<title>About</title>
-<head>
-<?php include("../Global/head.php"); ?>
-<script type="text/javascript" src="../Script/admin.js"></script>
-</head>
-<p id="navBarActive" hidden>adminPage</p>
-<?php include("../Global/navBar.php"); ?>
-<body>
-    <p>This is the admin page</p>
+    <title>Admin</title>
+    <head>
+        <?php include("../Global/head.php"); ?>
+        <script type="text/javascript" src="../Script/admin.js"></script>
+        <p id="navBarActive" hidden>adminPage</p>
+    </head>
+    
+    <body>
+    <?php include("../Global/navBar.php"); ?>
     
     <?php if (!isset($_SESSION['userLoggedIn']) || $userLoggedIn->getLevel() == "1" || $userLoggedIn->getLevel() == "2") 
             { header("Location: ../Global/forbidden.php"); } 
