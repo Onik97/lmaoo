@@ -42,20 +42,18 @@ function getTicketWithProjectId(id)
             let ticketId = document.createTextNode(json[i].ticketId);
             let summary = document.createTextNode(json[i].summary);
             let progress = document.createTextNode(json[i].progress);
-            let viewBtnContent = document.createTextNode("View");
+            let assignee = document.createTextNode(`${json[i].forename} ${json[i].surname}`);
 
-            var viewBtn = document.createElement("a");
-            viewBtn.classList.add("btn");
-            viewBtn.classList.add("btn-info");
-            viewBtn.appendChild(viewBtnContent);
-            viewBtn.setAttribute('href', "../Ticket/index.php?ticketId="+json[i].ticketId);
+            summaryLink = document.createElement("a"); 
+            summaryLink.setAttribute('href', "../Ticket/index.php?ticketId="+json[i].ticketId);
+            summaryLink.appendChild(summary);
             
             let newRow = document.getElementById("ticketTable").insertRow(-1);
 
             newRow.insertCell(0).appendChild(ticketId);
-            newRow.insertCell(1).appendChild(summary);
+            newRow.insertCell(1).appendChild(summaryLink);
             newRow.insertCell(2).appendChild(progress);
-            newRow.insertCell(3).appendChild(viewBtn);
+            newRow.insertCell(3).appendChild(assignee);
         }
     })
 }
