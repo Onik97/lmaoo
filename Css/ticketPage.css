@@ -86,18 +86,30 @@
 #commentActions {
 	text-align: justify;
 	margin-top: 10px;
+	margin-left: 50px;
 }
 
 #commentActions > img {
-	width: 16px; /* Declare your value. Can be in relative units. */
-  	display: inline-block;
-  	vertical-align: top;
+	width: 15%; /* Declare your value. Can be in relative units. */
+	max-width: 20px;
+	float: right;
 }
 
 #commentActions:after {
 	content: "";
   	width: 25%;
-  	display: inline-block;
+	display: inline-block;
+}
+
+#commentImages {
+	display: table-cell;
+  	text-align: center;
+  	width: 20%;
+}
+
+#commentImages > img {
+	width: 15%;
+	max-width: 20px;
 }
 
 .profilePicture {
