@@ -12,7 +12,7 @@
 
     <body>
       <?php include("../Global/navBar.php"); ?>
-      <?php include("../Project/loginCheck.php"); ?>
+      <?php include("../Global/loginCheck.php"); ?>
 
     <div class="wrapper">
       <div id="projectDiv"> 
