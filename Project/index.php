@@ -33,7 +33,7 @@
                       <th class="col1" scope="col">Ticket ID</th>
                       <th class="col2" scope="col">Summary</th>
                       <th class="col3" scope="col">Progress</th>
-                      <th class="col4" scope="col">View</th>
+                      <th class="col4" scope="col">Assignee</th>
                     </tr>
                 </thead>
             </table>
