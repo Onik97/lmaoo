@@ -112,6 +112,10 @@
 	max-width: 20px;
 }
 
+.CommentImages:hover {
+	background-color: rgb(172, 205, 122);
+}
+
 .profilePicture {
 	margin-top: 5px;
 	width: 65px;

@@ -85,7 +85,7 @@ function loadComments()
                 <div class="col-2" id="commentActions">
                     <img class="CommentImages" src="../Images/pencilsquare.svg" onclick=editComment(${json[i].commentId}) role="button"></img>
                     <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#CommentModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
-                    <img class="CommentImages" src="../Images/paperclip.svg"></img>
+                    <img src="../Images/paperclip.svg"></img>
                 </div>
           </div>
           `
