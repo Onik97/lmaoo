@@ -27,7 +27,19 @@
       <div class="content">
         <h1 id="ticketMessage">Tickets</h1>
           <div id="ticketDiv">
+          
+
+            <ul class="nav nav-tabs" id="projectTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="comment-tab" data-toggle="tab" href="#comment-content" role="tab" aria-controls="home" aria-selected="true">All</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes-content" role="tab" aria-controls="profile" aria-selected="false">Assigned to Me</a>
+              </li>
+					
+
             <table id="ticketTable" class="table">
+              <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-home-tab">
                 <thead>
                     <tr>
                       <th class="col1" scope="col">Ticket ID</th>
@@ -39,6 +51,8 @@
             </table>
             
             <div id="ticketBtnDiv"></div>
+
+            </ul>
           </div>
       </div>
     </div>
