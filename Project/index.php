@@ -36,8 +36,15 @@
               <li class="nav-item">
                 <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes-content" role="tab" aria-controls="profile" aria-selected="false">Assigned to Me</a>
               </li>
-					
-
+              <label for="progressSelect">
+              <select name="progressSelect" id="progressSelect">
+                <option>Open</option>
+                <option>In Progress</option>
+                <option>In Automation</option>
+                <option>Completed</option>
+              </select>
+            </ul>
+            
             <table id="ticketTable" class="table">
               <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-home-tab">
                 <thead>
@@ -52,7 +59,7 @@
             
             <div id="ticketBtnDiv"></div>
 
-            </ul>
+          
           </div>
       </div>
     </div>
