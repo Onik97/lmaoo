@@ -27,15 +27,6 @@
       <div class="content">
         <h1 id="ticketMessage">Tickets</h1>
           <div id="ticketDiv">
-          
-            <ul class="nav nav-tabs" id="projectTab" role="tablist">
-              <li class="nav-item">
-                <a class="nav-link active" id="comment-tab" data-toggle="tab" href="#comment-content" role="tab" aria-controls="home" aria-selected="true">All</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes-content" role="tab" aria-controls="profile" aria-selected="false">Assigned to Me</a>
-              </li>
-            </ul>
 
             <ul class="nav nav-tabs nav-fill" id="projectProgressTab" role="tablist">
               <li class="nav-item">
@@ -45,7 +36,7 @@
                 <a class="nav-link" id="progress-tab" data-toggle="tab" href="#progress-content" role="tab">In-Progress</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" id="automation-tab" data-toggle="tab" href="#automation-content" role="tab">In-Automation</a>
+                <a class="nav-link" id="automation-tab" data-toggle="tab" href="#automation-content" role="tab">In-Automation</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" id="complete-tab" data-toggle="tab" href="#complete-content" role="tab">Complete</a>
