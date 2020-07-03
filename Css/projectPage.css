@@ -62,7 +62,6 @@
 /* MAIN CONTENT: TICKETS SECTION */
 
 .content {
-	padding: 10px;
     width: 100%;
     min-height: 100vh;
     transition: all 0.3s;
@@ -71,6 +70,10 @@
 #ticketMessage {
 	padding: 24px;
 	background: #DCDCDC;
+}
+
+#ticketDiv {
+	padding: 10px;
 }
 
 .table {
