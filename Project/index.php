@@ -35,10 +35,25 @@
               <li class="nav-item">
                 <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes-content" role="tab" aria-controls="profile" aria-selected="false">Assigned to Me</a>
               </li>
+            </ul>
+
+            <ul class="nav nav-tabs nav-fill" id="projectProgressTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="open-tab" data-toggle="tab" href="#open-content" role="tab">Open</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="progress-tab" data-toggle="tab" href="#progress-content" role="tab">In-Progress</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" id="automation-tab" data-toggle="tab" href="#automation-content" role="tab">In-Automation</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="complete-tab" data-toggle="tab" href="#complete-content" role="tab">Complete</a>
+              </li>
+            </ul>
             
             <table id="ticketTable" class="table">
               <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-home-tab">
-                </ul>
                     <thead>
                       <tr>
                         <th class="col1" scope="col">Ticket ID</th>
@@ -47,7 +62,7 @@
                         <th class="col4" scope="col">Assignee</th>
                       </tr>
                     </thead>
-                  </table>
+            </table>
 
             <div id="ticketBtnDiv"></div>
           </div>
