@@ -35,6 +35,16 @@ function loadTicketsFromServer(id)
     })
 }
 
+function loadTicketsWithProgressFromServer(id, progress)
+{
+    return response = axios(
+    {
+        method: 'get',
+        url: `../Project/projectController.php?projectId=${id}&progress=${progress}`,
+        headers: {'Content-Type': 'multipart/form-data' }
+    })
+}
+
 function loadAssigneeFromServer(ticketId)
 {
     var formData = new FormData();
