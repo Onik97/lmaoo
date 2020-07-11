@@ -9,6 +9,13 @@
         </button>
 
         <div class="collapse navbar-collapse w-100 order-3 dual-collapse2" id="navbarNav">
+            
+            <!-- <p class="navbar-brand mt-3 ml-3 mr-auto">Hello World</p> -->
+
+            <form class="navbar-brand form-inline lg-1">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search Ticket" aria-label="Search">
+                <button class="btn btn-outline-success my-sm-0" type="submit">Search</button>
+            </form>
 
             <ul class="nav navbar-nav ml-auto mr-5">
             
