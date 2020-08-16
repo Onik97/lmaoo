@@ -60,6 +60,8 @@
       </div>
     </div>
 
+    <button onclick="ticketswithprogress()">test</button>
+
     <?php include("projectModal.php"); ?>
     <?php include("../Global/editUserModal.php"); ?>
   </body>

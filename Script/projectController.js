@@ -155,3 +155,12 @@ function createTicket()
         $('#projectModal').modal('hide');
     })
 }
+
+function ticketswithprogress() {
+    loadTicketsWithProgressFromServer(1, 'open')
+    .then (response =>
+    {
+        var json = response;
+        console.log(json);
+    })
+}
