@@ -157,7 +157,6 @@ function createTicket()
 }
 
 function updateTicketWithProgress() {
-    console.log("button works");
     loadTicketsWithProgressFromServer(1, 'open')
     .then(response =>
         {
