@@ -59,8 +59,7 @@
           </div>
       </div>
     </div>
-
-    <button onclick="ticketswithprogress()">test</button>
+    <button onclick="updateTicketWithProgress()">clickme</button>
 
     <?php include("projectModal.php"); ?>
     <?php include("../Global/editUserModal.php"); ?>

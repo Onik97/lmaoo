@@ -156,11 +156,11 @@ function createTicket()
     })
 }
 
-function ticketswithprogress() {
+function updateTicketWithProgress() {
+    console.log("button works");
     loadTicketsWithProgressFromServer(1, 'open')
-    .then (response =>
-    {
-        var json = response;
-        console.log(json);
-    })
+    .then(response =>
+        {
+            console.log(response.data);
+        })
 }
