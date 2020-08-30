@@ -3,11 +3,6 @@ $(document).ready(function()
   loadDates();
 });
 
-function addZero(i)
-{
-  if (i < 10) { i = "0" + i; } return i; 
-}
-
 function tidyUpTimestamp(timestamp) 
 {
     var dateCreated = new Date(timestamp);
@@ -16,9 +11,9 @@ function tidyUpTimestamp(timestamp)
     var month = dateCreated.getMonth();
     var year = dateCreated.getFullYear();
     var hours = dateCreated.getHours();
-    var minutes = addZero(dateCreated.getMinutes());
+    var minutes = dateCreated.getMinutes();
+    (minutes < 10) ? minutes = "0" + minutes : minutes; // to add 0 from 0-9 minutes
     var ampm = (hours >= 12) ? "PM" : "AM";
-    // var seconds = addZero(dateCreated.getSeconds());
 
     var fullDate = `${date}/${month}/${year} ${hours}:${minutes} ${ampm}`;
     return fullDate;
@@ -32,7 +27,7 @@ function loadDates()
   loadDatesFromServer(ticketId)
   .then(response => 
   {
-    $("#createDate").html(tidyUpTimestamp(response.data[0].created.toLocaleString('en-GB')));
-    $("#updateDate").html(tidyUpTimestamp(response.data[0].updated.toLocaleString('en-GB')));
+    $("#createDate").html(tidyUpTimestamp(response.data[0].created));
+    $("#updateDate").html(tidyUpTimestamp(response.data[0].updated));
   })
 }
