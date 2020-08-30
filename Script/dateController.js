@@ -11,8 +11,7 @@ function tidyUpTimestamp(timestamp)
     var month = dateCreated.getMonth();
     var year = dateCreated.getFullYear();
     var hours = dateCreated.getHours();
-    var minutes = dateCreated.getMinutes();
-    (minutes < 10) ? minutes = "0" + minutes : minutes; // to add 0 from 0-9 minutes
+    var minutes = (dateCreated.getMinutes() < 10) ? ("0" + dateCreated.getMinutes()) : dateCreated.getMinutes(); // to add 0 from 0-9 minutes
     var ampm = (hours >= 12) ? "PM" : "AM";
 
     var fullDate = `${date}/${month}/${year} ${hours}:${minutes} ${ampm}`;
