@@ -174,7 +174,7 @@ function checkProgressTabs(value) {
 }
 
 function loadTicketsWithProgress (id, progress) {
-    loadTicketsWithProgressFromServer(id, progress)
+    loadTicketsWithProgressFromServer(id, "Open")
     .then (response => {
         console.log(response.data)
     })
