@@ -5,7 +5,7 @@ if ($_GET['projectId'] && !isset($_GET['progress']))
 {
    echo json_encode(getTicketList($_GET['projectId']));
 }
-else if ($_GET['projectId'] && $_GET['progress'])
+else if ($_GET['projectId'] && !isset($_GET['progress']))
 {
     echo json_encode(getTicketListWithProgress($_GET['projectId'], $_GET['progress']));
 }
