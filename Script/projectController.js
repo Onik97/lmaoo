@@ -32,37 +32,38 @@ function getProjectName(name)
    document.getElementById("ticketMessage").innerHTML = "Tickets for " + name;
 }
 
-// function getTicketWithProjectId(id)
-// {
-//     if (userLevel >= 2) document.getElementById("ticketBtnDiv").innerHTML = 
-//         `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
+function getTicketWithProjectId(id)
+{
+    if (userLevel >= 2) document.getElementById("ticketBtnDiv").innerHTML = 
+        `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
 
-//     loadTicketsFromServer(id)
-//     .then(response => 
-//     {
-//         var json = response.data;
-//         $("#ticketTable").find("tr:gt(0)").remove(); // Clears table
+    loadTicketsFromServer(id)
+    .then(response => 
+    {
+        var json = response.data;
+        $("#ticketTable").find("tr:gt(0)").remove(); // Clears table
 
-//         for (i = 0; i < json.length; i++)
-//         {
-//             let ticketId = document.createTextNode(json[i].ticketId);
-//             let summary = document.createTextNode(json[i].summary);
-//             let progress = document.createTextNode(json[i].progress);
-//             let assignee = document.createTextNode(`${json[i].forename} ${json[i].surname}`);
+        for (i = 0; i < json.length; i++)
+        {
+            let ticketId = document.createTextNode(json[i].ticketId);
+            let summary = document.createTextNode(json[i].summary);
+            let progress = document.createTextNode(json[i].progress);
+            let assignee = document.createTextNode(`${json[i].forename} ${json[i].surname}`);
+            if (json[i].forename == null) assignee = document.createTextNode("Not assigned");
 
-//             summaryLink = document.createElement("a"); 
-//             summaryLink.setAttribute('href', `../Ticket/Index.php?ticketId=${json[i].ticketId}`);
-//             summaryLink.appendChild(summary);
+            summaryLink = document.createElement("a"); 
+            summaryLink.setAttribute('href', `../Ticket/Index.php?ticketId=${json[i].ticketId}`);
+            summaryLink.appendChild(summary);
             
-//             let newRow = document.getElementById("ticketTable").insertRow(-1);
+            let newRow = document.getElementById("ticketTable").insertRow(-1);
 
-//             newRow.insertCell(0).appendChild(ticketId);
-//             newRow.insertCell(1).appendChild(summaryLink);
-//             newRow.insertCell(2).appendChild(progress);
-//             newRow.insertCell(3).appendChild(assignee);
-//         }
-//     })
-// }
+            newRow.insertCell(0).appendChild(ticketId);
+            newRow.insertCell(1).appendChild(summaryLink);
+            newRow.insertCell(2).appendChild(progress);
+            newRow.insertCell(3).appendChild(assignee);
+        }
+    })
+}
 
 function createProjectPrompt()
 {
