@@ -61,31 +61,32 @@ function getTicketWithProjectId(id)
 
 function createProjectPrompt()
 {
-    document.getElementById("projectModalHead").innerHTML = "Create Project"
+    document.getElementById("projectModalHead").innerHTML = "Create Project";
 
-    document.getElementById("projectModalBody").innerHTML = 
-    `
-    <div class="form-group modal-content-1">    
-        <label for="projectName">Project Name:</label><br>
-        <input class="form-control" type="text" id="projectName" onkeyup="projectConfirmation()" required> <br>
-    </div>
-    <div class="modal-content-2 form-group">
-        <label for="projectStatus">Status:</label><br>
-        <select id ="projectStatus" class="form-control" required name="projectStatus">
-            <option value="0" selected disabled ></option>
-            <option value="Back-log">Back-Log</option>
-            <option value="Development">Development</option>
-            <option value="QA">QA</option>
-            <option value="Releasing">Releasing</option>
-            <option value="Released">Released</option>
-        </select>
-    </div>
-        <input type="hidden" name="function" value="createProject">
-    `; 
+    document.getElementById("projectModalBody").innerHTML = "";
 
-    document.getElementById("projectModalFooter").innerHTML = `
-    <button id="saveProjectBtn" class="btn btn-primary" onclick="createProject()" disabled >Save</button>
-    `;
+    var projectNameDiv = $("<div>", {"class": "form-group modal-content-1"});
+    var projectNameLabel = $("<label>").html("Project Name:");
+    var projectNameInput = $("<input>", {"class": "form-control", type : "text", id : "projectName", onkeyup : "projectConfirmation()"});
+    $("#projectModalBody").append(projectNameDiv);
+    $(projectNameDiv).append(projectNameLabel);
+    $(projectNameDiv).append(projectNameInput);
+
+    var statusDiv = $("<div>", {"class": "form-group modal-content-2"});
+    var statusLabel = $("<label>").html("Status:");
+    var statusSelect = $("<select>", { id : "projectStatus", "class": "form-group"}).prop("required", true);
+    $(statusSelect).append($("<option>").val("0").text(""));
+    $(statusSelect).append($("<option>").val("Back-log").text("Back-log"));
+    $(statusSelect).append($("<option>").val("Development").text("Development"));
+    $(statusSelect).append($("<option>").val("QA").text("QA"));
+    $(statusSelect).append($("<option>").val("Releasing").text("Releasing"));
+    $(statusSelect).append($("<option>").val("Released").text("Released"));
+
+    $("#projectModalBody").append(statusDiv);
+    $(statusDiv).append(statusLabel);
+    $(statusDiv).append(statusSelect);
+
+    $("#projectModalFooter").append($("<button>", {"class": "btn btn-primary", type : "text", id : "saveProjectBtn", onclick : "createProject()"}).html("Save"));
 }
 
 function projectConfirmation() 
