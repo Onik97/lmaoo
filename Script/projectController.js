@@ -65,16 +65,16 @@ function createProjectPrompt()
 
     document.getElementById("projectModalBody").innerHTML = "";
 
-    var projectNameDiv = $("<div>", {"class": "form-group modal-content-1"});
-    var projectNameLabel = $("<label>").html("Project Name:");
-    var projectNameInput = $("<input>", {"class": "form-control", type : "text", id : "projectName", onkeyup : "projectConfirmation()"});
+    let projectNameDiv = $("<div>", {"class": "form-group modal-content-1"});
+    let projectNameLabel = $("<label>").html("Project Name:");
+    let projectNameInput = $("<input>", {"class": "form-control", type : "text", id : "projectName", onkeyup : "projectConfirmation()"});
     $("#projectModalBody").append(projectNameDiv);
     $(projectNameDiv).append(projectNameLabel);
     $(projectNameDiv).append(projectNameInput);
 
-    var statusDiv = $("<div>", {"class": "form-group modal-content-2"});
-    var statusLabel = $("<label>").html("Status:");
-    var statusSelect = $("<select>", { id : "projectStatus", "class": "form-control"}).prop("required", true);
+    let statusDiv = $("<div>", {"class": "form-group modal-content-2"});
+    let statusLabel = $("<label>").html("Status:");
+    let statusSelect = $("<select>", { id : "projectStatus", "class": "form-control"}).prop("required", true);
     $(statusSelect).append($("<option>").val("0").text(""));
     $(statusSelect).append($("<option>").val("Back-log").text("Back-log"));
     $(statusSelect).append($("<option>").val("Development").text("Development"));
@@ -86,7 +86,7 @@ function createProjectPrompt()
     $(statusDiv).append(statusLabel);
     $(statusDiv).append(statusSelect);
 
-    $("#projectModalFooter").append($("<button>", {"class": "btn btn-primary", type : "text", id : "saveProjectBtn", onclick : "createProject()"}).html("Save"));
+    $("#projectModalFooter").html().append($("<button>", {"class": "btn btn-primary", type : "text", id : "saveProjectBtn", onclick : "createProject()"}).html("Save"));
 }
 
 function projectConfirmation() 
@@ -97,7 +97,7 @@ function projectConfirmation()
 
 function createProject()
 {
-    var projectStatus = document.getElementById("projectStatus").options[document.getElementById("projectStatus").selectedIndex].text;
+    let projectStatus = document.getElementById("projectStatus").options[document.getElementById("projectStatus").selectedIndex].text;
 
     var data = new FormData();
     data.append('function', "createProject");
@@ -117,25 +117,18 @@ function createTicketPrompt(projectId)
 {
     $("#projectModalHead").html("Create Ticket");
 
-    document.getElementById("projectModalBody").innerHTML = 
-    `
-    <div class="form-group">
-        <label for="projectId" class="modal-content-1">Project ID</label> 
-        <input type="text" id="projectId" class="form-control" value="${projectId}" disabled> 
-        <label for="summary" class="modal-content-2">Summary</label> 
-        <input type="text" id="summary" class="form-control" onkeyup="ticketConfirmation()" required>
-        <input type="hidden" id="reporterKey" value="${userId}">
-        <input type="hidden" id="function" value="createTicket">
-    </div>
-    `;
+    let createTicketDiv = $("<div>", {"class": "form-group"});
+    $(createTicketDiv).append($("<label>", {"class": "modal-content-1"}).html("Project ID"));
+    $(createTicketDiv).append($("<input>", { id : "projectId", "class": "form-control", value : projectId}));
+    $(createTicketDiv).append($("<label>", { "class": "modal-content-2",}).html("Summary"));
+    $(createTicketDiv).append($("<input>", { id : "summary", "class": "form-control", onkeyup : "ticketConfirmation()"}));
+    $(createTicketDiv).append($("<input>", { type : "hidden", id : "reporterKey", value : userId}));
+    $(createTicketDiv).append($("<input>", { type : "hidden", id : "function", value : "createTicket"}));
 
-    document.getElementById("projectModalFooter").innerHTML = 
-    `
-    <button id="saveTicketBtn" class="btn btn-primary" type=submit onclick="createTicket()" disabled >Save</button>
-    `;
+    $("#projectModalFooter").html().append($("<button>", { id : "saveTicketBtn", class : "btn btn-primary", type : "submit" , onclick : "createTicket()"}).html("Save"));
 }
 
-function ticketConfirmation() 
+function ticketConfirmation()  // Use onchange instead of onkeyup for the drop down
 {
     document.getElementById("summary").value.trim() == ""
     ? document.getElementById("saveTicketBtn").disabled = true : document.getElementById("saveTicketBtn").disabled = false;
