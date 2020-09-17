@@ -119,12 +119,13 @@ function createTicketPrompt(projectId)
 
     let createTicketDiv = $("<div>", {"class": "form-group"});
     $(createTicketDiv).append($("<label>", {"class": "modal-content-1"}).html("Project ID"));
-    $(createTicketDiv).append($("<input>", { id : "projectId", "class": "form-control", value : projectId}));
+    $(createTicketDiv).append($("<input>", { id : "projectId", "class": "form-control", value : projectId}).prop("disabled", true));
     $(createTicketDiv).append($("<label>", { "class": "modal-content-2",}).html("Summary"));
     $(createTicketDiv).append($("<input>", { id : "summary", "class": "form-control", onkeyup : "ticketConfirmation()"}));
     $(createTicketDiv).append($("<input>", { type : "hidden", id : "reporterKey", value : userId}));
     $(createTicketDiv).append($("<input>", { type : "hidden", id : "function", value : "createTicket"}));
-
+    
+    $("#projectModalBody").append(createTicketDiv);
     $("#projectModalFooter").html("").append($("<button>", { id : "saveTicketBtn", class : "btn btn-primary", type : "submit" , onclick : "createTicket()"}).html("Save"));
 }
 
