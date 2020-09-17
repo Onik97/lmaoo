@@ -115,7 +115,7 @@ function createTicketPrompt(projectId)
 {
     $("#projectModalHead").html("Create Ticket");
 
-    let createTicketDiv = $("<div>", {"class": "form-group"});
+    let createTicketDiv = $("<div>", {class : "form-group"});
     $(createTicketDiv).append($("<label>", { class : "modal-content-1"}).html("Project ID"));
     $(createTicketDiv).append($("<input>", { id : "projectId", class: "form-control", value : projectId}).prop("disabled", true));
     $(createTicketDiv).append($("<label>", { class : "modal-content-2"}).html("Summary"));
