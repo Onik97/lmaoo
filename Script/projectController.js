@@ -74,7 +74,7 @@ function createProjectPrompt()
 
     var statusDiv = $("<div>", {"class": "form-group modal-content-2"});
     var statusLabel = $("<label>").html("Status:");
-    var statusSelect = $("<select>", { id : "projectStatus", "class": "form-group"}).prop("required", true);
+    var statusSelect = $("<select>", { id : "projectStatus", "class": "form-control"}).prop("required", true);
     $(statusSelect).append($("<option>").val("0").text(""));
     $(statusSelect).append($("<option>").val("Back-log").text("Back-log"));
     $(statusSelect).append($("<option>").val("Development").text("Development"));
