@@ -86,7 +86,7 @@ function createProjectPrompt()
     $(statusDiv).append(statusLabel);
     $(statusDiv).append(statusSelect);
 
-    $("#projectModalFooter").html().append($("<button>", {"class": "btn btn-primary", type : "text", id : "saveProjectBtn", onclick : "createProject()"}).html("Save"));
+    $("#projectModalFooter").html("").append($("<button>", {"class": "btn btn-primary", type : "text", id : "saveProjectBtn", onclick : "createProject()"}).html("Save"));
 }
 
 function projectConfirmation() 
@@ -125,7 +125,7 @@ function createTicketPrompt(projectId)
     $(createTicketDiv).append($("<input>", { type : "hidden", id : "reporterKey", value : userId}));
     $(createTicketDiv).append($("<input>", { type : "hidden", id : "function", value : "createTicket"}));
 
-    $("#projectModalFooter").html().append($("<button>", { id : "saveTicketBtn", class : "btn btn-primary", type : "submit" , onclick : "createTicket()"}).html("Save"));
+    $("#projectModalFooter").html("").append($("<button>", { id : "saveTicketBtn", class : "btn btn-primary", type : "submit" , onclick : "createTicket()"}).html("Save"));
 }
 
 function ticketConfirmation()  // Use onchange instead of onkeyup for the drop down
