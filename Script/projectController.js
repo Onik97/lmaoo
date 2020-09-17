@@ -61,14 +61,12 @@ function getTicketWithProjectId(id)
 
 function createProjectPrompt()
 {
-    document.getElementById("projectModalHead").innerHTML = "Create Project";
-
-    document.getElementById("projectModalBody").innerHTML = "";
+    $("#projectModalHead").html("Create Project");
 
     let projectNameDiv = $("<div>", {"class": "form-group modal-content-1"});
     let projectNameLabel = $("<label>").html("Project Name:");
-    let projectNameInput = $("<input>", {"class": "form-control", type : "text", id : "projectName", onkeyup : "projectConfirmation()"});
-    $("#projectModalBody").append(projectNameDiv);
+    let projectNameInput = $("<input>", {class: "form-control", type : "text", id : "projectName", onkeyup : "projectConfirmation()"});
+    $("#projectModalBody").html("").append(projectNameDiv);
     $(projectNameDiv).append(projectNameLabel);
     $(projectNameDiv).append(projectNameInput);
 
@@ -86,7 +84,7 @@ function createProjectPrompt()
     $(statusDiv).append(statusLabel);
     $(statusDiv).append(statusSelect);
 
-    $("#projectModalFooter").html("").append($("<button>", {"class": "btn btn-primary", type : "text", id : "saveProjectBtn", onclick : "createProject()"}).html("Save"));
+    $("#projectModalFooter").html("").append($("<button>", {class: "btn btn-primary", type : "text", id : "saveProjectBtn", onclick : "createProject()"}).html("Save"));
 }
 
 function projectConfirmation() 
@@ -118,18 +116,18 @@ function createTicketPrompt(projectId)
     $("#projectModalHead").html("Create Ticket");
 
     let createTicketDiv = $("<div>", {"class": "form-group"});
-    $(createTicketDiv).append($("<label>", {"class": "modal-content-1"}).html("Project ID"));
-    $(createTicketDiv).append($("<input>", { id : "projectId", "class": "form-control", value : projectId}).prop("disabled", true));
-    $(createTicketDiv).append($("<label>", { "class": "modal-content-2",}).html("Summary"));
+    $(createTicketDiv).append($("<label>", { class: "modal-content-1"}).html("Project ID"));
+    $(createTicketDiv).append($("<input>", { id : "projectId", class: "form-control", value : projectId}).prop("disabled", true));
+    $(createTicketDiv).append($("<label>", { class: "modal-content-2",}).html("Summary"));
     $(createTicketDiv).append($("<input>", { id : "summary", "class": "form-control", onkeyup : "ticketConfirmation()"}));
-    $(createTicketDiv).append($("<input>", { type : "hidden", id : "reporterKey", value : userId}));
-    $(createTicketDiv).append($("<input>", { type : "hidden", id : "function", value : "createTicket"}));
+    $(createTicketDiv).append($("<input>", { id : "reporterKey", value : userId, type : "hidden"}));
+    $(createTicketDiv).append($("<input>", { id : "function", value : "createTicket", type : "hidden"}));
     
     $("#projectModalBody").append(createTicketDiv);
     $("#projectModalFooter").html("").append($("<button>", { id : "saveTicketBtn", class : "btn btn-primary", type : "submit" , onclick : "createTicket()"}).html("Save"));
 }
 
-function ticketConfirmation()  // Use onchange instead of onkeyup for the drop down
+function ticketConfirmation() // TODO: Onik -> Improve Ticket Confirmation -> Perhaps rename it to ticketValidation for serialisation
 {
     document.getElementById("summary").value.trim() == ""
     ? document.getElementById("saveTicketBtn").disabled = true : document.getElementById("saveTicketBtn").disabled = false;
