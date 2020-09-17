@@ -63,17 +63,17 @@ function createProjectPrompt()
 {
     $("#projectModalHead").html("Create Project");
 
-    let projectNameDiv = $("<div>", {"class": "form-group modal-content-1"});
+    let projectNameDiv = $("<div>", {"class" : "form-group modal-content-1"});
     let projectNameLabel = $("<label>").html("Project Name:");
-    let projectNameInput = $("<input>", {class: "form-control", type : "text", id : "projectName", onkeyup : "projectConfirmation()"});
+    let projectNameInput = $("<input>", {class : "form-control", type : "text", id : "projectName", onkeyup : "projectConfirmation()"});
     $("#projectModalBody").html("").append(projectNameDiv);
     $(projectNameDiv).append(projectNameLabel);
     $(projectNameDiv).append(projectNameInput);
 
-    let statusDiv = $("<div>", {"class": "form-group modal-content-2"});
+    let statusDiv = $("<div>", {"class" : "form-group modal-content-2"});
     let statusLabel = $("<label>").html("Status:");
-    let statusSelect = $("<select>", { id : "projectStatus", "class": "form-control"}).prop("required", true);
-    $(statusSelect).append($("<option>").val("0").text(""));
+    let statusSelect = $("<select>", { id : "projectStatus", "class" : "form-control"}).prop("required", true);
+    $(statusSelect).append($("<option>").val("0").text("").prop({"selected" : true, "disabled" : true}));
     $(statusSelect).append($("<option>").val("Back-log").text("Back-log"));
     $(statusSelect).append($("<option>").val("Development").text("Development"));
     $(statusSelect).append($("<option>").val("QA").text("QA"));
@@ -84,7 +84,7 @@ function createProjectPrompt()
     $(statusDiv).append(statusLabel);
     $(statusDiv).append(statusSelect);
 
-    $("#projectModalFooter").html("").append($("<button>", {class: "btn btn-primary", type : "text", id : "saveProjectBtn", onclick : "createProject()"}).html("Save"));
+    $("#projectModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveProjectBtn", onclick : "createProject()"}).html("Save"));
 }
 
 function projectConfirmation() 
@@ -116,14 +116,14 @@ function createTicketPrompt(projectId)
     $("#projectModalHead").html("Create Ticket");
 
     let createTicketDiv = $("<div>", {"class": "form-group"});
-    $(createTicketDiv).append($("<label>", { class: "modal-content-1"}).html("Project ID"));
+    $(createTicketDiv).append($("<label>", { class : "modal-content-1"}).html("Project ID"));
     $(createTicketDiv).append($("<input>", { id : "projectId", class: "form-control", value : projectId}).prop("disabled", true));
-    $(createTicketDiv).append($("<label>", { class: "modal-content-2",}).html("Summary"));
+    $(createTicketDiv).append($("<label>", { class : "modal-content-2"}).html("Summary"));
     $(createTicketDiv).append($("<input>", { id : "summary", "class": "form-control", onkeyup : "ticketConfirmation()"}));
     $(createTicketDiv).append($("<input>", { id : "reporterKey", value : userId, type : "hidden"}));
     $(createTicketDiv).append($("<input>", { id : "function", value : "createTicket", type : "hidden"}));
     
-    $("#projectModalBody").append(createTicketDiv);
+    $("#projectModalBody").html("").append(createTicketDiv);
     $("#projectModalFooter").html("").append($("<button>", { id : "saveTicketBtn", class : "btn btn-primary", type : "submit" , onclick : "createTicket()"}).html("Save"));
 }
 
