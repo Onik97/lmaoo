@@ -46,7 +46,7 @@ function getTicketWithProjectId(id)
             if (json[i].forename == null) assignee = document.createTextNode("Not assigned");
 
             summaryLink = document.createElement("a"); 
-            summaryLink.setAttribute('href', `../Ticket/Index.php?ticketId=${json[i].ticketId}`);
+            summaryLink.setAttribute('href', `../Ticket/index.php?ticketId=${json[i].ticketId}`);
             summaryLink.appendChild(summary);
             
             let newRow = document.getElementById("ticketTable").insertRow(-1);
