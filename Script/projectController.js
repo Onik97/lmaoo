@@ -8,16 +8,14 @@ function loadProjects()
     loadProjectsFromServer()
     .then(response =>
     {
-        document.getElementById("listOfProjects").innerHTML = "";
+
+        if (userLevel >= 3) $("#listOfProjects").append($("<li>", { id : "createProjectBtn" , "data-toggle" : "modal" , "data-target" : "#projectModal" , onclick : "createProjectPrompt()"}).html(" + Create Project"));
+        
         var json = response.data;
         for (i = 0; i < json.length; i++)
         {
-            document.getElementById("listOfProjects").innerHTML += 
-            `<li onclick="getProjectName(this.innerHTML, this.value); getTicketWithProjectId(this.value)" value="${json[i].projectId}">${json[i].name}</li>`
+            $("#listOfProjects").append($("<li>", { value : json[i].projectId , onclick : "getProjectName(this.innerHTML, this.value); getTicketWithProjectId(this.value)"}).html(json[i].name));
         }
-
-        if (userLevel >= 3) document.getElementById("listOfProjects").innerHTML += 
-            `<li id="createProjectBtn" data-toggle="modal" data-target="#projectModal" onclick="createProjectPrompt()"> + Create Project</li>`
     })
 }
 
