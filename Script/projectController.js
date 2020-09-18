@@ -13,8 +13,7 @@ function loadProjects()
         for (i = 0; i < json.length; i++)
         {
             document.getElementById("listOfProjects").innerHTML += 
-            // `<li onclick="getProjectName(this.innerHTML); getTicketWithProjectId(this.value)" value="${json[i].projectId}">${json[i].name}</li>`
-            `<li onclick="getProjectName(this.innerHTML); loadTicketsWithProgress(this.value)" value="${json[i].projectId}, Open">${json[i].name}</li>`
+            `<li onclick="getProjectName(this.innerHTML, this.value); getTicketWithProjectId(this.value)" value="${json[i].projectId}">${json[i].name}</li>`
         }
 
         if (userLevel >= 3) document.getElementById("listOfProjects").innerHTML += 
@@ -22,12 +21,13 @@ function loadProjects()
     })
 }
 
-function getProjectName(name)
+function getProjectName(name, id)
 {
    document.getElementById("ticketMessage").innerHTML = "Tickets for " + name;
+   document.getElementById("selectedProjectId").innerHTML = id;
 }
 
-function getTicketWithProjectId1(id)
+function getTicketWithProjectId(id)
 {
     if (userLevel >= 2) document.getElementById("ticketBtnDiv").innerHTML = 
         `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
@@ -151,11 +151,10 @@ function createTicket()
     })
 }
 
-function checkProgressTabs(progress){
+function loadTicketsWithProgress(progress) 
+{
+    console.log(progress);
     return progress;
-}
-
-function loadTicketsWithProgress(id, progress) {
     loadTicketsWithProgressFromServer(id, progress)
     .then (response => {
         console.log(response.data)
