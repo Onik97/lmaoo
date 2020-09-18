@@ -153,9 +153,11 @@ function createTicket()
 
 function loadTicketsWithProgress(progress) 
 {
-    console.log(progress);
-    return progress;
-    loadTicketsWithProgressFromServer(id, progress)
+    let selectedProjectId = document.getElementById("selectedProjectId").innerHTML;
+
+    if (selectedProjectId == 0) return false
+
+    loadTicketsWithProgressFromServer(selectedProjectId, progress)
     .then (response => {
         console.log(response.data)
     })
