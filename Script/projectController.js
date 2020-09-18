@@ -3,11 +3,6 @@ $(document).ready(function()
   loadProjects();
 }); 
 
-let Open = "Open";
-let inProgress = "In Progress";
-let inAutomation = "In Automation";
-let Complete = "Complete";
-
 function loadProjects()
 {
     loadProjectsFromServer()
@@ -19,7 +14,7 @@ function loadProjects()
         {
             document.getElementById("listOfProjects").innerHTML += 
             // `<li onclick="getProjectName(this.innerHTML); getTicketWithProjectId(this.value)" value="${json[i].projectId}">${json[i].name}</li>`
-            `<li onclick="getProjectName(this.innerHTML); loadTicketsWithProgress(this.value)" value="${json[i].projectId}">${json[i].name}</li>`
+            `<li onclick="getProjectName(this.innerHTML); loadTicketsWithProgress(this.value)" value="${json[i].projectId}, Open">${json[i].name}</li>`
         }
 
         if (userLevel >= 3) document.getElementById("listOfProjects").innerHTML += 
@@ -32,38 +27,38 @@ function getProjectName(name)
    document.getElementById("ticketMessage").innerHTML = "Tickets for " + name;
 }
 
-function getTicketWithProjectId(id)
-{
-    if (userLevel >= 2) document.getElementById("ticketBtnDiv").innerHTML = 
-        `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
+// function getTicketWithProjectId1(id)
+// {
+//     if (userLevel >= 2) document.getElementById("ticketBtnDiv").innerHTML = 
+//         `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
 
-    loadTicketsFromServer(id)
-    .then(response => 
-    {
-        var json = response.data;
-        $("#ticketTable").find("tr:gt(0)").remove(); // Clears table
+//     loadTicketsFromServer(id)
+//     .then(response => 
+//     {
+//         var json = response.data;
+//         $("#ticketTable").find("tr:gt(0)").remove(); // Clears table
 
-        for (i = 0; i < json.length; i++)
-        {
-            let ticketId = document.createTextNode(json[i].ticketId);
-            let summary = document.createTextNode(json[i].summary);
-            let progress = document.createTextNode(json[i].progress);
-            let assignee = document.createTextNode(`${json[i].forename} ${json[i].surname}`);
-            if (json[i].forename == null) assignee = document.createTextNode("Not assigned");
+//         for (i = 0; i < json.length; i++)
+//         {
+//             let ticketId = document.createTextNode(json[i].ticketId);
+//             let summary = document.createTextNode(json[i].summary);
+//             let progress = document.createTextNode(json[i].progress);
+//             let assignee = document.createTextNode(`${json[i].forename} ${json[i].surname}`);
+//             if (json[i].forename == null) assignee = document.createTextNode("Not assigned");
 
-            summaryLink = document.createElement("a"); 
-            summaryLink.setAttribute('href', `../Ticket/Index.php?ticketId=${json[i].ticketId}`);
-            summaryLink.appendChild(summary);
+//             summaryLink = document.createElement("a"); 
+//             summaryLink.setAttribute('href', `../Ticket/Index.php?ticketId=${json[i].ticketId}`);
+//             summaryLink.appendChild(summary);
             
-            let newRow = document.getElementById("ticketTable").insertRow(-1);
+//             let newRow = document.getElementById("ticketTable").insertRow(-1);
 
-            newRow.insertCell(0).appendChild(ticketId);
-            newRow.insertCell(1).appendChild(summaryLink);
-            newRow.insertCell(2).appendChild(progress);
-            newRow.insertCell(3).appendChild(assignee);
-        }
-    })
-}
+//             newRow.insertCell(0).appendChild(ticketId);
+//             newRow.insertCell(1).appendChild(summaryLink);
+//             newRow.insertCell(2).appendChild(progress);
+//             newRow.insertCell(3).appendChild(assignee);
+//         }
+//     })
+// }
 
 function createProjectPrompt()
 {
@@ -163,26 +158,12 @@ function createTicket()
     })
 }
 
-function updateTicketWithProgress() {
-    loadTicketsWithProgressFromServer(1, 'open')
-    .then(response =>
-        {
-            console.log(response.data);
-        })
-}
-function checkProgressTabs(value) {
-    document.getElementById("open-tab").value = "Open";
-    document.getElementById("progress-tab").value = "In Progress";
-    document.getElementById("automation-tab").value = "In Automation";
-    document.getElementById("complete-tab").value = "Complete";
-    
-    let progress = value;
-    console.log(progress);
+function checkProgressTabs(progress){
     return progress;
 }
 
-function loadTicketsWithProgress (id, progress) {
-    loadTicketsWithProgressFromServer(id, "Open")
+function loadTicketsWithProgress(id, progress) {
+    loadTicketsWithProgressFromServer(id, progress)
     .then (response => {
         console.log(response.data)
     })
