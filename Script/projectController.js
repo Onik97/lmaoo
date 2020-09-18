@@ -27,66 +27,65 @@ function getProjectName(name)
    document.getElementById("ticketMessage").innerHTML = "Tickets for " + name;
 }
 
-// function getTicketWithProjectId1(id)
-// {
-//     if (userLevel >= 2) document.getElementById("ticketBtnDiv").innerHTML = 
-//         `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
+function getTicketWithProjectId1(id)
+{
+    if (userLevel >= 2) document.getElementById("ticketBtnDiv").innerHTML = 
+        `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
 
-//     loadTicketsFromServer(id)
-//     .then(response => 
-//     {
-//         var json = response.data;
-//         $("#ticketTable").find("tr:gt(0)").remove(); // Clears table
+    loadTicketsFromServer(id)
+    .then(response => 
+    {
+        var json = response.data;
+        $("#ticketTable").find("tr:gt(0)").remove(); // Clears table
 
-//         for (i = 0; i < json.length; i++)
-//         {
-//             let ticketId = document.createTextNode(json[i].ticketId);
-//             let summary = document.createTextNode(json[i].summary);
-//             let progress = document.createTextNode(json[i].progress);
-//             let assignee = document.createTextNode(`${json[i].forename} ${json[i].surname}`);
-//             if (json[i].forename == null) assignee = document.createTextNode("Not assigned");
+        for (i = 0; i < json.length; i++)
+        {
+            let ticketId = document.createTextNode(json[i].ticketId);
+            let summary = document.createTextNode(json[i].summary);
+            let progress = document.createTextNode(json[i].progress);
+            let assignee = document.createTextNode(`${json[i].forename} ${json[i].surname}`);
+            if (json[i].forename == null) assignee = document.createTextNode("Not assigned");
 
-//             summaryLink = document.createElement("a"); 
-//             summaryLink.setAttribute('href', `../Ticket/Index.php?ticketId=${json[i].ticketId}`);
-//             summaryLink.appendChild(summary);
+            summaryLink = document.createElement("a"); 
+            summaryLink.setAttribute('href', `../Ticket/index.php?ticketId=${json[i].ticketId}`);
+            summaryLink.appendChild(summary);
             
-//             let newRow = document.getElementById("ticketTable").insertRow(-1);
+            let newRow = document.getElementById("ticketTable").insertRow(-1);
 
-//             newRow.insertCell(0).appendChild(ticketId);
-//             newRow.insertCell(1).appendChild(summaryLink);
-//             newRow.insertCell(2).appendChild(progress);
-//             newRow.insertCell(3).appendChild(assignee);
-//         }
-//     })
-// }
+            newRow.insertCell(0).appendChild(ticketId);
+            newRow.insertCell(1).appendChild(summaryLink);
+            newRow.insertCell(2).appendChild(progress);
+            newRow.insertCell(3).appendChild(assignee);
+        }
+    })
+}
 
 function createProjectPrompt()
 {
-    document.getElementById("projectModalHead").innerHTML = "Create Project"
+    $("#projectModalHead").html("Create Project");
 
-    document.getElementById("projectModalBody").innerHTML = 
-    `
-    <div class="form-group modal-content-1">    
-        <label for="projectName">Project Name:</label><br>
-        <input class="form-control" type="text" id="projectName" onkeyup="projectConfirmation()" required> <br>
-    </div>
-    <div class="modal-content-2 form-group">
-        <label for="projectStatus">Status:</label><br>
-        <select id ="projectStatus" class="form-control" required name="projectStatus">
-            <option value="0" selected disabled ></option>
-            <option value="Back-log">Back-Log</option>
-            <option value="Development">Development</option>
-            <option value="QA">QA</option>
-            <option value="Releasing">Releasing</option>
-            <option value="Released">Released</option>
-        </select>
-    </div>
-        <input type="hidden" name="function" value="createProject">
-    `; 
+    let projectNameDiv = $("<div>", {"class" : "form-group modal-content-1"});
+    let projectNameLabel = $("<label>").html("Project Name:");
+    let projectNameInput = $("<input>", {class : "form-control", type : "text", id : "projectName", onkeyup : "projectConfirmation()"});
+    $("#projectModalBody").html("").append(projectNameDiv);
+    $(projectNameDiv).append(projectNameLabel);
+    $(projectNameDiv).append(projectNameInput);
 
-    document.getElementById("projectModalFooter").innerHTML = `
-    <button id="saveProjectBtn" class="btn btn-primary" onclick="createProject()" disabled >Save</button>
-    `;
+    let statusDiv = $("<div>", {"class" : "form-group modal-content-2"});
+    let statusLabel = $("<label>").html("Status:");
+    let statusSelect = $("<select>", { id : "projectStatus", "class" : "form-control"}).prop("required", true);
+    $(statusSelect).append($("<option>").val("0").text("").prop({"selected" : true, "disabled" : true}));
+    $(statusSelect).append($("<option>").val("Back-log").text("Back-log"));
+    $(statusSelect).append($("<option>").val("Development").text("Development"));
+    $(statusSelect).append($("<option>").val("QA").text("QA"));
+    $(statusSelect).append($("<option>").val("Releasing").text("Releasing"));
+    $(statusSelect).append($("<option>").val("Released").text("Released"));
+
+    $("#projectModalBody").append(statusDiv);
+    $(statusDiv).append(statusLabel);
+    $(statusDiv).append(statusSelect);
+
+    $("#projectModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveProjectBtn", onclick : "createProject()"}).html("Save"));
 }
 
 function projectConfirmation() 
@@ -97,7 +96,7 @@ function projectConfirmation()
 
 function createProject()
 {
-    var projectStatus = document.getElementById("projectStatus").options[document.getElementById("projectStatus").selectedIndex].text;
+    let projectStatus = document.getElementById("projectStatus").options[document.getElementById("projectStatus").selectedIndex].text;
 
     var data = new FormData();
     data.append('function', "createProject");
@@ -117,25 +116,19 @@ function createTicketPrompt(projectId)
 {
     $("#projectModalHead").html("Create Ticket");
 
-    document.getElementById("projectModalBody").innerHTML = 
-    `
-    <div class="form-group">
-        <label for="projectId" class="modal-content-1">Project ID</label> 
-        <input type="text" id="projectId" class="form-control" value="${projectId}" disabled> 
-        <label for="summary" class="modal-content-2">Summary</label> 
-        <input type="text" id="summary" class="form-control" onkeyup="ticketConfirmation()" required>
-        <input type="hidden" id="reporterKey" value="${userId}">
-        <input type="hidden" id="function" value="createTicket">
-    </div>
-    `;
-
-    document.getElementById("projectModalFooter").innerHTML = 
-    `
-    <button id="saveTicketBtn" class="btn btn-primary" type=submit onclick="createTicket()" disabled >Save</button>
-    `;
+    let createTicketDiv = $("<div>", {class : "form-group"});
+    $(createTicketDiv).append($("<label>", { class : "modal-content-1"}).html("Project ID"));
+    $(createTicketDiv).append($("<input>", { id : "projectId", class: "form-control", value : projectId}).prop("disabled", true));
+    $(createTicketDiv).append($("<label>", { class : "modal-content-2"}).html("Summary"));
+    $(createTicketDiv).append($("<input>", { id : "summary", "class": "form-control", onkeyup : "ticketConfirmation()"}));
+    $(createTicketDiv).append($("<input>", { id : "reporterKey", value : userId, type : "hidden"}));
+    $(createTicketDiv).append($("<input>", { id : "function", value : "createTicket", type : "hidden"}));
+    
+    $("#projectModalBody").html("").append(createTicketDiv);
+    $("#projectModalFooter").html("").append($("<button>", { id : "saveTicketBtn", class : "btn btn-primary", type : "submit" , onclick : "createTicket()"}).html("Save"));
 }
 
-function ticketConfirmation() 
+function ticketConfirmation() // TODO: Onik -> Improve Ticket Confirmation -> Perhaps rename it to ticketValidation for serialisation
 {
     document.getElementById("summary").value.trim() == ""
     ? document.getElementById("saveTicketBtn").disabled = true : document.getElementById("saveTicketBtn").disabled = false;
