@@ -23,8 +23,8 @@ function loadProjects()
 
 function getProjectName(name, id)
 {
-   document.getElementById("ticketMessage").innerHTML = "Tickets for " + name;
-   document.getElementById("selectedProjectId").innerHTML = id;
+    $("#ticketMessage").html("Tickets for " + name);
+    $("#selectedProjectId").html(id);
 }
 
 function getTicketWithProjectId(id)
@@ -154,8 +154,7 @@ function createTicket()
 function loadTicketsWithProgress(progress) 
 {
     let selectedProjectId = document.getElementById("selectedProjectId").innerHTML;
-
-    if (selectedProjectId == 0) return false
+    if (selectedProjectId == 0) return false;
 
     loadTicketsWithProgressFromServer(selectedProjectId, progress)
     .then (response => {
