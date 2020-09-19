@@ -51,17 +51,6 @@ function getProjectList()
     return $stmt->fetchAll();
 }
 
-function getTicketList($projectId)
-{
-    $pdo = logindb('user', 'pass');
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("SELECT ticket.ticketId, ticket.summary, ticket.progress, user.forename, user.surname 
-                           FROM ticket LEFT JOIN user on user.userId = ticket.assignee_key
-                           WHERE projectId = ?");
-    $stmt->execute([$projectId]);
-    return $stmt->fetchAll();
-}
-
 function getTicketListWithProgress($projectId, $progress)
 {
     $pdo = logindb('user', 'pass');
