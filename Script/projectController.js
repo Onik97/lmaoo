@@ -10,7 +10,8 @@ function loadProjects()
     {
 
         if (userLevel >= 3) $("#listOfProjects").append($("<li>", { id : "createProjectBtn" , "data-toggle" : "modal" , "data-target" : "#projectModal" , onclick : "createProjectPrompt()"}).html(" + Create Project"));
-        
+        $("#listOfProjects").find("li:gt(0)").remove();
+
         var json = response.data;
         for (i = 0; i < json.length; i++)
         {
