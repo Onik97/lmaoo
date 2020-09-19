@@ -14,7 +14,7 @@ function loadProjects()
         var json = response.data;
         for (i = 0; i < json.length; i++)
         {
-            $("#listOfProjects").append($("<li>", { value : json[i].projectId , onclick : "getProjectName(this.innerHTML, this.value); getTicketWithProjectId(this.value)"}).html(json[i].name));
+            $("#listOfProjects").append($("<li>", { value : json[i].projectId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress();"}).html(json[i].name));
         }
     })
 }
@@ -25,7 +25,7 @@ function getProjectName(name, id)
     $("#selectedProjectId").html(id);
 }
 
-function getTicketWithProjectId(id)
+function getTicketWithProjectId1(id)
 {
     if (userLevel >= 2) document.getElementById("ticketBtnDiv").innerHTML = 
         `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
@@ -136,14 +136,14 @@ function createTicket()
 {
     var data = new FormData();
     data.append('function', "createTicket");
-    data.append('projectId', document.getElementById("projectId").value);
+    data.append('projectId', document.getElementById("selectedProjectId").innerHTML);
     data.append('reporterKey', document.getElementById("reporterKey").value);
     data.append('summary', document.getElementById("summary").value);
 
     axios.post("../Project/projectController.php", data)
     .then(() =>
     {
-        getTicketWithProjectId(document.getElementById("projectId").value);
+        loadTicketsWithProgress(document.getElementById("selectedProjectId").innerHTML);
         overHang("success", "Ticket has been successfully created!");
         $('#projectModal').modal('hide');
     })
@@ -154,8 +154,33 @@ function loadTicketsWithProgress(progress)
     let selectedProjectId = document.getElementById("selectedProjectId").innerHTML;
     if (selectedProjectId == 0) return false;
 
+    if (userLevel >= 2) document.getElementById("ticketBtnDiv").innerHTML = 
+        `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${selectedProjectId})">Create Ticket</button>`;
+
     loadTicketsWithProgressFromServer(selectedProjectId, progress)
-    .then (response => {
-        console.log(response.data)
+    .then (response => 
+    {
+        var json = response.data;
+        $("#ticketTable").find("tr:gt(0)").remove(); // Clears table
+
+        for (i = 0; i < json.length; i++)
+        {
+            let ticketId = document.createTextNode(json[i].ticketId);
+            let summary = document.createTextNode(json[i].summary);
+            let progress = document.createTextNode(json[i].progress);
+            let assignee = document.createTextNode(`${json[i].forename} ${json[i].surname}`);
+            if (json[i].forename == null) assignee = document.createTextNode("Not assigned");
+
+            summaryLink = document.createElement("a"); 
+            summaryLink.setAttribute('href', `../Ticket/index.php?ticketId=${json[i].ticketId}`);
+            summaryLink.appendChild(summary);
+            
+            let newRow = document.getElementById("ticketTable").insertRow(-1);
+
+            newRow.insertCell(0).appendChild(ticketId);
+            newRow.insertCell(1).appendChild(summaryLink);
+            newRow.insertCell(2).appendChild(progress);
+            newRow.insertCell(3).appendChild(assignee);
+        }
     })
 }
