@@ -25,16 +25,6 @@ function loadProjectsFromServer()
     })
 }
 
-function loadTicketsFromServer(id)
-{
-    return response = axios(
-    {
-        method: 'get',
-        url: '../Project/projectController.php?projectId='+id,
-        headers: {'Content-Type': 'multipart/form-data' }
-    })
-}
-
 function loadTicketsWithProgressFromServer(id, progress)
 {
     return response = axios(
