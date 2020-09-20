@@ -1,11 +1,8 @@
 <?php
 require('../connection.php');
 error_reporting(0);
-if ($_GET['projectId'] && !isset($_GET['progress']))
-{
-   echo json_encode(getTicketList($_GET['projectId']));
-}
-else if ($_GET['projectId'] && $_GET['progress'])
+
+if ($_GET['projectId'] && $_GET['progress'])
 {
     echo json_encode(getTicketListWithProgress($_GET['projectId'], $_GET['progress']));
 }

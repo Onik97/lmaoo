@@ -104,8 +104,8 @@ function createTicket()
 {
     var data = new FormData();
     data.append('function', "createTicket");
-    data.append('projectId', document.getElementById("selectedProjectId").innerHTML);
-    data.append('reporterKey', document.getElementById("reporterKey").value);
+    data.append('projectId', document.getElementById("selectedProjectId").html);
+    data.append('reporterKey',document.getElementById("reporterKey").value);
     data.append('summary', document.getElementById("summary").value);
 
     axios.post("../Project/projectController.php", data)
@@ -119,11 +119,14 @@ function createTicket()
 
 function loadTicketsWithProgress(progress) 
 {
-    let selectedProjectId = document.getElementById("selectedProjectId").innerHTML;
+    let selectedProjectId = $("#selectedProjectId").html();
     if (selectedProjectId == 0) return false;
+    console.log(userLevel);
 
-    if (userLevel >= 2) document.getElementById("ticketBtnDiv").innerHTML = 
-        `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${selectedProjectId})">Create Ticket</button>`;
+    if (userLevel >= 2) $("ticketBtnDiv").append(
+        // $("#listOfProjects").append($("<li>", { id : "createProjectBtn" , "data-toggle" : "modal" , "data-target" : "#projectModal" , onclick : "createProjectPrompt()"}).html(" + Create Project"));
+        $("<button>", {"data-toggle" : "modal" , "data-target" : "#projectModal" , onclick : "createTicketPrompt(selectedProjectId)"}).html("Create Ticket"));
+        // `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${selectedProjectId})">Create Ticket</button>`);
 
     loadTicketsWithProgressFromServer(selectedProjectId, progress)
     .then (response => 
