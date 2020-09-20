@@ -104,9 +104,9 @@ function createTicket()
 {
     var data = new FormData();
     data.append('function', "createTicket");
-    data.append('projectId', document.getElementById("selectedProjectId").innerHTML);
-    data.append('reporterKey',document.getElementById("reporterKey").value);
-    data.append('summary', document.getElementById("summary").value);
+    data.append('projectId', $("#selectedProjectId").html());
+    data.append('reporterKey',$("#reporterKey").val());
+    data.append('summary', $("#summary").val());
 
     axios.post("../Project/projectController.php", data)
     .then(() =>
