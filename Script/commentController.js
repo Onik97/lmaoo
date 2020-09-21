@@ -83,9 +83,8 @@ function loadComments()
             </div>
 
                 <div class="col-2" id="commentActions">
-                    <img class="CommentImages" src="../Images/pencilsquare.svg" onclick=editComment(${json[i].commentId}) role="button"></img>
                     <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#CommentModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
-                    <img src="../Images/paperclip.svg"></img>
+                    <img class="CommentImages" src="../Images/pencilsquare.svg" onclick=editComment(${json[i].commentId}) role="button"></img>
                 </div>
           </div>
           `
@@ -109,15 +108,11 @@ function loadComments()
 
                 <div id="mainComment" class="comment${json[i].commentId}">${json[i].commentContent}</div>
             </div>
-
-                <div class="col-2" id="commentActions">
-                    <img class="CommentImages" src="../Images/paperclip.svg"></img>
-                </div>
-            </div>
-          `
-        }
+          </div>
+        `
       }
-    })
+    }
+  })
 }
 
 function editComment(commentId)
