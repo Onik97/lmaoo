@@ -60,6 +60,7 @@ function getTicketListWithProgress($projectId, $progress)
 
 function loadProjectsInNavBar()
 {
+    if (!isset($_SESSION["userLoggedIn"])) { return; }
     $projects = getProjectList();
     ?> 
     <li class="nav-item dropdown">
