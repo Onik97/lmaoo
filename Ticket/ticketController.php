@@ -1,6 +1,6 @@
 <?php
-$function = $_POST['function'];
 error_reporting(0);
+$function = $_POST['function'];
 
 if ($function == "checkTicket")
 {
