@@ -1,6 +1,6 @@
 <?php  
-require('../connection.php');
-require('user.php');
+require_once('../connection.php');
+require_once('user.php');
 error_reporting(0);
 $function = $_POST['function'];
 $logout = $_POST['logout'];
