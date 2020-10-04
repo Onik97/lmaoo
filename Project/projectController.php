@@ -1,7 +1,6 @@
 <?php
-require('../connection.php');
+require_once("../connection.php");
 error_reporting(0);
-
 if ($_GET['projectId'] && $_GET['progress'])
 {
     echo json_encode(getTicketListWithProgress($_GET['projectId'], $_GET['progress']));
@@ -57,5 +56,23 @@ function getTicketListWithProgress($projectId, $progress)
                            WHERE projectId = ? AND ticket.progress = ?");
     $stmt->execute([$projectId, $progress]);
     return $stmt->fetchAll();
+}
+
+function loadProjectsInNavBar()
+{
+    if (!isset($_SESSION["userLoggedIn"])) { return; }
+    $projects = getProjectList();
+    ?> 
+    <li class="nav-item dropdown">
+        <a id="projectNav" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Project<span class="caret"></span></a>
+
+        <div class="dropdown-menu">
+            <?php foreach ($projects as $project) 
+            { ?>
+            <a class="dropdown-item" href="../Project/index.php?projectId=<?php echo $project->projectId?>"><?php echo $project->name ?></a>
+            <?php } ?>
+        </div>
+    </li>
+    <?php
 }
 ?>
