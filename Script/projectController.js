@@ -132,22 +132,44 @@ function loadTicketsWithProgress(progress)
 
         for (i = 0; i < json.length; i++)
         {
-            let ticketId = document.createTextNode(json[i].ticketId);
-            let summary = document.createTextNode(json[i].summary);
-            let progress = document.createTextNode(json[i].progress);
-            let assignee = document.createTextNode(`${json[i].forename} ${json[i].surname}`);
-            if (json[i].forename == null) assignee = document.createTextNode("Not assigned");
-
-            summaryLink = document.createElement("a"); 
-            summaryLink.setAttribute('href', `../Ticket/index.php?ticketId=${json[i].ticketId}`);
-            summaryLink.appendChild(summary);
-            
             let newRow = document.getElementById("ticketTable").insertRow(-1);
+            let cell1 = newRow.insertCell(0)
+            let cell2 = newRow.insertCell(1)
+            let cell3 = newRow.insertCell(2)
+            let cell4 = newRow.insertCell(3)
+            if (json[i].forename == null) assignee = document.createTextNode("Not assigned");
+            let assignee = document.createTextNode(`${json[i].forename} ${json[i].surname}`);
 
-            newRow.insertCell(0).appendChild(ticketId);
-            newRow.insertCell(1).appendChild(summaryLink);
-            newRow.insertCell(2).appendChild(progress);
-            newRow.insertCell(3).appendChild(assignee);
+            $(cell1).append(document.createTextNode(json[i].ticketId))
+            $(cell2).append("<a href=`../Ticket/index.php?ticketId=${json[i].ticketId}`>Link</a>")
+            $(cell3).append(document.createTextNode(json[i].progress))
+            $(cell4).append(assignee)
+
+            // newRow.insertCell(0).appendChild(ticketId);
+            // newRow.insertCell(1).appendChild(summaryLink);
+            // newRow.insertCell(2).appendChild(progress);
+            // newRow.insertCell(3).appendChild(assignee);
         }
     })
 }
+
+// $(".divcls").append("<h3>Add content by append method</h3> including <b>bold text</b> and a <a href='http://jquery.com/'>link</a> and a line-break <br><hr>");
+// $(createTicketDiv).append($("<label>", { class : "modal-content-1"}).html("Project ID"));
+// $('selector').append(document.createTextNode('text < and > not & html!'))
+
+// let ticketId = document.createTextNode(json[i].ticketId);
+// let summary = document.createTextNode(json[i].summary);
+// let progress = document.createTextNode(json[i].progress);
+// let assignee = document.createTextNode(`${json[i].forename} ${json[i].surname}`);
+// if (json[i].forename == null) assignee = document.createTextNode("Not assigned");
+
+// summaryLink = document.createElement("a"); 
+// summaryLink.setAttribute('href', `../Ticket/index.php?ticketId=${json[i].ticketId}`);
+// summaryLink.appendChild(summary);
+
+// let newRow = document.getElementById("ticketTable").insertRow(-1);
+
+// newRow.insertCell(0).appendChild(ticketId);
+// newRow.insertCell(1).appendChild(summaryLink);
+// newRow.insertCell(2).appendChild(progress);
+// newRow.insertCell(3).appendChild(assignee);
