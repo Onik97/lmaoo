@@ -132,21 +132,26 @@ function loadTicketsWithProgress(progress)
 
         for (i = 0; i < json.length; i++)
         {
+            if (json[i].forename == null) {
+                assignee = document.createTextNode("Not assigned");
+            }
+            else
+            {
+                assignee = document.createTextNode(`${json[i].forename} ${json[i].surname}`);
+            }
+
             let newRow = document.getElementById("ticketTable").insertRow(-1);
             let cell1 = newRow.insertCell(0)
             let cell2 = newRow.insertCell(1)
             let cell3 = newRow.insertCell(2)
             let cell4 = newRow.insertCell(3)
-            if (json[i].forename == null) assignee = document.createTextNode("Not assigned");
-            let assignee = document.createTextNode(`${json[i].forename} ${json[i].surname}`);
-            summaryLink = document.createElement("a"); 
-            summaryLink.setAttribute('href', `../Ticket/index.php?ticketId=${json[i].ticketId}`)
-            summaryLink.innerHTML = "Link";
 
             $(cell1).append(document.createTextNode(json[i].ticketId))
-            $(cell2).append(summaryLink)
+            $(cell2).append($("<a>", { href : `../Ticket/index.php?ticketId=${json[i].ticketId}`}).html("Link"));
             $(cell3).append(document.createTextNode(json[i].progress))
             $(cell4).append(assignee)
         }
     })
 }
+
+// $(createTicketDiv).append($("<label>", { class : "modal-content-1"}).html("Project ID"));
