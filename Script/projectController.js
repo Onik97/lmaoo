@@ -153,5 +153,3 @@ function loadTicketsWithProgress(progress)
         }
     })
 }
-
-// $(createTicketDiv).append($("<label>", { class : "modal-content-1"}).html("Project ID"));
