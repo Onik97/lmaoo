@@ -1,4 +1,4 @@
-<?php ob_start(); require_once("../Project/projectController.php"); ?>    
+<?php ob_start(); require_once("../Project/projectController.php"); require_once("../Ticket/ticketController.php"); ?>    
 <link rel="stylesheet" href="../Css/navbar.css">
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
     
@@ -9,11 +9,7 @@
         </button>
 
         <div class="collapse navbar-collapse w-100 order-3 dual-collapse2" id="navbarNav">
-
-            <form class="navbar-brand form-inline lg-1">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search Ticket" aria-label="Search">
-                <button class="btn btn-outline-success my-sm-0" type="submit">Search</button>
-            </form>
+            <?php viewingSearchBar() ?>
 
             <ul class="nav navbar-nav ml-auto mr-5">
             
