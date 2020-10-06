@@ -163,4 +163,15 @@ function loadReporter($ticketId)
     $stmt->execute([$ticketId]);
     return $stmt->fetchAll();
 }
+
+function loadSearchBar() 
+{
+    if (!isset($_SESSION["userLoggedIn"])) { return;} ?>
+
+    <form class="navbar-brand form-inline lg-1">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search Ticket" aria-label="Search">
+        <button class="btn btn-outline-success my-sm-0" type="submit">Search</button>
+    </form>
+    <?php
+}
 ?>
