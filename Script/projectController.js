@@ -134,7 +134,6 @@ function loadTicketsWithProgress(progress)
         {
             json[i].forename == null ? assignee = document.createTextNode("Not assigned") 
             : assignee = document.createTextNode(`${json[i].forename} ${json[i].surname}`);
-            
 
             let newRow = document.getElementById("ticketTable").insertRow(-1);
             let cell1 = newRow.insertCell(0)
