@@ -9,7 +9,7 @@
         </button>
 
         <div class="collapse navbar-collapse w-100 order-3 dual-collapse2" id="navbarNav">
-            <?php viewingSearchBar() ?>
+            <?php loadSearchBar() ?>
 
             <ul class="nav navbar-nav ml-auto mr-5">
             
