@@ -132,13 +132,9 @@ function loadTicketsWithProgress(progress)
 
         for (i = 0; i < json.length; i++)
         {
-            if (json[i].forename == null) {
-                assignee = document.createTextNode("Not assigned");
-            }
-            else
-            {
-                assignee = document.createTextNode(`${json[i].forename} ${json[i].surname}`);
-            }
+            json[i].forename == null ? assignee = document.createTextNode("Not assigned") 
+            : assignee = document.createTextNode(`${json[i].forename} ${json[i].surname}`);
+            
 
             let newRow = document.getElementById("ticketTable").insertRow(-1);
             let cell1 = newRow.insertCell(0)
@@ -147,7 +143,7 @@ function loadTicketsWithProgress(progress)
             let cell4 = newRow.insertCell(3)
 
             $(cell1).append(document.createTextNode(json[i].ticketId))
-            $(cell2).append($("<a>", { href : `../Ticket/index.php?ticketId=${json[i].ticketId}`}).html("Link"));
+            $(cell2).append($("<a>", { href : `../Ticket/index.php?ticketId=${json[i].ticketId}`}).html(`${json[i].summary}`));
             $(cell3).append(document.createTextNode(json[i].progress))
             $(cell4).append(assignee)
         }
