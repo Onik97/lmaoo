@@ -26,7 +26,7 @@
 
       <div class="content">
         <h1 id="ticketMessage">Tickets</h1>
-        <p id="selectedProjectId" hidden>0</p>
+        <p id="selectedFeatureId" hidden>0</p>
           <div id="ticketDiv">
 
             <ul class="nav nav-tabs nav-fill" id="projectProgressTab" role="tablist">
