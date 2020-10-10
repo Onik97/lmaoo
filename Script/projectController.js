@@ -1,21 +1,22 @@
 $(document).ready(function() 
 {
-  loadProjects();
+    loadFeatures();
 }); 
 
-function loadProjects()
+function loadFeatures()
 {
-    loadProjectsFromServer()
+    var projectId = new URL(window.location.href).searchParams.get("projectId");
+    loadFeaturesFromServer(projectId)
     .then(response =>
     {
 
-        if (userLevel >= 3) $("#listOfProjects").append($("<li>", { id : "createProjectBtn" , "data-toggle" : "modal" , "data-target" : "#projectModal" , onclick : "createProjectPrompt()"}).html(" + Create Project"));
-        $("#listOfProjects").find("li:gt(0)").remove();
+        if (userLevel >= 3) $("#listOfFeatures").append($("<li>", { id : "createFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" , onclick : "createFeaturePrompt()"}).html(" + Create Feature"));
+        $("#listOfFeatures").find("li:gt(0)").remove();
 
         var json = response.data;
         for (i = 0; i < json.length; i++)
         {
-            $("#listOfProjects").append($("<li>", { value : json[i].projectId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress();"}).html(json[i].name));
+            $("#listOfFeatures").append($("<li>", { value : json[i].projectId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress();"}).html(json[i].name));
         }
     })
 }

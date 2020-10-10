@@ -17,8 +17,8 @@
     <div class="wrapper">
       <div id="projectDiv"> 
         <nav id="sidebar">
-          <div id="sidebar-header" class="sidebar-header"><h1>Projects<h1></div>
-          <ul id="listOfProjects" class="list-unstyled components"></ul>
+          <div id="sidebar-header" class="sidebar-header"><h1>Features<h1></div>
+          <ul id="listOfFeatures" class="list-unstyled components"></ul>
         </nav>
       </div>
       
@@ -62,6 +62,7 @@
     </div>
 
     <?php include("projectModal.php"); ?>
+    <?php include("../Feature/featureModal.php"); ?>
     <?php include("../Global/editUserModal.php"); ?>
   </body>
 </html>
