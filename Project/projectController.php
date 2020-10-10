@@ -30,12 +30,12 @@ function createNewProject($projectName, $projectStatus)
     $stmt->execute([$projectName, $projectStatus]);
 }
 
-function createNewTicket($projectId, $summary, $reporterKey)
+function createNewTicket($featureId, $summary, $reporterKey)
 {
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("INSERT INTO ticket (summary, projectId, reporter_key) VALUES (?, ?, ?)");
-    $stmt->execute([$summary, $projectId, $reporterKey]);
+    $stmt = $pdo->prepare("INSERT INTO ticket (summary, featureId, reporter_key) VALUES (?, ?, ?)");
+    $stmt->execute([$summary, $featureId, $reporterKey]);
 }
 
 function getProjectList()
@@ -47,14 +47,14 @@ function getProjectList()
     return $stmt->fetchAll();
 }
 
-function getTicketListWithProgress($projectId, $progress)
+function getTicketListWithProgress($featureId, $progress)
 {
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("SELECT ticket.ticketId, ticket.summary, ticket.progress, user.forename, user.surname 
                            FROM ticket LEFT JOIN user on user.userId = ticket.assignee_key
-                           WHERE projectId = ? AND ticket.progress = ?");
-    $stmt->execute([$projectId, $progress]);
+                           WHERE featureId = ? AND ticket.progress = ?");
+    $stmt->execute([$featureId, $progress]);
     return $stmt->fetchAll();
 }
 
@@ -69,7 +69,7 @@ function loadProjectsInNavBar()
         <div class="dropdown-menu">
             <?php foreach ($projects as $project) 
             { ?>
-            <a class="dropdown-item" href="../Project/index.php?projectId=<?php echo $project->projectId?>"><?php echo $project->name ?></a>
+            <a class="dropdown-item" href="../Project/index.php?projectId=<?php echo $project->projectId ?>"><?php echo $project->name ?></a>
             <?php } ?>
         </div>
     </li>
