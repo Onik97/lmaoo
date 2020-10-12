@@ -11,15 +11,16 @@ function checkUsernameFromServer(formdata)
     })
 }
 
-function loadProjectsFromServer()
+function loadFeaturesFromServer(projectId)
 {
     var data = new FormData();
-    data.append('function', "loadProjects");
+    data.append('function', "loadFeatures");
+    data.append("projectId", projectId);
 
     return response = axios(
     {
         method: 'post',
-        url: '../Project/projectController.php',
+        url: '../Feature/featureController.php',
         data: data,
         headers: {'Content-Type': 'multipart/form-data' }
     })

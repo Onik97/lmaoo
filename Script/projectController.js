@@ -1,21 +1,22 @@
 $(document).ready(function() 
 {
-  loadProjects();
+    loadFeatures();
 }); 
 
-function loadProjects()
+function loadFeatures()
 {
-    loadProjectsFromServer()
+    var projectId = new URL(window.location.href).searchParams.get("projectId");
+    loadFeaturesFromServer(projectId)
     .then(response =>
     {
 
-        if (userLevel >= 3) $("#listOfProjects").append($("<li>", { id : "createProjectBtn" , "data-toggle" : "modal" , "data-target" : "#projectModal" , onclick : "createProjectPrompt()"}).html(" + Create Project"));
-        $("#listOfProjects").find("li:gt(0)").remove();
+        if (userLevel >= 3) $("#listOfFeatures").append($("<li>", { id : "createFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" , onclick : "createFeaturePrompt()"}).html(" + Create Feature"));
+        $("#listOfFeatures").find("li:gt(0)").remove();
 
         var json = response.data;
         for (i = 0; i < json.length; i++)
         {
-            $("#listOfProjects").append($("<li>", { value : json[i].projectId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress();"}).html(json[i].name));
+            $("#listOfFeatures").append($("<li>", { value : json[i].projectId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress();"}).html(json[i].name));
         }
     })
 }
@@ -23,7 +24,7 @@ function loadProjects()
 function getProjectName(name, id)
 {
     $("#ticketMessage").html("Tickets for " + name);
-    $("#selectedProjectId").html(id);
+    $("#selectedFeatureId").html(id);
 }
 
 function createProjectPrompt()
@@ -104,14 +105,14 @@ function createTicket()
 {
     var data = new FormData();
     data.append('function', "createTicket");
-    data.append('projectId', $("#selectedProjectId").html());
+    data.append('projectId', $("#selectedFeatureId").html());
     data.append('reporterKey',$("#reporterKey").val());
     data.append('summary', $("#summary").val());
 
     axios.post("../Project/projectController.php", data)
     .then(() =>
     {
-        loadTicketsWithProgress(document.getElementById("selectedProjectId").innerHTML);
+        loadTicketsWithProgress(document.getElementById("selectedFeatureId").innerHTML);
         overHang("success", "Ticket has been successfully created!");
         $('#projectModal').modal('hide');
     })
@@ -119,12 +120,12 @@ function createTicket()
 
 function loadTicketsWithProgress(progress) 
 {
-    let selectedProjectId = $("#selectedProjectId").html();
-    if (selectedProjectId == 0) return false;
+    let selectedFeatureId = $("#selectedFeatureId").html();
+    if (selectedFeatureId == 0) return false;
 
     $("#ticketBtnDiv").html("");
-    if (userLevel >= 2) $("#ticketBtnDiv").append($("<button>", { "data-toggle" : "modal" , "data-target" : "#projectModal" , onclick : createTicketPrompt(selectedProjectId)}).html("Create Ticket"));
-    loadTicketsWithProgressFromServer(selectedProjectId, progress)
+    if (userLevel >= 2) $("#ticketBtnDiv").append($("<button>", { "data-toggle" : "modal" , "data-target" : "#projectModal" , onclick : createTicketPrompt(selectedFeatureId)}).html("Create Ticket"));
+    loadTicketsWithProgressFromServer(selectedFeatureId, progress)
     .then (response => 
     {
         var json = response.data;
