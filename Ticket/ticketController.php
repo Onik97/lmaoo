@@ -5,7 +5,11 @@ $function = $_POST['function'];
 
 if ($function == "checkTicket")
 {
-    ticketExistance($_GET['ticketId']);
+    ticketIdExistance($_GET['ticketId']);
+}
+else if ($function == "checkTicketExistance")
+{
+    echo ticketExistance($_POST['ticketName'], $_POST['featureId']);
 }
 else if ($function == "createComment")
 {
@@ -64,12 +68,22 @@ function updateTicketTime($ticketId)
     $stmt->execute([date("Y-m-d H:i:s", time() - 3600), $ticketId]);
 }
 
-function ticketExistance($ticketId)
+function ticketIdExistance($ticketId)
 {
     $pdo = logindb("user", "pass");
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("SELECT ticketId FROM ticket WHERE ticketId = ?");
     $stmt->execute([$ticketId]);
+
+    return $stmt->fetchColumn() > 0 ? true : false;
+}
+
+function ticketExistance($ticketName, $featureId)
+{
+    $pdo = logindb("user", "pass");
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("SELECT summary FROM ticket WHERE summary = ? AND featureId = ?");
+    $stmt->execute([$ticketName, $featureId]);
 
     return $stmt->fetchColumn() > 0 ? true : false;
 }
