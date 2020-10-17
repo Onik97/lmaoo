@@ -22,6 +22,21 @@ else
     return;
 }
 
+function projectExistance()
+{
+    $projectId = $_GET['projectId'];
+    if (!isset($_GET['projectId']) || $_GET['projectId'] == null) return false;
+
+    $pdo = logindb('user', 'pass');
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("SELECT projectId FROM project WHERE projectId = ?");
+    $stmt->execute([$projectId]);
+
+    if($stmt->rowCount() != 0) return true; 
+
+    return false;
+}
+
 function createNewProject($projectName, $projectStatus)
 {
     $pdo = logindb('user', 'pass');
