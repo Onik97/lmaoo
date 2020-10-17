@@ -46,7 +46,34 @@ function createFeaturePrompt()
 
 function featureValidation()
 {
-    console.log("Key up is working correctly");
+    var projectId = new URL(window.location.href).searchParams.get("projectId");
+    var data = new FormData();
+    data.append("function", "checkFeatureExistance");
+    data.append("featureName", $.trim($("#featureName").val()));
+    data.append("projectId", projectId)
+
+    if($("#featureName").val() == null || $.trim($("#featureName").val()) == "")  { $('#saveFeatureBtn').prop('disabled', true); }
+    else 
+    {
+        axios.post("../Feature/featureController.php", data)
+        .then((res) => 
+        {
+            if(res.data)
+            {
+                $("#featureName").addClass("is-invalid");
+                $("#featureValidationSmall").html("Feature name not available!");
+                $("#featureValidationSmall").addClass("text-danger");
+                $('#saveFeatureBtn').prop('disabled', true);
+            }
+            else 
+            {
+                $("#featureName").removeClass("is-invalid");
+                $("#featureValidationSmall").html("");
+                $("#featureValidationSmall").removeClass("text-danger");
+                $('#saveFeatureBtn').prop('disabled', false);
+            }
+        })
+    }
 }
 
 function createFeature()
