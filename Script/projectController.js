@@ -31,12 +31,14 @@ function createFeaturePrompt()
 {
     $("#featureModalHead").html("Create Feature");
 
-    let projectNameDiv = $("<div>", {"class" : "form-group modal-content-1"});
-    let projectNameLabel = $("<label>").html("Feature Name:");
-    let projectNameInput = $("<input>", {class : "form-control", type : "text", id : "featureName", onkeyup : "featureValidation()"});
-    $("#featureModalBody").html("").append(projectNameDiv);
-    $(projectNameDiv).append(projectNameLabel);
-    $(projectNameDiv).append(projectNameInput);
+    let featureNameDiv = $("<div>", {"class" : "form-group modal-content-1"});
+    let featureNameLabel = $("<label>").html("Feature Name:");
+    let featureNameInput = $("<input>", {class : "form-control", type : "text", id : "featureName", onkeyup : "featureValidation()"});
+    let featureValidationSmall = $("<small>", {id : "featureValidationSmall"});
+    $("#featureModalBody").html("").append(featureNameDiv);
+    $(featureNameDiv).append(featureNameLabel);
+    $(featureNameDiv).append(featureNameInput);
+    $(featureNameDiv).append(featureValidationSmall);
 
     $("#featureModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveFeatureBtn", onclick : "createFeature()"}).html("Save"));
 }
