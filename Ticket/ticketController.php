@@ -71,7 +71,7 @@ function ticketExistance($ticketId)
     $stmt = $pdo->prepare("SELECT ticketId FROM ticket WHERE ticketId = ?");
     $stmt->execute([$ticketId]);
 
-    return $stmt->fetchColumn() == 0 ? false : true;
+    return $stmt->fetchColumn() > 0 ? true : false;
 }
 
 function loadUsers()
