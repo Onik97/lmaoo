@@ -55,22 +55,13 @@ else
 
 function hasDup()
 {
-	$boolean = false;
 	$username = $_POST['username'];
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 	$stmt = $pdo->prepare("SELECT username FROM user WHERE username = ?");
 	$stmt->execute([$username]);
 
-	if($stmt->rowCount() > 0)
-	{
-		$boolean = true;
-	}
-	else
-	{
-		// Should stay False
-	}
-	return $boolean;
+	return $stmt->rowCount() > 0 ? true : false;
 }
 
 function updateUser()
