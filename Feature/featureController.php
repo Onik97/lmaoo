@@ -1,6 +1,6 @@
 <?php 
 require_once("../connection.php"); 
-error_reporting(0);
+//error_reporting(0);
 
 if($_POST['function'] == "loadFeatures")
 {
