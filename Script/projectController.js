@@ -154,9 +154,10 @@ function createTicketPrompt(projectId)
     $(createTicketDiv).append($("<label>", { class : "modal-content-1"}).html("Project ID"));
     $(createTicketDiv).append($("<input>", { id : "projectId", class: "form-control", value : projectId}).prop("disabled", true));
     $(createTicketDiv).append($("<label>", { class : "modal-content-2"}).html("Summary"));
-    $(createTicketDiv).append($("<input>", { id : "summary", "class": "form-control", onkeyup : "ticketConfirmation()"}));
+    $(createTicketDiv).append($("<input>", { id : "summary", "class": "form-control", onkeyup : "ticketValidation()"}));
     $(createTicketDiv).append($("<input>", { id : "reporterKey", value : userId, type : "hidden"}));
     $(createTicketDiv).append($("<input>", { id : "function", value : "createTicket", type : "hidden"}));
+    let ticketValidationSmall = $("<small>", {id : "ticketValidationSmall"});
     
     $("#projectModalBody").html("").append(createTicketDiv);
     $("#projectModalBody").append(ticketValidationSmall);
@@ -164,7 +165,7 @@ function createTicketPrompt(projectId)
     $('#saveTicketBtn').prop('disabled', true);
 }
 
-function ticketConfirmation() // TODO: Onik -> Improve Ticket Confirmation -> Perhaps rename it to ticketValidation for serialisation
+function ticketValidation()
 {
     document.getElementById("summary").value.trim() == ""
     ? document.getElementById("saveTicketBtn").disabled = true : document.getElementById("saveTicketBtn").disabled = false;
