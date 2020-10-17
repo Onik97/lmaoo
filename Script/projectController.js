@@ -56,16 +56,11 @@ function createFeature()
     data.append('projectId', projectId);
 
     axios.post("../Feature/featureController.php", data)
-    .then((res) => 
+    .then(() => 
     {
         overHang("success", "Feature has been successfully created!");
         loadFeatures();
         $('#featureModal').modal('hide');
-        console.log(res.data);
-    })
-    .catch((res) => 
-    { 
-        console.log(res);
     })
 }
 
