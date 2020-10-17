@@ -41,6 +41,7 @@ function createFeaturePrompt()
     $(featureNameDiv).append(featureValidationSmall);
 
     $("#featureModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveFeatureBtn", onclick : "createFeature()"}).html("Save"));
+    $('#saveFeatureBtn').prop('disabled', true); 
 }
 
 function featureValidation()
