@@ -54,7 +54,7 @@ function createFeature()
 
     var data = new FormData();
     data.append('function', "createFeature");
-    data.append('featureName', document.getElementById("featureName").value);
+    data.append('featureName', $.trim($("#featureName").val()));
     data.append('projectId', projectId);
 
     axios.post("../Feature/featureController.php", data)
