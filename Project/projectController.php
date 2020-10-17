@@ -1,5 +1,5 @@
 <?php
-require_once("../connection.php");
+require_once("../connection.php"); require_once("../User/user.php");
 error_reporting(0);
 if ($_GET['projectId'] && $_GET['progress'])
 {
@@ -82,7 +82,12 @@ function loadProjectsInNavBar()
         <a id="projectNav" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Project<span class="caret"></span></a>
 
         <div class="dropdown-menu">
-            <?php foreach ($projects as $project) 
+            <?php $userLoggedIn = $_SESSION['userLoggedIn'];
+            if ($userLoggedIn->getLevel() > 3)
+            { ?>
+            <a class="dropdown-item" onclick="">+ Create Project</a>
+            <?php }
+            foreach ($projects as $project) 
             { ?>
             <a class="dropdown-item" href="../Project/index.php?projectId=<?php echo $project->projectId ?>"><?php echo $project->name ?></a>
             <?php } ?>
