@@ -1,6 +1,6 @@
 <?php 
 require_once("../connection.php"); 
-//error_reporting(0);
+error_reporting(0);
 
 if($_POST['function'] == "loadFeatures")
 {
@@ -8,7 +8,7 @@ if($_POST['function'] == "loadFeatures")
 }
 else if ($_POST['function'] == "checkFeatureExistance")
 {
-    echo featureExistance($_POST['featureName']);
+    echo featureExistance($_POST['featureName'], $_POST['projectId']);
 }
 else if ($_POST['function'] == "createFeature")
 {
@@ -25,12 +25,12 @@ function loadFeatures($projectId)
     return $stmt->fetchAll();
 }
 
-function featureExistance($featureName)
+function featureExistance($featureName, $projectId)
 {
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-	$stmt = $pdo->prepare("SELECT name FROM feature WHERE name = ?");
-	$stmt->execute([$featureName]);
+	$stmt = $pdo->prepare("SELECT name FROM feature WHERE name = ? AND projectId = ?");
+	$stmt->execute([$featureName, $projectId]);
 
 	return $stmt->rowCount() > 0 ? true : false;
 }
