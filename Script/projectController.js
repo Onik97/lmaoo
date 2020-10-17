@@ -167,8 +167,34 @@ function createTicketPrompt(projectId)
 
 function ticketValidation()
 {
-    document.getElementById("summary").value.trim() == ""
-    ? document.getElementById("saveTicketBtn").disabled = true : document.getElementById("saveTicketBtn").disabled = false;
+    var data = new FormData();
+    data.append("function", "checkTicketExistance");
+    data.append("ticketName", $.trim($("#summary").val()));
+    data.append("featureId", $("#selectedFeatureId").html());
+
+    if($("#summary").val() == null || $.trim($("#summary").val()) == "")  { $('#saveTicketBtn').prop('disabled', true); }
+    else 
+    {   
+        axios.post("../Ticket/ticketController.php", data)
+        .then((res) => 
+        {
+            console.log(res.data);
+            if(res.data)
+            {
+                $("#summary").addClass("is-invalid");
+                $("#ticketValidationSmall").html("Feature name not available!");
+                $("#ticketValidationSmall").addClass("text-danger");
+                $('#saveTicketBtn').prop('disabled', true);
+            }
+            else 
+            {
+                $("#summary").removeClass("is-invalid");
+                $("#ticketValidationSmall").html("");
+                $("#ticketValidationSmall").removeClass("text-danger");
+                $('#saveTicketBtn').prop('disabled', false);
+            }
+        })
+    }
 }
 
 function createTicket()
