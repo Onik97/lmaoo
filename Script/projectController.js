@@ -16,7 +16,7 @@ function loadFeatures()
         var json = response.data;
         for (i = 0; i < json.length; i++)
         {
-            $("#listOfFeatures").append($("<li>", { value : json[i].projectId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress();"}).html(json[i].name));
+            $("#listOfFeatures").append($("<li>", { value : json[i].featureId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress();"}).html(json[i].name));
         }
     })
 }
@@ -25,6 +25,48 @@ function getProjectName(name, id)
 {
     $("#ticketMessage").html("Tickets for " + name);
     $("#selectedFeatureId").html(id);
+}
+
+function createFeaturePrompt()
+{
+    $("#featureModalHead").html("Create Feature");
+
+    let projectNameDiv = $("<div>", {"class" : "form-group modal-content-1"});
+    let projectNameLabel = $("<label>").html("Feature Name:");
+    let projectNameInput = $("<input>", {class : "form-control", type : "text", id : "featureName", onkeyup : "featureValidation()"});
+    $("#featureModalBody").html("").append(projectNameDiv);
+    $(projectNameDiv).append(projectNameLabel);
+    $(projectNameDiv).append(projectNameInput);
+
+    $("#featureModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveFeatureBtn", onclick : "createFeature()"}).html("Save"));
+}
+
+function featureValidation()
+{
+    console.log("Key up is working correctly");
+}
+
+function createFeature()
+{
+    var projectId = new URL(window.location.href).searchParams.get("projectId");
+
+    var data = new FormData();
+    data.append('function', "createFeature");
+    data.append('featureName', document.getElementById("featureName").value);
+    data.append('projectId', projectId);
+
+    axios.post("../Feature/featureController.php", data)
+    .then((res) => 
+    {
+        overHang("success", "Feature has been successfully created!");
+        loadFeatures();
+        $('#featureModal').modal('hide');
+        console.log(res.data);
+    })
+    .catch((res) => 
+    { 
+        console.log(res);
+    })
 }
 
 function createProjectPrompt()
