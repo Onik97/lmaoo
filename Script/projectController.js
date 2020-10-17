@@ -159,7 +159,9 @@ function createTicketPrompt(projectId)
     $(createTicketDiv).append($("<input>", { id : "function", value : "createTicket", type : "hidden"}));
     
     $("#projectModalBody").html("").append(createTicketDiv);
+    $("#projectModalBody").append(ticketValidationSmall);
     $("#projectModalFooter").html("").append($("<button>", { id : "saveTicketBtn", class : "btn btn-primary", type : "submit" , onclick : "createTicket()"}).html("Save"));
+    $('#saveTicketBtn').prop('disabled', true);
 }
 
 function ticketConfirmation() // TODO: Onik -> Improve Ticket Confirmation -> Perhaps rename it to ticketValidation for serialisation
