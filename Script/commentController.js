@@ -83,7 +83,7 @@ function loadComments()
             </div>
 
                 <div class="col-2" id="commentActions">
-                    <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#CommentModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
+                    <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#ticketPageModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
                     <img class="CommentImages" src="../Images/pencilsquare.svg" onclick=editComment(${json[i].commentId}) role="button"></img>
                 </div>
           </div>
@@ -170,9 +170,9 @@ function saveComment(summernoteId, commentId)
 
 function deletePrompt(commentId)
 {
-  $("#commentModalHead").html("Delete Comment");
-  $("#commentModalBody").html("Are you sure you want to delete this comment?")
-  $("#commentModalFooter").html("").append($("<button>", { class : "btn btn-primary", type : "submit", onclick : `deleteComment(${commentId})` }).html("Delete Comment"))
+  $("#Modal-head").html("Delete Comment");
+  $("#modal-body").html("Are you sure you want to delete this comment?")
+  $("#modal-footer").html("").append($("<button>", { class : "btn btn-primary", type : "submit", onclick : `deleteComment(${commentId})` }).html("Delete Comment"))
 }
 
 function deleteComment(commentId)
@@ -184,7 +184,7 @@ function deleteComment(commentId)
     axios.post("../Ticket/ticketController.php", data)
     .then(() =>
     {
-      $('#CommentModal').modal('hide'); 
+      $('#ticketPageModal').modal('hide'); 
       overHang("success", "Comment deleted successfully!");
       loadComments();
       updateTicketTime(new URL(window.location.href).searchParams.get("ticketId"))
