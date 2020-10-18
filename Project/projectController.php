@@ -17,6 +17,10 @@ else if($_POST['function'] == "createTicket")
 {
     createNewTicket($_POST['projectId'], $_POST['summary'], $_POST['reporterKey']);
 }
+else if ($_POST['function'] == "checkProjectExistance")
+{
+    echo projectExistance();
+}
 else 
 {
     return;
@@ -24,13 +28,15 @@ else
 
 function projectExistance()
 {
-    $projectId = $_GET['projectId'];
-    if (!isset($_GET['projectId']) || $_GET['projectId'] == null) return false;
+    $function = $_POST['function'];
+    $projectSearch = isset($function) ? $_POST['name'] : $_GET['projectId'];
+    $sql = isset($function) ? "SELECT name FROM project WHERE name = ?" : "SELECT projectId FROM project WHERE projectId = ?";
+    if (!isset($projectSearch) || $projectSearch == null) return false;
 
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("SELECT projectId FROM project WHERE projectId = ?");
-    $stmt->execute([$projectId]);
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$projectSearch]);
 
     if($stmt->rowCount() != 0) return true; 
 
