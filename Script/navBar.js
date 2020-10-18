@@ -8,9 +8,9 @@ let navBarActive = document.getElementById("navBarActive").innerHTML;
 function searchBar() 
 {
     let searchbarText = $("#searchBarInput").html();
-    if (searchbarText == 0) return false;
+    // if (searchbarText == 0) return false;
 
-    loadTicketsWithProgressFromServer(searchbarText)
+    ticketIdExistance(searchbarText)
     .then (response => 
     {
         var json = response.data;
@@ -18,6 +18,6 @@ function searchBar()
     })
 }
 
-function searchBarBtn() {
+function searchBarBtn(){
     searchBar();
 }

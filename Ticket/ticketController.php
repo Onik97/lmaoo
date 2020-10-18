@@ -184,9 +184,11 @@ function loadSearchBar()
     if (!isset($_SESSION["userLoggedIn"])) { return;} ?>
 
     <form class="navbar-brand form-inline lg-1">
-        <input id="searchBarInput" class="form-control mr-sm-2" type="search" placeholder="Search Ticket" aria-label="Search">
-        <button id="searchBarBtn" class="btn btn-outline-success my-sm-0" type="submit" onclick="searchBarBtn()">Search</button>
+        <input id="searchBarInput" class="form-control mr-sm-2" type="search" placeholder="Search Ticket" aria-label="Search" onkeyup="searchBar()">
+        <button id="searchBarBtn" class="btn btn-outline-success my-sm-0" type="submit">Search</button>
     </form>
     <?php
 }
 ?>
+
+<script src="../Script/navBar.js"></script>
