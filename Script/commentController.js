@@ -170,18 +170,9 @@ function saveComment(summernoteId, commentId)
 
 function deletePrompt(commentId)
 {
-  document.getElementById("Modal-head").innerHTML = "Delete Comment";
-  document.getElementById("modal-body").innerHTML = "Are you sure you want to delete this comment?";
-  document.getElementById("modal-footer").innerHTML = ""; // To avoid duplications
-  let modalFooter = document.querySelector("#modal-footer");
-  
-  let deleteBtn = document.createElement("input");
-  deleteBtn.setAttribute("class", "btn btn-primary");
-  deleteBtn.setAttribute("type", "submit");
-  deleteBtn.setAttribute("value", "Delete Comment");
-  deleteBtn.setAttribute("onclick", `deleteComment(${commentId})`);
-
-  modalFooter.appendChild(deleteBtn);
+  $("#commentModalHead").html("Delete Comment");
+  $("#commentModalBody").html("Are you sure you want to delete this comment?")
+  $("#commentModalFooter").html("").append($("<button>", { class : "btn btn-primary", type : "submit", onclick : `deleteComment(${commentId})` }).html("Delete Comment"))
 }
 
 function deleteComment(commentId)
