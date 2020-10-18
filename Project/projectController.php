@@ -85,7 +85,7 @@ function loadProjectsInNavBar()
             <?php $userLoggedIn = $_SESSION['userLoggedIn'];
             if ($userLoggedIn->getLevel() > 3)
             { ?>
-            <a class="dropdown-item" onclick="">+ Create Project</a>
+            <a class="dropdown-item" data-toggle="modal" data-target="#globalModal" onclick="createProjectPrompt()">+ Create Project</a>
             <?php }
             foreach ($projects as $project) 
             { ?>
