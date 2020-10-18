@@ -7,12 +7,12 @@ let navBarActive = document.getElementById("navBarActive").innerHTML;
 
 function createProjectPrompt()
 {
-    $("#projectModalHead").html("Create Project");
+    $("#globalModallHead").html("Create Project");
 
     let projectNameDiv = $("<div>", {"class" : "form-group modal-content-1"});
     let projectNameLabel = $("<label>").html("Project Name:");
     let projectNameInput = $("<input>", {class : "form-control", type : "text", id : "projectName", onkeyup : "projectConfirmation()"});
-    $("#projectModalBody").html("").append(projectNameDiv);
+    $("#globalModalBody").html("").append(projectNameDiv);
     $(projectNameDiv).append(projectNameLabel);
     $(projectNameDiv).append(projectNameInput);
 
@@ -26,11 +26,11 @@ function createProjectPrompt()
     $(statusSelect).append($("<option>").val("Releasing").text("Releasing"));
     $(statusSelect).append($("<option>").val("Released").text("Released"));
 
-    $("#projectModalBody").append(statusDiv);
+    $("#globalModalBody").append(statusDiv);
     $(statusDiv).append(statusLabel);
     $(statusDiv).append(statusSelect);
 
-    $("#projectModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveProjectBtn", onclick : "createProject()"}).html("Save"));
+    $("#globalModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveProjectBtn", onclick : "createProject()"}).html("Save"));
 }
 
 function projectValidation() 
@@ -50,8 +50,7 @@ function createProject()
     axios.post("../Project/projectController.php", data)
     .then(() => 
     {
-        overHang("success", "Project has been successfully created!");
-        loadProjects();
-        $('#projectModal').modal('hide');
+        $('#globalModal').modal('hide');
+        location.reload(); // Refreshes Page as Projects is loaded from PHP, not Javascript
     })
 }
