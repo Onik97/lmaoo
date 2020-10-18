@@ -16,7 +16,7 @@ function loadFeatures()
         var json = response.data;
         for (i = 0; i < json.length; i++)
         {
-            $("#listOfFeatures").append($("<li>", { value : json[i].projectId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress();"}).html(json[i].name));
+            $("#listOfFeatures").append($("<li>", { value : json[i].featureId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress();"}).html(json[i].name));
         }
     })
 }
@@ -25,6 +25,73 @@ function getProjectName(name, id)
 {
     $("#ticketMessage").html("Tickets for " + name);
     $("#selectedFeatureId").html(id);
+}
+
+function createFeaturePrompt()
+{
+    $("#featureModalHead").html("Create Feature");
+
+    let featureNameDiv = $("<div>", {"class" : "form-group modal-content-1"});
+    let featureNameLabel = $("<label>").html("Feature Name:");
+    let featureNameInput = $("<input>", {class : "form-control", type : "text", id : "featureName", onkeyup : "featureValidation()"});
+    let featureValidationSmall = $("<small>", {id : "featureValidationSmall"});
+    $("#featureModalBody").html("").append(featureNameDiv);
+    $(featureNameDiv).append(featureNameLabel);
+    $(featureNameDiv).append(featureNameInput);
+    $(featureNameDiv).append(featureValidationSmall);
+
+    $("#featureModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveFeatureBtn", onclick : "createFeature()"}).html("Save"));
+    $('#saveFeatureBtn').prop('disabled', true); 
+}
+
+function featureValidation()
+{
+    var projectId = new URL(window.location.href).searchParams.get("projectId");
+    var data = new FormData();
+    data.append("function", "checkFeatureExistance");
+    data.append("featureName", $.trim($("#featureName").val()));
+    data.append("projectId", projectId)
+
+    if($("#featureName").val() == null || $.trim($("#featureName").val()) == "")  { $('#saveFeatureBtn').prop('disabled', true); }
+    else 
+    {
+        axios.post("../Feature/featureController.php", data)
+        .then((res) => 
+        {
+            if(res.data)
+            {
+                $("#featureName").addClass("is-invalid");
+                $("#featureValidationSmall").html("Feature name not available!");
+                $("#featureValidationSmall").addClass("text-danger");
+                $('#saveFeatureBtn').prop('disabled', true);
+            }
+            else 
+            {
+                $("#featureName").removeClass("is-invalid");
+                $("#featureValidationSmall").html("");
+                $("#featureValidationSmall").removeClass("text-danger");
+                $('#saveFeatureBtn').prop('disabled', false);
+            }
+        })
+    }
+}
+
+function createFeature()
+{
+    var projectId = new URL(window.location.href).searchParams.get("projectId");
+
+    var data = new FormData();
+    data.append('function', "createFeature");
+    data.append('featureName', $.trim($("#featureName").val()));
+    data.append('projectId', projectId);
+
+    axios.post("../Feature/featureController.php", data)
+    .then(() => 
+    {
+        overHang("success", "Feature has been successfully created!");
+        loadFeatures();
+        $('#featureModal').modal('hide');
+    })
 }
 
 function createProjectPrompt()
@@ -87,18 +154,47 @@ function createTicketPrompt(projectId)
     $(createTicketDiv).append($("<label>", { class : "modal-content-1"}).html("Project ID"));
     $(createTicketDiv).append($("<input>", { id : "projectId", class: "form-control", value : projectId}).prop("disabled", true));
     $(createTicketDiv).append($("<label>", { class : "modal-content-2"}).html("Summary"));
-    $(createTicketDiv).append($("<input>", { id : "summary", "class": "form-control", onkeyup : "ticketConfirmation()"}));
+    $(createTicketDiv).append($("<input>", { id : "summary", "class": "form-control", onkeyup : "ticketValidation()"}));
     $(createTicketDiv).append($("<input>", { id : "reporterKey", value : userId, type : "hidden"}));
     $(createTicketDiv).append($("<input>", { id : "function", value : "createTicket", type : "hidden"}));
+    let ticketValidationSmall = $("<small>", {id : "ticketValidationSmall"});
     
     $("#projectModalBody").html("").append(createTicketDiv);
+    $("#projectModalBody").append(ticketValidationSmall);
     $("#projectModalFooter").html("").append($("<button>", { id : "saveTicketBtn", class : "btn btn-primary", type : "submit" , onclick : "createTicket()"}).html("Save"));
+    $('#saveTicketBtn').prop('disabled', true);
 }
 
-function ticketConfirmation() // TODO: Onik -> Improve Ticket Confirmation -> Perhaps rename it to ticketValidation for serialisation
+function ticketValidation()
 {
-    document.getElementById("summary").value.trim() == ""
-    ? document.getElementById("saveTicketBtn").disabled = true : document.getElementById("saveTicketBtn").disabled = false;
+    var data = new FormData();
+    data.append("function", "checkTicketExistance");
+    data.append("ticketName", $.trim($("#summary").val()));
+    data.append("featureId", $("#selectedFeatureId").html());
+
+    if($("#summary").val() == null || $.trim($("#summary").val()) == "")  { $('#saveTicketBtn').prop('disabled', true); }
+    else 
+    {   
+        axios.post("../Ticket/ticketController.php", data)
+        .then((res) => 
+        {
+            console.log(res.data);
+            if(res.data)
+            {
+                $("#summary").addClass("is-invalid");
+                $("#ticketValidationSmall").html("Feature name not available!");
+                $("#ticketValidationSmall").addClass("text-danger");
+                $('#saveTicketBtn').prop('disabled', true);
+            }
+            else 
+            {
+                $("#summary").removeClass("is-invalid");
+                $("#ticketValidationSmall").html("");
+                $("#ticketValidationSmall").removeClass("text-danger");
+                $('#saveTicketBtn').prop('disabled', false);
+            }
+        })
+    }
 }
 
 function createTicket()

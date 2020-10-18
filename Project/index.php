@@ -13,6 +13,7 @@
     <body>
       <?php include("../Global/navBar.php"); ?>
       <?php include("../Global/loginCheck.php"); ?>
+      <?php include("projectValidation.php") ?>
 
     <div class="wrapper">
       <div id="projectDiv"> 
