@@ -94,58 +94,6 @@ function createFeature()
     })
 }
 
-function createProjectPrompt()
-{
-    $("#projectModalHead").html("Create Project");
-
-    let projectNameDiv = $("<div>", {"class" : "form-group modal-content-1"});
-    let projectNameLabel = $("<label>").html("Project Name:");
-    let projectNameInput = $("<input>", {class : "form-control", type : "text", id : "projectName", onkeyup : "projectConfirmation()"});
-    $("#projectModalBody").html("").append(projectNameDiv);
-    $(projectNameDiv).append(projectNameLabel);
-    $(projectNameDiv).append(projectNameInput);
-
-    let statusDiv = $("<div>", {"class" : "form-group modal-content-2"});
-    let statusLabel = $("<label>").html("Status:");
-    let statusSelect = $("<select>", { id : "projectStatus", "class" : "form-control"}).prop("required", true);
-    $(statusSelect).append($("<option>").val("0").text("").prop({"selected" : true, "disabled" : true}));
-    $(statusSelect).append($("<option>").val("Back-log").text("Back-log"));
-    $(statusSelect).append($("<option>").val("Development").text("Development"));
-    $(statusSelect).append($("<option>").val("QA").text("QA"));
-    $(statusSelect).append($("<option>").val("Releasing").text("Releasing"));
-    $(statusSelect).append($("<option>").val("Released").text("Released"));
-
-    $("#projectModalBody").append(statusDiv);
-    $(statusDiv).append(statusLabel);
-    $(statusDiv).append(statusSelect);
-
-    $("#projectModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveProjectBtn", onclick : "createProject()"}).html("Save"));
-}
-
-function projectConfirmation() 
-{
-    document.getElementById("projectName").value.trim() == "" || document.getElementById("projectStatus").value == 0
-    ? document.getElementById("saveProjectBtn").disabled = true : document.getElementById("saveProjectBtn").disabled = false;
-}
-
-function createProject()
-{
-    let projectStatus = document.getElementById("projectStatus").options[document.getElementById("projectStatus").selectedIndex].text;
-
-    var data = new FormData();
-    data.append('function', "createProject");
-    data.append('projectName', document.getElementById("projectName").value);
-    data.append('projectStatus', projectStatus);
-
-    axios.post("../Project/projectController.php", data)
-    .then(() => 
-    {
-        overHang("success", "Project has been successfully created!");
-        loadProjects();
-        $('#projectModal').modal('hide');
-    })
-}
-
 function createTicketPrompt(projectId)
 {
     $("#projectModalHead").html("Create Ticket");

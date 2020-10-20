@@ -32,6 +32,7 @@ function overHang(type, message)
     message: message
   });
 }
+
 <?php 
 if(isset($_SESSION['userLoggedIn']))
 {
@@ -45,3 +46,4 @@ const userUsername = "<?php echo $userLoggedIn->getUsername(); ?>";
 const userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
 <?php } ?>
 </script>
+<?php include("modal.php");
