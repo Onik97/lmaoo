@@ -5,7 +5,7 @@ $function = $_POST['function'];
 
 if ($function == "checkTicket")
 {
-    ticketIdExistance($_POST['ticketId']);
+    echo ticketIdExistance($_POST['ticketId']);
 }
 else if ($function == "checkTicketExistance")
 {
@@ -75,17 +75,17 @@ function ticketIdExistance($ticketId)
     $stmt = $pdo->prepare("SELECT ticketId FROM ticket WHERE ticketId = ?");
     $stmt->execute([$ticketId]);
 
-    return $stmt->fetchColumn() > 0 ? true : false;
+    return $stmt->fetchColumn() ? true : false;
 }
 
 function ticketExistance($ticketName, $featureId)
 {
     $pdo = logindb("user", "pass");
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("SELECT summary FROM ticket WHERE summary = ? AND featureId = ?");
+    $stmt = $pdo->prepare("SELECT ticketId FROM ticket WHERE summary = ? AND featureId = ?");
     $stmt->execute([$ticketName, $featureId]);
 
-    return $stmt->fetchColumn() > 0 ? true : false;
+    return $stmt->fetchColumn() ? true : false;
 }
 
 function loadUsers()
@@ -190,5 +190,3 @@ function loadSearchBar()
     <?php
 }
 ?>
-
-<script src="../Script/navBar.js"></script>
