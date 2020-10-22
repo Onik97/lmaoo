@@ -37,7 +37,7 @@ class ProjectTest extends TestCase
         {
             if($project->projectId == 26) //Automation Project has ID of 26
             {
-                $this->assertEquals("AutomatidonProject", $project->name);
+                $this->assertEquals("AutomationProject", $project->name);
                 $this->assertEquals("Back-log", $project->status);
             }
         }
