@@ -1,4 +1,6 @@
-<?php ob_start(); require_once("../Project/projectController.php"); require_once("../Ticket/ticketController.php"); ?>    
+<?php ob_start(); require_once("../Project/projectController.php"); require_once("../Ticket/ticketController.php");
+$projectController = new projectController();
+?>    
 <link rel="stylesheet" href="../Css/navbar.css">
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
     
@@ -14,7 +16,7 @@
             <ul class="nav navbar-nav ml-auto mr-5">
             
                 <li class="nav-item"> <a class="nav-link" id="homeNav" href="../Home/index.php">Home</a> </li>
-                <?php loadProjectsInNavBar() ?>
+                <?php $projectController->loadProjectsInNavBar() ?>
 
                 <li class="nav-item dropdown">
                     <a id="accountNav" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
