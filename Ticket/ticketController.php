@@ -5,7 +5,7 @@ $function = $_POST['function'];
 
 if ($function == "checkTicket")
 {
-    ticketIdExistance($_GET['ticketId']);
+    ticketIdExistance($_POST['ticketId']);
 }
 else if ($function == "checkTicketExistance")
 {

@@ -8,13 +8,16 @@ let navBarActive = document.getElementById("navBarActive").innerHTML;
 function searchBar() 
 {
     let searchbarText = $("#searchBarInput").html();
-    // if (searchbarText == 0) return false;
 
-    ticketIdExistance(searchbarText)
-    .then (response => 
+    let data = new FormData();
+    data.append("function", "checkTicket");
+    data.append("ticketId", searchbarText);
+
+    axios.post("../Ticket/ticketController.php", data)
+    .then(response => 
     {
-        var json = response.data;
-        console.log(json);
+        var dbdata = response.data;
+        console.log(dbdata);
     })
 }
 
