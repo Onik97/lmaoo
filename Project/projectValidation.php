@@ -1,6 +1,7 @@
 <?php require_once("projectController.php");
 
-$checker = projectExistance();
+$projectController = new projectController();
+$checker = $projectController->projectExistance(null);
 
 if ($checker == false)
 {
