@@ -20,6 +20,8 @@ function searchBar()
 
 function searchBarBtn(){
     searchBar();
+}
+
 function createProjectPrompt()
 {
     $("#globalModallHead").html("Create Project");
