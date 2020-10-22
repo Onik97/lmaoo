@@ -1,6 +1,6 @@
 <?php  
-require('../connection.php');
-require('user.php');
+require_once('../connection.php');
+require_once('user.php');
 error_reporting(0);
 $function = $_POST['function'];
 $logout = $_POST['logout'];
@@ -31,29 +31,37 @@ else if (isset($logout))
 {
 	logout();
 }
-else
+else if ($function == "checkUsername")
+{
+	if (hasDup())
+	{
+		$json->fromServer = "True";
+		echo json_encode($json);
+	}
+	else if (!hasDup())
+	{
+		$json->fromServer = "False";
+		echo json_encode($json);
+	}
+}
+else if ($function == "getActiveUsers")
+{
+	echo json_encode(getActiveUsers());
+}
+else 
 {
 	return;
 }
 
 function hasDup()
 {
-	$boolean = false;
 	$username = $_POST['username'];
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 	$stmt = $pdo->prepare("SELECT username FROM user WHERE username = ?");
 	$stmt->execute([$username]);
 
-	if($stmt->rowCount() > 0)
-	{
-		$boolean = true;
-	}
-	else
-	{
-		// Should stay False
-	}
-	return $boolean;
+	return $stmt->rowCount() > 0 ? true : false;
 }
 
 function updateUser()
@@ -62,16 +70,19 @@ function updateUser()
 	$editSurname = $_POST['editSurname'];
 	$editUsername = $_POST['editUsername'];
 	$editUserId = $_POST['editUserId'];
+
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 	$stmt = $pdo->prepare("UPDATE user SET forename=?, surname=?, username=? WHERE userId=?");
 	$stmt->execute([$editForename, $editSurname, $editUsername, $editUserId]);
+
 	session_start();
-	session_unset();
-	session_destroy();
-	session_start();
-	$_SESSION['message'] = 'Your changes has been saved! Please login!';
-	header("Location: index.php");
+	$userLoggedIn = $_SESSION["userLoggedIn"];
+	$userLoggedIn->setForename($editForename);
+	$userLoggedIn->setSurname($editSurname);
+	$userLoggedIn->setUsername($editUsername);
+	$_SESSION['message'] = 'Your User Details has been updated';
+	header("Location: ../Home/index.php");
 }
 
 function userInfoById($userId)
@@ -97,10 +108,19 @@ function login()
 
 	if (password_verify($loginPassword, $user->password))
 	{
-		$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level);
-		session_start();
-		$_SESSION['userLoggedIn'] = $userLoggedIn;
-		header("Location: ../Project/index.php");
+		if($user->isActive == true)
+		{
+			$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive);
+			session_start();
+			$_SESSION['userLoggedIn'] = $userLoggedIn;
+			header("Location: ../Project/index.php");
+		}
+		else
+		{
+			session_start();
+			$_SESSION['message'] = 'User deactivated, contact the administrator';
+			header("Location: index.php");
+		}
 	}
 	else
 	{
@@ -140,7 +160,7 @@ function failedLogin()
 	header("Location: index.php");
 }
 
-function getAllUsers()
+function getAllUsers() // This is used in Admin
 {
 	$pdo = logindb('user', 'pass');
 	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -148,5 +168,15 @@ function getAllUsers()
 	$stmt->execute();
 	$users = $stmt->fetchAll();
 	return $users;
+}
+
+function getActiveUsers()
+{
+	$pdo = logindb('user', 'pass');
+	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+	$stmt = $pdo->prepare("SELECT userId, forename, surname, username FROM user WHERE isActive = 1");
+	$stmt->execute();
+	$activeUsers = $stmt->fetchall();
+	return $activeUsers;
 }
 ?>

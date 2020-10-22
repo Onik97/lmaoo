@@ -1,176 +1,195 @@
 $(document).ready(function() 
 {
-  loadProjects();
+    loadFeatures();
 }); 
 
-function loadProjects()
+function loadFeatures()
 {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("POST", "projectController.php", true)
+    var projectId = new URL(window.location.href).searchParams.get("projectId");
+    loadFeaturesFromServer(projectId)
+    .then(response =>
+    {
+
+        if (userLevel >= 3) $("#listOfFeatures").append($("<li>", { id : "createFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" , onclick : "createFeaturePrompt()"}).html(" + Create Feature"));
+        $("#listOfFeatures").find("li:gt(0)").remove();
+
+        var json = response.data;
+        for (i = 0; i < json.length; i++)
+        {
+            $("#listOfFeatures").append($("<li>", { value : json[i].featureId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress();"}).html(json[i].name));
+        }
+    })
+}
+
+function getProjectName(name, id)
+{
+    $("#ticketMessage").html("Tickets for " + name);
+    $("#selectedFeatureId").html(id);
+}
+
+function createFeaturePrompt()
+{
+    $("#featureModalHead").html("Create Feature");
+
+    let featureNameDiv = $("<div>", {"class" : "form-group modal-content-1"});
+    let featureNameLabel = $("<label>").html("Feature Name:");
+    let featureNameInput = $("<input>", {class : "form-control", type : "text", id : "featureName", onkeyup : "featureValidation()"});
+    let featureValidationSmall = $("<small>", {id : "featureValidationSmall"});
+    $("#featureModalBody").html("").append(featureNameDiv);
+    $(featureNameDiv).append(featureNameLabel);
+    $(featureNameDiv).append(featureNameInput);
+    $(featureNameDiv).append(featureValidationSmall);
+
+    $("#featureModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveFeatureBtn", onclick : "createFeature()"}).html("Save"));
+    $('#saveFeatureBtn').prop('disabled', true); 
+}
+
+function featureValidation()
+{
+    var projectId = new URL(window.location.href).searchParams.get("projectId");
+    var data = new FormData();
+    data.append("function", "checkFeatureExistance");
+    data.append("featureName", $.trim($("#featureName").val()));
+    data.append("projectId", projectId)
+
+    if($("#featureName").val() == null || $.trim($("#featureName").val()) == "")  { $('#saveFeatureBtn').prop('disabled', true); }
+    else 
+    {
+        axios.post("../Feature/featureController.php", data)
+        .then((res) => 
+        {
+            if(res.data)
+            {
+                $("#featureName").addClass("is-invalid");
+                $("#featureValidationSmall").html("Feature name not available!");
+                $("#featureValidationSmall").addClass("text-danger");
+                $('#saveFeatureBtn').prop('disabled', true);
+            }
+            else 
+            {
+                $("#featureName").removeClass("is-invalid");
+                $("#featureValidationSmall").html("");
+                $("#featureValidationSmall").removeClass("text-danger");
+                $('#saveFeatureBtn').prop('disabled', false);
+            }
+        })
+    }
+}
+
+function createFeature()
+{
+    var projectId = new URL(window.location.href).searchParams.get("projectId");
 
     var data = new FormData();
-    data.append('function', "loadTickets");
+    data.append('function', "createFeature");
+    data.append('featureName', $.trim($("#featureName").val()));
+    data.append('projectId', projectId);
 
-    xmlhttp.onreadystatechange = function() 
+    axios.post("../Feature/featureController.php", data)
+    .then(() => 
     {
-        if (this.readyState == 4 && this.status == 200)
-        {
-            var ticketJSON = JSON.parse(this.responseText);
-            if (userLevel == 2) 
-            {
-                document.getElementById("projectDiv").innerHTML = `
-                <button data-toggle="modal" data-target="#projectModal" role="button" onclick="createProjectPrompt()">Create Project</button>`
-            }
-            document.getElementById("projectDiv").innerHTML += `
-            <h1>Projects</h1>
-            ${ticketJSON.map(function(ticket)
-            {
-            return `
-            <button class="btn btn-primary" onclick="getProjectName(this.innerHTML); getTicketWithProjectId(this.value)" value="${ticket.projectId}">${ticket.name}</button> <br>   
-            `;
-            }).join('')}
-            `;
-        }
-    }
-    xmlhttp.send(data);
+        overHang("success", "Feature has been successfully created!");
+        loadFeatures();
+        $('#featureModal').modal('hide');
+    })
 }
-
-function getProjectName(name)
-{
-   document.getElementById("ticketMessage").innerHTML = "Tickets for " + name;
-}
-
-function getTicketWithProjectId(id)
-{
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "projectController.php?projectId="+id, true)
-    xmlhttp.send();
-    xmlhttp.onreadystatechange = function() 
-    {
-        if (this.readyState == 4 && this.status == 200)
-        {
-            var ticketJSON = JSON.parse(this.responseText);
-            if (userLevel == 2)
-            {
-                document.getElementById("ticketBtnDiv").innerHTML = 
-                `<button data-toggle="modal" data-target="#projectModal" onclick="createTicketPrompt(${id})">Create Ticket</button>`;
-            }
-            document.getElementById("ticketDiv").innerHTML = 
-            `<table class="table">
-            <thead class="thead-dark">
-                <tr>
-                <th scope="col">Ticket ID</th>
-                <th scope="col">Task</th>
-                <th scope="col">Progress</th>
-                <th scope="col">View</th>
-                </tr>
-            </thead>
-            ${ticketJSON.map(function(ticket)
-                {
-                    return `
-                    <tr>
-                    <th scope="row">${ticket.ticketId}</th>
-                    <td>${ticket.task}</td>
-                    <td>Not included in the database</td>
-                    <td><a class="btn btn-info" href="../Ticket/index.php?ticketId=${ticket.ticketId}">View</a></td>
-                    </tr>
-                    `;
-                }).join('')}
-            `;
-        }
-    }
-}
-
-function createProjectPrompt()
-{
-    document.getElementById("projectModalBody").innerHTML = `
-            Project Name<br>
-            <input type="text" id="projectName" required> <br>
-            Status:<br>
-            <select id ="projectStatus" required name="projectStatus">
-                <option value="" selected disabled ></option>
-                <option value="Back-log">Back-Log</option>
-                <option value="Developement">Development</option>
-                <option value="QA">QA</option>
-                <option value="Releasing">Releasing</option>
-                <option value="Released">Released</option>
-            </select>
-            <br><br>
-            <input type="hidden" name="function" value="createProject">
-    `;
-
-    document.getElementById("projectModalFooter").innerHTML = `
-    <button class="btn btn-primary" onclick="createProject()">Save</button>
-    `;
-}
-
-function createProject()
-{
-    var e = document.getElementById("projectStatus");
-    var projectStatus = e.options[e.selectedIndex].text;
-
-    var data = new FormData();
-    data.append('function', "createProject");
-    data.append('projectName', document.getElementById("projectName").value);
-    data.append('projectStatus', projectStatus);
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'projectController.php', true);
-    xhr.onreadystatechange = function() 
-    {
-      if (this.readyState == 4 && this.status == 200)
-        {
-            console.log(this.responseText);
-            loadProjects();
-            overHang("success", "Project has been successfully created!");
-            $('#projectModal').modal('hide');
-        }
-    }
-    xhr.send(data);
-}
-
 
 function createTicketPrompt(projectId)
 {
-    document.getElementById("projectModalBody").innerHTML = `
-    <label>Project ID</label> <br>
-    <input type="text" id="projectId" value="${projectId}" disabled> <br>
-    <label>Reporter</label> <br>
-    <input type="text" id="reporter" value="${userForename + " " + userSurname}" disabled> <br>
-    <label>Task</label> <br>
-    <input type="text" id="task" required> <br>
-    <label>Progress</label> <br>
-    <input type="text" id="progress" required> <br>
-    <input type="hidden" id="reporterKey" value="${userId}"> 
-    <input type="hidden" id="function" value="createTicket"> <br>
-    `;
+    $("#projectModalHead").html("Create Ticket");
 
-    document.getElementById("projectModalFooter").innerHTML = `
-    <button class="btn btn-primary" type=submit onclick="createTicket()">Save</button>
-    `;
+    let createTicketDiv = $("<div>", {class : "form-group"});
+    $(createTicketDiv).append($("<label>", { class : "modal-content-1"}).html("Project ID"));
+    $(createTicketDiv).append($("<input>", { id : "projectId", class: "form-control", value : projectId}).prop("disabled", true));
+    $(createTicketDiv).append($("<label>", { class : "modal-content-2"}).html("Summary"));
+    $(createTicketDiv).append($("<input>", { id : "summary", "class": "form-control", onkeyup : "ticketValidation()"}));
+    $(createTicketDiv).append($("<input>", { id : "reporterKey", value : userId, type : "hidden"}));
+    $(createTicketDiv).append($("<input>", { id : "function", value : "createTicket", type : "hidden"}));
+    let ticketValidationSmall = $("<small>", {id : "ticketValidationSmall"});
+    
+    $("#projectModalBody").html("").append(createTicketDiv);
+    $("#projectModalBody").append(ticketValidationSmall);
+    $("#projectModalFooter").html("").append($("<button>", { id : "saveTicketBtn", class : "btn btn-primary", type : "submit" , onclick : "createTicket()"}).html("Save"));
+    $('#saveTicketBtn').prop('disabled', true);
+}
+
+function ticketValidation()
+{
+    var data = new FormData();
+    data.append("function", "checkTicketExistance");
+    data.append("ticketName", $.trim($("#summary").val()));
+    data.append("featureId", $("#selectedFeatureId").html());
+
+    if($("#summary").val() == null || $.trim($("#summary").val()) == "")  { $('#saveTicketBtn').prop('disabled', true); }
+    else 
+    {   
+        axios.post("../Ticket/ticketController.php", data)
+        .then((res) => 
+        {
+            console.log(res.data);
+            if(res.data)
+            {
+                $("#summary").addClass("is-invalid");
+                $("#ticketValidationSmall").html("Feature name not available!");
+                $("#ticketValidationSmall").addClass("text-danger");
+                $('#saveTicketBtn').prop('disabled', true);
+            }
+            else 
+            {
+                $("#summary").removeClass("is-invalid");
+                $("#ticketValidationSmall").html("");
+                $("#ticketValidationSmall").removeClass("text-danger");
+                $('#saveTicketBtn').prop('disabled', false);
+            }
+        })
+    }
 }
 
 function createTicket()
 {
     var data = new FormData();
     data.append('function', "createTicket");
-    data.append('projectId', document.getElementById("projectId").value);
-    data.append('reporterKey', document.getElementById("reporterKey").value);
-    data.append('reporter', document.getElementById("reporter").value);
-    data.append('task', document.getElementById("task").value);
-    //data.append('progress', document.getElementById("progress").value);
+    data.append('projectId', $("#selectedFeatureId").html());
+    data.append('reporterKey',$("#reporterKey").val());
+    data.append('summary', $("#summary").val());
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'projectController.php', true);
-    xhr.onreadystatechange = function() 
+    axios.post("../Project/projectController.php", data)
+    .then(() =>
     {
-      if (this.readyState == 4 && this.status == 200)
+        loadTicketsWithProgress(document.getElementById("selectedFeatureId").innerHTML);
+        overHang("success", "Ticket has been successfully created!");
+        $('#projectModal').modal('hide');
+    })
+}
+
+function loadTicketsWithProgress(progress) 
+{
+    let selectedFeatureId = $("#selectedFeatureId").html();
+    if (selectedFeatureId == 0) return false;
+
+    $("#ticketBtnDiv").html("");
+    if (userLevel >= 2) $("#ticketBtnDiv").append($("<button>", { "data-toggle" : "modal" , "data-target" : "#projectModal" , onclick : createTicketPrompt(selectedFeatureId)}).html("Create Ticket"));
+    loadTicketsWithProgressFromServer(selectedFeatureId, progress)
+    .then (response => 
+    {
+        var json = response.data;
+        $("#ticketTable").find("tr:gt(0)").remove(); // Clears table
+
+        for (i = 0; i < json.length; i++)
         {
-            console.log(this.responseText);
-            getTicketWithProjectId(document.getElementById("projectId").value);
-            overHang("success", "Ticket has been successfully created!");
-            $('#projectModal').modal('hide');
+            json[i].forename == null ? assignee = document.createTextNode("Not assigned") 
+            : assignee = document.createTextNode(`${json[i].forename} ${json[i].surname}`);
+
+            let newRow = document.getElementById("ticketTable").insertRow(-1);
+            let cell1 = newRow.insertCell(0)
+            let cell2 = newRow.insertCell(1)
+            let cell3 = newRow.insertCell(2)
+            let cell4 = newRow.insertCell(3)
+
+            $(cell1).append(document.createTextNode(json[i].ticketId))
+            $(cell2).append($("<a>", { href : `../Ticket/index.php?ticketId=${json[i].ticketId}`}).html(`${json[i].summary}`));
+            $(cell3).append(document.createTextNode(json[i].progress))
+            $(cell4).append(assignee)
         }
-    }
-    xhr.send(data);
+    })
 }

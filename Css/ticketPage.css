@@ -1,199 +1,142 @@
-#ticketContainer {
-	Margin-top: 100px;
-	display: grid;
-	text-align: centre;
-	width: 1500px;
-	margin-left: auto;
-	margin-right: auto;
-	
+#info {
+	background-color: rgb(229, 241, 216);
 }
 
-#ticketBrief {
-	grid-column: 1 / 2;
-	width: 990px;
-	background-color: #e60000;
+#main {
+	background-color: rgb(247,250,243);
 	text-align: centre;
-	
+	align-items: center;
 }
 
-#ticketBrief1 {
-	float: left;
-	width: 495px;
-	text-align: centre;
+#myTab {
+	margin-top: 50px;
+	margin-left: 350px;
+	margin-right: 350px;
+	margin-bottom: 50px;
 }
 
-#ticketBrief2 {
-	float: right;
-	width: 495px;
-	text-align: centre;
+#comment-content {
+	background-color: rgb(247,250,243);
 }
 
-#ticketBrief3 {
-	width: 495px;
-	text-align: centre;
-}
-
-#ticketBriefModal {
-	margin-left: 872.5px;
-	margin-top: 10px;
+#notes-content {
+	background-color: rgb(247,250,243);
 }
 
 #ticketPeople {
-	grid-column: 2 / 2;
-	width: 490px;
-	background-color: #ff751a;
-	text-align: centre;
-}
-
-#ticketPeople1 {
-	margin: 10px;
-	text-align: centre;
-}
-
-#ticketPeople2 {
-	margin: 10px;
-}
-
-#ticketPeople3 {
-	margin-left: 358px;
+	padding: 25px;
+	margin: auto;
 }
 
 #ticketDetails {
-    grid-column: 1 / 2;
-	width: 990px;
-	background-color: #00e6e6;
-	text-align: centre;
+	margin-top: 50px;
+	margin-left: 80px;
 }
 
-#ticketDetails1 {
+#ticketDetails > p::after {
+	content: "\a"; /* adds new line */
+}
+
+#ticketDates {
+	padding: 25px;
+	width: 200px;
+	height: 300px;
+	text-align: centre;
+} 
+
+#dates1, #dates2 {
 	float: left;
-	text-align: centre;
-	width: 495px;
+	margin-top: 20px;
 }
 
-#ticketDetails2 {
-	float: right;
-	text-align: centre;
-	width: 495px;
+#ticketCreate, #ticketComments, #ticketDetails{
+	padding: 0;
+	margin: auto;
+	width: 800px;
+	max-width: 1000px;
+	min-width: 150px;
+	text-align: left;
 }
 
-#ticketDetails3 {
-	float: left;
-	text-align: centre;
-	width: 495px;
-}
-
-#ticketDetails4 {
-	float: right;
-	text-align: centre;
-	width: 495px;
-}
-
-#ticketDetails5 {
-	width: 990px;
-	border: 5px solid black;
-	border-width: 5px;
-	background-color: #4293f5;
-	text-align: center;
-}
-
-#detailsButtonModal {
-		margin-left: 858.5px;
-}
-
-
-#ticketDate {
-	grid-column: 2 / 2;
-	width: 490px;
-	background-color: #ffff1a;
-	text-align: centre;
-}
-
-#dates1 {
-	background-color: cyan;
-	width: 240px;
-	float: left;
-}
-
-#dates2 {
-	background-color: red;
-	width: 240px;
-	float: right;
-}
-
-#preDates {
-	background-color: #ffff1a;
-	outline-color: #ffff1a;
-}
-
-#detailsSubBug {
-	grid-column: 1 / 2;
-	width: 990px;
-	background-color: grey;
-	text-align: centre;
-}
-
-#ticketMessages {
-	grid-column: 2 / 2;
-	width: 490px;
-	background-color: #00e600;
-	text-align: centre;
-}
-
-#ticketMessages1 {
-	margin-left: 371px;
-}
-
-#ticketCreate {
-
-	text-align: centre;
-	width: 1490px;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: #00ffd5;
-}
-
-.Createcommentbutton {
-	margin-right: 5px;
-}
-
-#ticketComments {
-	text-align: centre;
-	width: 1490px;
-	margin-left: auto;
-	margin-right: auto;
-	background-color:  #e2e2e2;
-}
-
-#commentList {
-	margin-left: 75px;
+.note-editor, .note-editing-area {
+	border-radius: 6px;
 }
 
 #comments {
-	background-color: white;
-	width: 1350px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	margin-left: 0px;
-	margin-bottom: 10px;
-	border-width:5px; 
-	border-style:groove;
-	padding-top: 10px;
+	border-radius: 10px;
 }
-.CommentImages {
-	width: 25px;
-	height: 20px;
+
+#commentBody {
 	margin-left: 10px;
-	padding-left: 5px;
+	margin-top: 10px;
+}
+
+#commentBody > h6 {
+	display: inline-block;
+}
+
+#commentBody > span {
+	font-size: 10px;
+}
+
+#mainComment {
+	margin-left: 10px;
+}
+
+#commentActions {
+	text-align: justify;
+	margin-top: 10px;
+	margin-left: 50px;
+}
+
+#commentActions > img {
+	width: 15%; /* Declare your value. Can be in relative units. */
+	max-width: 20px;
 	float: right;
+}
+
+#commentActions:after {
+	content: "";
+  	width: 25%;
+	display: inline-block;
+}
+
+#commentImages {
+	display: table-cell;
+  	text-align: center;
+  	width: 20%;
+}
+
+#commentImages > img {
+	width: 15%;
+	max-width: 20px;
+}
+
+.CommentImages:hover {
+	background-color: rgb(172, 205, 122);
+}
+
+.profilePicture {
+	margin-top: 5px;
+	width: 65px;
+	height: 65px;
+	border-radius: 50px;
+}
+
+.reporterName {
+	margin-bottom: 20px;
+}
+
+#ticketPeopleChooseAssignee, #ticketPeopleSelfAssignee {
+	float: right;
+	background-color: rgb(213, 229, 187);
+}
+
+#ticketPeopleChooseAssignee:hover, #ticketPeopleSelfAssignee:hover {
+	background-color: rgb(172, 205, 122);
 }
 
 #loginMessage
 {
-	padding-top: 65px; 
-}
-
-.CenterText {
-	margin-left: auto;
-	margin-right: auto;
+	padding-top: 65px;
 }

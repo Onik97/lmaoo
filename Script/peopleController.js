@@ -1,144 +1,119 @@
 $(document).ready(function() 
 {
-  loadPeople(ticketId);
+    loadAssignee();
+    loadReporter();
 });
 
-function People()
+function peoplePrompt()
 {
-  document.getElementById("Modal-head").innerHTML = "People";
-  document.getElementById("prompt").style.display = "block"
-  document.getElementById("prompt").innerHTML = 
-  `
-  <p>Select Assignee below</p>
-  <select id="selectUsers">
-  </select>
-  `;
-  loadUsersAsSelect();
-  document.getElementById("Modal-footer").innerHTML = `
-    <div class="modal-footer">
-        <input class="btn btn-primary" type="submit" value="Save" onclick=savePeople(${ticketId})>
-    </div>
-    `;
-}
-
-function loadPeople(ticketId)
-{
-    var data = new FormData();
-    data.append('function', "loadPeople");
-    data.append('ticketId', ticketId);
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'ticketController.php', true);
-    xhr.onreadystatechange = function() 
-    {
-      if (this.readyState == 4 && this.status == 200)
-        {
-          var response = JSON.parse(this.responseText)[0];
-          $("#reporter").html(response.reporter);
-          $("#assignee").html(response.assignee);
-        }
-    }
-    xhr.send(data);
-}
-
-function savePeople(ticketId)
-{
-  var selectElement = document.getElementById("selectUsers");
-  var selectedUser = selectElement.options[selectElement.selectedIndex].text;
-  var selectedUserValue = selectElement.options[selectElement.selectedIndex].value;  
-
-  var data = new FormData();
-  data.append('function', "savePeople");
-  data.append('ticketId', ticketId);
-  data.append('newAssignee', selectedUser);
-
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'ticketController.php', true);
-  xhr.onreadystatechange = function() 
-  {
-    if (this.readyState == 4 && this.status == 200)
-      {
-        console.log(this.responseText);
-        saveAssigneeKey(selectedUserValue, ticketId);
-        loadPeople(ticketId);
-        $('#CommentModal').modal('hide'); // Shouldnt we use a different Modal? Should we just rename it to ticketModal? I will leave that decision to you Lewis
-        overHang("success", "Ticket assigned to "+ selectedUser);
-      }
-  }
-  xhr.send(data);
-}
-
-function loadUsersAsSelect()
-{
-  var assignee = document.getElementById("assignee").innerHTML;
-  var selectUsers = document.getElementById("selectUsers");
-  var data = new FormData();
-  data.append('function', "loadUsers");
-
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'ticketController.php', true);
-  xhr.onreadystatechange = function() 
-  {
-    if (this.readyState == 4 && this.status == 200)
-      {
-        var users = JSON.parse(this.responseText);
-        for (let i = 0; i < users.length; i++) 
-        {
-          option = document.createElement('option');
-          option.text = users[i].forename + " " + users[i].surname;
-          option.value = users[i].userId;
-          if (users[i].forename + " " + users[i].surname == assignee) 
-          {
-            $("#selectUsers").prepend("<option value="+ users[i].userId +" disabled selected>" + users[i].forename + " " + users[i].surname + "</option>");
-            // selectUsers.add(option); $(option).prop("selected", true); $(option).prop("disabled", true);
-          }
-          else 
-          { 
-            selectUsers.add(option); 
-          }
-        }
-      }
-  }
-  xhr.send(data);
-}
-
-function saveAssigneeAsYourself(ticketId, fullName)
-{
-  var data = new FormData();
-  data.append('function', "peopleYourself");
-  data.append('ticketId', ticketId)
-  data.append('fullName', fullName)
+  document.getElementById("Modal-head").innerHTML = "Select Assignee";
+  document.getElementById("modal-body").innerHTML = ""; // Makes it empty first to avoid multiple append childs
   
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'ticketController.php', true);
-  xhr.onreadystatechange = function()
-  {
-	  if (this.readyState == 4 && this.status == 200)
-	  {
-      console.log(this.responseText);
-      saveAssigneeKey(userId, ticketId);
-      loadPeople(ticketId);
-      overHang("success", "Ticket assigned to yourself!");
-	  }
-  }
-  xhr.send(data);
+  let modalBody = document.querySelector("#modal-body");
+  let selectUsers = document.createElement("select");
+  selectUsers.setAttribute("id", "selectUsers");
+  modalBody.appendChild(selectUsers);
+  
+  loadUsersInAssigneeModal();
+
+  let modalFooter = document.querySelector("#modal-footer");
+  document.getElementById("modal-footer").innerHTML = ""; // Makes it empty first to avoid multiple append childs
+  let input = document.createElement("input");
+  input.setAttribute("class", "btn btn-primary");
+  input.setAttribute("type", "submit");
+  input.setAttribute("value", "Save");
+  input.setAttribute("onclick", "saveSelectedAssignee()");
+
+  modalFooter.appendChild(input);
 }
 
-function saveAssigneeKey(ticketId, key)
+function loadAssignee()
 {
-  var data = new FormData();
-  data.append('function', "assigneeKeyUpdate");
-  data.append('ticketId', ticketId);
-  data.append('key', key)
-    
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'ticketController.php', true);
-  xhr.onreadystatechange = function()
+  var ticketId = new URL(window.location.href).searchParams.get("ticketId");
+  loadAssigneeFromServer(ticketId)
+  .then(response => 
   {
-	  if (this.readyState == 4 && this.status == 200)
-	  {
-		  console.log(this.responseText);
-	  }
-  }
-  xhr.send(data);
+    if (response.data.length == 0) return;
+
+    var res = response.data;
+    $("#assignee").html(`${res[0].forename} ${res[0].surname} (${res[0].username})`);
+    $("#assigneeUserId").html(res[0].userId);
+  })
+}
+
+function loadReporter()
+{
+  var ticketId = new URL(window.location.href).searchParams.get("ticketId");
+  loadReporterFromServer(ticketId)
+  .then(response =>
+  {
+    var res = response.data;
+    $("#reporter").html(`${res[0].forename} ${res[0].surname} (${res[0].username})`);
+    $("#reporterUserId").html(res[0].userId);
+  })
+}
+
+function saveSelectedAssignee()
+{
+  var ticketId = new URL(window.location.href).searchParams.get("ticketId");
+  var assigneeId = document.getElementById("selectUsers").options[document.getElementById("selectUsers").selectedIndex].value;
+  var assigneeName = document.getElementById("selectUsers").options[document.getElementById("selectUsers").selectedIndex].text;
+
+  var data = new FormData();
+  data.append('function', "saveSelectedAssignee");
+  data.append('ticketId', ticketId);
+  data.append('assigneeId', assigneeId);
+
+  axios.post('../Ticket/ticketController.php', data)
+  .then(() => 
+    {
+      loadAssignee();
+      $('#ticketPageModal').modal('hide');
+      overHang("success", "Ticket assigned to " + assigneeName);
+      loadDates();
+    })
+}
+
+function loadUsersInAssigneeModal()
+{
+  var assigneeUserId = document.getElementById("assigneeUserId").innerHTML;
+  var selectUsers = document.getElementById("selectUsers");
+
+  getActiveUsersFromServer()
+  .then(response => 
+  {
+    var usersJson = response.data;
+    for (let i = 0; i < usersJson.length; i++)
+    {
+      if (usersJson[i].userId == assigneeUserId) $("#selectUsers")
+      .prepend(`<option value=${usersJson[i].userId} disabled selected> ${usersJson[i].forename} ${usersJson[i].surname} (${usersJson[i].username})</option>`);
+      else if (usersJson[i].userId == userId);
+      else 
+      {
+        var option = document.createElement('option');
+        option.text = `${usersJson[i].forename} ${usersJson[i].surname} (${usersJson[i].username})`;
+        option.value = usersJson[i].userId;
+        selectUsers.add(option);
+      }
+    }
+  })
+}
+
+function saveAssigneeAsYourself()
+{
+  var ticketId = new URL(window.location.href).searchParams.get("ticketId");
+
+  var data = new FormData();
+  data.append('function', "assigneeSelf");
+  data.append('ticketId', ticketId)
+  data.append('selfId', userId)
+    
+  axios.post('../Ticket/ticketController.php', data)
+  .then(() => 
+  {
+    loadAssignee();
+    $('#ticketPageModal').modal('hide');
+    overHang("success", "Ticket assigned to yourself!");
+    loadDates();
+  })
 }

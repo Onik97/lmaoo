@@ -1,11 +1,15 @@
 <?php
-require('../connection.php');
+require_once("../connection.php");
 error_reporting(0);
 $function = $_POST['function'];
 
 if ($function == "checkTicket")
 {
-    ticketExistance($_GET['ticketId']);
+    ticketIdExistance($_GET['ticketId']);
+}
+else if ($function == "checkTicketExistance")
+{
+    echo ticketExistance($_POST['ticketName'], $_POST['featureId']);
 }
 else if ($function == "createComment")
 {
@@ -17,57 +21,71 @@ else if ($function == "loadComments")
 }
 else if ($function == "updateComment")
 {
-    echo updateComment($_POST['commentId'], $_POST['newComment']);
+    echo updateComment($_POST['commentId'], $_POST['commentContent']);
 }
 else if ($function == "deleteComment")
 {
     echo deleteComment($_POST['commentId']);
 }
-else if ($function == "loadPeople")
+else if ($function == "saveSelectedAssignee")
 {
-    echo json_encode(loadPeople($_POST['ticketId']));
+    echo saveSelectedAssignee($_POST['ticketId'], $_POST['assigneeId']);
 }
-else if ($function == "savePeople")
+else if ($function == "assigneeSelf")
 {
-    echo savePeople($_POST['ticketId'], $_POST['newAssignee']);
-}
-else if ($function == "peopleYourself")
-{
-    peopleYourself($_POST['fullName'], $_POST['ticketId']);
+    echo assigneeYourself($_POST['ticketId'], $_POST['selfId']);
 }
 else if ($function == "loadUsers")
 {
     echo json_encode(loadUsers());
 }
-else if ($function == "assigneeKeyUpdate")
-{
-    echo assigneeKey($_POST['key'], $_POST['ticketId']);
-}
 else if ($function == "loadDates")
 {
-
     echo json_encode(loadDates($_POST['ticketId']));
+}
+else if ($function == "loadAssignee")
+{
+    echo json_encode(loadAssignee($_POST["ticketId"]));
+}
+else if ($function == "loadReporter")
+{
+    echo json_encode(loadReporter($_POST['ticketId']));
+}
+else if ($function == "updateTicketTime")
+{
+    updateTicketTime($_POST["ticketId"]);
 }
 else 
 {
     return;
 }
 
-function ticketExistance($ticketId)
+function updateTicketTime($ticketId)
+{
+    $pdo = logindb("user", "pass");
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("UPDATE ticket SET updated = ? WHERE ticketId = ?");
+    $stmt->execute([date("Y-m-d H:i:s", time() - 3600), $ticketId]);
+}
+
+function ticketIdExistance($ticketId)
 {
     $pdo = logindb("user", "pass");
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("SELECT ticketId FROM ticket WHERE ticketId = ?");
     $stmt->execute([$ticketId]);
-    
-    if ($stmt->fetchColumn() == 0)
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
+
+    return $stmt->fetchColumn() > 0 ? true : false;
+}
+
+function ticketExistance($ticketName, $featureId)
+{
+    $pdo = logindb("user", "pass");
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("SELECT summary FROM ticket WHERE summary = ? AND featureId = ?");
+    $stmt->execute([$ticketName, $featureId]);
+
+    return $stmt->fetchColumn() > 0 ? true : false;
 }
 
 function loadUsers()
@@ -76,8 +94,7 @@ function loadUsers()
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("SELECT userId, forename, surname FROM user");
     $stmt->execute();
-    $users = $stmt->fetchAll();
-    return $users;
+    return $stmt->fetchAll();
 }
 
 function createComment($commentContent, $ticketId, $userId)
@@ -86,7 +103,6 @@ function createComment($commentContent, $ticketId, $userId)
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("INSERT INTO comment (commentId, commentContent, ticketId, userId) VALUES (null, ?, ?, ?)");
     $stmt->execute([$commentContent, $ticketId, $userId]);
-    echo "Success"; // Using echo for XMLHttpRequest
 }
 
 function updateComment($commentId, $newComment)
@@ -95,7 +111,6 @@ function updateComment($commentId, $newComment)
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("UPDATE comment SET commentContent = ? WHERE commentId = ?");
     $stmt->execute([$newComment, $commentId]);
-    echo "Success"; // Using echo for XMLHttpRequest
 }
 
 function loadComments($ticketId)
@@ -106,8 +121,7 @@ function loadComments($ticketId)
                            FROM comment INNER JOIN user on user.userId = comment.userId
                            WHERE comment.ticketId = ?");
     $stmt->execute([$ticketId]);
-    $comments = $stmt->fetchAll();
-    return $comments;
+    return $stmt->fetchAll();
 }
 
 function deleteComment($commentId)
@@ -116,59 +130,22 @@ function deleteComment($commentId)
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("DELETE FROM comment WHERE commentId = ?");
     $stmt->execute([$commentId]);
-    echo "Success"; // Using echo for XMLHttpRequest
 }
 
-function createBugs($userId, $projectId)
-{
-
-}
-
-function deleteBugs($bugId)
-{
-
-}
-
-function loadBugs($ticketId)
-{
-
-}
-
-function loadPeople($ticketId)
-{
-    $pdo = logindb('user', 'pass');
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("SELECT reporter, assignee FROM ticket WHERE ticketId = ?");
-    $stmt->execute([$ticketId]);
-    $people = $stmt->fetchAll();
-    return $people;
-}
-
-function peopleYourself($fullName, $ticketId)
-{
-    $pdo = logindb('user', 'pass');
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("UPDATE ticket SET assignee = ? WHERE ticketId = ?");
-    $stmt->execute([$fullName, $ticketId]);
-    echo "Success"; // Using echo for XMLHttpRequest
-}
-
-function savePeople($ticketId, $newAssignee)
-{
-    $pdo = logindb('user', 'pass');
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("UPDATE ticket SET assignee = ? WHERE ticketId = ?");
-    $stmt->execute([$newAssignee, $ticketId]);
-    echo "Success"; // Using echo for XMLHttpRequest
-}
-
-function assigneeKey($ticketId, $key)
+function saveSelectedAssignee($ticketId, $newAssignee)
 {
     $pdo = logindb('user', 'pass');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("UPDATE ticket SET assignee_key = ? WHERE ticketId = ?");
-    $stmt->execute([$key, $ticketId]);
-    echo "Success"; // Using echo for XMLHttpRequest
+    $stmt->execute([$newAssignee, $ticketId]);
+}
+
+function assigneeYourself($ticketId, $selfKey)
+{
+    $pdo = logindb('user', 'pass');
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("UPDATE ticket SET assignee_key = ? WHERE ticketId = ?");
+    $stmt->execute([$selfKey, $ticketId]);
 }
 
 function loadDates($ticketId)
@@ -177,8 +154,39 @@ function loadDates($ticketId)
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $stmt = $pdo->prepare("SELECT created, updated FROM ticket WHERE ticketId = ?");
     $stmt->execute([$ticketId]);
-    $dates = $stmt->fetchAll();
-    return $dates;
+    return $stmt->fetchAll();
 }
 
+function loadAssignee($ticketId)
+{
+    $pdo = logindb('user', 'pass');
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("SELECT user.forename, user.surname, user.username, user.userId FROM ticket 
+                           INNER JOIN user on user.userId = ticket.assignee_key
+                           WHERE ticket.ticketId = ?");
+    $stmt->execute([$ticketId]);
+    return $stmt->fetchAll();
+}
+
+function loadReporter($ticketId)
+{
+    $pdo = logindb('user', 'pass');
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+    $stmt = $pdo->prepare("SELECT user.forename, user.surname, user.username, user.userId FROM ticket 
+                           INNER JOIN user on user.userId = ticket.reporter_key
+                           WHERE ticket.ticketId = ?");
+    $stmt->execute([$ticketId]);
+    return $stmt->fetchAll();
+}
+
+function loadSearchBar() 
+{
+    if (!isset($_SESSION["userLoggedIn"])) { return;} ?>
+
+    <form class="navbar-brand form-inline lg-1">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search Ticket" aria-label="Search">
+        <button class="btn btn-outline-success my-sm-0" type="submit">Search</button>
+    </form>
+    <?php
+}
 ?>

@@ -1,17 +1,18 @@
-<?php
-require("../User/user.php");
-session_start(); 
-?>
+<?php require("../User/user.php"); require("../connection.php"); session_start(); ?>
+
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" href="../Css/HomePage.css">
-<title>Home</title>
-<head>
-<?php include("../Global/head.php"); ?>
-</head>
-<?php include("../Global/navBar.php"); ?>
-<body>       
-<?php echo "This page is still under maintenance"; ?>
-<?php include("../Global/editUserModal.php"); ?>
-</body>
+    <head> 
+        <link rel="stylesheet" href="../Css/HomePage.css">
+        <p id="navBarActive" hidden>homePage</p>
+        <?php include("../Global/head.php"); ?> 
+        <title>Home</title>
+    </head>
+
+    <body>
+        <?php include("../Global/navBar.php"); ?>
+        <?php include("../Home/homeMessage.php"); ?>
+        <h1>This page is under maintenance</h1>
+    </body>
+        <?php include("../Global/editUserModal.php"); ?>
 </html>
