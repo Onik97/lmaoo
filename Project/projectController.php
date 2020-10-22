@@ -1,6 +1,8 @@
 <?php
-require_once("../connection.php"); require_once("../User/user.php");
+require_once(__DIR__ . "/../connection.php");
+require_once(__DIR__ . "/../User/user.php");
 error_reporting(0);
+
 if ($_GET['projectId'] && $_GET['progress'])
 {
     echo json_encode(getTicketListWithProgress($_GET['projectId'], $_GET['progress']));
