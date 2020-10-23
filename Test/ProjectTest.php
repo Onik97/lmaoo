@@ -16,17 +16,15 @@ class ProjectTest extends TestCase
     public function test_projectExistance_true()
     {
         $projectController = new projectController();
-        $_POST['function'] == "checkProjectExistance";
         $actual = $projectController->projectExistance("AutomationProject");
-        $this->assertEquals(true, $actual);
+        $this->assertTrue($actual);
     }
 
     public function test_projectExistance_false()
     {
         $projectController = new projectController();
-        $_POST['function'] == "checkProjectExistance";
         $actual = $projectController->projectExistance("ThisProjectDoesNotExist");
-        $this->assertEquals(false, $actual);
+        $this->assertFalse($actual);
     }
 
     public function test_getProjectList_checkContents()
@@ -39,6 +37,10 @@ class ProjectTest extends TestCase
             {
                 $this->assertEquals("AutomationProject", $project->name);
                 $this->assertEquals("Back-log", $project->status);
+            }
+            else 
+            {
+                $this->fail("If statement did not work correctly! Check Content");
             }
         }
     }
@@ -55,6 +57,10 @@ class ProjectTest extends TestCase
                 $this->assertEquals("Open", $ticket->progress);
                 $this->assertEquals("Onik", $ticket->forename);
                 $this->assertEquals("Noor", $ticket->surname);
+            }
+            else 
+            {
+                $this->fail("If statement did not work correctly! Check Content");
             }
 
         }
@@ -73,6 +79,10 @@ class ProjectTest extends TestCase
                 $this->assertEquals("Adil", $ticket->forename);
                 $this->assertEquals("Rahman", $ticket->surname);
             }
+            else 
+            {
+                $this->fail("If statement did not work correctly! Check Content");
+            }
 
         }
     }
@@ -90,6 +100,10 @@ class ProjectTest extends TestCase
                 $this->assertEquals("Unit", $ticket->forename);
                 $this->assertEquals("Test", $ticket->surname);
             }
+            else 
+            {
+                $this->fail("If statement did not work correctly! Check Content");
+            }
         }
     }
     
@@ -106,10 +120,11 @@ class ProjectTest extends TestCase
                 $this->assertEquals("Owen", $ticket->forename);
                 $this->assertEquals("Alister", $ticket->surname);
             }
+            else 
+            {
+                $this->fail("If statement did not work correctly! Check Content");
+            }
         }
     }
-
-    
 }
-
 ?>
