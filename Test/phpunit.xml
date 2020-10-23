@@ -12,7 +12,9 @@
 
     <testsuites>
         <testsuite name="lmaoo">
-            <directory>ProjectTest.php</directory>
+            <file>ProjectTest.php</file>
+            <file>TicketTest.php</file>
+            <file>UserTest.php</file>
         </testsuite>
     </testsuites>
 
