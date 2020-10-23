@@ -80,7 +80,7 @@ class TicketTest extends TestCase
             }
             else 
             {
-                $this->fail("If Statement did work correctly! Check Condition");
+                $this->fail("If Statement did not work correctly! Check Condition");
             }
         }
     }
