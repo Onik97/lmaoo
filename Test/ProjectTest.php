@@ -38,10 +38,6 @@ class ProjectTest extends TestCase
                 $this->assertEquals("AutomationProject", $project->name);
                 $this->assertEquals("Back-log", $project->status);
             }
-            else 
-            {
-                $this->fail("If statement did not work correctly! Check Content");
-            }
         }
     }
 
@@ -55,8 +51,8 @@ class ProjectTest extends TestCase
             {
                 $this->assertEquals("AutomationOpenTicket", $ticket->summary);
                 $this->assertEquals("Open", $ticket->progress);
-                $this->assertEquals("Onik", $ticket->forename);
-                $this->assertEquals("Noor", $ticket->surname);
+                $this->assertEquals("Tufan", $ticket->forename);
+                $this->assertEquals("Butuner", $ticket->surname);
             }
             else 
             {
