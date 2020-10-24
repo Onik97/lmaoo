@@ -1,4 +1,4 @@
-<?php ob_start(); require_once("../Project/projectController.php"); require_once("../Ticket/ticketController.php"); ?>    
+<?php ob_start(); require_once("../Project/projectController.php"); require("../Ticket/ticketController.php"); ?>    
 <link rel="stylesheet" href="../Css/navbar.css">
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
     

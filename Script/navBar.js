@@ -5,9 +5,9 @@ let navBarActive = document.getElementById("navBarActive").innerHTML;
 : (navBarActive == "registerPage" || navBarActive == "loginPage" || navBarActive == "adminPage") ? (document.getElementById("accountNav").classList.add("active"))
 : null;
 
-function searchBar() 
+function searchBar()
 {
-    let searchbarText = $("#searchBarInput").html();
+    let searchbarText = $("#searchBarInput").val();
 
     let data = new FormData();
     data.append("function", "checkTicket");
@@ -18,11 +18,16 @@ function searchBar()
     {
         var dbdata = response.data;
         console.log(dbdata);
+        
+        if (dbdata == null)
+        {
+            console.log("is not a ticket")
+        }
+        else
+        {
+            console.log("ticket exists") 
+        }
     })
-}
-
-function searchBarBtn(){
-    searchBar();
 }
 
 function createProjectPrompt()
