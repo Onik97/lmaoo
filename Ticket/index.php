@@ -1,4 +1,4 @@
-<?php require("../User/user.php"); require("ticketController.php"); session_start(); ?>
+<?php require("../User/user.php"); session_start(); ?>
 
 <!DOCTYPE html>
 <html>

@@ -5,6 +5,31 @@ let navBarActive = document.getElementById("navBarActive").innerHTML;
 : (navBarActive == "registerPage" || navBarActive == "loginPage" || navBarActive == "adminPage") ? (document.getElementById("accountNav").classList.add("active"))
 : null;
 
+function searchBar()
+{
+    let searchbarText = $("#searchBarInput").val();
+
+    let data = new FormData();
+    data.append("function", "checkTicket");
+    data.append("ticketId", searchbarText);
+
+    axios.post("../Ticket/ticketController.php", data)
+    .then(response => 
+    {
+        var dbdata = response.data;
+        console.log(dbdata);
+        
+        if (dbdata == "")
+        {
+            console.log("is not a ticket")
+        }
+        else
+        {
+            console.log("ticket exists") 
+        }
+    })
+}
+
 function createProjectPrompt()
 {
     $("#globalModallHead").html("Create Project");

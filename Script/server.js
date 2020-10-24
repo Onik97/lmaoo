@@ -125,3 +125,13 @@ function updateTicketTime(ticketId)
         headers: {'Content-Type': 'multipart/form-data' }
     })
 }
+
+function ticketIdExistance()
+{
+    return response = axios(
+    {
+        method: 'post',
+        url: '../Ticket/ticketController.php',
+        headers: {'Content-Type': 'multipart/form-data' }
+    })
+}
