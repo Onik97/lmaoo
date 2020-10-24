@@ -28,8 +28,8 @@ else if ($_POST['function'] == "checkProjectExistance")
 }
 else
 {
-    ob_end_clean();
-    header('HTTP/1.0 404 Not Found');
+    ob_clean();
+    return;
 }
 
 class projectController

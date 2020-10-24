@@ -37,10 +37,6 @@ else if ($function == "assigneeSelf")
 {
     echo $ticketController->assigneeYourself($_POST['ticketId'], $_POST['selfId']);
 }
-else if ($function == "loadUsers")
-{
-    echo json_encode($ticketController->loadUsers());
-}
 else if ($function == "loadDates")
 {
     echo json_encode($ticketController->loadDates($_POST['ticketId']));
@@ -60,7 +56,7 @@ else if ($function == "updateTicketTime")
 else 
 {
     ob_clean();
-    header('HTTP/1.0 404 Not Found');
+    return;
 }
 
 class ticketController
