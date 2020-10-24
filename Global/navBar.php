@@ -1,5 +1,6 @@
 <?php ob_start(); require_once("../Project/projectController.php"); require_once("../Ticket/ticketController.php");
 $projectController = new projectController();
+$ticketController = new ticketController();
 ?>    
 <link rel="stylesheet" href="../Css/navbar.css">
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
@@ -11,7 +12,7 @@ $projectController = new projectController();
         </button>
 
         <div class="collapse navbar-collapse w-100 order-3 dual-collapse2" id="navbarNav">
-            <?php loadSearchBar() ?>
+            <?php $ticketController->loadSearchBar() ?>
 
             <ul class="nav navbar-nav ml-auto mr-5">
             
