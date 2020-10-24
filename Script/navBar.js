@@ -19,7 +19,7 @@ function searchBar()
         var dbdata = response.data;
         console.log(dbdata);
         
-        if (dbdata == null)
+        if (dbdata == "")
         {
             console.log("is not a ticket")
         }
