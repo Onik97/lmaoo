@@ -2,71 +2,65 @@
 require_once(__DIR__ . "/../connection.php");
 error_reporting(0);
 
-$usercontroller = new ticketController();
+$ticketController = new ticketController();
 $function = $_POST['function'];
 
 if ($function == "checkTicket")
 {
-    $usercontroller->ticketIdExistance($_GET['ticketId']);
+    echo $ticketController->ticketIdExistance($_POST['ticketId']);
 }
 else if ($function == "checkTicketExistance")
 {
-    echo $usercontroller->ticketExistance($_POST['ticketName'], $_POST['featureId']);
+    echo $ticketController->ticketExistance($_POST['ticketName'], $_POST['featureId']);
 }
 else if ($function == "createComment")
 {
-    $usercontroller->createComment($_POST['commentContent'], $_POST['ticketId'], $_POST['userId']);
+    $ticketController->createComment($_POST['commentContent'], $_POST['ticketId'], $_POST['userId']);
 }
 else if ($function == "loadComments")
 {
-    echo json_encode($usercontroller->loadComments($_POST['ticketId']));
+    echo json_encode($ticketController->loadComments($_POST['ticketId']));
 }
 else if ($function == "updateComment")
 {
-    echo $usercontroller->updateComment($_POST['commentId'], $_POST['commentContent']);
+    echo $ticketController->updateComment($_POST['commentId'], $_POST['commentContent']);
 }
 else if ($function == "deleteComment")
 {
-    echo $usercontroller->deleteComment($_POST['commentId']);
+    echo $ticketController->deleteComment($_POST['commentId']);
 }
 else if ($function == "saveSelectedAssignee")
 {
-    echo $usercontroller->saveSelectedAssignee($_POST['ticketId'], $_POST['assigneeId']);
+    echo $ticketController->saveSelectedAssignee($_POST['ticketId'], $_POST['assigneeId']);
 }
 else if ($function == "assigneeSelf")
 {
-    echo $usercontroller->assigneeYourself($_POST['ticketId'], $_POST['selfId']);
-}
-else if ($function == "loadUsers")
-{
-    echo json_encode($usercontroller->loadUsers());
+    echo $ticketController->assigneeYourself($_POST['ticketId'], $_POST['selfId']);
 }
 else if ($function == "loadDates")
 {
-    echo json_encode($usercontroller->loadDates($_POST['ticketId']));
+    echo json_encode($ticketController->loadDates($_POST['ticketId']));
 }
 else if ($function == "loadAssignee")
 {
-    echo json_encode($usercontroller->loadAssignee($_POST["ticketId"]));
+    echo json_encode($ticketController->loadAssignee($_POST["ticketId"]));
 }
 else if ($function == "loadReporter")
 {
-    echo json_encode($usercontroller->loadReporter($_POST['ticketId']));
+    echo json_encode($ticketController->loadReporter($_POST['ticketId']));
 }
 else if ($function == "updateTicketTime")
 {
-    $usercontroller->updateTicketTime($_POST["ticketId"]);
+    $ticketController->updateTicketTime($_POST["ticketId"]);
 }
 else 
 {
     ob_clean();
-    header('HTTP/1.0 404 Not Found');
+    return;
 }
 
 class ticketController
 {
-
-
     public function updateTicketTime($ticketId)
     {
         $pdo = logindb("user", "pass");
@@ -180,12 +174,13 @@ class ticketController
     public function loadSearchBar() 
     {
         if (!isset($_SESSION["userLoggedIn"])) { return; } ?>
-
-        <form class="navbar-brand form-inline lg-1">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search Ticket" aria-label="Search">
-            <button class="btn btn-outline-success my-sm-0" type="submit">Search</button>
-        </form>
+    
+        <div class="navbar-brand form-inline lg-1">
+            <input id="searchBarInput" class="form-control mr-sm-2" type="search" placeholder="Search Ticket" aria-label="Search" onkeyup="searchBar()">
+            <button id="searchBarBtn" class="btn btn-outline-success my-sm-0">Search</button>
+        </div>
         <?php
     }
 }
 ?>
+

@@ -45,5 +45,5 @@ $ticketController = new ticketController();
             </ul>
         </div>
     </div>
-<script src="../Script/navBar.js"></script>
 </nav>
+<script src="../Script/navBar.js"></script>
