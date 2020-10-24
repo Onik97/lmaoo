@@ -1,5 +1,5 @@
 <?php 
-require_once("../connection.php"); 
+require_once(__DIR__ . "/../connection.php");
 error_reporting(0);
 
 if($_POST['function'] == "loadFeatures")
