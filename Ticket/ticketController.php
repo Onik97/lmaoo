@@ -2,7 +2,7 @@
 require_once(__DIR__ . "/../connection.php");
 error_reporting(0);
 
-$usercontroller = new ticketController();
+$ticketController = new ticketController();
 $function = $_POST['function'];
 
 if ($function == "checkTicket")
