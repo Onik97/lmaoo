@@ -19,13 +19,16 @@ function searchBar()
         var dbdata = response.data;
         console.log(dbdata);
         
-        if (dbdata == "")
+        if (dbdata >= 1)
         {
-            console.log("is not a ticket")
+            document.getElementById("searchBarInput").classList.remove('searchBarInvalid'); 
+            window.location.href = `../Ticket/index.php?ticketId=${searchbarText}`;
         }
         else
         {
-            console.log("ticket exists") 
+            document.getElementById("searchBarInput").classList.add('searchBarInvalid'); 
+            overHang("error", "TicketId Is Incorrect!");
+            console.log("ticket doesnt exists");
         }
     })
 }
