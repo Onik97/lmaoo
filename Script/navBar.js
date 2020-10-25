@@ -28,7 +28,6 @@ function searchBar()
         {
             document.getElementById("searchBarInput").classList.add('searchBarInvalid'); 
             overHang("error", "TicketId Is Incorrect!");
-            console.log("ticket doesnt exists");
         }
     })
 }
