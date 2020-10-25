@@ -16,18 +16,17 @@ function searchBar()
     axios.post("../Ticket/ticketController.php", data)
     .then(response => 
     {
-        var dbdata = response.data;
-        console.log(dbdata);
+        var name = response.data;
         
-        if (dbdata >= 1)
+        if (name == true)
         {
-            document.getElementById("searchBarInput").classList.remove('searchBarInvalid'); 
+            $("#searchBarInput").removeClass('is-invalid'); 
             window.location.href = `../Ticket/index.php?ticketId=${searchbarText}`;
         }
         else
         {
-            document.getElementById("searchBarInput").classList.add('searchBarInvalid'); 
-            overHang("error", "TicketId Is Incorrect!");
+            $("#searchBarInput").addClass('is-invalid'); 
+            overHang("error", "TicketID Is Incorrect!");
         }
     })
 }
