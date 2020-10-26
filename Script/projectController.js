@@ -172,6 +172,8 @@ function loadTicketsWithProgress(progress)
     loadTicketsWithProgressFromServer(selectedFeatureId, progress)
     .then (response => 
     {
+        if (progress == "Open") $("#open-tab").addClass('active');
+
         var json = response.data;
         $("#ticketTable").find("tr:gt(0)").remove(); // Clears table
 
