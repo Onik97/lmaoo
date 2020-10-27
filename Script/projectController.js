@@ -16,7 +16,7 @@ function loadFeatures()
         var json = response.data;
         for (i = 0; i < json.length; i++)
         {
-            $("#listOfFeatures").append($("<li>", { value : json[i].featureId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress();"}).html(json[i].name));
+            $("#listOfFeatures").append($("<li>", { value : json[i].featureId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress('Open');"}).html(json[i].name));
         }
     })
 }
@@ -172,6 +172,12 @@ function loadTicketsWithProgress(progress)
     loadTicketsWithProgressFromServer(selectedFeatureId, progress)
     .then (response => 
     {
+        if (progress == "Open")
+        {
+            $('#progress-tab, #complete-tab').removeClass('active');
+            $("#open-tab").addClass('active');
+        }
+
         var json = response.data;
         $("#ticketTable").find("tr:gt(0)").remove(); // Clears table
 

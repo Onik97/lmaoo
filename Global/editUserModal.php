@@ -27,7 +27,7 @@
                     <small>Invalid file type.</small>
                 </div>
                 
-                <form action="../User/userController.php" method="POST" onkeyup="checkUserDup()">
+                <form action="../User/userController.php" method="POST" onkeyup="userEditValidation(); checkUserDup();">
                     <div class="form-group">
                         <label>Forename</label>
                         <input class="form-control" value=<?php echo $userLoggedIn->getForename(); ?>  id="editForename" name="editForename" required>
@@ -48,7 +48,7 @@
                     <input type="hidden" name="editUserId" value="<?php echo $userLoggedIn->getId();?>">
 
                     <div class="modal-footer">
-                        <input id="editUserBtn" class="btn btn-primary" type="submit" value="Save Changes">
+                        <input id="editUserBtn" class="btn btn-primary" type="submit" value="Save Changes" disabled>
                     </div>
                 </form>
             </div>

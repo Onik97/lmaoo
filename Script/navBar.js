@@ -16,16 +16,17 @@ function searchBar()
     axios.post("../Ticket/ticketController.php", data)
     .then(response => 
     {
-        var dbdata = response.data;
-        console.log(dbdata);
+        var name = response.data;
         
-        if (dbdata == "")
+        if (name == true)
         {
-            console.log("is not a ticket")
+            $("#searchBarInput").removeClass('is-invalid'); 
+            window.location.href = `../Ticket/index.php?ticketId=${searchbarText}`;
         }
         else
         {
-            console.log("ticket exists") 
+            $("#searchBarInput").addClass('is-invalid'); 
+            overHang("error", "TicketID Is Incorrect!");
         }
     })
 }
