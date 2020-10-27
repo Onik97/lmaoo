@@ -67,22 +67,16 @@ class TicketTest extends TestCase
         $ticketController = new ticketController();
         $comments = $ticketController->loadComments(83);
         
-        foreach ($comments as $comment) 
+        foreach ($comments as $commentFromDB) 
         {
-            if($comment->ticketId == 83)
-            {
-                $this->assertEquals($comment->commentContent, "<p>This comment will be unit tested!</p>");
-                $this->assertEquals($comment->commentId, 254);
-                $this->assertEquals($comment->userId, 12);
-                $this->assertEquals($comment->forename, "Onik");
-                $this->assertEquals($comment->surname, "Noor");
-                $this->assertEquals($comment->commentCreated, "2020-10-23 20:49:36");
-            }
-            else 
-            {
-                $this->fail("If Statement did not work correctly! Check Condition");
-            }
+            if ($commentFromDB->ticketId == 83 && $commentFromDB->commentId == 254) $comment = $commentFromDB;
         }
+
+        $this->assertEquals($comment->commentContent, "<p>This comment will be unit tested!</p>");
+        $this->assertEquals($comment->userId, 12);
+        $this->assertEquals($comment->forename, "Onik");
+        $this->assertEquals($comment->surname, "Noor");
+        $this->assertEquals($comment->commentCreated, "2020-10-23 20:49:36");
     }
 
     /** @test */
