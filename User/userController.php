@@ -158,14 +158,14 @@ class userController
 		header("Location: index.php");
 	}
 
-	public function failedLogin()
+	public function failedLogin() // May change to return false in the future to allow dynamic login page
 	{
 		session_start();
 		$_SESSION['message'] = 'Login attempted failed';
 		header("Location: index.php");
 	}
 
-	public function getAllUsers() // This is used in Admin
+	public function getAllUsers() // This is used in Admin -> May be moved, not unit testing
 	{
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -175,7 +175,7 @@ class userController
 		return $users;
 	}
 
-	public function getActiveUsers()
+	public function getActiveUsers() // Again this is used in Admin -> May be moved, not unit testing
 	{
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
