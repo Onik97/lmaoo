@@ -50,7 +50,7 @@ else if ($function == "getActiveUsers")
 {
 	echo json_encode($userController->getActiveUsers());
 }
-else 
+else
 {
 	return;
 }
