@@ -174,7 +174,7 @@ function loadTicketsWithProgress(progress)
     {
         if (progress == "Open")
         {
-            $('#progress-tab, #complete-tab').removeClass('active')
+            $('#progress-tab, #complete-tab').removeClass('active');
             $("#open-tab").addClass('active');
         }
 
