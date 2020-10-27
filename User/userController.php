@@ -3,6 +3,7 @@ require_once(__DIR__ . "/../connection.php");
 require_once(__DIR__ . "/user.php");
 $userController = new userController();
 error_reporting(0);
+
 $function = $_POST['function'];
 $logout = $_POST['logout'];
 
@@ -12,7 +13,7 @@ if ($function == "login")
 }
 else if ($function == "register")
 {
-	$checker = $userController->hasDup();
+	$checker = $userController->hasDup(null);
 	if ($checker == "1")
 	{
 		session_start();
@@ -34,12 +35,12 @@ else if (isset($logout))
 }
 else if ($function == "checkUsername")
 {
-	if ($userController->hasDup())
+	if ($userController->hasDup(null))
 	{
 		$json->fromServer = "True";
 		echo json_encode($json);
 	}
-	else if (!$userController->hasDup())
+	else if (!$userController->hasDup(null))
 	{
 		$json->fromServer = "False";
 		echo json_encode($json);
@@ -56,9 +57,9 @@ else
 
 class userController 
 {
-	public function hasDup()
+	public function hasDup(?string $unitTest)
 	{
-		$username = $_POST['username'];
+		$username = ($unitTest == null) ? $_POST['username'] : $unitTest;
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT username FROM user WHERE username = ?");
@@ -117,7 +118,7 @@ class userController
 				$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive);
 				session_start();
 				$_SESSION['userLoggedIn'] = $userLoggedIn;
-				header("Location: ../Project/index.php");
+				header("Location: ../Home/index.php");
 			}
 			else
 			{
