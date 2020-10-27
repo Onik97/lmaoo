@@ -31,96 +31,73 @@ class ProjectTest extends TestCase
     {
         $projectController = new projectController();
         $list = $projectController->getProjectList();
-        foreach ($list as $project) 
+        foreach ($list as $projectFromDB) 
         {
-            if($project->projectId == 26) //Automation Project has ID of 26
-            {
-                $this->assertEquals("AutomationProject", $project->name);
-                $this->assertEquals("Back-log", $project->status);
-            }
+            if($projectFromDB->projectId == 26) $project = $projectFromDB;
         }
+        
+        $this->assertEquals("AutomationProject", $project->name);
+        $this->assertEquals("Back-log", $project->status);  
     }
 
     public function test_getTicketListWithProgress_checkOpen()
     {
         $projectController = new projectController();
         $tickets = $projectController->getTicketListWithProgress(9, "Open");
-        foreach ($tickets as $ticket)
+        foreach ($tickets as $ticketFromDB)
         {
-            if($ticket->ticketId == 83)
-            {
-                $this->assertEquals("AutomationOpenTicket", $ticket->summary);
-                $this->assertEquals("Open", $ticket->progress);
-                $this->assertEquals("Tufan", $ticket->forename);
-                $this->assertEquals("Butuner", $ticket->surname);
-            }
-            else 
-            {
-                $this->fail("If statement did not work correctly! Check Content");
-            }
-
+            if($ticketFromDB->ticketId == 83) $ticket = $ticketFromDB;
         }
+
+        $this->assertEquals("AutomationOpenTicket", $ticket->summary);
+        $this->assertEquals("Open", $ticket->progress);
+        $this->assertEquals("Tufan", $ticket->forename);
+        $this->assertEquals("Butuner", $ticket->surname);
     }
 
     public function test_getTicketListWithProgress_checkInProgress()
     {
         $projectController = new projectController();
         $tickets = $projectController->getTicketListWithProgress(9, "In Progress");
-        foreach ($tickets as $ticket)
+        foreach ($tickets as $ticketFromDB)
         {
-            if($ticket->ticketId == 84)
-            {
-                $this->assertEquals("AutomationInProgressTicket", $ticket->summary);
-                $this->assertEquals("In Progress", $ticket->progress);
-                $this->assertEquals("Adil", $ticket->forename);
-                $this->assertEquals("Rahman", $ticket->surname);
-            }
-            else 
-            {
-                $this->fail("If statement did not work correctly! Check Content");
-            }
-
+            if($ticketFromDB->ticketId == 84) $ticket = $ticketFromDB;
         }
+            
+        $this->assertEquals("AutomationInProgressTicket", $ticket->summary);
+        $this->assertEquals("In Progress", $ticket->progress);
+        $this->assertEquals("Adil", $ticket->forename);
+        $this->assertEquals("Rahman", $ticket->surname);
     }
 
     public function test_getTicketListWithProgress_checkInAutomation()
     {
         $projectController = new projectController();
         $tickets = $projectController->getTicketListWithProgress(9, "In Automation");
-        foreach ($tickets as $ticket)
+        foreach ($tickets as $ticketFromDB)
         {
-            if($ticket->ticketId == 85)
-            {
-                $this->assertEquals("AutomationInAutomationProgress", $ticket->summary);
-                $this->assertEquals("In Automation", $ticket->progress);
-                $this->assertEquals("Unit", $ticket->forename);
-                $this->assertEquals("Test", $ticket->surname);
-            }
-            else 
-            {
-                $this->fail("If statement did not work correctly! Check Content");
-            }
+            if($ticketFromDB->ticketId == 85) $ticket = $ticketFromDB;
         }
+
+        $this->assertEquals("AutomationInAutomationProgress", $ticket->summary);
+        $this->assertEquals("In Automation", $ticket->progress);
+        $this->assertEquals("Unit", $ticket->forename);
+        $this->assertEquals("Test", $ticket->surname);
     }
     
     public function test_getTicketListWithProgress_checkComplete()
     {
         $projectController = new projectController();
         $tickets = $projectController->getTicketListWithProgress(9, "Complete");
-        foreach ($tickets as $ticket)
+        foreach ($tickets as $ticketFromDB)
         {
-            if($ticket->ticketId == 86)
-            {
-                $this->assertEquals("AutomationCompleteTicket", $ticket->summary);
-                $this->assertEquals("Complete", $ticket->progress);
-                $this->assertEquals("Owen", $ticket->forename);
-                $this->assertEquals("Alister", $ticket->surname);
-            }
-            else 
-            {
-                $this->fail("If statement did not work correctly! Check Content");
-            }
+            if($ticketFromDB->ticketId == 86) $ticket = $ticketFromDB;
         }
+
+        $this->assertEquals("AutomationCompleteTicket", $ticket->summary);
+        $this->assertEquals("Complete", $ticket->progress);
+        $this->assertEquals("Owen", $ticket->forename);
+        $this->assertEquals("Alister", $ticket->surname);
     }
 }
 ?>
