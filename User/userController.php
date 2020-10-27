@@ -49,7 +49,7 @@ else if ($function == "getActiveUsers")
 {
 	echo json_encode(getActiveUsers());
 }
-else 
+else
 {
 	return;
 }
