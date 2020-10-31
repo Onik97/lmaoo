@@ -9,11 +9,12 @@ document.onkeypress = function (e)
 {
     e = e || window.event;
 
-    if (e.keyCode === 13)
+    if (e.key === 'Enter')
     {
         searchBar();
     }
 }
+
 function searchBar()
 {
     let searchbarText = $("#searchBarInput").val();
