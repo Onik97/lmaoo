@@ -14,7 +14,7 @@
                 
             <div class="modal-body">    
                 <label>Upload Profile Picture</label>
-                <div class="input-group">
+                <div class="input-group my-2">
                     <div class="input-group-prepend">
                         <button class="input-group-text" id="uploadImageBtn" disabled onclick="uploadImage()">Upload</button>
                     </div>
