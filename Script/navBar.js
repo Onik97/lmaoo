@@ -5,6 +5,15 @@ let navBarActive = document.getElementById("navBarActive").innerHTML;
 : (navBarActive == "registerPage" || navBarActive == "loginPage" || navBarActive == "adminPage") ? (document.getElementById("accountNav").classList.add("active"))
 : null;
 
+document.onkeypress = function (e) 
+{
+    e = e || window.event;
+
+    if (e.keyCode === 13)
+    {
+        searchBar();
+    }
+}
 function searchBar()
 {
     let searchbarText = $("#searchBarInput").val();
