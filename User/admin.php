@@ -5,7 +5,6 @@
     <title>Admin</title>
     <head>
         <?php include("../Global/head.php"); ?>
-        <link rel="stylesheet" href="../Css/admin.css">
         <script type="text/javascript" src="../Script/admin.js"></script>
         <p id="navBarActive" hidden>adminPage</p>
     </head>
