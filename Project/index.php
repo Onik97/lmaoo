@@ -15,7 +15,7 @@
       <?php include("../Global/loginCheck.php"); ?>
       <?php include("projectValidation.php") ?>
 
-    <div class="wrapper">
+    <div class="d-flex">
       <div id="projectDiv"> 
         <nav id="sidebar">
           <div id="sidebar-header" class="sidebar-header"><h1>Features<h1></div>
