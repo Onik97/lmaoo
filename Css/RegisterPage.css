@@ -49,8 +49,3 @@ input[type=submit]:hover
 	background:#003366;
 	opacity:0.6;
 }
-
-#validateMessage 
-{
-	margin-top: 25px;
-}
