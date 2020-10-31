@@ -99,9 +99,9 @@ function createTicketPrompt(projectId)
     $("#projectModalHead").html("Create Ticket");
 
     let createTicketDiv = $("<div>", {class : "form-group"});
-    $(createTicketDiv).append($("<label>", { class : "modal-content-1"}).html("Project ID"));
+    $(createTicketDiv).append($("<label>", { class : "my-3"}).html("Project ID"));
     $(createTicketDiv).append($("<input>", { id : "projectId", class: "form-control", value : projectId}).prop("disabled", true));
-    $(createTicketDiv).append($("<label>", { class : "modal-content-2"}).html("Summary"));
+    $(createTicketDiv).append($("<label>", { class : "my-3"}).html("Summary"));
     $(createTicketDiv).append($("<input>", { id : "summary", "class": "form-control", onkeyup : "ticketValidation()"}));
     $(createTicketDiv).append($("<input>", { id : "reporterKey", value : userId, type : "hidden"}));
     $(createTicketDiv).append($("<input>", { id : "function", value : "createTicket", type : "hidden"}));

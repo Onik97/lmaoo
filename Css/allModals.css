@@ -16,13 +16,3 @@
 	margin-right: auto;
 	color: white;
 }
-
-.modal-content-1 {
-	margin-top: 10px;
-	margin-bottom: 10px;
-} /* any modal content which is at top of the page, css spaces top */
-
-.modal-content-2 {
-	margin-top: 15px;
-	margin-bottom: 10px;
-} /* any modal content that is not at top of page, css spaces top and bottom.
