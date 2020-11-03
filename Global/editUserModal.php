@@ -6,7 +6,7 @@
         <div class="modal-content">
             
             <div class="modal-header">
-                <h5 class="modal-title modal-title-custom" id="EditUserModalTitle">Account Details</h5>
+                <h5 class="modal-title modal-title-custom ml-9 mr-auto text-white" id="EditUserModalTitle">Account Details</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,7 +14,7 @@
                 
             <div class="modal-body">    
                 <label>Upload Profile Picture</label>
-                <div class="input-group">
+                <div class="input-group my-2">
                     <div class="input-group-prepend">
                         <button class="input-group-text" id="uploadImageBtn" disabled onclick="uploadImage()">Upload</button>
                     </div>
@@ -27,7 +27,7 @@
                     <small>Invalid file type.</small>
                 </div>
                 
-                <form action="../User/userController.php" method="POST" onkeyup="checkUserDup()">
+                <form action="../User/userController.php" method="POST" onkeyup="userEditValidation(); checkUserDup();">
                     <div class="form-group">
                         <label>Forename</label>
                         <input class="form-control" value=<?php echo $userLoggedIn->getForename(); ?>  id="editForename" name="editForename" required>
@@ -48,7 +48,7 @@
                     <input type="hidden" name="editUserId" value="<?php echo $userLoggedIn->getId();?>">
 
                     <div class="modal-footer">
-                        <input id="editUserBtn" class="btn btn-primary" type="submit" value="Save Changes">
+                        <input id="editUserBtn" class="btn btn-primary" type="submit" value="Save Changes" disabled>
                     </div>
                 </form>
             </div>

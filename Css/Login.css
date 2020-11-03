@@ -1,5 +1,5 @@
-
-.wrap{
+.wrap
+{
 	max-width: 350px;
 	border-radius: 50px;
 	margin:auto;
@@ -9,9 +9,12 @@
 	color:#fff;
 	margin-top: 10px;
 }
-h2 {
+
+h2
+{
 	text-align: center;
 }
+
 input[type=text],input[type=password]{
 	width: 100%;
 	box-sizing:border-box;
@@ -39,7 +42,9 @@ input[type=submit]{
 	font-size:20px;
 	color:#fff;
 }
-input[type=submit]:hover{
+
+input[type=submit]:hover
+{
 	background:#00BFFF;
 	opacity:0.7;
 }

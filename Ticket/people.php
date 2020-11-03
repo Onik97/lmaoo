@@ -1,6 +1,6 @@
 <script src="../Script/peopleController.js"></script>
 
-<div class="reporterName">
+<div class="reporterName mb-3">
     <h6>Reporter: </h6>
         <label id="reporter"></label>
         <p id="reporterUserId" hidden></p>
@@ -11,6 +11,6 @@
         <label id="assignee"></label>
         <p id="assigneeUserId" hidden></p>
 
-    <button id="ticketPeopleChooseAssignee" class="btn btn-sm" data-toggle="modal" data-target="#CommentModal" onclick="peoplePrompt()">Choose Assignee</button>
+    <button id="ticketPeopleChooseAssignee" class="btn btn-sm" data-toggle="modal" data-target="#ticketPageModal" onclick="peoplePrompt()">Choose Assignee</button>
     <button id="ticketPeopleSelfAssignee"class="btn btn-sm" onclick="saveAssigneeAsYourself()">Assigned to myself</button>
 </div>

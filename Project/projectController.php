@@ -1,98 +1,121 @@
 <?php
-require_once("../connection.php"); require_once("../User/user.php");
+require_once(__DIR__ . "/../connection.php");
+require_once(__DIR__ . "/../User/user.php");
+
 error_reporting(0);
+
+$projectController = new projectController();
+
 if ($_GET['projectId'] && $_GET['progress'])
 {
-    echo json_encode(getTicketListWithProgress($_GET['projectId'], $_GET['progress']));
+    echo json_encode($projectController->getTicketListWithProgress($_GET['projectId'], $_GET['progress']));
 }
 else if($_POST['function'] == "loadProjects")
 {
-    echo json_encode(getProjectList());
+    echo json_encode($projectController->getProjectList());
 }
 else if($_POST['function'] == "createProject")
 {
-    createNewProject($_POST['projectName'], $_POST['projectStatus']);
+    $projectController->createNewProject($_POST['projectName'], $_POST['projectStatus']);
 }
 else if($_POST['function'] == "createTicket")
 {
-    createNewTicket($_POST['projectId'], $_POST['summary'], $_POST['reporterKey']);
+    $projectController->createNewTicket($_POST['projectId'], $_POST['summary'], $_POST['reporterKey']);
 }
-else 
+else if ($_POST['function'] == "checkProjectExistance")
 {
+    echo $projectController->projectExistance(null);
+}
+else
+{
+    ob_clean();
     return;
 }
 
-function projectExistance()
+class projectController
 {
-    $projectId = $_GET['projectId'];
-    if (!isset($_GET['projectId']) || $_GET['projectId'] == null) return false;
 
-    $pdo = logindb('user', 'pass');
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("SELECT projectId FROM project WHERE projectId = ?");
-    $stmt->execute([$projectId]);
+    public function projectExistance(?string $unitTest)
+    {
+        if($unitTest != null) 
+        { 
+            $_POST['name'] = $unitTest;
+            $_POST['function'] = "checkProjectExistance";
+        }
 
-    if($stmt->rowCount() != 0) return true; 
+        $function = $_POST['function'];
+        $projectSearch = isset($function) ? $_POST['name'] : $_GET['projectId'];
+        $sql = isset($function) ? "SELECT name FROM project WHERE name = ?" : "SELECT projectId FROM project WHERE projectId = ?";
+        if (!isset($projectSearch) || $projectSearch == null) return false;
 
-    return false;
-}
+        $pdo = logindb('user', 'pass');
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$projectSearch]);
 
-function createNewProject($projectName, $projectStatus)
-{
-    $pdo = logindb('user', 'pass');
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("INSERT INTO project (name, status) VALUES (?, ?)");
-    $stmt->execute([$projectName, $projectStatus]);
-}
+        if($stmt->rowCount() != 0) return true; 
 
-function createNewTicket($featureId, $summary, $reporterKey)
-{
-    $pdo = logindb('user', 'pass');
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("INSERT INTO ticket (summary, featureId, reporter_key) VALUES (?, ?, ?)");
-    $stmt->execute([$summary, $featureId, $reporterKey]);
-}
+        return false;
+    }
 
-function getProjectList()
-{
-    $pdo = logindb('user', 'pass');
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("SELECT projectId, name, status FROM project");
-    $stmt->execute();
-    return $stmt->fetchAll();
-}
+    public function createNewProject($projectName, $projectStatus)
+    {
+        $pdo = logindb('user', 'pass');
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("INSERT INTO project (name, status) VALUES (?, ?)");
+        $stmt->execute([$projectName, $projectStatus]);
+    }
 
-function getTicketListWithProgress($featureId, $progress)
-{
-    $pdo = logindb('user', 'pass');
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-    $stmt = $pdo->prepare("SELECT ticket.ticketId, ticket.summary, ticket.progress, user.forename, user.surname 
-                           FROM ticket LEFT JOIN user on user.userId = ticket.assignee_key
-                           WHERE featureId = ? AND ticket.progress = ?");
-    $stmt->execute([$featureId, $progress]);
-    return $stmt->fetchAll();
-}
+    public function createNewTicket($featureId, $summary, $reporterKey)
+    {
+        $pdo = logindb('user', 'pass');
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("INSERT INTO ticket (summary, featureId, reporter_key) VALUES (?, ?, ?)");
+        $stmt->execute([$summary, $featureId, $reporterKey]);
+    }
 
-function loadProjectsInNavBar()
-{
-    if (!isset($_SESSION["userLoggedIn"])) { return; }
-    $projects = getProjectList();
-    ?> 
-    <li class="nav-item dropdown">
-        <a id="projectNav" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Project<span class="caret"></span></a>
+    public function getProjectList()
+    {
+        $pdo = logindb('user', 'pass');
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("SELECT projectId, name, status FROM project");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 
-        <div class="dropdown-menu">
-            <?php $userLoggedIn = $_SESSION['userLoggedIn'];
-            if ($userLoggedIn->getLevel() > 3)
-            { ?>
-            <a class="dropdown-item" onclick="">+ Create Project</a>
-            <?php }
-            foreach ($projects as $project) 
-            { ?>
-            <a class="dropdown-item" href="../Project/index.php?projectId=<?php echo $project->projectId ?>"><?php echo $project->name ?></a>
-            <?php } ?>
-        </div>
-    </li>
-    <?php
+    public function getTicketListWithProgress($featureId, $progress)
+    {
+        $pdo = logindb('user', 'pass');
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("SELECT ticket.ticketId, ticket.summary, ticket.progress, user.forename, user.surname 
+                            FROM ticket LEFT JOIN user on user.userId = ticket.assignee_key
+                            WHERE featureId = ? AND ticket.progress = ?");
+        $stmt->execute([$featureId, $progress]);
+        return $stmt->fetchAll();
+    }
+
+    public function loadProjectsInNavBar()
+    {
+        $projectController = new projectController();
+        if (!isset($_SESSION["userLoggedIn"])) { return; }
+        $projects = $projectController->getProjectList();
+        ?> 
+        <li class="nav-item dropdown">
+            <a id="projectNav" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Project<span class="caret"></span></a>
+
+            <div class="dropdown-menu">
+                <?php $userLoggedIn = $_SESSION['userLoggedIn'];
+                if ($userLoggedIn->getLevel() > 3)
+                { ?>
+                <a class="dropdown-item" data-toggle="modal" data-target="#globalModal" onclick="createProjectPrompt()">+ Create Project</a>
+                <?php }
+                foreach ($projects as $project) 
+                { ?>
+                <a class="dropdown-item" href="../Project/index.php?projectId=<?php echo $project->projectId ?>"><?php echo $project->name ?></a>
+                <?php } ?>
+            </div>
+        </li>
+        <?php
+    }
 }
 ?>

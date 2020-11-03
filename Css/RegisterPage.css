@@ -1,5 +1,5 @@
-
-.wrap{
+.wrap
+{
 	max-width: 350px;
 	border-radius: 50px;
 	margin:auto;
@@ -9,9 +9,12 @@
 	color:#fff;
 	margin-top: 10px;
 }
-h2 {
+
+h2 
+{
 	text-align: center;
 }
+
 input[type=text],input[type=password]{
 	width: 100%;
 	box-sizing:border-box;
@@ -26,7 +29,8 @@ input[type=text],input[type=password]{
 	font-weight:bold;
 }
 
-input[type=submit]{
+input[type=submit]
+{
 	width:100%;
 	box-sizing:border-box;
 	padding:10px 0;
@@ -39,11 +43,9 @@ input[type=submit]{
 	font-size:20px;
 	color:#fff;
 }
-input[type=submit]:hover{
+
+input[type=submit]:hover
+{
 	background:#003366;
 	opacity:0.6;
-}
-
-#validateMessage {
-	margin-top: 25px;
 }

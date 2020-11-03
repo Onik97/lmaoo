@@ -1,4 +1,4 @@
-<?php require("../User/user.php"); require("ticketController.php"); session_start(); ?>
+<?php require("../User/user.php"); session_start(); ?>
 
 <!DOCTYPE html>
 <html>
@@ -19,8 +19,8 @@
 
 		<div class="row no-gutters">
 			<div id="info" class="col-sm-12 col-md-3">
-				<div id="ticketPeople"> <?php include("people.php"); ?> </div>
-				<div id="ticketDates"> <?php include("dates.php"); ?> </div>
+				<div id="ticketPeople" class="p-4 mx-auto"> <?php include("people.php"); ?> </div>
+				<div id="ticketDates" class=" p-4"> <?php include("dates.php"); ?> </div>
 			</div>
 
 			<div id="main" class="col-sm-12 col-md-9">
@@ -30,7 +30,7 @@
 						<div id="ticketCreate"> <?php include("createComment.php"); ?></div> 
 					</div>
 
-					<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<ul class="nav nav-tabs my-5" id="myTab" role="tablist">
 						<li class="nav-item">
 							<a class="nav-link active" id="comment-tab" data-toggle="tab" href="#comment-content" role="tab" aria-controls="home" aria-selected="true">Comments</a>
 						</li>
@@ -49,7 +49,7 @@
 						
 						<div class="tab-pane fade" id="notes-content" role="tabpanel" aria-labelledby="profile-tab">
 							<div class="row no-gutters mt-3">
-								<div id="ticketDetails"><?php include("details.php"); ?></div>
+								<div id="ticketDetails" class="mt-5 ml-7"><?php include("details.php"); ?></div>
 							</div>
 						</div>
 					</div>

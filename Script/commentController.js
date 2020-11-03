@@ -69,21 +69,21 @@ function loadComments()
           <div id="comments" class="row">
             <div class="col-1">
               <div id="commentThumbnail">
-                <img class="profilePicture" src="../Images/profilePictures/avatar.jpg"></img>
+                <img class="profilePicture mt-1" src="../Images/profilePictures/avatar.jpg"></img>
               </div>
             </div>
 
             <div class="col-8">
-                <div id="commentBody">
+                <div id="commentBody" class="mt-2 ml-2">
                     <h6>${json[i].forename + " " + json[i].surname}</h6>
                     <span>${json[i].commentCreated}</span>
                 </div>
 
-                <div id="mainComment" class="comment${json[i].commentId}">${json[i].commentContent}</div>
+                <div id="mainComment" class="ml-2 comment${json[i].commentId}">${json[i].commentContent}</div>
             </div>
 
-                <div class="col-2" id="commentActions">
-                    <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#CommentModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
+                <div class="col-2 mt-2 ml-5" id="commentActions">
+                    <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#ticketPageModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
                     <img class="CommentImages" src="../Images/pencilsquare.svg" onclick=editComment(${json[i].commentId}) role="button"></img>
                 </div>
           </div>
@@ -170,18 +170,9 @@ function saveComment(summernoteId, commentId)
 
 function deletePrompt(commentId)
 {
-  document.getElementById("Modal-head").innerHTML = "Delete Comment";
-  document.getElementById("modal-body").innerHTML = "Are you sure you want to delete this comment?";
-  document.getElementById("modal-footer").innerHTML = ""; // To avoid duplications
-  let modalFooter = document.querySelector("#modal-footer");
-  
-  let deleteBtn = document.createElement("input");
-  deleteBtn.setAttribute("class", "btn btn-primary");
-  deleteBtn.setAttribute("type", "submit");
-  deleteBtn.setAttribute("value", "Delete Comment");
-  deleteBtn.setAttribute("onclick", `deleteComment(${commentId})`);
-
-  modalFooter.appendChild(deleteBtn);
+  $("#Modal-head").html("Delete Comment");
+  $("#modal-body").html("Are you sure you want to delete this comment?")
+  $("#modal-footer").html("").append($("<button>", { class : "btn btn-primary", type : "submit", onclick : `deleteComment(${commentId})` }).html("Delete Comment"))
 }
 
 function deleteComment(commentId)
@@ -193,7 +184,7 @@ function deleteComment(commentId)
     axios.post("../Ticket/ticketController.php", data)
     .then(() =>
     {
-      $('#CommentModal').modal('hide'); 
+      $('#ticketPageModal').modal('hide'); 
       overHang("success", "Comment deleted successfully!");
       loadComments();
       updateTicketTime(new URL(window.location.href).searchParams.get("ticketId"))

@@ -1,9 +1,10 @@
-$('form').each(() => $(this).data('serialized', $(this).serialize())
-.on('change input', () => 
+function userEditValidation()
 {
-    $(this).find('input:submit, button:submit').attr('disabled', $(this).serialize() == $(this).data('serialized'));
-})
-.find('input:submit, button:submit').attr('disabled', true));
+    ($("#editForename").val() == userForename && $("#editSurname").val() == userSurname && $("#editUsername").val() == userUsername) 
+    ? $("#editUserBtn").prop("disabled", true) : $("#editUserBtn").prop("disabled", false);
+
+    if ($("#editForename").val().trim().length == 0 || $("#editSurname").val().trim().length == 0 || $("#editUsername").val().trim().length == 0) $("#editUserBtn").prop("disabled", true);    
+}
 
 function checkUserDup()
 {   
@@ -14,26 +15,26 @@ function checkUserDup()
 
     if (userUsername == editUsername) return;
 
-    checkUsernameFromServer(data)
-    .then(response =>
+    if ($("#editUsername").val().trim().length == 0) $("#editUserBtn").prop("disabled", true); 
+    else 
     {
-        if (response.data.fromServer == "True")
+        checkUsernameFromServer(data)
+        .then(response =>
         {
-            document.getElementById("editUserBtn").disabled = true;
-            document.getElementById("editUsernameMessage").innerHTML = "Username Taken! Try another!";
-            document.getElementById("editUsernameMessage").classList.add("text-danger"); 
-            document.getElementById("editUsername").classList.add("is-invalid"); 
-            document.getElementById("editUsernameMessage").removeAttribute("hidden");  
-        }
-        else
-        {
-            document.getElementById("editUserBtn").disabled = false;
-            document.getElementById("editUsername").classList.toggle("is-invalid", false); 
-            document.getElementById("editUsernameMessage").classList.toggle("text-danger", false); 
-            document.getElementById("editUsernameMessage").classList.toggle("text-success", false); 
-            document.getElementById("editUsernameMessage").setAttribute("hidden" , false);
-        }
-    })
+            if (response.data.fromServer == "True")
+            {
+                $("#editUserBtn").prop("disabled", true);
+                $("#editUsernameMessage").html("Username Taken! Try another!").addClass("text-danger").removeAttr("hidden");
+                $("#editUsername").addClass("is-invalid");
+            }
+            else
+            {
+                $("#editUserBtn").prop("disabled", false);
+                $("#editUsernameMessage").removeClass("text-danger").attr("hidden", true);
+                $("#editUsername").removeClass("is-invalid");
+            }
+        })
+    }
     
 }
 
