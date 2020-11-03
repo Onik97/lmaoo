@@ -1,13 +1,18 @@
 <?php ob_start(); require_once("../Project/projectController.php"); require_once("../Ticket/ticketController.php"); ?>    
 <link rel="stylesheet" href="../Css/navbar.css">
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
-    
+
+    <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="darkModeSwitch">
+        <label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
+    </div>
+
     <div class="container">
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="exampleNavComponents">
         <span class="navbar-toggler-icon"></span>
         </button>
-
+        
         <div class="collapse navbar-collapse w-100 order-3 dual-collapse2" id="navbarNav">
             <?php loadSearchBar() ?>
 
