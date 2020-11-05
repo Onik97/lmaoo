@@ -10,7 +10,7 @@ function loadFeatures()
     .then(response =>
     {
 
-        if (userLevel >= 3) $("#listOfFeatures").append($("<li>", { id : "createFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" , onclick : "createFeaturePrompt()"}).html(" + Create Feature"));
+        if (userLevel >= 3) $("#listOfFeatures").append($("<div>", { id : "createFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" , onclick : "createFeaturePrompt()"}).html(" + Create Feature"));
         $("#listOfFeatures").find("li:gt(0)").remove();
 
         var json = response.data;
