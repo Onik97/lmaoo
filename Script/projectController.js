@@ -17,6 +17,7 @@ function loadFeatures()
         for (i = 0; i < json.length; i++)
         {
             $("#listOfFeatures").append($("<li>", { value : json[i].featureId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress('Open');"}).html(json[i].name));
+            $("#listOfFeatures").append($("<li>", { class : "status align-self-center" }).html(json[i].status));
         }
     })
 }
