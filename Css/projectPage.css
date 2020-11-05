@@ -42,6 +42,24 @@
     background: #fff;
 }
 
+#sidebar ul div {
+	padding: 10px;
+    font-size: 1.1em;
+	display: block;
+	width: 350px;
+}
+
+#sidebar ul div:hover {
+    color: #000;
+	background: rgb(172, 205, 122);
+	cursor: pointer;
+}
+
+#sidebar ul div:active {
+    color: rgb(172, 205, 122);
+    background: #fff;
+}
+
 #createProjectBtn {
 	color: #000;
 	background: rgb(213, 229, 187);
