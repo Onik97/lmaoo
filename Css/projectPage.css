@@ -72,6 +72,24 @@
 	cursor: pointer;
 }
 
+#listOfFeatures {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#listOfFeatures li {
+	flex: 0 50%;
+}
+
+.status {
+	border-radius: 10px;
+	text-align: center;
+}
+
+.status:hover {
+	background: rgb(229, 241, 216);
+}
+
 /* MAIN CONTENT: TICKETS SECTION */
 
 .content {
