@@ -10,13 +10,14 @@ function loadFeatures()
     .then(response =>
     {
 
-        if (userLevel >= 3) $("#listOfFeatures").append($("<li>", { id : "createFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" , onclick : "createFeaturePrompt()"}).html(" + Create Feature"));
+        if (userLevel >= 3) $("#listOfFeatures").append($("<div>", { id : "createFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" , onclick : "createFeaturePrompt()"}).html(" + Create Feature"));
         $("#listOfFeatures").find("li:gt(0)").remove();
 
         var json = response.data;
         for (i = 0; i < json.length; i++)
         {
             $("#listOfFeatures").append($("<li>", { value : json[i].featureId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress('Open');"}).html(json[i].name));
+            $("#listOfFeatures").append($("<li>", { class : "status align-self-center" }).html(json[i].status));
         }
     })
 }
