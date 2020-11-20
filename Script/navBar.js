@@ -31,6 +31,36 @@ function searchBar()
     })
 }
 
+function darkMode()
+{
+    let darkMode = $("#darkModeSwitch");
+
+        if (darkMode.prop("checked") == true)
+        {
+            let data = new FormData();
+            data.append("function", "darkmode");
+            data.append("darkMode", "1");
+
+            axios.post("../User/userController.php", data)
+            .then(() =>
+            {
+                overHang("sucess", "User darkMode has been updated")
+            })
+        }
+        else if(darkMode.prop("checked") == false)
+        {
+            let data = new FormData();
+            data.append("function", "darkmode");
+            data.append("darkMode", "0");
+
+            axios.post("../User/userController.php", data)
+            .then(() =>
+            {
+                overHang("error", "Something went wrong")
+            })
+        }
+}
+
 function createProjectPrompt()
 {
     $("#globalModallHead").html("Create Project");

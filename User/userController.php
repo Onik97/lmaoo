@@ -50,6 +50,10 @@ else if ($function == "getActiveUsers")
 {
 	echo json_encode($userController->getActiveUsers());
 }
+else if ($function == "darkMode")
+{
+	// need help here, havent sent data without a wanted response before.
+}
 else
 {
 	return;
@@ -183,6 +187,16 @@ class userController
 		$stmt->execute();
 		$activeUsers = $stmt->fetchall();
 		return $activeUsers;
+	}
+
+	public function darkMode()
+	{
+		$pdo = logindb('user', 'pass');
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+		$stmt = $pdo->prepare("UPDATE user SET darkMode=? WHERE userId=?");
+		$stmt->execute();
+		$darkMode = $stmt->fetchall();
+		return $darkMode;
 	}
 }
 
