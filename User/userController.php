@@ -191,13 +191,13 @@ class userController
 
 	public function darkMode()
 	{
+		$darkModeUpdate = $_POST['darkMode']
+		$userId = $_POST['userId']
+
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("UPDATE user SET darkMode=? WHERE userId=?");
-		$stmt->execute();
-		$darkMode = $stmt->fetchall();
-		return $darkMode;
+		$stmt->execute([$darkModeUpdate, $userId]);
 	}
 }
-
 ?>

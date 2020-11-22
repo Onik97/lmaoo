@@ -38,27 +38,27 @@ function darkMode()
         if (darkMode.prop("checked") == true)
         {
             let data = new FormData();
-            data.append("function", "darkmode");
-            data.append("darkMode", true);
+            data.append("function", "darkMode");
+            data.append("darkMode", "1");
             data.append("userId", userId);
 
             axios.post("../User/userController.php", data)
             .then(() =>
             {
-                overHang("success", "User darkMode has been updated")
+                overHang("success", "Dark Mode Enabled")
             })
         }
         else if(darkMode.prop("checked") == false)
         {
             let data = new FormData();
-            data.append("function", "darkmode");
-            data.append("darkMode", false);
+            data.append("function", "darkMode");
+            data.append("darkMode", "0");
             data.append("userId", userId);
 
             axios.post("../User/userController.php", data)
             .then(() =>
             {
-                overHang("error", "Something went wrong")
+                overHang("error", "Dark Mode Disabled")
             })
         }
 }
