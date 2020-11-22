@@ -39,19 +39,21 @@ function darkMode()
         {
             let data = new FormData();
             data.append("function", "darkmode");
-            data.append("darkMode", "1");
+            data.append("darkMode", true);
+            data.append("userId", userId);
 
             axios.post("../User/userController.php", data)
             .then(() =>
             {
-                overHang("sucess", "User darkMode has been updated")
+                overHang("success", "User darkMode has been updated")
             })
         }
         else if(darkMode.prop("checked") == false)
         {
             let data = new FormData();
             data.append("function", "darkmode");
-            data.append("darkMode", "0");
+            data.append("darkMode", false);
+            data.append("userId", userId);
 
             axios.post("../User/userController.php", data)
             .then(() =>

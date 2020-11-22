@@ -52,7 +52,7 @@ else if ($function == "getActiveUsers")
 }
 else if ($function == "darkMode")
 {
-	// need help here, havent sent data without a wanted response before.
+	$userController->darkMode();
 }
 else
 {
