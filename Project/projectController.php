@@ -85,11 +85,15 @@ class projectController
 
     public function getTicketListWithProgress($featureId, $progress)
     {
+        $sql = "SELECT ticket.ticketId, ticket.summary, ticket.progress, user.forename, user.surname 
+        FROM ticket LEFT JOIN user on user.userId = ticket.assignee_key
+        WHERE featureId = ? AND ticket.progress = ?";
+        // TODO: When re-writing this, ensure that a better way is used for this
+        if($progress == "In Progress") $sql = $sql . "OR ticket.progress = 'In Automation'";
         $pdo = logindb('user', 'pass');
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("SELECT ticket.ticketId, ticket.summary, ticket.progress, user.forename, user.surname 
-                            FROM ticket LEFT JOIN user on user.userId = ticket.assignee_key
-                            WHERE featureId = ? AND ticket.progress = ?");
+        $stmt = $pdo->prepare($sql);
+
         $stmt->execute([$featureId, $progress]);
         return $stmt->fetchAll();
     }
