@@ -90,6 +90,7 @@ class projectController
         WHERE featureId = ? AND (ticket.progress = ?";
         // TODO: When re-writing this, ensure that a better way is used for this
         if($progress == "In Progress") $sql = $sql . "OR ticket.progress = 'In Automation')";
+        else $sql = $sql .")";
         $pdo = logindb('user', 'pass');
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare($sql);
