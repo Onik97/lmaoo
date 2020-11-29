@@ -50,9 +50,9 @@ else if ($function == "getActiveUsers")
 {
 	echo json_encode($userController->getActiveUsers());
 }
-else if ($function == "darkMode")
+else if ($function == "darkModeToggle")
 {
-	$userController->darkMode();
+	$userController->darkModeToggle();
 }
 else
 {
@@ -189,14 +189,14 @@ class userController
 		return $activeUsers;
 	}
 
-	public function darkMode()
+	public function darkModeToggle()
 	{
-		$darkModeUpdate = $_POST['darkMode']
-		$userId = $_POST['userId']
+		$darkModeUpdate = $_POST['darkMode'];
+		$userId = $_POST['userId'];
 
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("UPDATE user SET darkMode=? WHERE userId=?");
+		$stmt = $pdo->prepare("UPDATE user SET darkMode = ? WHERE userId = ?");
 		$stmt->execute([$darkModeUpdate, $userId]);
 	}
 }

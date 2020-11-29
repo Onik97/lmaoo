@@ -31,35 +31,32 @@ function searchBar()
     })
 }
 
-function darkMode()
+function loadDarkMode()
+{
+
+}
+
+function darkModeToggle()
 {
     let darkMode = $("#darkModeSwitch");
 
-        if (darkMode.prop("checked") == true)
+        if (darkMode.prop("checked"))
         {
             let data = new FormData();
-            data.append("function", "darkMode");
+            data.append("function", "darkModeToggle");
             data.append("darkMode", "1");
             data.append("userId", userId);
 
-            axios.post("../User/userController.php", data)
-            .then(() =>
-            {
-                overHang("success", "Dark Mode Enabled")
-            })
+            axios.post("../User/userController.php", data);
         }
-        else if(darkMode.prop("checked") == false)
+        else if (!darkMode.prop("checked"))
         {
             let data = new FormData();
-            data.append("function", "darkMode");
+            data.append("function", "darkModeToggle");
             data.append("darkMode", "0");
             data.append("userId", userId);
 
-            axios.post("../User/userController.php", data)
-            .then(() =>
-            {
-                overHang("error", "Dark Mode Disabled")
-            })
+            axios.post("../User/userController.php", data);
         }
 }
 
