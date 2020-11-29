@@ -2,8 +2,7 @@
 
 <!DOCTYPE html>
 <html>
-    <head> 
-        <link rel="stylesheet" href="../Css/HomePage.css">
+    <head>
         <p id="navBarActive" hidden>homePage</p>
         <?php include("../Global/head.php"); ?> 
         <title>Home</title>
