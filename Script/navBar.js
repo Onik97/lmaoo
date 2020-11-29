@@ -1,3 +1,8 @@
+$(document).ready(function() 
+{
+  loadDarkMode();
+});
+
 let navBarActive = document.getElementById("navBarActive").innerHTML;
 
 (navBarActive == "homePage") ? (document.getElementById("homeNav").classList.add("active"))
@@ -33,7 +38,23 @@ function searchBar()
 
 function loadDarkMode()
 {
+    let data = new FormData();
+    data.append('userId', userId);
+    data.append("function", "loadDarkMode");
+    let darkMode = $("#darkModeSwitch");
 
+    axios.post("../User/userController.php", data)
+    .then((res) => 
+    {
+        console.log(res.data);
+        if (res.data) {
+            darkMode.prop("checked", true);
+        }
+        else if (!res.data) {
+            darkMode.prop("checked", false);
+
+        }
+    })
 }
 
 function darkModeToggle()

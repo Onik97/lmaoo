@@ -54,6 +54,10 @@ else if ($function == "darkModeToggle")
 {
 	$userController->darkModeToggle();
 }
+else if ($function == "loadDarkMode")
+{
+	echo $userController->loadDarkMode();
+}
 else
 {
 	return;
@@ -198,6 +202,17 @@ class userController
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("UPDATE user SET darkMode = ? WHERE userId = ?");
 		$stmt->execute([$darkModeUpdate, $userId]);
+	}
+
+	public function loadDarkMode()
+	{
+		$userId = $_POST['userId'];
+
+		$pdo = logindb('user', 'pass');
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+		$stmt = $pdo->prepare("SELECT darkMode FROM user WHERE userId = ?");
+		$stmt->execute([$userId]);
+		echo $stmt->fetchColumn();
 	}
 }
 ?>
