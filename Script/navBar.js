@@ -10,18 +10,10 @@ let navBarActive = document.getElementById("navBarActive").innerHTML;
 : (navBarActive == "registerPage" || navBarActive == "loginPage" || navBarActive == "adminPage") ? (document.getElementById("accountNav").classList.add("active"))
 : null;
 
-document.onkeypress = function (e) 
-{
-    e = e || window.event;
-
-    if (e.key === 'Enter')
-    {
-        searchBar();
-    }
-}
+$('#searchBarInput').on("keypress", (e) => { if (e.keyCode == 13) searchBar(); });
 
 function searchBar()
-{
+{    
     let searchbarText = $("#searchBarInput").val();
 
     let data = new FormData();
@@ -41,7 +33,6 @@ function searchBar()
         else
         {
             $("#searchBarInput").addClass('is-invalid'); 
-            overHang("error", "TicketID Is Incorrect!");
         }
     })
 }
@@ -56,13 +47,13 @@ function loadDarkMode()
     axios.post("../User/userController.php", data)
     .then((res) => 
     {
-        console.log(res.data);
-        if (res.data) {
+        if (res.data) 
+        {
             darkMode.prop("checked", true);
         }
-        else if (!res.data) {
+        else if (!res.data) 
+        {
             darkMode.prop("checked", false);
-
         }
     })
 }
