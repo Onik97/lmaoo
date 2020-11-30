@@ -20,7 +20,7 @@ else if ($function == "register")
 	}
 	else
 	{
-		$userController->register();
+		$userController->register($_POST['forename'], $_POST['surname'], $_POST['username'], $_POST['password']);
 	}
 }
 else if ($function == 'update')
@@ -128,12 +128,8 @@ class userController
 
 	}
 
-	public function register()
-	{
-		$forename = $_POST['forename'];
-		$surname = $_POST['surname'];
-		$username = $_POST['username'];
-		$password = $_POST['password1'];
+	public function register($forename, $surname, $username, $password)
+	{		
 		$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
 		$pdo = logindb('user', 'pass');
@@ -143,7 +139,7 @@ class userController
 		$_SESSION['message'] = 'Register Successful';
 		header("Location: index.php");
 	}
-	
+
 	public function failedLogin() // May change to return false in the future to allow dynamic login page
 	{
 		session_start();
