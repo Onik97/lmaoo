@@ -143,15 +143,7 @@ class userController
 		$_SESSION['message'] = 'Register Successful';
 		header("Location: index.php");
 	}
-
-	public function logout()
-	{
-		session_start();
-		session_unset();
-		session_destroy();
-		header("Location: index.php");
-	}
-
+	
 	public function failedLogin() // May change to return false in the future to allow dynamic login page
 	{
 		session_start();
