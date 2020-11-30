@@ -62,29 +62,20 @@ class ProjectTest extends TestCase
         foreach ($tickets as $ticketFromDB)
         {
             if($ticketFromDB->ticketId == 84) $ticket = $ticketFromDB;
+            if($ticketFromDB->ticketId == 85) $ticket2 = $ticketFromDB;
         }
             
         $this->assertEquals("AutomationInProgressTicket", $ticket->summary);
         $this->assertEquals("In Progress", $ticket->progress);
         $this->assertEquals("Adil", $ticket->forename);
         $this->assertEquals("Rahman", $ticket->surname);
+
+        $this->assertEquals("AutomationInAutomationProgress", $ticket2->summary);
+        $this->assertEquals("In Automation", $ticket2->progress);
+        $this->assertEquals("Unit", $ticket2->forename);
+        $this->assertEquals("Test", $ticket2->surname);
     }
 
-    public function test_getTicketListWithProgress_checkInAutomation()
-    {
-        $projectController = new projectController();
-        $tickets = $projectController->getTicketListWithProgress(9, "In Automation");
-        foreach ($tickets as $ticketFromDB)
-        {
-            if($ticketFromDB->ticketId == 85) $ticket = $ticketFromDB;
-        }
-
-        $this->assertEquals("AutomationInAutomationProgress", $ticket->summary);
-        $this->assertEquals("In Automation", $ticket->progress);
-        $this->assertEquals("Unit", $ticket->forename);
-        $this->assertEquals("Test", $ticket->surname);
-    }
-    
     public function test_getTicketListWithProgress_checkComplete()
     {
         $projectController = new projectController();
