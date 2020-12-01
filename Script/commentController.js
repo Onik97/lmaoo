@@ -1,9 +1,4 @@
-$(document).ready(function() 
-{
-  loadComments();
-  loadSummerNote(".createComment");
-});
-
+$(document).ready(() => { loadComments(); loadSummerNote(".createComment"); });
 $(".createComment").on('summernote.keydown', (we, e) => e.shiftKey && e.keyCode == 13 ? saveComment(".createComment") : null ); // Shift + Enter 
 
 function loadSummerNote(summerNoteId)
@@ -17,7 +12,7 @@ function loadSummerNote(summerNoteId)
       ['font', ['strikethrough' ]],
       ['para', ['ul', 'ol']],
     ],
-    popover: 
+    popover:
     {
       image: [],
       link: [],
@@ -42,10 +37,7 @@ function commentValidation(summerNoteId)
     overHang("error", "Comment too large!");
     return false
   }
-  else
-  {
-    return true;
-  }
+  return true;
 }
 
 function loadComments()
@@ -55,11 +47,11 @@ function loadComments()
   loadCommentsFromServer(ticketId)
   .then(response => 
     {
-      document.getElementById("commentList").innerHTML = ""; // Empties for edit/delete comments
+      $("#commentList").html(""); // Empties for edit/delete comments
       var json = response.data;
       for (i = 0; i < json.length; i++)
       {
-          document.getElementById("commentList").innerHTML +=
+        $("#commentList").append(
           `
           <div id="comments${json[i].commentId}" class="row">
             <div class="col-1">
@@ -76,14 +68,14 @@ function loadComments()
 
                 <div id="mainComment" class="ml-2 comment${json[i].commentId}">${json[i].commentContent}</div>
             </div>
-          `
-          if (userId == json[i].userId || userLevel == 4) document.getElementById(`comments${json[i].commentId}`).innerHTML +=
+          `);
+          if (userId == json[i].userId || userLevel == 4) $(`#comments${json[i].commentId}`).append(
           `
             <div class="col-2 mt-2 ml-5" id="commentActions">
               <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#ticketPageModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
               <img class="CommentImages" src="../Images/pencilsquare.svg" onclick=editComment(${json[i].commentId}) role="button"></img>
             </div>
-          `
+          `);
       }
     })
 }
