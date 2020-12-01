@@ -130,7 +130,6 @@ function editComment(commentId)
       {
         saveComment('.comment'+commentId, commentId);
         $('.comment'+commentId).summernote('destroy');
-        updateTicketTime(new URL(window.location.href).searchParams.get("ticketId"))
         loadDates();
       }
     }
@@ -162,8 +161,7 @@ function saveComment(summernoteId, commentId)
       if (commentId == null) $('.createComment').summernote('code', "");
       commentId == null ? overHang("success", "New comment added successfully!") : overHang("success", "Comment successfully edited!"); 
       loadComments(); // Loads comments once you submit it
-      updateTicketTime(new URL(window.location.href).searchParams.get("ticketId"))
-      loadDates();
+      updateTicketTime(new URL(window.location.href).searchParams.get("ticketId")).then(() => loadDates());
     })
   }
 }
@@ -186,8 +184,7 @@ function deleteComment(commentId)
     {
       $('#ticketPageModal').modal('hide'); 
       overHang("success", "Comment deleted successfully!");
+      updateTicketTime(new URL(window.location.href).searchParams.get("ticketId")).then(() => loadDates());
       loadComments();
-      updateTicketTime(new URL(window.location.href).searchParams.get("ticketId"))
-      loadDates();
     })
  }
