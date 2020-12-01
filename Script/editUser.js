@@ -63,5 +63,20 @@ function validateImage()
 
 function uploadImage()
 {
-    console.log("Hello World");
+    var data = new FormData();
+    data.append("function", "uploadProfilePic");
+    data.append("userId", userId);
+    data.append("image", document.getElementById("uploadImage").files[0]);
+
+    serverUpload(data)
+    .then((res) => 
+    {
+        if(res)
+        {
+            document.getElementById("uploadImageText").classList.add("text-success");
+            document.getElementById("uploadImageText").hidden = false;
+            document.getElementById("uploadImageText").innerHTML = "Profile Picture Updated!";
+            document.getElementById("uploadImageBtn").disabled = true;
+        }
+    })
 }
