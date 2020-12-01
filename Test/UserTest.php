@@ -35,5 +35,23 @@ class UserTest extends TestCase
         $this->assertEquals("Noor", $user->surname);
         $this->assertEquals("od", $user->username);
     }
+
+    public function test_updatePicture_change()
+    {
+        $userController = new userController();
+        $userController->updatePicture("Testing this Target", 46);
+        $user = $userController->userInfoById(46);
+
+        $this->assertEquals("Testing this Target", $user->picture);
+    }
+
+    public function test_updatePicture_changeBack()
+    {
+        $userController = new userController();
+        $userController->updatePicture("../Images/profilePictures/avatar.jpg", 46);
+        $user = $userController->userInfoById(46);
+
+        $this->assertEquals("../Images/profilePictures/avatar.jpg", $user->picture);
+    }
     
 }

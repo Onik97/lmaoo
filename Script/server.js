@@ -125,3 +125,14 @@ function updateTicketTime(ticketId)
         headers: {'Content-Type': 'multipart/form-data' }
     })
 }
+
+function serverUpload(data)
+{
+    return response = axios(
+    {
+        method: 'post',
+        data: data,
+        url: '../User/userController.php',
+        headers: {'Content-Type': 'multipart/form-data' }
+    })
+}
