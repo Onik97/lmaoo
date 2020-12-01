@@ -15,17 +15,12 @@
 
     <div class="container d-flex justify-content-center">
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <input id="adminSearchBar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         </form>
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Active/Inactive
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-        <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+        <select id="adminSelect" class="form-control w-auto">
+            <option>In-Active</option>
+            <option>Active</option>
+        </select>
     </div>
         <div class="container pt-4" id="adminContainer">
             <table class="table table-hover" id="admin-table">
