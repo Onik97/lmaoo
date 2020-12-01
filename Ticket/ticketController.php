@@ -63,7 +63,6 @@ class ticketController
 {
     public function updateTicketTime($ticketId)
     {
-
         date_default_timezone_set('Europe/London');
         $time = date("Y-m-d H:i:s"); 
 
