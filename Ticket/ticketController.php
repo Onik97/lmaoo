@@ -63,10 +63,13 @@ class ticketController
 {
     public function updateTicketTime($ticketId)
     {
+        date_default_timezone_set('Europe/London');
+        $time = date("Y-m-d H:i:s"); 
+
         $pdo = logindb("user", "pass");
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("UPDATE ticket SET updated = ? WHERE ticketId = ?");
-        $stmt->execute([date("Y-m-d H:i:s", time() - 3600), $ticketId]);
+        $stmt->execute([$time, $ticketId]);
     }
 
     public function ticketIdExistance($ticketId)
