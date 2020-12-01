@@ -52,6 +52,10 @@ else if ($function == "loadDarkMode")
 {
 	echo $userController->loadDarkMode($_POST['userId']);
 }
+else if ($function == "uploadProfilePic")
+{
+	echo $userController->uploadImage($_POST['userId'], null);
+}
 else
 {
 	return;
@@ -182,6 +186,31 @@ class userController
 		$stmt = $pdo->prepare("SELECT darkMode FROM user WHERE userId = ?");
 		$stmt->execute([$userId]);
 		echo $stmt->fetchColumn();
+	}
+
+	public function updatePicture($target, ?string $userId)
+	{
+		$pdo = logindb('user', 'pass');
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+		$stmt = $pdo->prepare("UPDATE user SET picture = ? WHERE userId = ?");
+		$stmt->execute([$target, $userId]);
+	}
+
+	public function uploadImage($userId, $unitTest)
+	{
+		$userController = new userController();
+		$target_dir = $unitTest == null ? "../Images/profilePictures/" : __DIR__ . "../Images/profilePictures/";
+		$target_file = $target_dir . basename($_FILES["image"]["name"]);
+		$ext = pathinfo($target_file, PATHINFO_EXTENSION);
+		$rename = $target_dir . $userId . "." . $ext;
+		
+		if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) 
+		{
+			rename($target_file, $rename);
+			$userController->updatePicture($rename, $userId);
+			echo true;
+		}
+		else echo false;
 	}
 }
 ?>
