@@ -56,17 +56,15 @@ function loadComments()
   var ticketId = new URL(window.location.href).searchParams.get("ticketId");
 
   loadCommentsFromServer(ticketId)
-  .then(response =>
+  .then(response => 
     {
       document.getElementById("commentList").innerHTML = ""; // Empties for edit/delete comments
       var json = response.data;
       for (i = 0; i < json.length; i++)
       {
-        if (userId == json[i].userId || userLevel == 4)
-        {
           document.getElementById("commentList").innerHTML +=
           `
-          <div id="comments" class="row">
+          <div id="comments${json[i].commentId}" class="row">
             <div class="col-1">
               <div id="commentThumbnail">
                 <img class="profilePicture mt-1" src="${json[i].picture}"></img>
@@ -81,38 +79,16 @@ function loadComments()
 
                 <div id="mainComment" class="ml-2 comment${json[i].commentId}">${json[i].commentContent}</div>
             </div>
-
-                <div class="col-2 mt-2 ml-5" id="commentActions">
-                    <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#ticketPageModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
-                    <img class="CommentImages" src="../Images/pencilsquare.svg" onclick=editComment(${json[i].commentId}) role="button"></img>
-                </div>
-          </div>
           `
-        }
-        else 
-        {
-          document.getElementById("commentList").innerHTML +=
+          if (userId == json[i].userId || userLevel == 4) document.getElementById(`comments${json[i].commentId}`).innerHTML +=
           `
-            <div id="comments" class="row">
-            <div class="col-1">
-              <div id="commentThumbnail">
-                <img class="profilePicture" src="${json[i].picture}"></img>
-              </div>
+            <div class="col-2 mt-2 ml-5" id="commentActions">
+              <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#ticketPageModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
+              <img class="CommentImages" src="../Images/pencilsquare.svg" onclick=editComment(${json[i].commentId}) role="button"></img>
             </div>
-
-            <div class="col-8">
-                <div id="commentBody">
-                    <h6>${json[i].forename + " " + json[i].surname}</h6>
-                    <span>${json[i].commentCreated}</span>
-                </div>
-
-                <div id="mainComment" class="comment${json[i].commentId}">${json[i].commentContent}</div>
-            </div>
-          </div>
-        `
+          `
       }
-    }
-  })
+    })
 }
 
 function editComment(commentId)
