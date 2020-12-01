@@ -90,11 +90,11 @@ class userController
 		header("Location: ../Home/index.php");
 	}
 
-	public function userInfoById($userId)
+	public function userInfoById($userId) // Should be used for Unit Testing and Admin Only!
 	{
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, level FROM user WHERE userId = ?");
+		$stmt = $pdo->prepare("SELECT * FROM user WHERE userId = ?");
 		$stmt->execute([$userId]);
 		$user = $stmt->fetch();
 		return $user;
@@ -188,7 +188,7 @@ class userController
 		echo $stmt->fetchColumn();
 	}
 
-	public function updatePicture($target, ?string $userId)
+	public function updatePicture($target, $userId)
 	{
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -196,7 +196,7 @@ class userController
 		$stmt->execute([$target, $userId]);
 	}
 
-	public function uploadImage($userId, $unitTest)
+	public function uploadImage($userId, ?string $unitTest)
 	{
 		$userController = new userController();
 		$target_dir = $unitTest == null ? "../Images/profilePictures/" : __DIR__ . "../Images/profilePictures/";
