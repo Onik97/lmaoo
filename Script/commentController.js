@@ -69,7 +69,7 @@ function loadComments()
           <div id="comments" class="row">
             <div class="col-1">
               <div id="commentThumbnail">
-                <img class="profilePicture mt-1" src="../Images/profilePictures/avatar.jpg"></img>
+                <img class="profilePicture mt-1" src="${json[i].picture}"></img>
               </div>
             </div>
 
@@ -96,7 +96,7 @@ function loadComments()
             <div id="comments" class="row">
             <div class="col-1">
               <div id="commentThumbnail">
-                <img class="profilePicture" src="../Images/profilePictures/avatar.jpg"></img>
+                <img class="profilePicture" src="${json[i].picture}"></img>
               </div>
             </div>
 
