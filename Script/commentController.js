@@ -4,10 +4,7 @@ $(document).ready(function()
   loadSummerNote(".createComment");
 });
 
-$(".createComment").on('summernote.keydown', (we, e) =>
-{
-  if (e.shiftKey && e.keyCode == 13) saveComment(".createComment"); // Shift + Enter
-});
+$(".createComment").on('summernote.keydown', (we, e) => e.shiftKey && e.keyCode == 13 ? saveComment(".createComment") : null ); // Shift + Enter 
 
 function loadSummerNote(summerNoteId)
 {
