@@ -10,13 +10,14 @@ function loadFeatures()
     .then(response =>
     {
 
-        if (userLevel >= 3) $("#listOfFeatures").append($("<li>", { id : "createFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" , onclick : "createFeaturePrompt()"}).html(" + Create Feature"));
+        if (userLevel >= 3) $("#listOfFeatures").append($("<div>", { id : "createFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" , onclick : "createFeaturePrompt()"}).html(" + Create Feature"));
         $("#listOfFeatures").find("li:gt(0)").remove();
 
         var json = response.data;
         for (i = 0; i < json.length; i++)
         {
             $("#listOfFeatures").append($("<li>", { value : json[i].featureId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress('Open');"}).html(json[i].name));
+            $("#listOfFeatures").append($("<li>", { class : "status align-self-center" }).html(json[i].status));
         }
     })
 }
@@ -99,9 +100,9 @@ function createTicketPrompt(projectId)
     $("#projectModalHead").html("Create Ticket");
 
     let createTicketDiv = $("<div>", {class : "form-group"});
-    $(createTicketDiv).append($("<label>", { class : "modal-content-1"}).html("Project ID"));
+    $(createTicketDiv).append($("<label>", { class : "my-3"}).html("Project ID"));
     $(createTicketDiv).append($("<input>", { id : "projectId", class: "form-control", value : projectId}).prop("disabled", true));
-    $(createTicketDiv).append($("<label>", { class : "modal-content-2"}).html("Summary"));
+    $(createTicketDiv).append($("<label>", { class : "my-3"}).html("Summary"));
     $(createTicketDiv).append($("<input>", { id : "summary", "class": "form-control", onkeyup : "ticketValidation()"}));
     $(createTicketDiv).append($("<input>", { id : "reporterKey", value : userId, type : "hidden"}));
     $(createTicketDiv).append($("<input>", { id : "function", value : "createTicket", type : "hidden"}));

@@ -2,3 +2,4 @@
 .vscode/launch.json
 Test/Vendor
 *.cache
+Images/profilePictures/*

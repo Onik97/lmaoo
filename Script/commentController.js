@@ -1,13 +1,5 @@
-$(document).ready(function() 
-{
-  loadComments();
-  loadSummerNote(".createComment");
-});
-
-$(".createComment").on('summernote.keydown', (we, e) =>
-{
-  if (e.shiftKey && e.keyCode == 13) saveComment(".createComment"); // Shift + Enter
-});
+$(document).ready(() => { loadComments(); loadSummerNote(".createComment"); });
+$(".createComment").on('summernote.keydown', (we, e) => e.shiftKey && e.keyCode == 13 ? saveComment(".createComment") : null ); // Shift + Enter 
 
 function loadSummerNote(summerNoteId)
 {
@@ -20,7 +12,7 @@ function loadSummerNote(summerNoteId)
       ['font', ['strikethrough' ]],
       ['para', ['ul', 'ol']],
     ],
-    popover: 
+    popover:
     {
       image: [],
       link: [],
@@ -45,10 +37,7 @@ function commentValidation(summerNoteId)
     overHang("error", "Comment too large!");
     return false
   }
-  else
-  {
-    return true;
-  }
+  return true;
 }
 
 function loadComments()
@@ -56,63 +45,39 @@ function loadComments()
   var ticketId = new URL(window.location.href).searchParams.get("ticketId");
 
   loadCommentsFromServer(ticketId)
-  .then(response =>
+  .then(response => 
     {
-      document.getElementById("commentList").innerHTML = ""; // Empties for edit/delete comments
+      $("#commentList").html(""); // Empties for edit/delete comments
       var json = response.data;
       for (i = 0; i < json.length; i++)
       {
-        if (userId == json[i].userId || userLevel == 4)
-        {
-          document.getElementById("commentList").innerHTML +=
+        $("#commentList").append(
           `
-          <div id="comments" class="row">
+          <div id="comments${json[i].commentId}" class="row">
             <div class="col-1">
               <div id="commentThumbnail">
-                <img class="profilePicture" src="../Images/profilePictures/avatar.jpg"></img>
+                <img class="profilePicture mt-1" src="${json[i].picture}"></img>
               </div>
             </div>
 
             <div class="col-8">
-                <div id="commentBody">
+                <div id="commentBody" class="mt-2 ml-2">
                     <h6>${json[i].forename + " " + json[i].surname}</h6>
                     <span>${json[i].commentCreated}</span>
                 </div>
 
-                <div id="mainComment" class="comment${json[i].commentId}">${json[i].commentContent}</div>
+                <div id="mainComment" class="ml-2 comment${json[i].commentId}">${json[i].commentContent}</div>
             </div>
-
-                <div class="col-2" id="commentActions">
-                    <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#ticketPageModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
-                    <img class="CommentImages" src="../Images/pencilsquare.svg" onclick=editComment(${json[i].commentId}) role="button"></img>
-                </div>
-          </div>
+          `);
+          if (userId == json[i].userId || userLevel == 4) $(`#comments${json[i].commentId}`).append(
           `
-        }
-        else 
-        {
-          document.getElementById("commentList").innerHTML +=
-          `
-            <div id="comments" class="row">
-            <div class="col-1">
-              <div id="commentThumbnail">
-                <img class="profilePicture" src="../Images/profilePictures/avatar.jpg"></img>
-              </div>
+            <div class="col-2 mt-2 ml-5" id="commentActions">
+              <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#ticketPageModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
+              <img class="CommentImages" src="../Images/pencilsquare.svg" onclick=editComment(${json[i].commentId}) role="button"></img>
             </div>
-
-            <div class="col-8">
-                <div id="commentBody">
-                    <h6>${json[i].forename + " " + json[i].surname}</h6>
-                    <span>${json[i].commentCreated}</span>
-                </div>
-
-                <div id="mainComment" class="comment${json[i].commentId}">${json[i].commentContent}</div>
-            </div>
-          </div>
-        `
+          `);
       }
-    }
-  })
+    })
 }
 
 function editComment(commentId)
@@ -130,7 +95,6 @@ function editComment(commentId)
       {
         saveComment('.comment'+commentId, commentId);
         $('.comment'+commentId).summernote('destroy');
-        updateTicketTime(new URL(window.location.href).searchParams.get("ticketId"))
         loadDates();
       }
     }
@@ -162,8 +126,7 @@ function saveComment(summernoteId, commentId)
       if (commentId == null) $('.createComment').summernote('code', "");
       commentId == null ? overHang("success", "New comment added successfully!") : overHang("success", "Comment successfully edited!"); 
       loadComments(); // Loads comments once you submit it
-      updateTicketTime(new URL(window.location.href).searchParams.get("ticketId"))
-      loadDates();
+      updateTicketTime(new URL(window.location.href).searchParams.get("ticketId")).then(() => loadDates());
     })
   }
 }
@@ -186,8 +149,7 @@ function deleteComment(commentId)
     {
       $('#ticketPageModal').modal('hide'); 
       overHang("success", "Comment deleted successfully!");
+      updateTicketTime(new URL(window.location.href).searchParams.get("ticketId")).then(() => loadDates());
       loadComments();
-      updateTicketTime(new URL(window.location.href).searchParams.get("ticketId"))
-      loadDates();
     })
  }

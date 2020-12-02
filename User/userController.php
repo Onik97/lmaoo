@@ -5,16 +5,14 @@ $userController = new userController();
 error_reporting(0);
 
 $function = $_POST['function'];
-$logout = $_POST['logout'];
 
 if ($function == "login")
 {
-	$userController->login();
+	$userController->login($_POST['username'], $_POST['password']);
 }
 else if ($function == "register")
 {
-	$checker = $userController->hasDup(null);
-	if ($checker == "1")
+	if ($userController->hasDup(null))
 	{
 		session_start();
     	$_SESSION['message'] = 'Username already exist! Try logging in!';
@@ -22,16 +20,12 @@ else if ($function == "register")
 	}
 	else
 	{
-		$userController->register();
+		$userController->register($_POST['forename'], $_POST['surname'], $_POST['username'], $_POST['password']);
 	}
 }
 else if ($function == 'update')
 {
-	$userController->updateUser();
-}
-else if (isset($logout))
-{
-	$userController->logout();
+	$userController->updateUser($_POST['editForename'], $_POST['editSurname'], $_POST['editUsername'], $_POST['editUserId']);
 }
 else if ($function == "checkUsername")
 {
@@ -46,9 +40,21 @@ else if ($function == "checkUsername")
 		echo json_encode($json);
 	}
 }
-else if ($function == "getActiveUsers")
+else if ($function == "getActiveUsers") // This should be moved to Admin -> TODO: Lewis remove this and the function
 {
 	echo json_encode($userController->getActiveUsers());
+}
+else if ($function == "darkModeToggle")
+{
+	$userController->darkModeToggle($_POST['darkMode'], $_POST['userId']);
+}
+else if ($function == "loadDarkMode")
+{
+	echo $userController->loadDarkMode($_POST['userId']);
+}
+else if ($function == "uploadProfilePic")
+{
+	echo $userController->uploadImage($_POST['userId'], null);
 }
 else
 {
@@ -59,7 +65,7 @@ class userController
 {
 	public function hasDup(?string $unitTest)
 	{
-		$username = ($unitTest == null) ? $_POST['username'] : $unitTest;
+		$username = $unitTest == null ? $_POST['username'] : $unitTest;
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT username FROM user WHERE username = ?");
@@ -68,50 +74,42 @@ class userController
 		return $stmt->rowCount() > 0 ? true : false;
 	}
 
-	public function updateUser()
+	public function updateUser($forename, $surname, $username, $userId)
 	{
-		$editForename = $_POST['editForename'];
-		$editSurname = $_POST['editSurname'];
-		$editUsername = $_POST['editUsername'];
-		$editUserId = $_POST['editUserId'];
-
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("UPDATE user SET forename=?, surname=?, username=? WHERE userId=?");
-		$stmt->execute([$editForename, $editSurname, $editUsername, $editUserId]);
+		$stmt = $pdo->prepare("UPDATE user SET forename = ?, surname = ?, username = ? WHERE userId = ?");
+		$stmt->execute([$forename, $surname, $username, $userId]);
 
 		session_start();
 		$userLoggedIn = $_SESSION["userLoggedIn"];
-		$userLoggedIn->setForename($editForename);
-		$userLoggedIn->setSurname($editSurname);
-		$userLoggedIn->setUsername($editUsername);
+		$userLoggedIn->setForename($forename);
+		$userLoggedIn->setSurname($surname);
+		$userLoggedIn->setUsername($username);
 		$_SESSION['message'] = 'Your User Details has been updated';
 		header("Location: ../Home/index.php");
 	}
 
-	public function userInfoById($userId)
+	public function userInfoById($userId) // Should be used for Unit Testing and Admin Only!
 	{
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, level FROM user WHERE userId = ?");
+		$stmt = $pdo->prepare("SELECT * FROM user WHERE userId = ?");
 		$stmt->execute([$userId]);
 		$user = $stmt->fetch();
 		return $user;
 	}
 
-	public function login()
+	public function login($username, $password)
 	{
-		$loginUsername = $_POST['username'];
-		$loginPassword = $_POST['password'];
-
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT * FROM user WHERE username = ?");
-		$stmt->execute([$loginUsername]);
+		$stmt->execute([$username]);
 		$user = $stmt->fetch();
 		$userController = new userController();
 
-		if (password_verify($loginPassword, $user->password))
+		if (password_verify($password, $user->password))
 		{
 			if($user->isActive == true)
 			{
@@ -134,12 +132,8 @@ class userController
 
 	}
 
-	public function register()
-	{
-		$forename = $_POST['forename'];
-		$surname = $_POST['surname'];
-		$username = $_POST['username'];
-		$password = $_POST['password1'];
+	public function register($forename, $surname, $username, $password)
+	{		
 		$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
 		$pdo = logindb('user', 'pass');
@@ -147,14 +141,6 @@ class userController
 		$stmt->execute([$username, $hashedPassword, $forename, $surname]);
 		session_start();
 		$_SESSION['message'] = 'Register Successful';
-		header("Location: index.php");
-	}
-
-	public function logout()
-	{
-		session_start();
-		session_unset();
-		session_destroy();
 		header("Location: index.php");
 	}
 
@@ -184,6 +170,47 @@ class userController
 		$activeUsers = $stmt->fetchall();
 		return $activeUsers;
 	}
-}
 
+	public function darkModeToggle($toggle, $userId)
+	{
+		$pdo = logindb('user', 'pass');
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+		$stmt = $pdo->prepare("UPDATE user SET darkMode = ? WHERE userId = ?");
+		$stmt->execute([$toggle, $userId]);
+	}
+
+	public function loadDarkMode($userId)
+	{
+		$pdo = logindb('user', 'pass');
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+		$stmt = $pdo->prepare("SELECT darkMode FROM user WHERE userId = ?");
+		$stmt->execute([$userId]);
+		echo $stmt->fetchColumn();
+	}
+
+	public function updatePicture($target, $userId)
+	{
+		$pdo = logindb('user', 'pass');
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+		$stmt = $pdo->prepare("UPDATE user SET picture = ? WHERE userId = ?");
+		$stmt->execute([$target, $userId]);
+	}
+
+	public function uploadImage($userId, ?string $unitTest)
+	{
+		$userController = new userController();
+		$target_dir = $unitTest == null ? "../Images/profilePictures/" : __DIR__ . "../Images/profilePictures/";
+		$target_file = $target_dir . basename($_FILES["image"]["name"]);
+		$ext = pathinfo($target_file, PATHINFO_EXTENSION);
+		$rename = $target_dir . $userId . "." . $ext;
+		
+		if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) 
+		{
+			rename($target_file, $rename);
+			$userController->updatePicture($rename, $userId);
+			echo true;
+		}
+		else echo false;
+	}
+}
 ?>

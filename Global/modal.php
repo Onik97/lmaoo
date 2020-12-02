@@ -3,7 +3,7 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title modal-title-custom" id="globalModallHead"></h5>
+                <h5 class="modal-title modal-title-custom ml-9 mr-auto text-white" id="globalModallHead"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>

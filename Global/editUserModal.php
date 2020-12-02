@@ -6,7 +6,7 @@
         <div class="modal-content">
             
             <div class="modal-header">
-                <h5 class="modal-title modal-title-custom" id="EditUserModalTitle">Account Details</h5>
+                <h5 class="modal-title modal-title-custom ml-9 mr-auto text-white" id="EditUserModalTitle">Account Details</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,7 +14,7 @@
                 
             <div class="modal-body">    
                 <label>Upload Profile Picture</label>
-                <div class="input-group">
+                <div class="input-group my-2">
                     <div class="input-group-prepend">
                         <button class="input-group-text" id="uploadImageBtn" disabled onclick="uploadImage()">Upload</button>
                     </div>

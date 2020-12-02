@@ -1,3 +1,8 @@
+$(document).ready(function() 
+{
+  loadDarkMode();
+});
+
 let navBarActive = document.getElementById("navBarActive").innerHTML;
 
 (navBarActive == "homePage") ? (document.getElementById("homeNav").classList.add("active"))
@@ -5,8 +10,10 @@ let navBarActive = document.getElementById("navBarActive").innerHTML;
 : (navBarActive == "registerPage" || navBarActive == "loginPage" || navBarActive == "adminPage") ? (document.getElementById("accountNav").classList.add("active"))
 : null;
 
+$('#searchBarInput').on("keypress", (e) => { if (e.keyCode == 13) searchBar(); });
+
 function searchBar()
-{
+{    
     let searchbarText = $("#searchBarInput").val();
 
     let data = new FormData();
@@ -26,9 +33,53 @@ function searchBar()
         else
         {
             $("#searchBarInput").addClass('is-invalid'); 
-            overHang("error", "TicketID Is Incorrect!");
         }
     })
+}
+
+function loadDarkMode()
+{
+    let data = new FormData();
+    data.append('userId', userId);
+    data.append("function", "loadDarkMode");
+    let darkMode = $("#darkModeSwitch");
+
+    axios.post("../User/userController.php", data)
+    .then((res) => 
+    {
+        if (res.data) 
+        {
+            darkMode.prop("checked", true);
+        }
+        else if (!res.data) 
+        {
+            darkMode.prop("checked", false);
+        }
+    })
+}
+
+function darkModeToggle()
+{
+    let darkMode = $("#darkModeSwitch");
+
+        if (darkMode.prop("checked"))
+        {
+            let data = new FormData();
+            data.append("function", "darkModeToggle");
+            data.append("darkMode", "1");
+            data.append("userId", userId);
+
+            axios.post("../User/userController.php", data);
+        }
+        else if (!darkMode.prop("checked"))
+        {
+            let data = new FormData();
+            data.append("function", "darkModeToggle");
+            data.append("darkMode", "0");
+            data.append("userId", userId);
+
+            axios.post("../User/userController.php", data);
+        }
 }
 
 function createProjectPrompt()
