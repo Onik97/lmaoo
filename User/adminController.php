@@ -1,6 +1,6 @@
-<?php require('userController.php'); 
+<?php require(__DIR__ . '/userController.php'); 
 
-// __DIR__ . 
+
 
 
 $adminController = new adminController();
@@ -56,7 +56,7 @@ class adminController
 	{
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, level, isActive FROM user WHERE isActive = 1");
+		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, level FROM user WHERE isActive = 1");
 		$stmt->execute();
 		$activeUsers = $stmt->fetchall();
 		return $activeUsers;
@@ -66,7 +66,7 @@ class adminController
 	{
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, level, isActive FROM user WHERE isActive = 0");
+		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, level FROM user WHERE isActive = 0");
 		$stmt->execute();
 		$activeUsers = $stmt->fetchall();
 		return $activeUsers;

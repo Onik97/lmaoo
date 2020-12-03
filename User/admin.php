@@ -30,7 +30,6 @@
                 <th>Forename</th>
                 <th>Surname</th>
                 <th>Level</th>
-                <th>Active</th>
                 <th>Action</th>
                 </tr>
             </table>
