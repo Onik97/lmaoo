@@ -1,4 +1,4 @@
-<?php require("../User/userController.php"); session_start(); ?>
+<?php require("adminController.php"); session_start(); ?>
 
 <!DOCTYPE html>
 <html>

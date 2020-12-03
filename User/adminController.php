@@ -1,4 +1,8 @@
-<?php require(__DIR__ . 'userController.php'); 
+<?php require('userController.php'); 
+
+// __DIR__ . 
+
+
 $adminController = new adminController();
 $userController = new userController();
 
@@ -18,6 +22,10 @@ if($function == "adminUpdate")
 else if ($function == "deactivateUser")
 {
     $adminController->deactivateUser($_POST["userId"]);
+}
+else if ($function == "getActiveUsers")
+{
+	echo json_encode($adminController->getActiveUsers());
 }
 
 class adminController
@@ -39,6 +47,16 @@ class adminController
         $stmt->execute([$userId]);
         header("Location: admin.php");
     }
+
+    public function getActiveUsers()
+	{
+		$pdo = logindb('user', 'pass');
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, level, isActive FROM user WHERE isActive = 1");
+		$stmt->execute();
+		$activeUsers = $stmt->fetchall();
+		return $activeUsers;
+	}
 }
 
 ?>
