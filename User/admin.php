@@ -1,4 +1,4 @@
-<?php require("../User/userController.php"); session_start(); ?>
+<?php require("adminController.php"); session_start(); ?>
 
 <!DOCTYPE html>
 <html>
@@ -17,9 +17,9 @@
         <form class="form-inline my-2 my-lg-0">
             <input id="adminSearchBar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         </form>
-        <select id="adminSelect" class="form-control w-auto">
-            <option>In-Active</option>
-            <option>Active</option>
+        <select id="adminSelect" class="form-control w-auto" onchange="activeSelect(this.value)">
+            <option value="Active">Active</option>
+            <option value="inActive">In-Active</option>
         </select>
     </div>
         <div class="container pt-4" id="adminContainer">
@@ -30,7 +30,6 @@
                 <th>Forename</th>
                 <th>Surname</th>
                 <th>Level</th>
-                <th>Active</th>
                 <th>Action</th>
                 </tr>
             </table>

@@ -40,7 +40,7 @@ else if ($function == "checkUsername")
 		echo json_encode($json);
 	}
 }
-else if ($function == "getActiveUsers") // This should be moved to Admin -> TODO: Lewis remove this and the function
+else if ($function == "getActiveUsers") 
 {
 	echo json_encode($userController->getActiveUsers());
 }
@@ -161,7 +161,7 @@ class userController
 		return $users;
 	}
 
-	public function getActiveUsers() // Again this is used in Admin -> May be moved, not unit testing
+	public function getActiveUsers()
 	{
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);

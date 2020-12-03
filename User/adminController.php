@@ -1,15 +1,8 @@
-<?php require(__DIR__ . 'userController.php'); 
+<?php require(__DIR__ . '/userController.php'); 
+
 $adminController = new adminController();
-$userController = new userController();
 
-$userId = $_GET['userId'];
 $function = $_POST['function'];
-
-if(isset($userId))
-{
-    $userSelected = $userController->userInfoById($userId);
-    echo json_encode($userSelected);
-}
 
 if($function == "adminUpdate")
 {
@@ -18,6 +11,14 @@ if($function == "adminUpdate")
 else if ($function == "deactivateUser")
 {
     $adminController->deactivateUser($_POST["userId"]);
+}
+else if ($function == "getActiveUsers")
+{
+	echo json_encode($adminController->getActiveUsers());
+}
+else if ($function == "getInActiveUsers")
+{
+	echo json_encode($adminController->getInActiveUsers());
 }
 
 class adminController
@@ -39,6 +40,26 @@ class adminController
         $stmt->execute([$userId]);
         header("Location: admin.php");
     }
+
+    public function getActiveUsers()
+	{
+		$pdo = logindb('user', 'pass');
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, level FROM user WHERE isActive = 1");
+		$stmt->execute();
+		$activeUsers = $stmt->fetchall();
+		return $activeUsers;
+    }
+    
+    public function getInActiveUsers()
+	{
+		$pdo = logindb('user', 'pass');
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, level FROM user WHERE isActive = 0");
+		$stmt->execute();
+		$activeUsers = $stmt->fetchall();
+		return $activeUsers;
+	}
 }
 
 ?>
