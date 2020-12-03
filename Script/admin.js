@@ -15,7 +15,7 @@ function activeSelect()
 function loadActiveUsers()
 {
 
-   var data = new FormData
+   var data = new FormData();
    data.append("function", "getActiveUsers");
 
    axios.post("../User/adminController.php", data)
@@ -48,7 +48,7 @@ function loadActiveUsers()
 function loadInActiveUsers()
 {
     
-   var data = new FormData
+   var data = new FormData();
    data.append("function", "getInActiveUsers");
 
    axios.post("../User/adminController.php", data)
