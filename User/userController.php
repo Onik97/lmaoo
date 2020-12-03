@@ -40,6 +40,10 @@ else if ($function == "checkUsername")
 		echo json_encode($json);
 	}
 }
+else if ($function == "getActiveUsers") 
+{
+	echo json_encode($userController->getActiveUsers());
+}
 else if ($function == "darkModeToggle")
 {
 	$userController->darkModeToggle($_POST['darkMode'], $_POST['userId']);
@@ -155,6 +159,16 @@ class userController
 		$stmt->execute();
 		$users = $stmt->fetchAll();
 		return $users;
+	}
+
+	public function getActiveUsers()
+	{
+		$pdo = logindb('user', 'pass');
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+		$stmt = $pdo->prepare("SELECT userId, forename, surname, username FROM user WHERE isActive = 1");
+		$stmt->execute();
+		$activeUsers = $stmt->fetchall();
+		return $activeUsers;
 	}
 
 	public function darkModeToggle($toggle, $userId)
