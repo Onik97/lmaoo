@@ -1,19 +1,8 @@
 <?php require(__DIR__ . '/userController.php'); 
 
-
-
-
 $adminController = new adminController();
-$userController = new userController();
 
-$userId = $_GET['userId'];
 $function = $_POST['function'];
-
-if(isset($userId))
-{
-    $userSelected = $userController->userInfoById($userId);
-    echo json_encode($userSelected);
-}
 
 if($function == "adminUpdate")
 {
