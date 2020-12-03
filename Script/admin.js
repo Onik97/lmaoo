@@ -3,7 +3,7 @@ $(document).ready(function()
   loadActiveUsers();
 });
 
-function test()
+function activeSelect()
 {
     let selectValue = $("#adminSelect").val();
 

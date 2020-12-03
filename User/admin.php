@@ -17,9 +17,9 @@
         <form class="form-inline my-2 my-lg-0">
             <input id="adminSearchBar" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         </form>
-        <select id="adminSelect" class="form-control w-auto" onchange="test(this.value)">
-            <option value="inActive">In-Active</option>
+        <select id="adminSelect" class="form-control w-auto" onchange="activeSelect(this.value)">
             <option value="Active">Active</option>
+            <option value="inActive">In-Active</option>
         </select>
     </div>
         <div class="container pt-4" id="adminContainer">
