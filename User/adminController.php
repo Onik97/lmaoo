@@ -27,6 +27,10 @@ else if ($function == "getActiveUsers")
 {
 	echo json_encode($adminController->getActiveUsers());
 }
+else if ($function == "getInActiveUsers")
+{
+	echo json_encode($adminController->getInActiveUsers());
+}
 
 class adminController
 {
@@ -53,6 +57,16 @@ class adminController
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, level, isActive FROM user WHERE isActive = 1");
+		$stmt->execute();
+		$activeUsers = $stmt->fetchall();
+		return $activeUsers;
+    }
+    
+    public function getInActiveUsers()
+	{
+		$pdo = logindb('user', 'pass');
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, level, isActive FROM user WHERE isActive = 0");
 		$stmt->execute();
 		$activeUsers = $stmt->fetchall();
 		return $activeUsers;
