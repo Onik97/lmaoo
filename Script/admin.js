@@ -35,8 +35,6 @@ function loadActiveUsers()
            let cell5 = newRow.insertCell(4);
            let cell6 = newRow.insertCell(5);
 
-           console.log(json);
-
            $(cell1).append(document.createTextNode(json[i].userId));
            $(cell2).append(document.createTextNode(json[i].username));
            $(cell3).append(document.createTextNode(json[i].forename));
