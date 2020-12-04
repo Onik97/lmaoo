@@ -212,5 +212,16 @@ class userController
 		}
 		else echo false;
 	}
+
+	public function loadDarkModeToggle() 
+    {
+        if (!isset($_SESSION["userLoggedIn"])) { return; } ?>
+    
+		<div class="custom-control custom-switch">
+        	<input type="checkbox" class="custom-control-input" id="darkModeSwitch" onclick="darkModeToggle()">
+        	<label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
+    	</div>
+        <?php
+    }
 }
 ?>

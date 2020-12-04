@@ -39,10 +39,12 @@ function searchBar()
 
 function loadDarkMode()
 {
+    let darkMode = $("#darkModeSwitch");
+    if (userId == undefined) darkMode.prop("disabled", true);
+
     let data = new FormData();
     data.append('userId', userId);
     data.append("function", "loadDarkMode");
-    let darkMode = $("#darkModeSwitch");
 
     axios.post("../User/userController.php", data)
     .then((res) => 
