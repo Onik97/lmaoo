@@ -9,14 +9,14 @@ function activeSelect()
 
     if (selectValue == "Active") loadActiveUsers();
     if (selectValue == "inActive") loadInActiveUsers();
-    else return null;
+    else return;
 }
 
 function loadActiveUsers()
 {
 
    var data = new FormData();
-   data.append("function", "getActiveUsers");
+   data.append("function", "getAdminActiveUsers");
 
    axios.post("../User/adminController.php", data)
    .then(response =>
@@ -35,12 +35,15 @@ function loadActiveUsers()
            let cell5 = newRow.insertCell(4);
            let cell6 = newRow.insertCell(5);
 
+           console.log(json);
+
            $(cell1).append(document.createTextNode(json[i].userId));
            $(cell2).append(document.createTextNode(json[i].username));
            $(cell3).append(document.createTextNode(json[i].forename));
            $(cell4).append(document.createTextNode(json[i].surname));
            $(cell5).append(document.createTextNode(json[i].level));
            $(cell6).append($("<button>").html('Edit User'));
+
        }
    })
 }
@@ -49,7 +52,7 @@ function loadInActiveUsers()
 {
     
    var data = new FormData();
-   data.append("function", "getInActiveUsers");
+   data.append("function", "getAdminInActiveUsers");
 
    axios.post("../User/adminController.php", data)
    .then(response =>
