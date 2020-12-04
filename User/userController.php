@@ -109,7 +109,8 @@ class userController
 		{
 			if($user->isActive == true)
 			{
-				$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive);
+				$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode);
+				if ($user->darkMode != $_COOKIE["lmaooDarkMode"]) setcookie("lmaooDarkMode", $user->darkMode, 0, "/");
 				session_start();
 				$_SESSION['userLoggedIn'] = $userLoggedIn;
 				header("Location: ../Home/index.php");

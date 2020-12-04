@@ -36,24 +36,24 @@ function darkModeToggle()
 {
     let darkMode = $("#darkModeSwitch");
 
-        if (darkMode.prop("checked"))
-        {
-            let data = new FormData();
-            data.append("function", "darkModeToggle");
-            data.append("darkMode", "1");
-            data.append("userId", userId);
+    if (darkMode.prop("checked"))
+    {
+        let data = new FormData();
+        data.append("function", "darkModeToggle");
+        data.append("darkMode", "1");
+        data.append("userId", userId);
 
-            axios.post("../User/userController.php", data).then(() => $.cookie("lmaooDarkMode", 1));
-        }
-        else if (!darkMode.prop("checked"))
-        {
-            let data = new FormData();
-            data.append("function", "darkModeToggle");
-            data.append("darkMode", "0");
-            data.append("userId", userId);
+        axios.post("../User/userController.php", data).then(() => $.cookie("lmaooDarkMode", 1, { path: "/" }));
+    }
+    else if (!darkMode.prop("checked"))
+    {
+        let data = new FormData();
+        data.append("function", "darkModeToggle");
+        data.append("darkMode", "0");
+        data.append("userId", userId);
 
-            axios.post("../User/userController.php", data).then(() => $.cookie("lmaooDarkMode", 0));
-        }
+        axios.post("../User/userController.php", data).then(() => $.cookie("lmaooDarkMode", 0, { path: "/" }));
+    }
 }
 
 function createProjectPrompt()
