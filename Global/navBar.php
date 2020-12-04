@@ -6,7 +6,7 @@ $userController = new userController();
 <link rel="stylesheet" href="../Css/navbar.css">
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
     
-    <?php $userController->loadDarkModeToggle($_COOKIE["lmaooDarkMode"]); ?>
+    <?php $userController->loadDarkModeToggle($_COOKIE["lmaooDarkMode"], $userLoggedIn); ?>
 
     <div class="container">
         
