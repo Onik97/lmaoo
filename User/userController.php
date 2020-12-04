@@ -48,10 +48,6 @@ else if ($function == "darkModeToggle")
 {
 	$userController->darkModeToggle($_POST['darkMode'], $_POST['userId']);
 }
-else if ($function == "loadDarkMode")
-{
-	echo $userController->loadDarkMode($_POST['userId']);
-}
 else if ($function == "uploadProfilePic")
 {
 	echo $userController->uploadImage($_POST['userId'], null);
@@ -179,7 +175,7 @@ class userController
 		$stmt->execute([$toggle, $userId]);
 	}
 
-	public function loadDarkMode($userId)
+	public function loadDarkMode($userId) // Keeping for Unit Testing
 	{
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
