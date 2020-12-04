@@ -210,22 +210,36 @@ class userController
 		else echo false;
 	}
 
-	public function loadDarkModeToggle($toggle)
+	public function loadDarkModeToggle($toggle, $userLoggedIn)
 	{ 
-		if($toggle == false || $toggle == null)
+		if ($toggle == null) 
 		{
-			?>
-			<div class="custom-control custom-switch">
-			<input type="checkbox" class="custom-control-input" id="darkModeSwitch" onclick="darkModeToggle()">
-			<label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
-			</div>
-			<?php
+			if ($userLoggedIn == null) 
+			{
+				$toggle = false;
+				setcookie("lmaooDarkMode", false, 0, "/");
+			}
+			else if ($userLoggedIn != null)
+			{
+				$toggle = $userLoggedIn->getDarkMode();
+				setcookie("lmaooDarkMode", $userLoggedIn->getDarkMode(), 0, "/");
+			}
 		}
-		else if($toggle == true)
+		
+		if($toggle == true)
 		{
 			?>
 			<div class="custom-control custom-switch">
 			<input type="checkbox" class="custom-control-input" id="darkModeSwitch" onclick="darkModeToggle()" checked>
+			<label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
+			</div>
+			<?php
+		}
+		else if($toggle == false)
+		{
+			?>
+			<div class="custom-control custom-switch">
+			<input type="checkbox" class="custom-control-input" id="darkModeSwitch" onclick="darkModeToggle()">
 			<label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
 			</div>
 			<?php
