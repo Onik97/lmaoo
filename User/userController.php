@@ -212,5 +212,27 @@ class userController
 		}
 		else echo false;
 	}
+
+	public function loadDarkModeToggle($toggle)
+	{ 
+		if($toggle == false || $toggle == null)
+		{
+			?>
+			<div class="custom-control custom-switch">
+			<input type="checkbox" class="custom-control-input" id="darkModeSwitch" onclick="darkModeToggle()">
+			<label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
+			</div>
+			<?php
+		}
+		else if($toggle == true)
+		{
+			?>
+			<div class="custom-control custom-switch">
+			<input type="checkbox" class="custom-control-input" id="darkModeSwitch" onclick="darkModeToggle()" checked>
+			<label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
+			</div>
+			<?php
+		}
+	}
 }
 ?>
