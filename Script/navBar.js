@@ -40,7 +40,7 @@ function searchBar()
 function loadDarkMode()
 {
     let darkMode = $("#darkModeSwitch");
-    if (typeof userId == 'undefined'){darkMode.prop("disabled, disabled");return};
+    if (typeof userId == 'undefined'){darkMode.prop("disabled", true);return};
 
     let data = new FormData();
     data.append('userId', userId);
