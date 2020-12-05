@@ -35,6 +35,7 @@ function searchBar()
 function darkModeToggle()
 {
     let darkMode = $("#darkModeSwitch");
+    if(typeof userId == 'undefined'){darkMode.prop("disabled", true);return;};
 
     if (darkMode.prop("checked"))
     {
