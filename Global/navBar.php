@@ -1,11 +1,13 @@
-<?php ob_start(); require_once("../Project/projectController.php"); require_once("../Ticket/ticketController.php"); require_once("../User/userController.php");
+<?php ob_start(); require_once("../Project/projectController.php"); require_once("../Ticket/ticketController.php");
 $projectController = new projectController();
 $ticketController = new ticketController();
-$userController = new userController();
 ?>    
 <link rel="stylesheet" href="../Css/navbar.css">
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
-    <?php $userController->loadDarkModeToggle() ?>
+    <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="darkModeSwitch" onclick="darkModeToggle()">
+        <label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
+    </div>
 
     <div class="container">
         
