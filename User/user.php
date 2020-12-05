@@ -9,7 +9,7 @@ class user
 	private $level;
 	private $isActive;
 
-	function __construct($id, $forename, $surname, $username, $password, $level, $isActive)
+	function __construct($id, $forename, $surname, $username, $password, $level, $isActive, $darkMode)
 	{
 		$this->id = $id;
 		$this->forename = $forename;
@@ -18,6 +18,7 @@ class user
 		$this->password = $password;
 		$this->level = $level;
 		$this->isActive = $isActive;
+		$this->darkMode = $darkMode;
 	}
 
 	public function setId($id)
@@ -89,5 +90,16 @@ class user
 	{
 		return $this->isActive;
 	}
+
+	public function setDarkMode($darkMode)
+	{
+		$this->darkMode = $darkMode;
+	}
+
+	public function getDarkMode()
+	{
+		return $this->darkMode;
+	}
+
 }
 ?>

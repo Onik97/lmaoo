@@ -48,10 +48,6 @@ else if ($function == "darkModeToggle")
 {
 	$userController->darkModeToggle($_POST['darkMode'], $_POST['userId']);
 }
-else if ($function == "loadDarkMode")
-{
-	echo $userController->loadDarkMode($_POST['userId']);
-}
 else if ($function == "uploadProfilePic")
 {
 	echo $userController->uploadImage($_POST['userId'], null);
@@ -113,7 +109,8 @@ class userController
 		{
 			if($user->isActive == true)
 			{
-				$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive);
+				$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode);
+				if ($user->darkMode != $_COOKIE["lmaooDarkMode"]) setcookie("lmaooDarkMode", $user->darkMode, 0, "/");
 				session_start();
 				$_SESSION['userLoggedIn'] = $userLoggedIn;
 				header("Location: ../Home/index.php");
@@ -179,7 +176,7 @@ class userController
 		$stmt->execute([$toggle, $userId]);
 	}
 
-	public function loadDarkMode($userId)
+	public function loadDarkMode($userId) // Keeping for Unit Testing
 	{
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -211,6 +208,42 @@ class userController
 			echo true;
 		}
 		else echo false;
+	}
+
+	public function loadDarkModeToggle($toggle, $userLoggedIn)
+	{ 
+		if ($toggle == null) 
+		{
+			if ($userLoggedIn == null) 
+			{
+				$toggle = false;
+				setcookie("lmaooDarkMode", false, 0, "/");
+			}
+			else if ($userLoggedIn != null)
+			{
+				$toggle = $userLoggedIn->getDarkMode();
+				setcookie("lmaooDarkMode", $userLoggedIn->getDarkMode(), 0, "/");
+			}
+		}
+		
+		if($toggle == true)
+		{
+			?>
+			<div class="custom-control custom-switch">
+			<input type="checkbox" class="custom-control-input" id="darkModeSwitch" onclick="darkModeToggle()" checked>
+			<label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
+			</div>
+			<?php
+		}
+		else if($toggle == false)
+		{
+			?>
+			<div class="custom-control custom-switch">
+			<input type="checkbox" class="custom-control-input" id="darkModeSwitch" onclick="darkModeToggle()">
+			<label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
+			</div>
+			<?php
+		}
 	}
 }
 ?>

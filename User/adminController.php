@@ -12,11 +12,11 @@ else if ($function == "deactivateUser")
 {
     $adminController->deactivateUser($_POST["userId"]);
 }
-else if ($function == "getActiveUsers")
+else if ($function == "getAdminActiveUsers")
 {
 	echo json_encode($adminController->getActiveUsers());
 }
-else if ($function == "getInActiveUsers")
+else if ($function == "getAdminInActiveUsers")
 {
 	echo json_encode($adminController->getInActiveUsers());
 }

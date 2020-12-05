@@ -1,8 +1,3 @@
-$(document).ready(function() 
-{
-  loadDarkMode();
-});
-
 let navBarActive = document.getElementById("navBarActive").innerHTML;
 
 (navBarActive == "homePage") ? (document.getElementById("homeNav").classList.add("active"))
@@ -37,51 +32,28 @@ function searchBar()
     })
 }
 
-function loadDarkMode()
-{
-    let darkMode = $("#darkModeSwitch");
-    if (typeof userId == 'undefined'){darkMode.prop("disabled", true);return};
-
-    let data = new FormData();
-    data.append('userId', userId);
-    data.append("function", "loadDarkMode");
-
-    axios.post("../User/userController.php", data)
-    .then((res) => 
-    {
-        if (res.data) 
-        {
-            darkMode.prop("checked", true);
-        }
-        else if (!res.data) 
-        {
-            darkMode.prop("checked", false);
-        }
-    })
-}
-
 function darkModeToggle()
 {
     let darkMode = $("#darkModeSwitch");
 
-        if (darkMode.prop("checked"))
-        {
-            let data = new FormData();
-            data.append("function", "darkModeToggle");
-            data.append("darkMode", "1");
-            data.append("userId", userId);
+    if (darkMode.prop("checked"))
+    {
+        let data = new FormData();
+        data.append("function", "darkModeToggle");
+        data.append("darkMode", "1");
+        data.append("userId", userId);
 
-            axios.post("../User/userController.php", data);
-        }
-        else if (!darkMode.prop("checked"))
-        {
-            let data = new FormData();
-            data.append("function", "darkModeToggle");
-            data.append("darkMode", "0");
-            data.append("userId", userId);
+        axios.post("../User/userController.php", data).then(() => $.cookie("lmaooDarkMode", 1, { path: "/" }));
+    }
+    else if (!darkMode.prop("checked"))
+    {
+        let data = new FormData();
+        data.append("function", "darkModeToggle");
+        data.append("darkMode", "0");
+        data.append("userId", userId);
 
-            axios.post("../User/userController.php", data);
-        }
+        axios.post("../User/userController.php", data).then(() => $.cookie("lmaooDarkMode", 0, { path: "/" }));
+    }
 }
 
 function createProjectPrompt()
