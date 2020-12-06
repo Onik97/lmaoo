@@ -13,8 +13,7 @@ function tidyUpTimestamp(timestamp)
   var minutes = dateCreated.getMinutes() < 10 ? "0" + dateCreated.getMinutes() : dateCreated.getMinutes(); // to add 0 from 0-9 minutes
   var ampm = hours >= 12 ? "PM" : "AM";
 
-  var fullDate = `${date}/${month}/${year} ${hours}:${minutes} ${ampm}`;
-  return fullDate;
+  return `${date}/${month}/${year} ${hours}:${minutes} ${ampm}`;
 }
 
 function loadDates()
