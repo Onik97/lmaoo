@@ -1,7 +1,4 @@
-$(document).ready(function () 
-{
-  loadDates();
-});
+$(document).ready(() => loadDates());
 
 function tidyUpTimestamp(timestamp) 
 {
