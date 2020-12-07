@@ -236,14 +236,14 @@ class userController
 	{
 		if($userLoggedIn == null)
 		{
-			echo '<a class="dropdown-item" id="registerNav" href="../User/register.php">Register</a>';
-			echo '<a class="dropdown-item" id="loginNav" href="../User/index.php">Login</a>';
+			echo "<a class='dropdown-item' id='registerNav' href='../User/register.php'>Register</a>";
+			echo "<a class='dropdown-item' id='loginNav' href='../User/index.php'>Login</a>";
 		}
 		else
 		{
-			echo '<a class="dropdown-item" id="editAccountNav" data-toggle="modal" data-target="#view-modal" role="button">Edit Account</a>';
-			echo '<a class="dropdown-item" id="logoutNav" href="../User/logout.php">Logout</a>';
-			if($userLoggedIn->getLevel() > 3) echo '<a class="dropdown-item" id="adminNav" href="../User/admin.php">Admin</a>';
+			echo "<a class='dropdown-item' id='editAccountNav' data-toggle='modal' data-target='#view-modal' role='button'>Edit Account</a>";
+			echo "<a class='dropdown-item' id='logoutNav' href='../User/logout.php'>Logout</a>";
+			if($userLoggedIn->getLevel() > 3) echo "<a class='dropdown-item' id='adminNav' href='../User/admin.php'>Admin</a>";
 		}
 	}
 }
