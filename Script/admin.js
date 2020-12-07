@@ -40,7 +40,7 @@ function loadActiveUsers()
            $(cell3).append(document.createTextNode(json[i].forename));
            $(cell4).append(document.createTextNode(json[i].surname));
            $(cell5).append(document.createTextNode(json[i].level));
-           $(cell6).append($("<button>").html('Edit User'));
+            if (userLevel > 3)$(cell6).append($("<button>", { id : "editUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : "editUser()"}).html("Edit User"));
 
        }
    })
@@ -74,7 +74,7 @@ function loadInActiveUsers()
            $(cell3).append(document.createTextNode(json[i].forename));
            $(cell4).append(document.createTextNode(json[i].surname));
            $(cell5).append(document.createTextNode(json[i].level));
-           $(cell6).append($("<button>").html('Edit User'));;
+           if (userLevel > 3)$(cell6).append($("<button>", { id : "editUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : "editUser()"}).html("Edit User"));
        }
    })
 }
