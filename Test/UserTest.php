@@ -11,7 +11,7 @@ class UserTest extends TestCase
         $actual = $userController->hasDup("od");
         $this->assertTrue($actual);
     }
-    
+
     public function test_hasDup_false()
     {
         $userController = new userController();
