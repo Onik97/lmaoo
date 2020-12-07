@@ -61,5 +61,4 @@ class adminController
 		return $activeUsers;
 	}
 }
-
 ?>

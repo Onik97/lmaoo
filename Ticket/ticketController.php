@@ -174,16 +174,14 @@ class ticketController
         return $stmt->fetchAll();
     }
 
-    public function loadSearchBar() 
+    public function loadSearchBar($userLoggedIn) 
     {
-        if (!isset($_SESSION["userLoggedIn"])) { return; } ?>
+        if ($userLoggedIn == null) return;
     
-        <div class="navbar-brand form-inline lg-1">
-            <input id="searchBarInput" class="form-control mr-sm-2" type="search" placeholder="Search Ticket" aria-label="Search">
-            <button id="searchBarBtn" class="btn btn-outline-success my-sm-0" onclick="searchBar()">Search</button>
-        </div>
-        <?php
+        echo "<div class='navbar-brand form-inline lg-1'>";
+        echo "<input id='searchBarInput' class='form-control mr-sm-2' type='search' placeholder='Search Ticket' aria-label='Search'>";
+        echo "<button id='searchBarBtn' class='btn btn-outline-success my-sm-0' onclick='searchBar()'>Search</button>";
+        echo "</div>";
     }
 }
 ?>
-

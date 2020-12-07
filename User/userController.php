@@ -225,24 +225,25 @@ class userController
 				setcookie("lmaooDarkMode", $userLoggedIn->getDarkMode(), 0, "/");
 			}
 		}
-		
-		if($toggle == true)
+
+		echo "<div class='custom-control custom-switch'>";
+		echo $toggle == true ? "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' onclick='darkModeToggle()' checked>" : "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' onclick='darkModeToggle()'>";
+		echo "<label class='custom-control-label' for='darkModeSwitch'>Dark Mode</label>";
+		echo "</div>";
+	}
+
+	public function loadDropdownItems($userLoggedIn)
+	{
+		if($userLoggedIn == null)
 		{
-			?>
-			<div class="custom-control custom-switch">
-			<input type="checkbox" class="custom-control-input" id="darkModeSwitch" onclick="darkModeToggle()" checked>
-			<label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
-			</div>
-			<?php
+			echo "<a class='dropdown-item' id='registerNav' href='../User/register.php'>Register</a>";
+			echo "<a class='dropdown-item' id='loginNav' href='../User/index.php'>Login</a>";
 		}
-		else if($toggle == false)
+		else
 		{
-			?>
-			<div class="custom-control custom-switch">
-			<input type="checkbox" class="custom-control-input" id="darkModeSwitch" onclick="darkModeToggle()">
-			<label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
-			</div>
-			<?php
+			echo "<a class='dropdown-item' id='editAccountNav' data-toggle='modal' data-target='#view-modal' role='button'>Edit Account</a>";
+			echo "<a class='dropdown-item' id='logoutNav' href='../User/logout.php'>Logout</a>";
+			if($userLoggedIn->getLevel() > 3) echo "<a class='dropdown-item' id='adminNav' href='../User/admin.php'>Admin</a>";
 		}
 	}
 }

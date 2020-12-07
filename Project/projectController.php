@@ -99,28 +99,24 @@ class projectController
         return $stmt->fetchAll();
     }
 
-    public function loadProjectsInNavBar()
+    public function loadProjectsInNavBar($userLoggedIn)
     {
         $projectController = new projectController();
-        if (!isset($_SESSION["userLoggedIn"])) { return; }
+        if ($userLoggedIn == null)  return; 
         $projects = $projectController->getProjectList();
-        ?> 
-        <li class="nav-item dropdown">
-            <a id="projectNav" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Project<span class="caret"></span></a>
 
-            <div class="dropdown-menu">
-                <?php $userLoggedIn = $_SESSION['userLoggedIn'];
-                if ($userLoggedIn->getLevel() > 3)
-                { ?>
-                <a class="dropdown-item" data-toggle="modal" data-target="#globalModal" onclick="createProjectPrompt()">+ Create Project</a>
-                <?php }
-                foreach ($projects as $project) 
-                { ?>
-                <a class="dropdown-item" href="../Project/index.php?projectId=<?php echo $project->projectId ?>"><?php echo $project->name ?></a>
-                <?php } ?>
-            </div>
-        </li>
-        <?php
+        echo "<li class='nav-item dropdown'>";
+        echo "<a id='projectNav' href='#' class='nav-link dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Project<span class='caret'></span></a>";
+        echo "<div class='dropdown-menu'>";
+        if ($userLoggedIn->getLevel() > 3) echo "<a class='dropdown-item' data-toggle='modal' data-target='#globalModal' onclick='createProjectPrompt()'>+ Create Project</a>";
+        
+        foreach ($projects as $project) 
+        { 
+            echo "<a class='dropdown-item' href='../Project/index.php?projectId=$project->projectId'>$project->name</a>";
+        } 
+        
+        echo "</div>";
+        echo "</li>";
     }
 }
 ?>
