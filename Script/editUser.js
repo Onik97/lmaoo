@@ -8,7 +8,7 @@ function userEditValidation()
 
 function checkUserDup()
 {   
-    var editUsername = document.getElementById("editUsername").value;
+    var editUsername = $("#editUsername").val();
     var data = new FormData();
     data.append('function', "checkUsername");
     data.append('username', editUsername);
@@ -40,24 +40,22 @@ function checkUserDup()
 
 function validateImage() 
 {
-    let imageFile = document.getElementById("uploadImage").files[0];
-    let imgExt = imageFile.type.split("/").pop().toLowerCase();
+    let imageFile = $("#uploadImage").prop('files')[0];
+    let imgExt = $('#uploadImage').val().split('.').pop().toLowerCase();
 
     if (imgExt != "jpeg" && imgExt != "jpg" && imgExt != "png" && imgExt != "bmp" && imgExt != "gif") 
-    {
-        document.getElementById("uploadImageText").classList.add("text-danger");
-        document.getElementById("uploadImage").classList.add("is-invalid");
-        document.getElementById("uploadImageText").hidden = false;
+    {   
+        $('#uploadImage').addClass('is-invalid');
+        $('#uploadImageText').prop('hidden', false).addClass('text-danger');
         $('.custom-file-label').html("Choose file");
-        document.getElementById("uploadImageBtn").disabled = true;
+        $('#uploadImageBtn').prop("disabled", true);
     }
     else
     {
-        document.getElementById("uploadImageText").classList.toggle("text-danger", false);
-        document.getElementById("uploadImage").classList.toggle("is-invalid", false);
-        document.getElementById("uploadImageText").hidden = true;
+        $('#uploadImageText').removeClass('text-danger').prop('hidden', true);
+        $('#uploadImage').removeClass('is-invalid');
         $('.custom-file-label').html(imageFile.name);
-        document.getElementById("uploadImageBtn").disabled = false;
+        $('#uploadImageBtn').prop('disabled', false);
     }
 }
 
@@ -66,17 +64,15 @@ function uploadImage()
     var data = new FormData();
     data.append("function", "uploadProfilePic");
     data.append("userId", userId);
-    data.append("image", document.getElementById("uploadImage").files[0]);
+    data.append("image", $("#uploadImage").prop('files')[0]);
 
     serverUpload(data)
     .then((res) => 
     {
         if(res)
         {
-            document.getElementById("uploadImageText").classList.add("text-success");
-            document.getElementById("uploadImageText").hidden = false;
-            document.getElementById("uploadImageText").innerHTML = "Profile Picture Updated!";
-            document.getElementById("uploadImageBtn").disabled = true;
+            $("#uploadImageText").addClass("text-success").prop('hidden', false).html('Profile Picture Updated!');
+            $("#uploadImageBtn").prop('disabled', true);
         }
     })
 }
