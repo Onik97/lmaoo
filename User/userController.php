@@ -225,25 +225,11 @@ class userController
 				setcookie("lmaooDarkMode", $userLoggedIn->getDarkMode(), 0, "/");
 			}
 		}
-		
-		if($toggle == true)
-		{
-			?>
-			<div class="custom-control custom-switch">
-			<input type="checkbox" class="custom-control-input" id="darkModeSwitch" onclick="darkModeToggle()" checked>
-			<label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
-			</div>
-			<?php
-		}
-		else if($toggle == false)
-		{
-			?>
-			<div class="custom-control custom-switch">
-			<input type="checkbox" class="custom-control-input" id="darkModeSwitch" onclick="darkModeToggle()">
-			<label class="custom-control-label" for="darkModeSwitch">Dark Mode</label>
-			</div>
-			<?php
-		}
+
+		echo "<div class='custom-control custom-switch'>";
+		echo $toggle == true ? "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' onclick='darkModeToggle()' checked>" : "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' onclick='darkModeToggle()'>";
+		echo "<label class='custom-control-label' for='darkModeSwitch'>Dark Mode</label>";
+		echo "</div>";
 	}
 
 	public function loadDropdownItems($userLoggedIn)
