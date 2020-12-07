@@ -112,7 +112,7 @@ class projectController
         
         foreach ($projects as $project) 
         { 
-            echo "<a class='dropdown-item' href='../Project/index.php?projectId={$project->projectId}'>{$project->name}</a>";
+            echo "<a class='dropdown-item' href='../Project/index.php?projectId=$project->projectId'>$project->name</a>";
         } 
         
         echo "</div>";
