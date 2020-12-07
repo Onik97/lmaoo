@@ -20,7 +20,7 @@ $userController = new userController();
             <ul class="nav navbar-nav ml-auto mr-5">
 
                 <li class="nav-item"> <a class="nav-link" id="homeNav" href="../Home/index.php">Home</a> </li>
-                <?php $projectController->loadProjectsInNavBar() ?>
+                <?php $projectController->loadProjectsInNavBar($userLoggedIn) ?>
 
                 <li class="nav-item dropdown">
                     <a id="accountNav" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
