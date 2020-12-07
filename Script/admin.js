@@ -81,7 +81,23 @@ function loadInActiveUsers()
 
 function editUser(userId)
 {
-    console.log("TBC");
+    $("#admin-modal-title").html("Edit User Info");
+
+    let adminEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
+    let adminSelectLabel = $("<label>").html("Activate/Deactive User:");
+    let adminOptionSelect = $("<select>", {class : "form-control", id : "adminSelect"});
+    let adminOptioninput1 = $('<option>', {id : 'adminOptionInput1'}).val('Active').html('Activate');
+    let adminOptioninput2 = $('<option>', {id : 'adminOptionInput1'}).val('Not-Active').html('Deactivate');
+    let adminValidationSmall = $("<small>", {id : "adminValidationSmall"});
+    $("#admin-modal-body").html("").append(adminEditDiv);
+    $(adminEditDiv).append(adminSelectLabel);
+    $(adminEditDiv).append(adminOptionSelect);
+    $(adminOptionSelect).append(adminOptioninput1);
+    $(adminOptionSelect).append(adminOptioninput2);
+    $(adminEditDiv).append(adminValidationSmall);
+
+    $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveUserChange", onclick : "activateUser(), deactivateUser()"}).html("Save"));
+    // $('#saveUserChange').prop('disabled', true); 
 }
 
 function activateUser(userId)
