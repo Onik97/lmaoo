@@ -8,7 +8,7 @@ function userEditValidation()
 
 function checkUserDup()
 {   
-    var editUsername = document.getElementById("editUsername").value;
+    var editUsername = $("#editUsername").val();
     var data = new FormData();
     data.append('function', "checkUsername");
     data.append('username', editUsername);
