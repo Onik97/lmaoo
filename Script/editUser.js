@@ -46,20 +46,19 @@ function validateImage()
     // imageFile.type.split("/").pop().toLowerCase();
 
     if (imgExt != "jpeg" && imgExt != "jpg" && imgExt != "png" && imgExt != "bmp" && imgExt != "gif") 
-    {
-        document.getElementById("uploadImageText").classList.add("text-danger");
-        document.getElementById("uploadImage").classList.add("is-invalid");
-        document.getElementById("uploadImageText").hidden = false;
+    {   
+        $('#uploadImage').addClass('is-invalid', 'text-danger');
+        $('#uploadImageText').prop('hidden', false);
         $('.custom-file-label').html("Choose file");
-        document.getElementById("uploadImageBtn").disabled = true;
+        $('#uploadImageBtn').prop("disabled", true);
     }
     else
     {
-        document.getElementById("uploadImageText").classList.toggle("text-danger", false);
-        document.getElementById("uploadImage").classList.toggle("is-invalid", false);
-        document.getElementById("uploadImageText").hidden = true;
+        $('#uploadImageText').removeClass('text-danger')
+        $('#uploadImage').removeClass('is-invalid')
+        $('#uploadImageText').prop('hidden', true);
         $('.custom-file-label').html(imageFile.name);
-        document.getElementById("uploadImageBtn").disabled = false;
+        $('#uploadImageBtn').prop('disabled', false);
     }
 }
 
