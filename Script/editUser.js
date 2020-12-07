@@ -54,9 +54,8 @@ function validateImage()
     }
     else
     {
-        $('#uploadImageText').removeClass('text-danger')
-        $('#uploadImage').removeClass('is-invalid')
-        $('#uploadImageText').prop('hidden', true);
+        $('#uploadImageText').removeClass('text-danger').prop('hidden', true);
+        $('#uploadImage').removeClass('is-invalid');
         $('.custom-file-label').html(imageFile.name);
         $('#uploadImageBtn').prop('disabled', false);
     }
@@ -67,7 +66,7 @@ function uploadImage()
     var data = new FormData();
     data.append("function", "uploadProfilePic");
     data.append("userId", userId);
-    data.append("image", document.getElementById("uploadImage").files[0]);
+    data.append("image", $("#uploadImage").prop('files')[0]);
 
     serverUpload(data)
     .then((res) => 
