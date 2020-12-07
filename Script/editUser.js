@@ -40,8 +40,10 @@ function checkUserDup()
 
 function validateImage() 
 {
-    let imageFile = document.getElementById("uploadImage").files[0];
-    let imgExt = imageFile.type.split("/").pop().toLowerCase();
+    let imageFile = $("#uploadImage").prop('files')[0];
+    // let imageVal = $("#uploadImage").val();
+    let imgExt = $('#uploadImage').val().split('.').pop().toLowerCase();
+    // imageFile.type.split("/").pop().toLowerCase();
 
     if (imgExt != "jpeg" && imgExt != "jpg" && imgExt != "png" && imgExt != "bmp" && imgExt != "gif") 
     {
