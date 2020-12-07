@@ -47,8 +47,8 @@ function validateImage()
 
     if (imgExt != "jpeg" && imgExt != "jpg" && imgExt != "png" && imgExt != "bmp" && imgExt != "gif") 
     {   
-        $('#uploadImage').addClass('is-invalid', 'text-danger');
-        $('#uploadImageText').prop('hidden', false);
+        $('#uploadImage').addClass('is-invalid');
+        $('#uploadImageText').prop('hidden', false).addClass('text-danger');
         $('.custom-file-label').html("Choose file");
         $('#uploadImageBtn').prop("disabled", true);
     }
