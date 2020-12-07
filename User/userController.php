@@ -182,7 +182,7 @@ class userController
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT darkMode FROM user WHERE userId = ?");
 		$stmt->execute([$userId]);
-		echo $stmt->fetchColumn();
+		return $stmt->fetchColumn();
 	}
 
 	public function updatePicture($target, $userId)

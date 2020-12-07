@@ -11,7 +11,7 @@ class UserTest extends TestCase
         $actual = $userController->hasDup("od");
         $this->assertTrue($actual);
     }
-    
+
     public function test_hasDup_false()
     {
         $userController = new userController();
@@ -53,5 +53,22 @@ class UserTest extends TestCase
 
         $this->assertEquals("../Images/profilePictures/avatar.jpg", $user->picture);
     }
-    
+
+    public function test_darkModeToggle_true()
+    {
+        $userController = new userController();
+        $userController->darkModeToggle(1, 46);
+        $actual = $userController->loadDarkMode(46);
+
+        $this->assertEquals(1, $actual);
+    }
+
+    public function test_darkModeToggle_false()
+    {
+        $userController = new userController();
+        $userController->darkModeToggle(0, 46);
+        $actual = $userController->loadDarkMode(46);
+
+        $this->assertEquals(0, $actual);
+    }
 }
