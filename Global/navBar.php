@@ -2,23 +2,23 @@
 $projectController = new projectController();
 $ticketController = new ticketController();
 $userController = new userController();
-?>    
+?>
 <link rel="stylesheet" href="../Css/navbar.css">
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
-    
+
     <?php $userController->loadDarkModeToggle($_COOKIE["lmaooDarkMode"], $userLoggedIn); ?>
 
     <div class="container">
-        
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="exampleNavComponents">
-        <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
-        
+
         <div class="collapse navbar-collapse w-100 order-3 dual-collapse2" id="navbarNav">
             <?php $ticketController->loadSearchBar() ?>
 
             <ul class="nav navbar-nav ml-auto mr-5">
-            
+
                 <li class="nav-item"> <a class="nav-link" id="homeNav" href="../Home/index.php">Home</a> </li>
                 <?php $projectController->loadProjectsInNavBar() ?>
 
