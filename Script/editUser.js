@@ -73,10 +73,8 @@ function uploadImage()
     {
         if(res)
         {
-            document.getElementById("uploadImageText").classList.add("text-success");
-            document.getElementById("uploadImageText").hidden = false;
-            document.getElementById("uploadImageText").innerHTML = "Profile Picture Updated!";
-            document.getElementById("uploadImageBtn").disabled = true;
+            $("#uploadImageText").addClass("text-success").prop('hidden', false).html('Profile Picture Updated!');
+            $("#uploadImageBtn").prop('disabled', true);
         }
     })
 }
