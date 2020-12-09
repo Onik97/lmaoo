@@ -3,15 +3,17 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Home</title>
         <p id="navBarActive" hidden>homePage</p>
         <?php include("../Global/head.php"); ?> 
-        <title>Home</title>
     </head>
 
     <body>
         <?php include("../Global/navBar.php"); ?>
         <?php include("../Home/homeMessage.php"); ?>
         <h1>This page is under maintenance</h1>
+        <?php include("../Global/scripts.php"); ?>
     </body>
         <?php include("../Global/editUserModal.php"); ?>
+
 </html>

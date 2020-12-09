@@ -33,4 +33,3 @@ $userController = new userController();
         </div>
     </div>
 </nav>
-<script src="../Script/navBar.js"></script>

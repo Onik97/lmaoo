@@ -1,4 +1,5 @@
 $(document).ready(() => { loadComments(); loadSummerNote(".createComment"); });
+
 $(".createComment").on('summernote.keydown', (we, e) => e.shiftKey && e.keyCode == 13 ? saveComment(".createComment") : null ); // Shift + Enter 
 
 function loadSummerNote(summerNoteId)

@@ -1,5 +1,3 @@
-<script type="text/javascript" src="../Script/dateController.js"></script>
-
 <div ID="dates1" class="mt-4">
     <h6>Date created:</h6>
     <label id="createDate"></label>
