@@ -8,7 +8,6 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript" src="../Script/server.js"></script>
 
-<!-- Documentation: https://github.com/sandoche/nuxtjs-darkmode-js-module -->
 <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 
 <script src="../Script/notifications.js"></script>
