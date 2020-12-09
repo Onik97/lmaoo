@@ -14,6 +14,8 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript" src="../Script/server.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
 <link rel="stylesheet" href="../Css/notifications.css">
 <script src="../Script/notifications.js"></script>
 
@@ -28,10 +30,7 @@ function overHang(type, message)
     closeOnClick: true
   });
   
-  myNotification(
-  {
-    message: message
-  });
+  myNotification({ message: message });
 }
 
 <?php 
@@ -40,11 +39,11 @@ if(isset($_SESSION['userLoggedIn']))
   $userLoggedIn = $_SESSION['userLoggedIn'];
   include_once("../User/user.php");
   ?>
-const userId = "<?php echo $userLoggedIn->getId(); ?>"; 
-const userForename = "<?php echo $userLoggedIn->getForename(); ?>";
-const userSurname = "<?php echo $userLoggedIn->getSurname(); ?>";
-const userUsername = "<?php echo $userLoggedIn->getUsername(); ?>";
-const userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
+  const userId = "<?php echo $userLoggedIn->getId(); ?>"; 
+  const userForename = "<?php echo $userLoggedIn->getForename(); ?>";
+  const userSurname = "<?php echo $userLoggedIn->getSurname(); ?>";
+  const userUsername = "<?php echo $userLoggedIn->getUsername(); ?>";
+  const userLevel = "<?php echo $userLoggedIn->getLevel(); ?>";
 <?php } ?>
 </script>
 <?php include("modal.php");
