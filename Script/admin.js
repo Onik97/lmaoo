@@ -100,13 +100,14 @@ function editUser(userId, active)
     active == 1 ? $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveUserChange", onclick : "deactivateUser(userId)"}).html("Save"))
     : $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveUserChange", onclick : "activateUser(userId)"}).html("Save"))
     
-$("#adminSelect").change(function(){
+    $("#adminSelect").change(function(){
+        console.log($(this).val());
 	
-    ($(this).val() == 1 && active == 1) ? ($('#saveUserChange').prop('disabled', true))
-        : ($(this).val() == 1 && active == 0) ? ($('#saveUserChange').prop('disabled', false))
-            : ($(this).val() == 0 && active == 0) ? ($('#saveUserChange').prop('disabled', true))
-             : ($(this).val() == 0 && active == 1) ? ($('#saveUserChange').prop('disabled', false))
-                : console.log("we dun fucked up");
+        ($(this).val() == 1 && active == 1) ? ($('#saveUserChange').prop('disabled', true))
+            : ($(this).val() == 1 && active == 0) ? ($('#saveUserChange').prop('disabled', false))
+                : ($(this).val() == 0 && active == 0) ? ($('#saveUserChange').prop('disabled', true))
+                    : ($(this).val() == 0 && active == 1) ? ($('#saveUserChange').prop('disabled', false))
+                        : console.log("we dun fucked up");
     })
 }
 
