@@ -1,6 +1,5 @@
 $(document).ready(function() 
 {
-  loadActiveUsers();
   loadActiveUsers(active);
 });
 let active = 1;
@@ -9,17 +8,13 @@ function activeSelect()
 {
     let selectValue = $("#adminSelect").val();
 
-    if (selectValue == "Active") loadActiveUsers();
-    if (selectValue == "inActive") loadInActiveUsers();
     if (selectValue == "Active"){active = 1, loadActiveUsers(active);}
     if (selectValue == "inActive"){active = 0, loadInActiveUsers(active);}
     else return;
 }
 
-function loadActiveUsers()
 function loadActiveUsers(active)
 {
-
     console.log(active);
    var data = new FormData();
    data.append("function", "getAdminActiveUsers");
@@ -46,17 +41,14 @@ function loadActiveUsers(active)
            $(cell3).append(document.createTextNode(json[i].forename));
            $(cell4).append(document.createTextNode(json[i].surname));
            $(cell5).append(document.createTextNode(json[i].level));
-            if (userLevel > 3)$(cell6).append($("<button>", { id : "editUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : "editUser()"}).html("Edit User"));
             if (userLevel > 3)$(cell6).append($("<button>", { id : "editUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : "editUser(userId, active)"}).html("Edit User"));
 
        }
    })
 }
 
-function loadInActiveUsers()
 function loadInActiveUsers(active)
 {
-    
     console.log(active);
    var data = new FormData();
    data.append("function", "getAdminInActiveUsers");
@@ -83,13 +75,11 @@ function loadInActiveUsers(active)
            $(cell3).append(document.createTextNode(json[i].forename));
            $(cell4).append(document.createTextNode(json[i].surname));
            $(cell5).append(document.createTextNode(json[i].level));
-           if (userLevel > 3)$(cell6).append($("<button>", { id : "editUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : "editUser()"}).html("Edit User"));
            if (userLevel > 3)$(cell6).append($("<button>", { id : "editUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : "editUser(userId, active)"}).html("Edit User"));
        }
    })
 }
 
-function editUser(userId)
 function editUser(userId, active)
 {
     $("#admin-modal-title").html("Edit User Info");
@@ -97,8 +87,6 @@ function editUser(userId, active)
     let adminEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
     let adminSelectLabel = $("<label>").html("Activate/Deactive User:");
     let adminOptionSelect = $("<select>", {class : "form-control", id : "adminSelect"});
-    let adminOptioninput1 = $('<option>', {id : 'adminOptionInput1'}).val('Active').html('Activate');
-    let adminOptioninput2 = $('<option>', {id : 'adminOptionInput1'}).val('Not-Active').html('Deactivate');
     let adminOptioninput1 = $('<option>', {id : 'adminOptionInput1'}).val(1).html('Activate');
     let adminOptioninput2 = $('<option>', {id : 'adminOptionInput2'}).val(0).html('Deactivate');
     let adminValidationSmall = $("<small>", {id : "adminValidationSmall"});
@@ -109,10 +97,17 @@ function editUser(userId, active)
     $(adminOptionSelect).append(adminOptioninput2);
     $(adminEditDiv).append(adminValidationSmall);
 
-    $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveUserChange", onclick : "activateUser(), deactivateUser()"}).html("Save"));
-    // $('#saveUserChange').prop('disabled', true); 
     active == 1 ? $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveUserChange", onclick : "deactivateUser(userId)"}).html("Save"))
     : $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveUserChange", onclick : "activateUser(userId)"}).html("Save"))
+    
+$("#adminSelect").change(function(){
+	
+    ($(this).val() == 1 && active == 1) ? ($('#saveUserChange').prop('disabled', true))
+        : ($(this).val() == 1 && active == 0) ? ($('#saveUserChange').prop('disabled', false))
+            : ($(this).val() == 0 && active == 0) ? ($('#saveUserChange').prop('disabled', true))
+             : ($(this).val() == 0 && active == 1) ? ($('#saveUserChange').prop('disabled', false))
+                : console.log("we dun fucked up");
+    })
 }
 
 function activateUser(userId)
