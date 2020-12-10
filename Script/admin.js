@@ -99,6 +99,8 @@ function editUser(userId, active)
     let adminOptionSelect = $("<select>", {class : "form-control", id : "adminSelect"});
     let adminOptioninput1 = $('<option>', {id : 'adminOptionInput1'}).val('Active').html('Activate');
     let adminOptioninput2 = $('<option>', {id : 'adminOptionInput1'}).val('Not-Active').html('Deactivate');
+    let adminOptioninput1 = $('<option>', {id : 'adminOptionInput1'}).val(1).html('Activate');
+    let adminOptioninput2 = $('<option>', {id : 'adminOptionInput2'}).val(0).html('Deactivate');
     let adminValidationSmall = $("<small>", {id : "adminValidationSmall"});
     $("#admin-modal-body").html("").append(adminEditDiv);
     $(adminEditDiv).append(adminSelectLabel);
@@ -109,6 +111,8 @@ function editUser(userId, active)
 
     $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveUserChange", onclick : "activateUser(), deactivateUser()"}).html("Save"));
     // $('#saveUserChange').prop('disabled', true); 
+    active == 1 ? $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveUserChange", onclick : "deactivateUser(userId)"}).html("Save"))
+    : $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveUserChange", onclick : "activateUser(userId)"}).html("Save"))
 }
 
 function activateUser(userId)
