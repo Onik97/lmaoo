@@ -1,7 +1,9 @@
 $(document).ready(function() 
 {
   loadActiveUsers();
+  loadActiveUsers(active);
 });
+let active = 1;
 
 function activeSelect()
 {
@@ -9,12 +11,16 @@ function activeSelect()
 
     if (selectValue == "Active") loadActiveUsers();
     if (selectValue == "inActive") loadInActiveUsers();
+    if (selectValue == "Active"){active = 1, loadActiveUsers(active);}
+    if (selectValue == "inActive"){active = 0, loadInActiveUsers(active);}
     else return;
 }
 
 function loadActiveUsers()
+function loadActiveUsers(active)
 {
 
+    console.log(active);
    var data = new FormData();
    data.append("function", "getAdminActiveUsers");
 
@@ -41,14 +47,17 @@ function loadActiveUsers()
            $(cell4).append(document.createTextNode(json[i].surname));
            $(cell5).append(document.createTextNode(json[i].level));
             if (userLevel > 3)$(cell6).append($("<button>", { id : "editUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : "editUser()"}).html("Edit User"));
+            if (userLevel > 3)$(cell6).append($("<button>", { id : "editUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : "editUser(userId, active)"}).html("Edit User"));
 
        }
    })
 }
 
 function loadInActiveUsers()
+function loadInActiveUsers(active)
 {
     
+    console.log(active);
    var data = new FormData();
    data.append("function", "getAdminInActiveUsers");
 
@@ -75,11 +84,13 @@ function loadInActiveUsers()
            $(cell4).append(document.createTextNode(json[i].surname));
            $(cell5).append(document.createTextNode(json[i].level));
            if (userLevel > 3)$(cell6).append($("<button>", { id : "editUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : "editUser()"}).html("Edit User"));
+           if (userLevel > 3)$(cell6).append($("<button>", { id : "editUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : "editUser(userId, active)"}).html("Edit User"));
        }
    })
 }
 
 function editUser(userId)
+function editUser(userId, active)
 {
     $("#admin-modal-title").html("Edit User Info");
 
