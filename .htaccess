@@ -1,0 +1,3 @@
+RewriteEngine On
+ErrorDocument 404 /lmaoo/Global/404NotFound.php
+ErrorDocument 403 /lmaoo/Global/403Forbidden.php
