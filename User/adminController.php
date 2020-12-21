@@ -8,6 +8,10 @@ if ($function == "deactivateUser")
 {
     $adminController->deactivateUser($_POST["userId"]);
 }
+else if ($function == "activateUser")
+{
+    $adminController->activateUser($_POST["userId"]);
+}
 else if ($function == "getAdminActiveUsers")
 {
 	echo json_encode($adminController->getActiveUsers());
@@ -33,6 +37,20 @@ class adminController
         $level = $stmt->fetchColumn()['level'];
 
         return $level > 3 ? true : false;
+    }
+
+    public function activateUser($userId)
+    {
+        $adminController = new adminController();
+
+        $pdo = logindb('user', 'pass');
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("UPDATE user SET isActive = 1 WHERE userId = ?");
+        if ($adminController->validateAdmin(null) == true)
+        {
+            $stmt->execute([$userId]);
+            return $stmt->fetchColumn();
+        }
     }
 
     public function deactivateUser($userId)
