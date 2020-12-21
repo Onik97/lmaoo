@@ -34,32 +34,49 @@ class adminController
         return $level > 3 ? true : false;
     }
 
+
     public function deactivateUser($userId)
     {
+        $adminController = new adminController();
+
         $pdo = logindb('user', 'pass');
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("UPDATE user SET isActive = 0 WHERE userId = ?");
-        $stmt->execute([$userId]);
+        if ($adminController->validateAdmin(null) == true)
+        {
+            $stmt->execute([$userId]);
+            return $stmt->fetchColumn();
+        }
     }
 
     public function getActiveUsers()
 	{
+        $adminController = new adminController();
+
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, level FROM user WHERE isActive = 1");
-		$stmt->execute();
-		$activeUsers = $stmt->fetchall();
-		return $activeUsers;
+        $stmt = $pdo->prepare("SELECT userId, forename, surname, username, level FROM user WHERE isActive = 1");
+        if ($adminController->validateAdmin(null) == true)
+        {
+            $stmt->execute();
+            $activeUsers = $stmt->fetchall();
+            return $activeUsers;
+        }
     }
     
     public function getInActiveUsers()
 	{
+        $adminController = new adminController();
+
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, level FROM user WHERE isActive = 0");
-		$stmt->execute();
-		$activeUsers = $stmt->fetchall();
-		return $activeUsers;
+        $stmt = $pdo->prepare("SELECT userId, forename, surname, username, level FROM user WHERE isActive = 0");
+        if ($adminController->validateAdmin(null) == true)
+        {
+            $stmt->execute();
+            $activeUsers = $stmt->fetchall();
+            return $activeUsers;
+        }
 	}
 }
 ?>
