@@ -22,7 +22,7 @@ else if ($function == "getAdminInActiveUsers")
 }
 else if ($function == "resetPassword")
 {
-    echo json_encode($adminController->resetPassword($_POST['userId']));
+    echo json_encode($adminController->resetPassword($_POST['userId'], null));
 }
 
 class adminController
@@ -101,11 +101,11 @@ class adminController
         }
     }
     
-    public function resetPassword($userId)
+    public function resetPassword($userId, ?string $unitTest)
     {
         $adminController = new adminController();
 
-        $hashedPassword = password_hash("password", PASSWORD_BCRYPT);
+        $hashedPassword = $unitTest == null ? password_hash("password", PASSWORD_BCRYPT) : password_hash($unitTest, PASSWORD_BCRYPT);
         $pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("UPDATE user SET password = ? WHERE userId = ?");
