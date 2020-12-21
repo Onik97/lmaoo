@@ -1,4 +1,4 @@
-<?php require(__DIR__ . '/userController.php'); 
+<?php require(__DIR__ . '/userController.php');
 
 $adminController = new adminController();
 
@@ -21,13 +21,14 @@ class adminController
 {
     public function validateAdmin(?string $unitUserId)
     {
-        $userId = $unitUserId == null ? $_SESSION['userLoggedIn']->getLevel() : $unitUserId;
+        session_start();
+        $userId = $unitUserId == null ? $_SESSION['userLoggedIn']->getId() : $unitUserId;
         
         if ($userId == null) return false;
 
         $pdo = logindb('user', 'pass');
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("SELECT level FROM USER WHERE userId = ?");
+        $stmt = $pdo->prepare("SELECT level FROM user WHERE userId = ?");
         $stmt->execute([$userId]);
         $level = $stmt->fetchColumn()['level'];
 
