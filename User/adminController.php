@@ -34,7 +34,6 @@ class adminController
         return $level > 3 ? true : false;
     }
 
-
     public function deactivateUser($userId)
     {
         $adminController = new adminController();
