@@ -4,11 +4,7 @@ $adminController = new adminController();
 
 $function = $_POST['function'];
 
-if($function == "adminUpdate")
-{
-    $adminController->adminUpdate($_POST['editForename'], $_POST['editSurname'], $_POST['editUsername'], $_POST['userSelect'], $_POST['userId']);
-}
-else if ($function == "deactivateUser")
+if ($function == "deactivateUser")
 {
     $adminController->deactivateUser($_POST["userId"]);
 }
@@ -23,12 +19,19 @@ else if ($function == "getAdminInActiveUsers")
 
 class adminController
 {
-    public function adminUpdate($forename, $surname, $username, $level, $userId)
+    public function validateAdmin(?string $unitUserId)
     {
+        $userId = $unitUserId == null ? $_SESSION['userLoggedIn']->getLevel() : $unitUserId;
+        
+        if ($userId == null) return false;
+
         $pdo = logindb('user', 'pass');
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("UPDATE user SET forename = ?, surname = ?, username = ?, level = ? WHERE userId = ?");
-        $stmt->execute([$forename, $surname, $username, $level, $userId]);
+        $stmt = $pdo->prepare("SELECT level FROM USER WHERE userId = ?");
+        $stmt->execute([$userId]);
+        $level = $stmt->fetchColumn()['level'];
+
+        return $level > 3 ? true : false;
     }
 
     public function deactivateUser($userId)
