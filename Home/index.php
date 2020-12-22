@@ -1,4 +1,5 @@
 <?php require("../User/user.php"); require("../connection.php"); session_start(); ?>
+<?php require("../User/user.php"); require("../connection.php"); require_once("../User/userController.php"); session_start(); ?>
 
 <!DOCTYPE html>
 <html>
