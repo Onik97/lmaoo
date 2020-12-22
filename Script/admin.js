@@ -12,7 +12,6 @@ function activeSelect()
     else return;
 }
 
-function loadActiveUsers(active)
 function loadActiveUsers()
 {
    var data = new FormData();
@@ -26,7 +25,6 @@ function loadActiveUsers()
 
        for (i = 0; i < json.length; i++)
        {
-
            let newRow = document.getElementById("admin-table").insertRow(-1);
            let cell1 = newRow.insertCell(0);
            let cell2 = newRow.insertCell(1);
@@ -45,7 +43,6 @@ function loadActiveUsers()
    })
 }
 
-function loadInActiveUsers(active)
 function loadInActiveUsers()
 {
    var data = new FormData();
