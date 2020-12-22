@@ -247,5 +247,49 @@ class userController
 			if($userLoggedIn->getLevel() > 3) echo "<a class='dropdown-item' id='adminNav' href='../User/admin.php'>Admin</a>";
 		}
 	}
+
+	public function loadWelcomeMessage($userLoggedIn)
+    {
+		if ($userLoggedIn == null)
+		{
+		echo"<div class='welcomeMessage'>";
+        echo	"<h1> Welcome, Please log in </h1>";
+        echo"</div>";
+        echo"<div id='devInfo' class='container'>";
+        echo   "<div class='mx-5'>";
+        echo        "<h1>List of developer who worked on this Project</h1>";
+        echo    "</div>";
+        echo    "<div class='row align-items-start my-auto'>";
+        echo        "<div class='col-3 my-5'>";
+        echo            "[section about Onik]";
+        echo        "</div>";
+        echo        "<div class='col-3 my-5'>";
+        echo            "[section about Lewis]";
+        echo        "</div>";
+        echo        "<div class='col-3 my-5'>";
+        echo            "[section about Tufan]";
+        echo        "</div>";
+        echo        "<div class='col-3 my-5'>";
+        echo           " [section about Adil]";
+        echo        "</div>";
+        echo    "</div>";
+        echo"</div>";
+		}
+		else 
+		{
+		echo "<h1 class='welcomeMessage'>Welcome back Lewis</h1> <!-- will add this in via Javascript -->";
+		echo "<table id='homeTicketTable' class='table'>";
+        echo 	"<thead>";
+        echo 		"<tr>";
+        echo 			"<th class='col4'>Ticket ID</th>";
+        echo 			"<th class='col4'>Summary</th>";
+        echo 			"<th class='col4'>Progress</th>";
+        echo 			"<th class='col4'>Date Created</th>";
+        echo		"</tr>";
+        echo	"</thead>";
+        echo"</table>";
+		}
+	}
+		
 }
 ?>
