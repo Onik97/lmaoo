@@ -38,7 +38,8 @@ function loadActiveUsers()
            $(cell3).append(document.createTextNode(json[i].forename));
            $(cell4).append(document.createTextNode(json[i].surname));
            $(cell5).append(document.createTextNode(json[i].level));
-            if (userLevel > 3)$(cell6).append($("<button>", { id : "editUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : "editUser(userId, active)"}).html("Edit User"));
+           $(cell6).append($("<button>", { id : "editUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : "editUser(userId, active)"}).html("Edit User"));
+           $(cell6).append($("<button>", { id : "deactivateUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `deactivateUserPrompt(${json[i].userId})`}).html("Deactivate User"));
        }
    })
 }
