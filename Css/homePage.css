@@ -1,0 +1,14 @@
+#devInfo {
+    margin: 150px auto 0px auto;
+}
+
+.welcomeMessage
+{
+    margin: 10px 750px;
+}
+
+#homeTicketTable {
+    width: 800px;
+    margin: 225px auto 0px auto;
+    border: 5px solid black;
+}
