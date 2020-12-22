@@ -125,9 +125,29 @@ function editUser(userId, active)
 function activateUser(userId)
 {
     console.log("TBC");
+    let data = new FormData();
+    data.append("function", "activateUser");
+    data.append("userId", userId);
+
+    axios.post("../User/adminController.php", data)
+    .then(() =>
+    {
+        overHang("success", "User has been activated");
+        $('#admin-modal').modal('hide');
+    })
 }
 
 function deactivateUser(userId)
 {
     console.log("TBC");
+    let data = new FormData();
+    data.append("function", "deactivateUser");
+    data.append("userId", userId);
+
+    axios.post("../User/adminController.php", data)
+    .then(() =>
+    {
+        overHang("success", "User has been deactivated");
+        $('#admin-modal').modal('hide');
+    })
 }
