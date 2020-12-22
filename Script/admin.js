@@ -2,7 +2,6 @@ $(document).ready(function()
 {
   loadActiveUsers(active);
 });
-let active = 1;
 let active = 1; // this is used currently in later pages to make sure the user wanted this certain action on the selected Active/not-active group.
 
 function activeSelect()
@@ -43,7 +42,6 @@ function loadActiveUsers(active)
            $(cell4).append(document.createTextNode(json[i].surname));
            $(cell5).append(document.createTextNode(json[i].level));
             if (userLevel > 3)$(cell6).append($("<button>", { id : "editUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : "editUser(userId, active)"}).html("Edit User"));
-
        }
    })
 }
@@ -87,7 +85,6 @@ function editUser(userId, active)
 
     let adminEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
     let adminSelectLabel = $("<label>").html("Activate/Deactive User:");
-    let adminOptionSelect = $("<select>", {class : "form-control", id : "adminSelect"});
     let adminOptionSelect = $("<select>", {class : "form-control adminSelector", id : "adminSelect"});
     let adminOptioninput1 = $('<option>', {id : 'adminOptionInput1'}).val(1).html('Activate');
     let adminOptioninput2 = $('<option>', {id : 'adminOptionInput2'}).val(0).html('Deactivate');
@@ -103,16 +100,9 @@ function editUser(userId, active)
     : $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveUserChange", onclick : "activateUser(userId)"}).html("Save"))
     $('#saveUserChange').prop('disabled', true);
     
-    $("#adminSelect").change(function(){
-        console.log($(this).val());
     $("select.adminSelector").change(function(){
         let adminSelected = $(this).children("option:selected").val();
 	
-        ($(this).val() == 1 && active == 1) ? ($('#saveUserChange').prop('disabled', true))
-            : ($(this).val() == 1 && active == 0) ? ($('#saveUserChange').prop('disabled', false))
-                : ($(this).val() == 0 && active == 0) ? ($('#saveUserChange').prop('disabled', true))
-                    : ($(this).val() == 0 && active == 1) ? ($('#saveUserChange').prop('disabled', false))
-                        : console.log("we dun fucked up");
         (adminSelected == 1 && active == 1) ? ($('#saveUserChange').prop('disabled', true))
             : (adminSelected == 1 && active == 0) ? ($('#saveUserChange').prop('disabled', false))
                 : (adminSelected == 0 && active == 0) ? ($('#saveUserChange').prop('disabled', true))
@@ -124,7 +114,6 @@ function editUser(userId, active)
 
 function activateUser(userId)
 {
-    console.log("TBC");
     let data = new FormData();
     data.append("function", "activateUser");
     data.append("userId", userId);
@@ -139,7 +128,6 @@ function activateUser(userId)
 
 function deactivateUser(userId)
 {
-    console.log("TBC");
     let data = new FormData();
     data.append("function", "deactivateUser");
     data.append("userId", userId);
