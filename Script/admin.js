@@ -108,11 +108,11 @@ function editUser(userId, active)
     })
 }
 
-function activateUser(userId)
+function activateUser(userIdSelected)
 {
     let data = new FormData();
     data.append("function", "activateUser");
-    data.append("userId", userId);
+    data.append("userId", userIdSelected);
 
     axios.post("../User/adminController.php", data)
     .then(() =>
@@ -122,7 +122,6 @@ function activateUser(userId)
     })
 }
 
-function deactivateUser(userId)
 
 function deactivateUserPrompt(userIdSelected)
 {
@@ -135,15 +134,18 @@ function deactivateUserPrompt(userIdSelected)
 
     $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "deactivateBtn", onclick : `deactivateUser(${userIdSelected})`}).html("Deactivate User"))
 }
+
+function deactivateUser(userIdSelected)
 {
     let data = new FormData();
     data.append("function", "deactivateUser");
-    data.append("userId", userId);
+    data.append("userId", userIdSelected);
 
     axios.post("../User/adminController.php", data)
     .then(() =>
     {
         overHang("success", "User has been deactivated");
         $('#admin-modal').modal('hide');
+        loadActiveUsers();
     })
 }
