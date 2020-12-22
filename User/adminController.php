@@ -8,6 +8,10 @@ if($function == "adminUpdate")
 {
     $adminController->adminUpdate($_POST['editForename'], $_POST['editSurname'], $_POST['editUsername'], $_POST['userSelect'], $_POST['userId']);
 }
+else if ($function == "activateUser")
+{
+    $adminController->activateUser($_POST["userId"]);
+}
 else if ($function == "deactivateUser")
 {
     $adminController->deactivateUser($_POST["userId"]);
@@ -29,6 +33,15 @@ class adminController
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("UPDATE user SET forename = ?, surname = ?, username = ?, level = ? WHERE userId = ?");
         $stmt->execute([$forename, $surname, $username, $level, $userId]);
+        header("Location: admin.php");
+    }
+
+    public function activateUser($userId)
+    {
+        $pdo = logindb('user', 'pass');
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("UPDATE user SET isActive = 1 WHERE userId = ?");
+        $stmt->execute([$userId]);
         header("Location: admin.php");
     }
 

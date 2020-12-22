@@ -3,6 +3,7 @@ $(document).ready(function()
   loadActiveUsers(active);
 });
 let active = 1;
+let active = 1; // this is used currently in later pages to make sure the user wanted this certain action on the selected Active/not-active group.
 
 function activeSelect()
 {
