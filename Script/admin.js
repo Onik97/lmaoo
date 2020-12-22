@@ -8,12 +8,13 @@ function activeSelect()
 {
     let selectValue = $("#adminSelect").val();
 
-    if (selectValue == "Active"){active = 1, loadActiveUsers(active);}
-    if (selectValue == "inActive"){active = 0, loadInActiveUsers(active);}
+    if (selectValue == "Active"){active = 1, loadActiveUsers();}
+    if (selectValue == "inActive"){active = 0, loadInActiveUsers();}
     else return;
 }
 
 function loadActiveUsers(active)
+function loadActiveUsers()
 {
    var data = new FormData();
    data.append("function", "getAdminActiveUsers");
@@ -46,6 +47,7 @@ function loadActiveUsers(active)
 }
 
 function loadInActiveUsers(active)
+function loadInActiveUsers()
 {
    var data = new FormData();
    data.append("function", "getAdminInActiveUsers");
