@@ -15,7 +15,6 @@ function activeSelect()
 
 function loadActiveUsers(active)
 {
-    console.log(active);
    var data = new FormData();
    data.append("function", "getAdminActiveUsers");
 
@@ -48,7 +47,6 @@ function loadActiveUsers(active)
 
 function loadInActiveUsers(active)
 {
-    console.log(active);
    var data = new FormData();
    data.append("function", "getAdminInActiveUsers");
 
@@ -108,7 +106,6 @@ function editUser(userId, active)
                 : (adminSelected == 0 && active == 0) ? ($('#saveUserChange').prop('disabled', true))
                     : (adminSelected == 0 && active == 1) ? ($('#saveUserChange').prop('disabled', false))
                         : null;
-
     })
 }
 
