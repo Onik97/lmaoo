@@ -88,6 +88,7 @@ function editUser(userId, active)
     let adminEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
     let adminSelectLabel = $("<label>").html("Activate/Deactive User:");
     let adminOptionSelect = $("<select>", {class : "form-control", id : "adminSelect"});
+    let adminOptionSelect = $("<select>", {class : "form-control adminSelector", id : "adminSelect"});
     let adminOptioninput1 = $('<option>', {id : 'adminOptionInput1'}).val(1).html('Activate');
     let adminOptioninput2 = $('<option>', {id : 'adminOptionInput2'}).val(0).html('Deactivate');
     let adminValidationSmall = $("<small>", {id : "adminValidationSmall"});
