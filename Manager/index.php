@@ -1,3 +1,5 @@
+<?php require("../User/user.php"); require("../connection.php"); session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +11,9 @@
     <title>Manager</title>
 </head>
 <body>
+    <?php include("../Global/navBar.php"); ?>
+
+    <h1>THIS IS THE MANAGER PAGE LOL</h1>
 
     <?php include("../Global/scripts.php"); ?>
     <?php include("managerModal.php"); ?>
