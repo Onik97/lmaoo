@@ -18,6 +18,7 @@
         <?php include("../Global/scripts.php"); ?>
     </body>
         <?php include("../Global/editUserModal.php"); ?>
+    <?php $userController->loadWelcomeMessage($userLoggedIn); ?>
 
     <footer> 
         <?php include("../Global/editUserModal.php"); ?>
