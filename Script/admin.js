@@ -123,6 +123,18 @@ function activateUser(userId)
 }
 
 function deactivateUser(userId)
+
+function deactivateUserPrompt(userIdSelected)
+{
+    $("#admin-modal-title").html("Edit User Info"); 
+    let adminEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
+    let adminSelectLabel = $("<label>").html("Are you sure you want to deactivate this user?");
+    
+    $("#admin-modal-body").html("").append(adminEditDiv);
+    $(adminEditDiv).append(adminSelectLabel);
+
+    $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "deactivateBtn", onclick : `deactivateUser(${userIdSelected})`}).html("Deactivate User"))
+}
 {
     let data = new FormData();
     data.append("function", "deactivateUser");
