@@ -1,13 +1,24 @@
-#devInfo {
+#devInfo{
     margin: 50px auto 0px auto;
 }
 
-#homeTicketTable {
-    width: 800px;
-    margin: 225px auto 0px auto;
-    border: 5px solid black;
+.welcomeMessage{
+    margin-left: 100px;
+    margin-top: 50px;
+}
+#homePageCards{
+    margin: 10px, auto;
 }
 
-#homePageCards {
-    margin: 10px, auto;
+#homePageTickets{
+    margin-top: 20px;
+    margin-left: -250px;
+}
+.homeProject-list{
+    float : left;
+    width: 500px;
+}
+.ticket-deadline{
+    float: right;
+    width: 500px;
 }
