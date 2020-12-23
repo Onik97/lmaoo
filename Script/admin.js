@@ -75,18 +75,16 @@ function loadInActiveUsers()
    })
 }
 
-function editUser(userId, active)
+function activateUserPrompt(userIdSelected)
 {
-    $("#admin-modal-title").html("Edit User Info");
-
+    $("#admin-modal-title").html("Edit User Info"); 
     let adminEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
-    let adminSelectLabel = $("<label>").html("Activate/Deactive User:");
-    let adminOptionSelect = $("<select>", {class : "form-control adminSelector", id : "adminSelect"});
-    let adminOptioninput1 = $('<option>', {id : 'adminOptionInput1'}).val(1).html('Activate');
-    let adminOptioninput2 = $('<option>', {id : 'adminOptionInput2'}).val(0).html('Deactivate');
-    let adminValidationSmall = $("<small>", {id : "adminValidationSmall"});
+    let adminSelectLabel = $("<label>").html("Are you sure you want to activate this user?");
+    
     $("#admin-modal-body").html("").append(adminEditDiv);
     $(adminEditDiv).append(adminSelectLabel);
+
+    $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "activateBtn", onclick : `activateUser(${userIdSelected})`}).html("Activate User"))
 }
 
 function activateUser(userIdSelected)
@@ -100,6 +98,7 @@ function activateUser(userIdSelected)
     {
         overHang("success", "User has been activated");
         $('#admin-modal').modal('hide');
+        loadActiveUsers();
     })
 }
 
