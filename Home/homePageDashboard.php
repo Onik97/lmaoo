@@ -2,8 +2,10 @@
 if ($userLoggedIn == null)
 {
 ?>
-<div class='welcomeMessage'>
-    <h1>Welcome, Please log in</h1>
+<div class="jumbotron jumbotron-fluid text-center">
+  <div class="container">
+    <h1 class="display-4">Hard stuck Gold dps ;-;</h1>
+  </div>
 </div>
 <div id='devInfo' class='container'>
     <div class='mx-5'>
