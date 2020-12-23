@@ -11,8 +11,10 @@
     </head>
 
     <body>
-    <?php $userController->loadWelcomeMessage($userLoggedIn); ?>
 
+    <?php include("homePageDashboard.php"); ?>
+
+    </body>
     <footer> 
         <?php include("../Global/editUserModal.php"); ?>
         <?php include("../Global/scripts.php"); ?>
