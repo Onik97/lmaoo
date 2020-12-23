@@ -12,7 +12,9 @@
 
     <body>
 
-    <?php include("homePageDashboard.php"); ?>
+    <?php
+    if ($userLoggedIn == null) include("aboutUs.php"); else include("dashboard.php");
+    ?>
 
     </body>
     <footer> 
