@@ -9,6 +9,8 @@
 
             <div class="modal-body" id="admin-modal-body"></div>
 
+            <div class="modal-footer" id="admin-modal-footer"></div>
+
         </div>
     </div>
 </div>
