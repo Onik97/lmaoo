@@ -1,7 +1,6 @@
 <?php
 function logindb($user, $password)
 {
-	$pdo;
 	try
 	{
 		$pdo = new PDO("mysql:host=192.168.5.10;dbname=lmaoo", $user, $password);
