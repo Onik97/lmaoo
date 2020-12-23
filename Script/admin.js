@@ -7,8 +7,8 @@ function activeSelect()
 {
     let selectValue = $("#adminSelect").val();
 
-    if (selectValue == "Active"){active = 1, loadActiveUsers();}
-    if (selectValue == "inActive"){active = 0, loadInActiveUsers();}
+    if (selectValue == "Active")loadActiveUsers();
+    if (selectValue == "inActive")loadInActiveUsers();
     else return;
 }
 
@@ -88,24 +88,6 @@ function editUser(userId, active)
     let adminValidationSmall = $("<small>", {id : "adminValidationSmall"});
     $("#admin-modal-body").html("").append(adminEditDiv);
     $(adminEditDiv).append(adminSelectLabel);
-    $(adminEditDiv).append(adminOptionSelect);
-    $(adminOptionSelect).append(adminOptioninput1);
-    $(adminOptionSelect).append(adminOptioninput2);
-    $(adminEditDiv).append(adminValidationSmall);
-
-    active == 1 ? $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveUserChange", onclick : "deactivateUser(userId)"}).html("Save"))
-    : $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveUserChange", onclick : "activateUser(userId)"}).html("Save"))
-    $('#saveUserChange').prop('disabled', true);
-    
-    $("select.adminSelector").change(function(){
-        let adminSelected = $(this).children("option:selected").val();
-	
-        (adminSelected == 1 && active == 1) ? ($('#saveUserChange').prop('disabled', true))
-            : (adminSelected == 1 && active == 0) ? ($('#saveUserChange').prop('disabled', false))
-                : (adminSelected == 0 && active == 0) ? ($('#saveUserChange').prop('disabled', true))
-                    : (adminSelected == 0 && active == 1) ? ($('#saveUserChange').prop('disabled', false))
-                        : null;
-    })
 }
 
 function activateUser(userIdSelected)
