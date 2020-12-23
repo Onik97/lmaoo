@@ -11,14 +11,15 @@
 }
 
 #homePageTickets{
-    margin-top: 20px;
-    margin-left: -250px;
+    margin-top: 50px;
+    margin-left: 100px;
+    width: 800px;
 }
 .homeProject-list{
     float : left;
-    width: 500px;
+    width: 250px;
 }
 .ticket-deadline{
     float: right;
-    width: 500px;
+    width: 250px;
 }

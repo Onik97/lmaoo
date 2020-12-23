@@ -1,5 +1,5 @@
 <h1 class='welcomeMessage'>Welcome back User</h1>
-<div class="container">
+<div class="container-fluid">
     <div id="homePageTickets">
         <div class="homeDashboard">
             <span class="homeProject-list">
