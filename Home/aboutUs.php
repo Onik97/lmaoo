@@ -11,7 +11,7 @@
 <div id='devInfo' class='container'>
     <div id="homePageCards" class="card-deck">
         <div class="card">
-        <img class="card-img-top" src="../Images/LewisProfile.jpg" alt="Card image cap">
+        <img class="card-img-top" src="../Images/profilePictures/LewisProfile.jpg" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">Lewis</h5>
                 <p class="card-text">Still hardstuck gold dps, i cri everytime.</p>
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="card">
-        <img class="card-img-top" src="../Images/AvatarImage.jpg" alt="Card image cap">
+        <img class="card-img-top" src="../Images/profilePictures/avatar.jpg" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">Adil</h5>
                 <p class="card-text">King Of Heroes</p>
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="card">
-            <img class="card-img-top" src="../Images/AvatarImage.jpg" alt="Card image cap">
+            <img class="card-img-top" src="../Images/profilePictures/avatar.jpg" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">Onik</h5>
                 <p class="card-text">Also hardstuck gold dps.</p>
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="card">
-            <img class="card-img-top" src="../Images/AvatarImage.jpg" alt="Card image cap">
+            <img class="card-img-top" src="../Images/profilePictures/avatar.jpg" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">Tufan</h5>
                 <p class="card-text">UX Genius</p>
