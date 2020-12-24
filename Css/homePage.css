@@ -14,7 +14,7 @@
 #homePageTickets{
     margin-top: 50px;
     margin-left: 100px;
-    width: 1000px;
+    width: 1200px;
 }
 
 .homeProject-list{
@@ -24,9 +24,13 @@
 
 .ticket-deadline{
     float: right;
-    width: 350px;
+    width: 600px;
 }
 
-.homeProjectsTable{
-    
+.homeTable{
+    padding: 0px 17px;
+}
+
+.ticketTable{
+    padding: 0px 8px;
 }
