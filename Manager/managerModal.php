@@ -28,12 +28,9 @@
 
                 <ul class="list-group list-group-flush project-list">
                 <li class="list-group-item">
-                    <div class="project-info">User 1
-                        <div class="owner-role">
-                            <span class="user-access-role d-block">Owner</span>
-                        </div>
+                    <div class="user-info">User 1
                         <div class="btn-group">
-                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
                             ACTIVE ROLE?
                             </button>
                             <div class="dropdown-menu">
@@ -44,13 +41,10 @@
                     </div>
                 </li>
 
-                <li class="list-group-item justify-content-between">
-                    <div class="project-info">User 2
-                        <div class="manager-role">
-                            <span class="user-access-role d-block">Manager</span>
-                        </div>
+                <li class="list-group-item">
+                    <div class="user-info">User 2
                         <div class="btn-group">
-                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
                             ACTIVE ROLE?
                             </button>
                             <div class="dropdown-menu">
