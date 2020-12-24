@@ -1,3 +1,5 @@
+$(document).ready(() => { loadProjects(); } );
+
 async function loadOwnerProjects()
 {
     var data = new FormData();
