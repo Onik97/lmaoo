@@ -1,8 +1,4 @@
-<?php
-require_once(__DIR__ . "/../connection.php");
-require_once(__DIR__ . "/../User/user.php");
-
-error_reporting(0);
+<?php require_once(__DIR__ . "/../connection.php"); require_once(__DIR__ . "/../User/user.php");
 
 $projectController = new projectController();
 
