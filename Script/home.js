@@ -6,11 +6,8 @@ $(document).ready(function()
 
 function loadOwnProjects()
 {
-    if (typeof userId == 'undefined') return;
-
     var data = new FormData();
     data.append("function", "loadOwnProjects");
-    data.append("owner", userId);
 
     axios.post("../Home/homeController.php", data)
     .then(response =>
@@ -33,7 +30,6 @@ function loadOwnProjects()
 
 function loadTicketDeadlines()
 {
-    if (typeof userId == 'undefined') return;
     var data = new FormData();
     data.append("function", "loadTicketsWithDeadline");
     data.append("assignee_key", userId);
