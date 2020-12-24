@@ -37,7 +37,7 @@ async function loadProjects()
         var projectInfo = $("<div>", {"class" : "project-info"});
         var projectStatus = $("<div>", {"class" : "project-status"}).append(json.status);
         var role = $("<div>", {"class" : "owner-role"}).append("Owner");
-        var roleBtn = $("<button>", { type:"button", class : "btn btn-warning", "data-toggle" : "modal", "data-target" : "#managerModal"}).append("Roles");
+        var roleBtn = $("<button>", { type:"button", class : "btn btn-warning", "data-toggle" : "modal", "data-target" : "#managerModal", "onclick" : `rolePrompt(${json.projectId})`}).append("Roles");
         
         $(projectInfo).append(json.name);
         $(projectInfo).append(projectStatus);
@@ -55,7 +55,7 @@ async function loadProjects()
         var projectInfo = $("<div>", {"class" : "project-info"});
         var projectStatus = $("<div>", {"class" : "project-status"}).append(json.status);
         var role = $("<div>", {"class" : "manager-role"}).append("Manager");
-        var roleBtn = $("<button>", { type:"button", class : "btn btn-warning", "data-toggle" : "modal", "data-target" : "#managerModal"}).append("Roles");
+        var roleBtn = $("<button>", { type:"button", class : "btn btn-warning", "data-toggle" : "modal", "data-target" : "#managerModal", "onclick" : `rolePrompt(${json.projectId})` }).append("Roles");
         
         $(projectInfo).append(json.name);
         $(projectInfo).append(projectStatus);
