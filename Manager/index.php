@@ -19,49 +19,14 @@
         <div class="row">
             <div class="col-sm-10">
                 <h3 href="#">Projects <span id="projectSize" class="badge"></span></h3>
-
             </div>
             <div class="col-sm-2">
                 <button type="button" class="btn btn-success" data-toggle='modal' data-target='#globalModal' onclick="createProjectPrompt()">New Project</button>
             </div>
         </div>
-
         
         <!-- Projects List -->
-
-           <hr> <ul id="projectUl" class="list-group list-group-flush project-list">
-                <li class="list-group-item">
-                    <div class="project-info">Project 1
-                        <div class="project-status">In progress</div>
-                        <div class="owner-role">Owner</div>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#managerModal">Roles</button>
-                    </div>
-                </li>
-
-                <li class="list-group-item">
-                    <div class="project-info">Project 2
-                        <div class="project-status">Back-log</div>
-                        <div class="manager-role">Manager</div>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#managerModal">Roles</button>
-                    </div>
-                </li>
-
-                <li class="list-group-item">
-                    <div class="project-info">Project 3
-                        <div class="project-status">In development</div>
-                        <div class="manager-role">Manager</div>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#managerModal">Roles</button>
-                    </div>
-                </li>
-
-                <li class="list-group-item">
-                    <div class="project-info">Project 4
-                        <div class="project-status">Completed</div>
-                        <div class="manager-role">Manager</div>
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#managerModal">Roles</button>
-                    </div>
-                </li>
-            </ul>
+        <hr><ul id="projectUl" class="list-group list-group-flush project-list"></ul>
     </div>
 
     <?php include("../Global/scripts.php"); ?>
