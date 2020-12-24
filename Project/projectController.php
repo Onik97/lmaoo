@@ -60,10 +60,11 @@ class projectController
 
     public function createNewProject($projectName, $projectStatus)
     {
+        session_start();
         $pdo = logindb('user', 'pass');
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("INSERT INTO project (name, status) VALUES (?, ?)");
-        $stmt->execute([$projectName, $projectStatus]);
+        $stmt = $pdo->prepare("INSERT INTO project (name, status, owner) VALUES (?, ?, ?)");
+        $stmt->execute([$projectName, $projectStatus, $_SESSION['userLoggedIn']->getId()]);
     }
 
     public function createNewTicket($featureId, $summary, $reporterKey)
