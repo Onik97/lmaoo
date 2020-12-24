@@ -18,63 +18,46 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-10">
-                <h3 href="#">Projects <span class="badge">42</span></h3>
+                <h3 href="#">Projects <span id="projectSize" class="badge"></span></h3>
 
             </div>
             <div class="col-sm-2">
-                <button type="button" class="btn btn-success">New Project</button>
+                <button type="button" class="btn btn-success" data-toggle='modal' data-target='#globalModal' onclick="createProjectPrompt()">New Project</button>
             </div>
         </div>
 
         
         <!-- Projects List -->
 
-           <hr> <ul class="list-group list-group-flush project-list">
+           <hr> <ul id="projectUl" class="list-group list-group-flush project-list">
                 <li class="list-group-item">
                     <div class="project-info">Project 1
-
                         <div class="project-status">In progress</div>
-
-                        <div class="owner-role">
-                            <span class="user-access-role d-block">Owner</span>
-                        </div>
-
+                        <div class="owner-role">Owner</div>
                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#managerModal">Roles</button>
                     </div>
                 </li>
 
-                <li class="list-group-item justify-content-between">
+                <li class="list-group-item">
                     <div class="project-info">Project 2
-
                         <div class="project-status">Back-log</div>
-
-                        <div class="manager-role">
-                            <span class="user-access-role d-block">Manager</span>
-                        </div>
+                        <div class="manager-role">Manager</div>
                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#managerModal">Roles</button>
                     </div>
                 </li>
 
                 <li class="list-group-item">
                     <div class="project-info">Project 3
-
                         <div class="project-status">In development</div>
-
-                        <div class="manager-role">
-                            <span class="user-access-role d-block">Manager</span>
-                        </div>
+                        <div class="manager-role">Manager</div>
                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#managerModal">Roles</button>
                     </div>
                 </li>
 
                 <li class="list-group-item">
                     <div class="project-info">Project 4
-
                         <div class="project-status">Completed</div>
-
-                        <div class="manager-role">
-                            <span class="user-access-role d-block">Manager</span>
-                        </div>
+                        <div class="manager-role">Manager</div>
                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#managerModal">Roles</button>
                     </div>
                 </li>

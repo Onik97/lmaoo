@@ -59,10 +59,10 @@ class ManagerController
 
     public function addUsersToProject($json)
     {
-        $sql = "INSERT INTO projectAccess (userId, projectId, allowAccess, managerAccess) VALUES ";
+        $sql = "INSERT INTO projectAccess (userId, projectId, allowAccess, managerAccess) VALUES";
         $data = json_decode($json);
         foreach ($data as $key => $value) {
-            $sql = $sql . "$value->userId, $value->projectId, $value->allowAccess, $value->managerAccess,";
+            $sql = $sql . " ($value->userId, $value->projectId, $value->allowAccess, $value->managerAccess),";
         }
         $finalSql = substr($sql, 0, -1); // Removes , at the end of the SQL 
 
