@@ -1,4 +1,4 @@
-<?php require("../User/user.php"); require("../connection.php"); session_start();
+<?php require_once("../connection.php"); require_once("../User/userController.php"); session_start();
 error_reporting(0);
 
 $homeController = new homeController();
