@@ -1,4 +1,4 @@
-<?php require("../User/user.php"); require("../connection.php"); require_once("../User/userController.php"); session_start(); ?>
+<?php require_once("homeController.php"); ?>
 
 <!DOCTYPE html>
 <html>
@@ -19,5 +19,6 @@
     <footer> 
         <?php include("../Global/editUserModal.php"); ?>
         <?php include("../Global/scripts.php"); ?>
+        <script type="text/javascript" src="../Script/home.js"></script>
     </footer>
 </html>

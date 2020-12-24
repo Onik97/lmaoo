@@ -6,6 +6,7 @@
     margin-left: 100px;
     margin-top: 50px;
 }
+
 #homePageCards{
     margin: 10px, auto;
 }
@@ -13,13 +14,23 @@
 #homePageTickets{
     margin-top: 50px;
     margin-left: 100px;
-    width: 800px;
+    width: 1200px;
 }
+
 .homeProject-list{
     float : left;
-    width: 250px;
+    width: 350px;
 }
+
 .ticket-deadline{
     float: right;
-    width: 250px;
+    width: 600px;
+}
+
+.homeTable{
+    padding: 0px 17px;
+}
+
+.ticketTable{
+    padding: 0px 8px;
 }

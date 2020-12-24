@@ -3,21 +3,15 @@
     <div id="homePageTickets">
         <div class="homeDashboard">
             <span class="homeProject-list">
-                <p><b>Your projects</b></p>
+                <p class="text-center"><b>Your projects</b></p>
                 <hr class="small-hr">
-                <ul class="list-inline">
-                    <li class="list-inline-item">Lorem ipsum</li>
-                    <li class="list-inline-item">Phasellus iaculis</li>
-                    <li class="list-inline-item">Nulla volutpat</li>
+                <ul id="homeProjects" class="list-inline">
                 </ul>
             </span>
             <span class="ticket-deadline">
-                <p><b>Ticket Deadlines</b></p>
+                <p class="text-center"><b>Ticket Deadlines</b></p>
                 <hr class="small-hr">
-                <ul class="list-inline">
-                    <li class="list-inline-item">Lorem ipsum</li>
-                    <li class="list-inline-item">Phasellus iaculis</li>
-                    <li class="list-inline-item">Nulla volutpat</li>
+                <ul id="homeTickets" class="list-inline">
                 </ul>
             </span>
         </div>

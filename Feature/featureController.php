@@ -1,7 +1,5 @@
-<?php 
-require_once(__DIR__ . "/../connection.php");
+<?php require_once(__DIR__ . "/../connection.php");
 $featureController = new featureController();
-error_reporting(0);
 
 if($_POST['function'] == "loadFeatures")
 {
