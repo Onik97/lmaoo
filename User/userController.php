@@ -246,6 +246,6 @@ class userController
 			echo "<a class='dropdown-item' id='logoutNav' href='../User/logout.php'>Logout</a>";
 			if($userLoggedIn->getLevel() > 3) echo "<a class='dropdown-item' id='adminNav' href='../User/admin.php'>Admin</a>";
 		}
-	}	
+	}
 }
 ?>
