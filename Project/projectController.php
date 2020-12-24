@@ -102,13 +102,12 @@ class projectController
     public function loadProjectsInNavBar($userLoggedIn)
     {
         $projectController = new projectController();
-        if ($userLoggedIn == null)  return; 
+        if ($userLoggedIn == null) return; 
         $projects = $projectController->getProjectList();
 
         echo "<li class='nav-item dropdown'>";
         echo "<a id='projectNav' href='#' class='nav-link dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Project<span class='caret'></span></a>";
         echo "<div class='dropdown-menu'>";
-        if ($userLoggedIn->getLevel() > 3) echo "<a class='dropdown-item' data-toggle='modal' data-target='#globalModal' onclick='createProjectPrompt()'>+ Create Project</a>";
         
         foreach ($projects as $project) 
         { 
