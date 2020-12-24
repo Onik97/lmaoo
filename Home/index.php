@@ -1,10 +1,4 @@
-<?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-?>
-
-<?php require("../User/user.php"); require("../connection.php"); require("../User/userController.php"); require("homeController.php"); session_start(); ?>
+<?php require_once("homeController.php"); ?>
 
 <!DOCTYPE html>
 <html>
