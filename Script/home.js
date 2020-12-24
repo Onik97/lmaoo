@@ -6,6 +6,8 @@ $(document).ready(function()
 
 function loadOwnProjects()
 {
+    if (typeof userId == 'undefined') return;
+
     var data = new FormData();
     data.append("function", "loadOwnProjects");
 
@@ -20,9 +22,9 @@ function loadOwnProjects()
 
         for (i = 0; i < json.length; i++)
         {
-        $(ProjectList).append($("<li>", {class : "list-inline-item"}).html(json[i].projectId));
-        $(ProjectList).append($("<li>", {class : "list-inline-item"}).html(json[i].name));
-        $(ProjectList).append($("<li>", {class : "list-inline-item"}).html(json[i].status));
+        $(ProjectList).append($("<li>", {class : "list-inline-item homeProjectsTable"}).html(json[i].projectId));
+        $(ProjectList).append($("<li>", {class : "list-inline-item homeProjectsTable"}).html(json[i].name));
+        $(ProjectList).append($("<li>", {class : "list-inline-item homeProjectsTable"}).html(json[i].status));
         $(ProjectList).append($("<hr>", {class : "small-hr"}));
         }
     })
@@ -30,6 +32,8 @@ function loadOwnProjects()
 
 function loadTicketDeadlines()
 {
+    if (typeof userId == 'undefined') return;
+    
     var data = new FormData();
     data.append("function", "loadTicketsWithDeadline");
     data.append("assignee_key", userId);
