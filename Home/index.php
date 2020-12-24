@@ -5,6 +5,7 @@
     <head>
         <title>Home</title>
         <p id="navBarActive" hidden>homePage</p>
+        <link rel="stylesheet" href="../Css/homePage.css">
         <?php include("../Global/head.php"); ?> 
         <?php include("../Global/navBar.php"); ?>
         <?php include("../Home/homeMessage.php"); ?> <!-- not sure what this is used for, kept just incase. -->
@@ -12,14 +13,11 @@
 
     <body>
 
-    <?php
-    if ($userLoggedIn == null) include("aboutUs.php"); else include("dashboard.php");
-    ?>
+    <?php if ($userLoggedIn == null) include("aboutUs.php"); else include("dashboard.php"); ?>
 
     </body>
     <footer> 
         <?php include("../Global/editUserModal.php"); ?>
         <?php include("../Global/scripts.php"); ?>
-        <link rel="stylesheet" href="../Css/homePage.css">
     </footer>
 </html>
