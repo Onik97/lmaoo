@@ -6,18 +6,12 @@
                 <p><b>Your projects</b></p>
                 <hr class="small-hr">
                 <ul id="homeProjects" class="list-inline">
-                    <li class="list-inline-item">Lorem ipsum</li>
-                    <li class="list-inline-item">Phasellus iaculis</li>
-                    <li class="list-inline-item">Nulla volutpat</li>
                 </ul>
             </span>
             <span class="ticket-deadline">
                 <p><b>Ticket Deadlines</b></p>
                 <hr class="small-hr">
                 <ul id="homeTickets" class="list-inline">
-                    <li class="list-inline-item">Lorem ipsum</li>
-                    <li class="list-inline-item">Phasellus iaculis</li>
-                    <li class="list-inline-item">Nulla volutpat</li>
                 </ul>
             </span>
         </div>
