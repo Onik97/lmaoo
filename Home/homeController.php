@@ -1,8 +1,5 @@
 <?php require_once("../connection.php"); require_once("../User/userController.php"); session_start();
-error_reporting(0);
-
 $homeController = new homeController();
-$function = $_POST['function'];
 
 if ($function == "loadTicketsWithDeadline")
 {
