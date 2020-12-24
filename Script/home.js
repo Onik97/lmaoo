@@ -22,9 +22,9 @@ function loadOwnProjects()
 
         for (i = 0; i < json.length; i++)
         {
-        $(ProjectList).append($("<li>", {class : "list-inline-item homeProjectsTable"}).html(json[i].projectId));
-        $(ProjectList).append($("<li>", {class : "list-inline-item homeProjectsTable"}).html(json[i].name));
-        $(ProjectList).append($("<li>", {class : "list-inline-item homeProjectsTable"}).html(json[i].status));
+        $(ProjectList).append($("<li>", {class : "list-inline-item homeTable"}).html(json[i].projectId));
+        $(ProjectList).append($("<li>", {class : "list-inline-item homeTable"}).html(json[i].name));
+        $(ProjectList).append($("<li>", {class : "list-inline-item homeTable"}).html(json[i].status));
         $(ProjectList).append($("<hr>", {class : "small-hr"}));
         }
     })
@@ -33,7 +33,7 @@ function loadOwnProjects()
 function loadTicketDeadlines()
 {
     if (typeof userId == 'undefined') return;
-    
+
     var data = new FormData();
     data.append("function", "loadTicketsWithDeadline");
     data.append("assignee_key", userId);
@@ -49,10 +49,10 @@ function loadTicketDeadlines()
 
         for (i = 0; i < json.length; i++)
         {
-        $(ticketDeadline).append($("<li>", {class : "list-inline-item"}).html(json[i].ticketId));
-        $(ticketDeadline).append($("<li>", {class : "list-inline-item"}).html(json[i].summary));
-        $(ticketDeadline).append($("<li>", {class : "list-inline-item"}).html(json[i].progress));
-        $(ticketDeadline).append($("<li>", {class : "list-inline-item"}).html(json[i].deadline));
+        $(ticketDeadline).append($("<li>", {class : "list-inline-item ticketTable"}).html(json[i].ticketId));
+        $(ticketDeadline).append($("<li>", {class : "list-inline-item ticketTable"}).html(json[i].summary));
+        $(ticketDeadline).append($("<li>", {class : "list-inline-item ticketTable"}).html(json[i].progress));
+        $(ticketDeadline).append($("<li>", {class : "list-inline-item ticketTable"}).html(json[i].deadline));
         $(ticketDeadline).append($("<hr>", {class : "small-hr"}));
         }
     })
