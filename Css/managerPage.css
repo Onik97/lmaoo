@@ -51,7 +51,7 @@ h1 {
 
 .btn-warning {
     margin-left: 25px;
-    border-radius: 50px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     position: absolute;
