@@ -95,6 +95,12 @@ async function rolePrompt(projectId)
         $(user).append(userInfo);
         $(userUl).append(user);
     }
+    
+    // Dynamically change the role in the Modal
+    $(".dropdown-menu > a").click(function(e) { 
+        $('.user-info').on('hidden.bs.dropdown', function() { $(this).find("button").html(e.target.outerText); });
+    });
+
 }
 
 function createProjectPrompt()
