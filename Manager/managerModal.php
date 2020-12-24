@@ -38,7 +38,7 @@
                             </button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Manager</a>
-                                <a class="dropdown-item" href="#">Owner</a>
+                                <a class="dropdown-item" href="#">Developer</a>
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                             </button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Manager</a>
-                                <a class="dropdown-item" href="#">Owner</a>
+                                <a class="dropdown-item" href="#">Developer</a>
                             </div>
                         </div>
                     </div>
