@@ -6,14 +6,17 @@ $(document).ready(function()
 
 function loadOwnProjects()
 {
+    if (typeof userId == 'undefined') return;
+
     var data = new FormData();
     data.append("function", "loadOwnProjects");
     data.append("owner", userId);
 
-    axios.post("homeController.php", data)
+    axios.post("../Home/homeController.php", data)
     .then(response =>
     {
         let json = response.data;
+        console.log(json);
 
         let ProjectList = $("#homeProjects");
         $(ProjectList).find("li:gt(0)").remove();
@@ -30,14 +33,16 @@ function loadOwnProjects()
 
 function loadTicketDeadlines()
 {
+    if (typeof userId == 'undefined') return;
     var data = new FormData();
-    data.append("function", "loadTicketsWithDeadlines");
+    data.append("function", "loadTicketsWithDeadline");
     data.append("assignee_key", userId);
 
-    axios.post("homeController.php", data)
+    axios.post("../Home/homeController.php", data)
     .then(response =>
     {
         let json = response.data;
+        console.log(json);
 
         let ticketDeadline = $("#homeTickets");
         $(ticketDeadline).find("li:gt(0)").remove();
