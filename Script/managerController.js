@@ -46,7 +46,7 @@ async function loadProjects()
         var project = $("<li>", {"class" : "list-group-item"}).html("");
         var projectInfo = $("<div>", {"class" : "project-info"});
         var projectStatus = $("<div>", {"class" : "project-status"}).append(json.status);
-        var role = $("<div>", {"class" : "owner-role"}).append("Owner");
+        var role = $("<div>", {"class" : "manager-role"}).append("Manager");
         var roleBtn = $("<button>", { type:"button", class : "btn btn-warning", "data-toggle" : "modal", "data-target" : "#managerModal"}).append("Roles");
         
         $(projectInfo).append(json.name);
