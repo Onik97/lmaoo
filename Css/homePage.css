@@ -13,13 +13,13 @@
 #homePageTickets{
     margin-top: 50px;
     margin-left: 100px;
-    width: 800px;
+    width: 1000px;
 }
 .homeProject-list{
     float : left;
-    width: 250px;
+    width: 350px;
 }
 .ticket-deadline{
     float: right;
-    width: 250px;
+    width: 350px;
 }
