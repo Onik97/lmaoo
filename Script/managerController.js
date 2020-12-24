@@ -171,6 +171,6 @@ function createProject()
         .then(() => 
         {
             $('#globalModal').modal('hide');
-            location.reload(); // Refreshes Page as Projects is loaded from PHP, not Javascript
+            loadOwnerProjects();
         })
 }
