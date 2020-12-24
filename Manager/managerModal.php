@@ -9,6 +9,9 @@
                 </button>
             </div>
 
+
+            <!-- Search bar to look for members on the platform -->
+
             <div class="modal-body" id="managerModalBody">
                 <div class="wrapper">
                     <div class="search-input">
@@ -21,7 +24,43 @@
                     </div>
                 </div>
 
+                <!-- List of members on the platform  -->
 
+                <ul class="list-group list-group-flush project-list">
+                <li class="list-group-item">
+                    <div class="project-info">User 1
+                        <div class="owner-role">
+                            <span class="user-access-role d-block">Owner</span>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ACTIVE ROLE?
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Manager</a>
+                                <a class="dropdown-item" href="#">Owner</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="list-group-item justify-content-between">
+                    <div class="project-info">User 2
+                        <div class="manager-role">
+                            <span class="user-access-role d-block">Manager</span>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ACTIVE ROLE?
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Manager</a>
+                                <a class="dropdown-item" href="#">Owner</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
             </div>
 
             <div class="modal-footer" id="managerModalFooter">
