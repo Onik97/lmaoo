@@ -14,6 +14,14 @@ async function loadManagerProjects()
     return await axios.post("../Manager/managerController.php", data) 
 }
 
+async function loadUsersOnProject(projectId)
+{
+    var data = new FormData();
+    data.append("function", "loadUsersOnProject");
+    data.append("projectId", projectId);
+    return await axios.post("../Manager/managerController.php", data) 
+}
+
 async function loadProjects() 
 {
     var ownerProjects = await loadOwnerProjects();
