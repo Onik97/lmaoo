@@ -22,7 +22,7 @@
 
             </div>
             <div class="col-sm-2">
-                <button type="button" class="btn btn-success">New Project</button>
+                <button type="button" class="btn btn-success" data-toggle='modal' data-target='#globalModal' onclick="createProjectPrompt()">New Project</button>
             </div>
         </div>
 
