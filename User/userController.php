@@ -1,6 +1,5 @@
-<?php  
-require_once(__DIR__ . "/../connection.php");
-require_once(__DIR__ . "/user.php");
+<?php  require_once(__DIR__ . "/../connection.php"); require_once(__DIR__ . "/user.php");
+
 $userController = new userController();
 error_reporting(0);
 
