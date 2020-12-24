@@ -26,16 +26,14 @@
 
                 <!-- List of members on the platform  -->
 
-                <ul class="list-group list-group-flush project-list">
-                <li class="list-group-item">
+                <ul class="list-group list-group-flush user-list">
+                <li class="list-group-item users">
                     <div class="user-info">User 1
                         <div class="btn-group">
-                            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-                            ACTIVE ROLE?
-                            </button>
+                            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">ACTIVE ROLE?</button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Manager</a>
-                                <a class="dropdown-item" href="#">Developer</a>
+                                <a class="dropdown-item" value="1">Manager</a>
+                                <a class="dropdown-item" value="0">Developer</a>
                             </div>
                         </div>
                     </div>
@@ -44,12 +42,10 @@
                 <li class="list-group-item">
                     <div class="user-info">User 2
                         <div class="btn-group">
-                            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-                            ACTIVE ROLE?
-                            </button>
+                            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">ACTIVE ROLE?</button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Manager</a>
-                                <a class="dropdown-item" href="#">Developer</a>
+                                <a class="dropdown-item" value="1">Manager</a>
+                                <a class="dropdown-item" value="0">Developer</a>
                             </div>
                         </div>
                     </div>
