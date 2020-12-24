@@ -1,4 +1,10 @@
-<?php require("../User/user.php"); require("../connection.php"); require_once("../User/userController.php"); session_start(); ?>
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
+
+<?php require("../User/user.php"); require("../connection.php"); require("../User/userController.php"); require("homeController.php"); session_start(); ?>
 
 <!DOCTYPE html>
 <html>
@@ -19,5 +25,6 @@
     <footer> 
         <?php include("../Global/editUserModal.php"); ?>
         <?php include("../Global/scripts.php"); ?>
+        <script type="text/javascript" src="../Script/home.js"></script>
     </footer>
 </html>
