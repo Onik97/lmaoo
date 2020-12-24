@@ -7,14 +7,13 @@ function activeSelect()
 {
     let selectValue = $("#adminSelect").val();
 
-    if (selectValue == "Active") loadActiveUsers();
-    if (selectValue == "inActive") loadInActiveUsers();
+    if (selectValue == "Active")loadActiveUsers();
+    if (selectValue == "inActive")loadInActiveUsers();
     else return;
 }
 
 function loadActiveUsers()
 {
-
    var data = new FormData();
    data.append("function", "getAdminActiveUsers");
 
@@ -26,7 +25,6 @@ function loadActiveUsers()
 
        for (i = 0; i < json.length; i++)
        {
-
            let newRow = document.getElementById("admin-table").insertRow(-1);
            let cell1 = newRow.insertCell(0);
            let cell2 = newRow.insertCell(1);
@@ -40,15 +38,13 @@ function loadActiveUsers()
            $(cell3).append(document.createTextNode(json[i].forename));
            $(cell4).append(document.createTextNode(json[i].surname));
            $(cell5).append(document.createTextNode(json[i].level));
-           $(cell6).append($("<button>").html('Edit User'));
-
+           $(cell6).append($("<button>", { id : "deactivateUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `deactivateUserPrompt(${json[i].userId})`}).html("Deactivate User"));
        }
    })
 }
 
 function loadInActiveUsers()
 {
-    
    var data = new FormData();
    data.append("function", "getAdminInActiveUsers");
 
@@ -74,22 +70,62 @@ function loadInActiveUsers()
            $(cell3).append(document.createTextNode(json[i].forename));
            $(cell4).append(document.createTextNode(json[i].surname));
            $(cell5).append(document.createTextNode(json[i].level));
-           $(cell6).append($("<button>").html('Edit User'));;
+           $(cell6).append($("<button>", { id : "activateUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `activateUserPrompt(${json[i].userId})`}).html("Activate User"));
        }
    })
 }
 
-function editUser(userId)
+function activateUserPrompt(userIdSelected)
 {
-    console.log("TBC");
+    $("#admin-modal-title").html("Edit User Info"); 
+    let adminEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
+    let adminSelectLabel = $("<label>").html("Are you sure you want to activate this user?");
+    
+    $("#admin-modal-body").html("").append(adminEditDiv);
+    $(adminEditDiv).append(adminSelectLabel);
+
+    $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "activateBtn", onclick : `activateUser(${userIdSelected})`}).html("Activate User"))
 }
 
-function activateUser(userId)
+function activateUser(userIdSelected)
 {
-    console.log("TBC");
+    let data = new FormData();
+    data.append("function", "activateUser");
+    data.append("userId", userIdSelected);
+
+    axios.post("../User/adminController.php", data)
+    .then(() =>
+    {
+        overHang("success", "User has been activated");
+        $('#admin-modal').modal('hide');
+        loadActiveUsers();
+    })
 }
 
-function deactivateUser(userId)
+
+function deactivateUserPrompt(userIdSelected)
 {
-    console.log("TBC");
+    $("#admin-modal-title").html("Edit User Info"); 
+    let adminEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
+    let adminSelectLabel = $("<label>").html("Are you sure you want to deactivate this user?");
+    
+    $("#admin-modal-body").html("").append(adminEditDiv);
+    $(adminEditDiv).append(adminSelectLabel);
+
+    $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "deactivateBtn", onclick : `deactivateUser(${userIdSelected})`}).html("Deactivate User"))
+}
+
+function deactivateUser(userIdSelected)
+{
+    let data = new FormData();
+    data.append("function", "deactivateUser");
+    data.append("userId", userIdSelected);
+
+    axios.post("../User/adminController.php", data)
+    .then(() =>
+    {
+        overHang("success", "User has been deactivated");
+        $('#admin-modal').modal('hide');
+        loadActiveUsers();
+    })
 }
