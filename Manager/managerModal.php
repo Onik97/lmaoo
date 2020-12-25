@@ -15,10 +15,11 @@
             <div class="modal-body" id="managerModalBody">
                 <div class="wrapper">
                     <div class="search-input">
-                        <a href="" target="_blank" hidden></a>
                         <input type="text" class="form-control" placeholder="User's name">
                         <div class="autocom-box">
                             <!-- here list are inserted from javascript -->
+                            <li>dfdfdff</li>
+                            <li>dfdfdff</li>
                         </div>
                         <div class="icon"><i class="fas fa-search"></i></div>
                     </div>
