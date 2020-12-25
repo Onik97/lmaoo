@@ -6,7 +6,7 @@
 
 <head>
 	<p id="navBarActive" hidden>loginPage</p>
-	<link rel="stylesheet" href="../Css/Login.css">
+	<link rel="stylesheet" href="../Css/LoginRegister.css">
 	<?php include("../Global/head.php"); ?>
 </head>
 
