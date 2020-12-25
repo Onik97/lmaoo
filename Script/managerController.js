@@ -69,7 +69,7 @@ async function loadProjects()
 async function rolePrompt(projectId)
 {
     var json = await loadUsersOnProject(projectId);
-    // $(".list-group.list-group-flush.user-list").html("");
+    // $(".list-group.list-group-flush.user-list").html(""); // Leaving this comment for now to allow Tufan to use Static Data
     
     for (i = 0; i < json.data.length; i++)
     {
@@ -117,8 +117,9 @@ $(".search-input").keyup(e => {
 })
 
 $(".autocom-box").on("click", "li", function() {
-    $(this).remove();
+    $(this).remove(); // Removing for now, TODO: Add Users in the UL List 
 });
+
 function createProjectPrompt()
 {
     $("#globalModallHead").html("Create Project");

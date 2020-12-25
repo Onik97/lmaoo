@@ -17,6 +17,10 @@
                     <input type="text" class="search-input form-control" placeholder="User's name">
                     <div class="autocom-box">
                         <!-- here list are inserted from javascript -->
+                        <li>Static</li>
+                        <li>Data</li>
+                        <li>for</li>
+                        <li>Tufan</li>
                     </div>
                     <div class="icon"><i class="fas fa-search"></i></div>
                 </div>
@@ -26,7 +30,7 @@
                 <ul class="list-group list-group-flush user-list">
                     <li class="list-group-item users">
                         <div class="user-info">
-                            <span id="tufan">User 1</span>
+                            <span id="tufan">Static Data for Tufan 1</span>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">ACTIVE ROLE?</button>
                                 <div class="dropdown-menu">
@@ -39,7 +43,7 @@
 
                     <li class="list-group-item users">
                         <div class="user-info">
-                            <span id="tufan">User 2</span>
+                            <span id="tufan">Static Data for Tufan 2</span>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">ACTIVE ROLE?</button>
                                 <div class="dropdown-menu">
