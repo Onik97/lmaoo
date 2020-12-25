@@ -22,7 +22,6 @@
                         <li>for</li>
                         <li>Tufan</li>
                     </div>
-                    <div class="icon"><i class="fas fa-search"></i></div>
                 </div>
 
                 <!-- List of members on the platform  -->
@@ -39,6 +38,7 @@
                                 </div>
                             </div>
                         </div>
+                        <i class="fas fa-times"></i>
                     </li>
 
                     <li class="list-group-item users">
@@ -52,6 +52,7 @@
                                 </div>
                             </div>
                         </div>
+                        <i class="fas fa-times"></i>
                     </li>
                 </ul>
             </div>
