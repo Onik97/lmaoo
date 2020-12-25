@@ -73,7 +73,6 @@ async function rolePrompt(projectId)
     
     for (i = 0; i < json.data.length; i++)
     {
-        console.log(json.data[i]);
         var currentRole = (json.data[i].managerAccess == "1") ? "Manager" : "Developer"
     
         var userUl = $(".list-group.list-group-flush.user-list");
@@ -100,8 +99,22 @@ async function rolePrompt(projectId)
     $(".dropdown-menu > a").click(function(e) { 
         $('.user-info').on('hidden.bs.dropdown', function() { $(this).find("button").html(e.target.outerText); });
     });
-
 }
+
+// Search Box autofill
+$(".search-input > input").keyup(e => {
+    let input = e.target.value;
+    var usersArray = []; users.forEach((json => usersArray.push(`${json.userId},${json.forename},${json.surname}`)));
+    if (input) 
+    {
+        let results = []; results = usersArray.filter(data => {  return data.toLowerCase().indexOf(input.toLowerCase()) !== -1; });
+        $(".autocom-box").html("");
+        results.map(data => { var users = data.split(",");
+            $(".autocom-box").append($("<li>", {id : `${users[0]}`}).html(`${users[1]} ${users[2]}`));
+        })
+    }
+    else { $(".autocom-box").html("") }
+})
 
 function createProjectPrompt()
 {
