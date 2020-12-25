@@ -87,3 +87,24 @@ hr {
 .row {
     margin-bottom: 20px;
 }
+
+.search-input .autocom-box {
+    padding: 10px 8px;
+    max-height: 280px;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.autocom-box li {
+    list-style: none;
+    padding: 8px 12px;
+    width: 100%;
+    cursor: default;
+    border-radius: 3px;
+    display: none;
+}
+
+.autocom-box li:hover {
+    background: #efefef;
+}
