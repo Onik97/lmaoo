@@ -8,6 +8,11 @@
 	padding: 40px;
 	color:#fff;
 	margin-top: 10px;
+#otal_logo {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 90%;
 }
 
 h2
