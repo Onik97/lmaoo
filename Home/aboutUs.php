@@ -11,7 +11,7 @@
 <div id='devInfo' class='container'>
     <div id="homePageCards" class="card-deck">
         <div class="card">
-        <img class="card-img-top" src="../Images/profilePictures/LewisProfile.jpg" alt="Card image cap">
+        <img class="card-img-top" src="../Images/profilePictures/avatar.jpg" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">Lewis</h5>
                 <p class="card-text">Still hardstuck gold dps, i cri everytime.</p>
