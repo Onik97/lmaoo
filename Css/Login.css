@@ -35,6 +35,8 @@ input[type=text],input[type=password]{
 	border-radius:5px;
 	margin:5px;
 	font-weight:bold;
+.register:hover {
+	text-decoration: none;
 }
 
 input[type=submit]{
