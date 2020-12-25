@@ -102,7 +102,7 @@ async function rolePrompt(projectId)
 }
 
 // Search Box autofill
-$(".search-input > input").keyup(e => {
+$(".search-input").keyup(e => {
     let input = e.target.value;
     var usersArray = []; users.forEach((json => usersArray.push(`${json.userId},${json.forename},${json.surname}`)));
     if (input) 
@@ -116,6 +116,9 @@ $(".search-input > input").keyup(e => {
     else { $(".autocom-box").html("") }
 })
 
+$(".autocom-box").on("click", "li", function() {
+    $(this).remove();
+});
 function createProjectPrompt()
 {
     $("#globalModallHead").html("Create Project");
