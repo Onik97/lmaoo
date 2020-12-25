@@ -69,7 +69,7 @@ async function loadProjects()
 async function rolePrompt(projectId)
 {
     var json = await loadUsersOnProject(projectId);
-    $(".list-group.list-group-flush.user-list").html("");
+    // $(".list-group.list-group-flush.user-list").html("");
     
     for (i = 0; i < json.data.length; i++)
     {
