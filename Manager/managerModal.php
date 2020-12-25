@@ -27,7 +27,8 @@
 
                 <ul class="list-group list-group-flush user-list">
                 <li class="list-group-item users">
-                    <div class="user-info">User 1
+                    <div class="user-info">
+                        <span id="tufan">User 1</span>
                         <div class="btn-group">
                             <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">ACTIVE ROLE?</button>
                             <div class="dropdown-menu">
@@ -39,7 +40,8 @@
                 </li>
 
                 <li class="list-group-item users">
-                    <div class="user-info">User 2
+                    <div class="user-info">
+                        <span id="tufan">User 2</span>
                         <div class="btn-group">
                             <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">ACTIVE ROLE?</button>
                             <div class="dropdown-menu">
