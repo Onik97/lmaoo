@@ -92,7 +92,6 @@ hr {
     padding: 10px 8px;
     max-height: 280px;
     overflow-y: auto;
-    opacity: 0;
     pointer-events: none;
 }
 
@@ -102,7 +101,6 @@ hr {
     width: 100%;
     cursor: default;
     border-radius: 3px;
-    display: none;
 }
 
 .autocom-box li:hover {
