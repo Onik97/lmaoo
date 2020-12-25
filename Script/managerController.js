@@ -77,7 +77,8 @@ async function rolePrompt(projectId)
     
         var userUl = $(".list-group.list-group-flush.user-list");
         var user = $("<li>", {"class" : "list-group-item users"});
-        var userInfo = $("<div>", {"class" : "user-info"}).html(`${json.data[i].forename} ${json.data[i].surname} (${json.data[i].username})`);
+        var userInfo = $("<div>", {"class" : "user-info"});
+        var userSpan = $("<span>", {"id" : json.data[i].userId }).html(`${json.data[i].forename} ${json.data[i].surname} (${json.data[i].username})`);
         var btnGroup = $("<div>", { "class" : "btn-group"});
         var roleBtn = $("<button>", { type:"button", class : "btn btn-light dropdown-toggle", "data-toggle" : "dropdown" }).append(currentRole);
         var dropDownMenu = $("<div>", {"class" : "dropdown-menu"});
@@ -90,7 +91,9 @@ async function rolePrompt(projectId)
         $(btnGroup).append(roleBtn);
         $(btnGroup).append(dropDownMenu);
 
+        $(userInfo).append(userSpan);
         $(userInfo).append(btnGroup);
+        
         $(user).append(userInfo);
         $(userUl).append(user);
     }
