@@ -17,7 +17,10 @@
 
 h2
 {
+.header {
 	text-align: center;
+	margin-top: 60px;
+	margin-bottom: 40px;
 }
 
 input[type=text],input[type=password]{
