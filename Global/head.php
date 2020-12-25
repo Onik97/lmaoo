@@ -9,13 +9,20 @@
 if(isset($_SESSION['userLoggedIn'])) 
 {
   $userLoggedIn = $_SESSION['userLoggedIn'];
-  include_once("../User/user.php"); ?>
+  include_once("../User/user.php");
   
-  const userId = "<?php echo $userLoggedIn->getId(); ?>"; 
-  const userForename = "<?php echo $userLoggedIn->getForename(); ?>";
-  const userSurname = "<?php echo $userLoggedIn->getSurname(); ?>";
-  const userUsername = "<?php echo $userLoggedIn->getUsername(); ?>";
-  const userLevel = "<?php echo $userLoggedIn->getLevel(); ?>"; <?php 
-} ?>
+  echo "const userId = '" . $userLoggedIn->getId() . "'\n";
+  echo "const userForename = '" . $userLoggedIn->getForename(). "'\n";
+  echo "const userSurname = '" . $userLoggedIn->getSurname(). "'\n";
+  echo "const userUsername = '" . $userLoggedIn->getUsername(). "'\n";
+  echo "const userLevel = '" . $userLoggedIn->getLevel(). "'\n";
+
+  if ($userLoggedIn->getLevel() > 1)
+  {
+    include_once("../User/userController.php");
+    echo "const users = " . json_encode($userController->getActiveUsers()) . "\n";
+  }
+} 
+?>
 
 </script>
