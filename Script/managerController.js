@@ -66,6 +66,35 @@ async function loadProjects()
     }
 }
 
+function addUser(userId, forename, surname, username, managerAccess)
+{
+    var currentRole = (managerAccess == "1") ? "Manager" : "Developer"
+    
+    var userUl = $(".list-group.list-group-flush.user-list");
+    var user = $("<li>", {"class" : "list-group-item users"});
+    var userInfo = $("<div>", {"class" : "user-info"});
+    var userSpan = $("<span>", {"id" : userId }).html(`${forename} ${surname} (${username})`);
+    var btnGroup = $("<div>", { "class" : "btn-group"});
+    var roleBtn = $("<button>", { type:"button", class : "btn btn-light dropdown-toggle", "data-toggle" : "dropdown" }).append(currentRole);
+    var dropDownMenu = $("<div>", {"class" : "dropdown-menu"});
+    var managerRole = $("<a>", {"class" : "dropdown-item"}).html("Manager");
+    var developerRole = $("<a>", {"class" : "dropdown-item"}).html("Developer");
+    var xSign = $("<a>", {"class" : "fas fa-times"});
+
+    $(dropDownMenu).append(managerRole);
+    $(dropDownMenu).append(developerRole);
+    
+    $(btnGroup).append(roleBtn);
+    $(btnGroup).append(dropDownMenu);
+
+    $(userInfo).append(userSpan);
+    $(userInfo).append(btnGroup);
+    
+    $(user).append(userInfo);
+    $(user).append(xSign);
+    $(userUl).append(user);
+}
+
 async function rolePrompt(projectId)
 {
     var json = await loadUsersOnProject(projectId);
@@ -73,29 +102,6 @@ async function rolePrompt(projectId)
     
     for (i = 0; i < json.data.length; i++)
     {
-        var currentRole = (json.data[i].managerAccess == "1") ? "Manager" : "Developer"
-    
-        var userUl = $(".list-group.list-group-flush.user-list");
-        var user = $("<li>", {"class" : "list-group-item users"});
-        var userInfo = $("<div>", {"class" : "user-info"});
-        var userSpan = $("<span>", {"id" : json.data[i].userId }).html(`${json.data[i].forename} ${json.data[i].surname} (${json.data[i].username})`);
-        var btnGroup = $("<div>", { "class" : "btn-group"});
-        var roleBtn = $("<button>", { type:"button", class : "btn btn-light dropdown-toggle", "data-toggle" : "dropdown" }).append(currentRole);
-        var dropDownMenu = $("<div>", {"class" : "dropdown-menu"});
-        var managerRole = $("<a>", {"class" : "dropdown-item"}).html("Manager");
-        var developerRole = $("<a>", {"class" : "dropdown-item"}).html("Developer");
-
-        $(dropDownMenu).append(managerRole);
-        $(dropDownMenu).append(developerRole);
-        
-        $(btnGroup).append(roleBtn);
-        $(btnGroup).append(dropDownMenu);
-
-        $(userInfo).append(userSpan);
-        $(userInfo).append(btnGroup);
-        
-        $(user).append(userInfo);
-        $(userUl).append(user);
     }
     
     // Dynamically change the role in the Modal
