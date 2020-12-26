@@ -22,6 +22,22 @@ async function loadUsersOnProject(projectId)
     return await axios.post("../Manager/managerController.php", data) 
 }
 
+async function removeUsersToServer(projectId)
+{
+    var data = new FormData();
+    data.append("function", "removeUsersFromProject");
+    data.append("projectId", projectId);
+    return await axios.post("../Manager/managerController.php", data) 
+}
+
+async function saveUsersToServer(jsondata)
+{
+    var data = new FormData();
+    data.append("function", "addUsersToProject");
+    data.append("json", JSON.stringify(jsondata));
+    return await axios.post("../Manager/managerController.php", data) 
+}
+
 async function loadProjects() 
 {
     var ownerProjects = await loadOwnerProjects();
