@@ -157,7 +157,7 @@ class userController
 	{
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT userId, forename, surname, username FROM user WHERE isActive = 1");
+		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, picture FROM user WHERE isActive = 1");
 		$stmt->execute();
 		$activeUsers = $stmt->fetchall();
 		return $activeUsers;
@@ -236,7 +236,7 @@ class userController
 		}
 		else
 		{
-			if ($userLoggedIn->getLevel() > 1) echo "<a class='dropdown-item' id='managerNav' href=''>Manager</a>"; 
+			if ($userLoggedIn->getLevel() > 1) echo "<a class='dropdown-item' id='managerNav' href='../Manager/index.php'>Manager</a>"; 
 			echo "<a class='dropdown-item' id='editAccountNav' data-toggle='modal' data-target='#view-modal' role='button'>Edit Account</a>";
 			echo "<a class='dropdown-item' id='logoutNav' href='../User/logout.php'>Logout</a>";
 			if($userLoggedIn->getLevel() > 3) echo "<a class='dropdown-item' id='adminNav' href='../User/admin.php'>Admin</a>";
