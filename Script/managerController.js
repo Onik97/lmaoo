@@ -103,12 +103,12 @@ async function rolePrompt(projectId)
     for (i = 0; i < json.data.length; i++)
     {
     }
-    
-    // Dynamically change the role in the Modal
-    $(".dropdown-menu > a").click(function(e) { 
-        $('.user-info').on('hidden.bs.dropdown', function() { $(this).find("button").html(e.target.outerText); });
-    });
 }
+
+// Dynamically change the role in the Modal
+$(document).click(function (e) {
+    $(e.target).attr('class') == "dropdown-item" ? $(e.target).parent().prev().html(e.target.outerText) : null;
+});
 
 // Search Box autofill
 $(".search-input").keyup(e => {
