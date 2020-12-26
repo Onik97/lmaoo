@@ -1,8 +1,6 @@
 <?php require_once(__DIR__ . "/../connection.php"); require_once(__DIR__ . "/../User/user.php");
-error_reporting(0);
 
 $managerController = new ManagerController();
-$function = $_POST['function'];
 
 if ($function == "loadOwnerProjects") 
 {
