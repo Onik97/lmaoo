@@ -98,7 +98,8 @@ function addUser(userId, forename, surname, username, managerAccess)
 async function rolePrompt(projectId)
 {
     var json = await loadUsersOnProject(projectId);
-    // $(".list-group.list-group-flush.user-list").html(""); // Leaving this comment for now to allow Tufan to use Static Data
+    $(".list-group.list-group-flush.user-list").html(""); // Comment this out to see static data
+    $(".autocom-box").html(""); // Comment this out to see static data
     
     for (i = 0; i < json.data.length; i++)
     {
