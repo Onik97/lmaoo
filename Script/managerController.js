@@ -43,7 +43,7 @@ async function loadProjects()
     var ownerProjects = await loadOwnerProjects();
     var managerProjects = await loadManagerProjects();
     $("#projectSize").html(ownerProjects.data.length + managerProjects.data.length);
-    $("#projectUl").html(""); // Empties List -> Will remove once static data has been removed
+    $("#projectUl").html("");
 
     for (i = 0; i < ownerProjects.data.length; i++)
     {
@@ -85,7 +85,6 @@ async function loadProjects()
 function addUser(userId, forename, surname, username, managerAccess)
 {
     var currentRole = managerAccess == "1" ? "Manager" : "Developer"
-    
     var userUl = $(".list-group.list-group-flush.user-list");
     var user = $("<li>", { "value" : userId, "class" : "list-group-item users"});
     var userInfo = $("<div>", {"class" : "user-info"});
@@ -114,8 +113,8 @@ function addUser(userId, forename, surname, username, managerAccess)
 async function rolePrompt(projectId)
 {
     var json = await loadUsersOnProject(projectId);
-    $(".list-group.list-group-flush.user-list").html(""); // Comment this out to see static data
-    $(".autocom-box").html(""); // Comment this out to see static data
+    $(".list-group.list-group-flush.user-list").html("");
+    $(".autocom-box").html("");
     
     for (i = 0; i < json.data.length; i++)
     {
@@ -124,9 +123,7 @@ async function rolePrompt(projectId)
 
     var saveBtn = $("<button>", { type:"button", class : "btn btn-success", "onclick" : `saveUsers(${projectId})`}).html("Save changes");
     var closeBtn = $("<button>", { type:"button", class : "btn btn-secondary", "data-dismiss" : "modal" }).html("Close");
-
     $("#managerModalFooter").html("").append(saveBtn).append(closeBtn);
-
 }
 
 // Dynamically change the role in the Modal
