@@ -130,6 +130,7 @@ function deactivateUser(userIdSelected)
         $('#admin-modal').modal('hide');
         loadActiveUsers();
     })
+}
 
 function passwordResetPrompt(userIdSelected)
 {
