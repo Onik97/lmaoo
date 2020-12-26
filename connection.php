@@ -1,4 +1,4 @@
-<?php
+<?php error_reporting(0); $function = $_POST['function']; 
 function logindb($user, $password)
 {
 	try

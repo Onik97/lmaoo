@@ -1,9 +1,5 @@
-<?php
-require_once(__DIR__ . "/../connection.php");
-error_reporting(0);
-
+<?php require_once(__DIR__ . "/../connection.php");
 $ticketController = new ticketController();
-$function = $_POST['function'];
 
 if ($function == "checkTicket")
 {

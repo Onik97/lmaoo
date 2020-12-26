@@ -1,0 +1,36 @@
+#devInfo{
+    margin: 50px auto 0px auto;
+}
+
+.welcomeMessage{
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+#homePageCards{
+    margin: 10px, auto;
+}
+
+#homePageTickets{
+    margin-top: 50px;
+    margin-left: 100px;
+    width: 1200px;
+}
+
+.homeProject-list{
+    float : left;
+    width: 350px;
+}
+
+.ticket-deadline{
+    float: right;
+    width: 600px;
+}
+
+.homeTable{
+    padding: 0px 17px;
+}
+
+.ticketTable{
+    padding: 0px 8px;
+}
