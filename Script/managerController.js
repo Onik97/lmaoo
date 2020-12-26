@@ -121,6 +121,12 @@ async function rolePrompt(projectId)
     {
         addUser(json.data[i].userId, json.data[i].forename, json.data[i].surname, json.data[i].username, json.data[i].managerAccess)
     }
+
+    var saveBtn = $("<button>", { type:"button", class : "btn btn-success", "onclick" : `saveUsers(${projectId})`}).html("Save changes");
+    var closeBtn = $("<button>", { type:"button", class : "btn btn-secondary", "data-dismiss" : "modal" }).html("Close");
+
+    $("#managerModalFooter").html("").append(saveBtn).append(closeBtn);
+
 }
 
 // Dynamically change the role in the Modal
