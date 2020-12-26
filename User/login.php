@@ -12,12 +12,10 @@
 
 <body>
 	<?php include("../Global/navBar.php");
-	if (isset($_SESSION['message'])) { ?>
-		<div class="alert alert-warning"> <?php
-											echo $_SESSION['message'];
-											session_unset(); ?>
-		</div><?php
-			} ?>
+	if (isset($_SESSION['message'])) {
+		echo "<div class='alert alert-warning'>" . $_SESSION['message'] . "</div>";
+		session_unset();
+	} ?>
 
 	<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
     <div class="container">
