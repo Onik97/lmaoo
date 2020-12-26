@@ -19,7 +19,6 @@ else if ($function == "removeUsersFromProject")
 else if ($function == "addUsersToProject")
 {
     echo $managerController->addUsersToProject($_POST['json']);
-    //echo json_encode($managerController->addUsersToProject($_POST['json']));
 }
 else if ($function == "loadUsersOnProject")
 {
