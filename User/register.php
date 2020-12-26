@@ -1,7 +1,6 @@
 <?php session_start(); if (isset($_SESSION['userLoggedIn'])) { header("Location: ../Ticket/index.php"); } ?>
 
 <!DOCTYPE html>
-<html>
 <title>Register Page</title>
 
 <head>
