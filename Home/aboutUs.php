@@ -1,6 +1,5 @@
-<div class="jumbotron jumbotron-fluid text-center">
+<div class="jumbotron jumbo jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4">Hard stuck Gold dps ;-;</h1>
   </div>
 </div>
 
