@@ -68,12 +68,12 @@ async function loadProjects()
 
 function addUser(userId, forename, surname, username, managerAccess)
 {
-    var currentRole = (managerAccess == "1") ? "Manager" : "Developer"
+    var currentRole = managerAccess == "1" ? "Manager" : "Developer"
     
     var userUl = $(".list-group.list-group-flush.user-list");
-    var user = $("<li>", {"class" : "list-group-item users"});
+    var user = $("<li>", { "value" : userId, "class" : "list-group-item users"});
     var userInfo = $("<div>", {"class" : "user-info"});
-    var userSpan = $("<span>", {"id" : userId }).html(`${forename} ${surname} (${username})`);
+    var userSpan = $("<span>").html(`${forename} ${surname} (${username})`);
     var btnGroup = $("<div>", { "class" : "btn-group"});
     var roleBtn = $("<button>", { type:"button", class : "btn btn-light dropdown-toggle", "data-toggle" : "dropdown" }).append(currentRole);
     var dropDownMenu = $("<div>", {"class" : "dropdown-menu"});
