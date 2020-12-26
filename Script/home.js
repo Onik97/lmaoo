@@ -15,7 +15,6 @@ function loadOwnProjects()
     .then(response =>
     {
         let json = response.data;
-        console.log(json);
 
         let ProjectList = $("#homeProjects");
         $(ProjectList).find("li:gt(0)").remove();
@@ -42,7 +41,6 @@ function loadTicketDeadlines()
     .then(response =>
     {
         let json = response.data;
-        console.log(json);
 
         let ticketDeadline = $("#homeTickets");
         $(ticketDeadline).find("li:gt(0)").remove();
