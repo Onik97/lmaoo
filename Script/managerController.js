@@ -115,13 +115,13 @@ $(document).click(function (e) {
 // Search Box autofill
 $(".search-input").keyup(e => {
     let input = e.target.value;
-    var usersArray = []; users.forEach((json => usersArray.push(`${json.userId},${json.forename},${json.surname}`)));
+    var usersArray = []; users.forEach((json => usersArray.push(`${json.userId},${json.forename},${json.surname},${json.username}`)));
     if (input) 
     {
         let results = []; results = usersArray.filter(data => {  return data.toLowerCase().indexOf(input.toLowerCase()) !== -1; });
         $(".autocom-box").html("");
-        results.map(data => { var users = data.split(",");
-            $(".autocom-box").append($("<li>", {id : `${users[0]}`}).html(`${users[1]} ${users[2]}`));
+        results.map(data => { var elements = data.split(",");
+            $(".autocom-box").append($("<li>", {value : `${elements[0]},${elements[1]},${elements[2]},${elements[3]}`}).html(`${elements[1]} ${elements[2]}`));
         })
     }
     else { $(".autocom-box").html("") }
