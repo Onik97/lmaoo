@@ -127,8 +127,12 @@ $(".search-input").keyup(e => {
     else { $(".autocom-box").html("") }
 })
 
+// When selecting the user
 $(".autocom-box").on("click", "li", function() {
-    $(this).remove(); // Removing for now, TODO: Add Users in the UL List 
+    var userSelected = $(this).attr("value").split(",");
+    addUser(userSelected[0], userSelected[1], userSelected[2], userSelected[3], 0);
+    $(this).remove();
+});
 });
 
 function createProjectPrompt()
