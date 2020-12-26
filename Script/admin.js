@@ -143,4 +143,17 @@ function passwordResetPrompt(userIdSelected)
     $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "resetPasswordBtn", onclick : `resetPassword(${userIdSelected})`}).html("Reset Password"))
 }
 
+function resetPassword(userIdSelected)
+{
+    let data = new FormData();
+    data.append("function", "resetPassword");
+    data.append("userId", userIdSelected);
+
+    axios.post("../User/adminController.php", data)
+    .then(() =>
+    {
+        overHang("success", "Password has been reset");
+        $('#admin-modal').modal('hide');
+        loadActiveUsers();
+    })
 }
