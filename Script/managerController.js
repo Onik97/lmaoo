@@ -14,12 +14,36 @@ async function loadManagerProjects()
     return await axios.post("../Manager/managerController.php", data) 
 }
 
+async function loadUsersOnProject(projectId)
+{
+    var data = new FormData();
+    data.append("function", "loadUsersOnProject");
+    data.append("projectId", projectId);
+    return await axios.post("../Manager/managerController.php", data) 
+}
+
+async function removeUsersToServer(projectId)
+{
+    var data = new FormData();
+    data.append("function", "removeUsersFromProject");
+    data.append("projectId", projectId);
+    return await axios.post("../Manager/managerController.php", data) 
+}
+
+async function saveUsersToServer(jsondata)
+{
+    var data = new FormData();
+    data.append("function", "addUsersToProject");
+    data.append("json", JSON.stringify(jsondata));
+    return await axios.post("../Manager/managerController.php", data) 
+}
+
 async function loadProjects() 
 {
     var ownerProjects = await loadOwnerProjects();
     var managerProjects = await loadManagerProjects();
     $("#projectSize").html(ownerProjects.data.length + managerProjects.data.length);
-    $("#projectUl").html(""); // Empties List -> Will remove once static data has been removed
+    $("#projectUl").html("");
 
     for (i = 0; i < ownerProjects.data.length; i++)
     {
@@ -29,7 +53,7 @@ async function loadProjects()
         var projectInfo = $("<div>", {"class" : "project-info"});
         var projectStatus = $("<div>", {"class" : "project-status"}).append(json.status);
         var role = $("<div>", {"class" : "owner-role"}).append("Owner");
-        var roleBtn = $("<button>", { type:"button", class : "btn btn-warning", "data-toggle" : "modal", "data-target" : "#managerModal"}).append("Roles");
+        var roleBtn = $("<button>", { type:"button", class : "btn btn-warning", "data-toggle" : "modal", "data-target" : "#managerModal", "onclick" : `rolePrompt(${json.projectId})`}).append("Roles");
         
         $(projectInfo).append(json.name);
         $(projectInfo).append(projectStatus);
@@ -47,7 +71,7 @@ async function loadProjects()
         var projectInfo = $("<div>", {"class" : "project-info"});
         var projectStatus = $("<div>", {"class" : "project-status"}).append(json.status);
         var role = $("<div>", {"class" : "manager-role"}).append("Manager");
-        var roleBtn = $("<button>", { type:"button", class : "btn btn-warning", "data-toggle" : "modal", "data-target" : "#managerModal"}).append("Roles");
+        var roleBtn = $("<button>", { type:"button", class : "btn btn-warning", "data-toggle" : "modal", "data-target" : "#managerModal", "onclick" : `rolePrompt(${json.projectId})` }).append("Roles");
         
         $(projectInfo).append(json.name);
         $(projectInfo).append(projectStatus);
@@ -55,6 +79,118 @@ async function loadProjects()
         $(projectInfo).append(roleBtn);
         $(project).append(projectInfo);
         $("#projectUl").append(project);
+    }
+}
+
+function addUser(userId, forename, surname, username, managerAccess)
+{
+    var currentRole = managerAccess == "1" ? "Manager" : "Developer"
+    var userUl = $(".list-group.list-group-flush.user-list");
+    var user = $("<li>", { "value" : userId, "class" : "list-group-item users"});
+    var userInfo = $("<div>", {"class" : "user-info"});
+    var userSpan = $("<span>").html(`${forename} ${surname} (${username})`);
+    var btnGroup = $("<div>", { "class" : "btn-group"});
+    var roleBtn = $("<button>", { type:"button", class : "btn btn-light dropdown-toggle", "data-toggle" : "dropdown" }).append(currentRole);
+    var dropDownMenu = $("<div>", {"class" : "dropdown-menu"});
+    var managerRole = $("<a>", {"class" : "dropdown-item"}).html("Manager");
+    var developerRole = $("<a>", {"class" : "dropdown-item"}).html("Developer");
+    var xSign = $("<a>", {"class" : "fas fa-times"});
+
+    $(dropDownMenu).append(managerRole);
+    $(dropDownMenu).append(developerRole);
+    
+    $(btnGroup).append(roleBtn);
+    $(btnGroup).append(dropDownMenu);
+
+    $(userInfo).append(userSpan);
+    $(userInfo).append(btnGroup);
+    
+    $(user).append(userInfo);
+    $(user).append(xSign);
+    $(userUl).append(user);
+}
+
+async function rolePrompt(projectId)
+{
+    var json = await loadUsersOnProject(projectId);
+    $(".list-group.list-group-flush.user-list").html("");
+    $(".autocom-box").html("");
+    
+    for (i = 0; i < json.data.length; i++)
+    {
+        addUser(json.data[i].userId, json.data[i].forename, json.data[i].surname, json.data[i].username, json.data[i].managerAccess)
+    }
+
+    var saveBtn = $("<button>", { type:"button", class : "btn btn-success", "onclick" : `saveUsers(${projectId})`}).html("Save changes");
+    var closeBtn = $("<button>", { type:"button", class : "btn btn-secondary", "data-dismiss" : "modal" }).html("Close");
+    $("#managerModalFooter").html("").append(saveBtn).append(closeBtn);
+}
+
+// Dynamically change the role in the Modal
+$(document).click(function (e) {
+    $(e.target).attr('class') == "dropdown-item" ? $(e.target).parent().siblings("button").html(e.target.outerText) : null;
+});
+
+// Search Box autofill
+$(".search-input").keyup(e => {
+    let input = e.target.value;
+    var usersArray = []; users.forEach((user => usersArray.push(`${user.userId},${user.forename},${user.surname},${user.username}`)));
+    if (input)
+    {
+        let results = []; results = usersArray.filter(data => data.toLowerCase().indexOf(input.toLowerCase()) !== -1);
+        $(".autocom-box").html("");
+        results.map(data => {
+            let usersAlreadySelected = [];
+            document.querySelectorAll(".list-group-item.users").forEach(list => usersAlreadySelected.push(`${list.value}`));
+            var elements = data.split(",");
+            if (!usersAlreadySelected.includes(elements[0]))
+            $(".autocom-box").append($("<li>", {value : `${elements[0]},${elements[1]},${elements[2]},${elements[3]}`}).html(`${elements[1]} ${elements[2]}`));
+        })
+    }
+    else { $(".autocom-box").html("") }
+})
+
+// When selecting the user
+$(".autocom-box").on("click", "li", function() {
+    var userSelected = $(this).attr("value").split(",");
+    addUser(userSelected[0], userSelected[1], userSelected[2], userSelected[3], 0);
+    $(this).remove();
+});
+
+// Remove user from list 
+$(document).click(function (e) {
+    $(e.target).attr('class') == "fas fa-times" ? $(e.target).closest("li").remove() : null;
+});
+
+async function saveUsers(projectId)
+{
+    var userIds = []; var accessList = []; var jsondata = []
+    document.querySelectorAll(".list-group-item.users").forEach(list => userIds.push(`${list.value}`));
+    document.querySelectorAll(".btn.btn-light.dropdown-toggle").forEach(list => accessList.push(`${list.innerHTML}`));
+
+    for (i = 0; i < userIds.length; i++)
+    {
+        jsondata.push(
+        {
+            "userId": userIds[i],
+            "projectId": projectId,
+            "allowAccess": 1,
+            "managerAccess": accessList[i] == "Manager" ? 1 : 0 
+        });
+    }
+
+    if(userIds.length == 0)
+    {
+        await removeUsersToServer(projectId);
+        $("#managerModal").modal('hide');
+        overHang("success", "Removed Access to All!");
+    }
+    else 
+    {
+        await removeUsersToServer(projectId);
+        await saveUsersToServer(jsondata);
+        $("#managerModal").modal('hide');
+        overHang("success", "Project Access updated!");
     }
 }
 
@@ -132,6 +268,6 @@ function createProject()
         .then(() => 
         {
             $('#globalModal').modal('hide');
-            location.reload(); // Refreshes Page as Projects is loaded from PHP, not Javascript
+            loadOwnerProjects();
         })
 }

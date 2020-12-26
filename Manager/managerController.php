@@ -18,7 +18,7 @@ else if ($function == "removeUsersFromProject")
 }
 else if ($function == "addUsersToProject")
 {
-    echo json_encode($managerController->addUsersToProject($_POST['json']));
+    echo $managerController->addUsersToProject($_POST['json']);
 }
 else if ($function == "loadUsersOnProject")
 {
@@ -53,7 +53,7 @@ class ManagerController
         session_start();
         $pdo = logindb('user', 'pass');
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("DELETE FROM projectAccess WHERE userId = ?");
+        $stmt = $pdo->prepare("DELETE FROM projectAccess WHERE projectId = ?");
         $stmt->execute([$projectId]);
     }
 
@@ -61,7 +61,8 @@ class ManagerController
     {
         $sql = "INSERT INTO projectAccess (userId, projectId, allowAccess, managerAccess) VALUES";
         $data = json_decode($json);
-        foreach ($data as $key => $value) {
+
+        foreach ($data as $value) {
             $sql = $sql . " ($value->userId, $value->projectId, $value->allowAccess, $value->managerAccess),";
         }
         $finalSql = substr($sql, 0, -1); // Removes , at the end of the SQL 
