@@ -103,6 +103,7 @@ async function rolePrompt(projectId)
     
     for (i = 0; i < json.data.length; i++)
     {
+        addUser(json.data[i].userId, json.data[i].forename, json.data[i].surname, json.data[i].username, json.data[i].managerAccess)
     }
 }
 
