@@ -130,4 +130,17 @@ function deactivateUser(userIdSelected)
         $('#admin-modal').modal('hide');
         loadActiveUsers();
     })
+
+function passwordResetPrompt(userIdSelected)
+{
+    $("#admin-modal-title").html("Password Reset"); 
+    let adminEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
+    let adminSelectLabel = $("<label>").html("Are you sure you want to reset your password?");
+
+    $("#admin-modal-body").html("").append(adminEditDiv);
+    $(adminEditDiv).append(adminSelectLabel);
+
+    $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "resetPasswordBtn", onclick : `resetPassword(${userIdSelected})`}).html("Reset Password"))
+}
+
 }
