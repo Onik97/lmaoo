@@ -44,7 +44,9 @@
 					</div>
 				</div>
 			</div>
-			<?php include("../Global/scripts.php"); ?>
+		</div>
+	</main>
+	<?php include("../Global/scripts.php"); ?>
 </body>
 
 </html>
