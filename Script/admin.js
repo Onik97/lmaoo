@@ -39,6 +39,7 @@ function loadActiveUsers()
            $(cell4).append(document.createTextNode(json[i].surname));
            $(cell5).append(document.createTextNode(json[i].level));
            $(cell6).append($("<button>", { id : "deactivateUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `deactivateUserPrompt(${json[i].userId})`}).html("Deactivate User"));
+           $(cell6).append($("<button>", { id : "resetPasswordTableBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `passwordResetPrompt(${json[i].userId})`}).html("Reset Password"));
        }
    })
 }
@@ -71,6 +72,7 @@ function loadInActiveUsers()
            $(cell4).append(document.createTextNode(json[i].surname));
            $(cell5).append(document.createTextNode(json[i].level));
            $(cell6).append($("<button>", { id : "activateUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `activateUserPrompt(${json[i].userId})`}).html("Activate User"));
+           $(cell6).append($("<button>", { id : "resetPasswordTableBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `passwordResetPrompt(${json[i].userId})`}).html("Reset Password"));
        }
    })
 }
