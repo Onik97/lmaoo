@@ -133,6 +133,10 @@ $(".autocom-box").on("click", "li", function() {
     addUser(userSelected[0], userSelected[1], userSelected[2], userSelected[3], 0);
     $(this).remove();
 });
+
+// Remove user from list 
+$(document).click(function (e) {
+    $(e.target).attr('class') == "fas fa-times" ? $(e.target).closest("li").remove() : null;
 });
 
 function createProjectPrompt()
