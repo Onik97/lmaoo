@@ -32,5 +32,6 @@
     <?php include("../Global/scripts.php"); ?>
     <?php include("managerModal.php"); ?>
     <script type="text/javascript" src="../Script/managerController.js"></script>
+    <?php include("../Global/editUserModal.php"); ?>
 </body>
 </html>
