@@ -165,6 +165,38 @@ $(document).click(function (e) {
     $(e.target).attr('class') == "fas fa-times" ? $(e.target).closest("li").remove() : null;
 });
 
+async function saveUsers(projectId)
+{
+    var userIds = []; var accessList = []; var jsondata = []
+    document.querySelectorAll(".list-group-item.users").forEach(list => userIds.push(`${list.value}`));
+    document.querySelectorAll(".btn.btn-light.dropdown-toggle").forEach(list => accessList.push(`${list.innerHTML}`));
+
+    for (i = 0; i < userIds.length; i++)
+    {
+        jsondata.push(
+        {
+            "userId": userIds[i],
+            "projectId": projectId,
+            "allowAccess": 1,
+            "managerAccess": accessList[i] == "Manager" ? 1 : 0 
+        });
+    }
+
+    if(userIds.length == 0)
+    {
+        await removeUsersToServer(projectId);
+        $("#managerModal").modal('hide');
+        overHang("success", "Removed Access to All!");
+    }
+    else 
+    {
+        await removeUsersToServer(projectId);
+        await saveUsersToServer(jsondata);
+        $("#managerModal").modal('hide');
+        overHang("success", "Project Access updated!");
+    }
+}
+
 function createProjectPrompt()
 {
     $("#globalModallHead").html("Create Project");
