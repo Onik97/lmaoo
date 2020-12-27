@@ -20,10 +20,12 @@ else if ($function == "register")
 }
 else if ($function == 'update')
 {
+	validateSuperUser();
 	$userController->updateUser($_POST['editForename'], $_POST['editSurname'], $_POST['editUsername'], $_POST['editUserId']);
 }
 else if ($function == "checkUsername")
 {
+	validateManager();
 	if ($userController->hasDup(null))
 	{
 		$json->fromServer = "True";
@@ -37,14 +39,17 @@ else if ($function == "checkUsername")
 }
 else if ($function == "getActiveUsers") 
 {
+	validateDeveloper();
 	echo json_encode($userController->getActiveUsers());
 }
 else if ($function == "darkModeToggle")
 {
+	validateDeveloper();
 	$userController->darkModeToggle($_POST['darkMode'], $_POST['userId']);
 }
 else if ($function == "uploadProfilePic")
 {
+	validateDeveloper();
 	echo $userController->uploadImage($_POST['userId'], null);
 }
 else

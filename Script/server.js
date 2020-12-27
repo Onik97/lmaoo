@@ -28,10 +28,15 @@ function loadFeaturesFromServer(projectId)
 
 function loadTicketsWithProgressFromServer(id, progress)
 {
+    var data = new FormData();
+    data.append("projectId", id);
+    data.append("progress", progress);
+    
     return response = axios(
     {
-        method: 'get',
-        url: `../Project/projectController.php?projectId=${id}&progress=${progress}`,
+        method: 'post',
+        url: `../Project/projectController.php`,
+        data: data,
         headers: {'Content-Type': 'multipart/form-data' }
     })
 }

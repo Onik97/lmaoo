@@ -2,24 +2,29 @@
 
 $projectController = new projectController();
 
-if ($_GET['projectId'] && $_GET['progress'])
+if ($_POST['projectId'] && $_POST['progress'])
 {
-    echo json_encode($projectController->getTicketListWithProgress($_GET['projectId'], $_GET['progress']));
+    validateDeveloper();
+    echo json_encode($projectController->getTicketListWithProgress($_POST['projectId'], $_POST['progress']));
 }
 else if($_POST['function'] == "loadProjects")
 {
+    validateDeveloper();
     echo json_encode($projectController->getProjectList());
 }
 else if($_POST['function'] == "createProject")
 {
+    validateManager();
     $projectController->createNewProject($_POST['projectName'], $_POST['projectStatus']);
 }
 else if($_POST['function'] == "createTicket")
 {
+    validateDeveloper();
     $projectController->createNewTicket($_POST['projectId'], $_POST['summary'], $_POST['reporterKey']);
 }
 else if ($_POST['function'] == "checkProjectExistance")
 {
+    validateDeveloper();
     echo $projectController->projectExistance(null);
 }
 else

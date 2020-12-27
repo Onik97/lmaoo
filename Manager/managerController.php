@@ -4,22 +4,27 @@ $managerController = new ManagerController();
 
 if ($function == "loadOwnerProjects") 
 {
+    validateManager();
     echo json_encode($managerController->loadOwnerProjects());
 }
 else if ($function == "loadManagerProjects")
 {
+    validateManager();
     echo json_encode($managerController->loadManagerProjects());
 }
 else if ($function == "removeUsersFromProject")
 {
+    validateManager();
     echo json_encode($managerController->removeUsersFromProject($_POST['projectId']));
 }
 else if ($function == "addUsersToProject")
 {
+    validateManager();
     echo $managerController->addUsersToProject($_POST['json']);
 }
 else if ($function == "loadUsersOnProject")
 {
+    validateManager();
     echo json_encode($managerController->loadUsersOnProject($_POST['projectId']));
 }
 
