@@ -184,6 +184,18 @@ function updateUserLevelPrompt(userIdSelected)
 
 function userCheck(userIdSelected)
 {
-    var lol = $("#userLevelSelecter option:selected").val();
-    console.log(lol);
+    var userLevelSelected = $("#userLevelSelecter option:selected").val();
+
+    let data = new FormData();
+    data.append("function", "updateUserLevel");
+    data.append("userId", userIdSelected);
+    data.append("chosenUserLevel", userLevelSelected);
+
+    axios.post("../User/adminController.php", data)
+    .then(() =>
+    {
+        overHang("success", "User Level has been changed");
+        $('#admin-modal').modal('hide');
+        loadActiveUsers();
+    })
 }
