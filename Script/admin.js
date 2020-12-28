@@ -180,8 +180,9 @@ function updateUserLevelPrompt(userIdSelected)
     $(adminEditDiv).append(adminSelecter);
 
     let SelectedUserLevel = '1';
-    $("#userLevelSelecter").change(function(){
-        let SelectedUserLevel = $(this).children("option:selected").val();
+    $("updateUserLevelBtn").click(function()
+    {
+        let SelectedUserLevel = $('#userLevelSelecter').children("option:selected").val();
         return SelectedUserLevel;
     });
     // $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "updateUserLevelBtn", onclick : `resetPassword(${userIdSelected}${SelectedUserLevel})`}).html("Update User Level"))
