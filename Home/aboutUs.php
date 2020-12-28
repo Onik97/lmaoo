@@ -1,5 +1,6 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
+      <img id="aboutUsImg" src="../Images/otal_logo.png">
   </div>
 </div>
 
