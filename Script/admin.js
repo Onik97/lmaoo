@@ -176,20 +176,14 @@ function updateUserLevelPrompt(userIdSelected)
 
     $(adminSelecter).append(adminSelectoption1, adminSelectoption2, adminSelectoption3, adminSelectoption4);
 
-    $("#admin-modal-body").html("").append(adminEditDiv);
     $(adminEditDiv).append(adminSelecter);
+    $("#admin-modal-body").html("").append(adminEditDiv);
 
-    let SelectedUserLevel = '1';
-    $("updateUserLevelBtn").click(function()
-    {
-        let SelectedUserLevel = $('#userLevelSelecter').children("option:selected").val();
-        return SelectedUserLevel;
-    });
-    // $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "updateUserLevelBtn", onclick : `resetPassword(${userIdSelected}${SelectedUserLevel})`}).html("Update User Level"))
-    $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "updateUserLevelBtn", onclick : `userCheck(${userIdSelected},${SelectedUserLevel})`}).html("Update User Level"))
+    $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "updateUserLevelBtn", onclick : `userCheck(${userIdSelected})`}).html("Update User Level"));
 }
 
-function userCheck(userIdSelected, SelectedUserLevel)
+function userCheck(userIdSelected)
 {
-    console.log(userIdSelected, SelectedUserLevel);
+    var lol = $("#userLevelSelecter option:selected").val();
+    console.log(lol);
 }

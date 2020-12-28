@@ -24,7 +24,7 @@ else if ($function == "resetPassword")
 {
     echo json_encode($adminController->resetPassword($_POST['userId'], null));
 }
-else if ($function == "updateUserLevel)")
+else if ($function == "updateUserLevel")
 {
     ($adminController->updateUserLevel($_POST["userId"], ["chosenUserLevel"]));
 }
