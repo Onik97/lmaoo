@@ -3,10 +3,12 @@ $homeController = new homeController();
 
 if ($function == "loadTicketsWithDeadline")
 {
+    validateDeveloper();
     echo json_encode($homeController->loadTicketsWithDeadline());
 }
 else if ($function == "loadOwnProjects")
 {
+    validateDeveloper();
     echo json_encode($homeController->loadOwnProjects());
 }
 

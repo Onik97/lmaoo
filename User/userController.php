@@ -20,10 +20,12 @@ else if ($function == "register")
 }
 else if ($function == 'update')
 {
+	validateSuperUser();
 	$userController->updateUser($_POST['editForename'], $_POST['editSurname'], $_POST['editUsername'], $_POST['editUserId']);
 }
 else if ($function == "checkUsername")
 {
+	validateManager();
 	if ($userController->hasDup(null))
 	{
 		$json->fromServer = "True";
@@ -37,14 +39,17 @@ else if ($function == "checkUsername")
 }
 else if ($function == "getActiveUsers") 
 {
+	validateDeveloper();
 	echo json_encode($userController->getActiveUsers());
 }
 else if ($function == "darkModeToggle")
 {
+	validateDeveloper();
 	$userController->darkModeToggle($_POST['darkMode'], $_POST['userId']);
 }
 else if ($function == "uploadProfilePic")
 {
+	validateDeveloper();
 	echo $userController->uploadImage($_POST['userId'], null);
 }
 else
@@ -157,7 +162,7 @@ class userController
 	{
 		$pdo = logindb('user', 'pass');
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT userId, forename, surname, username FROM user WHERE isActive = 1");
+		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, picture FROM user WHERE isActive = 1");
 		$stmt->execute();
 		$activeUsers = $stmt->fetchall();
 		return $activeUsers;
@@ -236,7 +241,7 @@ class userController
 		}
 		else
 		{
-			if ($userLoggedIn->getLevel() > 1) echo "<a class='dropdown-item' id='managerNav' href=''>Manager</a>"; 
+			if ($userLoggedIn->getLevel() > 1) echo "<a class='dropdown-item' id='managerNav' href='../Manager/index.php'>Manager</a>"; 
 			echo "<a class='dropdown-item' id='editAccountNav' data-toggle='modal' data-target='#view-modal' role='button'>Edit Account</a>";
 			echo "<a class='dropdown-item' id='logoutNav' href='../User/logout.php'>Logout</a>";
 			if($userLoggedIn->getLevel() > 3) echo "<a class='dropdown-item' id='adminNav' href='../User/admin.php'>Admin</a>";
