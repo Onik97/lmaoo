@@ -24,6 +24,10 @@ else if ($function == "resetPassword")
 {
     echo json_encode($adminController->resetPassword($_POST['userId'], null));
 }
+else if ($function == "updateUserLevel)")
+{
+    ($adminController->updateUserLevel($_POST["userId"], ["chosenUserLevel"]));
+}
 
 class adminController
 {
@@ -112,6 +116,21 @@ class adminController
         if ($adminController->validateAdmin(null) == true)
         {
             $stmt->execute([$hashedPassword, $userId]);
+            return true;
+        }
+        return false;
+    }
+
+    public function updateUserLevel($userId, $chosenUserLevel)
+    {
+        $adminController = new adminController();
+
+        $pdo = logindb('user', 'pass');
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("UPDATE user SET level = ? WHERE userId = ?");
+        if ($adminController->validateAdmin(null) == true)
+        {
+            $stmt->execute([$chosenUserLevel, $userId]);
             return true;
         }
         return false;
