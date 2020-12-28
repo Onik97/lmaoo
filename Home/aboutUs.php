@@ -1,6 +1,6 @@
-<div class="jumbotron jumbotron-fluid text-center">
+<div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4">Hard stuck Gold dps ;-;</h1>
+      <!-- <img id="aboutUsImg" src="../Images/otal_logo.png"> -->
   </div>
 </div>
 
@@ -11,7 +11,7 @@
 <div id='devInfo' class='container'>
     <div id="homePageCards" class="card-deck">
         <div class="card">
-        <img class="card-img-top" src="../Images/profilePictures/avatar.jpg" alt="Card image cap">
+        <img class="card-img-top" src="../Images/LewisWelch.jpg" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">Lewis</h5>
                 <p class="card-text">Still hardstuck gold dps, i cri everytime.</p>

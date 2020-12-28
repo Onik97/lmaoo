@@ -7,6 +7,7 @@
 <head>
     <p id="navBarActive" hidden>adminPage</p>
     <?php include("../Global/head.php"); ?>
+    <link rel="stylesheet" href="../Css/admin.css">
 </head>
 
 <body>

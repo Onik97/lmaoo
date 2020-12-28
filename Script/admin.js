@@ -39,6 +39,7 @@ function loadActiveUsers()
            $(cell4).append(document.createTextNode(json[i].surname));
            $(cell5).append(document.createTextNode(json[i].level));
            $(cell6).append($("<button>", { id : "deactivateUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `deactivateUserPrompt(${json[i].userId})`}).html("Deactivate User"));
+           $(cell6).append($("<button>", { id : "resetPasswordTableBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `passwordResetPrompt(${json[i].userId})`}).html("Reset Password"));
        }
    })
 }
@@ -71,6 +72,7 @@ function loadInActiveUsers()
            $(cell4).append(document.createTextNode(json[i].surname));
            $(cell5).append(document.createTextNode(json[i].level));
            $(cell6).append($("<button>", { id : "activateUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `activateUserPrompt(${json[i].userId})`}).html("Activate User"));
+           $(cell6).append($("<button>", { id : "resetPasswordTableBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `passwordResetPrompt(${json[i].userId})`}).html("Reset Password"));
        }
    })
 }
@@ -125,6 +127,33 @@ function deactivateUser(userIdSelected)
     .then(() =>
     {
         overHang("success", "User has been deactivated");
+        $('#admin-modal').modal('hide');
+        loadActiveUsers();
+    })
+}
+
+function passwordResetPrompt(userIdSelected)
+{
+    $("#admin-modal-title").html("Password Reset"); 
+    let adminEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
+    let adminSelectLabel = $("<label>").html("Are you sure you want to reset your password?");
+
+    $("#admin-modal-body").html("").append(adminEditDiv);
+    $(adminEditDiv).append(adminSelectLabel);
+
+    $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "resetPasswordBtn", onclick : `resetPassword(${userIdSelected})`}).html("Reset Password"))
+}
+
+function resetPassword(userIdSelected)
+{
+    let data = new FormData();
+    data.append("function", "resetPassword");
+    data.append("userId", userIdSelected);
+
+    axios.post("../User/adminController.php", data)
+    .then(() =>
+    {
+        overHang("success", "Password has been reset");
         $('#admin-modal').modal('hide');
         loadActiveUsers();
     })
