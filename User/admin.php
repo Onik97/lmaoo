@@ -1,7 +1,6 @@
 <?php require("adminController.php"); session_start(); ?>
 
 <!DOCTYPE html>
-<html>
 <title>Admin</title>
 
 <head>
