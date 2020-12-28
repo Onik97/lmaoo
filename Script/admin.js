@@ -169,10 +169,10 @@ function updateUserLevelPrompt(userIdSelected)
 
     let adminEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
     let adminSelecter = $("<select>", { id : 'userLevelSelecter'});
-    let adminSelectoption1 = $("<option>").val('1').html('Developer');
-    let adminSelectoption2 = $("<option>").val('2').html('Manager');
-    let adminSelectoption3 = $("<option>").val('3').html('Admin');
-    let adminSelectoption4 = $("<option>").val('4').html('Super User');
+    let adminSelectoption1 = $("<option>").val(1).html('Developer');
+    let adminSelectoption2 = $("<option>").val(2).html('Manager');
+    let adminSelectoption3 = $("<option>").val(3).html('Admin');
+    let adminSelectoption4 = $("<option>").val(4).html('Super User');
 
     $(adminSelecter).append(adminSelectoption1, adminSelectoption2, adminSelectoption3, adminSelectoption4);
 
@@ -180,7 +180,7 @@ function updateUserLevelPrompt(userIdSelected)
     $(adminEditDiv).append(adminSelecter);
 
     let SelectedUserLevel = '1';
-    $(adminSelecter).change(function(){
+    $("#userLevelSelecter").change(function(){
         let SelectedUserLevel = $(this).children("option:selected").val();
         return SelectedUserLevel;
     });
