@@ -3,50 +3,62 @@ $ticketController = new ticketController();
 
 if ($function == "checkTicket")
 {
+    validateDeveloper();
     echo $ticketController->ticketIdExistance($_POST['ticketId']);
 }
 else if ($function == "checkTicketExistance")
 {
+    validateDeveloper();
     echo $ticketController->ticketExistance($_POST['ticketName'], $_POST['featureId']);
 }
 else if ($function == "createComment")
 {
+    validateDeveloper();
     $ticketController->createComment($_POST['commentContent'], $_POST['ticketId'], $_POST['userId']);
 }
 else if ($function == "loadComments")
 {
+    validateDeveloper();
     echo json_encode($ticketController->loadComments($_POST['ticketId']));
 }
 else if ($function == "updateComment")
 {
+    validateDeveloper();
     echo $ticketController->updateComment($_POST['commentId'], $_POST['commentContent']);
 }
 else if ($function == "deleteComment")
 {
+    validateDeveloper();
     echo $ticketController->deleteComment($_POST['commentId']);
 }
 else if ($function == "saveSelectedAssignee")
 {
+    validateDeveloper();
     echo $ticketController->saveSelectedAssignee($_POST['ticketId'], $_POST['assigneeId']);
 }
 else if ($function == "assigneeSelf")
 {
+    validateDeveloper();
     echo $ticketController->assigneeYourself($_POST['ticketId'], $_POST['selfId']);
 }
 else if ($function == "loadDates")
 {
+    validateDeveloper();
     echo json_encode($ticketController->loadDates($_POST['ticketId']));
 }
 else if ($function == "loadAssignee")
 {
+    validateDeveloper();
     echo json_encode($ticketController->loadAssignee($_POST["ticketId"]));
 }
 else if ($function == "loadReporter")
 {
+    validateDeveloper();
     echo json_encode($ticketController->loadReporter($_POST['ticketId']));
 }
 else if ($function == "updateTicketTime")
 {
+    validateDeveloper();
     $ticketController->updateTicketTime($_POST["ticketId"]);
 }
 else 
