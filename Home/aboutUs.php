@@ -1,4 +1,4 @@
-<div class="jumbotron jumbo jumbotron-fluid">
+<div class="jumbotron jumbotron-fluid">
   <div class="container">
   </div>
 </div>
