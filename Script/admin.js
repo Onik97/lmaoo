@@ -179,10 +179,10 @@ function updateUserLevelPrompt(userIdSelected)
     $(adminEditDiv).append(adminSelecter);
     $("#admin-modal-body").html("").append(adminEditDiv);
 
-    $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "updateUserLevelBtn", onclick : `userCheck(${userIdSelected})`}).html("Update User Level"));
+    $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "updateUserLevelBtn", onclick : `updateUserLevel(${userIdSelected})`}).html("Update User Level"));
 }
 
-function userCheck(userIdSelected)
+function updateUserLevel(userIdSelected)
 {
     var userLevelSelected = $("#userLevelSelecter option:selected").val();
 
