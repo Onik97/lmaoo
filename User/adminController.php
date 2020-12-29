@@ -26,7 +26,7 @@ else if ($function == "resetPassword")
 }
 else if ($function == "updateUserLevel")
 {
-    ($adminController->updateUserLevel($_POST["userId"], ["chosenUserLevel"]));
+    ($adminController->updateUserLevel($_POST["userId"], $_POST["chosenUserLevel"]));
 }
 
 class adminController
