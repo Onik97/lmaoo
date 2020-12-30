@@ -164,16 +164,16 @@ function resetPassword(userIdSelected)
 function updateUserLevelPrompt(userIdSelected)
 {
     $("#admin-modal-title").html("Update User Level");
-    let adminSelecterLabel = $("<label>").html("Please select a level for the user");
-    $("#admin-modal-header").append(adminSelecterLabel);
 
-    let adminEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
+    let adminSelectLabel = $("<label>").html("Please select a level for the user");
+    let adminEditDiv = $("<div>", {class : "form-group modal-content-1"});
     let adminSelecter = $("<select>", { id : 'userLevelSelecter'});
     let adminSelectoption1 = $("<option>").val(1).html('Developer');
     let adminSelectoption2 = $("<option>").val(2).html('Manager');
     let adminSelectoption3 = $("<option>").val(3).html('Admin');
     let adminSelectoption4 = $("<option>").val(4).html('Super User');
 
+    $(adminEditDiv).append(adminSelectLabel);
     $(adminSelecter).append(adminSelectoption1, adminSelectoption2, adminSelectoption3, adminSelectoption4);
 
     $(adminEditDiv).append(adminSelecter);
