@@ -102,6 +102,58 @@ class AdminTest extends TestCase
         $this->assertFalse(password_verify("test", $userUpdated->password));
         session_destroy();
     }
+
+    public function test_updateUserLevel_setToFour()
+    {
+        session_start();
+        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null); 
+
+        $adminController = new adminController();
+        $adminController->updateUserLevel(46, 4);
+        $userController = new userController();
+        $expected = $userController->userInfoById(46);
+
+        $this->assertEquals($expected->level, 4);
+    }
+
+    public function test_updateUserLevel_setToOne()
+    {
+        session_start();
+        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null); 
+
+        $adminController = new adminController();
+        $adminController->updateUserLevel(46, 1);
+        $userController = new userController();
+        $expected = $userController->userInfoById(46);
+
+        $this->assertEquals($expected->level, 1);
+    }
+
+    public function test_updateUserLevel_setToTwo()
+    {
+        session_start();
+        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null); 
+
+        $adminController = new adminController();
+        $adminController->updateUserLevel(46, 2);
+        $userController = new userController();
+        $expected = $userController->userInfoById(46);
+
+        $this->assertEquals($expected->level, 2);
+    }
+
+    public function test_updateUserLevel_setToThree()
+    {
+        session_start();
+        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null); 
+
+        $adminController = new adminController();
+        $adminController->updateUserLevel(46, 3);
+        $userController = new userController();
+        $expected = $userController->userInfoById(46);
+
+        $this->assertEquals($expected->level, 3);
+    }
 }
 
 ?>

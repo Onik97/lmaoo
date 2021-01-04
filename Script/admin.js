@@ -40,6 +40,7 @@ function loadActiveUsers()
            $(cell5).append(document.createTextNode(json[i].level));
            $(cell6).append($("<button>", { id : "deactivateUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `deactivateUserPrompt(${json[i].userId})`}).html("Deactivate User"));
            $(cell6).append($("<button>", { id : "resetPasswordTableBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `passwordResetPrompt(${json[i].userId})`}).html("Reset Password"));
+           $(cell6).append($("<button>", { id : "updateUserLevel" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `updateUserLevelPrompt(${json[i].userId})`}).html("Update User Level"));
        }
    })
 }
@@ -73,6 +74,7 @@ function loadInActiveUsers()
            $(cell5).append(document.createTextNode(json[i].level));
            $(cell6).append($("<button>", { id : "activateUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `activateUserPrompt(${json[i].userId})`}).html("Activate User"));
            $(cell6).append($("<button>", { id : "resetPasswordTableBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `passwordResetPrompt(${json[i].userId})`}).html("Reset Password"));
+           $(cell6).append($("<button>", { id : "updateUserLevel" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `updateUserLevelPrompt(${json[i].userId})`}).html("Update User Level"));
        }
    })
 }
@@ -154,6 +156,45 @@ function resetPassword(userIdSelected)
     .then(() =>
     {
         overHang("success", "Password has been reset");
+        $('#admin-modal').modal('hide');
+        loadActiveUsers();
+    })
+}
+
+function updateUserLevelPrompt(userIdSelected)
+{
+    $("#admin-modal-title").html("Update User Level");
+
+    let adminSelectLabel = $("<label>").html("Please select a level for the user");
+    let adminEditDiv = $("<div>", {class : "form-group modal-content-1"});
+    let adminSelecter = $("<select>", { id : 'userLevelSelecter'});
+    let adminSelectoption1 = $("<option>").val(1).html('Developer');
+    let adminSelectoption2 = $("<option>").val(2).html('Manager');
+    let adminSelectoption3 = $("<option>").val(3).html('Admin');
+    let adminSelectoption4 = $("<option>").val(4).html('Super User');
+
+    $(adminEditDiv).append(adminSelectLabel);
+    $(adminSelecter).append(adminSelectoption1, adminSelectoption2, adminSelectoption3, adminSelectoption4);
+
+    $(adminEditDiv).append(adminSelecter);
+    $("#admin-modal-body").html("").append(adminEditDiv);
+
+    $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "updateUserLevelBtn", onclick : `updateUserLevel(${userIdSelected})`}).html("Update User Level"));
+}
+
+function updateUserLevel(userIdSelected)
+{
+    var userLevelSelected = $("#userLevelSelecter option:selected").val();
+
+    let data = new FormData();
+    data.append("function", "updateUserLevel");
+    data.append("userId", userIdSelected);
+    data.append("chosenUserLevel", userLevelSelected);
+
+    axios.post("../User/adminController.php", data)
+    .then(() =>
+    {
+        overHang("success", "User Level has been changed");
         $('#admin-modal').modal('hide');
         loadActiveUsers();
     })
