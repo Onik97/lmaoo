@@ -37,6 +37,10 @@ h1 {
     justify-content: left;
 }
 
+.darkmode--activated .project-info {
+    color: #fff;
+}
+
 .user-info {
     display: flex;
     align-items: center;
@@ -55,6 +59,11 @@ h1 {
     border: 1px solid #4a4a4a;
     border-radius: 100px;
     font-weight: 400;
+}
+
+.darkmode--activated .project-status {
+    color: #fff;
+    border: 1px solid #fff;
 }
 
 .btn-warning {
@@ -112,4 +121,8 @@ hr {
     top: 25px;
     right: 12px;
     color: #4a4a4a;
+}
+
+.darkmode--activated .list-group-item {
+    background-color: rgba(105, 105, 105, 0.24);
 }
