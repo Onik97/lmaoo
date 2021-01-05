@@ -4,7 +4,7 @@ $ticketController = new ticketController();
 $userController = new userController();
 ?>
 <link rel="stylesheet" href="../Css/navbar.css">
-<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+<nav class="navbar navbar-expand-lg">
 
     <?php $userController->loadDarkModeToggle($_COOKIE["lmaooDarkMode"], $userLoggedIn); ?>
 
