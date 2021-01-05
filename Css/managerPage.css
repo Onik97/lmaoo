@@ -90,6 +90,28 @@ h1 {
     margin-right: 40px;
 }
 
+.darkmode--activated .btn-light {
+    background-color: #4a4a4a;
+    color: #fff;
+}
+
+.dropdown-item {
+    cursor: pointer;
+}
+
+.darkmode--activated .dropdown-item {
+    background-color: #4a4a4a;
+    color: #fff;
+}
+
+.darkmode--activated .dropdown-menu.show {
+    background-color: #4a4a4a;
+}
+
+.dropdown-item:hover {
+    background-color: #28a745;
+}
+
 hr {
     margin: 0;
 }
@@ -111,9 +133,17 @@ hr {
     border-radius: 3px;
 }
 
+.darkmode--activated .autocom-box li {
+    color: #fff;
+}
+
 .autocom-box li:hover {
     background: rgb(247, 193, 68);
     cursor: pointer;
+}
+
+.darkmode--activated .autocom-box li:hover {
+    background: rgba(126, 126, 126, 0.24);
 }
 
 .fas {
@@ -124,5 +154,6 @@ hr {
 }
 
 .darkmode--activated .list-group-item {
-    background-color: rgba(105, 105, 105, 0.24);
+    background-color: rgba(126, 126, 126, 0.24);
+    color: #fff;
 }
