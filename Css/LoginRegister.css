@@ -21,6 +21,14 @@
 	text-decoration: none;
 }
 
-.container>.card {
+.container > .card {
 	border: none;
+}
+
+.darkmode--activated .row.no-gutters {
+	background-color: black;
+}
+
+.darkmode--activated h2 {
+	color: white;
 }
