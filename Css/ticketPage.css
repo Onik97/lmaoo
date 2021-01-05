@@ -1,9 +1,11 @@
 #info {
-	background-color: rgb(229, 241, 216);
+	/* background-color: rgb(229, 241, 216); */
+	background-color:  rgb(230, 230, 230);
+	border-right: 3px solid rgb(242, 242, 242);
 }
 
 #main {
-	background-color: rgb(247,250,243);
+	border-left: 3px solid rgb(246, 246, 246);
 	text-align: centre;
 	align-items: center;
 }
@@ -14,11 +16,11 @@
 }
 
 #comment-content {
-	background-color: rgb(247,250,243);
+	background-color: white;
 }
 
 #notes-content {
-	background-color: rgb(247,250,243);
+	background-color: white;
 }
 
 #ticketDetails > p::after {
@@ -99,11 +101,11 @@
 
 #ticketPeopleChooseAssignee, #ticketPeopleSelfAssignee {
 	float: right;
-	background-color: rgb(213, 229, 187);
+	background-color: rgb(230, 230, 230);
 }
 
 #ticketPeopleChooseAssignee:hover, #ticketPeopleSelfAssignee:hover {
-	background-color: rgb(172, 205, 122);
+	background-color: rgb(179, 179, 179);
 }
 
 #loginMessage
