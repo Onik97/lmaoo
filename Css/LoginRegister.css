@@ -26,9 +26,14 @@
 }
 
 .darkmode--activated .row.no-gutters {
-	background-color: black;
+	background-color: #000;
 }
 
 .darkmode--activated h2 {
-	color: white;
+	color: #fff;
+}
+
+.darkmode--activated .form-group input {
+	background-color: rgba(105, 105, 105, 0.24);
+	color: #fff;
 }
