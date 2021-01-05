@@ -91,9 +91,9 @@ function addUser(userId, forename, surname, username, managerAccess)
     var userSpan = $("<span>").html(`${forename} ${surname} (${username})`);
     var btnGroup = $("<div>", { "class" : "btn-group"});
     var roleBtn = $("<button>", { type:"button", class : "btn btn-light dropdown-toggle", "data-toggle" : "dropdown" }).append(currentRole);
-    var dropDownMenu = $("<div>", {"class" : "dropdown-menu"});
-    var managerRole = $("<a>", {"class" : "dropdown-item"}).html("Manager");
-    var developerRole = $("<a>", {"class" : "dropdown-item"}).html("Developer");
+    var dropDownMenu = $("<div>", {"class" : "dropdown-menu roles"});
+    var managerRole = $("<a>", {"class" : "dropdown-item role"}).html("Manager");
+    var developerRole = $("<a>", {"class" : "dropdown-item role"}).html("Developer");
     var xSign = $("<a>", {"class" : "fas fa-times"});
 
     $(dropDownMenu).append(managerRole);

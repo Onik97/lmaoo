@@ -95,20 +95,20 @@ h1 {
     color: #fff;
 }
 
-.dropdown-item {
+.role {
     cursor: pointer;
 }
 
-.darkmode--activated .dropdown-item {
+.darkmode--activated .role {
     background-color: #4a4a4a;
     color: #fff;
 }
 
-.darkmode--activated .dropdown-menu.show {
+.darkmode--activated .roles.show {
     background-color: #4a4a4a;
 }
 
-.dropdown-item:hover {
+.role:hover {
     background-color: #28a745;
 }
 
