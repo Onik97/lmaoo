@@ -1,7 +1,6 @@
 <?php require_once("homeController.php"); ?>
 
 <!DOCTYPE html>
-<html>
     <head>
         <title>Home</title>
         <p id="navBarActive" hidden>homePage</p>

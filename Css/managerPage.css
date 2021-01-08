@@ -37,6 +37,10 @@ h1 {
     justify-content: left;
 }
 
+.darkmode--activated .project-info {
+    color: #fff;
+}
+
 .user-info {
     display: flex;
     align-items: center;
@@ -55,6 +59,11 @@ h1 {
     border: 1px solid #4a4a4a;
     border-radius: 100px;
     font-weight: 400;
+}
+
+.darkmode--activated .project-status {
+    color: #fff;
+    border: 1px solid #fff;
 }
 
 .btn-warning {
@@ -81,6 +90,28 @@ h1 {
     margin-right: 40px;
 }
 
+.darkmode--activated .btn-light {
+    background-color: #4a4a4a;
+    color: #fff;
+}
+
+.role {
+    cursor: pointer;
+}
+
+.darkmode--activated .role {
+    background-color: #4a4a4a;
+    color: #fff;
+}
+
+.darkmode--activated .roles.show {
+    background-color: #4a4a4a;
+}
+
+.role:hover {
+    background-color: #28a745;
+}
+
 hr {
     margin: 0;
 }
@@ -102,9 +133,17 @@ hr {
     border-radius: 3px;
 }
 
+.darkmode--activated .autocom-box li {
+    color: #fff;
+}
+
 .autocom-box li:hover {
     background: rgb(247, 193, 68);
     cursor: pointer;
+}
+
+.darkmode--activated .autocom-box li:hover {
+    background: rgba(126, 126, 126, 0.24);
 }
 
 .fas {
@@ -112,4 +151,9 @@ hr {
     top: 25px;
     right: 12px;
     color: #4a4a4a;
+}
+
+.darkmode--activated .list-group-item {
+    background-color: rgba(126, 126, 126, 0.24);
+    color: #fff;
 }

@@ -21,6 +21,19 @@
 	text-decoration: none;
 }
 
-.container>.card {
+.container > .card {
 	border: none;
+}
+
+.darkmode--activated .row.no-gutters {
+	background-color: #000;
+}
+
+.darkmode--activated h2 {
+	color: #fff;
+}
+
+.darkmode--activated .form-group input {
+	background-color: rgba(105, 105, 105, 0.24);
+	color: #fff;
 }

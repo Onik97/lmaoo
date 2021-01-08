@@ -34,3 +34,13 @@
 .ticketTable{
     padding: 0px 8px;
 }
+
+.darkmode--activated .card-body {
+    background-color: rgba(33, 33, 33, 0.99);
+    color: #fff;
+}
+
+.darkmode--activated .card-footer {
+    background-color: rgba(33, 33, 33, 0.99);
+    color: #fff;
+}

@@ -1,3 +1,5 @@
+$(document).ready(() => darkModeToggleValidator());
+
 let navBarActive = document.getElementById("navBarActive").innerHTML;
 
 (navBarActive == "homePage") ? (document.getElementById("homeNav").classList.add("active"))
@@ -18,6 +20,20 @@ function searchBar()
     axios.post("../Ticket/ticketController.php", data)
         .then(response => 
             (response.data == true) ? window.location.href = `../Ticket/index.php?ticketId=${searchbarText}` : $("#searchBarInput").addClass('is-invalid'));
+}
+
+function darkModeToggleValidator() // Sometimes toggle can be on but dark mode is not on 
+{
+    let darkModeSwitch = $("#darkModeSwitch");
+
+    if (darkModeSwitch.prop("checked"))
+    {
+        if (!darkmode.isActivated()) darkmode.toggle();
+    }
+    else if (!darkModeSwitch.prop("checked"))
+    {
+        if (darkmode.isActivated()) darkmode.toggle();
+    }
 }
 
 function darkModeToggle()
