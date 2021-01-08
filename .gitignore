@@ -4,3 +4,4 @@ Test/Vendor
 *.cache
 Images/profilePictures/*
 debug.log
+config.php
