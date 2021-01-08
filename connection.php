@@ -17,8 +17,6 @@ function logindb()
 	return $pdo;
 }
 
-logindb("","");
-
 function validateDeveloper()
 {
 	if (!$_SESSION['userLoggedIn']->getLevel() >= 1)
