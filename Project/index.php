@@ -1,13 +1,12 @@
-<?php require("../User/user.php"); require("projectController.php"); session_start(); ?>
+<?php require("projectController.php"); session_start(); ?>
 
 <!DOCTYPE html>
 <html>
   <title>Home</title>
     <head>
+      <p id="navBarActive" hidden>projectPage</p>
       <?php include("../Global/head.php"); ?>
       <link rel="stylesheet" href="../Css/projectPage.css">
-      <script type="text/javascript" src="../Script/projectController.js"></script>
-      <p id="navBarActive" hidden>projectPage</p>
     </head>
 
     <body>
@@ -59,6 +58,8 @@
       </div>
     </div>
 
+    <?php include("../Global/scripts.php"); ?>
+    <script type="text/javascript" src="../Script/projectController.js"></script>
     <?php include("projectModal.php"); ?>
     <?php include("../Feature/featureModal.php"); ?>
     <?php include("../Global/editUserModal.php"); ?>

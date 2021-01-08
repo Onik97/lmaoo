@@ -5,7 +5,6 @@ use PHPUnit\Framework\TestCase;
 
 class ProjectTest extends TestCase
 {
-
     public function test_projectExistance_null()
     {
         $projectController = new projectController();

@@ -1,29 +1,30 @@
-<?php
-require_once(__DIR__ . "/../connection.php");
-require_once(__DIR__ . "/../User/user.php");
-
-error_reporting(0);
+<?php require_once(__DIR__ . "/../connection.php"); require_once(__DIR__ . "/../User/user.php");
 
 $projectController = new projectController();
 
-if ($_GET['projectId'] && $_GET['progress'])
+if ($_POST['projectId'] && $_POST['progress'])
 {
-    echo json_encode($projectController->getTicketListWithProgress($_GET['projectId'], $_GET['progress']));
+    validateDeveloper();
+    echo json_encode($projectController->getTicketListWithProgress($_POST['projectId'], $_POST['progress']));
 }
 else if($_POST['function'] == "loadProjects")
 {
+    validateDeveloper();
     echo json_encode($projectController->getProjectList());
 }
 else if($_POST['function'] == "createProject")
 {
+    validateManager();
     $projectController->createNewProject($_POST['projectName'], $_POST['projectStatus']);
 }
 else if($_POST['function'] == "createTicket")
 {
+    validateDeveloper();
     $projectController->createNewTicket($_POST['projectId'], $_POST['summary'], $_POST['reporterKey']);
 }
 else if ($_POST['function'] == "checkProjectExistance")
 {
+    validateDeveloper();
     echo $projectController->projectExistance(null);
 }
 else
@@ -48,7 +49,7 @@ class projectController
         $sql = isset($function) ? "SELECT name FROM project WHERE name = ?" : "SELECT projectId FROM project WHERE projectId = ?";
         if (!isset($projectSearch) || $projectSearch == null) return false;
 
-        $pdo = logindb('user', 'pass');
+        $pdo = logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$projectSearch]);
@@ -60,15 +61,16 @@ class projectController
 
     public function createNewProject($projectName, $projectStatus)
     {
-        $pdo = logindb('user', 'pass');
+        session_start();
+        $pdo = logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("INSERT INTO project (name, status) VALUES (?, ?)");
-        $stmt->execute([$projectName, $projectStatus]);
+        $stmt = $pdo->prepare("INSERT INTO project (name, status, owner) VALUES (?, ?, ?)");
+        $stmt->execute([$projectName, $projectStatus, $_SESSION['userLoggedIn']->getId()]);
     }
 
     public function createNewTicket($featureId, $summary, $reporterKey)
     {
-        $pdo = logindb('user', 'pass');
+        $pdo = logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("INSERT INTO ticket (summary, featureId, reporter_key) VALUES (?, ?, ?)");
         $stmt->execute([$summary, $featureId, $reporterKey]);
@@ -76,7 +78,7 @@ class projectController
 
     public function getProjectList()
     {
-        $pdo = logindb('user', 'pass');
+        $pdo = logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT projectId, name, status FROM project");
         $stmt->execute();
@@ -91,7 +93,7 @@ class projectController
         // TODO: When re-writing this, ensure that a better way is used for this
         if($progress == "In Progress") $sql = $sql . "OR ticket.progress = 'In Automation')";
         else $sql = $sql .")";
-        $pdo = logindb('user', 'pass');
+        $pdo = logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare($sql);
 
@@ -99,28 +101,23 @@ class projectController
         return $stmt->fetchAll();
     }
 
-    public function loadProjectsInNavBar()
+    public function loadProjectsInNavBar($userLoggedIn)
     {
         $projectController = new projectController();
-        if (!isset($_SESSION["userLoggedIn"])) { return; }
+        if ($userLoggedIn == null) return; 
         $projects = $projectController->getProjectList();
-        ?> 
-        <li class="nav-item dropdown">
-            <a id="projectNav" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Project<span class="caret"></span></a>
 
-            <div class="dropdown-menu">
-                <?php $userLoggedIn = $_SESSION['userLoggedIn'];
-                if ($userLoggedIn->getLevel() > 3)
-                { ?>
-                <a class="dropdown-item" data-toggle="modal" data-target="#globalModal" onclick="createProjectPrompt()">+ Create Project</a>
-                <?php }
-                foreach ($projects as $project) 
-                { ?>
-                <a class="dropdown-item" href="../Project/index.php?projectId=<?php echo $project->projectId ?>"><?php echo $project->name ?></a>
-                <?php } ?>
-            </div>
-        </li>
-        <?php
+        echo "<li class='nav-item dropdown'>";
+        echo "<a id='projectNav' href='#' class='nav-link dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Project<span class='caret'></span></a>";
+        echo "<div class='dropdown-menu'>";
+        
+        foreach ($projects as $project) 
+        { 
+            echo "<a class='dropdown-item' href='../Project/index.php?projectId=$project->projectId'>$project->name</a>";
+        } 
+        
+        echo "</div>";
+        echo "</li>";
     }
 }
 ?>

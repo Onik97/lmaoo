@@ -1,36 +1,57 @@
-<?php session_start(); if(isset($_SESSION['userLoggedIn'])){header("Location: ../Ticket/index.php");}?>
+<?php session_start(); if (isset($_SESSION['userLoggedIn'])) { header("Location: ../Ticket/index.php"); } ?>
+
 <!DOCTYPE html>
-<html>
-  <title>Register Page</title>
+<title>Register Page</title>
 
-  <head>
-    <link rel="stylesheet" href="../Css/RegisterPage.css">
-    <?php include("../Global/head.php"); ?>
-    <p id="navBarActive" hidden>registerPage</p>
-  </head>
+<head>
+  <p id="navBarActive" hidden>registerPage</p>
+  <link rel="stylesheet" href="../Css/LoginRegister.css">
+  <?php include("../Global/head.php"); ?>
+</head>
 
-  <body>
-    <?php include("../Global/navBar.php"); ?>
-    
-    <div class="top-buffer">
-      <div class="container">
-        <div class="wrap">
-        <p class="alert alert-warning mt-3" id="validateMessage" hidden></p>
-          <form action="userController.php" onSubmit="return checkPassword(this)" method='POST'>
+<body>
+  <?php include("../Global/navBar.php"); ?>
 
-            <input type="text" name="forename" id="forenameRegister" required placeholder="First Name"> 
-            <input type="text" name="surname" id="surnameRegister" required placeholder="Last Name"> 
-            <input type="text" name="username" id="usernameRegister" required placeholder="Username"> 
-            <input type="password" name="password1" id="password1Register" required placeholder="Password"> 
-            <input type="password" name="password2" id="password2Register" required placeholder="Re-Type Password"> 
-            <input type="hidden" name="function" value="register">
-            <input class="one" type="submit" value="Submit">
-            <a href="../User/index.php">Already Registered? Login here!</a>
-            
-          </form>
+  <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="container">
+      <div class="card">
+        <div class="row no-gutters">
+          <div class="col-md-6">
+            <img id="otal_logo" src="../Images/otal_logo.png">
+          </div>
+          <div class="col-md-6 text-center">
+            <div class="card-body">
+              <h2 class="register-header">Sign up</h2>
+              <form action="userController.php" onSubmit="return checkPassword(this)" method='POST'>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="forename" placeholder="First name" id="forenameRegister" required>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="surname" placeholder="Last name" id="surnameRegister" required>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="username" placeholder="Username" id="usernameRegister" required>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" name="password1" placeholder="Password" id="password1Register" required>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" name="password2" placeholder="Confirm password" id="password2Register" required>
+                </div>
+                <input type="hidden" name="function" value="register">
+                <button type="submit" value="Submit" class="btn btn-success btn-block">Register</button>
+
+                <div class="form-group mt-3">
+                  <a class="register" href="../User/index.php">Already Registered? Login here!</a>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </body>
+
+      <?php include("../Global/scripts.php"); ?>
+      <script src="../Script/User/passwordchecker.js"></script>
+</body>
+
 </html>
-<script src="../Script/User/passwordchecker.js"></script>

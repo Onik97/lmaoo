@@ -1,4 +1,33 @@
-.active
-{
-  background-color: rgba(119, 119, 119, 0.24);
+.active {
+  background-color: rgba(151, 151, 151, 0.24);
+}
+
+.navbar .navbar-nav > li > a {
+  color: rgb(0, 0, 0);
+}
+
+.darkmode--activated .dropdown-menu.show {
+  background-color: rgb(25, 25, 25);
+  color: #fff;
+}
+
+.darkmode--activated .navbar .navbar-nav > li > a, .darkmode--activated .dropdown-menu.show > a {
+  color: rgb(170, 170, 170);
+}
+
+.darkmode--activated .dropdown-menu.show > a:hover {
+  background-color: rgba(151, 151, 151, 0.24);
+}
+
+.darkmode--activated .navbar > div.custom-control.custom-switch > label {
+  color: rgb(170, 170, 170);
+}
+
+.darkmode--activated .navbar {
+  background-color: rgba(105, 105, 105, 0.24);
+}
+
+.darkmode--activated #searchBarInput {
+  background-color: rgba(105, 105, 105, 0);
+  color: #fff;
 }

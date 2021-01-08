@@ -1,11 +1,36 @@
 #info {
-	background-color: rgb(229, 241, 216);
+	background-color: rgb(230, 230, 230);
+	border-right: 3px solid rgb(242, 242, 242);
+}
+
+.darkmode--activated #info {
+	background-color: rgba(105, 105, 105, 0.24);
+	color: #fff;
 }
 
 #main {
-	background-color: rgb(247,250,243);
 	text-align: centre;
 	align-items: center;
+}
+
+.darkmode--activated #main {
+	background-color: rgba(151, 151, 151, 0.24);
+}
+
+.darkmode--activated #main > h1 {
+	color: #fff;
+}
+
+.darkmode--activated .note-toolbar.panel-heading {
+	background-color: rgba(151, 151, 151, 0.24);
+}
+
+.darkmode--activated .note-editable {
+	background-color: rgba(151, 151, 151, 0.24);
+}
+
+.darkmode--activated .note-toolbar.panel-heading button {
+	color: #fff;
 }
 
 #myTab {
@@ -14,11 +39,11 @@
 }
 
 #comment-content {
-	background-color: rgb(247,250,243);
+	background-color: white;
 }
 
 #notes-content {
-	background-color: rgb(247,250,243);
+	background-color: white;
 }
 
 #ticketDetails > p::after {
@@ -35,7 +60,7 @@
 	float: left;
 }
 
-#ticketCreate, #ticketComments, #ticketDetails{
+#ticketCreate, #ticketComments, #ticketDetails {
 	padding: 0;
 	margin: auto;
 	width: 800px;
@@ -43,6 +68,17 @@
 	min-width: 150px;
 	text-align: left;
 }
+
+.darkmode--activated #comment-content > div, .darkmode--activated #notes-content > div {
+	background-color: rgba(33, 33, 33, 0.99);
+	color: #fff;
+}
+
+.darkmode--activated .note-editable { 
+	background-color: rgba(105, 105, 105, 0.24) !important; 
+	color: white !important; 
+  }
+  
 
 .note-editor, .note-editing-area {
 	border-radius: 6px;
@@ -82,6 +118,10 @@
   	width: 20%;
 }
 
+.darkmode--activated .CommentImages {
+	filter: invert(100%);
+}
+
 #commentImages > img {
 	width: 15%;
 	max-width: 20px;
@@ -89,6 +129,10 @@
 
 .CommentImages:hover {
 	background-color: rgb(172, 205, 122);
+}
+
+.darkmode--activated .CommentImages:hover {
+	background-color: rgba(151, 151, 151, 0.99);
 }
 
 .profilePicture {
@@ -99,11 +143,11 @@
 
 #ticketPeopleChooseAssignee, #ticketPeopleSelfAssignee {
 	float: right;
-	background-color: rgb(213, 229, 187);
+	background-color: rgb(230, 230, 230);
 }
 
 #ticketPeopleChooseAssignee:hover, #ticketPeopleSelfAssignee:hover {
-	background-color: rgb(172, 205, 122);
+	background-color: rgb(179, 179, 179);
 }
 
 #loginMessage

@@ -1,10 +1,5 @@
-<?php  
-require_once(__DIR__ . "/../connection.php");
-require_once(__DIR__ . "/user.php");
+<?php  require_once(__DIR__ . "/../connection.php"); require_once(__DIR__ . "/user.php");
 $userController = new userController();
-error_reporting(0);
-
-$function = $_POST['function'];
 
 if ($function == "login")
 {
@@ -25,10 +20,12 @@ else if ($function == "register")
 }
 else if ($function == 'update')
 {
+	validateSuperUser();
 	$userController->updateUser($_POST['editForename'], $_POST['editSurname'], $_POST['editUsername'], $_POST['editUserId']);
 }
 else if ($function == "checkUsername")
 {
+	validateManager();
 	if ($userController->hasDup(null))
 	{
 		$json->fromServer = "True";
@@ -40,20 +37,19 @@ else if ($function == "checkUsername")
 		echo json_encode($json);
 	}
 }
-else if ($function == "getActiveUsers") // This should be moved to Admin -> TODO: Lewis remove this and the function
+else if ($function == "getActiveUsers") 
 {
+	validateDeveloper();
 	echo json_encode($userController->getActiveUsers());
 }
 else if ($function == "darkModeToggle")
 {
+	validateDeveloper();
 	$userController->darkModeToggle($_POST['darkMode'], $_POST['userId']);
-}
-else if ($function == "loadDarkMode")
-{
-	echo $userController->loadDarkMode($_POST['userId']);
 }
 else if ($function == "uploadProfilePic")
 {
+	validateDeveloper();
 	echo $userController->uploadImage($_POST['userId'], null);
 }
 else
@@ -66,7 +62,7 @@ class userController
 	public function hasDup(?string $unitTest)
 	{
 		$username = $unitTest == null ? $_POST['username'] : $unitTest;
-		$pdo = logindb('user', 'pass');
+		$pdo = logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT username FROM user WHERE username = ?");
 		$stmt->execute([$username]);
@@ -76,7 +72,7 @@ class userController
 
 	public function updateUser($forename, $surname, $username, $userId)
 	{
-		$pdo = logindb('user', 'pass');
+		$pdo = logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("UPDATE user SET forename = ?, surname = ?, username = ? WHERE userId = ?");
 		$stmt->execute([$forename, $surname, $username, $userId]);
@@ -92,7 +88,7 @@ class userController
 
 	public function userInfoById($userId) // Should be used for Unit Testing and Admin Only!
 	{
-		$pdo = logindb('user', 'pass');
+		$pdo = logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT * FROM user WHERE userId = ?");
 		$stmt->execute([$userId]);
@@ -102,7 +98,7 @@ class userController
 
 	public function login($username, $password)
 	{
-		$pdo = logindb('user', 'pass');
+		$pdo = logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT * FROM user WHERE username = ?");
 		$stmt->execute([$username]);
@@ -113,7 +109,8 @@ class userController
 		{
 			if($user->isActive == true)
 			{
-				$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive);
+				$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode);
+				if ($user->darkMode != $_COOKIE["lmaooDarkMode"]) setcookie("lmaooDarkMode", $user->darkMode, 0, "/");
 				session_start();
 				$_SESSION['userLoggedIn'] = $userLoggedIn;
 				header("Location: ../Home/index.php");
@@ -136,7 +133,7 @@ class userController
 	{		
 		$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-		$pdo = logindb('user', 'pass');
+		$pdo = logindb();
 		$stmt = $pdo->prepare("INSERT INTO user (userId, username, password, forename, surname) VALUES (null, ?, ?, ?, ?)");
 		$stmt->execute([$username, $hashedPassword, $forename, $surname]);
 		session_start();
@@ -153,7 +150,7 @@ class userController
 
 	public function getAllUsers() // This is used in Admin -> May be moved, not unit testing
 	{
-		$pdo = logindb('user', 'pass');
+		$pdo = logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT * FROM user");
 		$stmt->execute();
@@ -161,11 +158,11 @@ class userController
 		return $users;
 	}
 
-	public function getActiveUsers() // Again this is used in Admin -> May be moved, not unit testing
+	public function getActiveUsers()
 	{
-		$pdo = logindb('user', 'pass');
+		$pdo = logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT userId, forename, surname, username FROM user WHERE isActive = 1");
+		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, picture FROM user WHERE isActive = 1");
 		$stmt->execute();
 		$activeUsers = $stmt->fetchall();
 		return $activeUsers;
@@ -173,24 +170,24 @@ class userController
 
 	public function darkModeToggle($toggle, $userId)
 	{
-		$pdo = logindb('user', 'pass');
+		$pdo = logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("UPDATE user SET darkMode = ? WHERE userId = ?");
 		$stmt->execute([$toggle, $userId]);
 	}
 
-	public function loadDarkMode($userId)
+	public function loadDarkMode($userId) // Keeping for Unit Testing
 	{
-		$pdo = logindb('user', 'pass');
+		$pdo = logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT darkMode FROM user WHERE userId = ?");
 		$stmt->execute([$userId]);
-		echo $stmt->fetchColumn();
+		return $stmt->fetchColumn();
 	}
 
 	public function updatePicture($target, $userId)
 	{
-		$pdo = logindb('user', 'pass');
+		$pdo = logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("UPDATE user SET picture = ? WHERE userId = ?");
 		$stmt->execute([$target, $userId]);
@@ -211,6 +208,44 @@ class userController
 			echo true;
 		}
 		else echo false;
+	}
+
+	public function loadDarkModeToggle($toggle, $userLoggedIn)
+	{ 
+		if ($toggle == null) 
+		{
+			if ($userLoggedIn == null) 
+			{
+				$toggle = false;
+				setcookie("lmaooDarkMode", false, 0, "/");
+			}
+			else if ($userLoggedIn != null)
+			{
+				$toggle = $userLoggedIn->getDarkMode();
+				setcookie("lmaooDarkMode", $userLoggedIn->getDarkMode(), 0, "/");
+			}
+		}
+
+		echo "<div class='custom-control custom-switch'>";
+		echo $toggle == true ? "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' onclick='darkModeToggle()' checked>" : "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' onclick='darkModeToggle()'>";
+		echo "<label class='custom-control-label' for='darkModeSwitch'>Dark Mode</label>";
+		echo "</div>";
+	}
+
+	public function loadDropdownItems($userLoggedIn)
+	{
+		if($userLoggedIn == null)
+		{
+			echo "<a class='dropdown-item' id='registerNav' href='../User/register.php'>Register</a>";
+			echo "<a class='dropdown-item' id='loginNav' href='../User/index.php'>Login</a>";
+		}
+		else
+		{
+			if ($userLoggedIn->getLevel() > 1) echo "<a class='dropdown-item' id='managerNav' href='../Manager/index.php'>Manager</a>"; 
+			echo "<a class='dropdown-item' id='editAccountNav' data-toggle='modal' data-target='#view-modal' role='button'>Edit Account</a>";
+			echo "<a class='dropdown-item' id='logoutNav' href='../User/logout.php'>Logout</a>";
+			if($userLoggedIn->getLevel() > 3) echo "<a class='dropdown-item' id='adminNav' href='../User/admin.php'>Admin</a>";
+		}
 	}
 }
 ?>
