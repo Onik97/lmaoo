@@ -102,4 +102,23 @@ class githubController
             header("Location: ../User/login.php");
         }
     }
+
+    public function registerGithub()
+    {
+        session_start();
+        $githubUser = $this->getGithubUser($this->accessToken);
+
+        $pdo = logindb();
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("UPDATE user SET github_id = ?, github_accessToken = ? WHERE userId = ?");
+        $stmt->execute([$githubUser['id'], $this->getAccessToken(), $_SESSION['userLoggedIn']->getId()]);
+        
+        $_SESSION['userLoggedIn']->setGithubId($githubUser['id']);
+        $_SESSION['userLoggedIn']->profilePicture = $githubUser['avatar_url'];
+		$_SESSION['userLoggedIn']->name = $githubUser['name'];
+        $_SESSION['userLoggedIn']->login = $githubUser['login'];
+        
+        $_SESSION['message'] = 'Github Registration Successful!';
+        header("Location: ../Home/index.php");
+    }
 }
