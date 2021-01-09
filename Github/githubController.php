@@ -52,6 +52,13 @@ class githubController
 		$stmt = $pdo->prepare("SELECT * FROM user WHERE github_id = ?");
 		$stmt->execute([$githubId]);
         $user = $stmt->fetch();
+
+        if($user == null)
+        {
+            session_start();
+            $_SESSION['message'] = 'Github account not linked, you must login and register Github account first';
+            header("Location: ../User/login.php");
+        }
         
         if($user->isActive == true)
         {
