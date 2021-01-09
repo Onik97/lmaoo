@@ -22,7 +22,7 @@ class AdminTest extends TestCase
     public function test_validateAdmin_trueWithSession()
     {
         session_start();
-        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null);
+        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null, null);
         $adminController = new adminController();
         $actual = $adminController->validateAdmin(null);
         $this->assertTrue($actual);
@@ -32,7 +32,7 @@ class AdminTest extends TestCase
     public function test_validateAdmin_falseWithSession()
     {
         session_start();
-        $_SESSION['userLoggedIn'] = new user(34, null, null, null, null, null, null, null);
+        $_SESSION['userLoggedIn'] = new user(34, null, null, null, null, null, null, null, null);
         $adminController = new adminController();
         $actual = $adminController->validateAdmin(null);
         $this->assertFalse($actual);
@@ -45,7 +45,7 @@ class AdminTest extends TestCase
         $userController = new userController();
 
         session_start();
-        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null);  
+        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null, null);  
         $adminController->activateUser(34);
         $userUpdated = $userController->userInfoById(34);
 
@@ -63,7 +63,7 @@ class AdminTest extends TestCase
         $userController = new userController();
 
         session_start();
-        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null);  
+        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null, null);  
         $adminController->deactivateUser(34);
         $userUpdated = $userController->userInfoById(34);
 
@@ -81,7 +81,7 @@ class AdminTest extends TestCase
         $userController = new userController();
 
         session_start();
-        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null);  
+        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null, null);  
         $adminController->resetPassword(34, null);
         $userUpdated = $userController->userInfoById(34);
         $this->assertTrue(password_verify("password", $userUpdated->password));
@@ -95,7 +95,7 @@ class AdminTest extends TestCase
         $userController = new userController();
 
         session_start();
-        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null);  
+        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null, null);  
         $adminController->resetPassword(34, null);
         $userUpdated = $userController->userInfoById(34);
         $adminController->resetPassword(34, $hashedPassword);
@@ -106,7 +106,7 @@ class AdminTest extends TestCase
     public function test_updateUserLevel_setToFour()
     {
         session_start();
-        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null); 
+        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null, null); 
 
         $adminController = new adminController();
         $adminController->updateUserLevel(46, 4);
@@ -119,7 +119,7 @@ class AdminTest extends TestCase
     public function test_updateUserLevel_setToOne()
     {
         session_start();
-        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null); 
+        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null, null); 
 
         $adminController = new adminController();
         $adminController->updateUserLevel(46, 1);
@@ -132,7 +132,7 @@ class AdminTest extends TestCase
     public function test_updateUserLevel_setToTwo()
     {
         session_start();
-        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null); 
+        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null, null); 
 
         $adminController = new adminController();
         $adminController->updateUserLevel(46, 2);
@@ -145,7 +145,7 @@ class AdminTest extends TestCase
     public function test_updateUserLevel_setToThree()
     {
         session_start();
-        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null); 
+        $_SESSION['userLoggedIn'] = new user(12, null, null, null, null, null, null, null, null); 
 
         $adminController = new adminController();
         $adminController->updateUserLevel(46, 3);

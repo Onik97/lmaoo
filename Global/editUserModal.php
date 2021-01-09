@@ -1,4 +1,5 @@
-<?php if (!isset($userLoggedIn))  { return; } else { ?>
+<?php if (!isset($userLoggedIn)) return; require_once("../Github/githubController.php"); $githubController = new githubController(); ?>
+
 <link rel="stylesheet" href="../Css/allModals.css">
             
 <div class="modal fade" id="view-modal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
@@ -44,6 +45,9 @@
                         <small id="editUsernameMessage" hidden></small> 
                     </div>
 
+                    <?php $githubController->loadProfile($userLoggedIn); ?>
+
+            </div>
                     <input type="hidden" name="function" value="update">
                     <input type="hidden" name="editUserId" value="<?php echo $userLoggedIn->getId();?>">
 
@@ -55,6 +59,4 @@
         </div>
     </div> 
 </div>
-
-<?php } ?>
 <script type="text/javascript" src="../Script/editUser.js"></script>

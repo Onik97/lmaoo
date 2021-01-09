@@ -14,11 +14,12 @@ else
     {
         case "login":
             $github->setAccessToken();
-            $id = $github->getGithubId();
+            $id = $github->getGithubUser($github->getAccessToken())['id'];
             $github->login($id);
             break;
-        // case "register":
-        //     echo "i is bar";
-        //     break;
+        case "register":
+            $github->setAccessToken();
+            $github->registerGithub();
+            break;
     }
 }
