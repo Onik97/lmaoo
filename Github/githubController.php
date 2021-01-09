@@ -43,6 +43,23 @@ class githubController
 
         $jsonAccessTokenResponse = json_decode($accessTokenResponse, true);
         return $jsonAccessTokenResponse["id"];
+    public function loadProfile($userLoggedIn)
+    {
+        if($userLoggedIn->getGithubId() == null)
+        {
+            echo 
+            "<div class='form-group'>
+            <a href='../Github/authorize.php?function=register' class='github'><i class='fab fa-github'></i> Register on Github</a>
+            </div>";
+        }
+        else
+        {
+            echo 
+            "<div class='row github-registered'>
+            <div class='col-2'><img class='github-image' width='50' height='50' src='{$userLoggedIn->profilePicture}}'></div>
+            <div class='col-10 github-info'><i class='fab fa-github'></i> Github Linked as {$userLoggedIn->name} ({$userLoggedIn->login})</div>   
+            </div>";
+        }
     }
 
     public function login($githubId)
