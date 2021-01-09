@@ -40,7 +40,7 @@
 									<a class="register" href="../User/register.php">Not Registered? Click here!</a>
 								</div>
 							</form>
-							<a href="../Github/authorize.php" class="github"><i class="fab fa-github"></i> Sign in with Github</a>
+							<a href="../Github/authorize.php?function=login" class="github"><i class="fab fa-github"></i> Sign in with Github</a>
 						</div>
 					</div>
 				</div>

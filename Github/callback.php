@@ -9,7 +9,16 @@ else
 {
     unset($_SESSION['state']);
     $github = new githubController();
-    $github->setAccessToken();
-    $id = $github->getGithubId();
-    $github->login($id);
+
+    switch ($_GET['function']) 
+    {
+        case "login":
+            $github->setAccessToken();
+            $id = $github->getGithubId();
+            $github->login($id);
+            break;
+        // case "register":
+        //     echo "i is bar";
+        //     break;
+    }
 }
