@@ -45,4 +45,27 @@ class githubController
         return $jsonAccessTokenResponse["id"];
     }
 
+    public function login($githubId)
+    {
+        $pdo = logindb();
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+		$stmt = $pdo->prepare("SELECT * FROM user WHERE github_id = ?");
+		$stmt->execute([$githubId]);
+        $user = $stmt->fetch();
+        
+        if($user->isActive == true)
+        {
+            $userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode);
+            if ($user->darkMode != $_COOKIE["lmaooDarkMode"]) setcookie("lmaooDarkMode", $user->darkMode, 0, "/");
+            session_start();
+            $_SESSION['userLoggedIn'] = $userLoggedIn;
+            header("Location: ../Home/index.php");
+        }
+        else
+        {
+            session_start();
+            $_SESSION['message'] = 'User deactivated, contact the administrator';
+            header("Location: ../User/login.php");
+        }
+    }
 }
