@@ -40,3 +40,11 @@
 .darkmode--activated .modal-backdrop {
     opacity:0.95;
 }
+
+.github-image {
+	border-radius: 25px;
+}
+
+.darkmode--activated .github-info {
+	color: #fff;
+}
