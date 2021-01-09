@@ -28,14 +28,14 @@ class githubController
         return $this->accessToken;
     }
 
-    public function getGithubId()
+    public function getGithubUser($accessToken)
     {
         $cURLConnection = curl_init();
         curl_setopt($cURLConnection, CURLOPT_URL, 'https://api.github.com/user');
         curl_setopt($cURLConnection, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array(
-            "Authorization: token {$this->getAccessToken()}",
+            "Authorization: token {$accessToken}",
             "User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0"
         ));
         $accessTokenResponse = curl_exec($cURLConnection);
