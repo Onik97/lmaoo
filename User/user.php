@@ -8,8 +8,9 @@ class user
 	private $surname;
 	private $level;
 	private $isActive;
+	private $githubId;
 
-	function __construct($id, $forename, $surname, $username, $password, $level, $isActive, $darkMode)
+	function __construct($id, $forename, $surname, $username, $password, $level, $isActive, $darkMode, $githubId)
 	{
 		$this->id = $id;
 		$this->forename = $forename;
@@ -19,6 +20,14 @@ class user
 		$this->level = $level;
 		$this->isActive = $isActive;
 		$this->darkMode = $darkMode;
+		$this->githubId = $githubId;
+	}
+
+	function createGithubProfile($profilePicture, $name, $login)
+	{
+		$this->profilePicture = $profilePicture;
+		$this->name = $name;
+		$this->login = $login;
 	}
 
 	public function setId($id)
@@ -99,6 +108,16 @@ class user
 	public function getDarkMode()
 	{
 		return $this->darkMode;
+	}
+
+	public function setGithubId($githubId)
+	{
+		$this->githubId = $githubId;
+	}
+
+	public function getGithubId()
+	{
+		return $this->githubId;
 	}
 
 }
