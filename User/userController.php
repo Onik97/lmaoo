@@ -1,4 +1,4 @@
-<?php  require_once(__DIR__ . "/../connection.php"); require_once(__DIR__ . "/user.php"); require_once("../Github/githubController.php");
+<?php  require_once(__DIR__ . "/../connection.php"); require_once(__DIR__ . "/user.php"); require_once(__DIR__  . "/../Github/githubController.php");
 $userController = new userController();
 
 if ($function == "login")

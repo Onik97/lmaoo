@@ -1,4 +1,4 @@
-<?php require_once("../connection.php"); require_once("../User/userController.php");
+<?php require_once(__DIR__ . "/../connection.php"); require_once(__DIR__ . "/../User/userController.php");
 
 class githubController
 {
