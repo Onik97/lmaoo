@@ -52,6 +52,8 @@ class githubController
 		$stmt = $pdo->prepare("SELECT * FROM user WHERE github_id = ?");
 		$stmt->execute([$githubId]);
         $user = $stmt->fetch();
+        $stmt = $pdo->prepare("UPDATE user SET github_accessToken = ? WHERE github_id = ?");
+		$stmt->execute([$this->getAccessToken(), $githubId]);
 
         if($user == null)
         {
