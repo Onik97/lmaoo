@@ -14,7 +14,7 @@ else
     {
         case "login":
             $github->setAccessToken();
-            $id = $github->getGithubId();
+            $id = $github->getGithubUser($github->getAccessToken())['id'];
             $github->login($id);
             break;
         // case "register":
