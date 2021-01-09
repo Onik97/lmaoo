@@ -59,8 +59,7 @@ class githubController
             $_SESSION['message'] = 'Github account not linked, you must login and register Github account first';
             header("Location: ../User/login.php");
         }
-        
-        if($user->isActive == true)
+        else if($user->isActive == true)
         {
             $userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode);
             if ($user->darkMode != $_COOKIE["lmaooDarkMode"]) setcookie("lmaooDarkMode", $user->darkMode, 0, "/");
