@@ -75,7 +75,7 @@ class githubController
         if($user == null)
         {
             session_start();
-            $_SESSION['message'] = 'Github account not linked, you must login and register Github account first';
+            $_SESSION['message'] = 'Github account not linked, you must login and register the Github account first';
             header("Location: ../User/login.php");
         }
         else if($user->isActive == true)
