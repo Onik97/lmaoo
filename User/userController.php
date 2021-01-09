@@ -1,4 +1,4 @@
-<?php  require_once(__DIR__ . "/../connection.php"); require_once(__DIR__ . "/user.php");
+<?php  require_once(__DIR__ . "/../connection.php"); require_once(__DIR__ . "/user.php"); require_once("../Github/githubController.php");
 $userController = new userController();
 
 if ($function == "login")
@@ -104,13 +104,22 @@ class userController
 		$stmt->execute([$username]);
 		$user = $stmt->fetch();
 		$userController = new userController();
-
+		
 		if (password_verify($password, $user->password))
 		{
 			if($user->isActive == true)
 			{
-				$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode);
+				$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode, $user->github_id);
 				if ($user->darkMode != $_COOKIE["lmaooDarkMode"]) setcookie("lmaooDarkMode", $user->darkMode, 0, "/");
+				
+				if ($user->github_id != null)
+				{
+					$githubController = new githubController();
+					$accessToken = $githubController->getAccessTokenFromDatabase($user->userId);
+					$githubUser = $githubController->getGithubUser($accessToken);
+					$userLoggedIn->createGithubProfile($githubUser['avatar_url'], $githubUser['name'], $githubUser['login']);
+				}
+
 				session_start();
 				$_SESSION['userLoggedIn'] = $userLoggedIn;
 				header("Location: ../Home/index.php");
