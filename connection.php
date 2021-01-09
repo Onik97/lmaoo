@@ -12,7 +12,7 @@ function logindb()
 	}
 	catch(PDOException $e)
 	{
-		die("Lmaoo is down, please try again later");
+		die("ERROR ID: 101");
 	}
 	return $pdo;
 }

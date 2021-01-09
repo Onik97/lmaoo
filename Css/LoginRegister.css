@@ -37,3 +37,11 @@
 	background-color: rgba(105, 105, 105, 0.24);
 	color: #fff;
 }
+
+.github {
+	cursor: pointer;
+}
+
+.darkmode--activated .github {
+	color: #fff;
+}
