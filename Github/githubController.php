@@ -23,9 +23,15 @@ class githubController
         $this->accessToken = $jsonAccessTokenResponse["access_token"];
     }
 
-    public function getAccessToken()
+    public function getAccessToken() { return $this->accessToken; }
+
+    public function getAccessTokenFromDatabase($userId) 
     {
-        return $this->accessToken;
+        $pdo = logindb();
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+		$stmt = $pdo->prepare("SELECT github_accessToken FROM user WHERE userId = ?");
+		$stmt->execute([$userId]);
+		return $stmt->fetchColumn();
     }
 
     public function getGithubUser($accessToken)
@@ -41,8 +47,9 @@ class githubController
         $accessTokenResponse = curl_exec($cURLConnection);
         curl_close($cURLConnection);
 
-        $jsonAccessTokenResponse = json_decode($accessTokenResponse, true);
-        return $jsonAccessTokenResponse["id"];
+        return json_decode($accessTokenResponse, true);
+    }
+
     public function loadProfile($userLoggedIn)
     {
         if($userLoggedIn->getGithubId() == null)
@@ -80,7 +87,9 @@ class githubController
         }
         else if($user->isActive == true)
         {
-            $userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode);
+            $githubUser = $this->getGithubUser($this->getAccessToken());
+            $userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode, $user->github_id);
+            $userLoggedIn->createGithubProfile($githubUser['avatar_url'], $githubUser['name'], $githubUser['login']);
             if ($user->darkMode != $_COOKIE["lmaooDarkMode"]) setcookie("lmaooDarkMode", $user->darkMode, 0, "/");
             session_start();
             $_SESSION['userLoggedIn'] = $userLoggedIn;
