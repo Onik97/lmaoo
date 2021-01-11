@@ -8,7 +8,5 @@ function autoLoader($className)
                      "../Utility/" . $className . ".php"
     );
 
-    foreach ($sources as $source) {
-        if (file_exists($source)) include $source;
-    }
+    foreach ($sources as $source) if (file_exists($source)) include $source;
 }
