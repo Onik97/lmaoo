@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . "/../User/userController.php";
+require __DIR__ . "/../src/User/userController.php";
 
 use PHPUnit\Framework\TestCase;
 

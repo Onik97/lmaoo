@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . "/../Ticket/ticketController.php";
+require __DIR__ . "/../src/Ticket/ticketController.php";
 use PHPUnit\Framework\TestCase;
 
 class TicketTest extends TestCase
