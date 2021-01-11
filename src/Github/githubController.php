@@ -15,7 +15,7 @@ class githubController
         $cURLConnection = curl_init('https://github.com/login/oauth/access_token');
         curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postRequest);
         curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array('Accept: application/json'));
+        curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, array('Accept' => 'application/json'));
         $accessTokenResponse = curl_exec($cURLConnection);
         curl_close($cURLConnection);
 

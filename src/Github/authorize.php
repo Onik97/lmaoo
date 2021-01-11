@@ -1,5 +1,5 @@
 <?php
-$config = require("../config.php");
+$config = require("../../config.php");
 // To prevent CSRF attacks
 $length = 10;
 $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
