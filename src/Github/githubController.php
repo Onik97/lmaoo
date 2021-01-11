@@ -1,8 +1,8 @@
 <?php require_once(__DIR__ . "/../connection.php"); require_once(__DIR__ . "/../User/userController.php");
 
-class githubController
+class githubControllers
 {
-    public function __construct() { $this->config = include('../config.php'); } 
+    public function __construct() { $this->config = include(__DIR__ . '/../config.php'); } 
 
     public function setAccessToken()
     {
