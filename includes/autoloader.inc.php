@@ -1,12 +1,11 @@
-<?php
-
-spl_autoload_register('autoLoader');
+<?php spl_autoload_register('autoLoader');
 
 function autoLoader($className)
 {
-    $sources = array("../Controller/" . $className . ".php",
-                     "../Utility/" . $className . ".php"
-    );
+    $paths = array($_SERVER["DOCUMENT_ROOT"] . "lmaoo/Controller/$className.php",
+                   $_SERVER["DOCUMENT_ROOT"] . "lmaoo/Utility/$className.php",
+                   $_SERVER["DOCUMENT_ROOT"] . "lmaoo/Model/$className.php"); 
 
-    foreach ($sources as $source) if (file_exists($source)) include $source;
+    foreach ($paths as $path) if (file_exists($path)) include_once($path); 
+    session_start();
 }
