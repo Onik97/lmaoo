@@ -1,6 +1,7 @@
 <?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); 
 
 $managerController = new ManagerController();
+$function = $_POST['function'];
 
 if ($function == "loadOwnerProjects") 
 {
