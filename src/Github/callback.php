@@ -1,13 +1,13 @@
-<?php require_once (__DIR__ . "/../connection.php"); require_once("githubController.php");
+<?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); session_start();
 
 if(!isset($_GET['code']) || !isset($_GET['state'])) 
-    die(file_get_contents('../Global/404NotFound.php')); 
+    die(file_get_contents('../../includes/notFound.php')); 
 else if ($_GET['state'] != $_SESSION['state']) 
-    die(file_get_contents('../Global/403Forbidden.php'));
+    die(file_get_contents('../../includes/forbidden.php')); 
 else
 {
     unset($_SESSION['state']);
-    $github = new githubController();
+    $github = new GithubController();
 
     switch ($_GET['function']) 
     {
