@@ -11,10 +11,11 @@ function loadOwnProjects()
     var data = new FormData();
     data.append("function", "loadOwnProjects");
 
-    axios.post("../Home/homeController.php", data)
+    axios.post("../Home/target.php", data)
     .then(response =>
     {
         let json = response.data;
+        console.log(response.data);
 
         let ProjectList = $("#homeProjects");
         $(ProjectList).find("li:gt(0)").remove();
@@ -37,7 +38,7 @@ function loadTicketDeadlines()
     data.append("function", "loadTicketsWithDeadline");
     data.append("assignee_key", userId);
 
-    axios.post("../Home/homeController.php", data)
+    axios.post("../Home/target.php", data)
     .then(response =>
     {
         let json = response.data;
