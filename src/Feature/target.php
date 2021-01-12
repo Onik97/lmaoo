@@ -1,0 +1,19 @@
+<?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); 
+
+$featureController = new featureController();
+if($_POST['function'] == "loadFeatures")
+{
+    echo json_encode($featureController->loadFeatures($_POST['projectId']));
+}
+else if ($_POST['function'] == "checkFeatureExistance")
+{
+    echo $featureController->featureExistance($_POST['featureName'], $_POST['projectId']);
+}
+else if ($_POST['function'] == "createFeature")
+{
+    $featureController->createFeature($_POST['featureName'], $_POST['projectId']);
+}
+else 
+{
+    Library::notFoundMessage();
+}   
