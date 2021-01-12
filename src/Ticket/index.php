@@ -1,4 +1,4 @@
-<?php require("../User/user.php"); ?>
+<?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); ?>
 
 <!DOCTYPE html>
 
@@ -6,12 +6,12 @@
 	<title>Ticket</title>
 	<p id="navBarActive" hidden>ticketPage</p>
 	<link rel="stylesheet" href="../Css/ticketPage.css">
-	<?php include("../Global/head.php"); ?>
+	<?php include("../../includes/head.php"); ?>
 </head>
 
 <body>
-	<?php include("../Global/navBar.php"); ?>
-	<?php include("../Global/loginCheck.php"); ?>
+	<?php include("../../includes/navBar.php"); ?>
+	<?php include("../../includes/loginCheck.php"); ?>
 	<?php include("../Ticket/ticketValidation.php"); ?>
 
 	<div id="ticketActions"></div>
@@ -55,8 +55,8 @@
 		</div>
 	</div>
 
-	<?php include("../Global/scripts.php"); ?>
-	<?php include("../Global/editUserModal.php"); ?>
+	<?php include("../../includes/scripts.php"); ?>
+	<?php include("../../includes/editUserModal.php"); ?>
 	<?php include("ticketModal.php"); ?>
 	<script src="../Script/peopleController.js"></script>
 	<script type="text/javascript" src="../Script/commentController.js"></script>
