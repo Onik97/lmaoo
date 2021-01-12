@@ -25,4 +25,10 @@ class Library
         for ($i = 0; $i < $length; ++$i) $str .= $keyspace[random_int(0, $max)];
         return $str;
     }
+
+    public static function notFoundMessage()
+    {
+        die(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/notFound.php"));
+        return null;
+    }
 }
