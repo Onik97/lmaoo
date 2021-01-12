@@ -7,7 +7,7 @@ class TicketController
         date_default_timezone_set('Europe/London');
         $time = date("Y-m-d H:i:s"); 
 
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("UPDATE ticket SET updated = ? WHERE ticketId = ?");
         $stmt->execute([$time, $ticketId]);
@@ -15,7 +15,7 @@ class TicketController
 
     public function ticketIdExistance($ticketId)
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT summary FROM ticket WHERE ticketId = ?");
         $stmt->execute([$ticketId]);
@@ -25,7 +25,7 @@ class TicketController
 
     public function ticketExistance($ticketName, $featureId)
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT summary FROM ticket WHERE summary = ? AND featureId = ?");
         $stmt->execute([$ticketName, $featureId]);
@@ -35,7 +35,7 @@ class TicketController
 
     public function createComment($commentContent, $ticketId, $userId)
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("INSERT INTO comment (commentId, commentContent, ticketId, userId) VALUES (null, ?, ?, ?)");
         $stmt->execute([$commentContent, $ticketId, $userId]);
@@ -43,7 +43,7 @@ class TicketController
 
     public function updateComment($commentId, $newComment)
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("UPDATE comment SET commentContent = ? WHERE commentId = ?");
         $stmt->execute([$newComment, $commentId]);
@@ -51,7 +51,7 @@ class TicketController
 
     public function loadComments($ticketId)
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT comment.ticketId, comment.commentId, comment.commentContent, comment.commentCreated, user.userId, user.forename, user.surname, user.picture
                             FROM comment INNER JOIN user on user.userId = comment.userId
@@ -62,7 +62,7 @@ class TicketController
 
     public function deleteComment($commentId)
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("DELETE FROM comment WHERE commentId = ?");
         $stmt->execute([$commentId]);
@@ -70,7 +70,7 @@ class TicketController
 
     public function saveSelectedAssignee($ticketId, $newAssignee)
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("UPDATE ticket SET assignee_key = ? WHERE ticketId = ?");
         $stmt->execute([$newAssignee, $ticketId]);
@@ -78,7 +78,7 @@ class TicketController
 
     public function assigneeYourself($ticketId, $selfKey)
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("UPDATE ticket SET assignee_key = ? WHERE ticketId = ?");
         $stmt->execute([$selfKey, $ticketId]);
@@ -86,7 +86,7 @@ class TicketController
 
     public function loadDates($ticketId)
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT created, updated FROM ticket WHERE ticketId = ?");
         $stmt->execute([$ticketId]);
@@ -95,7 +95,7 @@ class TicketController
 
     public function loadAssignee($ticketId)
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT user.forename, user.surname, user.username, user.userId FROM ticket 
                             INNER JOIN user on user.userId = ticket.assignee_key
@@ -106,7 +106,7 @@ class TicketController
 
     public function loadReporter($ticketId)
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT user.forename, user.surname, user.username, user.userId FROM ticket 
                             INNER JOIN user on user.userId = ticket.reporter_key

@@ -32,7 +32,7 @@ class ManagerController
 {
     public function loadOwnerProjects()
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT * FROM project WHERE owner = ?");
         $stmt->execute([$_SESSION['userLoggedIn']->getId()]);
@@ -41,7 +41,7 @@ class ManagerController
 
     public function loadManagerProjects()
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT pa.userId, pa.projectId, p.name, p.status FROM projectAccess pa INNER JOIN project p
                                ON pa.projectId = p.projectId WHERE pa.managerAccess = 1 AND pa.userId = ?");
@@ -51,7 +51,7 @@ class ManagerController
 
     public function removeUsersFromProject($projectId)
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("DELETE FROM projectAccess WHERE projectId = ?");
         $stmt->execute([$projectId]);
@@ -67,7 +67,7 @@ class ManagerController
         }
         $finalSql = substr($sql, 0, -1); // Removes , at the end of the SQL 
 
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare($finalSql);
         $stmt->execute();
@@ -75,7 +75,7 @@ class ManagerController
 
     public function loadUsersOnProject($projectId)
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT pa.projectId, pa.managerAccess, u.userId, u.username, u.forename, u.surname FROM projectAccess pa INNER JOIN user u
                                ON pa.userId = u.userId WHERE pa.allowAccess = 1 AND projectId = ?");

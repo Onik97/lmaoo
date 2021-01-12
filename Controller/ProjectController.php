@@ -15,7 +15,7 @@ class ProjectController
         $sql = isset($function) ? "SELECT name FROM project WHERE name = ?" : "SELECT projectId FROM project WHERE projectId = ?";
         if (!isset($projectSearch) || $projectSearch == null) return false;
 
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$projectSearch]);
@@ -27,7 +27,7 @@ class ProjectController
 
     public function createNewProject($projectName, $projectStatus)
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("INSERT INTO project (name, status, owner) VALUES (?, ?, ?)");
         $stmt->execute([$projectName, $projectStatus, $_SESSION['userLoggedIn']->getId()]);
@@ -35,7 +35,7 @@ class ProjectController
 
     public function createNewTicket($featureId, $summary, $reporterKey)
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("INSERT INTO ticket (summary, featureId, reporter_key) VALUES (?, ?, ?)");
         $stmt->execute([$summary, $featureId, $reporterKey]);
@@ -43,7 +43,7 @@ class ProjectController
 
     public function getProjectList()
     {
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT projectId, name, status FROM project");
         $stmt->execute();
@@ -58,7 +58,7 @@ class ProjectController
         // TODO: When re-writing this, ensure that a better way is used for this
         if($progress == "In Progress") $sql = $sql . "OR ticket.progress = 'In Automation')";
         else $sql = $sql .")";
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare($sql);
 

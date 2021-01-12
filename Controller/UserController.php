@@ -5,7 +5,7 @@ class UserController
 	public function hasDup(?string $unitTest)
 	{
 		$username = $unitTest == null ? $_POST['username'] : $unitTest;
-		$pdo = Connection::logindb();
+		$pdo = Library::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT username FROM user WHERE username = ?");
 		$stmt->execute([$username]);
@@ -15,7 +15,7 @@ class UserController
 
 	public function updateUser($forename, $surname, $username, $userId)
 	{
-		$pdo = Connection::logindb();
+		$pdo = Library::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("UPDATE user SET forename = ?, surname = ?, username = ? WHERE userId = ?");
 		$stmt->execute([$forename, $surname, $username, $userId]);
@@ -30,7 +30,7 @@ class UserController
 
 	public function userInfoById($userId) // Should be used for Unit Testing and Admin Only!
 	{
-		$pdo = Connection::logindb();
+		$pdo = Library::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT * FROM user WHERE userId = ?");
 		$stmt->execute([$userId]);
@@ -40,7 +40,7 @@ class UserController
 
 	public function login($username, $password)
 	{
-		$pdo = Connection::logindb();
+		$pdo = Library::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT * FROM user WHERE username = ?");
 		$stmt->execute([$username]);
@@ -83,7 +83,7 @@ class UserController
 	{		
 		$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-		$pdo = Connection::logindb();
+		$pdo = Library::logindb();
 		$stmt = $pdo->prepare("INSERT INTO user (userId, username, password, forename, surname) VALUES (null, ?, ?, ?, ?)");
 		$stmt->execute([$username, $hashedPassword, $forename, $surname]);
 		$_SESSION['message'] = 'Register Successful';
@@ -98,7 +98,7 @@ class UserController
 
 	public function getAllUsers() // This is used in Admin -> May be moved, not unit testing
 	{
-		$pdo = Connection::logindb();
+		$pdo = Library::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT * FROM user");
 		$stmt->execute();
@@ -108,7 +108,7 @@ class UserController
 
 	public function getActiveUsers()
 	{
-		$pdo = Connection::logindb();
+		$pdo = Library::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, picture FROM user WHERE isActive = 1");
 		$stmt->execute();
@@ -118,7 +118,7 @@ class UserController
 
 	public function darkModeToggle($toggle, $userId)
 	{
-		$pdo = Connection::logindb();
+		$pdo = Library::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("UPDATE user SET darkMode = ? WHERE userId = ?");
 		$stmt->execute([$toggle, $userId]);
@@ -126,7 +126,7 @@ class UserController
 
 	public static function loadDarkMode($userId) // Keeping for Unit Testing
 	{
-		$pdo = Connection::logindb();
+		$pdo = Library::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT darkMode FROM user WHERE userId = ?");
 		$stmt->execute([$userId]);
@@ -135,7 +135,7 @@ class UserController
 
 	public function updatePicture($target, $userId)
 	{
-		$pdo = Connection::logindb();
+		$pdo = Library::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("UPDATE user SET picture = ? WHERE userId = ?");
 		$stmt->execute([$target, $userId]);

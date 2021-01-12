@@ -8,7 +8,7 @@ class adminController
         
         if ($userId == null) return false;
 
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT level FROM user WHERE userId = ?");
         $stmt->execute([$userId]);
@@ -21,7 +21,7 @@ class adminController
     {
         $adminController = new adminController();
 
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("UPDATE user SET isActive = 1 WHERE userId = ?");
         if ($adminController->validateAdmin(null) == true)
@@ -35,7 +35,7 @@ class adminController
     {
         $adminController = new adminController();
 
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("UPDATE user SET isActive = 0 WHERE userId = ?");
         if ($adminController->validateAdmin(null) == true)
@@ -49,7 +49,7 @@ class adminController
 	{
         $adminController = new adminController();
 
-		$pdo = Connection::logindb();
+		$pdo = Library::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT userId, forename, surname, username, level FROM user WHERE isActive = 1");
         if ($adminController->validateAdmin(null) == true)
@@ -64,7 +64,7 @@ class adminController
 	{
         $adminController = new adminController();
 
-		$pdo = Connection::logindb();
+		$pdo = Library::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT userId, forename, surname, username, level FROM user WHERE isActive = 0");
         if ($adminController->validateAdmin(null) == true)
@@ -80,7 +80,7 @@ class adminController
         $adminController = new adminController();
 
         $hashedPassword = $unitTest == null ? password_hash("password", PASSWORD_BCRYPT) : password_hash($unitTest, PASSWORD_BCRYPT);
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("UPDATE user SET password = ? WHERE userId = ?");
         if ($adminController->validateAdmin(null) == true)
@@ -95,7 +95,7 @@ class adminController
     {
         $adminController = new adminController();
 
-        $pdo = Connection::logindb();
+        $pdo = Library::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("UPDATE user SET level = ? WHERE userId = ?");
         if ($adminController->validateAdmin(null) == true)
