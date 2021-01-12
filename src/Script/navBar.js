@@ -17,7 +17,7 @@ function searchBar()
     data.append("function", "checkTicket");
     data.append("ticketId", searchbarText);
 
-    axios.post("../Ticket/ticketController.php", data)
+    axios.post("../Ticket/target.php", data)
         .then(response => 
             (response.data == true) ? window.location.href = `../Ticket/index.php?ticketId=${searchbarText}` : $("#searchBarInput").addClass('is-invalid'));
 }
@@ -61,5 +61,5 @@ function saveUserDarkMode(toggle)
     data.append("darkMode", toggle);
     data.append("userId", userId);
 
-    axios.post("../User/userController.php", data);
+    axios.post("../User/target.php", data);
 }

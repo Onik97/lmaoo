@@ -4,14 +4,14 @@ async function loadOwnerProjects()
 {
     var data = new FormData();
     data.append("function", "loadOwnerProjects");
-    return await axios.post("../Manager/managerController.php", data)
+    return await axios.post("../Manager/target.php", data)
 }
 
 async function loadManagerProjects()
 {
     var data = new FormData();
     data.append("function", "loadManagerProjects");
-    return await axios.post("../Manager/managerController.php", data) 
+    return await axios.post("../Manager/target.php", data) 
 }
 
 async function loadUsersOnProject(projectId)
@@ -19,7 +19,7 @@ async function loadUsersOnProject(projectId)
     var data = new FormData();
     data.append("function", "loadUsersOnProject");
     data.append("projectId", projectId);
-    return await axios.post("../Manager/managerController.php", data) 
+    return await axios.post("../Manager/target.php", data) 
 }
 
 async function removeUsersToServer(projectId)
@@ -27,7 +27,7 @@ async function removeUsersToServer(projectId)
     var data = new FormData();
     data.append("function", "removeUsersFromProject");
     data.append("projectId", projectId);
-    return await axios.post("../Manager/managerController.php", data) 
+    return await axios.post("../Manager/target.php", data) 
 }
 
 async function saveUsersToServer(jsondata)
@@ -35,12 +35,13 @@ async function saveUsersToServer(jsondata)
     var data = new FormData();
     data.append("function", "addUsersToProject");
     data.append("json", JSON.stringify(jsondata));
-    return await axios.post("../Manager/managerController.php", data) 
+    return await axios.post("../Manager/target.php", data) 
 }
 
 async function loadProjects() 
 {
     var ownerProjects = await loadOwnerProjects();
+    console.log(ownerProjects.data);
     var managerProjects = await loadManagerProjects();
     $("#projectSize").html(ownerProjects.data.length + managerProjects.data.length);
     $("#projectUl").html("");
@@ -234,7 +235,7 @@ function projectValidation()
     if ($("#projectStatus").val() == null || $.trim($("#projectName").val()) == "") { $('#saveProjectBtn').prop('disabled', true); }
     else 
     {
-        axios.post("../Project/projectController.php", data)
+        axios.post("../Project/target.php", data)
             .then((res) => 
             {
                 if (res.data)
@@ -264,7 +265,7 @@ function createProject()
     data.append('projectName', document.getElementById("projectName").value);
     data.append('projectStatus', projectStatus);
 
-    axios.post("../Project/projectController.php", data)
+    axios.post("../Project/target.php", data)
         .then(() => 
         {
             $('#globalModal').modal('hide');

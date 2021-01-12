@@ -56,7 +56,7 @@ function featureValidation()
     if($("#featureName").val() == null || $.trim($("#featureName").val()) == "")  { $('#saveFeatureBtn').prop('disabled', true); }
     else 
     {
-        axios.post("../Feature/featureController.php", data)
+        axios.post("../Feature/target.php", data)
         .then((res) => 
         {
             if(res.data)
@@ -86,7 +86,7 @@ function createFeature()
     data.append('featureName', $.trim($("#featureName").val()));
     data.append('projectId', projectId);
 
-    axios.post("../Feature/featureController.php", data)
+    axios.post("../Feature/target.php", data)
     .then(() => 
     {
         overHang("success", "Feature has been successfully created!");
@@ -124,7 +124,7 @@ function ticketValidation()
     if($("#summary").val() == null || $.trim($("#summary").val()) == "")  { $('#saveTicketBtn').prop('disabled', true); }
     else 
     {   
-        axios.post("../Ticket/ticketController.php", data)
+        axios.post("../Ticket/target.php", data)
         .then((res) => 
         {
             console.log(res.data);
@@ -154,7 +154,7 @@ function createTicket()
     data.append('reporterKey',$("#reporterKey").val());
     data.append('summary', $("#summary").val());
 
-    axios.post("../Project/projectController.php", data)
+    axios.post("../Project/target.php", data)
     .then(() =>
     {
         loadTicketsWithProgress(document.getElementById("selectedFeatureId").innerHTML);

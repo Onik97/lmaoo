@@ -64,7 +64,7 @@ function saveSelectedAssignee()
   data.append('ticketId', ticketId);
   data.append('assigneeId', assigneeId);
 
-  axios.post('../Ticket/ticketController.php', data)
+  axios.post('../Ticket/target.php', data)
   .then(() => 
     {
       loadAssignee();
@@ -108,7 +108,7 @@ function saveAssigneeAsYourself()
   data.append('ticketId', ticketId)
   data.append('selfId', userId)
     
-  axios.post('../Ticket/ticketController.php', data)
+  axios.post('../Ticket/target.php', data)
   .then(() => 
   {
     loadAssignee();

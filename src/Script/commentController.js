@@ -121,7 +121,7 @@ function saveComment(summernoteId, commentId)
 
   if (commentValidation(summernoteId))
   {
-    axios.post("../Ticket/ticketController.php", data)
+    axios.post("../Ticket/target.php", data)
     .then(() =>
     {
       if (commentId == null) $('.createComment').summernote('code', "");
@@ -145,7 +145,7 @@ function deleteComment(commentId)
     data.append('function', "deleteComment");
     data.append('commentId', commentId);
 
-    axios.post("../Ticket/ticketController.php", data)
+    axios.post("../Ticket/target.php", data)
     .then(() =>
     {
       $('#ticketPageModal').modal('hide'); 

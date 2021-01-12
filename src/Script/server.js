@@ -5,7 +5,7 @@ function checkUsernameFromServer(formdata)
     return response = axios(
     {
         method: 'post',
-        url: '../User/userController.php',
+        url: '../User/target.php',
         data: formdata,
         headers: {'Content-Type': 'multipart/form-data' }
     })
@@ -20,7 +20,7 @@ function loadFeaturesFromServer(projectId)
     return response = axios(
     {
         method: 'post',
-        url: '../Feature/featureController.php',
+        url: '../Feature/target.php',
         data: data,
         headers: {'Content-Type': 'multipart/form-data' }
     })
@@ -35,7 +35,7 @@ function loadTicketsWithProgressFromServer(id, progress)
     return response = axios(
     {
         method: 'post',
-        url: `../Project/projectController.php`,
+        url: `../Project/target.php`,
         data: data,
         headers: {'Content-Type': 'multipart/form-data' }
     })
@@ -51,7 +51,7 @@ function loadAssigneeFromServer(ticketId)
     {
         method: 'post',
         data: formData,
-        url: '../Ticket/ticketController.php',
+        url: '../Ticket/target.php',
         headers: {'Content-Type': 'multipart/form-data' }
     })
 
@@ -67,7 +67,7 @@ function loadReporterFromServer(ticketId)
     {
         method: 'post',
         data: data,
-        url: '../Ticket/ticketController.php',
+        url: '../Ticket/target.php',
         headers: {'Content-Type': 'multipart/form-data' }
     })
 }
@@ -81,7 +81,7 @@ function getActiveUsersFromServer()
     {
         method: 'post',
         data: data,
-        url: '../User/userController.php',
+        url: '../User/target.php',
         headers: {'Content-Type': 'multipart/form-data' }
     })
 }
@@ -96,7 +96,7 @@ function loadCommentsFromServer(ticketId)
     {
         method: 'post',
         data: data,
-        url: '../Ticket/ticketController.php',
+        url: '../Ticket/target.php',
         headers: {'Content-Type': 'multipart/form-data' }
     })
 }
@@ -111,7 +111,7 @@ function loadDatesFromServer(ticketId)
     {
         method: 'post',
         data: data,
-        url: '../Ticket/ticketController.php',
+        url: '../Ticket/target.php',
         headers: {'Content-Type': 'multipart/form-data' }
     })
 }
@@ -126,7 +126,7 @@ function updateTicketTime(ticketId)
     {
         method: 'post',
         data: data,
-        url: '../Ticket/ticketController.php',
+        url: '../Ticket/target.php',
         headers: {'Content-Type': 'multipart/form-data' }
     })
 }
@@ -137,7 +137,7 @@ function serverUpload(data)
     {
         method: 'post',
         data: data,
-        url: '../User/userController.php',
+        url: '../User/target.php',
         headers: {'Content-Type': 'multipart/form-data' }
     })
 }
