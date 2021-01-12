@@ -1,7 +1,4 @@
-<?php //error_reporting(0);
-$function = $_POST['function']; include_once("User/user.php");
-session_start();
-
+<?php
 class Connection 
 {
 	public static function logindb()
