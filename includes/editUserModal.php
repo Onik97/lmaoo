@@ -1,4 +1,4 @@
-<?php if (!isset($userLoggedIn)) return; require_once("../Github/githubController.php"); $githubController = new githubController(); ?>
+<?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); if (!isset($userLoggedIn)) return; ?>
 
 <link rel="stylesheet" href="../Css/allModals.css">
             

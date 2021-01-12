@@ -17,7 +17,7 @@ if(!isset($_SESSION['userLoggedIn'])) $_SESSION['userLoggedIn'] = null; ?>
 
     </body>
     <footer> 
-        <?php if($_SESSION['userLoggedIn'] != null) include("../../includes/editUserModal.php"); ?>
+        <?php include("../../includes/editUserModal.php"); ?>
         <?php include("../../includes/scripts.php"); ?>
         <script type="text/javascript" src="../Script/home.js"></script>
     </footer>
