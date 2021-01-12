@@ -1,4 +1,7 @@
-<?php
+<?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); 
+$homeController = new HomeController();
+$function = $_POST['function'];
+
 if ($function == "loadTicketsWithDeadline")
 {
     Validator::validateDeveloper();
