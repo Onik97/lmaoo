@@ -17,10 +17,11 @@ function loadActiveUsers()
    var data = new FormData();
    data.append("function", "getAdminActiveUsers");
 
-   axios.post("../User/adminController.php", data)
+   axios.post("../Admin/target.php", data)
    .then(response =>
    {
        var json = response.data;
+       console.log(response.data);
        $("#admin-table").find("tr:gt(0)").remove();
 
        for (i = 0; i < json.length; i++)
@@ -50,7 +51,7 @@ function loadInActiveUsers()
    var data = new FormData();
    data.append("function", "getAdminInActiveUsers");
 
-   axios.post("../User/adminController.php", data)
+   axios.post("../Admin/target.php", data)
    .then(response =>
    {
        var json = response.data;
@@ -97,7 +98,7 @@ function activateUser(userIdSelected)
     data.append("function", "activateUser");
     data.append("userId", userIdSelected);
 
-    axios.post("../User/adminController.php", data)
+    axios.post("../Admin/target.php", data)
     .then(() =>
     {
         overHang("success", "User has been activated");
@@ -125,7 +126,7 @@ function deactivateUser(userIdSelected)
     data.append("function", "deactivateUser");
     data.append("userId", userIdSelected);
 
-    axios.post("../User/adminController.php", data)
+    axios.post("../Admin/target.php", data)
     .then(() =>
     {
         overHang("success", "User has been deactivated");
@@ -152,7 +153,7 @@ function resetPassword(userIdSelected)
     data.append("function", "resetPassword");
     data.append("userId", userIdSelected);
 
-    axios.post("../User/adminController.php", data)
+    axios.post("../Admin/target.php", data)
     .then(() =>
     {
         overHang("success", "Password has been reset");
@@ -191,7 +192,7 @@ function updateUserLevel(userIdSelected)
     data.append("userId", userIdSelected);
     data.append("chosenUserLevel", userLevelSelected);
 
-    axios.post("../User/adminController.php", data)
+    axios.post("../Admin/target.php", data)
     .then(() =>
     {
         overHang("success", "User Level has been changed");

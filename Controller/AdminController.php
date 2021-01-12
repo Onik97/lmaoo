@@ -1,10 +1,10 @@
 <?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); 
 
-class adminController
+class AdminController
 {
     public function validateAdmin(?string $unitUserId)
     {
-        $userId = $unitUserId == null ? $_SESSION['userLoggedIn']->getId() : $unitUserId;
+        $userId = $unitUserId == null ? unserialize($_SESSION['userLoggedIn'])->getId() : $unitUserId;
         
         if ($userId == null) return false;
 
@@ -12,7 +12,7 @@ class adminController
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT level FROM user WHERE userId = ?");
         $stmt->execute([$userId]);
-        $level = $stmt->fetchColumn()['level'];
+        $level = $stmt->fetchColumn();
 
         return $level > 3 ? true : false;
     }

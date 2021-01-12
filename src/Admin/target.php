@@ -1,6 +1,6 @@
 <?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); 
 
-$adminController = new adminController();
+$adminController = new AdminController();
 
 $function = $_POST['function'];
 
