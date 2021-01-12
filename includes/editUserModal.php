@@ -28,7 +28,7 @@
                     <small>Invalid file type.</small>
                 </div>
                 
-                <form action="../User/userController.php" method="POST" onkeyup="userEditValidation(); checkUserDup();">
+                <form action="../User/target.php" method="POST" onkeyup="userEditValidation(); checkUserDup();">
                     <div class="form-group">
                         <label>Forename</label>
                         <input class="form-control" value=<?php echo $userLoggedIn->getForename(); ?>  id="editForename" name="editForename" required>
