@@ -1,18 +1,17 @@
-<?php require("projectController.php"); session_start(); ?>
+<?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); ?>
 
 <!DOCTYPE html>
 <html>
   <title>Home</title>
     <head>
       <p id="navBarActive" hidden>projectPage</p>
-      <?php include("../Global/head.php"); ?>
+      <?php include("../../includes/head.php"); ?>
       <link rel="stylesheet" href="../Css/projectPage.css">
     </head>
 
     <body>
-      <?php include("../Global/navBar.php"); ?>
-      <?php include("../Global/loginCheck.php"); ?>
-      <?php include("projectValidation.php") ?>
+      <?php include("../../includes/navBar.php"); ?>
+      <?php include("../../includes/loginCheck.php"); ?>
 
     <div class="d-flex">
       <div id="projectDiv"> 
@@ -58,10 +57,10 @@
       </div>
     </div>
 
-    <?php include("../Global/scripts.php"); ?>
+    <?php include("../../includes/scripts.php"); ?>
     <script type="text/javascript" src="../Script/projectController.js"></script>
     <?php include("projectModal.php"); ?>
     <?php include("../Feature/featureModal.php"); ?>
-    <?php include("../Global/editUserModal.php"); ?>
+    <?php include("../../includes/editUserModal.php"); ?>
   </body>
 </html>
