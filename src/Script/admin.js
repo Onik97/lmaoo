@@ -21,7 +21,6 @@ function loadActiveUsers()
    .then(response =>
    {
        var json = response.data;
-       console.log(response.data);
        $("#admin-table").find("tr:gt(0)").remove();
 
        for (i = 0; i < json.length; i++)

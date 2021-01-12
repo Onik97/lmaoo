@@ -127,7 +127,6 @@ function ticketValidation()
         axios.post("../Ticket/target.php", data)
         .then((res) => 
         {
-            console.log(res.data);
             if(res.data)
             {
                 $("#summary").addClass("is-invalid");

@@ -15,7 +15,6 @@ function loadOwnProjects()
     .then(response =>
     {
         let json = response.data;
-        console.log(response.data);
 
         let ProjectList = $("#homeProjects");
         $(ProjectList).find("li:gt(0)").remove();

@@ -41,7 +41,6 @@ async function saveUsersToServer(jsondata)
 async function loadProjects() 
 {
     var ownerProjects = await loadOwnerProjects();
-    console.log(ownerProjects.data);
     var managerProjects = await loadManagerProjects();
     $("#projectSize").html(ownerProjects.data.length + managerProjects.data.length);
     $("#projectUl").html("");
