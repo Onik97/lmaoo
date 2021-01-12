@@ -1,4 +1,4 @@
-<?php session_start(); if (isset($_SESSION['userLoggedIn'])) { header("Location: ../Ticket/index.php"); } ?>
+<?php ?>
 
 <!DOCTYPE html>
 <title>Register Page</title>
@@ -6,11 +6,11 @@
 <head>
   <p id="navBarActive" hidden>registerPage</p>
   <link rel="stylesheet" href="../Css/LoginRegister.css">
-  <?php include("../Global/head.php"); ?>
+  <?php include("../../includes/head.php"); ?>
 </head>
 
 <body>
-  <?php include("../Global/navBar.php"); ?>
+  <?php include("../../includes/navBar.php"); ?>
 
   <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
     <div class="container">
@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <?php include("../Global/scripts.php"); ?>
+      <?php include("../../includes/scripts.php"); ?>
       <script src="../Script/User/passwordchecker.js"></script>
 </body>
 

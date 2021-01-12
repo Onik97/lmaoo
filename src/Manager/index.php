@@ -1,16 +1,16 @@
-<?php require("../User/user.php"); require("../connection.php"); session_start(); ?>
+<?php $_SERVER["DOCUMENT_ROOT"] . "lmaoo/config.php" ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include("../Global/head.php"); ?> 
+    <?php include("../../includes/head.php"); ?> 
     <link rel="stylesheet" type="text/css" href="../Css/managerPage.css"/>
     <title>Manager</title>
 </head>
 <body>
-    <?php include("../Global/navBar.php"); ?>
+    <?php include("../../includes/navBar.php"); ?>
 
     <h1>Manager Dashboard</h1>
 
@@ -28,9 +28,9 @@
         <hr><ul id="projectUl" class="list-group list-group-flush project-list"></ul>
     </div>
 
-    <?php include("../Global/scripts.php"); ?>
+    <?php include("../../includes/scripts.php"); ?>
     <?php include("managerModal.php"); ?>
     <script type="text/javascript" src="../Script/managerController.js"></script>
-    <?php include("../Global/editUserModal.php"); ?>
+    <?php include("../../includes/editUserModal.php"); ?>
 </body>
 </html>

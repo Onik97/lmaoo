@@ -1,4 +1,6 @@
-<?php require("../User/user.php"); session_start(); if (isset($_SESSION['userLoggedIn'])) { header("Location: ../Ticket/index.php"); } ?>
+<?php
+if (isset($_SESSION['userLoggedIn'])) { header("Location: ../Home/index.php"); } 
+?>
 
 <!DOCTYPE html>
 <html>
@@ -7,11 +9,11 @@
 <head>
 	<p id="navBarActive" hidden>loginPage</p>
 	<link rel="stylesheet" href="../Css/LoginRegister.css">
-	<?php include("../Global/head.php"); ?>
+	<?php include("../../includes/head.php"); ?>
 </head>
 
 <body>
-	<?php include("../Global/navBar.php");
+	<?php include("../../includes/navBar.php");
 	if (isset($_SESSION['message'])) {
 		echo "<div class='alert alert-warning'>" . $_SESSION['message'] . "</div>";
 		session_unset();
@@ -27,7 +29,7 @@
 					<div class="col-md-6 text-center">
 						<div class="card-body">
 							<h2 class="header">Member login</h2>
-							<form action="userController.php" method='POST'>
+							<form action="target.php" method='POST'>
 								<div class="form-group">
 									<input type="text" class="form-control" name="username" placeholder="Username" id="usernameLogin" required>
 								</div>
@@ -47,7 +49,7 @@
 			</div>
 		</div>
 	</main>
-<?php include("../Global/scripts.php"); ?>
+<?php include("../../includes/scripts.php"); ?>
 </body>
 
 </html>

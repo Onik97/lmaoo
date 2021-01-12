@@ -1,17 +1,17 @@
-<?php require("adminController.php"); session_start(); ?>
+<?php $_SERVER["DOCUMENT_ROOT"] . "lmaoo/config.php" ?>
 
 <!DOCTYPE html>
 <title>Admin</title>
 
 <head>
     <p id="navBarActive" hidden>adminPage</p>
-    <?php include("../Global/head.php"); ?>
+    <?php include("../../includes/head.php"); ?>
     <link rel="stylesheet" href="../Css/admin.css">
 </head>
 
 <body>
-    <?php include("../Global/navBar.php"); ?>
-    <?php if (!isset($_SESSION['userLoggedIn']) || $userLoggedIn->getLevel() < 3) header("Location: ../Global/forbidden.php"); ?>
+    <?php include("../../includes/navBar.php"); ?>
+    <?php if (!isset($_SESSION['userLoggedIn']) || $userLoggedIn->getLevel() < 3) header("Location: ../../includes/forbidden.php"); ?>
 
     <div class="container d-flex justify-content-center">
         <form class="form-inline my-2 my-lg-0">
@@ -35,8 +35,8 @@
         </table>
     </div>
 
-    <?php include("../Global/scripts.php"); ?>
-    <?php include("../Global/editUserModal.php"); ?>
+    <?php include("../../includes/scripts.php"); ?>
+    <?php include("../../includes/editUserModal.php"); ?>
     <?php include("adminModal.php"); ?>
     <script type="text/javascript" src="../Script/admin.js"></script>
 </body>
