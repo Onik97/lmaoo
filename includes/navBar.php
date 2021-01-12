@@ -4,6 +4,7 @@ if(!isset($_SESSION['userLoggedIn'])) $_SESSION['userLoggedIn'] = null;
 <link rel="stylesheet" href="../Css/navbar.css">
 <nav class="navbar navbar-expand-lg">
 
+    <?php if(!isset($_COOKIE["lmaooDarkMode"])) $_COOKIE["lmaooDarkMode"] = 0; ?>
     <?php UserController::loadDarkModeToggle($_COOKIE["lmaooDarkMode"], $_SESSION['userLoggedIn']); ?>
 
     <div class="container">
