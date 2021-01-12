@@ -1,4 +1,4 @@
-<?php
+<?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); 
 
 class ProjectController
 {
@@ -30,7 +30,7 @@ class ProjectController
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("INSERT INTO project (name, status, owner) VALUES (?, ?, ?)");
-        $stmt->execute([$projectName, $projectStatus, $_SESSION['userLoggedIn']->getId()]);
+        $stmt->execute([$projectName, $projectStatus, unserialize($_SESSION['userLoggedIn'])->getId()]);
     }
 
     public function createNewTicket($featureId, $summary, $reporterKey)
