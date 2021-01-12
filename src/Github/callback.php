@@ -1,5 +1,4 @@
 <?php require_once (__DIR__ . "/../connection.php"); require_once("githubController.php");
-session_start();
 
 if(!isset($_GET['code']) || !isset($_GET['state'])) 
     die(file_get_contents('../Global/404NotFound.php')); 
