@@ -1,68 +1,11 @@
-<?php  require_once(__DIR__ . "/../connection.php"); require_once(__DIR__ . "/user.php"); require_once(__DIR__  . "/../Github/githubController.php");
-$userController = new userController();
+<?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); 
 
-if ($function == "login")
-{
-	$userController->login($_POST['username'], $_POST['password']);
-}
-else if ($function == "register")
-{
-	if ($userController->hasDup(null))
-	{
-		session_start();
-    	$_SESSION['message'] = 'Username already exist! Try logging in!';
-		header("Location: index.php");
-	}
-	else
-	{
-		$userController->register($_POST['forename'], $_POST['surname'], $_POST['username'], $_POST['password']);
-	}
-}
-else if ($function == 'update')
-{
-	validateSuperUser();
-	$userController->updateUser($_POST['editForename'], $_POST['editSurname'], $_POST['editUsername'], $_POST['editUserId']);
-}
-else if ($function == "checkUsername")
-{
-	validateManager();
-	if ($userController->hasDup(null))
-	{
-		$json->fromServer = "True";
-		echo json_encode($json);
-	}
-	else if (!$userController->hasDup(null))
-	{
-		$json->fromServer = "False";
-		echo json_encode($json);
-	}
-}
-else if ($function == "getActiveUsers") 
-{
-	validateDeveloper();
-	echo json_encode($userController->getActiveUsers());
-}
-else if ($function == "darkModeToggle")
-{
-	validateDeveloper();
-	$userController->darkModeToggle($_POST['darkMode'], $_POST['userId']);
-}
-else if ($function == "uploadProfilePic")
-{
-	validateDeveloper();
-	echo $userController->uploadImage($_POST['userId'], null);
-}
-else
-{
-	return;
-}
-
-class userController 
+class UserController 
 {
 	public function hasDup(?string $unitTest)
 	{
 		$username = $unitTest == null ? $_POST['username'] : $unitTest;
-		$pdo = logindb();
+		$pdo = Connection::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT username FROM user WHERE username = ?");
 		$stmt->execute([$username]);
@@ -72,12 +15,11 @@ class userController
 
 	public function updateUser($forename, $surname, $username, $userId)
 	{
-		$pdo = logindb();
+		$pdo = Connection::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("UPDATE user SET forename = ?, surname = ?, username = ? WHERE userId = ?");
 		$stmt->execute([$forename, $surname, $username, $userId]);
 
-		session_start();
 		$userLoggedIn = $_SESSION["userLoggedIn"];
 		$userLoggedIn->setForename($forename);
 		$userLoggedIn->setSurname($surname);
@@ -88,7 +30,7 @@ class userController
 
 	public function userInfoById($userId) // Should be used for Unit Testing and Admin Only!
 	{
-		$pdo = logindb();
+		$pdo = Connection::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT * FROM user WHERE userId = ?");
 		$stmt->execute([$userId]);
@@ -98,7 +40,7 @@ class userController
 
 	public function login($username, $password)
 	{
-		$pdo = logindb();
+		$pdo = Connection::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT * FROM user WHERE username = ?");
 		$stmt->execute([$username]);
@@ -112,21 +54,20 @@ class userController
 				$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode, $user->github_id);
 				if ($user->darkMode != $_COOKIE["lmaooDarkMode"]) setcookie("lmaooDarkMode", $user->darkMode, 0, "/");
 				
-				if ($user->github_id != null)
-				{
-					$githubController = new githubController();
-					$accessToken = $githubController->getAccessTokenFromDatabase($user->userId);
-					$githubUser = $githubController->getGithubUser($accessToken);
-					$userLoggedIn->createGithubProfile($githubUser['avatar_url'], $githubUser['name'], $githubUser['login']);
-				}
+				// if ($user->github_id != null)
+				// {
+				// 	$githubController = new githubController();
+				// 	$accessToken = $githubController->getAccessTokenFromDatabase($user->userId);
+				// 	$githubUser = $githubController->getGithubUser($accessToken);
+				// 	$userLoggedIn->createGithubProfile($githubUser['avatar_url'], $githubUser['name'], $githubUser['login']);
+				// }
 
-				session_start();
-				$_SESSION['userLoggedIn'] = $userLoggedIn;
+			
+				$_SESSION['userLoggedIn'] = serialize($userLoggedIn);
 				header("Location: ../Home/index.php");
 			}
 			else
 			{
-				session_start();
 				$_SESSION['message'] = 'User deactivated, contact the administrator';
 				header("Location: index.php");
 			}
@@ -142,24 +83,22 @@ class userController
 	{		
 		$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-		$pdo = logindb();
+		$pdo = Connection::logindb();
 		$stmt = $pdo->prepare("INSERT INTO user (userId, username, password, forename, surname) VALUES (null, ?, ?, ?, ?)");
 		$stmt->execute([$username, $hashedPassword, $forename, $surname]);
-		session_start();
 		$_SESSION['message'] = 'Register Successful';
 		header("Location: index.php");
 	}
 
 	public function failedLogin() // May change to return false in the future to allow dynamic login page
 	{
-		session_start();
 		$_SESSION['message'] = 'Login attempted failed';
 		header("Location: index.php");
 	}
 
 	public function getAllUsers() // This is used in Admin -> May be moved, not unit testing
 	{
-		$pdo = logindb();
+		$pdo = Connection::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT * FROM user");
 		$stmt->execute();
@@ -169,7 +108,7 @@ class userController
 
 	public function getActiveUsers()
 	{
-		$pdo = logindb();
+		$pdo = Connection::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, picture FROM user WHERE isActive = 1");
 		$stmt->execute();
@@ -179,15 +118,15 @@ class userController
 
 	public function darkModeToggle($toggle, $userId)
 	{
-		$pdo = logindb();
+		$pdo = Connection::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("UPDATE user SET darkMode = ? WHERE userId = ?");
 		$stmt->execute([$toggle, $userId]);
 	}
 
-	public function loadDarkMode($userId) // Keeping for Unit Testing
+	public static function loadDarkMode($userId) // Keeping for Unit Testing
 	{
-		$pdo = logindb();
+		$pdo = Connection::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("SELECT darkMode FROM user WHERE userId = ?");
 		$stmt->execute([$userId]);
@@ -196,7 +135,7 @@ class userController
 
 	public function updatePicture($target, $userId)
 	{
-		$pdo = logindb();
+		$pdo = Connection::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 		$stmt = $pdo->prepare("UPDATE user SET picture = ? WHERE userId = ?");
 		$stmt->execute([$target, $userId]);
@@ -219,8 +158,9 @@ class userController
 		else echo false;
 	}
 
-	public function loadDarkModeToggle($toggle, $userLoggedIn)
+	public static function loadDarkModeToggle($toggle, $userLoggedIn)
 	{ 
+		$userLoggedIn = unserialize($userLoggedIn);
 		if ($toggle == null) 
 		{
 			if ($userLoggedIn == null) 
@@ -241,8 +181,9 @@ class userController
 		echo "</div>";
 	}
 
-	public function loadDropdownItems($userLoggedIn)
+	public static function loadDropdownItems($userLoggedIn)
 	{
+		$userLoggedIn = unserialize($userLoggedIn);
 		if($userLoggedIn == null)
 		{
 			echo "<a class='dropdown-item' id='registerNav' href='../User/register.php'>Register</a>";

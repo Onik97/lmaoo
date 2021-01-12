@@ -1,30 +1,30 @@
-<?php require_once(__DIR__ . "/../connection.php"); require_once(__DIR__ . "/../User/user.php");
+<?php include("../../includes/autoloader.inc.php");
 
 $managerController = new ManagerController();
 
 if ($function == "loadOwnerProjects") 
 {
-    validateManager();
+    Validator::validateManager();
     echo json_encode($managerController->loadOwnerProjects());
 }
 else if ($function == "loadManagerProjects")
 {
-    validateManager();
+    Validator::validateManager();
     echo json_encode($managerController->loadManagerProjects());
 }
 else if ($function == "removeUsersFromProject")
 {
-    validateManager();
+    Validator::validateManager();
     echo json_encode($managerController->removeUsersFromProject($_POST['projectId']));
 }
 else if ($function == "addUsersToProject")
 {
-    validateManager();
+    Validator::validateManager();
     echo $managerController->addUsersToProject($_POST['json']);
 }
 else if ($function == "loadUsersOnProject")
 {
-    validateManager();
+    Validator::validateManager();
     echo json_encode($managerController->loadUsersOnProject($_POST['projectId']));
 }
 
@@ -32,8 +32,7 @@ class ManagerController
 {
     public function loadOwnerProjects()
     {
-        session_start();
-        $pdo = logindb();
+        $pdo = Connection::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT * FROM project WHERE owner = ?");
         $stmt->execute([$_SESSION['userLoggedIn']->getId()]);
@@ -42,8 +41,7 @@ class ManagerController
 
     public function loadManagerProjects()
     {
-        session_start();
-        $pdo = logindb();
+        $pdo = Connection::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT pa.userId, pa.projectId, p.name, p.status FROM projectAccess pa INNER JOIN project p
                                ON pa.projectId = p.projectId WHERE pa.managerAccess = 1 AND pa.userId = ?");
@@ -53,8 +51,7 @@ class ManagerController
 
     public function removeUsersFromProject($projectId)
     {
-        session_start();
-        $pdo = logindb();
+        $pdo = Connection::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("DELETE FROM projectAccess WHERE projectId = ?");
         $stmt->execute([$projectId]);
@@ -70,7 +67,7 @@ class ManagerController
         }
         $finalSql = substr($sql, 0, -1); // Removes , at the end of the SQL 
 
-        $pdo = logindb();
+        $pdo = Connection::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare($finalSql);
         $stmt->execute();
@@ -78,7 +75,7 @@ class ManagerController
 
     public function loadUsersOnProject($projectId)
     {
-        $pdo = logindb();
+        $pdo = Connection::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT pa.projectId, pa.managerAccess, u.userId, u.username, u.forename, u.surname FROM projectAccess pa INNER JOIN user u
                                ON pa.userId = u.userId WHERE pa.allowAccess = 1 AND projectId = ?");

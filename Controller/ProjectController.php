@@ -1,41 +1,7 @@
-<?php require_once(__DIR__ . "/../connection.php"); require_once(__DIR__ . "/../User/user.php");
+<?php
 
-$projectController = new projectController();
-
-if ($_POST['projectId'] && $_POST['progress'])
+class ProjectController
 {
-    validateDeveloper();
-    echo json_encode($projectController->getTicketListWithProgress($_POST['projectId'], $_POST['progress']));
-}
-else if($_POST['function'] == "loadProjects")
-{
-    validateDeveloper();
-    echo json_encode($projectController->getProjectList());
-}
-else if($_POST['function'] == "createProject")
-{
-    validateManager();
-    $projectController->createNewProject($_POST['projectName'], $_POST['projectStatus']);
-}
-else if($_POST['function'] == "createTicket")
-{
-    validateDeveloper();
-    $projectController->createNewTicket($_POST['projectId'], $_POST['summary'], $_POST['reporterKey']);
-}
-else if ($_POST['function'] == "checkProjectExistance")
-{
-    validateDeveloper();
-    echo $projectController->projectExistance(null);
-}
-else
-{
-    ob_clean();
-    return;
-}
-
-class projectController
-{
-
     public function projectExistance(?string $unitTest)
     {
         if($unitTest != null) 
@@ -49,7 +15,7 @@ class projectController
         $sql = isset($function) ? "SELECT name FROM project WHERE name = ?" : "SELECT projectId FROM project WHERE projectId = ?";
         if (!isset($projectSearch) || $projectSearch == null) return false;
 
-        $pdo = logindb();
+        $pdo = Connection::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$projectSearch]);
@@ -61,8 +27,7 @@ class projectController
 
     public function createNewProject($projectName, $projectStatus)
     {
-        session_start();
-        $pdo = logindb();
+        $pdo = Connection::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("INSERT INTO project (name, status, owner) VALUES (?, ?, ?)");
         $stmt->execute([$projectName, $projectStatus, $_SESSION['userLoggedIn']->getId()]);
@@ -70,7 +35,7 @@ class projectController
 
     public function createNewTicket($featureId, $summary, $reporterKey)
     {
-        $pdo = logindb();
+        $pdo = Connection::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("INSERT INTO ticket (summary, featureId, reporter_key) VALUES (?, ?, ?)");
         $stmt->execute([$summary, $featureId, $reporterKey]);
@@ -78,7 +43,7 @@ class projectController
 
     public function getProjectList()
     {
-        $pdo = logindb();
+        $pdo = Connection::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT projectId, name, status FROM project");
         $stmt->execute();
@@ -93,7 +58,7 @@ class projectController
         // TODO: When re-writing this, ensure that a better way is used for this
         if($progress == "In Progress") $sql = $sql . "OR ticket.progress = 'In Automation')";
         else $sql = $sql .")";
-        $pdo = logindb();
+        $pdo = Connection::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare($sql);
 
@@ -101,10 +66,10 @@ class projectController
         return $stmt->fetchAll();
     }
 
-    public function loadProjectsInNavBar($userLoggedIn)
+    public static function loadProjectsInNavBar($userLoggedIn)
     {
-        $projectController = new projectController();
         if ($userLoggedIn == null) return; 
+        $projectController = new projectController();
         $projects = $projectController->getProjectList();
 
         echo "<li class='nav-item dropdown'>";
