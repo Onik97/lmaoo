@@ -31,4 +31,16 @@ class Library
         die(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/notFound.php"));
         return null;
     }
+
+    public static function forbiddenMessage()
+    {
+        die(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/forbidden.php"));
+        return null;
+    }
+
+    public static function redirectWithMessage($message, $url)
+    {
+        $_SESSION['message'] = $message;
+        header("Location: $url");
+    }
 }
