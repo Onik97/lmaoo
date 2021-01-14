@@ -1,4 +1,4 @@
-<?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); session_start();
+<?php require_once($_SERVER["DOCUMENT_ROOT"] . "/lmaoo/includes/autoloader.inc.php");
 if(!isset($_SESSION['userLoggedIn'])) $_SESSION['userLoggedIn'] = null; ?>
 
 <!DOCTYPE html>

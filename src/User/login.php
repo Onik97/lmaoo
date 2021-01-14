@@ -1,7 +1,3 @@
-<?php
-if (isset($_SESSION['userLoggedIn'])) { header("Location: ../Home/index.php"); } 
-?>
-
 <!DOCTYPE html>
 <html>
 <title>Login</title>
