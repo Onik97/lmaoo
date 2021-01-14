@@ -1,4 +1,4 @@
-<?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); if (!isset($userLoggedIn)) return; ?>
+<?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); if (!isset($_SESSION['userLoggedIn'])) return; ?>
 
 <link rel="stylesheet" href="../Css/allModals.css">
             
@@ -45,7 +45,7 @@
                         <small id="editUsernameMessage" hidden></small> 
                     </div>
 
-                    <?php $githubController->loadProfile($userLoggedIn); ?>
+                    <?php GithubController::loadProfile($userLoggedIn); ?>
 
             </div>
                     <input type="hidden" name="function" value="update">
