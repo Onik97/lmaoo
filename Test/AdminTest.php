@@ -1,4 +1,4 @@
-<?php require_once "autoload.php";
+<?php include_once "autoload.php";
 
 use PHPUnit\Framework\TestCase;
 

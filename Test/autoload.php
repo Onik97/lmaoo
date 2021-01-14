@@ -2,7 +2,7 @@
 
 function autoLoader($className)
 {
-    error_reporting(0);
+    //error_reporting(0);
     
     if (!file_exists((__DIR__ . "/../config.php"))) die("ERROR: 101");
     
