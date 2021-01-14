@@ -1,3 +1,5 @@
+<?php if(!defined('directAccessValidator')) { die(file_get_contents('../../includes/notFound.php')); return; } ?>
+
 <?php
 if(isset($_SESSION['message']))
 { ?>

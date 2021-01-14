@@ -1,3 +1,5 @@
+<?php if(!defined('directAccessValidator')) { die(file_get_contents('../../includes/notFound.php')); return; } ?>
+
 <div class="reporterName mb-3">
     <h6>Reporter: </h6>
         <label id="reporter"></label>

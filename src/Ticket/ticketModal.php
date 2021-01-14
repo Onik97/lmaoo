@@ -1,3 +1,5 @@
+<?php if(!defined('directAccessValidator')) { die(file_get_contents('../../includes/notFound.php')); return; } ?>
+
 <div class="modal fade" id="ticketPageModal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">

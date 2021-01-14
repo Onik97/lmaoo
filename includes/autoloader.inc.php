@@ -10,4 +10,5 @@ function autoLoader($className)
 
     foreach ($paths as $path) if (file_exists($path)) include_once($path);
     if (session_status() == PHP_SESSION_NONE) session_start();
+    if (!defined('directAccessValidator')) define('directAccessValidator', true);
 }

@@ -1,3 +1,5 @@
+<?php if(!defined('directAccessValidator')) { die(file_get_contents('../../includes/notFound.php')); return; } ?>
+
 <h1 class='welcomeMessage'>Welcome back User</h1>
 <div class="container-fluid">
     <div id="homePageTickets">
