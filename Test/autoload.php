@@ -4,7 +4,7 @@ function autoLoader($className)
 {
     error_reporting(0);
     
-    if (!file_exists((__DIR__ . "/../config.php"))) die("ERROR: 101");
+    if (!file_exists((__DIR__ . "/../config.php"))) die("ERROR: 101 - Unit Testing");
     
     $paths = array(__DIR__ . "/../Controller/$className.php",
                    __DIR__ . "/../Utility/$className.php",
