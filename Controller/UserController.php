@@ -48,14 +48,14 @@ class UserController
 		{
 			$stmt = $pdo->prepare("SELECT * FROM user WHERE github_id = ?");
 			$stmt->execute([$githubUser['id']]);
+			$user = $stmt->fetch();
 			
-			if($stmt->columnCount() == 0) 
+			if($user == false) 
 			{
 				Library::redirectWithMessage("No Github Account has been linked. You must login first and edit your user", "User/login.php"); 
 				return;
 			}
-
-			$user = $stmt->fetch();
+			
 			$userLoggedIn = new user($user->userId, $user->forename, $user->urname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode, $user->github_id);
 			$userLoggedIn->profileToObject($githubUser);
 			
