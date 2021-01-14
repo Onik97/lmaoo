@@ -2,6 +2,8 @@
 
 function autoLoader($className)
 {
+    error_reporting(0);
+    
     if (!file_exists((__DIR__ . "/../config.php"))) die("ERROR: 101");
     
     $paths = array(__DIR__ . "/../Controller/$className.php",
@@ -10,5 +12,4 @@ function autoLoader($className)
 
     foreach ($paths as $path) if (file_exists($path)) include_once($path);
     if (!defined('directAccessValidator')) define('directAccessValidator', true);
-    //error_reporting(0);
 }
