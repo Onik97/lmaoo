@@ -31,3 +31,8 @@
   background-color: rgba(105, 105, 105, 0);
   color: #fff;
 }
+
+.darkmode--activated .custom-control-input:checked~.custom-control-label::before {
+  border-color: rgba(105, 105, 105, 0.24) !important; 
+  background-color: rgba(105, 105, 105, 0.24) !important; 
+}
