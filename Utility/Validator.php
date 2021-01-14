@@ -4,20 +4,20 @@ class Validator
 {
     public static function validateDeveloper()
     {
-        if (!unserialize($_SESSION['userLoggedIn'])->getLevel() >= 1)
-        return null;
+        return (!unserialize($_SESSION['userLoggedIn'])->getLevel() >= 1)
+        ? false : true;
     }
 
     public static function validateManager()
     {
-        if (!unserialize($_SESSION['userLoggedIn'])->getLevel() >= 2)
-        return null;
+        return (!unserialize($_SESSION['userLoggedIn'])->getLevel() >= 2)
+        ? false : true;
     }
 
     public static function validateSuperUser()
     {
-        if (!unserialize($_SESSION['userLoggedIn'])->getLevel() >= 3)
-        return null;
+        return (!unserialize($_SESSION['userLoggedIn'])->getLevel() >= 3)
+        ? false : true;
     }
     
 }
