@@ -9,6 +9,15 @@ class GithubController extends ApiWrapper
     
     public function getAccessToken() { return $this->accessToken; }
 
+    public function getAccessTokenFromDatabase($userId) 
+    {
+        $pdo = Library::logindb();
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+		$stmt = $pdo->prepare("SELECT github_accessToken FROM user WHERE userId = ?");
+		$stmt->execute([$userId]);
+		return $stmt->fetchColumn();
+    }
+
     public function setAccessToken()
     {
         $postFields = array(
