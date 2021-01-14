@@ -41,6 +41,6 @@ class Library
     public static function redirectWithMessage($message, $url)
     {
         $_SESSION['message'] = $message;
-        header("Location: $url");
+        header("Location: /lmaoo/src/$url");
     }
 }
