@@ -23,12 +23,12 @@ class user
 		$this->githubId = $githubId;
 	}
 
-	function createGithubProfile($profilePicture, $name, $login)
-	{
-		$this->profilePicture = $profilePicture;
-		$this->name = $name;
-		$this->login = $login;
-	}
+	public function profileToObject($githubUser)
+    {
+        $this->profilePicture = $githubUser['avatar_url'];
+        $this->name = $githubUser['name'];
+        $this->login = $githubUser['login'];
+    }
 
 	public function setId($id)
 	{
