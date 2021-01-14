@@ -39,30 +39,42 @@ class UserController
 	}
 
 	public function login($username, $password)
+	public function login($username, $password, $githubUser = null)
 	{
+		$githubController = new GithubController();
 		$pdo = Library::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+		
+		if ($githubUser != null)
+		{
+			$stmt = $pdo->prepare("SELECT * FROM user WHERE github_id = ?");
+			$stmt->execute([$githubUser['id']]);
+			$user = $stmt->fetch();
+			$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode, $user->github_id);
+			$userLoggedIn->profileToObject($githubUser);
+			
+			if ($user->darkMode != $_COOKIE["lmaooDarkMode"]) setcookie("lmaooDarkMode", $user->darkMode, 0, "/");
+			$_SESSION['userLoggedIn'] = serialize($userLoggedIn);
+			header("Location: ../Home/index.php");
+			return;
+		}
+
 		$stmt = $pdo->prepare("SELECT * FROM user WHERE username = ?");
 		$stmt->execute([$username]);
 		$user = $stmt->fetch();
-		$userController = new userController();
 		
 		if (password_verify($password, $user->password))
 		{
 			if($user->isActive == true)
 			{
 				$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode, $user->github_id);
-				if ($user->darkMode != $_COOKIE["lmaooDarkMode"]) setcookie("lmaooDarkMode", $user->darkMode, 0, "/");
 				
-				// if ($user->github_id != null)
-				// {
-				// 	$githubController = new githubController();
-				// 	$accessToken = $githubController->getAccessTokenFromDatabase($user->userId);
-				// 	$githubUser = $githubController->getGithubUser($accessToken);
-				// 	$userLoggedIn->createGithubProfile($githubUser['avatar_url'], $githubUser['name'], $githubUser['login']);
-				// }
+				if($user->github_id != null) 
+				{
+					$userLoggedIn->profileToObject($githubController->getGithubUser($githubController->getAccessTokenFromDatabase($user->userId)));
+				}
 
-			
+				if ($user->darkMode != $_COOKIE["lmaooDarkMode"]) setcookie("lmaooDarkMode", $user->darkMode, 0, "/");			
 				$_SESSION['userLoggedIn'] = serialize($userLoggedIn);
 				header("Location: ../Home/index.php");
 			}
@@ -74,7 +86,7 @@ class UserController
 		}
 		else
 		{
-			$userController->failedLogin();
+			$this->failedLogin();
 		}
 
 	}

@@ -8,13 +8,15 @@ else
 {
     unset($_SESSION['state']);
     $github = new GithubController();
+    $userController = new UserController();
 
     switch ($_GET['function']) 
     {
         case "login":
             $github->setAccessToken();
-            $id = $github->getGithubUser($github->getAccessToken())['id'];
-            $github->login($id);
+            $githubUser = $github->getGithubUser($github->getAccessToken());
+            $github->saveAccessToken($githubUser);
+            $userController->login("", "", $githubUser);
             break;
         case "register":
             $github->setAccessToken();

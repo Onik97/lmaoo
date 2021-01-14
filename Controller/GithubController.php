@@ -53,37 +53,6 @@ class GithubController extends ApiWrapper
         return json_decode($accessTokenResponse, true);
     }
 
-    public function login($githubId)
-    {
-        $pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT * FROM user WHERE github_id = ?");
-		$stmt->execute([$githubId]);
-        $user = $stmt->fetch();
-        $stmt = $pdo->prepare("UPDATE user SET github_accessToken = ? WHERE github_id = ?");
-		$stmt->execute([$this->getAccessToken(), $githubId]);
-
-        if($user == null)
-        {
-            $_SESSION['message'] = 'Github account not linked, you must login and register the Github account first';
-            header("Location: ../User/login.php");
-        }
-        else if($user->isActive == true)
-        {
-            $githubUser = $this->getGithubUser($this->getAccessToken());
-            $userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode, $user->github_id);
-            $userLoggedIn->createGithubProfile($githubUser['avatar_url'], $githubUser['name'], $githubUser['login']);
-            if ($user->darkMode != $_COOKIE["lmaooDarkMode"]) setcookie("lmaooDarkMode", $user->darkMode, 0, "/");
-            $_SESSION['userLoggedIn'] = serialize($userLoggedIn);
-            header("Location: ../Home/index.php");
-        }
-        else
-        {
-            $_SESSION['message'] = 'User deactivated, contact the administrator';
-            header("Location: ../User/login.php");
-        }
-    }
-
     public function registerGithub()
     {
         $githubUser = $this->getGithubUser($this->accessToken);
