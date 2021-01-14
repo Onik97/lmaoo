@@ -64,13 +64,10 @@ class GithubController extends ApiWrapper
 
         $userLoggedIn = unserialize($_SESSION['userLoggedIn']);
         $userLoggedIn->setGithubId($githubUser['id']);
-        $userLoggedIn->profilePicture = $githubUser['avatar_url'];
-		$userLoggedIn->name = $githubUser['name'];
-        $userLoggedIn->login = $githubUser['login'];
-        $_SESSION['userLoggedIn'] = serialize($userLoggedIn);
+        $this->profileToObject($userLoggedIn);
         
-        $_SESSION['message'] = 'Github Registration Successful!';
-        header("Location: ../src/Home/index.php");
+        $_SESSION['userLoggedIn'] = serialize($userLoggedIn);
+        Library::redirectWithMessage("Github Registration Successful!", "../Home/index.php");
     }
 
     public static function loadProfile($userLoggedIn)
