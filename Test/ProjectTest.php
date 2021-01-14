@@ -6,28 +6,28 @@ class ProjectTest extends TestCase
 {
     public function test_projectExistance_null()
     {
-        $projectController = new projectController();
+        $projectController = new ProjectController();
         $actual = $projectController->projectExistance(null);
         $this->assertEquals(null, $actual);
     }
 
     public function test_projectExistance_true()
     {
-        $projectController = new projectController();
+        $projectController = new ProjectController();
         $actual = $projectController->projectExistance("AutomationProject");
         $this->assertTrue($actual);
     }
 
     public function test_projectExistance_false()
     {
-        $projectController = new projectController();
+        $projectController = new ProjectController();
         $actual = $projectController->projectExistance("ThisProjectDoesNotExist");
         $this->assertFalse($actual);
     }
 
     public function test_getProjectList_checkContents()
     {
-        $projectController = new projectController();
+        $projectController = new ProjectController();
         $list = $projectController->getProjectList();
         foreach ($list as $projectFromDB) 
         {
@@ -40,7 +40,7 @@ class ProjectTest extends TestCase
 
     public function test_getTicketListWithProgress_checkOpen()
     {
-        $projectController = new projectController();
+        $projectController = new ProjectController();
         $tickets = $projectController->getTicketListWithProgress(9, "Open");
         foreach ($tickets as $ticketFromDB)
         {
@@ -55,7 +55,7 @@ class ProjectTest extends TestCase
 
     public function test_getTicketListWithProgress_checkInProgress()
     {
-        $projectController = new projectController();
+        $projectController = new ProjectController();
         $tickets = $projectController->getTicketListWithProgress(9, "In Progress");
         foreach ($tickets as $ticketFromDB)
         {
@@ -76,7 +76,7 @@ class ProjectTest extends TestCase
 
     public function test_getTicketListWithProgress_checkComplete()
     {
-        $projectController = new projectController();
+        $projectController = new ProjectController();
         $tickets = $projectController->getTicketListWithProgress(9, "Complete");
         foreach ($tickets as $ticketFromDB)
         {

@@ -10,5 +10,5 @@ function autoLoader($className)
 
     foreach ($paths as $path) if (file_exists($path)) include_once($path);
     if (!defined('directAccessValidator')) define('directAccessValidator', true);
-    error_reporting(0);
+    //error_reporting(0);
 }

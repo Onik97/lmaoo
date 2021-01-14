@@ -6,14 +6,14 @@ class AdminTest extends TestCase
 {
     public function test_validateAdmin_true()
     {
-        $adminController = new adminController();
+        $adminController = new AdminController();
         $actual = $adminController->validateAdmin(12);
         $this->assertTrue($actual);
     }
 
     public function test_validateAdmin_false()
     {
-        $adminController = new adminController();
+        $adminController = new AdminController();
         $actual = $adminController->validateAdmin(34);
         $this->assertFalse($actual);
     }
@@ -22,7 +22,7 @@ class AdminTest extends TestCase
     {
         $user = new user(12, null, null, null, null, null, null, null, null);
         $_SESSION['userLoggedIn'] = serialize($user);
-        $adminController = new adminController();
+        $adminController = new AdminController();
         $actual = $adminController->validateAdmin(null);
         $this->assertTrue($actual);
         session_destroy();
@@ -32,7 +32,7 @@ class AdminTest extends TestCase
     {
         $user = new user(34, null, null, null, null, null, null, null, null);
         $_SESSION['userLoggedIn'] = serialize($user);
-        $adminController = new adminController();
+        $adminController = new AdminController();
         $actual = $adminController->validateAdmin(null);
         $this->assertFalse($actual);
         session_destroy();
@@ -40,8 +40,8 @@ class AdminTest extends TestCase
 
     public function test_activateUser_activateUser()
     {
-        $adminController = new adminController();
-        $userController = new userController();
+        $adminController = new AdminController();
+        $userController = new UserController();
 
         $user = new user(12, null, null, null, null, null, null, null, null);
         $_SESSION['userLoggedIn'] = serialize($user);
@@ -58,8 +58,8 @@ class AdminTest extends TestCase
 
     public function test_activateUser_deactivateUser()
     {
-        $adminController = new adminController();
-        $userController = new userController();
+        $adminController = new AdminController();
+        $userController = new UserController();
 
         $user = new user(12, null, null, null, null, null, null, null, null);
         $_SESSION['userLoggedIn'] = serialize($user);
@@ -76,8 +76,8 @@ class AdminTest extends TestCase
 
     public function test_resetPassword_reset()
     {
-        $adminController = new adminController();
-        $userController = new userController();
+        $adminController = new AdminController();
+        $userController = new UserController();
 
         $user = new user(12, null, null, null, null, null, null, null, null);
         $_SESSION['userLoggedIn'] = serialize($user);
@@ -90,8 +90,8 @@ class AdminTest extends TestCase
     public function test_resetPassword_resetBack()
     {
         $hashedPassword = '$2y$10$gynAasS6oo8n3u6cR9XaF.hKLPrHiSb1xvcSSa3K//XoVWczvLywS'; // Password: test
-        $adminController = new adminController();
-        $userController = new userController();
+        $adminController = new AdminController();
+        $userController = new UserController();
 
         $user = new user(12, null, null, null, null, null, null, null, null);
         $_SESSION['userLoggedIn'] = serialize($user);
@@ -107,9 +107,9 @@ class AdminTest extends TestCase
         $user = new user(12, null, null, null, null, null, null, null, null);
         $_SESSION['userLoggedIn'] = serialize($user);
 
-        $adminController = new adminController();
+        $adminController = new AdminController();
         $adminController->updateUserLevel(46, 4);
-        $userController = new userController();
+        $userController = new UserController();
         $expected = $userController->userInfoById(46);
 
         $this->assertEquals($expected->level, 4);
@@ -120,9 +120,9 @@ class AdminTest extends TestCase
         $user = new user(12, null, null, null, null, null, null, null, null);
         $_SESSION['userLoggedIn'] = serialize($user);
 
-        $adminController = new adminController();
+        $adminController = new AdminController();
         $adminController->updateUserLevel(46, 1);
-        $userController = new userController();
+        $userController = new UserController();
         $expected = $userController->userInfoById(46);
 
         $this->assertEquals($expected->level, 1);
@@ -133,9 +133,9 @@ class AdminTest extends TestCase
         $user = new user(12, null, null, null, null, null, null, null, null);
         $_SESSION['userLoggedIn'] = serialize($user);
 
-        $adminController = new adminController();
+        $adminController = new AdminController();
         $adminController->updateUserLevel(46, 2);
-        $userController = new userController();
+        $userController = new UserController();
         $expected = $userController->userInfoById(46);
 
         $this->assertEquals($expected->level, 2);
@@ -146,9 +146,9 @@ class AdminTest extends TestCase
         $user = new user(12, null, null, null, null, null, null, null, null);
         $_SESSION['userLoggedIn'] = serialize($user);
 
-        $adminController = new adminController();
+        $adminController = new AdminController();
         $adminController->updateUserLevel(46, 3);
-        $userController = new userController();
+        $userController = new UserController();
         $expected = $userController->userInfoById(46);
 
         $this->assertEquals($expected->level, 3);
