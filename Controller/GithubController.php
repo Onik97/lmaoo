@@ -5,8 +5,8 @@ class GithubController extends ApiWrapper
     public static $ACCESS_TOKEN_URL = "https://github.com/login/oauth/access_token";
     public static $USER_URL = "https://api.github.com/user";
 
-    public function __construct() { $this->config = include($_SERVER["DOCUMENT_ROOT"] . "lmaoo/config.php"); } 
-    
+    public function __construct() { $this->config = include($_SERVER["DOCUMENT_ROOT"] . "lmaoo/config.php"); }
+
     public function getAccessToken() { return $this->accessToken; }
 
     public function getAccessTokenFromDatabase($userId) 
