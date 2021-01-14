@@ -38,7 +38,6 @@ class UserController
 		return $user;
 	}
 
-	public function login($username, $password)
 	public function login($username, $password, $githubUser = null)
 	{
 		$githubController = new GithubController();
