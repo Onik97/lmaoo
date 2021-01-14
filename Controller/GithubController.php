@@ -33,6 +33,15 @@ class GithubController extends ApiWrapper
         $this->accessToken = $jsonAccessTokenResponse["access_token"];
     }
 
+    public function saveAccessToken($githubUser)
+    {
+        $pdo = Library::logindb();
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("UPDATE user SET github_accessToken = ? WHERE github_id = ?");
+        $stmt->execute([$this->getAccessToken(), $githubUser['id']]);
+        return $stmt->fetchColumn();
+    }
+
     public function getGithubUser($accessToken)
     {
         $headers = array(
