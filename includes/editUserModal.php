@@ -1,4 +1,4 @@
-<?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); if (!isset($_SESSION['userLoggedIn'])) return; ?>
+<?php include_once(__DIR__ . "/../includes/autoloader.inc.php"); if (!isset($_SESSION['userLoggedIn'])) return; ?>
 
 <link rel="stylesheet" href="../Css/allModals.css">
             
@@ -31,17 +31,17 @@
                 <form action="../User/target.php" method="POST" onkeyup="userEditValidation(); checkUserDup();">
                     <div class="form-group">
                         <label>Forename</label>
-                        <input class="form-control" value=<?php echo $userLoggedIn->getForename(); ?>  id="editForename" name="editForename" required>
+                        <input class="form-control" value=<?php echo unserialize($_SESSION['userLoggedIn'])->getForename(); ?>  id="editForename" name="editForename" required>
                     </div>
 
                     <div class="form-group">
                         <label>Surname</label>
-                        <input class="form-control" value=<?php echo $userLoggedIn->getSurname(); ?>  id="editSurname" name="editSurname" required>
+                        <input class="form-control" value=<?php echo unserialize($_SESSION['userLoggedIn'])->getSurname(); ?>  id="editSurname" name="editSurname" required>
                     </div>
 
                     <div class="form-group">
                         <label>Username</label>
-                        <input class="form-control" value=<?php echo $userLoggedIn->getUsername(); ?> id="editUsername" name="editUsername" required>
+                        <input class="form-control" value=<?php echo unserialize($_SESSION['userLoggedIn'])->getUsername(); ?> id="editUsername" name="editUsername" required>
                         <small id="editUsernameMessage" hidden></small> 
                     </div>
 

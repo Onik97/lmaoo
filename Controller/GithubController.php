@@ -5,7 +5,7 @@ class GithubController extends ApiWrapper
     public static $ACCESS_TOKEN_URL = "https://github.com/login/oauth/access_token";
     public static $USER_URL = "https://api.github.com/user";
 
-    public function __construct() { $this->config = include($_SERVER["DOCUMENT_ROOT"] . "lmaoo/config.php"); }
+    public function __construct() { $this->config = include_once(__DIR__ . "/../config.php"); }
 
     public function getAccessToken() { return $this->accessToken; }
 
@@ -67,7 +67,7 @@ class GithubController extends ApiWrapper
         $userLoggedIn->profileToObject($githubUser);
         
         $_SESSION['userLoggedIn'] = serialize($userLoggedIn);
-        Library::redirectWithMessage("Github Registration Successful!", "Home/index.php");
+        Library::redirectWithMessage("Github Registration Successful!", "../Home/index.php");
     }
 
     public static function loadProfile($userLoggedIn)

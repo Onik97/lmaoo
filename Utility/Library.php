@@ -4,7 +4,7 @@ class Library
 {
     public static function logindb()
 	{
-        $config = defined('PHPUNIT_COMPOSER_INSTALL') ? include(__DIR__ . "/../config.php") : include($_SERVER["DOCUMENT_ROOT"] . 'lmaoo/config.php');
+        $config = include (__DIR__ . "/../config.php");
         try
 		{
 			$pdo = new PDO("mysql:host={$config['db_host']};dbname={$config['db_table']}", $config['db_username'],  $config['db_password']);
@@ -28,19 +28,19 @@ class Library
 
     public static function notFoundMessage()
     {
-        die(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/notFound.php"));
+        die(file_get_contents(__DIR__ . "/../includes/notFound.php"));
         return null;
     }
 
     public static function forbiddenMessage()
     {
-        die(file_get_contents($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/forbidden.php"));
+        die(file_get_contents(__DIR__ . "/../includes/forbidden.php"));
         return null;
     }
 
     public static function redirectWithMessage($message, $url)
     {
         $_SESSION['message'] = $message;
-        header("Location: /lmaoo/src/$url");
+        header("Location: $url");
     }
 }

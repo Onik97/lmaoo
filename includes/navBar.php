@@ -1,4 +1,4 @@
-<?php ob_start(); require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php");
+<?php ob_start(); include_once(__DIR__ . "/../includes/autoloader.inc.php");
 if(!isset($_SESSION['userLoggedIn'])) $_SESSION['userLoggedIn'] = null;
 ?>
 <link rel="stylesheet" href="../Css/navbar.css">
