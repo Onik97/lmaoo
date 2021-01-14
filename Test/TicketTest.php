@@ -1,40 +1,40 @@
-<?php
-require __DIR__ . "/../Ticket/ticketController.php";
+<?php include_once "autoload.php";
+
 use PHPUnit\Framework\TestCase;
 
 class TicketTest extends TestCase
 {
     public function test_ticketIdExistance_null()
     {
-        $ticketController = new ticketController();
+        $ticketController = new TicketController();
         $expected = $ticketController->ticketIdExistance(null);
         $this->assertEquals($expected, null);
     }
 
     public function test_ticketIdExistance_false()
     {
-        $ticketController = new ticketController();
+        $ticketController = new TicketController();
         $expected = $ticketController->ticketIdExistance(-1);
         $this->assertEquals($expected, null);
     }
 
     public function test_ticketIdExistance_true()
     {
-        $ticketController = new ticketController();
+        $ticketController = new TicketController();
         $expected = $ticketController->ticketIdExistance(83);
         $this->assertEquals($expected, true);
     }
     
     public function test_ticketExistance_null()
     {
-        $ticketController = new ticketController();
+        $ticketController = new TicketController();
         $expected = $ticketController->ticketExistance(null, null);
         $this->assertEquals($expected, null);
     }
 
     public function test_ticketExistance_incorrectFormat()
     {
-        $ticketController = new ticketController();
+        $ticketController = new TicketController();
         $expected = $ticketController->ticketExistance(1,"featureId");
         $this->assertEquals($expected, null);
     }
@@ -42,29 +42,28 @@ class TicketTest extends TestCase
     /** @test */
     public function test_ticketExistance_true()
     {
-        $ticketController = new ticketController();
+        $ticketController = new TicketController();
         $expected = $ticketController->ticketExistance("AutomationOpenTicket", 9);
         $this->assertTrue($expected);
     }
 
     public function test_ticketExistance_falseTicketName()
     {
-        $ticketController = new ticketController();
+        $ticketController = new TicketController();
         $expected = $ticketController->ticketExistance("ThisTicketDoesNotExist", 9);
         $this->assertFalse($expected);
     }
 
     public function test_ticketExistance_falseFeatureId()
     {
-        $ticketController = new ticketController();
+        $ticketController = new TicketController();
         $expected = $ticketController->ticketExistance("AutomationOpenTicket", -1);
         $this->assertEquals($expected, false);
     }
 
-    /** @test */
     public function test_loadComments_checkContents()
     {
-        $ticketController = new ticketController();
+        $ticketController = new TicketController();
         $comments = $ticketController->loadComments(83);
         
         foreach ($comments as $commentFromDB) 
@@ -82,7 +81,7 @@ class TicketTest extends TestCase
     /** @test */
     public function test_loadAssignee_checkContents()
     {
-        $ticketController = new ticketController();
+        $ticketController = new TicketController();
         $assignee = $ticketController->loadAssignee(83);
         $this->assertEquals($assignee[0]->forename, "Tufan");
         $this->assertEquals($assignee[0]->surname, "Butuner");
@@ -92,7 +91,7 @@ class TicketTest extends TestCase
 
     public function test_loadAssignee_null()
     {
-        $ticketController = new ticketController();
+        $ticketController = new TicketController();
         $assignee = $ticketController->loadAssignee(null);
         $this->assertNull($assignee[0]);
     }
@@ -100,7 +99,7 @@ class TicketTest extends TestCase
     
     public function test_loadReporter_checkContents()
     {
-        $ticketController = new ticketController();
+        $ticketController = new TicketController();
         $assignee = $ticketController->loadReporter(83);
         $this->assertEquals($assignee[0]->forename, "Onik");
         $this->assertEquals($assignee[0]->surname, "Noor");
@@ -110,7 +109,7 @@ class TicketTest extends TestCase
 
     public function test_loadReporter_null()
     {
-        $ticketController = new ticketController();
+        $ticketController = new TicketController();
         $assignee = $ticketController->loadReporter(null);
         $this->assertNull($assignee[0]);
     }

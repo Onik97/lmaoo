@@ -1,6 +1,6 @@
 .vscode/launch.json
 Test/Vendor
 *.cache
-Images/profilePictures/*
+img/profilePictures/*
 debug.log
 config.php
