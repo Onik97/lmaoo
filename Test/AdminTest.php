@@ -1,6 +1,7 @@
 <?php require_once "autoload.php";
 
 use PHPUnit\Framework\TestCase;
+
 class AdminTest extends TestCase
 {
     public function test_validateAdmin_true()
