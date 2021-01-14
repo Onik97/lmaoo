@@ -1,5 +1,4 @@
-<?php
-require __DIR__ . "/../src/User/userController.php";
+<?php require_once "autoload.php";
 
 use PHPUnit\Framework\TestCase;
 

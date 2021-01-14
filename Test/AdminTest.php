@@ -1,7 +1,4 @@
-<?php
-require __DIR__ . "/../User/adminController.php";
-require __DIR__ . "/../User/userController.php";
-use PHPUnit\Framework\TestCase;
+<?php require_once "autoload.php";
 
 class AdminTest extends TestCase
 {

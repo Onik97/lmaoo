@@ -1,5 +1,5 @@
-<?php
-require __DIR__ . "/../src/Ticket/ticketController.php";
+<?php require_once "autoload.php";
+
 use PHPUnit\Framework\TestCase;
 
 class TicketTest extends TestCase
