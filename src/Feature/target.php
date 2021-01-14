@@ -1,4 +1,4 @@
-<?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); 
+<?php require_once($_SERVER["DOCUMENT_ROOT"] . "/lmaoo/includes/autoloader.inc.php");
 
 $featureController = new featureController();
 if($_POST['function'] == "loadFeatures")

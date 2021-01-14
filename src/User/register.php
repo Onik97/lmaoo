@@ -1,5 +1,3 @@
-<?php ?>
-
 <!DOCTYPE html>
 <title>Register Page</title>
 

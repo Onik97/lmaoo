@@ -1,4 +1,4 @@
-<?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); session_start();
+<?php require_once($_SERVER["DOCUMENT_ROOT"] . "/lmaoo/includes/autoloader.inc.php");
 
 if(!isset($_GET['code']) || !isset($_GET['state'])) 
     die(file_get_contents('../../includes/notFound.php')); 

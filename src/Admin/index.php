@@ -1,4 +1,4 @@
-<?php $_SERVER["DOCUMENT_ROOT"] . "lmaoo/config.php" ?>
+<?php require_once($_SERVER["DOCUMENT_ROOT"] . "/lmaoo/includes/autoloader.inc.php"); ?>
 
 <!DOCTYPE html>
 <title>Admin</title>

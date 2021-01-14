@@ -1,4 +1,4 @@
-<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php");
+<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once($_SERVER["DOCUMENT_ROOT"] . "/lmaoo/includes/autoloader.inc.php");
 
 class ManagerController
 {
