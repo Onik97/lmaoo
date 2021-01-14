@@ -1,11 +1,11 @@
-<?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); 
+<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); 
 
 class Library 
 {
     public static function logindb()
 	{
-		$config = include($_SERVER["DOCUMENT_ROOT"] . 'lmaoo/config.php');
-		try
+        $config = defined('PHPUNIT_COMPOSER_INSTALL') ? include(__DIR__ . "/../config.php") : include($_SERVER["DOCUMENT_ROOT"] . 'lmaoo/config.php');
+        try
 		{
 			$pdo = new PDO("mysql:host={$config['db_host']};dbname={$config['db_table']}", $config['db_username'],  $config['db_password']);
 		}
