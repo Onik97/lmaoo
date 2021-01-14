@@ -49,7 +49,7 @@ class UserController
 			$stmt = $pdo->prepare("SELECT * FROM user WHERE github_id = ?");
 			$stmt->execute([$githubUser['id']]);
 			
-			if($stmt->fetchColumn() == 0) 
+			if($stmt->columnCount() == 0) 
 			{
 				Library::redirectWithMessage("No Github Account has been linked. You must login first and edit your user", "User/login.php"); 
 				return;
