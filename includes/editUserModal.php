@@ -1,4 +1,4 @@
-<?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); if (!isset($_SESSION['userLoggedIn'])) return; ?>
+<?php include_once(__DIR__ . "/../includes/autoloader.inc.php"); if (!isset($_SESSION['userLoggedIn'])) return; ?>
 
 <link rel="stylesheet" href="../Css/allModals.css">
             
