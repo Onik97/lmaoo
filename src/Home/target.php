@@ -1,4 +1,4 @@
-<?php require_once($_SERVER["DOCUMENT_ROOT"] . "lmaoo/includes/autoloader.inc.php"); 
+<?php include_once(__DIR__ . "/../../includes/autoloader.inc.php");
 $homeController = new HomeController();
 $function = $_POST['function'];
 

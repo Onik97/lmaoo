@@ -1,4 +1,4 @@
-<?php require_once($_SERVER["DOCUMENT_ROOT"] . "/lmaoo/includes/autoloader.inc.php");
+<?php include_once(__DIR__ . "/../../includes/autoloader.inc.php");
 
 $projectController = new projectController();
 $checker = $projectController->projectExistance(null);
