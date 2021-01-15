@@ -20,7 +20,7 @@
           <div class="col-md-6 text-center">
             <div class="card-body">
               <h2 class="register-header">Sign up</h2>
-              <form action="target.php" onSubmit="return checkPassword(this)" method='POST'>
+              <form name="registerForm" action="target.php" onSubmit="return registerValidation()" onkeyup="validateUsername()" method='POST'>
                 <div class="form-group">
                   <input type="text" class="form-control" name="forename" placeholder="First name" id="forenameRegister" required>
                 </div>
