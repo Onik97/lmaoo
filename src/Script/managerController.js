@@ -128,7 +128,7 @@ async function rolePrompt(projectId)
 
 // Dynamically change the role in the Modal
 $(document).click(function (e) {
-    $(e.target).attr('class') == "dropdown-item" ? $(e.target).parent().siblings("button").html(e.target.outerText) : null;
+    $(e.target).attr('class') == "dropdown-item role" ? $(e.target).parent().siblings("button").html(e.target.outerText) : null;
 });
 
 // Search Box autofill

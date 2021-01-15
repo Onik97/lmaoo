@@ -20,7 +20,7 @@
           <div class="col-md-6 text-center">
             <div class="card-body">
               <h2 class="register-header">Sign up</h2>
-              <form action="target.php" onSubmit="return checkPassword(this)" method='POST'>
+              <form name="registerForm" action="target.php" onSubmit="return registerValidation()" onkeyup="validateUsername()" method='POST'>
                 <div class="form-group">
                   <input type="text" class="form-control" name="forename" placeholder="First name" id="forenameRegister" required>
                 </div>
@@ -29,6 +29,7 @@
                 </div>
                 <div class="form-group">
                   <input type="text" class="form-control" name="username" placeholder="Username" id="usernameRegister" required>
+                  <small id="usernameMessage"></small>
                 </div>
                 <div class="form-group">
                   <input type="password" class="form-control" name="password1" placeholder="Password" id="password1Register" required>
@@ -37,8 +38,8 @@
                   <input type="password" class="form-control" name="password2" placeholder="Confirm password" id="password2Register" required>
                 </div>
                 <input type="hidden" name="function" value="register">
-                <button type="submit" value="Submit" class="btn btn-success btn-block">Register</button>
-
+                <button id="registerBtn" type="submit" value="Submit" class="btn btn-success btn-block">Register</button>
+                <small id="validateMessage" hidden></small>
                 <div class="form-group mt-3">
                   <a class="register" href="../User/index.php">Already Registered? Login here!</a>
                 </div>
@@ -49,7 +50,7 @@
       </div>
 
       <?php include("../../includes/scripts.php"); ?>
-      <script src="../Script/User/passwordchecker.js"></script>
+      <script src="../Script/register.js"></script>
 </body>
 
 </html>

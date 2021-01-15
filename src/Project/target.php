@@ -2,7 +2,7 @@
 
 $projectController = new ProjectController();
 
-if ($_POST['projectId'] && $_POST['progress'])
+if (isset($_POST['projectId']) && isset($_POST['progress']))
 {
     Validator::validateDeveloper();
     echo json_encode($projectController->getTicketListWithProgress($_POST['projectId'], $_POST['progress']));
@@ -25,7 +25,7 @@ else if($_POST['function'] == "createTicket")
 else if ($_POST['function'] == "checkProjectExistance")
 {
     Validator::validateDeveloper();
-    echo $projectController->projectExistance(null);
+    echo $projectController->projectExistance($_POST['name']);
 }
 else 
 {

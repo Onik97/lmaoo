@@ -2,27 +2,16 @@
 
 class ProjectController
 {
-    public function projectExistance(?string $unitTest)
+    public function projectExistance($name)
     {
-        if($unitTest != null) 
-        { 
-            $_POST['name'] = $unitTest;
-            $_POST['function'] = "checkProjectExistance";
-        }
-
-        $function = $_POST['function'];
-        $projectSearch = isset($function) ? $_POST['name'] : $_GET['projectId'];
-        $sql = isset($function) ? "SELECT name FROM project WHERE name = ?" : "SELECT projectId FROM project WHERE projectId = ?";
-        if (!isset($projectSearch) || $projectSearch == null) return false;
+        if ($name == null) return;
 
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$projectSearch]);
+        $stmt = $pdo->prepare("SELECT name FROM project WHERE name = ?");
+        $stmt->execute([$name]);
 
-        if($stmt->rowCount() != 0) return true; 
-
-        return false;
+        return $stmt->rowCount() != 0 ? true : false;
     }
 
     public function createNewProject($projectName, $projectStatus)
