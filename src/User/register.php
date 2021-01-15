@@ -29,6 +29,7 @@
                 </div>
                 <div class="form-group">
                   <input type="text" class="form-control" name="username" placeholder="Username" id="usernameRegister" required>
+                  <small id="usernameMessage"></small>
                 </div>
                 <div class="form-group">
                   <input type="password" class="form-control" name="password1" placeholder="Password" id="password1Register" required>
@@ -38,7 +39,7 @@
                 </div>
                 <input type="hidden" name="function" value="register">
                 <button type="submit" value="Submit" class="btn btn-success btn-block">Register</button>
-
+                <small id="validateMessage" hidden></small>
                 <div class="form-group mt-3">
                   <a class="register" href="../User/index.php">Already Registered? Login here!</a>
                 </div>
