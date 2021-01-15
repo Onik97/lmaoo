@@ -24,3 +24,18 @@ function registerValidation()
     if(error.length != 0) document.getElementById("validateMessage").removeAttribute("hidden");
     return error.length == 0 ? true : false;
 }
+
+function validateUsername()
+{
+    var username = document.forms["registerForm"].username.value;
+
+    var data = new FormData();
+    data.append("function", "checkUsername");
+    data.append("username", username);
+    checkUsernameFromServer(data)
+    .then(res => 
+    {
+        (res.data.fromServer == "True") ? document.getElementById("registerBtn").setAttribute("disabled", true) :  document.getElementById("registerBtn").removeAttribute("disabled");
+        (res.data.fromServer == "True") ? document.getElementById("usernameMessage").innerHTML = "Username already exists!" :  document.getElementById("usernameMessage").innerHTML = "";
+    });
+}
