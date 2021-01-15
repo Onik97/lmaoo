@@ -1,6 +1,6 @@
 <?php include_once(__DIR__ . "/../../includes/autoloader.inc.php");
 
-$featureController = new featureController();
+$featureController = new FeatureController();
 if($_POST['function'] == "loadFeatures")
 {
     echo json_encode($featureController->loadFeatures($_POST['projectId']));
