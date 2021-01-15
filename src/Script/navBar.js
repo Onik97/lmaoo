@@ -22,7 +22,7 @@ function searchBar()
             (response.data == true) ? window.location.href = `../Ticket/index.php?ticketId=${searchbarText}` : $("#searchBarInput").addClass('is-invalid'));
 }
 
-function darkModeToggleValidator() // Sometimes toggle can be on but dark mode is not on 
+function darkModeToggleValidator() // Sometimes toggle can be on but dark mode is not 
 {
     let darkModeSwitch = $("#darkModeSwitch");
 
