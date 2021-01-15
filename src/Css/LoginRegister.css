@@ -25,6 +25,10 @@
 	border: none;
 }
 
+#validateMessage, #usernameMessage {
+	color: red;
+}
+
 .darkmode--activated .row.no-gutters {
 	background-color: #000;
 }
