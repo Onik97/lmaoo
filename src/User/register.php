@@ -38,7 +38,7 @@
                   <input type="password" class="form-control" name="password2" placeholder="Confirm password" id="password2Register" required>
                 </div>
                 <input type="hidden" name="function" value="register">
-                <button type="submit" value="Submit" class="btn btn-success btn-block">Register</button>
+                <button id="registerBtn" type="submit" value="Submit" class="btn btn-success btn-block">Register</button>
                 <small id="validateMessage" hidden></small>
                 <div class="form-group mt-3">
                   <a class="register" href="../User/index.php">Already Registered? Login here!</a>
