@@ -1,0 +1,33 @@
+<?php include_once(__DIR__ . "/../../includes/autoloader.inc.php");
+
+$projectController = new ProjectController();
+
+if (isset($_POST['projectId']) && isset($_POST['progress']))
+{
+    Validator::validateDeveloper();
+    echo json_encode($projectController->getTicketListWithProgress($_POST['projectId'], $_POST['progress']));
+}
+else if($_POST['function'] == "loadProjects")
+{
+    Validator::validateDeveloper();
+    echo json_encode($projectController->getProjectList());
+}
+else if($_POST['function'] == "createProject")
+{
+    Validator::validateManager();
+    $projectController->createNewProject($_POST['projectName'], $_POST['projectStatus']);
+}
+else if($_POST['function'] == "createTicket")
+{
+    Validator::validateDeveloper();
+    $projectController->createNewTicket($_POST['projectId'], $_POST['summary'], $_POST['reporterKey']);
+}
+else if ($_POST['function'] == "checkProjectExistance")
+{
+    Validator::validateDeveloper();
+    echo $projectController->projectExistance($_POST['name']);
+}
+else 
+{
+    Library::notFoundMessage();
+}

@@ -1,0 +1,7 @@
+RewriteEngine On
+ErrorDocument 404 /lmaoo/includes/notFound.php
+ErrorDocument 403 /lmaoo/includes/forbidden.php
+RedirectMatch 403 /\..*$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+Options -Indexes

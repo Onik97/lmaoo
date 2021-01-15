@@ -1,0 +1,154 @@
+/* SIDEBAR */
+
+#sidebar {
+	height: 100vh;
+    width: 350px;
+    background: rgb(229, 241, 216);
+    color: #000;
+	transition: all 0.3s;
+}
+
+.darkmode--activated #sidebar {
+	background: rgba(105, 105, 105, 0.24);
+}
+
+#sidebar .sidebar-header {
+	padding: 20px;
+	background: rgb(213, 229, 187);
+}
+
+.darkmode--activated #sidebar .sidebar-header {
+	background: rgba(105, 105, 105, 0.24);
+}
+
+#sidebar ul {
+    color: #000;
+	padding: 10px;
+	border: none;
+	background: none;
+}
+
+#sidebar ul li {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar ul li:hover {
+    color: #000;
+	background: rgb(172, 205, 122);
+	cursor: pointer;
+}
+
+.darkmode--activated #sidebar ul li:hover {
+	background: rgb(75, 75, 75);
+	color: white;
+}
+
+#sidebar ul li:active {
+    color: rgb(172, 205, 122);
+    background: #fff;
+}
+
+#sidebar ul div {
+	padding: 10px;
+    font-size: 1.1em;
+	display: block;
+	width: 350px;
+}
+
+#listOfFeatures {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#listOfFeatures li {
+	flex: 0 50%;
+}
+
+.status {
+	border-radius: 10px;
+	text-align: center;
+}
+
+.status:hover {
+	background: rgb(229, 241, 216);
+}
+
+/* MAIN CONTENT: TICKETS SECTION */
+
+.content {
+    width: 100%;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+#ticketMessage {
+	padding: 24px;
+	background: rgb(247,250,243);
+}
+
+.darkmode--activated #ticketMessage {
+	background: rgba(105, 105, 105, 0.24);
+}
+
+#ticketDiv {
+	padding: 10px;
+}
+
+.table {
+	width: 100%;
+}
+
+th, td {
+	padding-right: 10px;
+  }
+
+.col1 {
+width: 10%;
+padding-left: 20px;
+}
+
+.col2 {
+width: 45%;
+}
+
+.col3 {
+width: 25%;
+}
+
+.col4 {
+width: 10%;
+}
+
+.tableHead {
+position: absolute;
+width: 100%;
+top: 0;
+left: 0;
+}
+
+.tableBody {
+max-height: 585px;
+overflow: auto;
+}
+
+.table th {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 18px;
+color: #fff;
+line-height: 1.4;
+background-color:rgb(172, 205, 122);
+}
+
+.darkmode--activated .table th {
+	background-color:rgba(105, 105, 105, 0.24);
+	color: #fff;
+}
+
+.table td {
+font-family: Arial, Helvetica, sans-serif;
+font-size: 15px;
+color: #000;
+line-height: 1.4;
+}

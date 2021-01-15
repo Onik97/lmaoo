@@ -1,0 +1,159 @@
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+.owner-role {
+    display: inline-block;
+    color: #fff;
+    background-color: #14b81f;
+    font-size: 12px;
+    line-height: 20px;
+    padding: 0 7px;
+    border: 1px solid;
+    border-radius: 100px;
+    font-weight: 400;
+    margin-left: 25px;
+}
+
+.manager-role {
+    display: inline-block;
+    color: #fff;
+    background-color: #de0d0d;
+    font-size: 12px;
+    line-height: 20px;
+    padding: 0 7px;
+    border: 1px solid;
+    border-radius: 100px;
+    font-weight: 400;
+    margin-left: 25px;
+}
+
+.project-info {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: left;
+}
+
+.darkmode--activated .project-info {
+    color: #fff;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: left;
+    padding: 10px;
+}
+
+.project-status {
+    margin-left: 25px;
+    display: inline-block;
+    color: #4a4a4a;
+    font-size: 12px;
+    line-height: 20px;
+    padding: 0 7px;
+    border: 1px solid #4a4a4a;
+    border-radius: 100px;
+    font-weight: 400;
+}
+
+.darkmode--activated .project-status {
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.btn-warning {
+    margin-left: 25px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 0;
+}
+
+.btn-group {
+    position: absolute;
+    right: 0;
+}
+
+.btn-light {
+    display: inline-block;
+    font-size: 12px;
+    line-height: 20px;
+    padding: 0 7px;
+    font-weight: 400;
+    color: #4a4a4a;
+    margin-right: 40px;
+}
+
+.darkmode--activated .btn-light {
+    background-color: #4a4a4a;
+    color: #fff;
+}
+
+.role {
+    cursor: pointer;
+}
+
+.darkmode--activated .role {
+    background-color: #4a4a4a;
+    color: #fff;
+}
+
+.darkmode--activated .roles.show {
+    background-color: #4a4a4a;
+}
+
+.role:hover {
+    background-color: #28a745;
+}
+
+hr {
+    margin: 0;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+.search-input .autocom-box {
+    padding: 10px 8px;
+    max-height: 280px;
+}
+
+.autocom-box li {
+    list-style: none;
+    padding: 8px 12px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.darkmode--activated .autocom-box li {
+    color: #fff;
+}
+
+.autocom-box li:hover {
+    background: rgb(247, 193, 68);
+    cursor: pointer;
+}
+
+.darkmode--activated .autocom-box li:hover {
+    background: rgba(126, 126, 126, 0.24);
+}
+
+.fas {
+    position: absolute;
+    top: 25px;
+    right: 12px;
+    color: #4a4a4a;
+}
+
+.darkmode--activated .list-group-item {
+    background-color: rgba(126, 126, 126, 0.24);
+    color: #fff;
+}

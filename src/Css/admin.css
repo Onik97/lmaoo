@@ -1,0 +1,11 @@
+#resetPasswordTableBtn, #updateUserLevel {
+    margin-left: 10px;
+}
+
+#admin-modal-header {
+    text-align: center;
+}
+
+#userLevelSelecter {
+    margin-left: 175px;
+}
