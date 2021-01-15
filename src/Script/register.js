@@ -1,13 +1,8 @@
 function registerValidation()
 {
     var form = document.forms["registerForm"];
-    let username = form.username.value
     let password1 = form.password1.value
     let password2 = form.password2.value
-
-    var data = new FormData();
-    data.append('function', "checkUsername");
-    data.append('username', username);
 
     const numberValidator = /\d/;
     const specialValidator = /^[A-Za-z0-9 ]+$/;
