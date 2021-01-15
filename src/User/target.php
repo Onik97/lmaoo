@@ -17,7 +17,7 @@ else if ($function == "register")
 	}
 	else
 	{
-		$userController->register($_POST['forename'], $_POST['surname'], $_POST['username'], $_POST['password']);
+		$userController->register($_POST['forename'], $_POST['surname'], $_POST['username'], $_POST['password1']);
 	}
 }
 else if ($function == 'update')
@@ -27,7 +27,7 @@ else if ($function == 'update')
 }
 else if ($function == "checkUsername")
 {
-	Validator::validateManager();
+	$json = new stdClass();
 	if ($userController->hasDup(null))
 	{
 		$json->fromServer = "True";
