@@ -50,7 +50,7 @@
       </div>
 
       <?php include("../../includes/scripts.php"); ?>
-      <script src="../Script/User/passwordchecker.js"></script>
+      <script src="../Script/register.js"></script>
 </body>
 
 </html>
