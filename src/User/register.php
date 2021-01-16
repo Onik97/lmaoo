@@ -15,7 +15,7 @@
       <div class="card">
         <div class="row no-gutters">
           <div class="col-md-6">
-            <img id="otal_logo" src="../Images/otal_logo.png">
+            <img id="otal_logo" src="../Images/otal_light.png">
           </div>
           <div class="col-md-6 text-center">
             <div class="card-body">
