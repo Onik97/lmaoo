@@ -20,7 +20,7 @@ class UserController
 		$stmt = $pdo->prepare("UPDATE user SET forename = ?, surname = ?, username = ? WHERE userId = ?");
 		$stmt->execute([$forename, $surname, $username, $userId]);
 
-		$userLoggedIn = $_SESSION["userLoggedIn"];
+		$userLoggedIn = unserialize($_SESSION["userLoggedIn"]);
 		$userLoggedIn->setForename($forename);
 		$userLoggedIn->setSurname($surname);
 		$userLoggedIn->setUsername($username);
