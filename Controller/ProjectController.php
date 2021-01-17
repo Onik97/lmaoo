@@ -45,8 +45,7 @@ class ProjectController
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT DISTINCT p.projectId, p.name, p.owner FROM projectAccess pa 
                                INNER JOIN project p ON pa.projectId = p.projectId 
-                               WHERE pa.allowAccess = 1 AND pa.userId = ? 
-                               OR p.owner = ?");
+                               WHERE pa.allowAccess = 1 AND pa.userId = ? OR p.owner = ?");
         $stmt->execute([unserialize($userLoggedIn)->getId(), unserialize($userLoggedIn)->getId()]);
         return $stmt->fetchAll();
     }
