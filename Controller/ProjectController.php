@@ -39,6 +39,17 @@ class ProjectController
         return $stmt->fetchAll();
     }
 
+    public function getAccessibleProjectList($userLoggedIn)
+    {
+        $pdo = Library::logindb();
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("SELECT DISTINCT p.projectId, p.name, p.owner FROM projectAccess pa 
+                               INNER JOIN project p ON pa.projectId = p.projectId 
+                               WHERE pa.allowAccess = 1 AND pa.userId = ? OR p.owner = ?");
+        $stmt->execute([unserialize($userLoggedIn)->getId(), unserialize($userLoggedIn)->getId()]);
+        return $stmt->fetchAll();
+    }
+
     public function getTicketListWithProgress($featureId, $progress)
     {
         $sql = "SELECT ticket.ticketId, ticket.summary, ticket.progress, user.forename, user.surname 
@@ -59,7 +70,7 @@ class ProjectController
     {
         if ($userLoggedIn == null) return; 
         $projectController = new projectController();
-        $projects = $projectController->getProjectList();
+        $projects = $projectController->getAccessibleProjectList($userLoggedIn);
 
         echo "<li class='nav-item dropdown'>";
         echo "<a id='projectNav' href='#' class='nav-link dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Project<span class='caret'></span></a>";
