@@ -68,6 +68,11 @@ else if($function == "loadSummary")
     Validator::validateDeveloper();
     echo $ticketController->loadSummary($_POST['ticketId']);
 }
+else if ($function == "loadProgress")
+{
+    Validator::validateDeveloper();
+    echo $ticketController->loadProgress($_POST['ticketId']);
+}
 else 
 {
     Library::notFoundMessage();
