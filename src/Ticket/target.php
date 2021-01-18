@@ -73,6 +73,11 @@ else if ($function == "loadProgress")
     Validator::validateDeveloper();
     echo $ticketController->loadProgress($_POST['ticketId']);
 }
+else if ($function == "changeProgress")
+{
+    Validator::validateDeveloper();
+    echo $ticketController->changeProgress($_POST['progress'], $_POST['ticketId']);
+}
 else 
 {
     Library::notFoundMessage();

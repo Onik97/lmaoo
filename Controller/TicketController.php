@@ -132,6 +132,15 @@ class TicketController
         $stmt->execute([$ticketId]);
         return $stmt->fetchColumn();
     }
+
+    public function changeProgress($progress, $ticketId)
+    {
+        $pdo = Library::logindb();
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("UPDATE ticket SET progress = ? WHERE ticketId = ?");
+        $stmt->execute([$progress, $ticketId]);
+    }
+
     public static function loadSearchBar($userLoggedIn) 
     {
         if ($userLoggedIn == null) return;

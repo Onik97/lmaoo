@@ -31,4 +31,31 @@ function loadProgress()
     });
 }
 
+function changeProgress()
+{
+    var ticketId = new URL(window.location.href).searchParams.get("ticketId");
+    var currentProgress = $("#ticketProgress").html();
+    var progress = "";
+
+    switch(currentProgress)
+    {
+        case "Open": progress = "In Progress"; break;
+        case "In Progress": progress = "In Automation"; break;
+        case "In Automation": progress = "Complete"; break;
+        case "Complete": progress = "Open"; break;
+    }
+
+    var data = new FormData();
+    data.append("function", "changeProgress");
+    data.append("ticketId", ticketId);
+    data.append("progress", progress)
+
+    axios.post('../Ticket/target.php', data)
+    .then((res) => 
+    { 
+        $("#ticketSummaryHeader").html(res.data); 
+        overHang("success", `Status change to '${progress}' successfully!`); 
+        loadProgress();
+        loadDates();
+    });
 }
