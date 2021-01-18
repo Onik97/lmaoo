@@ -1,4 +1,4 @@
-$(document).ready(() => loadSummary());
+$(document).ready(() => { loadSummary(); loadProgress(); })
 
 function loadSummary()
 {
