@@ -51,9 +51,8 @@ function changeProgress()
     data.append("progress", progress)
 
     axios.post('../Ticket/target.php', data)
-    .then((res) => 
+    .then(()=> 
     { 
-        $("#ticketSummaryHeader").html(res.data); 
         overHang("success", `Status change to '${progress}' successfully!`); 
         loadProgress();
         loadDates();
