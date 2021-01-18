@@ -115,6 +115,15 @@ class TicketController
         return $stmt->fetchAll();
     }
 
+    public function loadSummary($ticketId)
+    {
+        $pdo = Library::logindb();
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("SELECT summary from ticket WHERE ticketId = ?");
+        $stmt->execute([$ticketId]);
+        return $stmt->fetchColumn();
+    }
+
     public static function loadSearchBar($userLoggedIn) 
     {
         if ($userLoggedIn == null) return;
