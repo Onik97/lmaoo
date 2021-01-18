@@ -52,8 +52,7 @@
 
 #ticketDates {
 	width: 200px;
-	height: 300px;
-	text-align: centre;
+	height: 220px;
 } 
 
 #dates1, #dates2 {
@@ -141,7 +140,7 @@
 	border-radius: 50px;
 }
 
-#ticketPeopleChooseAssignee, #ticketPeopleSelfAssignee {
+#ticketPeopleChooseAssignee, #ticketPeopleSelfAssignee, #changeProgressBtn {
 	float: right;
 	background-color: rgb(230, 230, 230);
 }
