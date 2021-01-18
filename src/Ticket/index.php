@@ -20,6 +20,10 @@
 		<div id="info" class="col-sm-12 col-md-3">
 			<div id="ticketPeople" class="p-4 mx-auto"> <?php include("people.php"); ?> </div>
 			<div id="ticketDates" class=" p-4"> <?php include("dates.php"); ?> </div>
+			<div class="p-4">
+				<label>Ticket Status: <span id="ticketProgress"></span></label>
+				<button id="changeProgressBtn" class="btn btn-sm" onclick="changeProgress()"></button>
+			</div>
 		</div>
 
 		<div id="main" class="col-sm-12 col-md-9">
