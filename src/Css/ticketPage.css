@@ -154,3 +154,8 @@
 {
 	padding-top: 65px;
 }
+
+#ticketSummaryHeader {
+	padding: 10px;
+	text-align: center;
+}
