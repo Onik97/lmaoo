@@ -63,6 +63,21 @@ else if ($function == "updateTicketTime")
     Validator::validateDeveloper();
     $ticketController->updateTicketTime($_POST["ticketId"]);
 }
+else if($function == "loadSummary")
+{
+    Validator::validateDeveloper();
+    echo $ticketController->loadSummary($_POST['ticketId']);
+}
+else if ($function == "loadProgress")
+{
+    Validator::validateDeveloper();
+    echo $ticketController->loadProgress($_POST['ticketId']);
+}
+else if ($function == "changeProgress")
+{
+    Validator::validateDeveloper();
+    echo $ticketController->changeProgress($_POST['progress'], $_POST['ticketId']);
+}
 else 
 {
     Library::notFoundMessage();

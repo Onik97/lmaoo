@@ -1,14 +1,11 @@
-$(document).ready(function() 
-{
-  loadActiveUsers();
-});
+$(document).ready(() => loadActiveUsers());
 
 function activeSelect()
 {
     let selectValue = $("#adminSelect").val();
 
-    if (selectValue == "Active")loadActiveUsers();
-    if (selectValue == "inActive")loadInActiveUsers();
+    if (selectValue == "Active") loadActiveUsers();
+    if (selectValue == "inActive") loadInActiveUsers();
     else return;
 }
 
@@ -105,7 +102,6 @@ function activateUser(userIdSelected)
         loadActiveUsers();
     })
 }
-
 
 function deactivateUserPrompt(userIdSelected)
 {
