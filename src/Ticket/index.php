@@ -23,7 +23,7 @@
 		</div>
 
 		<div id="main" class="col-sm-12 col-md-9">
-			<h1>Ticket name: </h1>
+			<h1 id="ticketSummaryHeader"></h1>
 
 			<div class="row no-gutters mt-3">
 				<div id="ticketCreate"> <?php include("createComment.php"); ?></div>
@@ -58,9 +58,10 @@
 	<?php include("../../includes/scripts.php"); ?>
 	<?php include("../../includes/editUserModal.php"); ?>
 	<?php include("ticketModal.php"); ?>
-	<script src="../Script/peopleController.js"></script>
+	<script type="text/javascript" src="../Script/peopleController.js"></script>
 	<script type="text/javascript" src="../Script/commentController.js"></script>
 	<script type="text/javascript" src="../Script/dateController.js"></script>
+	<script type="text/javascript" src="../Script/ticketController.js"></script>
 </body>
 
 </html>
