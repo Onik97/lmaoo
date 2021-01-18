@@ -11,7 +11,7 @@ class Library
 		}
 		catch(PDOException $e)
 		{
-			die("ERROR ID: 101");
+			die("ERROR ID: 102");
 		}
 		return $pdo;
     }
