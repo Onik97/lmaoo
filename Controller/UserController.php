@@ -20,12 +20,12 @@ class UserController
 		$stmt = $pdo->prepare("UPDATE user SET forename = ?, surname = ?, username = ? WHERE userId = ?");
 		$stmt->execute([$forename, $surname, $username, $userId]);
 
-		$userLoggedIn = $_SESSION["userLoggedIn"];
+		$userLoggedIn = unserialize($_SESSION["userLoggedIn"]);
 		$userLoggedIn->setForename($forename);
 		$userLoggedIn->setSurname($surname);
 		$userLoggedIn->setUsername($username);
-		$_SESSION['message'] = 'Your User Details has been updated';
-		header("Location: ../Home/index.php");
+		$_SESSION['userLoggedIn'] = serialize($userLoggedIn);
+		Library::redirectWithMessage("Your User Details has been updated", "../Home/index.php"); 
 	}
 
 	public function userInfoById($userId) // Should be used for Unit Testing and Admin Only!

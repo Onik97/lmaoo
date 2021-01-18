@@ -4,7 +4,7 @@
 </div>
 
 <div class='text-center'>
-        <h1>List of developer who worked on this Project</h1>
+        <h1>List of developers who worked on this Project</h1>
 </div>
 
 <div id='devInfo' class='container'>
@@ -13,7 +13,7 @@
         <img class="card-img-top" src="../Images/OnikNoor.jpg" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">Onik</h5>
-            <p class="card-text">Project Lead & Back-end Lead</p>
+            <p class="card-text">Project, Back-end & API Lead</p>
         </div>
         <div class="card-footer">
             <small class="text-muted">Started project 1 year ago</small>
@@ -21,7 +21,7 @@
     </div>
 
     <div class="card">
-        <img class="card-img-top" src="../Images/profilePictures/avatar.jpg" alt="Card image cap">
+        <img class="card-img-top" src="../Images/TufanButuner.png" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">Tufan</h5>
             <p class="card-text">UX Lead</p>
