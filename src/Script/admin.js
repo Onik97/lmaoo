@@ -81,7 +81,6 @@ function activateUserPrompt(userIdSelected)
     $("#admin-modal-title").html("Edit User Info"); 
     let adminEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
     let adminSelectLabel = $("<label>").html("Are you sure you want to activate this user?");
-    
     let adminlabel = $("<p>").html("Please confirm this action")
 
     $("#admin-modal-header").append(adminlabel);
@@ -185,7 +184,6 @@ function updateUserLevelPrompt(userIdSelected)
     let adminSelectoption3 = $("<option>").val(3).html('Admin');
     let adminSelectoption4 = $("<option>").val(4).html('Super User');
 
-    $(adminEditDiv).append(adminSelectLabel);
     $("#admin-modal-header").append(adminSelectLabel);
     $(adminSelecter).append(adminSelectoption1, adminSelectoption2, adminSelectoption3, adminSelectoption4);
 
