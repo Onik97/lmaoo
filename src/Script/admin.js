@@ -35,6 +35,7 @@ function loadActiveUsers()
            $(cell3).append(document.createTextNode(json[i].forename));
            $(cell4).append(document.createTextNode(json[i].surname));
            $(cell5).append(document.createTextNode(json[i].level));
+           $(cell6).append($("<button>", { id : "editUser" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `editUserPrompt(${json[i].userId})`}).html("Edit User"));
            $(cell6).append($("<button>", { id : "deactivateUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `deactivateUserPrompt(${json[i].userId})`}).html("Deactivate User"));
        }
    })
@@ -67,6 +68,7 @@ function loadInActiveUsers()
            $(cell3).append(document.createTextNode(json[i].forename));
            $(cell4).append(document.createTextNode(json[i].surname));
            $(cell5).append(document.createTextNode(json[i].level));
+           $(cell6).append($("<button>", { id : "editUser" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `editUserPrompt(${json[i].userId})`}).html("Edit User"));
            $(cell6).append($("<button>", { id : "activateUserBtn" , "data-toggle" : "modal" , "data-target" : "#admin-modal" , onclick : `activateUserPrompt(${json[i].userId})`}).html("Activate User"));
        }
    })
