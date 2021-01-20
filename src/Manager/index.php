@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <p id="navBarActive" hidden>managerPage</p>
     <?php include("../../includes/head.php"); ?> 
     <link rel="stylesheet" type="text/css" href="../Css/managerPage.css"/>
     <title>Manager</title>
