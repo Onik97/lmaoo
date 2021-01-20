@@ -5,13 +5,13 @@ $(document).ready(function()
 
 function loadFeatures()
 {
+    $("#listOfFeatures").find("li:gt(0)").remove();
     var projectId = new URL(window.location.href).searchParams.get("projectId");
     loadFeaturesFromServer(projectId)
     .then(response =>
     {
 
         if (userLevel >= 3) $("#listOfFeatures").append($("<div>", { id : "createFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" , onclick : "createFeaturePrompt()"}).html(" + Create Feature"));
-        $("#listOfFeatures").find("li:gt(0)").remove();
 
         var json = response.data;
         for (i = 0; i < json.length; i++)
@@ -90,6 +90,7 @@ function createFeature()
     .then(() => 
     {
         overHang("success", "Feature has been successfully created!");
+        $("#listOfFeatures").children().remove();
         loadFeatures();
         $('#featureModal').modal('hide');
     })
