@@ -210,3 +210,36 @@ function updateUserLevel(userIdSelected)
         loadActiveUsers();
     })
 }
+
+function editUserPrompt(userIdSelected)
+{
+    $("#admin-modal-header").children().remove()
+    $('#admin-modal-footer').children().remove()
+
+    $("#admin-modal-title").html("Update User");
+
+    let adminSelectLabel = $("<label>").html("Please select what you would like to edit");
+    let adminEditDiv = $("<div>", {class : "form-group modal-content-1"});
+    let adminSelecter = $("<select>", { id : 'editUserSelecter'});
+    let adminSelectoption1 = $("<option>").val(1).html('Please select a option');
+    let adminSelectoption2 = $("<option>").val(2).html('Update User Level');
+    let adminSelectoption3 = $("<option>").val(3).html('Edit Password (wip)');
+    let adminSelectoption4 = $("<option>").val(4).html('Reset Password');
+
+    $("#admin-modal-header").append(adminSelectLabel);
+
+    $(adminEditDiv).append(adminSelecter);
+    $(adminSelecter).append(adminSelectoption1, adminSelectoption2, adminSelectoption3, adminSelectoption4);
+
+    $("#admin-modal-body").html("").append(adminEditDiv);
+
+    $('#editUserSelecter').on('change',(event) => {
+
+
+        (event.target.value == 1) ? $('#admin-modal-footer').children().remove()
+        : (event.target.value == 2) ? $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "updateUserBtn1", onclick : `updateUserLevelPrompt(${userIdSelected})`}).html("Update User"))
+        : (event.target.value == 3) ? $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "updateUserBtn2", onclick : `editPasswordPrompt(${userIdSelected})`}).html("Edit Password (wip)"))
+        : (event.target.value == 4) ? $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "updateUserBtn3", onclick : `passwordResetPrompt(${userIdSelected})`}).html("Reset Password"))
+        : null;
+    });
+}
