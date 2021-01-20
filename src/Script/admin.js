@@ -76,6 +76,8 @@ function loadInActiveUsers()
 
 function activateUserPrompt(userIdSelected)
 {
+    $("#admin-modal-header").children().remove()
+
     $("#admin-modal-title").html("Edit User Info"); 
     let adminEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
     let adminSelectLabel = $("<label>").html("Are you sure you want to activate this user?");
@@ -107,6 +109,8 @@ function activateUser(userIdSelected)
 
 function deactivateUserPrompt(userIdSelected)
 {
+    $("#admin-modal-header").children().remove()
+
     $("#admin-modal-title").html("Edit User Info"); 
     let adminEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
     let adminSelectLabel = $("<label>").html("Are you sure you want to deactivate this user?");
@@ -137,6 +141,8 @@ function deactivateUser(userIdSelected)
 
 function passwordResetPrompt(userIdSelected)
 {
+    $("#admin-modal-header").children().remove()
+
     $("#admin-modal-title").html("Password Reset"); 
     let adminEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
     let adminSelectLabel = $("<label>").html("Are you sure you want to reset your password?");
@@ -167,6 +173,8 @@ function resetPassword(userIdSelected)
 
 function updateUserLevelPrompt(userIdSelected)
 {
+    $("#admin-modal-header").children().remove()
+
     $("#admin-modal-title").html("Update User Level");
 
     let adminSelectLabel = $("<label>").html("Please select a level for the user");
