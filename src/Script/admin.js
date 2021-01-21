@@ -99,6 +99,7 @@ function activateUser(userIdSelected)
     {
         overHang("success", "User has been activated");
         $('#admin-modal').modal('hide');
+        $("#adminSelect").val('Active').trigger('change');
         loadActiveUsers();
     })
 }
@@ -126,6 +127,7 @@ function deactivateUser(userIdSelected)
     {
         overHang("success", "User has been deactivated");
         $('#admin-modal').modal('hide');
+        $("#adminSelect").val('Active').trigger('change');
         loadActiveUsers();
     })
 }
