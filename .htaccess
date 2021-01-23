@@ -5,3 +5,7 @@ RedirectMatch 403 /\..*$
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
 Options -Indexes
+
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$">
+Header set Cache-Control "max-age=86400, public"
+</FilesMatch>
