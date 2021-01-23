@@ -58,3 +58,27 @@ function changeProgress()
         loadDates();
     });
 }
+
+$("#ticketSummaryHeader").click(function() 
+{
+    $('#ticketSummaryHeader').summernote(
+    {
+        focus: true,
+        toolbar: false,
+        height: 50,
+        popover:
+        {
+          image: [],
+          link: [],
+          air: [],
+        }
+    });
+    $('.note-statusbar').hide(); // Hides adjustable height
+    $('#ticketSummaryHeader').on('summernote.keydown', (we, e) => 
+    {
+        if(e.shiftKey && e.keyCode == 13) saveSummary(e, "#ticketSummaryHeader");
+        else if(e.keyCode == 13) e.preventDefault(); // Prevents new line to be made
+    })
+});
+
+}
