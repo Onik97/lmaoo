@@ -81,4 +81,33 @@ $("#ticketSummaryHeader").click(function()
     })
 });
 
+function saveSummary(e, summarySummerNote)
+{
+    var summary = $(summarySummerNote).summernote('code');
+    var summaryStripped = summary.replace(/<[^>]*>?/gm, "");
+    var ticketId = new URL(window.location.href).searchParams.get("ticketId");
+
+    if ($(summarySummerNote).summernote("isEmpty") || summaryStripped.trim().length == 0)
+    {
+      overHang("error", "Summary must be entered!"); e.preventDefault();
+    }
+    else if (summary.length > 30)
+    {
+      overHang("error", "Summary too large!"); e.preventDefault();
+    }
+    else 
+    {
+        e.preventDefault();
+        var data = new FormData();
+        data.append("function", "saveSummary");
+        data.append("summary", summaryStripped.trim());
+        data.append("ticketId", ticketId);
+
+        axios.post("../Ticket/target.php", data)
+        .then(() =>
+        {
+            overHang("success", "Summary has been saved");
+            $(summarySummerNote).summernote("destroy");
+        })
+    }
 }
