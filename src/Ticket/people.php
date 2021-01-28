@@ -10,7 +10,9 @@
     <h6>Assignee: </h6>
         <label id="assignee"></label>
         <p id="assigneeUserId" hidden></p>
+</div>
 
+<div class="assigneeBtn">
     <button id="ticketPeopleChooseAssignee" class="btn btn-sm" data-toggle="modal" data-target="#ticketPageModal" onclick="peoplePrompt()">Choose Assignee</button>
     <button id="ticketPeopleSelfAssignee"class="btn btn-sm" onclick="saveAssigneeAsYourself()">Assigned to myself</button>
 </div>
