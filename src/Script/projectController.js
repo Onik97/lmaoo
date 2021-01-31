@@ -121,6 +121,14 @@ function ticketValidation()
     data.append("function", "checkTicketExistance");
     data.append("ticketName", $.trim($("#summary").val()));
     data.append("featureId", $("#selectedFeatureId").html());
+    
+    if($("#summary").val().length >= 20)
+    {
+        $("#ticketValidationSmall").html("Project name too large!");
+        $("#ticketValidationSmall").addClass("text-danger");
+        $('#saveTicketBtn').prop('disabled', true);
+        return;
+    }
 
     if($("#summary").val() == null || $.trim($("#summary").val()) == "")  { $('#saveTicketBtn').prop('disabled', true); }
     else 
@@ -131,7 +139,7 @@ function ticketValidation()
             if(res.data)
             {
                 $("#summary").addClass("is-invalid");
-                $("#ticketValidationSmall").html("Feature name not available!");
+                $("#ticketValidationSmall").html("Ticket name not available!");
                 $("#ticketValidationSmall").addClass("text-danger");
                 $('#saveTicketBtn').prop('disabled', true);
             }
