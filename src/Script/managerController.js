@@ -230,7 +230,6 @@ function projectValidation()
     var data = new FormData();
     data.append("function", "checkProjectExistance");
     data.append("name", $.trim($("#projectName").val()));
-    //console.log("lol");
 
     if($("#projectName").val().length >= 20)
     {
