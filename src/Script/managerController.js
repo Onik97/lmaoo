@@ -208,7 +208,7 @@ function createProjectPrompt()
     let statusDiv = $("<div>", { "class": "form-group modal-content-2" });
     let statusLabel = $("<label>").html("Status:");
     let statusSelect = $("<select>", { id: "projectStatus", "class": "form-control", onchange: "projectValidation()" }).prop("required", true);
-    let ticketValidationSmall = $("<small>", { id: "projectValidationSmall" });
+    let projectValidationSmall = $("<small>", { id: "projectValidationSmall" });
     $(statusSelect).append($("<option>").val("0").text("").prop({ "selected": true, "disabled": true }));
     $(statusSelect).append($("<option>").val("Back-log").text("Back-log"));
     $(statusSelect).append($("<option>").val("Development").text("Development"));
@@ -217,7 +217,7 @@ function createProjectPrompt()
     $(statusSelect).append($("<option>").val("Released").text("Released"));
 
     $("#globalModalBody").append(statusDiv);
-    $("#globalModalBody").append(ticketValidationSmall);
+    $("#globalModalBody").append(projectValidationSmall);
     $(statusDiv).append(statusLabel);
     $(statusDiv).append(statusSelect);
 
@@ -230,6 +230,15 @@ function projectValidation()
     var data = new FormData();
     data.append("function", "checkProjectExistance");
     data.append("name", $.trim($("#projectName").val()));
+    //console.log("lol");
+
+    if($("#projectName").val().length >= 20)
+    {
+        $("#projectValidationSmall").html("Project name too large!");
+        $("#projectValidationSmall").addClass("text-danger");
+        $('#saveProjectBtn').prop('disabled', true);
+        return;
+    }
 
     if ($("#projectStatus").val() == null || $.trim($("#projectName").val()) == "") { $('#saveProjectBtn').prop('disabled', true); }
     else 
