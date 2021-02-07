@@ -65,10 +65,20 @@
 	flex: 0 100%;
 }
 
+#createFeatureBtn {
+	background: #fff;
+	color: #000;
+	cursor: pointer;
 }
 
+#createFeatureBtn:hover {
+	background: rgb(172, 205, 122);
+	color: #fff;
+	cursor: pointer;
 }
 
+.darkmode--activated #createFeatureBtn:hover {
+	background: #000;
 }
 
 /* MAIN CONTENT: TICKETS SECTION */
