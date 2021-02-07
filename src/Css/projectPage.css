@@ -22,14 +22,13 @@
 }
 
 #sidebar ul {
-    color: #000;
-	padding: 10px;
+	color: #000;
 	border: none;
 	background: none;
 }
 
 #sidebar ul li {
-    padding: 10px;
+	padding: 14px;
     font-size: 1.1em;
     display: block;
 }
@@ -63,16 +62,13 @@
 }
 
 #listOfFeatures li {
-	flex: 0 50%;
+	flex: 0 100%;
 }
 
-.status {
-	border-radius: 10px;
-	text-align: center;
 }
 
-.status:hover {
-	background: rgb(229, 241, 216);
+}
+
 }
 
 /* MAIN CONTENT: TICKETS SECTION */
