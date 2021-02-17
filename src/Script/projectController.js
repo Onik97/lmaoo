@@ -5,13 +5,13 @@ $(document).ready(function()
 
 function loadFeatures()
 {
+    $("#listOfFeatures").find("li:gt(0)").remove();
     var projectId = new URL(window.location.href).searchParams.get("projectId");
     loadFeaturesFromServer(projectId)
     .then(response =>
     {
 
         if (userLevel >= 3) $("#listOfFeatures").append($("<div>", { id : "createFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" , onclick : "createFeaturePrompt()"}).html(" + Create Feature"));
-        $("#listOfFeatures").find("li:gt(0)").remove();
 
         var json = response.data;
         for (i = 0; i < json.length; i++)
@@ -89,6 +89,7 @@ function createFeature()
     .then(() => 
     {
         overHang("success", "Feature has been successfully created!");
+        $("#listOfFeatures").children().remove();
         loadFeatures();
         $('#featureModal').modal('hide');
     })
@@ -119,6 +120,14 @@ function ticketValidation()
     data.append("function", "checkTicketExistance");
     data.append("ticketName", $.trim($("#summary").val()));
     data.append("featureId", $("#selectedFeatureId").html());
+    
+    if($("#summary").val().length >= 20)
+    {
+        $("#ticketValidationSmall").html("Project name too large!");
+        $("#ticketValidationSmall").addClass("text-danger");
+        $('#saveTicketBtn').prop('disabled', true);
+        return;
+    }
 
     if($("#summary").val() == null || $.trim($("#summary").val()) == "")  { $('#saveTicketBtn').prop('disabled', true); }
     else 
@@ -129,7 +138,7 @@ function ticketValidation()
             if(res.data)
             {
                 $("#summary").addClass("is-invalid");
-                $("#ticketValidationSmall").html("Feature name not available!");
+                $("#ticketValidationSmall").html("Ticket name not available!");
                 $("#ticketValidationSmall").addClass("text-danger");
                 $('#saveTicketBtn').prop('disabled', true);
             }

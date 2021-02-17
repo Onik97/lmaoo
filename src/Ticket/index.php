@@ -27,7 +27,9 @@
 		</div>
 
 		<div id="main" class="col-sm-12 col-md-9">
-			<h1 id="ticketSummaryHeader"></h1>
+			<div class="row no-gutters mt-3">
+				<div id="ticketHeader"><h1 id="ticketSummaryHeader"></h1></div>
+			</div>
 
 			<div class="row no-gutters mt-3">
 				<div id="ticketCreate"> <?php include("createComment.php"); ?></div>
