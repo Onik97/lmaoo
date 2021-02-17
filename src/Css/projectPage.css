@@ -158,3 +158,20 @@ font-size: 15px;
 color: #000;
 line-height: 1.4;
 }
+
+#ticketBtnDiv button {
+	width: 15%;
+	border: none;
+	border-radius: 10px;
+	font-size: 17px;
+	padding: 14px;
+	background-color: #629632;
+	color: #fff;
+	margin-left: auto;
+	float: right;
+}
+
+.darkmode--activated #ticketBtnDiv button {
+	color: #fff;
+	background-color: #000;
+}
