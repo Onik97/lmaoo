@@ -78,6 +78,11 @@ else if ($function == "changeProgress")
     Validator::validateDeveloper();
     echo $ticketController->changeProgress($_POST['progress'], $_POST['ticketId']);
 }
+else if ($function == "saveSummary")
+{
+    Validator::validateManager();
+    echo $ticketController->saveSummary($_POST['summary'], $_POST['ticketId']);
+}
 else 
 {
     Library::notFoundMessage();

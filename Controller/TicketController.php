@@ -141,6 +141,14 @@ class TicketController
         $stmt->execute([$progress, $ticketId]);
     }
 
+    public function saveSummary($summary, $ticketId)
+    {
+        $pdo = Library::logindb();
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("UPDATE ticket SET summary = ? WHERE ticketId = ?");
+        $stmt->execute([$summary, $ticketId]);
+    }
+
     public static function loadSearchBar($userLoggedIn) 
     {
         if ($userLoggedIn == null) return;
