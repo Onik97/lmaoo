@@ -1,4 +1,4 @@
-#resetPasswordTableBtn, #updateUserLevel {
+#editUser, #deactivateUserBtn, #activateUserBtn {
     margin-left: 10px;
 }
 

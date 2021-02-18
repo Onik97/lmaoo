@@ -41,6 +41,10 @@ h1 {
     color: #fff;
 }
 
+.darkmode--activated h3 {
+    color: #fff;
+}
+
 .user-info {
     display: flex;
     align-items: center;

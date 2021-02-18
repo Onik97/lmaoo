@@ -22,14 +22,13 @@
 }
 
 #sidebar ul {
-    color: #000;
-	padding: 10px;
+	color: #000;
 	border: none;
 	background: none;
 }
 
 #sidebar ul li {
-    padding: 10px;
+	padding: 14px;
     font-size: 1.1em;
     display: block;
 }
@@ -63,16 +62,23 @@
 }
 
 #listOfFeatures li {
-	flex: 0 50%;
+	flex: 0 100%;
 }
 
-.status {
-	border-radius: 10px;
-	text-align: center;
+#createFeatureBtn {
+	background: #fff;
+	color: #000;
+	cursor: pointer;
 }
 
-.status:hover {
-	background: rgb(229, 241, 216);
+#createFeatureBtn:hover {
+	background: rgb(172, 205, 122);
+	color: #fff;
+	cursor: pointer;
+}
+
+.darkmode--activated #createFeatureBtn:hover {
+	background: #000;
 }
 
 /* MAIN CONTENT: TICKETS SECTION */
@@ -151,4 +157,21 @@ font-family: Arial, Helvetica, sans-serif;
 font-size: 15px;
 color: #000;
 line-height: 1.4;
+}
+
+#ticketBtnDiv button {
+	width: 15%;
+	border: none;
+	border-radius: 10px;
+	font-size: 17px;
+	padding: 14px;
+	background-color: #629632;
+	color: #fff;
+	margin-left: auto;
+	float: right;
+}
+
+.darkmode--activated #ticketBtnDiv button {
+	color: #fff;
+	background-color: #000;
 }

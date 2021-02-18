@@ -44,3 +44,13 @@
     background-color: rgba(33, 33, 33, 0.99);
     color: #fff;
 }
+
+#footer {
+    margin-top: 100px;
+    background-color: rgb(33, 33, 33);
+}
+
+#copyright {
+    color: white;
+    padding: 25px;
+}
