@@ -59,13 +59,17 @@
 	float: left;
 }
 
-#ticketCreate, #ticketComments, #ticketDetails {
+#ticketCreate, #ticketComments, #ticketDetails, #ticketHeader {
 	padding: 0;
 	margin: auto;
 	width: 800px;
 	max-width: 1000px;
 	min-width: 150px;
 	text-align: left;
+}
+
+.darkmode--activated #ticketHeader {
+	color: #fff;
 }
 
 .darkmode--activated #comment-content > div, .darkmode--activated #notes-content > div {
