@@ -236,5 +236,9 @@ function editUserPrompt(userIdSelected)
 
     $('#editUserSelecter').on('change',(event) => {
 
+        if (event.target.value == 1) $('#admin-modal-footer').children().remove();
+         else if (event.target.value == 2) $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "updateUserBtn1", onclick : `updateUserLevelPrompt(${userIdSelected})`}).html("Update User"));
+            else if (event.target.value == 3) $("#admin-modal-footer").html("").append($("<button>", {class : "btn btn-danger", type : "text", id : "updateUserBtn3", onclick : `passwordResetPrompt(${userIdSelected})`}).html("Reset Password"));
+                else null;
     });
 }
