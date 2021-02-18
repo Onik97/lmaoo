@@ -230,7 +230,7 @@ function editUserPrompt(userIdSelected)
     $("#admin-modal-header").append(adminSelectLabel);
 
     $(adminEditDiv).append(adminSelecter);
-    $(adminSelecter).append(adminSelectoption1, adminSelectoption2, adminSelectoption3, adminSelectoption4);
+    $(adminSelecter).append(adminSelectoption1, adminSelectoption2, adminSelectoption3);
 
     $("#admin-modal-body").html("").append(adminEditDiv);
 
