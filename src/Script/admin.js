@@ -225,8 +225,7 @@ function editUserPrompt(userIdSelected)
     let adminSelecter = $("<select>", { id : 'editUserSelecter'});
     let adminSelectoption1 = $("<option>").val(1).html('Please select a option');
     let adminSelectoption2 = $("<option>").val(2).html('Update User Level');
-    let adminSelectoption3 = $("<option>").val(3).html('Edit Password (wip)');
-    let adminSelectoption4 = $("<option>").val(4).html('Reset Password');
+    let adminSelectoption3 = $("<option>").val(3).html('Reset Password');
 
     $("#admin-modal-header").append(adminSelectLabel);
 
