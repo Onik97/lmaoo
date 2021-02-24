@@ -7,7 +7,7 @@ export default class Validator {
 
     static validateSpecialCharacter(string) {
         let specialValidator = /^[A-Za-z0-9 ]+$/;
-        return specialValidator.test(string);
+        return !specialValidator.test(string);
     }
 
     static validateMinimumLength(string, length) {
