@@ -19,3 +19,16 @@ $("#registerForm").submit(function() {
     return error.length == 0 && $("#usernameMessage").html() == "" ? true : false;
 });
 
+$("#usernameRegister").keyup(async function() {
+    let usernameDuplication = await RegisterController.validateUsername($(this).val());
+
+    if(usernameDuplication.data.fromServer == "True") {
+        $("#usernameMessage").html("Username already exist!");
+        $("#registerBtn").prop("disabled", true);
+    }
+    else {
+        $("#usernameMessage").html("");
+        $("#registerBtn").prop("disabled", false);
+    }
+
+})
