@@ -20,7 +20,8 @@
           <div class="col-md-6 text-center">
             <div class="card-body">
               <h2 class="register-header">Sign up</h2>
-              <form name="registerForm" action="target.php" onSubmit="return registerValidation()" onkeyup="validateUsername()" method='POST'>
+              <!-- onSubmit="return registerValidation()" onkeyup="validateUsername()" -->
+              <form id="registerForm" name="registerForm" action="target.php"  method='POST'>
                 <div class="form-group">
                   <input type="text" class="form-control" name="forename" placeholder="First name" id="forenameRegister" required>
                 </div>
@@ -50,6 +51,7 @@
       </div>
 
       <?php include("../../includes/scripts.php"); ?>
+      <script type="module" src="../Script/src/register.js"></script>
       <script src="../Script/register.js"></script>
 </body>
 

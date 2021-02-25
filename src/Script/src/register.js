@@ -11,7 +11,7 @@ $("#registerForm").submit(function() {
     if (registerData.password1 != registerData.password2) error.push("Password does not match!");
     if (!Validator.validateMinimumLength(registerData.password1, 5)) error.push("Password must be at least 6 characters long");
     if (!Validator.validateNumber(registerData.password1)) error.push("Password must have a number");
-    if (!Validator.validateSpecialCharacter(registerData.password1)) error.push("Password must have a special character");
+    if (!zValidator.validateSpecialCharacter(registerData.password1)) error.push("Password must have a special character");
     
      $("#validateMessage").html(""); // clears to avoid duplicates
      error.forEach((e) => document.getElementById("validateMessage").innerHTML += `${e}<br>`);
