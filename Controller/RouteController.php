@@ -4,7 +4,10 @@ class RouteController
 {
     public static function Post($function, $userValidation = true, $callback)
     {
-        if ($userValidation == false) return;
+        if ($userValidation == false) 
+        {
+            http_response_code(403); echo "403"; return;
+        }
 
         if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["function"] == $function)
         {
