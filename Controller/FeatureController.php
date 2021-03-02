@@ -2,7 +2,7 @@
 
 class FeatureController
 {
-    public function loadFeatures($projectId)
+    public static function loadFeatures($projectId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -11,7 +11,7 @@ class FeatureController
         return $stmt->fetchAll();
     }
 
-    public function featureExistance($featureName, $projectId)
+    public static function featureExistance($featureName, $projectId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -21,7 +21,7 @@ class FeatureController
         return $stmt->rowCount() > 0 ? true : false;
     }
 
-    public function createFeature($featureName, $projectId)
+    public static function createFeature($featureName, $projectId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
