@@ -2,9 +2,10 @@
 
 try
 {
-    RouteController::Post("loadFeatures", Validator::validateManager(), FeatureController::loadFeatures($_POST['projectId']));
-    RouteController::Post("checkFeatureExistance", Validator::validateManager(), FeatureController::featureExistance($_POST['featureName'], $_POST['projectId']));
-    RouteController::Post("createFeature", Validator::validateManager(), FeatureController::createFeature($_POST['featureName'], $_POST['projectId']));
+    if (!Validator::validateUserLoggedIn()) { http_response_code(401); return; }
+    RouteController::Post("loadFeatures", Validator::validateDeveloper(), 'FeatureController::loadFeatures', [@$_POST['projectId']]);
+    RouteController::Post("checkFeatureExistance", Validator::validateDeveloper(), 'FeatureController::featureExistance', [@$_POST['featureName'], @$_POST['projectId']]);
+    RouteController::Post("createFeature", Validator::validateDeveloper(), 'FeatureController::createFeature', [@$_POST['projectId']]);
     Validator::ThrowNotFound();
 }
 catch(Throwable $e)
