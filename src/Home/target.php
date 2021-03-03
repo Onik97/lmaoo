@@ -3,8 +3,8 @@
 try
 {
     if (!Validator::validateUserLoggedIn()) { http_response_code(401); return; }
-    RouteController::Post("loadTicketsWithDeadline", Validator::validateDeveloper(), HomeController::loadTicketsWithDeadline());
-    RouteController::Post("loadOwnProjects", Validator::validateDeveloper(), HomeController::loadOwnProjects());
+    RouteController::Post("loadTicketsWithDeadline", Validator::validateDeveloper(), 'HomeController::loadTicketsWithDeadline', array());
+    RouteController::Post("loadOwnProjects", Validator::validateDeveloper(), 'HomeController::loadOwnProjects', array());
     Validator::ThrowNotFound();
 }
 catch(Throwable $e)
