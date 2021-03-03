@@ -9,7 +9,7 @@ class RouteController
             http_response_code(403); echo "403"; return;
         }
 
-        if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["function"] == $function)
+        if($_SERVER["REQUEST_METHOD"] == "POST" && @$_POST["function"] == $function)
         {
             echo json_encode(call_user_func_array($callback, $callbackParameters));
         }
