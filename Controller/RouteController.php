@@ -2,7 +2,7 @@
 
 class RouteController
 {
-    public static function Post($function, $userValidation = true, $callback)
+    public static function Post($function, $userValidation = true, $callback, array $callbackParameters)
     {
         if ($userValidation == false) 
         {
@@ -11,7 +11,7 @@ class RouteController
 
         if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["function"] == $function)
         {
-            echo json_encode($callback);
+            echo json_encode(call_user_func_array($callback, $callbackParameters));
         }
     }
 }
