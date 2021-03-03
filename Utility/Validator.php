@@ -4,8 +4,8 @@ class Validator
 {
     public static function validateUserLoggedIn()
     {
-        if(!isset($_SESSION['userLoggedIn'])) $_SESSION["userLoggedIn"] == null; // To remove notice error
-        return $_SESSION['userLoggedIn'] == null ? false : true;
+        if(!isset($_SESSION['userLoggedIn'])) @$_SESSION["userLoggedIn"] == null; // To remove notice error
+        return @$_SESSION['userLoggedIn'] == null ? false : true;
     }
 
     public static function validateDeveloper()
