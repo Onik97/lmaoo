@@ -18,6 +18,8 @@ function loadFeatures()
         {
             $("#listOfFeatures").append($("<li>", { value : json[i].featureId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress('Open');"}).html(json[i].name));
         }
+
+        if (userLevel >= 3) $("#listOfFeatures").append($("<div>", { id : "editFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" , onclick : "editFeaturePrompt()"}).html("Edit Feature"));
     })
 }
 
