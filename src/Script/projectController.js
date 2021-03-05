@@ -97,6 +97,40 @@ function createFeature()
     })
 }
 
+function editFeaturePrompt(id)
+{
+    let featureId = id
+    console.log(featureId)
+
+    $("#featureModalHead").html("Edit Feature");
+
+    $("#featureModalTitle").html("Activate Feature"); 
+    let featureEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
+    let featureSelectLabel = $("<label>").html("Are you sure you want to activate this feature?");
+
+    $("#featureModalBody").html("").append(featureEditDiv);
+    $(featureEditDiv).append(featureSelectLabel);
+
+    $("#featureModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "activateFeatureBtn", onclick : "activateFeature(featureId)"}).html("Save"));
+
+}
+
+function activateFeature(featureId)
+{
+    var data = new FormData();
+    data.append('function', "activateFeature");
+    data.append('featureId', featureId);
+
+    axios.post("../Feature/target.php", data)
+    .then(() => 
+    {
+        overHang("success", "Feature has been successfully activated!");
+        $("#listOfFeatures").children().remove();
+        loadFeatures();
+        $('#featureModal').modal('hide');
+    })
+}
+
 function createTicketPrompt(projectId)
 {
     $("#projectModalHead").html("Create Ticket");
