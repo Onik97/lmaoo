@@ -97,7 +97,7 @@ function createFeature()
     })
 }
 
-function editFeaturePrompt(id)
+function activateFeaturePrompt()
 {
     let featureId = id
     console.log(featureId)
