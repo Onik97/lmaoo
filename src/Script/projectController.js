@@ -146,6 +146,23 @@ function deactivateFeaturePrompt
     $("#featureModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "deactivateFeatureBtn", onclick : "deactivateFeature(featureId)"}).html("Save"));
 
 }
+
+function deactivateFeature(featureId)
+{
+    var data = new FormData();
+    data.append('function', "deactivateFeature");
+    data.append('featureId', featureId);
+
+    axios.post("../Feature/target.php", data)
+    .then(() => 
+    {
+        overHang("success", "Feature has been successfully deactivated!");
+        $("#listOfFeatures").children().remove();
+        loadFeatures();
+        $('#featureModal').modal('hide');
+    })
+}
+
 function createTicketPrompt(projectId)
 {
     $("#projectModalHead").html("Create Ticket");
