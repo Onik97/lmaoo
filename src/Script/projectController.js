@@ -99,8 +99,7 @@ function createFeature()
 
 function activateFeaturePrompt()
 {
-    let featureId = id
-    console.log(featureId)
+    let featureId = $("#selectedFeatureId").html();
 
     $("#featureModalHead").html("Edit Feature");
 
