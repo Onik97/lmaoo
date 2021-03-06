@@ -101,7 +101,7 @@ function activateFeaturePrompt()
 {
     let featureId = $("#selectedFeatureId").html();
 
-    $("#featureModalHead").html("Edit Feature");
+    $("#featureModalHead").html("Activate Feature");
 
     $("#featureModalTitle").html("Activate Feature"); 
     let featureEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
