@@ -130,6 +130,22 @@ function activateFeature(featureId)
     })
 }
 
+function deactivateFeaturePrompt
+{
+    let featureId = $("#selectedFeatureId").html();
+
+    $("#featureModalHead").html("Deactivate Feature");
+
+    $("#featureModalTitle").html("Activate Feature"); 
+    let featureEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
+    let featureSelectLabel = $("<label>").html("Are you sure you want to deactivate this feature?");
+
+    $("#featureModalBody").html("").append(featureEditDiv);
+    $(featureEditDiv).append(featureSelectLabel);
+
+    $("#featureModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "deactivateFeatureBtn", onclick : "deactivateFeature(featureId)"}).html("Save"));
+
+}
 function createTicketPrompt(projectId)
 {
     $("#projectModalHead").html("Create Ticket");
