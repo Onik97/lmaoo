@@ -5,11 +5,13 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title modal-title-custom ml-9 mr-auto text-white" id="featureModalHead"></h5>
+                <h5 class="modal-title modal-title-custom ml-9 mr-auto text-white" id="featureModalTitle"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
+            <div class="modal-head" id="featureModalHead"></div>
 
             <div class="modal-body" id="featureModalBody"></div>
 

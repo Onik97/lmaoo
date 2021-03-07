@@ -18,6 +18,8 @@ function loadFeatures()
         {
             $("#listOfFeatures").append($("<li>", { value : json[i].featureId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress('Open');"}).html(json[i].name));
         }
+
+        if (userLevel >= 3) $("#listOfFeatures").append($("<div>", { id : "editFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" , onclick : "activateFeaturePrompt()"}).html("Activate Feature"));
     })
 }
 
@@ -29,7 +31,7 @@ function getProjectName(name, id)
 
 function createFeaturePrompt()
 {
-    $("#featureModalHead").html("Create Feature");
+    $("#featureModalTitle").html("Create Feature");
 
     let featureNameDiv = $("<div>", {"class" : "form-group modal-content-1"});
     let featureNameLabel = $("<label>").html("Feature Name:");
@@ -89,6 +91,68 @@ function createFeature()
     .then(() => 
     {
         overHang("success", "Feature has been successfully created!");
+        $("#listOfFeatures").children().remove();
+        loadFeatures();
+        $('#featureModal').modal('hide');
+    })
+}
+
+function activateFeaturePrompt()
+{
+    let featureId = $("#selectedFeatureId").html();
+
+    $("#featureModalTitle").html("Activate Feature"); 
+    let featureEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
+    let featureSelectLabel = $("<label>").html("Are you sure you want to activate this feature?");
+
+    $("#featureModalBody").html("").append(featureEditDiv);
+    $(featureEditDiv).append(featureSelectLabel);
+
+    $("#featureModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "activateFeatureBtn", onclick : "activateFeature(featureId)"}).html("Save"));
+
+}
+
+function activateFeature(featureId)
+{
+    var data = new FormData();
+    data.append('function', "activateFeature");
+    data.append('featureId', featureId);
+
+    axios.post("../Feature/target.php", data)
+    .then(() => 
+    {
+        overHang("success", "Feature has been successfully activated!");
+        $("#listOfFeatures").children().remove();
+        loadFeatures();
+        $('#featureModal').modal('hide');
+    })
+}
+
+function deactivateFeaturePrompt()
+{
+    let featureId = $("#selectedFeatureId").html();
+
+    $("#featureModalTitle").html("Dectivate Feature"); 
+    let featureEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
+    let featureSelectLabel = $("<label>").html("Are you sure you want to deactivate this feature?");
+
+    $("#featureModalBody").html("").append(featureEditDiv);
+    $(featureEditDiv).append(featureSelectLabel);
+
+    $("#featureModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "deactivateFeatureBtn", onclick : "deactivateFeature(featureId)"}).html("Save"));
+
+}
+
+function deactivateFeature(featureId)
+{
+    var data = new FormData();
+    data.append('function', "deactivateFeature");
+    data.append('featureId', featureId);
+
+    axios.post("../Feature/target.php", data)
+    .then(() => 
+    {
+        overHang("success", "Feature has been successfully deactivated!");
         $("#listOfFeatures").children().remove();
         loadFeatures();
         $('#featureModal').modal('hide');

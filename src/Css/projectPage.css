@@ -65,19 +65,19 @@
 	flex: 0 100%;
 }
 
-#createFeatureBtn {
+#createFeatureBtn, #editFeatureBtn {
 	background: #fff;
 	color: #000;
 	cursor: pointer;
 }
 
-#createFeatureBtn:hover {
+#createFeatureBtn:hover, #editFeatureBtn:hover {
 	background: rgb(172, 205, 122);
 	color: #fff;
 	cursor: pointer;
 }
 
-.darkmode--activated #createFeatureBtn:hover {
+.darkmode--activated #createFeatureBtn:hover, #editFeatureBtn:hover {
 	background: #000;
 }
 
