@@ -31,7 +31,7 @@ function getProjectName(name, id)
 
 function createFeaturePrompt()
 {
-    $("#featureModalHead").html("Create Feature");
+    $("#featureModalTitle").html("Create Feature");
 
     let featureNameDiv = $("<div>", {"class" : "form-group modal-content-1"});
     let featureNameLabel = $("<label>").html("Feature Name:");
