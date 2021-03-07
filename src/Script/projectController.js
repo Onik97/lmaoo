@@ -132,7 +132,7 @@ function deactivateFeaturePrompt
 {
     let featureId = $("#selectedFeatureId").html();
 
-    $("#featureModalTitle").html("Activate Feature"); 
+    $("#featureModalTitle").html("Dectivate Feature"); 
     let featureEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
     let featureSelectLabel = $("<label>").html("Are you sure you want to deactivate this feature?");
 
