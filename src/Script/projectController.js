@@ -101,8 +101,6 @@ function activateFeaturePrompt()
 {
     let featureId = $("#selectedFeatureId").html();
 
-    $("#featureModalHead").html("Activate Feature");
-
     $("#featureModalTitle").html("Activate Feature"); 
     let featureEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
     let featureSelectLabel = $("<label>").html("Are you sure you want to activate this feature?");
@@ -133,8 +131,6 @@ function activateFeature(featureId)
 function deactivateFeaturePrompt
 {
     let featureId = $("#selectedFeatureId").html();
-
-    $("#featureModalHead").html("Deactivate Feature");
 
     $("#featureModalTitle").html("Activate Feature"); 
     let featureEditDiv = $("<div>", {"class" : "form-group modal-content-1"});
