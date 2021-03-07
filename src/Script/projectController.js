@@ -128,7 +128,7 @@ function activateFeature(featureId)
     })
 }
 
-function deactivateFeaturePrompt
+function deactivateFeaturePrompt()
 {
     let featureId = $("#selectedFeatureId").html();
 
