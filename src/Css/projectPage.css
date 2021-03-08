@@ -65,6 +65,18 @@
 	flex: 0 100%;
 }
 
+#listOfFeatures li::after {
+	font-family: "Font Awesome 5 Free";
+	font-weight: 300;
+	content: '\f044';
+	float: right;
+}
+
+#editIcon {
+	float: right;
+	margin-top: 4px;
+}
+
 #createFeatureBtn, #editFeatureBtn {
 	background: #fff;
 	color: #000;
