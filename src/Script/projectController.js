@@ -16,10 +16,12 @@ function loadFeatures()
         var json = response.data;
         for (i = 0; i < json.length; i++)
         {
-            $("#listOfFeatures").append($("<li>", { value : json[i].featureId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress('Open');"}).html(json[i].name));
+            // TODO: Write this on PHP side, no point doing load features -> May do it in the Javascript Rework Branch (Onik)
+            var icon = $("<l>", { class : "far fa-edit", onclick : ""});
+            var featureinfo = $("<li>", { value : json[i].featureId , onclick : "getProjectName(this.innerHTML, this.value); loadTicketsWithProgress('Open');"}).html(json[i].name)
+            var feature = featureinfo.append(icon);
+            $("#listOfFeatures").append(feature);
         }
-
-        if (userLevel >= 3) $("#listOfFeatures").append($("<div>", { id : "editFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" , onclick : "activateFeaturePrompt()"}).html("Activate Feature"));
     })
 }
 
