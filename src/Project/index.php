@@ -17,7 +17,9 @@
       <div id="projectDiv"> 
         <nav id="sidebar">
           <div id="sidebar-header" class="sidebar-header"><h1>Features<h1></div>
-          <ul id="listOfFeatures" class="list-unstyled components"></ul>
+          <ul id="listOfFeatures" class="list-unstyled components">
+            <li>Feature 1<i class="far fa-edit" id="editIcon"></i></li>
+          </ul>
         </nav>
       </div>
       
