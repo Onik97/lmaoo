@@ -1,3 +1,4 @@
 RewriteEngine On
 ErrorDocument 404 /lmaoo/includes/notFound.php
 ErrorDocument 403 /lmaoo/includes/forbidden.php
+Options -Indexes

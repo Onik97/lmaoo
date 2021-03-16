@@ -2,7 +2,7 @@
 
 class ProjectController
 {
-    public function projectExistance($name)
+    public static function projectExistance($name)
     {
         if ($name == null) return;
 
@@ -14,7 +14,7 @@ class ProjectController
         return $stmt->rowCount() != 0 ? true : false;
     }
 
-    public function createNewProject($projectName, $projectStatus)
+    public static function createNewProject($projectName, $projectStatus)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -22,7 +22,7 @@ class ProjectController
         $stmt->execute([$projectName, $projectStatus, unserialize($_SESSION['userLoggedIn'])->getId()]);
     }
 
-    public function createNewTicket($featureId, $summary, $reporterKey)
+    public static function createNewTicket($featureId, $summary, $reporterKey)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -30,7 +30,7 @@ class ProjectController
         $stmt->execute([$summary, $featureId, $reporterKey]);
     }
 
-    public function getProjectList()
+    public static function getProjectList()
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -39,7 +39,7 @@ class ProjectController
         return $stmt->fetchAll();
     }
 
-    public function getAccessibleProjectList($userLoggedIn)
+    public static function getAccessibleProjectList($userLoggedIn)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -50,7 +50,7 @@ class ProjectController
         return $stmt->fetchAll();
     }
 
-    public function getTicketListWithProgress($featureId, $progress)
+    public static function getTicketListWithProgress($featureId, $progress)
     {
         $sql = "SELECT ticket.ticketId, ticket.summary, ticket.progress, user.forename, user.surname 
         FROM ticket LEFT JOIN user on user.userId = ticket.assignee_key

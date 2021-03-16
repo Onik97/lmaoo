@@ -1,18 +1,13 @@
 <?php include_once(__DIR__ . "/../../includes/autoloader.inc.php");
-$homeController = new HomeController();
-$function = $_POST['function'];
 
-if ($function == "loadTicketsWithDeadline")
+try
 {
-    Validator::validateDeveloper();
-    echo json_encode($homeController->loadTicketsWithDeadline());
+    if (!Validator::validateUserLoggedIn()) { http_response_code(401); return; }
+    RouteController::Post("loadTicketsWithDeadline", Validator::validateDeveloper(), 'HomeController::loadTicketsWithDeadline', array());
+    RouteController::Post("loadOwnProjects", Validator::validateDeveloper(), 'HomeController::loadOwnProjects', array());
+    Validator::ThrowNotFound();
 }
-else if ($function == "loadOwnProjects")
+catch(Throwable $e)
 {
-    Validator::validateDeveloper();
-    echo json_encode($homeController->loadOwnProjects());
-}
-else 
-{
-    Library::notFoundMessage();
+    http_response_code(500);
 }

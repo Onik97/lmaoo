@@ -2,7 +2,7 @@
 
 class HomeController
 {
-    public function loadTicketsWithDeadline()
+    public static function loadTicketsWithDeadline()
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -11,7 +11,7 @@ class HomeController
         return $stmt->fetchAll();
     }
 
-    public function loadOwnProjects()
+    public static function loadOwnProjects()
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -20,5 +20,3 @@ class HomeController
         return $stmt->fetchAll();
     }
 }
-
-?>

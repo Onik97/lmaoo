@@ -2,22 +2,37 @@
 
 class Validator 
 {
+    public static function validateUserLoggedIn()
+    {
+        if(!isset($_SESSION['userLoggedIn'])) @$_SESSION["userLoggedIn"] == null; // To remove notice error
+        return @$_SESSION['userLoggedIn'] == null ? false : true;
+    }
+
     public static function validateDeveloper()
     {
-        return (!unserialize($_SESSION['userLoggedIn'])->getLevel() >= 1)
-        ? false : true;
+        if($_SESSION['userLoggedIn'] == null) return false;
+        return unserialize($_SESSION['userLoggedIn'])->getLevel() >= 1 ? true : false;
     }
 
     public static function validateManager()
     {
-        return (!unserialize($_SESSION['userLoggedIn'])->getLevel() >= 2)
-        ? false : true;
+        if($_SESSION['userLoggedIn'] == null) return false;
+        return unserialize($_SESSION['userLoggedIn'])->getLevel() >= 2 ? true : false;
     }
 
     public static function validateSuperUser()
     {
-        return (!unserialize($_SESSION['userLoggedIn'])->getLevel() >= 3)
-        ? false : true;
+        if($_SESSION['userLoggedIn'] == null) return false;
+        return unserialize($_SESSION['userLoggedIn'])->getLevel() >= 3 ? true : false;
     }
-    
+
+    // To avoid direct access to page
+    public static function ThrowNotFound()
+    {
+        if($_SERVER["REQUEST_METHOD"] == "GET")
+        {
+            echo file_get_contents("../../includes/notFound.php");
+            return;
+        }
+    }
 }

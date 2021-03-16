@@ -2,7 +2,7 @@
 
 class TicketController
 {
-    public function updateTicketTime($ticketId)
+    public static function updateTicketTime($ticketId)
     {
         date_default_timezone_set('Europe/London');
         $time = date("Y-m-d H:i:s"); 
@@ -13,7 +13,7 @@ class TicketController
         $stmt->execute([$time, $ticketId]);
     }
 
-    public function ticketIdExistance($ticketId)
+    public static function ticketIdExistance($ticketId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -23,7 +23,7 @@ class TicketController
         return $stmt->fetchColumn() ? true : false;
     }
 
-    public function ticketExistance($ticketName, $featureId)
+    public static function ticketExistance($ticketName, $featureId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -33,7 +33,7 @@ class TicketController
         return $stmt->fetchColumn() ? true : false;
     }
 
-    public function createComment($commentContent, $ticketId, $userId)
+    public static function createComment($commentContent, $ticketId, $userId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -41,7 +41,7 @@ class TicketController
         $stmt->execute([$commentContent, $ticketId, $userId]);
     }
 
-    public function updateComment($commentId, $newComment)
+    public static function updateComment($commentId, $newComment)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -49,7 +49,7 @@ class TicketController
         $stmt->execute([$newComment, $commentId]);
     }
 
-    public function loadComments($ticketId)
+    public static function loadComments($ticketId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -60,7 +60,7 @@ class TicketController
         return $stmt->fetchAll();
     }
 
-    public function deleteComment($commentId)
+    public static function deleteComment($commentId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -68,7 +68,7 @@ class TicketController
         $stmt->execute([$commentId]);
     }
 
-    public function saveSelectedAssignee($ticketId, $newAssignee)
+    public static function saveSelectedAssignee($ticketId, $newAssignee)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -76,7 +76,7 @@ class TicketController
         $stmt->execute([$newAssignee, $ticketId]);
     }
 
-    public function assigneeYourself($ticketId, $selfKey)
+    public static function assigneeYourself($ticketId, $selfKey)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -84,7 +84,7 @@ class TicketController
         $stmt->execute([$selfKey, $ticketId]);
     }
 
-    public function loadDates($ticketId)
+    public static function loadDates($ticketId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -93,7 +93,7 @@ class TicketController
         return $stmt->fetchAll();
     }
 
-    public function loadAssignee($ticketId)
+    public static function loadAssignee($ticketId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -104,7 +104,7 @@ class TicketController
         return $stmt->fetchAll();
     }
 
-    public function loadReporter($ticketId)
+    public static function loadReporter($ticketId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -115,7 +115,7 @@ class TicketController
         return $stmt->fetchAll();
     }
 
-    public function loadSummary($ticketId)
+    public static function loadSummary($ticketId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -124,7 +124,7 @@ class TicketController
         return $stmt->fetchColumn();
     }
 
-    public function loadProgress($ticketId)
+    public static function loadProgress($ticketId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -133,7 +133,7 @@ class TicketController
         return $stmt->fetchColumn();
     }
 
-    public function changeProgress($progress, $ticketId)
+    public static function changeProgress($progress, $ticketId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -141,7 +141,7 @@ class TicketController
         $stmt->execute([$progress, $ticketId]);
     }
 
-    public function saveSummary($summary, $ticketId)
+    public static function saveSummary($summary, $ticketId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
