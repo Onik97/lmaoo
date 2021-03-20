@@ -14,7 +14,7 @@ function checkUsernameFromServer(formdata)
 function loadFeaturesFromServer(projectId)
 {
     var data = new FormData();
-    data.append('function', "loadFeatures");
+    data.append('function', "loadActiveFeatures");
     data.append("projectId", projectId);
 
     return response = axios(

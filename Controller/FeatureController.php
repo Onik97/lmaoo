@@ -2,16 +2,43 @@
 
 class FeatureController
 {
-    public function loadFeatures($projectId)
+    public static function loadActiveFeatures($projectId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("SELECT * FROM feature WHERE projectId = ?");
+        $stmt = $pdo->prepare("SELECT * FROM feature WHERE projectId = ? AND active = 1");
         $stmt->execute([$projectId]);
         return $stmt->fetchAll();
     }
 
-    public function featureExistance($featureName, $projectId)
+    public static function loadInactiveFeatures($projectId)
+    {
+        $pdo = Library::logindb();
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("SELECT * FROM feature WHERE projectId = ? AND active = 0");
+        $stmt->execute([$projectId]);
+        return $stmt->fetchAll();
+    }
+
+    public static function activateFeature($featureId)
+    {
+        $pdo = Library::logindb();
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("UPDATE feature SET active = 1 WHERE featureId = ?");
+        $stmt->execute([$featureId]);
+        return $stmt->fetchAll();
+    }
+
+    public static function deactivateFeature($featureId)
+    {
+        $pdo = Library::logindb();
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("UPDATE feature SET active = 0 WHERE featureId = ?");
+        $stmt->execute([$featureId]);
+        return $stmt->fetchAll();
+    }
+
+    public static function featureExistance($featureName, $projectId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -21,7 +48,7 @@ class FeatureController
         return $stmt->rowCount() > 0 ? true : false;
     }
 
-    public function createFeature($featureName, $projectId)
+    public static function createFeature($featureName, $projectId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);

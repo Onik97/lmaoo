@@ -1,33 +1,22 @@
 <?php include_once(__DIR__ . "/../../includes/autoloader.inc.php");
 
-$projectController = new ProjectController();
-
+// TODO: Create better solution for this if statement below -> Ticket ID: 
 if (isset($_POST['projectId']) && isset($_POST['progress']))
 {
     Validator::validateDeveloper();
-    echo json_encode($projectController->getTicketListWithProgress($_POST['projectId'], $_POST['progress']));
+    echo json_encode(ProjectController::getTicketListWithProgress(@$_POST['projectId'], @$_POST['progress']));
 }
-else if($_POST['function'] == "loadProjects")
+
+try
 {
-    Validator::validateDeveloper();
-    echo json_encode($projectController->getProjectList());
+    if (!Validator::validateUserLoggedIn()) { http_response_code(401); return; }
+    RouteController::Post("loadProjects", Validator::validateDeveloper(), 'ProjectController::getProjectList', array());
+    RouteController::Post("createProject", Validator::validateDeveloper(), 'HomeController::createNewProject', [@$_POST['projectName'], @$_POST['projectStatus']]);
+    RouteController::Post("createTicket", Validator::validateDeveloper(), 'ProjectController::createNewTicket', [@$_POST['projectId'], @$_POST['summary'], @$_POST['reporterKey']]);
+    RouteController::Post("checkProjectExistance", Validator::validateDeveloper(), 'ProjectController::projectExistance', [@$_POST['name']]);
+    Validator::ThrowNotFound();
 }
-else if($_POST['function'] == "createProject")
+catch(Throwable $e)
 {
-    Validator::validateManager();
-    $projectController->createNewProject($_POST['projectName'], $_POST['projectStatus']);
-}
-else if($_POST['function'] == "createTicket")
-{
-    Validator::validateDeveloper();
-    $projectController->createNewTicket($_POST['projectId'], $_POST['summary'], $_POST['reporterKey']);
-}
-else if ($_POST['function'] == "checkProjectExistance")
-{
-    Validator::validateDeveloper();
-    echo $projectController->projectExistance($_POST['name']);
-}
-else 
-{
-    Library::notFoundMessage();
+    http_response_code(500);
 }
