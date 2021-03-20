@@ -6,6 +6,6 @@
     <title>404</title>
 </head>
 <body>
-    <p>Not found!</p>
+    <p>Not found lol!</p>
 </body>
 </html>
