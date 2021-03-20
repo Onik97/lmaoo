@@ -1,7 +1,6 @@
 export default class DataTypeUtility {
     
-    static SerializedArrayToJSON(serializeArray)
-    {
+    static SerializedArrayToJSON(serializeArray) {
         var indexed_array = {};
 
         serializeArray.map(content => {
@@ -9,6 +8,10 @@ export default class DataTypeUtility {
         })
 
         return indexed_array;
+    }
+
+    static DateTimeToDate(dateFormat) {
+        // To be implemented
     }
     
 }
