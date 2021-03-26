@@ -2,7 +2,7 @@
 
 class ManagerController
 {
-    public function loadOwnerProjects()
+    public static function loadOwnerProjects()
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -11,7 +11,7 @@ class ManagerController
         return $stmt->fetchAll();
     }
 
-    public function loadManagerProjects()
+    public static function loadManagerProjects()
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -21,7 +21,7 @@ class ManagerController
         return $stmt->fetchAll();
     }
 
-    public function removeUsersFromProject($projectId)
+    public static function removeUsersFromProject($projectId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -29,7 +29,7 @@ class ManagerController
         $stmt->execute([$projectId]);
     }
 
-    public function addUsersToProject($json)
+    public static function addUsersToProject($json)
     {
         $sql = "INSERT INTO projectAccess (userId, projectId, allowAccess, managerAccess) VALUES";
         $data = json_decode($json);
@@ -45,7 +45,7 @@ class ManagerController
         $stmt->execute();
     }
 
-    public function loadUsersOnProject($projectId)
+    public static function loadUsersOnProject($projectId)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);

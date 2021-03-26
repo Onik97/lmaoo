@@ -1,34 +1,16 @@
 <?php include_once(__DIR__ . "/../../includes/autoloader.inc.php"); 
 
-$managerController = new ManagerController();
-$function = $_POST['function'];
-
-if ($function == "loadOwnerProjects") 
+try
 {
-    Validator::validateManager();
-    echo json_encode($managerController->loadOwnerProjects());
+    if (!Validator::validateUserLoggedIn()) { http_response_code(401); return; }
+    RouteController::Post("loadOwnerProjects", Validator::validateDeveloper(), 'ManagerController::loadOwnerProjects', array());
+    RouteController::Post("loadManagerProjects", Validator::validateDeveloper(), 'ManagerController::loadManagerProjects', array());
+    RouteController::Post("removeUsersFromProject", Validator::validateDeveloper(), 'ManagerController::removeUsersFromProject', [@$_POST["projectId"]]);
+    RouteController::Post("addUsersToProject", Validator::validateDeveloper(), 'ManagerController::addUsersToProject', [@$_POST["json"]]);
+    RouteController::Post("loadUsersOnProject", Validator::validateDeveloper(), 'ManagerController::loadUsersOnProject', [@$_POST["projectId"]]);
+    Validator::ThrowNotFound();
 }
-else if ($function == "loadManagerProjects")
+catch(Throwable $e)
 {
-    Validator::validateManager();
-    echo json_encode($managerController->loadManagerProjects());
-}
-else if ($function == "removeUsersFromProject")
-{
-    Validator::validateManager();
-    echo json_encode($managerController->removeUsersFromProject($_POST['projectId']));
-}
-else if ($function == "addUsersToProject")
-{
-    Validator::validateManager();
-    echo $managerController->addUsersToProject($_POST['json']);
-}
-else if ($function == "loadUsersOnProject")
-{
-    Validator::validateManager();
-    echo json_encode($managerController->loadUsersOnProject($_POST['projectId']));
-}
-else 
-{
-    Library::notFoundMessage();
+    http_response_code(500);
 }

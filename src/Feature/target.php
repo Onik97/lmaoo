@@ -1,19 +1,17 @@
 <?php include_once(__DIR__ . "/../../includes/autoloader.inc.php");
 
-$featureController = new FeatureController();
-if($_POST['function'] == "loadFeatures")
+try
 {
-    echo json_encode($featureController->loadFeatures($_POST['projectId']));
+    if (!Validator::validateUserLoggedIn()) { http_response_code(401); return; }
+    RouteController::Post("loadActiveFeatures", Validator::validateDeveloper(), 'FeatureController::loadActiveFeatures', [@$_POST['projectId']]);
+    RouteController::Post("loadInactiveFeatures", Validator::validateDeveloper(), 'FeatureController::loadInactiveFeatures', [@$_POST['projectId']]);
+    RouteController::Post("activateFeature", Validator::validateDeveloper(), 'FeatureController::activateFeature', [@$_POST['projectId']]);
+    RouteController::Post("deactivateFeature", Validator::validateDeveloper(), 'FeatureController::deactivateFeature', [@$_POST['projectId']]);
+    RouteController::Post("checkFeatureExistance", Validator::validateDeveloper(), 'FeatureController::featureExistance', [@$_POST['featureName'], @$_POST['projectId']]);
+    RouteController::Post("createFeature", Validator::validateManager(), 'FeatureController::createFeature', [@$_POST['featureName'], @$_POST['projectId']]);
+    Validator::ThrowNotFound();
 }
-else if ($_POST['function'] == "checkFeatureExistance")
+catch(Throwable $e)
 {
-    echo $featureController->featureExistance($_POST['featureName'], $_POST['projectId']);
+    http_response_code(500);
 }
-else if ($_POST['function'] == "createFeature")
-{
-    $featureController->createFeature($_POST['featureName'], $_POST['projectId']);
-}
-else 
-{
-    Library::notFoundMessage();
-}   
