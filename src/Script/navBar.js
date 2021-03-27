@@ -4,10 +4,6 @@ $('#searchBarInput').on("keypress", (e) => { if (e.keyCode == 13) searchBar(); }
 
 class Navbar
 {
-    constructor()
-    {
-
-    }
     homeActiveTab()
     {
         document.getElementById("homeNav").classList.add("active");
@@ -21,7 +17,6 @@ class Navbar
         document.getElementById("accountNav").classList.add("active");
     }
 }
-NavbarActivater = new Navbar();
 
 function searchBar()
 {
