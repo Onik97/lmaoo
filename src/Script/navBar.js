@@ -21,6 +21,7 @@ class Navbar
         document.getElementById("accountNav").classList.add("active");
     }
 }
+NavbarActivater = new Navbar();
 
 function searchBar()
 {
