@@ -4,15 +4,15 @@ $('#searchBarInput').on("keypress", (e) => { if (e.keyCode == 13) searchBar(); }
 
 class Navbar
 {
-    homeActiveTab()
+     static homeActiveTab()
     {
         document.getElementById("homeNav").classList.add("active");
     }
-    projectActiveTab()
+    static projectActiveTab()
     {
         document.getElementById("projectNav").classList.add("active");
     }
-    accountActiveTab()
+    static accountActiveTab()
     {
         document.getElementById("accountNav").classList.add("active");
     }
