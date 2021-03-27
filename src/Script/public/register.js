@@ -3,6 +3,8 @@ import Constant from "../Utility/Constant.js";
 import DataTypeUtility from "../Utility/DataTypeUtility.js";
 import Validator from "../Utility/Validator.js";
 
+$(document).ready(() => { Navbar.accountActiveTab(); });
+
 //Submit Register Form
 $("#registerForm").submit(function() {
 
