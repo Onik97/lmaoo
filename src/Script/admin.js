@@ -1,4 +1,4 @@
-$(document).ready(() => loadActiveUsers());
+$(document).ready(() => { loadActiveUsers(); NavbarActivater.accountActiveTab(); });
 
 function activeSelect()
 {
