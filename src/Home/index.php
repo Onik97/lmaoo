@@ -20,5 +20,6 @@ if(!isset($_SESSION['userLoggedIn'])) $_SESSION['userLoggedIn'] = null; ?>
         <?php include("../../includes/editUserModal.php"); ?>
         <?php include("../../includes/scripts.php"); ?>
         <script type="text/javascript" src="../Script/home.js"></script>
+        <script type="text/javascript" src="../Script/public/home.js"></script>
     </footer>
 </html>
