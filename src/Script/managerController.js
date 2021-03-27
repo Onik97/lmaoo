@@ -1,4 +1,4 @@
-$(document).ready(() => { loadProjects(); NavbarActivater.accountActiveTab(); } );
+$(document).ready(() => { loadProjects(); } );
 
 async function loadOwnerProjects()
 {
