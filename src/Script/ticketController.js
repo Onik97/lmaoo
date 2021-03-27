@@ -1,4 +1,4 @@
-$(document).ready(() => { loadSummary(); loadProgress(); NavbarActivater.projectActiveTab(); })
+$(document).ready(() => { loadSummary(); loadProgress();})
 
 function loadSummary()
 {
