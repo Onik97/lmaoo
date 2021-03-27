@@ -47,5 +47,6 @@
 	</main>
 <?php include("../../includes/scripts.php"); ?>
 </body>
+<script>NavbarActivater.accountActiveTab();</script>
 
 </html>
