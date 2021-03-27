@@ -2,7 +2,25 @@ $(document).ready(() => darkModeToggleValidator());
 
 $('#searchBarInput').on("keypress", (e) => { if (e.keyCode == 13) searchBar(); });
 
+class Navbar
+{
+    constructor()
+    {
 
+    }
+    homeActiveTab()
+    {
+        document.getElementById("homeNav").classList.add("active");
+    }
+    projectActiveTab()
+    {
+        document.getElementById("projectNav").classList.add("active");
+    }
+    accountActiveTab()
+    {
+        document.getElementById("accountNav").classList.add("active");
+    }
+}
 
 function searchBar()
 {
