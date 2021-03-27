@@ -34,5 +34,3 @@ $("#usernameRegister").keyup(async function() {
     }
 
 })
-
-NavbarActivater.accountActiveTab();
