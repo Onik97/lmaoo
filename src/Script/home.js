@@ -2,7 +2,6 @@ $(document).ready(function()
 {
     loadOwnProjects();
     loadTicketDeadlines();
-    NavbarActivater.homeActiveTab();
 });
 
 function loadOwnProjects()
