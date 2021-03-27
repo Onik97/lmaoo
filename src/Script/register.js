@@ -1,3 +1,5 @@
+NavbarActivater.accountActiveTab();
+
 function registerValidation()
 {
     var form = document.forms["registerForm"];

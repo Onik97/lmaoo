@@ -1,6 +1,7 @@
 $(document).ready(function() 
 {
     loadFeatures();
+    NavbarActivater.projectActiveTab();
 }); 
 
 function loadFeatures()
