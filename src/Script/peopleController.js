@@ -1,9 +1,3 @@
-$(document).ready(function() 
-{
-    loadAssignee();
-    loadReporter();
-});
-
 function peoplePrompt()
 {
   document.getElementById("Modal-head").innerHTML = "Select Assignee";
@@ -25,32 +19,6 @@ function peoplePrompt()
   input.setAttribute("onclick", "saveSelectedAssignee()");
 
   modalFooter.appendChild(input);
-}
-
-function loadAssignee()
-{
-  var ticketId = new URL(window.location.href).searchParams.get("ticketId");
-  loadAssigneeFromServer(ticketId)
-  .then(response => 
-  {
-    if (response.data.length == 0) return;
-
-    var res = response.data;
-    $("#assignee").html(`${res[0].forename} ${res[0].surname} (${res[0].username})`);
-    $("#assigneeUserId").html(res[0].userId);
-  })
-}
-
-function loadReporter()
-{
-  var ticketId = new URL(window.location.href).searchParams.get("ticketId");
-  loadReporterFromServer(ticketId)
-  .then(response =>
-  {
-    var res = response.data;
-    $("#reporter").html(`${res[0].forename} ${res[0].surname} (${res[0].username})`);
-    $("#reporterUserId").html(res[0].userId);
-  })
 }
 
 function saveSelectedAssignee()
