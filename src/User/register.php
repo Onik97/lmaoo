@@ -63,6 +63,6 @@
   </main>
 
   <?php include("../../includes/scripts.php"); ?>
-  <script type="module" src="../Script/src/register.js"></script>
+  <script type="module" src="../Script/public/register.js"></script>
 </body>
 </html>

@@ -46,6 +46,6 @@
 		</div>
 	</main>
 <?php include("../../includes/scripts.php"); ?>
+<script type="module" src="../Script/public/login.js"></script>
 </body>
-
 </html>

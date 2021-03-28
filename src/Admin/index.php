@@ -39,6 +39,7 @@
     <?php include("../../includes/editUserModal.php"); ?>
     <?php include("adminModal.php"); ?>
     <script type="text/javascript" src="../Script/admin.js"></script>
+    <script type="module" src="../Script/public/admin.js"></script>
 </body>
 
 </html>
