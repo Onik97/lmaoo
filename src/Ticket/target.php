@@ -18,6 +18,7 @@ try
     RouteController::Post("loadProgress", Validator::validateDeveloper(), 'TicketController::loadProgress', [@$_POST["ticketId"]]);
     RouteController::Post("changeProgress", Validator::validateDeveloper(), 'TicketController::changeProgress', [@$_POST['progress'], @$_POST["ticketId"]]);
     RouteController::Post("saveSummary", Validator::validateDeveloper(), 'TicketController::saveSummary', [@$_POST['summary'], @$_POST["ticketId"]]);
+    RouteController::Post("loadDates", Validator::validateDeveloper(), 'TicketController::loadDates', [@$_POST["ticketId"]]);
     Validator::ThrowNotFound();
 }
 catch(Throwable $e)

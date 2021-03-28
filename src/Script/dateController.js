@@ -1,5 +1,3 @@
-$(document).ready(() => loadDates());
-
 function tidyUpTimestamp(timestamp) 
 {
   var dateCreated = new Date(timestamp); dateCreated.toString();
@@ -15,12 +13,5 @@ function tidyUpTimestamp(timestamp)
 
 function loadDates()
 {
-  var ticketId = new URL(window.location.href).searchParams.get("ticketId");
-
-  loadDatesFromServer(ticketId)
-    .then(response => 
-    {
-      $("#createDate").html(tidyUpTimestamp(response.data[0].created));
-      $("#updateDate").html(tidyUpTimestamp(response.data[0].updated));
-    })
+  // To be implemented -> Remember: This file will be deleted
 }
