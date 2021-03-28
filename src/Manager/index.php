@@ -32,7 +32,7 @@
     <?php include("../../includes/scripts.php"); ?>
     <?php include("managerModal.php"); ?>
     <script type="text/javascript" src="../Script/managerController.js"></script>
-    <script type="text/javascript" src="../Script/public/manager.js"></script>
+    <script type="module" src="../Script/public/manager.js"></script>
     <?php include("../../includes/editUserModal.php"); ?>
 </body>
 </html>
