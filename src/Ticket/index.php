@@ -59,7 +59,7 @@
 			<!-- Progress Section -->
 
 			<div class="p-4">
-				<label>Ticket Status: <span id="ticketProgress"></span></label>
+				<label>Ticket Status: <span id="ticketProgress"><?php echo $ticket->progress ?></span></label>
 				<button id="changeProgressBtn" class="btn btn-sm" onclick="changeProgress()"></button>
 			</div>
 		</div>
