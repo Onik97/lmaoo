@@ -2,7 +2,7 @@
 
 try
 {
-    if (!Validator::validateUserLoggedIn()) { http_response_code(401); return; }
+    if (!Validator::validateUserLoggedIn()) return http_response_code(401); 
     RouteController::Post("checkTicket", Validator::validateDeveloper(), 'TicketController::ticketIdExistance', [@$_POST["ticketId"]]);
     RouteController::Post("checkTicketExistance", Validator::validateDeveloper(), 'TicketController::ticketExistance', [@$_POST['ticketName'], @$_POST['featureId']]);
     RouteController::Post("createComment", Validator::validateDeveloper(), 'TicketController::createComment', [@$_POST['commentContent'], @$_POST['ticketId'], @$_POST['userId']]);
