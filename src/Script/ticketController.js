@@ -1,18 +1,7 @@
-$(document).ready(() => { loadSummary(); loadProgressBtn(); })
-
-function loadSummary()
-{
-    var ticketId = new URL(window.location.href).searchParams.get("ticketId");
-    var data = new FormData();
-    data.append('function', "loadSummary");
-    data.append('ticketId', ticketId);
-
-    axios.post('../Ticket/target.php', data).then((res) => $("#ticketSummaryHeader").html(res.data));
-}
+$(document).ready(() => { loadProgressBtn(); })
 
 function loadProgressBtn()
 {
-    console.log($("#ticketProgress").html());
     switch($("#ticketProgress").html())
     {
         case "Open": $("#changeProgressBtn").html("Change progress to 'In Progress'"); break;

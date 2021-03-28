@@ -69,7 +69,7 @@
 			<!-- Summary Section -->
 
 			<div class="row no-gutters mt-3">
-				<div id="ticketHeader"><h1 id="ticketSummaryHeader"></h1></div>
+				<div id="ticketHeader"><h1 id="ticketSummaryHeader"><?php echo $ticket->summary ?></h1></div>
 			</div>
 
 			<!-- Comment Section -->
