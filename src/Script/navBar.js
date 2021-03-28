@@ -1,13 +1,21 @@
 $(document).ready(() => darkModeToggleValidator());
 
-let navBarActive = document.getElementById("navBarActive").innerHTML;
-
-(navBarActive == "homePage") ? (document.getElementById("homeNav").classList.add("active"))
-    : (navBarActive == "projectPage" || navBarActive == "ticketPage") ? (document.getElementById("projectNav").classList.add("active"))
-        : (navBarActive == "registerPage" || navBarActive == "loginPage" || navBarActive == "adminPage" || navBarActive == "managerPage") ? (document.getElementById("accountNav").classList.add("active"))
-            : null;
-
 $('#searchBarInput').on("keypress", (e) => { if (e.keyCode == 13) searchBar(); });
+
+class Navbar
+{
+     static homeActiveTab(){
+        document.getElementById("homeNav").classList.add("active");
+    }
+
+    static projectActiveTab(){
+        document.getElementById("projectNav").classList.add("active");
+    }
+
+    static accountActiveTab(){
+        document.getElementById("accountNav").classList.add("active");
+    }
+}
 
 function searchBar()
 {

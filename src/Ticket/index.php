@@ -134,6 +134,7 @@
 	<script type="text/javascript" src="../Script/commentController.js"></script>
 	<script type="text/javascript" src="../Script/dateController.js"></script>
 	<script type="text/javascript" src="../Script/ticketController.js"></script>
+	<script type="module" src="../Script/public/ticket.js"></script>
 </body>
 
 </html>

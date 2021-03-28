@@ -60,6 +60,7 @@
 
     <?php include("../../includes/scripts.php"); ?>
     <script type="text/javascript" src="../Script/projectController.js"></script>
+    <script type="module" src="../Script/public/project.js"></script>
     <?php include("projectModal.php"); ?>
     <?php include("../Feature/featureModal.php"); ?>
     <?php include("../../includes/editUserModal.php"); ?>

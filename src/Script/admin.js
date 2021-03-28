@@ -1,4 +1,4 @@
-$(document).ready(() => loadActiveUsers());
+$(document).ready(() => { loadActiveUsers();});
 
 function activeSelect()
 {
