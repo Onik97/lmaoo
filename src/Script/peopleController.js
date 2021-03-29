@@ -1,9 +1,3 @@
-$(document).ready(function() 
-{
-    loadAssignee();
-    loadReporter();
-});
-
 function peoplePrompt()
 {
   document.getElementById("Modal-head").innerHTML = "Select Assignee";
