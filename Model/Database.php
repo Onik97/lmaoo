@@ -16,6 +16,7 @@ class Database
 
     function parameters($parameters)
     {
+        if (!is_array($parameters)) die("Error ID: 103");
         $this->parameters = $parameters;
         return $this;
     }
