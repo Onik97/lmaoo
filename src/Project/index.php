@@ -18,12 +18,12 @@
         <nav id="sidebar">
           <div id="sidebar-header" class="sidebar-header">
             <div class="custom-control custom-switch">
-              <input type="checkbox" class="custom-control-input" id="featureToggle">
+              <input type="checkbox" class="custom-control-input" id="featureToggle" onclick='featureToggle()' checked>
               <label class="custom-control-label" for="featureToggle"><h1>Feature</h1></label>
             </div>
           </div>
-          <ul id="listOfFeatures" class="list-unstyled components">
-          </ul>
+          <ul id="activeFeatures" class="list-unstyled components" style="display: none;"></ul>
+          <ul id="inactiveFeatures" class="list-unstyled components" style="display: none;"><li value="1">Inactive Feature Static Data<l class="far fa-edit"></l></li></ul>
             <div class="editFeatureModal">
               <?php include("../Feature/editFeatureModal.php"); ?>
             </div>
