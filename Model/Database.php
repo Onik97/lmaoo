@@ -4,6 +4,7 @@ class Database
 {
     function __construct()
 	{
+        $this->config = include(__DIR__ . "/../config.php");
         $this->query = null;
         $this->parameters = null;
     }
@@ -23,10 +24,9 @@ class Database
 
     function fetchAll()
     {
-        $config = include(__DIR__ . "/../config.php");
         try 
         {
-            $pdo = new PDO("mysql:host={$config['db_host']};dbname={$config['db_table']}", $config['db_username'],  $config['db_password']);
+            $pdo = new PDO("mysql:host={$this->config['db_host']};dbname={$this->config['db_table']}", $this->config['db_username'],  $this->config['db_password']);
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
             $stmt = $pdo->prepare($this->query);
             $stmt->execute($this->parameters);
@@ -41,10 +41,9 @@ class Database
 
     function fetchColumn()
     {
-        $config = include(__DIR__ . "/../config.php");
         try 
         {
-            $pdo = new PDO("mysql:host={$config['db_host']};dbname={$config['db_table']}", $config['db_username'],  $config['db_password']);
+            $pdo = new PDO("mysql:host={$this->config['db_host']};dbname={$this->config['db_table']}", $this->config['db_username'],  $this->config['db_password']);
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
             $stmt = $pdo->prepare($this->query);
             $stmt->execute($this->parameters);
@@ -60,10 +59,9 @@ class Database
     
     function fetchObject()
     {
-        $config = include(__DIR__ . "/../config.php");
         try 
         {
-            $pdo = new PDO("mysql:host={$config['db_host']};dbname={$config['db_table']}", $config['db_username'],  $config['db_password']);
+            $pdo = new PDO("mysql:host={$this->config['db_host']};dbname={$this->config['db_table']}", $this->config['db_username'],  $this->config['db_password']);
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
             $stmt = $pdo->prepare($this->query);
             $stmt->execute($this->parameters);
@@ -78,10 +76,9 @@ class Database
 
     function rowCount()
     {
-        $config = include(__DIR__ . "/../config.php");
         try 
         {
-            $pdo = new PDO("mysql:host={$config['db_host']};dbname={$config['db_table']}", $config['db_username'],  $config['db_password']);
+            $pdo = new PDO("mysql:host={$this->config['db_host']};dbname={$this->config['db_table']}", $this->config['db_username'],  $this->config['db_password']);
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
             $stmt = $pdo->prepare($this->query);
             $stmt->execute($this->parameters);
@@ -96,10 +93,9 @@ class Database
 
     function exec()
     {
-        $config = include(__DIR__ . "/../config.php");
         try 
         {
-            $pdo = new PDO("mysql:host={$config['db_host']};dbname={$config['db_table']}", $config['db_username'],  $config['db_password']);
+            $pdo = new PDO("mysql:host={$this->config['db_host']};dbname={$this->config['db_table']}", $this->config['db_username'],  $this->config['db_password']);
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
             $stmt = $pdo->prepare($this->query);
             $stmt->execute($this->parameters);
