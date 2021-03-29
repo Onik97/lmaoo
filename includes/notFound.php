@@ -12,7 +12,7 @@
     <h1>404</h1>
     <h2>Page Not Found</h2>
     <p>Yikes...I Promise There Is Nothing To See Here...</p>
-    <a href="index.php"><button class="btn">Go Home</button>
+    <a href="../Home/index.php"><button class="btn">Go Home</button>
     </div>
 
 </html>
