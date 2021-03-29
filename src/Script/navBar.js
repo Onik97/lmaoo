@@ -1,4 +1,4 @@
-$(document).ready(() => darkModeToggleValidator());
+$(document).ready(() => { darkModeToggleValidator(); featureToggle(); });
 
 $('#searchBarInput').on("keypress", (e) => { if (e.keyCode == 13) searchBar(); });
 
@@ -74,7 +74,12 @@ function saveUserDarkMode(toggle)
 
 function featureToggle()
 {
-    $("#featureToggle").prop("checked") 
-    ? $('.nav-tabs a[href="#bbb"]').tab('show') 
-    : $('.nav-tabs a[href="#aaa"]').tab('show');
+    if ($("#featureToggle").prop("checked")) {
+        $("#activeFeatures").css("display", "block");
+        $("#inactiveFeatures").css("display", "none");
+    }
+    else {
+        $("#inactiveFeatures").css("display", "block");
+        $("#activeFeatures").css("display", "none");
+    }
 }
