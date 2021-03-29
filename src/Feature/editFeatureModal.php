@@ -1,8 +1,4 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editFeatureModal">
-Edit feature modal test
-</button>
-
-<div class="modal fade" id="editFeatureModal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
+<div class="editFeatureModal modal fade" id="editFeatureModal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
 
