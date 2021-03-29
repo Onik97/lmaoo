@@ -93,4 +93,21 @@ class Database
 			die("ERROR ID: 102");
 		}
     }
+
+    function exec()
+    {
+        $config = include(__DIR__ . "/../config.php");
+        try 
+        {
+            $pdo = new PDO("mysql:host={$config['db_host']};dbname={$config['db_table']}", $config['db_username'],  $config['db_password']);
+            $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+            $stmt = $pdo->prepare($this->query);
+            $stmt->execute($this->parameters);
+            $pdo = null; // Closes Connection
+        }
+        catch(PDOException $e)
+		{
+			die("ERROR ID: 102");
+		}
+    }
 }
