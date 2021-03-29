@@ -4,56 +4,38 @@ class FeatureController
 {
     public static function loadActiveFeatures($projectId)
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("SELECT * FROM feature WHERE projectId = ? AND active = 1");
-        $stmt->execute([$projectId]);
-        return $stmt->fetchAll();
+        $feature = new Feature();
+        return $feature->getActiveFeature($projectId);
     }
 
     public static function loadInactiveFeatures($projectId)
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("SELECT * FROM feature WHERE projectId = ? AND active = 0");
-        $stmt->execute([$projectId]);
-        return $stmt->fetchAll();
+        $feature = new Feature();
+        return $feature->getInactiveFeature($projectId);
     }
 
     public static function activateFeature($featureId)
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("UPDATE feature SET active = 1 WHERE featureId = ?");
-        $stmt->execute([$featureId]);
-        return $stmt->fetchAll();
+        $feature = new Feature();
+        return $feature->activateFeature($featureId);
     }
 
     public static function deactivateFeature($featureId)
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("UPDATE feature SET active = 0 WHERE featureId = ?");
-        $stmt->execute([$featureId]);
-        return $stmt->fetchAll();
+        $feature = new Feature();
+        return $feature->deactivateFeature($featureId);
     }
 
     public static function featureExistance($featureName, $projectId)
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("SELECT name FROM feature WHERE name = ? AND projectId = ?");
-        $stmt->execute([$featureName, $projectId]);
-
-        return $stmt->rowCount() > 0 ? true : false;
+        $feature = new Feature();
+        return $feature->doesFeatureExists($featureName, $projectId);
     }
 
     public static function createFeature($featureName, $projectId)
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("INSERT INTO feature (name, projectId) VALUES (?, ?)");
-        $stmt->execute([$featureName, $projectId]);
+        $feature = new Feature();
+        $feature->createFeature($featureName, $projectId);
     }
 }
 
