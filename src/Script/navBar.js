@@ -71,3 +71,10 @@ function saveUserDarkMode(toggle)
 
     axios.post("../User/target.php", data);
 }
+
+function featureToggle()
+{
+    $("#featureToggle").prop("checked") 
+    ? $('.nav-tabs a[href="#bbb"]').tab('show') 
+    : $('.nav-tabs a[href="#aaa"]').tab('show');
+}

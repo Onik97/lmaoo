@@ -16,7 +16,12 @@
     <div class="d-flex">
       <div id="projectDiv"> 
         <nav id="sidebar">
-          <div id="sidebar-header" class="sidebar-header"><h1>Features<h1></div>
+          <div id="sidebar-header" class="sidebar-header">
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" id="featureToggle">
+              <label class="custom-control-label" for="featureToggle"><h1>Feature</h1></label>
+            </div>
+          </div>
           <ul id="listOfFeatures" class="list-unstyled components">
           </ul>
             <div class="editFeatureModal">
@@ -24,7 +29,7 @@
             </div>
         </nav>
       </div>
-      
+  
       <div id="createProject"></div>
 
       <div class="content">
