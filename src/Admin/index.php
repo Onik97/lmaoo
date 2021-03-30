@@ -11,7 +11,7 @@
 
 <body>
     <?php include("../../includes/navBar.php"); ?>
-    <?php if (!isset($_SESSION['userLoggedIn']) || unserialize($_SESSION['userLoggedIn'])->getLevel() < 3) header("Location: ../../includes/forbidden.php"); ?>
+    <?php if (!isset($_SESSION['userLoggedIn']) || unserialize($_SESSION['userLoggedIn'])->level < 3) header("Location: ../../includes/forbidden.php"); ?>
 
     <div class="container d-flex justify-content-center">
         <form class="form-inline my-2 my-lg-0">
