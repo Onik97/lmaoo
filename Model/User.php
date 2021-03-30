@@ -59,6 +59,12 @@ class User extends Database
         : $this->query($sql)->parameters([$userId])->fetchObject();
     }
 
+    public function getIsActiveUsers($isActive) 
+    {
+        $sql = "SELECT * FROM user WHERE isActive = ?";
+        return $this->query($sql)->parameters([$isActive])->fetchAll();
+    }
+
     public function deactivateUser($userId)
     {
         $sql = "UPDATE user SET active = 0 WHERE userId = ?";

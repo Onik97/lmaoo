@@ -68,12 +68,8 @@ class UserController
 	
 	public function getActiveUsers()
 	{
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, picture FROM user WHERE isActive = 1");
-		$stmt->execute();
-		$activeUsers = $stmt->fetchall();
-		return $activeUsers;
+		$user = new User();
+		return $user->getIsActive(1);
 	}
 
 	public function darkModeToggle($toggle, $userId)
