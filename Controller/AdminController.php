@@ -4,7 +4,7 @@ class AdminController
 {
     public function validateAdmin(?string $unitUserId)
     {
-        $userId = $unitUserId == null ? unserialize($_SESSION['userLoggedIn'])->getId() : $unitUserId;
+        $userId = $unitUserId == null ? unserialize($_SESSION['userLoggedIn'])->id : $unitUserId;
         
         if ($userId == null) return false;
 
