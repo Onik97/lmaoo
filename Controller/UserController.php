@@ -69,7 +69,7 @@ class UserController
 	public function getActiveUsers()
 	{
 		$user = new User();
-		return $user->getIsActive(1);
+		return $user->getIsActiveUsers(1);
 	}
 
 	public function darkModeToggle($toggle, $userId)
