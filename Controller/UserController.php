@@ -38,63 +38,17 @@ class UserController
 		return $user;
 	}
 
-	public function login($username, $password, $githubUser = null)
+	public function standardLogin($username, $password)
 	{
-		$githubController = new GithubController();
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		
-		if ($githubUser != null)
-		{
-			$stmt = $pdo->prepare("SELECT * FROM user WHERE github_id = ?");
-			$stmt->execute([$githubUser['id']]);
-			$user = $stmt->fetch();
-			
-			if($user == false) 
-			{
-				Library::redirectWithMessage("No Github Account has been linked. You must login first and edit your user", "../User/login.php"); 
-				return;
-			}
-			
-			$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode, $user->github_id);
-			$userLoggedIn->profileToObject($githubUser);
-			
-			if ($user->darkMode != $_COOKIE["lmaooDarkMode"]) setcookie("lmaooDarkMode", $user->darkMode, 0, "/");
-			$_SESSION['userLoggedIn'] = serialize($userLoggedIn);
-			header("Location: ../Home/index.php");
-			return;
-		}
+		if ($username == null || $password == null) return Library::redirectWithMessage("Username or Password must be filled in", "../User/login.php");
 
-		$stmt = $pdo->prepare("SELECT * FROM user WHERE username = ?");
-		$stmt->execute([$username]);
-		$user = $stmt->fetch();
-		
-		if (password_verify($password, $user->password))
-		{
-			if($user->isActive == true)
-			{
-				$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode, $user->github_id);
-				
-				if($user->github_id != null) 
-				{
-					$userLoggedIn->profileToObject($githubController->getGithubUser($githubController->getAccessTokenFromDatabase($user->userId)));
-				}
+		$user = new User($username, $password);
 
-				if ($user->darkMode != $_COOKIE["lmaooDarkMode"]) setcookie("lmaooDarkMode", $user->darkMode, 0, "/");			
-				$_SESSION['userLoggedIn'] = serialize($userLoggedIn);
-				header("Location: ../Home/index.php");
-			}
-			else
-			{
-				$_SESSION['message'] = 'User deactivated, contact the administrator';
-				header("Location: index.php");
-			}
-		}
-		else
-		{
-			$this->failedLogin();
-		}
+		if ($user->id == null) return Library::redirectWithMessage("Username or Password did not match", "../User/login.php");
+		if ($user->isActive == 0) return Library::redirectWithMessage("User deactivated, contact the administrator", "../User/login.php");
 
+		$_SESSION['userLoggedIn'] = serialize($user);
+		header("Location: ../Home/index.php");
 	}
 
 	public function register($forename, $surname, $username, $password)
@@ -188,8 +142,8 @@ class UserController
 			}
 			else if ($userLoggedIn != null)
 			{
-				$toggle = $userLoggedIn->getDarkMode();
-				setcookie("lmaooDarkMode", $userLoggedIn->getDarkMode(), 0, "/");
+				$toggle = $userLoggedIn->darkMode;
+				setcookie("lmaooDarkMode", $userLoggedIn->darkMode, 0, "/");
 			}
 		}
 
@@ -209,10 +163,10 @@ class UserController
 		}
 		else
 		{
-			if ($userLoggedIn->getLevel() > 1) echo "<a class='dropdown-item' id='managerNav' href='../Manager/index.php'>Manager</a>"; 
+			if ($userLoggedIn->level > 1) echo "<a class='dropdown-item' id='managerNav' href='../Manager/index.php'>Manager</a>"; 
 			echo "<a class='dropdown-item' id='editAccountNav' data-toggle='modal' data-target='#view-modal' role='button'>Edit Account</a>";
 			echo "<a class='dropdown-item' id='logoutNav' href='../User/logout.php'>Logout</a>";
-			if($userLoggedIn->getLevel() > 3) echo "<a class='dropdown-item' id='adminNav' href='../Admin/index.php'>Admin</a>";
+			if($userLoggedIn->level > 3) echo "<a class='dropdown-item' id='adminNav' href='../Admin/index.php'>Admin</a>";
 		}
 	}
 }

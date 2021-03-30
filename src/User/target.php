@@ -6,7 +6,7 @@ $function = $_POST['function'];
 
 if ($function == "login")
 {
-	$userController->login($_POST['username'], $_POST['password']);
+	$userController->standardLogin($_POST['username'], $_POST['password']);
 }
 else if ($function == "register")
 {
