@@ -19,6 +19,9 @@
           <div id="sidebar-header" class="sidebar-header"><h1>Features<h1></div>
           <ul id="listOfFeatures" class="list-unstyled components">
           </ul>
+            <div class="editFeatureModal">
+              <?php include("../Feature/editFeatureModal.php"); ?>
+            </div>
         </nav>
       </div>
       
