@@ -1,6 +1,6 @@
-<?php
+<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../includes/autoloader.inc.php");
 
-class User
+class User extends Database
 {
     public function __construct()
     {
@@ -13,14 +13,20 @@ class User
         }
     }
 
-	function __construct1($githubId)
+	function __construct1($githubId) // Login using Github API
 	{
-		
+        $sql = "SELECT * FROM user WHERE github_id = ?";
+        $user = $this->query($sql)->parameters([$githubId])->fetchObject();
+        return $user != null ? $user : null;
 	}
 
-	function __construct2($username, $password)
+	function __construct2($username, $password) // Standard Username and Password Login
 	{
-
+        $sql = "SELECT * FROM user WHERE username = ?";
+        $user = $this->query($sql)->parameters([$username])->fetchObject();
+        
+        if ($user == null) return; // Username does not exist
+        return password_verify($password, $user->password) ? $user : null;
 	}
 
 	public function profileToObject($githubUser)
