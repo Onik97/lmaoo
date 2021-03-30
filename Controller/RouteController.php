@@ -12,6 +12,7 @@ class RouteController
         if($_SERVER["REQUEST_METHOD"] == "POST" && @$_POST["function"] == $function)
         {
             echo json_encode(call_user_func_array($callback, $callbackParameters));
+            exit();
         }
     }
 }
