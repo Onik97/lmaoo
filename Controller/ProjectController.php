@@ -46,7 +46,7 @@ class ProjectController
         $stmt = $pdo->prepare("SELECT DISTINCT p.projectId, p.name, p.owner FROM projectAccess pa 
                                RIGHT JOIN project p ON pa.projectId = p.projectId 
                                WHERE pa.allowAccess = 1 AND pa.userId = ? OR p.owner = ?");
-        $stmt->execute([unserialize($userLoggedIn)->getId(), unserialize($userLoggedIn)->getId()]);
+        $stmt->execute([unserialize($userLoggedIn)->id, unserialize($userLoggedIn)->id]);
         return $stmt->fetchAll();
     }
 

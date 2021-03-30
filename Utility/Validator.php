@@ -11,19 +11,19 @@ class Validator
     public static function validateDeveloper()
     {
         if($_SESSION['userLoggedIn'] == null) return false;
-        return unserialize($_SESSION['userLoggedIn'])->getLevel() >= 1 ? true : false;
+        return unserialize($_SESSION['userLoggedIn'])->level >= 1 ? true : false;
     }
 
     public static function validateManager()
     {
         if($_SESSION['userLoggedIn'] == null) return false;
-        return unserialize($_SESSION['userLoggedIn'])->getLevel() >= 2 ? true : false;
+        return unserialize($_SESSION['userLoggedIn'])->level >= 2 ? true : false;
     }
 
     public static function validateSuperUser()
     {
         if($_SESSION['userLoggedIn'] == null) return false;
-        return unserialize($_SESSION['userLoggedIn'])->getLevel() >= 3 ? true : false;
+        return unserialize($_SESSION['userLoggedIn'])->level >= 3 ? true : false;
     }
 
     // To avoid direct access to page
