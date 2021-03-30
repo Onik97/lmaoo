@@ -5,6 +5,7 @@ class User extends Database
     public function __construct()
     {
         parent::__construct();
+        
         $arguments = func_get_args();
         $numberOfArguments = func_num_args();
 
@@ -43,6 +44,13 @@ class User extends Database
         $this->github_id = $userFromDB->github_id;
     }
 
+    public function registerUser($forename, $surname, $username, $hashedPassword)
+    {
+        $sql = "INSERT INTO user (userId, username, password, forename, surname) VALUES (null, ?, ?, ?, ?)";
+        $checker = $this->query($sql)->parameters([$username, $hashedPassword, $forename, $surname])->rowCount();
+        return $checker == 1 ? true : false;
+    }
+
     public function getUser(string $userId = null)
     {
         $sql = $userId == null ? "SELECT * FROM user" : "SELECT * FROM user WHERE userId = ?";
@@ -62,8 +70,6 @@ class User extends Database
         $sql = "UPDATE user SET active = 1 WHERE userId = ?";
         $this->query($sql)->parameters([$userId])->exec();
     }
-
-
 
 	public function profileToObject($githubUser)
     {
