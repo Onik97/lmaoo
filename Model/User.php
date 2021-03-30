@@ -4,6 +4,7 @@ class User extends Database
 {
     public function __construct()
     {
+        parent::__construct();
         $arguments = func_get_args();
         $numberOfArguments = func_num_args();
 
@@ -13,21 +14,56 @@ class User extends Database
         }
     }
 
-	function __construct1($githubId) // Login using Github API
+	public function __construct1($githubId) // Login using Github API
 	{
         $sql = "SELECT * FROM user WHERE github_id = ?";
         $user = $this->query($sql)->parameters([$githubId])->fetchObject();
         return $user != null ? $user : null;
 	}
 
-	function __construct2($username, $password) // Standard Username and Password Login
+	public function __construct2($username, $password) // Standard Username and Password Login
 	{
         $sql = "SELECT * FROM user WHERE username = ?";
-        $user = $this->query($sql)->parameters([$username])->fetchObject();
+        $userFromDB = $this->query($sql)->parameters([$username])->fetchObject();
         
-        if ($user == null) return; // Username does not exist
-        return password_verify($password, $user->password) ? $user : null;
+        if ($userFromDB == null) return; // Username does not exist
+        password_verify($password, $userFromDB->password) ? $this->setUser($userFromDB) : null;
 	}
+
+    public function setUser($userFromDB)
+    {
+        $this->id = $userFromDB->userId;
+        $this->username = $userFromDB->username;
+        $this->forename = $userFromDB->forename;
+        $this->surname = $userFromDB->surname;
+        $this->level = $userFromDB->level;
+        $this->isActive = $userFromDB->isActive;
+        $this->picture = $userFromDB->picture;
+        $this->darkMode = $userFromDB->darkMode;
+        $this->github_id = $userFromDB->github_id;
+    }
+
+    public function getUser(string $userId = null)
+    {
+        $sql = $userId == null ? "SELECT * FROM user" : "SELECT * FROM user WHERE userId = ?";
+        return $userId == null 
+        ? $this->query($sql)->fetchAll()
+        : $this->query($sql)->parameters([$userId])->fetchObject();
+    }
+
+    public function deactivateUser($userId)
+    {
+        $sql = "UPDATE user SET active = 0 WHERE userId = ?";
+        $this->query($sql)->parameters([$userId])->exec();
+    }
+
+    public function activateUser($userId)
+    {
+        $sql = "UPDATE user SET active = 1 WHERE userId = ?";
+        $this->query($sql)->parameters([$userId])->exec();
+    }
+
+
 
 	public function profileToObject($githubUser)
     {
