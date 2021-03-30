@@ -30,17 +30,13 @@ class UserController
 
 	public function userInfoById($userId) // Should be used for Unit Testing and Admin Only!
 	{
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT * FROM user WHERE userId = ?");
-		$stmt->execute([$userId]);
-		$user = $stmt->fetch();
-		return $user;
+		$user = new User();
+		return $user->getUser($userId);
 	}
 
 	public function standardLogin($username, $password)
 	{
-		if ($username == null || $password == null) return Library::redirectWithMessage("Username or Password must be filled in", "../User/login.php");
+		if (Library::hasNull($username, $password)) return Library::redirectWithMessage("Username or Password must be filled in", "../User/login.php");
 
 		$user = new User($username, $password);
 
@@ -52,32 +48,24 @@ class UserController
 	}
 
 	public function register($forename, $surname, $username, $password)
-	{		
+	{
+		if (Library::hasNull($forename, $surname, $username, $password)) return Library::redirectWithMessage("All Fields must be filled", "../User/register.php");
 		$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-		$pdo = Library::logindb();
-		$stmt = $pdo->prepare("INSERT INTO user (userId, username, password, forename, surname) VALUES (null, ?, ?, ?, ?)");
-		$stmt->execute([$username, $hashedPassword, $forename, $surname]);
-		$_SESSION['message'] = 'Register Successful';
-		header("Location: index.php");
+		$user = new User();
+		$checker = $user->registerUser($forename, $surname, $username, $hashedPassword);
+		
+		if ($checker == 1) 
+		{
+			return Library::redirectWithMessage("Register Successful, Login!", "../User/login.php");
+		}
+		else
+		{
+			// TODO: Implement Logging
+			return Library::redirectWithMessage("Something went wrong... Try Again later", "../User/login.php");
+		}
 	}
-
-	public function failedLogin() // May change to return false in the future to allow dynamic login page
-	{
-		$_SESSION['message'] = 'Login attempted failed';
-		header("Location: index.php");
-	}
-
-	public function getAllUsers() // This is used in Admin -> May be moved, not unit testing
-	{
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT * FROM user");
-		$stmt->execute();
-		$users = $stmt->fetchAll();
-		return $users;
-	}
-
+	
 	public function getActiveUsers()
 	{
 		$pdo = Library::logindb();
