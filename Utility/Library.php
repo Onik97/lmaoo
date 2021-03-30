@@ -43,4 +43,13 @@ class Library
         $_SESSION['message'] = $message;
         header("Location: $url");
     }
+
+    public static function hasNull(...$values)
+    {
+        foreach($values as $value) 
+        {
+            if ($value == null) return true;
+        }
+        return false;
+    }
 }
