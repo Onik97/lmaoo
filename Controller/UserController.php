@@ -40,7 +40,6 @@ class UserController
 		$user = User::withUsername($username);
 
 		if ($user->userId == null || !password_verify($password, $user->password)) return Library::redirectWithMessage("Username and Password did not match", "../User/login.php");
-	
 		if ($user->isActive == 0) return Library::redirectWithMessage("User deactivated, contact the administrator", "../User/login.php");
 
 		if($user->github_id != null)
@@ -78,6 +77,11 @@ class UserController
 		return User::withActive(1);
 	}
 
+	public function getInactiveUsers()
+	{
+		return User::withActive(0);
+	}
+
 	public function darkModeToggle($toggle, $userId)
 	{
 		$user = new User();
@@ -87,7 +91,7 @@ class UserController
 	public static function loadDarkMode($userId) // Keeping for Unit Testing
 	{
 		$user = new User();
-		$user->getDarkMode($userId);
+		return $user->getDarkMode($userId);
 	}
 
 	public function uploadImage($userId)
@@ -106,6 +110,12 @@ class UserController
 			echo true;
 		}
 		else echo false;
+	}
+
+	public function updatePicture($target, $userId)
+	{
+		$user = new User();
+		$user->setPicture($target, $userId);
 	}
 
 	public static function loadDarkModeToggle($toggle, $userLoggedIn)
