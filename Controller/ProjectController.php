@@ -19,7 +19,7 @@ class ProjectController
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("INSERT INTO project (name, status, owner) VALUES (?, ?, ?)");
-        $stmt->execute([$projectName, $projectStatus, unserialize($_SESSION['userLoggedIn'])->getId()]);
+        $stmt->execute([$projectName, $projectStatus, unserialize($_SESSION['userLoggedIn'])->id]);
     }
 
     public static function createNewTicket($featureId, $summary, $reporterKey)
