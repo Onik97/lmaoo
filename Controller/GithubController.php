@@ -60,7 +60,7 @@ class GithubController extends ApiWrapper
         $pdo = Library::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("UPDATE user SET github_id = ?, github_accessToken = ? WHERE userId = ?");
-        $stmt->execute([$githubUser['id'], $this->getAccessToken(), unserialize($_SESSION['userLoggedIn'])->id]);
+        $stmt->execute([$githubUser['id'], $this->getAccessToken(), unserialize($_SESSION['userLoggedIn'])->userId]);
 
         $userLoggedIn = unserialize($_SESSION['userLoggedIn']);
         $userLoggedIn->setGithubId($githubUser['id']);

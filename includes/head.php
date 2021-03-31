@@ -14,7 +14,7 @@ if(isset($_SESSION['userLoggedIn']))
 {
   $userLoggedIn = unserialize($_SESSION['userLoggedIn']);
   
-  echo "const userId = '" . $userLoggedIn->id . "'\n";
+  echo "const userId = '" . $userLoggedIn->userId . "'\n";
   echo "const userForename = '" . $userLoggedIn->forename. "'\n";
   echo "const userSurname = '" . $userLoggedIn->surname. "'\n";
   echo "const userUsername = '" . $userLoggedIn->username. "'\n";

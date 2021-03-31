@@ -49,7 +49,7 @@
 
             </div>
                     <input type="hidden" name="function" value="update">
-                    <input type="hidden" name="editUserId" value="<?php echo $userLoggedIn->id;?>">
+                    <input type="hidden" name="editUserId" value="<?php echo $userLoggedIn->userId;?>">
 
                     <div class="modal-footer">
                         <input id="editUserBtn" class="btn btn-primary" type="submit" value="Save Changes" disabled>
