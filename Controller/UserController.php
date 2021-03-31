@@ -43,6 +43,13 @@ class UserController
 		if ($user->id == null) return Library::redirectWithMessage("Username or Password did not match", "../User/login.php");
 		if ($user->isActive == 0) return Library::redirectWithMessage("User deactivated, contact the administrator", "../User/login.php");
 
+		if($user->github_id != null)
+		{
+			$githubController = new GithubController();
+			$github = new GithubUser($githubController->getGithubUser($user->github_accessToken));
+			$_SESSION['githubProfile'] = $github;
+		}
+
 		$_SESSION['userLoggedIn'] = serialize($user);
 		header("Location: ../Home/index.php");
 	}
@@ -142,4 +149,3 @@ class UserController
 		}
 	}
 }
-?>

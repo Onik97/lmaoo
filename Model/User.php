@@ -50,6 +50,7 @@ class User extends Database
         $this->picture = $userFromDB->picture;
         $this->darkMode = $userFromDB->darkMode;
         $this->github_id = $userFromDB->github_id;
+        $this->github_accessToken = $userFromDB->github_accessToken;
     }
 
     public function registerUser($forename, $surname, $username, $hashedPassword)
