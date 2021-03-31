@@ -30,17 +30,17 @@ class UserController
 
 	public function userInfoById($userId) // Should be used for Unit Testing and Admin Only!
 	{
-		$user = new User();
-		return $user->getUser($userId);
+		return User::withId($userId);
 	}
 
 	public function standardLogin($username, $password)
 	{
-		if (Library::hasNull($username, $password)) return Library::redirectWithMessage("Username or Password must be filled in", "../User/login.php");
+		if (Library::hasNull($username, $password)) return Library::redirectWithMessage("Username and Password must be filled in", "../User/login.php");
 
-		$user = new User($username, $password);
+		$user = User::withUsername($username);
 
-		if ($user->id == null) return Library::redirectWithMessage("Username or Password did not match", "../User/login.php");
+		if ($user->userId == null || !password_verify($password, $user->password)) return Library::redirectWithMessage("Username and Password did not match", "../User/login.php");
+	
 		if ($user->isActive == 0) return Library::redirectWithMessage("User deactivated, contact the administrator", "../User/login.php");
 
 		if($user->github_id != null)
@@ -75,8 +75,7 @@ class UserController
 	
 	public function getActiveUsers()
 	{
-		$user = new User();
-		return $user->getIsActiveUsers(1);
+		return User::withActive(1);
 	}
 
 	public function darkModeToggle($toggle, $userId)
