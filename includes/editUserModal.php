@@ -45,7 +45,7 @@
                         <small id="editUsernameMessage" hidden></small> 
                     </div>
 
-                    <?php GithubController::loadProfile($userLoggedIn); ?>
+                    <?php GithubController::loadProfile($_SESSION['githubProfile']); ?>
 
             </div>
                     <input type="hidden" name="function" value="update">
