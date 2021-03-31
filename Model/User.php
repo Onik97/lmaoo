@@ -5,52 +5,54 @@ class User extends Database
     public function __construct()
     {
         parent::__construct();
-        
-        $arguments = func_get_args();
-        $numberOfArguments = func_num_args();
-
-        if (method_exists($this, $function = '__construct'. $numberOfArguments)) 
-		{
-            call_user_func_array(array($this, $function), $arguments);
-        }
     }
 
-	public function __construct1($githubId) // Login using Github API
-	{
-        $sql = "SELECT * FROM user WHERE github_id = ?";
-        $user = $this->query($sql)->parameters([$githubId])->fetchObject();
-        return $user != null ? $user : null;
-	}
+    public static function withId($userId)
+    {
+        $user = new self();
+        return $user->getUserById($userId);
+    }
 
-	public function __construct2($username, $password) // Standard Username and Password Login
-	{
+    public static function withUsername($username)
+    {
+        $user = new self();
+        return $user->getUserByUsername($username);
+    }
+
+    public static function withGithubId($githubId)
+    {
+        $user = new self();
+        return $user->getUserByGithubId($githubId);
+    }
+
+    public static function withActive($isActive)
+    {
+        $user = new self();
+        return $user->getUsers($isActive);
+    }
+
+    public function getUserById(string $userId = null)
+    {
+        $sql = "SELECT * FROM user WHERE userId = ?";
+        return $this->query($sql)->parameters([$userId])->fetchObject();
+    }
+
+    public function getUserByUsername($username)
+    {
         $sql = "SELECT * FROM user WHERE username = ?";
-        $userFromDB = $this->query($sql)->parameters([$username])->fetchObject();
-        
-        if ($userFromDB == null) return; // Username does not exist
-        password_verify($password, $userFromDB->password) ? $this->setUser($userFromDB) : null;
-	}
-
-    public function getUser(string $userId = null)
-    {
-        $sql = $userId == null ? "SELECT * FROM user" : "SELECT * FROM user WHERE userId = ?";
-        return $userId == null 
-        ? $this->query($sql)->fetchAll()
-        : $this->query($sql)->parameters([$userId])->fetchObject();
+        return $this->query($sql)->parameters([$username])->fetchObject();
     }
 
-    public function setUser($userFromDB)
+    public function getUserByGithubId($githubId)
     {
-        $this->id = $userFromDB->userId;
-        $this->username = $userFromDB->username;
-        $this->forename = $userFromDB->forename;
-        $this->surname = $userFromDB->surname;
-        $this->level = $userFromDB->level;
-        $this->isActive = $userFromDB->isActive;
-        $this->picture = $userFromDB->picture;
-        $this->darkMode = $userFromDB->darkMode;
-        $this->github_id = $userFromDB->github_id;
-        $this->github_accessToken = $userFromDB->github_accessToken;
+        $sql = "SELECT * FROM user WHERE github_id = ?";
+        return $this->query($sql)->parameters([$githubId])->fetchObject();
+    }
+
+    public function getUsers($isActive = null)
+    {
+        $sql = $isActive == null ? "SELECT * FROM user" : "SELECT * FROM user WHERE isActive = ?";
+        return $this->query($sql)->parameters([$isActive])->fetchAll();
     }
 
     public function registerUser($forename, $surname, $username, $hashedPassword)
@@ -58,12 +60,6 @@ class User extends Database
         $sql = "INSERT INTO user (userId, username, password, forename, surname) VALUES (null, ?, ?, ?, ?)";
         $checker = $this->query($sql)->parameters([$username, $hashedPassword, $forename, $surname])->rowCount();
         return $checker == 1 ? true : false;
-    }
-
-    public function getIsActiveUsers($isActive) 
-    {
-        $sql = "SELECT * FROM user WHERE isActive = ?";
-        return $this->query($sql)->parameters([$isActive])->fetchAll();
     }
 
     public function activateUser($userId)
