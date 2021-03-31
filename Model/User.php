@@ -13,28 +13,16 @@ class User extends Database
         return $user->getUserById($userId);
     }
 
-    public static function withUsername($username)
-    {
-        $user = new self();
-        return $user->getUserByUsername($username);
-    }
-
-    public static function withGithubId($githubId)
-    {
-        $user = new self();
-        return $user->getUserByGithubId($githubId);
-    }
-
-    public static function withActive($isActive)
-    {
-        $user = new self();
-        return $user->getUsers($isActive);
-    }
-
     public function getUserById(string $userId = null)
     {
         $sql = "SELECT * FROM user WHERE userId = ?";
         return $this->query($sql)->parameters([$userId])->fetchObject();
+    }
+
+    public static function withUsername($username)
+    {
+        $user = new self();
+        return $user->getUserByUsername($username);
     }
 
     public function getUserByUsername($username)
@@ -43,10 +31,22 @@ class User extends Database
         return $this->query($sql)->parameters([$username])->fetchObject();
     }
 
+    public static function withGithubId($githubId)
+    {
+        $user = new self();
+        return $user->getUserByGithubId($githubId);
+    }
+
     public function getUserByGithubId($githubId)
     {
         $sql = "SELECT * FROM user WHERE github_id = ?";
         return $this->query($sql)->parameters([$githubId])->fetchObject();
+    }
+
+    public static function withActive($isActive)
+    {
+        $user = new self();
+        return $user->getUsers($isActive);
     }
 
     public function getUsers($isActive = null)
@@ -77,13 +77,13 @@ class User extends Database
     public function getDarkMode($userId)
     {
         $sql = "SELECT darkMode FROM user WHERE userId = ?";
-        $this->query($sql)->parameters([$userId])->fetchColumn();
+        return $this->query($sql)->parameters([$userId])->fetchObject()->darkMode;
     }
 
     public function setDarkMode($toggle, $userId)
     {
         $sql = "UPDATE user SET darkMode = ? WHERE userId = ?";
-        $this->query($sql)->parameters([$toggle, $userId])->fetchColumn();
+        $this->query($sql)->parameters([$toggle, $userId])->exec();
     }
 
     public function setPicture($target, $userId)
@@ -91,12 +91,4 @@ class User extends Database
         $sql = "UPDATE user SET picture = ? WHERE userId = ?";
         $this->query($sql)->parameters([$target, $userId])->exec();
     }
-
-	public function profileToObject($githubUser)
-    {
-        $this->profilePicture = $githubUser['avatar_url'];
-        $this->name = $githubUser['name'];
-        $this->login = $githubUser['login'];
-    }
 }
-?>
