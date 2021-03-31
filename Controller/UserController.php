@@ -74,33 +74,21 @@ class UserController
 
 	public function darkModeToggle($toggle, $userId)
 	{
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("UPDATE user SET darkMode = ? WHERE userId = ?");
-		$stmt->execute([$toggle, $userId]);
+		$user = new User();
+		$user->setDarkMode($toggle, $userId);
 	}
 
 	public static function loadDarkMode($userId) // Keeping for Unit Testing
 	{
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT darkMode FROM user WHERE userId = ?");
-		$stmt->execute([$userId]);
-		return $stmt->fetchColumn();
+		$user = new User();
+		$user->getDarkMode($userId);
 	}
 
-	public function updatePicture($target, $userId)
+	public function uploadImage($userId)
 	{
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("UPDATE user SET picture = ? WHERE userId = ?");
-		$stmt->execute([$target, $userId]);
-	}
+		$user = new User();
 
-	public function uploadImage($userId, ?string $unitTest)
-	{
-		$userController = new userController();
-		$target_dir = $unitTest == null ? "../Images/profilePictures/" : __DIR__ . "../Images/profilePictures/";
+		$target_dir = "../Images/profilePictures/";
 		$target_file = $target_dir . basename($_FILES["image"]["name"]);
 		$ext = pathinfo($target_file, PATHINFO_EXTENSION);
 		$rename = $target_dir . $userId . "." . $ext;
@@ -108,7 +96,7 @@ class UserController
 		if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) 
 		{
 			rename($target_file, $rename);
-			$userController->updatePicture($rename, $userId);
+			$user->setPicture($rename, $userId);
 			echo true;
 		}
 		else echo false;

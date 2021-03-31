@@ -31,6 +31,14 @@ class User extends Database
         password_verify($password, $userFromDB->password) ? $this->setUser($userFromDB) : null;
 	}
 
+    public function getUser(string $userId = null)
+    {
+        $sql = $userId == null ? "SELECT * FROM user" : "SELECT * FROM user WHERE userId = ?";
+        return $userId == null 
+        ? $this->query($sql)->fetchAll()
+        : $this->query($sql)->parameters([$userId])->fetchObject();
+    }
+
     public function setUser($userFromDB)
     {
         $this->id = $userFromDB->userId;
@@ -51,18 +59,16 @@ class User extends Database
         return $checker == 1 ? true : false;
     }
 
-    public function getUser(string $userId = null)
-    {
-        $sql = $userId == null ? "SELECT * FROM user" : "SELECT * FROM user WHERE userId = ?";
-        return $userId == null 
-        ? $this->query($sql)->fetchAll()
-        : $this->query($sql)->parameters([$userId])->fetchObject();
-    }
-
     public function getIsActiveUsers($isActive) 
     {
         $sql = "SELECT * FROM user WHERE isActive = ?";
         return $this->query($sql)->parameters([$isActive])->fetchAll();
+    }
+
+    public function activateUser($userId)
+    {
+        $sql = "UPDATE user SET active = 1 WHERE userId = ?";
+        $this->query($sql)->parameters([$userId])->exec();
     }
 
     public function deactivateUser($userId)
@@ -71,10 +77,22 @@ class User extends Database
         $this->query($sql)->parameters([$userId])->exec();
     }
 
-    public function activateUser($userId)
+    public function getDarkMode($userId)
     {
-        $sql = "UPDATE user SET active = 1 WHERE userId = ?";
-        $this->query($sql)->parameters([$userId])->exec();
+        $sql = "SELECT darkMode FROM user WHERE userId = ?";
+        $this->query($sql)->parameters([$userId])->fetchColumn();
+    }
+
+    public function setDarkMode($toggle, $userId)
+    {
+        $sql = "UPDATE user SET darkMode = ? WHERE userId = ?";
+        $this->query($sql)->parameters([$toggle, $userId])->fetchColumn();
+    }
+
+    public function setPicture($target, $userId)
+    {
+        $sql = "UPDATE user SET picture = ? WHERE userId = ?";
+        $this->query($sql)->parameters([$target, $userId])->exec();
     }
 
 	public function profileToObject($githubUser)
