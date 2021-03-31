@@ -38,24 +38,6 @@ class Database
 			die("ERROR ID: 102");
 		}
     }
-
-    function fetchColumn()
-    {
-        try 
-        {
-            $pdo = new PDO("mysql:host={$this->config['db_host']};dbname={$this->config['db_table']}", $this->config['db_username'],  $this->config['db_password']);
-            $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-            $stmt = $pdo->prepare($this->query);
-            $stmt->execute($this->parameters);
-            $pdo = null; // Closes Connection
-            return $stmt->fetchColumn();
-        }
-        catch(PDOException $e)
-		{
-			die("ERROR ID: 102");
-		}
-    }
-
     
     function fetchObject()
     {
