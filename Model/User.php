@@ -3,9 +3,9 @@
 class User extends Database
 {
 
-    public static function withId($userId)
+    public static function withId($userId, $columns = null)
     {
-        $sql = "SELECT * FROM user WHERE userId = ?";
+        $sql = $columns == null ? "SELECT * FROM user WHERE userId = ?" : "SELECT $columns FROM user";
         return self::db()::query($sql)::parameters([$userId])::fetchObject();
     }
 
