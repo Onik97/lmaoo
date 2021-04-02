@@ -22,13 +22,13 @@ class Ticket extends Database implements IModel
 
     public static function update($ticketId, array $data)
     {
-        $sql = Library::arrayToUpdateQuery("project", $data);
+        $sql = Library::arrayToUpdateQuery("ticket", $data);
         self::db()::query($sql)::parameters([$ticketId])::exec();
     }
 
     public static function delete($ticketId)
     {
-        $sql = "UPDATE project SET active = 0 WHERE ticketId = ?";
+        $sql = "UPDATE ticket SET active = 0 WHERE ticketId = ?";
         self::db()::query($sql)::parameters([$ticketId])::exec();
     }
 }
