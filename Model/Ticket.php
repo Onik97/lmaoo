@@ -31,5 +31,4 @@ class Ticket extends Database implements IModel
         $sql = "UPDATE project SET active = 0 WHERE ticketId = ?";
         self::db()::query($sql)::parameters([$ticketId])::exec();
     }
-
 }
