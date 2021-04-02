@@ -1,6 +1,6 @@
 <?php
 
-interface IModal 
+interface IModel 
 {
     public static function create(array $data);
 

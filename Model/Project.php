@@ -1,6 +1,6 @@
 <?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../includes/autoloader.inc.php");
 
-class Project extends Database implements IModal
+class Project extends Database implements IModel
 {
     public static function create(array $data)
     {
