@@ -1,11 +1,17 @@
 <?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../includes/autoloader.inc.php");
 
-class Ticket extends Database
+class Ticket extends Database implements IModel
 {
-    public static function createComment($comment, $ticketId, $userId)
+    public static function create(array $data)
     {
-        $sql = "INSERT INTO comment (commentId, commentContent, ticketId, userId) VALUES (null, ?, ?, ?)";
-        return self::db()::query($sql)::parameters([$comment, $ticketId, $userId])::exec();
+        $sql = Library::arrayToInsertQuery("comment", $data);
+        self::db()::query($sql)::parameters([])::exec();
+    }
+
+    public static function withId($commentId, $columns = null)
+    {
+        $sql = $columns == null ? "SELECT * FROM project WHERE projectId = ?" : "SELECT $columns FROM project WHERE projectId = ?";
+        return self::db()::query($sql)::parameters([$commentId])::fetchObject();
     }
 
     public static function withTicketId($ticketId)
@@ -15,15 +21,15 @@ class Ticket extends Database
         return self::db()::query($sql)::parameters([$ticketId])::fetchAll();
     }
 
-    public static function updateComment($comment, $commentId)
+    public static function update($commentId, array $data)
     {
-        $sql = "UPDATE comment SET commentContent = ? WHERE commentId = ?";
-        return self::db()::query($sql)::parameters([$comment, $commentId])::fetchAll();
+        $sql = Library::arrayToUpdateQuery("comment", $data);
+        self::db()::query($sql)::parameters([$commentId])::exec();
     }
 
-    public static function deleteComment($commentId)
+    public static function delete($commentId)
     {
-        $sql = "DELETE FROM comment WHERE commentId = ?";
+        $sql = "UPDATE project SET active = 0 WHERE commentId = ?";
         self::db()::query($sql)::parameters([$commentId])::exec();
     }
 }
