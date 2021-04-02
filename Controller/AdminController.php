@@ -106,4 +106,3 @@ class AdminController
         return false;
     }
 }
-?>

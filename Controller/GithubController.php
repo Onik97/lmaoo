@@ -88,5 +88,4 @@ class GithubController extends ApiWrapper
             </div>";
         }
     }
-
 }

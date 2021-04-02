@@ -85,4 +85,3 @@ class ProjectController
         echo "</li>";
     }
 }
-?>
