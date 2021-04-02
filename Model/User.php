@@ -1,7 +1,24 @@
 <?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../includes/autoloader.inc.php");
 
-class User extends Database
+class User extends Database implements IModel
 {
+    public static function create(array $data)
+    {
+        $sql = Library::arrayToInsertQuery("user", $data);
+        self::db()::query($sql)::parameters([])::exec();
+    }
+
+    public static function update($userId, array $data)
+    {
+        $sql = Library::arrayToUpdateQuery("user", $data);
+        self::db()::query($sql)::parameters([$userId])::exec();
+    }
+
+    public static function delete($userId)
+    {
+        $sql = "UPDATE user SET active = 0 WHERE userId = ?";
+        self::db()::query($sql)::parameters([$userId])::exec();
+    }
 
     public static function withId($userId, $columns = null)
     {
