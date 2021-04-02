@@ -176,7 +176,7 @@ class TicketController
     public static function loadTicket()
     {
         $ticketId = $_GET["ticketId"];
-        if ($ticketId == null) return Library::redirectWithMessage("TicketId not valid", "../Home/index.php");
+        if ($ticketId == null) return Library::redirectWithMessage("Ticket ID not valid", "../Home/index.php");
 
         $ticket = TicketController::getTicket($ticketId);
         return ($ticket == null) 
