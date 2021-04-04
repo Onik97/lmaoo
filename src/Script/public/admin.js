@@ -1,1 +1,1 @@
-$(document).ready(() => { Navbar.accountActiveTab(); })
+$(document).ready(() => { Navbar.accountActiveTab(); Admin.loadActiveUsers(); })
