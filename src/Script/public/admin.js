@@ -76,3 +76,4 @@ class Admin{
     }
 }
 
+$('#adminSelect').change(function(){Admin.activeSelect(this.value)});
