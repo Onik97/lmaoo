@@ -60,7 +60,7 @@ class GithubController extends ApiWrapper
         $pdo = Library::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("UPDATE user SET github_id = ?, github_accessToken = ? WHERE userId = ?");
-        $stmt->execute([$githubUser['id'], $this->getAccessToken(), unserialize($_SESSION['userLoggedIn'])->getId()]);
+        $stmt->execute([$githubUser['id'], $this->getAccessToken(), unserialize($_SESSION['userLoggedIn'])->userId]);
 
         $userLoggedIn = unserialize($_SESSION['userLoggedIn']);
         $userLoggedIn->setGithubId($githubUser['id']);
@@ -70,9 +70,9 @@ class GithubController extends ApiWrapper
         Library::redirectWithMessage("Github Registration Successful!", "../Home/index.php");
     }
 
-    public static function loadProfile($userLoggedIn)
+    public static function loadProfile($githubProfile)
     {
-        if($userLoggedIn->getGithubId() == null)
+        if($githubProfile == null)
         {
             echo 
             "<div class='form-group'>
@@ -83,10 +83,9 @@ class GithubController extends ApiWrapper
         {
             echo 
             "<div class='row github-registered'>
-            <div class='col-2'><img class='github-image' width='50' height='50' src='{$userLoggedIn->profilePicture}}'></div>
-            <div class='col-10 github-info'><i class='fab fa-github'></i> Github Linked as {$userLoggedIn->name} ({$userLoggedIn->login})</div>   
+            <div class='col-2'><img class='github-image' width='50' height='50' src='{$githubProfile->avatar}}'></div>
+            <div class='col-10 github-info'><i class='fab fa-github'></i> Github Linked as {$githubProfile->name} ({$githubProfile->username})</div>   
             </div>";
         }
     }
-
 }

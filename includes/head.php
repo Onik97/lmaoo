@@ -14,13 +14,13 @@ if(isset($_SESSION['userLoggedIn']))
 {
   $userLoggedIn = unserialize($_SESSION['userLoggedIn']);
   
-  echo "const userId = '" . $userLoggedIn->getId() . "'\n";
-  echo "const userForename = '" . $userLoggedIn->getForename(). "'\n";
-  echo "const userSurname = '" . $userLoggedIn->getSurname(). "'\n";
-  echo "const userUsername = '" . $userLoggedIn->getUsername(). "'\n";
-  echo "const userLevel = '" . $userLoggedIn->getLevel(). "'\n";
+  echo "const userId = '" . $userLoggedIn->userId . "'\n";
+  echo "const userForename = '" . $userLoggedIn->forename. "'\n";
+  echo "const userSurname = '" . $userLoggedIn->surname. "'\n";
+  echo "const userUsername = '" . $userLoggedIn->username. "'\n";
+  echo "const userLevel = '" . $userLoggedIn->level. "'\n";
 
-  if ($userLoggedIn->getLevel() > 1)
+  if ($userLoggedIn->level > 1)
   {
     echo "const users = " . json_encode($userController->getActiveUsers()) . "\n";
   }

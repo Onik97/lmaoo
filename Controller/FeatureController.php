@@ -56,5 +56,3 @@ class FeatureController
         $stmt->execute([$featureName, $projectId]);
     }
 }
-
-?>
