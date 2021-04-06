@@ -1,1 +1,3 @@
-$(document).ready(() => {Navbar.projectActiveTab(); });
+import Navbar from "../public/navbar.js";
+
+$(document).ready(() => { Navbar.projectActiveTab(); });

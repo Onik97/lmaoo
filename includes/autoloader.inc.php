@@ -6,7 +6,8 @@ function autoLoader($className)
     
     $paths = array(__DIR__ . "/../Controller/$className.php",
                    __DIR__ . "/../Utility/$className.php",
-                   __DIR__ . "/../Model/$className.php");
+                   __DIR__ . "/../Model/$className.php",
+                   __DIR__ . "/../$className.php");
 
     foreach ($paths as $path) if (file_exists($path)) include_once($path);
     if (session_status() == PHP_SESSION_NONE) session_start();

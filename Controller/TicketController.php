@@ -2,6 +2,20 @@
 
 class TicketController
 {
+    public static function getTicket($ticketId)
+    {
+        $pdo = Library::logindb();
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("SELECT t.ticketId, t.summary, t.created, t.updated, t.progress, 
+                               t.reporter_key AS reporterId, t.assignee_key AS assigneeId, 
+                               CONCAT(u.forename, ' ' ,u.surname) AS reporter, u.username AS reporterUsername, 
+                               CONCAT(u2.forename, ' ' ,u2.surname) AS assignee, u2.username AS assigneeUsername FROM ticket t 
+                               INNER JOIN user u ON u.userId = t.reporter_key INNER JOIN user u2 ON u2.userId = t.assignee_key 
+                               WHERE t.ticketId = ?");
+        $stmt->execute([$ticketId]);
+        return $stmt->fetchObject();
+    }
+
     public static function updateTicketTime($ticketId)
     {
         date_default_timezone_set('Europe/London');
@@ -158,5 +172,15 @@ class TicketController
         echo "<button id='searchBarBtn' class='btn btn-outline-success my-sm-0' onclick='searchBar()'>Search</button>";
         echo "</div>";
     }
+
+    public static function loadTicket()
+    {
+        $ticketId = $_GET["ticketId"];
+        if ($ticketId == null) return Library::redirectWithMessage("Ticket ID not valid", "../Home/index.php");
+
+        $ticket = TicketController::getTicket($ticketId);
+        return ($ticket == null) 
+        ? Library::redirectWithMessage("TicketId not valid", "../Home/index.php")
+        : $ticket;
+    }
 }
-?>

@@ -2,6 +2,35 @@
 
 class UserController 
 {
+	public static function standardLogin()
+	{
+		Library::validatePostValues("username", "password");
+		$username = $_POST["username"]; $password = $_POST["password"];
+		if (Library::hasNull($username, $password)) return Library::redirectWithMessage("Username and Password must be filled in", "/login");
+
+		$user = User::withUsername($username);
+
+		if ($user->userId == null || !password_verify($password, $user->password)) return Library::redirectWithMessage("Username and Password did not match", "../User/login.php");
+		if ($user->isActive == 0) return Library::redirectWithMessage("User deactivated, contact the administrator", "../User/login.php");
+
+		if($user->github_id != null)
+		{
+			$githubController = new GithubController();
+			$github = new GithubUser($githubController->getGithubUser($user->github_accessToken));
+			$_SESSION['githubProfile'] = $github;
+		}
+
+		$_SESSION['userLoggedIn'] = serialize($user);
+		header("Location: /");
+	}
+
+	public static function logout()
+	{
+		session_unset();
+		session_destroy();
+		header("Location: /");
+	}
+
 	public function hasDup(?string $unitTest)
 	{
 		$username = $unitTest == null ? $_POST['username'] : $unitTest;
@@ -30,139 +59,55 @@ class UserController
 
 	public function userInfoById($userId) // Should be used for Unit Testing and Admin Only!
 	{
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT * FROM user WHERE userId = ?");
-		$stmt->execute([$userId]);
-		$user = $stmt->fetch();
-		return $user;
-	}
-
-	public function login($username, $password, $githubUser = null)
-	{
-		$githubController = new GithubController();
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		
-		if ($githubUser != null)
-		{
-			$stmt = $pdo->prepare("SELECT * FROM user WHERE github_id = ?");
-			$stmt->execute([$githubUser['id']]);
-			$user = $stmt->fetch();
-			
-			if($user == false) 
-			{
-				Library::redirectWithMessage("No Github Account has been linked. You must login first and edit your user", "../User/login.php"); 
-				return;
-			}
-			
-			$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode, $user->github_id);
-			$userLoggedIn->profileToObject($githubUser);
-			
-			if ($user->darkMode != $_COOKIE["lmaooDarkMode"]) setcookie("lmaooDarkMode", $user->darkMode, 0, "/");
-			$_SESSION['userLoggedIn'] = serialize($userLoggedIn);
-			header("Location: ../Home/index.php");
-			return;
-		}
-
-		$stmt = $pdo->prepare("SELECT * FROM user WHERE username = ?");
-		$stmt->execute([$username]);
-		$user = $stmt->fetch();
-		
-		if (password_verify($password, $user->password))
-		{
-			if($user->isActive == true)
-			{
-				$userLoggedIn = new user($user->userId, $user->forename, $user->surname, $user->username, $user->password, $user->level, $user->isActive, $user->darkMode, $user->github_id);
-				
-				if($user->github_id != null) 
-				{
-					$userLoggedIn->profileToObject($githubController->getGithubUser($githubController->getAccessTokenFromDatabase($user->userId)));
-				}
-
-				if ($user->darkMode != $_COOKIE["lmaooDarkMode"]) setcookie("lmaooDarkMode", $user->darkMode, 0, "/");			
-				$_SESSION['userLoggedIn'] = serialize($userLoggedIn);
-				header("Location: ../Home/index.php");
-			}
-			else
-			{
-				$_SESSION['message'] = 'User deactivated, contact the administrator';
-				header("Location: index.php");
-			}
-		}
-		else
-		{
-			$this->failedLogin();
-		}
-
+		return User::withId($userId);
 	}
 
 	public function register($forename, $surname, $username, $password)
-	{		
+	{
+		if (Library::hasNull($forename, $surname, $username, $password)) return Library::redirectWithMessage("All Fields must be filled", "../User/register.php");
 		$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-		$pdo = Library::logindb();
-		$stmt = $pdo->prepare("INSERT INTO user (userId, username, password, forename, surname) VALUES (null, ?, ?, ?, ?)");
-		$stmt->execute([$username, $hashedPassword, $forename, $surname]);
-		$_SESSION['message'] = 'Register Successful';
-		header("Location: index.php");
+		$user = new User();
+		$checker = $user->registerUser($forename, $surname, $username, $hashedPassword);
+		
+		if ($checker == 1) 
+		{
+			return Library::redirectWithMessage("Register Successful, Login!", "../User/login.php");
+		}
+		else
+		{
+			// TODO: Implement Logging
+			return Library::redirectWithMessage("Something went wrong... Try Again later", "../User/login.php");
+		}
 	}
-
-	public function failedLogin() // May change to return false in the future to allow dynamic login page
-	{
-		$_SESSION['message'] = 'Login attempted failed';
-		header("Location: index.php");
-	}
-
-	public function getAllUsers() // This is used in Admin -> May be moved, not unit testing
-	{
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT * FROM user");
-		$stmt->execute();
-		$users = $stmt->fetchAll();
-		return $users;
-	}
-
+	
 	public function getActiveUsers()
 	{
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT userId, forename, surname, username, picture FROM user WHERE isActive = 1");
-		$stmt->execute();
-		$activeUsers = $stmt->fetchall();
-		return $activeUsers;
+		return User::withActive(1);
+	}
+
+	public function getInactiveUsers()
+	{
+		return User::withActive(0);
 	}
 
 	public function darkModeToggle($toggle, $userId)
 	{
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("UPDATE user SET darkMode = ? WHERE userId = ?");
-		$stmt->execute([$toggle, $userId]);
+		$user = new User();
+		$user->setDarkMode($toggle, $userId);
 	}
 
 	public static function loadDarkMode($userId) // Keeping for Unit Testing
 	{
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT darkMode FROM user WHERE userId = ?");
-		$stmt->execute([$userId]);
-		return $stmt->fetchColumn();
+		$user = new User();
+		return $user->getDarkMode($userId);
 	}
 
-	public function updatePicture($target, $userId)
+	public function uploadImage($userId)
 	{
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("UPDATE user SET picture = ? WHERE userId = ?");
-		$stmt->execute([$target, $userId]);
-	}
+		$user = new User();
 
-	public function uploadImage($userId, ?string $unitTest)
-	{
-		$userController = new userController();
-		$target_dir = $unitTest == null ? "../Images/profilePictures/" : __DIR__ . "../Images/profilePictures/";
+		$target_dir = "../Images/profilePictures/";
 		$target_file = $target_dir . basename($_FILES["image"]["name"]);
 		$ext = pathinfo($target_file, PATHINFO_EXTENSION);
 		$rename = $target_dir . $userId . "." . $ext;
@@ -170,10 +115,16 @@ class UserController
 		if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) 
 		{
 			rename($target_file, $rename);
-			$userController->updatePicture($rename, $userId);
+			$user->setPicture($rename, $userId);
 			echo true;
 		}
 		else echo false;
+	}
+
+	public function updatePicture($target, $userId)
+	{
+		$user = new User();
+		$user->setPicture($target, $userId);
 	}
 
 	public static function loadDarkModeToggle($toggle, $userLoggedIn)
@@ -188,32 +139,14 @@ class UserController
 			}
 			else if ($userLoggedIn != null)
 			{
-				$toggle = $userLoggedIn->getDarkMode();
-				setcookie("lmaooDarkMode", $userLoggedIn->getDarkMode(), 0, "/");
+				$toggle = $userLoggedIn->darkMode;
+				setcookie("lmaooDarkMode", $userLoggedIn->darkMode, 0, "/");
 			}
 		}
-
+		
 		echo "<div class='custom-control custom-switch'>";
 		echo $toggle == true ? "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' onclick='darkModeToggle()' checked>" : "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' onclick='darkModeToggle()'>";
 		echo "<label class='custom-control-label' for='darkModeSwitch'>Dark Mode</label>";
 		echo "</div>";
 	}
-
-	public static function loadDropdownItems($userLoggedIn)
-	{
-		$userLoggedIn = unserialize($userLoggedIn);
-		if($userLoggedIn == null)
-		{
-			echo "<a class='dropdown-item' id='registerNav' href='../User/register.php'>Register</a>";
-			echo "<a class='dropdown-item' id='loginNav' href='../User/index.php'>Login</a>";
-		}
-		else
-		{
-			if ($userLoggedIn->getLevel() > 1) echo "<a class='dropdown-item' id='managerNav' href='../Manager/index.php'>Manager</a>"; 
-			echo "<a class='dropdown-item' id='editAccountNav' data-toggle='modal' data-target='#view-modal' role='button'>Edit Account</a>";
-			echo "<a class='dropdown-item' id='logoutNav' href='../User/logout.php'>Logout</a>";
-			if($userLoggedIn->getLevel() > 3) echo "<a class='dropdown-item' id='adminNav' href='../Admin/index.php'>Admin</a>";
-		}
-	}
 }
-?>
