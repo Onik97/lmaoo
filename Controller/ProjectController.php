@@ -65,23 +65,4 @@ class ProjectController
         $stmt->execute([$featureId, $progress]);
         return $stmt->fetchAll();
     }
-
-    public static function loadProjectsInNavBar($userLoggedIn)
-    {
-        if ($userLoggedIn == null) return; 
-        $projectController = new projectController();
-        $projects = $projectController->getAccessibleProjectList($userLoggedIn);
-
-        echo "<li class='nav-item dropdown'>";
-        echo "<a id='projectNav' href='#' class='nav-link dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Project<span class='caret'></span></a>";
-        echo "<div class='dropdown-menu'>";
-        
-        foreach ($projects as $project) 
-        { 
-            echo "<a class='dropdown-item' href='../Project/index.php?projectId=$project->projectId'>$project->name</a>";
-        } 
-        
-        echo "</div>";
-        echo "</li>";
-    }
 }

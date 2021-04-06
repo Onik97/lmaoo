@@ -1,4 +1,3 @@
-<?php $_SESSION["userLoggedIn"] ?? null; ?>
 <link rel="stylesheet" href="../Css/navbar.css">
 <nav class="navbar navbar-expand-lg">
 
@@ -17,7 +16,7 @@
             <ul class="nav navbar-nav ml-auto mr-5">
 
                 <li class="nav-item"> <a class="nav-link" id="homeNav" href="/">Home</a> </li>
-                <?php ProjectController::loadProjectsInNavBar($_SESSION['userLoggedIn'] ?? null); ?>
+                <?php RenderController::renderProjectsInNavBar($_SESSION['userLoggedIn'] ?? null); ?>
 
                 <li class="nav-item dropdown">
                     <a id="accountNav" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>

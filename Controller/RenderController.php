@@ -30,4 +30,23 @@ class RenderController
 			if($userLoggedIn->level > 3) echo "<a class='dropdown-item' id='adminNav' href='/admin'>Admin</a>";
 		}
 	}
+
+	public static function renderProjectsInNavBar($userLoggedIn)
+    {
+        if ($userLoggedIn == null) return; 
+        $projectController = new projectController();
+        $projects = $projectController->getAccessibleProjectList($userLoggedIn);
+
+        echo "<li class='nav-item dropdown'>";
+        echo "<a id='projectNav' href='#' class='nav-link dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Project<span class='caret'></span></a>";
+        echo "<div class='dropdown-menu'>";
+        
+        foreach ($projects as $project) 
+        { 
+            echo "<a class='dropdown-item' href='/project?projectId=$project->projectId'>$project->name</a>";
+        } 
+        
+        echo "</div>";
+        echo "</li>";
+    }
 }
