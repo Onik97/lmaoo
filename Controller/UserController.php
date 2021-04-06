@@ -5,8 +5,7 @@ class UserController
 	public static function standardLogin()
 	{
 		Library::validatePostValues("username", "password");
-		$username = $_POST["username"];
-		$password = $_POST["password"];
+		$username = $_POST["username"]; $password = $_POST["password"];
 		if (Library::hasNull($username, $password)) return Library::redirectWithMessage("Username and Password must be filled in", "/login");
 
 		$user = User::withUsername($username);
@@ -27,7 +26,6 @@ class UserController
 
 	public static function logout()
 	{
-		session_start();
 		session_unset();
 		session_destroy();
 		header("Location: /");
@@ -145,7 +143,7 @@ class UserController
 				setcookie("lmaooDarkMode", $userLoggedIn->darkMode, 0, "/");
 			}
 		}
-
+		
 		echo "<div class='custom-control custom-switch'>";
 		echo $toggle == true ? "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' onclick='darkModeToggle()' checked>" : "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' onclick='darkModeToggle()'>";
 		echo "<label class='custom-control-label' for='darkModeSwitch'>Dark Mode</label>";
