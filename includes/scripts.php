@@ -12,7 +12,7 @@
 
 <script src="../Script/notifications.js"></script>
 <script src="../Script/navBar.js"></script>
-<script src="../Script/public/navbar.js"></script>
+<script type="module" src="../Script/public/navbar.js"></script>
 
 <script>
 

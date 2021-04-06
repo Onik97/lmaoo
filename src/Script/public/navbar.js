@@ -1,4 +1,4 @@
-class Navbar{
+export default class Navbar{
      static homeActiveTab(){
         document.getElementById("homeNav").classList.add("active");
     }
