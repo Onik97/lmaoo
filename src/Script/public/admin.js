@@ -2,17 +2,18 @@ import Navbar from "../public/navbar.js";
 
 $(document).ready(() => { Navbar.accountActiveTab(); Admin.loadActiveUsers(); })
 
-class Admin{
-    static activeSelect(){
+class Admin {
+    
+    static activeSelect() {
 
         let selectValue = $("#adminSelect").val();
-    
+
         if (selectValue == "Active") Admin.loadActiveUsers();
         if (selectValue == "inActive") Admin.loadInActiveUsers();
         else return;
     }
 
-    static loadActiveUsers(){
+    static loadActiveUsers() {
 
        var data = new FormData();
        data.append("function", "getAdminActiveUsers");
@@ -44,7 +45,7 @@ class Admin{
        })
     }
 
-    static loadInActiveUsers(){
+    static loadInActiveUsers() {
 
        var data = new FormData();
        data.append("function", "getAdminInActiveUsers");
@@ -78,4 +79,6 @@ class Admin{
     }
 }
 
-$('#adminSelect').change(function(){Admin.activeSelect(this.value)});
+$('#adminSelect').change(function() { 
+    Admin.activeSelect(this.value) 
+});

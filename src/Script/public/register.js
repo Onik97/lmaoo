@@ -35,5 +35,4 @@ $("#usernameRegister").keyup(async function() {
         $("#usernameMessage").html("");
         $("#registerBtn").prop("disabled", false);
     }
-
 })
