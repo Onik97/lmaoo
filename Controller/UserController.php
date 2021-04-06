@@ -151,21 +151,4 @@ class UserController
 		echo "<label class='custom-control-label' for='darkModeSwitch'>Dark Mode</label>";
 		echo "</div>";
 	}
-
-	public static function loadDropdownItems($userLoggedIn)
-	{
-		$userLoggedIn = unserialize($userLoggedIn);
-		if($userLoggedIn == null)
-		{
-			echo "<a class='dropdown-item' id='registerNav' href='../User/register.php'>Register</a>";
-			echo "<a class='dropdown-item' id='loginNav' href='../User/index.php'>Login</a>";
-		}
-		else
-		{
-			if ($userLoggedIn->level > 1) echo "<a class='dropdown-item' id='managerNav' href='../Manager/index.php'>Manager</a>"; 
-			echo "<a class='dropdown-item' id='editAccountNav' data-toggle='modal' data-target='#view-modal' role='button'>Edit Account</a>";
-			echo "<a class='dropdown-item' id='logoutNav' href='../User/logout.php'>Logout</a>";
-			if($userLoggedIn->level > 3) echo "<a class='dropdown-item' id='adminNav' href='../Admin/index.php'>Admin</a>";
-		}
-	}
 }
