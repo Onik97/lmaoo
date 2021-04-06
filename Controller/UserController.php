@@ -2,6 +2,37 @@
 
 class UserController 
 {
+	public static function standardLogin()
+	{
+		Library::validatePostValues("username", "password");
+		$username = $_POST["username"];
+		$password = $_POST["password"];
+		if (Library::hasNull($username, $password)) return Library::redirectWithMessage("Username and Password must be filled in", "/login");
+
+		$user = User::withUsername($username);
+
+		if ($user->userId == null || !password_verify($password, $user->password)) return Library::redirectWithMessage("Username and Password did not match", "../User/login.php");
+		if ($user->isActive == 0) return Library::redirectWithMessage("User deactivated, contact the administrator", "../User/login.php");
+
+		if($user->github_id != null)
+		{
+			$githubController = new GithubController();
+			$github = new GithubUser($githubController->getGithubUser($user->github_accessToken));
+			$_SESSION['githubProfile'] = $github;
+		}
+
+		$_SESSION['userLoggedIn'] = serialize($user);
+		header("Location: /");
+	}
+
+	public static function logout()
+	{
+		session_start();
+		session_unset();
+		session_destroy();
+		header("Location: /");
+	}
+
 	public function hasDup(?string $unitTest)
 	{
 		$username = $unitTest == null ? $_POST['username'] : $unitTest;
@@ -31,26 +62,6 @@ class UserController
 	public function userInfoById($userId) // Should be used for Unit Testing and Admin Only!
 	{
 		return User::withId($userId);
-	}
-
-	public function standardLogin($username, $password)
-	{
-		if (Library::hasNull($username, $password)) return Library::redirectWithMessage("Username and Password must be filled in", "../User/login.php");
-
-		$user = User::withUsername($username);
-
-		if ($user->userId == null || !password_verify($password, $user->password)) return Library::redirectWithMessage("Username and Password did not match", "../User/login.php");
-		if ($user->isActive == 0) return Library::redirectWithMessage("User deactivated, contact the administrator", "../User/login.php");
-
-		if($user->github_id != null)
-		{
-			$githubController = new GithubController();
-			$github = new GithubUser($githubController->getGithubUser($user->github_accessToken));
-			$_SESSION['githubProfile'] = $github;
-		}
-
-		$_SESSION['userLoggedIn'] = serialize($user);
-		header("Location: ../Home/index.php");
 	}
 
 	public function register($forename, $surname, $username, $password)
