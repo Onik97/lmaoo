@@ -2,6 +2,7 @@ import RegisterController from "../Controller/RegisterController.js";
 import Constant from "../Utility/Constant.js";
 import DataTypeUtility from "../Utility/DataTypeUtility.js";
 import Validator from "../Utility/Validator.js";
+import Navbar from "../public/navbar.js";
 
 $(document).ready(() => { Navbar.accountActiveTab(); });
 
@@ -34,5 +35,4 @@ $("#usernameRegister").keyup(async function() {
         $("#usernameMessage").html("");
         $("#registerBtn").prop("disabled", false);
     }
-
 })
