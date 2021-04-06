@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../Css/navbar.css">
+<link rel="stylesheet" href="/Style/navbar.css">
 <nav class="navbar navbar-expand-lg">
 
     <?php if(!isset($_COOKIE["lmaooDarkMode"])) $_COOKIE["lmaooDarkMode"] = 0; ?>
