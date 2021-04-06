@@ -53,6 +53,21 @@ class Library
         return false;
     }
 
+    public static function validatePostValues(...$args) 
+    {
+        $post = array_keys($_POST);
+        $keys = array_values($args);
+        $result = array_diff($keys, $post);
+        if(count($result) == 0) return;
+        
+        $message = "Following information is missing: ";
+        foreach($result as $value) {
+            $message = $message . "$value ";
+        }
+        http_response_code(400);
+        exit($message);
+    }
+
     public static function arrayToInsertQuery(string $tableName, array $data)
     {
         $keys = "";

@@ -1,17 +1,7 @@
-<?php include_once(__DIR__ . "/../../includes/autoloader.inc.php"); ?>
-
-<!DOCTYPE html>
-<html>
   <title>Home</title>
-    <head>
-      <p id="navBarActive" hidden>projectPage</p>
-      <?php include("../../includes/head.php"); ?>
-      <link rel="stylesheet" href="../Css/projectPage.css">
-    </head>
 
-    <body>
-      <?php include("../../includes/navBar.php"); ?>
-      <?php include("../../includes/loginCheck.php"); ?>
+      <p id="navBarActive" hidden>projectPage</p>
+      <link rel="stylesheet" href="../Css/projectPage.css">
 
     <div class="d-flex">
       <div id="projectDiv"> 
@@ -19,9 +9,6 @@
           <div id="sidebar-header" class="sidebar-header"><h1>Features<h1></div>
           <ul id="listOfFeatures" class="list-unstyled components">
           </ul>
-            <div class="editFeatureModal">
-              <?php include("../Feature/editFeatureModal.php"); ?>
-            </div>
         </nav>
       </div>
       
@@ -60,12 +47,3 @@
           </div>
       </div>
     </div>
-
-    <?php include("../../includes/scripts.php"); ?>
-    <script type="text/javascript" src="../Script/projectController.js"></script>
-    <script type="module" src="../Script/public/project.js"></script>
-    <?php include("projectModal.php"); ?>
-    <?php include("../Feature/featureModal.php"); ?>
-    <?php include("../../includes/editUserModal.php"); ?>
-  </body>
-</html>

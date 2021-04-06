@@ -1,17 +1,8 @@
 <?php include_once(__DIR__ . "/../../includes/autoloader.inc.php"); $ticket = TicketController::loadTicket(); ?>
 
-<!DOCTYPE html>
-
-<head>
-	<title>Ticket</title>
-	<p id="navBarActive" hidden>ticketPage</p>
-	<link rel="stylesheet" href="../Css/ticketPage.css">
-	<?php include("../../includes/head.php"); ?>
-</head>
-
-<body>
-	<?php include("../../includes/navBar.php"); ?>
-	<?php include("../../includes/loginCheck.php"); ?>
+<title>Ticket</title>
+<p id="navBarActive" hidden>ticketPage</p>
+<link rel="stylesheet" href="../Css/ticketPage.css">
 
 	<div id="ticketActions"></div>
 
@@ -126,15 +117,3 @@
 			</div>
 		</div>
 	</div>
-
-	<?php include("../../includes/scripts.php"); ?>
-	<?php include("../../includes/editUserModal.php"); ?>
-	<?php include("ticketModal.php"); ?>
-	<script type="text/javascript" src="../Script/peopleController.js"></script>
-	<script type="text/javascript" src="../Script/commentController.js"></script>
-	<script type="text/javascript" src="../Script/dateController.js"></script>
-	<script type="text/javascript" src="../Script/ticketController.js"></script>
-	<script type="module" src="../Script/public/ticket.js"></script>
-</body>
-
-</html>

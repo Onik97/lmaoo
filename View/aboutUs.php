@@ -1,4 +1,5 @@
-<?php if(!defined('directAccessValidator')) { die(file_get_contents('../../includes/notFound.php')); return; } ?>
+<p id="navBarActive" hidden>homePage</p>
+<link rel="stylesheet" href="../Css/homePage.css">
 
 <div class="jumbotron jumbotron-fluid">
 </div>
@@ -54,9 +55,3 @@
     </div>
     </div>
 </div>
-
-<footer class="text-center text-lg-start">
-  <div id="footer" class="text-center p-4">
-    <p id="copyright">© 2021 Copyright: OTAL</p>
-  </div>
-</footer>
