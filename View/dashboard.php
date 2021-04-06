@@ -1,5 +1,4 @@
-<?php if(!defined('directAccessValidator')) { die(file_get_contents('../../includes/notFound.php')); return; } ?>
-
+<link rel="stylesheet" href="/Css/homePage.css">
 <h1 class='welcomeMessage'>Welcome back User</h1>
 <div class="container-fluid">
     <div id="homePageTickets">
