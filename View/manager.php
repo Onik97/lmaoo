@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="../Css/managerPage.css"/>
+<link rel="stylesheet" type="text/css" href="/Style/managerPage.css"/>
 <title>Manager</title>
 <p id="navBarActive" hidden>managerPage</p>
 

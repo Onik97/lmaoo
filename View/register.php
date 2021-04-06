@@ -1,5 +1,5 @@
 <p id="navBarActive" hidden>registerPage</p>
-<link rel="stylesheet" href="../Css/LoginRegister.css">
+<link rel="stylesheet" href="/Style/LoginRegister.css">
 
 <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
   <div class="container">
