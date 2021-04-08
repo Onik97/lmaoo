@@ -33,7 +33,7 @@
 const darkmode =  new Darkmode();
 
 <?php
-include_once(__DIR__ . "/../includes/autoloader.inc.php");
+include_once(__DIR__ . "/../Core/Autoloader.php");
 $userController = new UserController();
 if(isset($_SESSION['userLoggedIn'])) 
 {

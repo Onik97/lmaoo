@@ -1,8 +1,8 @@
-<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../includes/autoloader.inc.php");
+<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../Core/Autoloader.php");
 
 class Library 
 {
-    public static function logindb()
+    public static function logindb() // To be removed once all Controllers has been updated
 	{
         $config = include (__DIR__ . "/../config.php");
         try
@@ -24,18 +24,6 @@ class Library
         if ($max < 1) throw new Exception('$keyspace must be at least two characters long'); 
         for ($i = 0; $i < $length; ++$i) $str .= $keyspace[random_int(0, $max)];
         return $str;
-    }
-
-    public static function notFoundMessage()
-    {
-        die(file_get_contents(__DIR__ . "/../includes/notFound.php"));
-        return null;
-    }
-
-    public static function forbiddenMessage()
-    {
-        die(file_get_contents(__DIR__ . "/../includes/forbidden.php"));
-        return null;
     }
 
     public static function redirectWithMessage($message, $url)
@@ -90,7 +78,6 @@ class Library
         foreach($data as $x => $y) {
             $updates = $updates . "$x = $y,";
         }
-        $keys = substr($updates, 0, -1);
 
         return "INSERT INTO $tableName SET $updates";
     }

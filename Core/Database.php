@@ -1,10 +1,10 @@
-<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../includes/autoloader.inc.php");
+<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/Autoloader.php");
 
 abstract class Database
 {
-    public static $pdo;
-    public static $query;
-    public static $parameters;
+    public static PDO $pdo;
+    public static string $query;
+    public static array $parameters;
 
     public static function db()
     {
@@ -21,7 +21,6 @@ abstract class Database
 
     public static function parameters($parameters)
     {
-        if (!is_array($parameters)) die("Error ID: 103");
         self::$parameters = $parameters;
         return new static;
     }

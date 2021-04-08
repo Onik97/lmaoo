@@ -1,4 +1,4 @@
-<?php include_once(__DIR__ . "/../../includes/autoloader.inc.php"); $ticket = TicketController::loadTicket(); ?>
+<?php include_once(__DIR__ . "/../../Core/Autoloader.php"); $ticket = TicketController::loadTicket(); ?>
 
 <title>Ticket</title>
 <p id="navBarActive" hidden>ticketPage</p>
