@@ -4,12 +4,12 @@ $router = new Router();
 
 // Render Views
 
-$router->get("/", [RenderController::class, "index"]);
-$router->get("/login", [RenderController::class, "login"]);
-$router->get("/register", [RenderController::class, "register"]);
-$router->get("/project", [RenderController::class, "project"]);
-$router->get("/manager", [RenderController::class, "manager"]);
-$router->get("/admin", [RenderController::class, "admin"]);
+$router->get("/", [Render::class, "index"]);
+$router->get("/login", [Render::class, "login"]);
+$router->get("/register", [Render::class, "register"]);
+$router->get("/project", [Render::class, "project"]);
+$router->get("/manager", [Render::class, "manager"]);
+$router->get("/admin", [Render::class, "admin"]);
 
 // User Routes
 
