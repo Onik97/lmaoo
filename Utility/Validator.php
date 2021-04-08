@@ -25,14 +25,4 @@ class Validator
         if($_SESSION['userLoggedIn'] == null) return false;
         return unserialize($_SESSION['userLoggedIn'])->level >= 3 ? true : false;
     }
-
-    // To avoid direct access to page
-    public static function ThrowNotFound()
-    {
-        if($_SERVER["REQUEST_METHOD"] == "GET")
-        {
-            echo file_get_contents("../../includes/notFound.php");
-            return;
-        }
-    }
 }
