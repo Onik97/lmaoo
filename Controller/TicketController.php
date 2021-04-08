@@ -163,16 +163,6 @@ class TicketController
         $stmt->execute([$summary, $ticketId]);
     }
 
-    public static function loadSearchBar($userLoggedIn) 
-    {
-        if ($userLoggedIn == null) return;
-    
-        echo "<div class='navbar-brand form-inline lg-1'>";
-        echo "<input id='searchBarInput' class='form-control mr-sm-2' type='search' placeholder='Search Ticket' aria-label='Search'>";
-        echo "<button id='searchBarBtn' class='btn btn-outline-success my-sm-0' onclick='searchBar()'>Search</button>";
-        echo "</div>";
-    }
-
     public static function loadTicket()
     {
         $ticketId = $_GET["ticketId"];
