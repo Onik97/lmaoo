@@ -1,4 +1,4 @@
-<?php include_once(__DIR__ . "/../../includes/autoloader.inc.php"); session_start();
+<?php include_once(__DIR__ . "/../../Core/Autoloader.php"); session_start();
 
 $config = require("../../config.php");
 $str = Library::generateString(10); // To prevent CSRF attacks
