@@ -1,5 +1,5 @@
 <p id="navBarActive" hidden>homePage</p>
-<link rel="stylesheet" href="../Css/homePage.css">
+<link rel="stylesheet" href="/Style/homePage.css">
 
 <div class="jumbotron jumbotron-fluid">
 </div>

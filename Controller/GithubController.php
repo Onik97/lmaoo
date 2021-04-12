@@ -1,6 +1,6 @@
-<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../includes/autoloader.inc.php");
+<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../Core/Autoloader.php");
 
-class GithubController extends ApiWrapper
+class GithubController extends APIClient
 {
     public static $ACCESS_TOKEN_URL = "https://github.com/login/oauth/access_token";
     public static $USER_URL = "https://api.github.com/user";

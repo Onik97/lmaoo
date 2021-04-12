@@ -1,4 +1,4 @@
-<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../includes/autoloader.inc.php");
+<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../Core/Autoloader.php");
 
 class TicketController
 {
@@ -161,16 +161,6 @@ class TicketController
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("UPDATE ticket SET summary = ? WHERE ticketId = ?");
         $stmt->execute([$summary, $ticketId]);
-    }
-
-    public static function loadSearchBar($userLoggedIn) 
-    {
-        if ($userLoggedIn == null) return;
-    
-        echo "<div class='navbar-brand form-inline lg-1'>";
-        echo "<input id='searchBarInput' class='form-control mr-sm-2' type='search' placeholder='Search Ticket' aria-label='Search'>";
-        echo "<button id='searchBarBtn' class='btn btn-outline-success my-sm-0' onclick='searchBar()'>Search</button>";
-        echo "</div>";
     }
 
     public static function loadTicket()

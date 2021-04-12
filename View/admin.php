@@ -1,5 +1,5 @@
 <p id="navBarActive" hidden>adminPage</p>
-<link rel="stylesheet" href="../Css/admin.css">
+<link rel="stylesheet" href="/Style/admin.css">
 
 <div class="container d-flex justify-content-center">
     <form class="form-inline my-2 my-lg-0">

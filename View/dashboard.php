@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/Css/homePage.css">
+<link rel="stylesheet" href="/Style/homePage.css">
 <h1 class='welcomeMessage'>Welcome back User</h1>
 <div class="container-fluid">
     <div id="homePageTickets">

@@ -1,6 +1,6 @@
-<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../includes/autoloader.inc.php");
+<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../Core/Autoloader.php");
 
-class ApiWrapper 
+class APIClient 
 {
     public static function getRequest(string $url, array $headers = null)
     {

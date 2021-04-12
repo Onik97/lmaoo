@@ -1,8 +1,8 @@
-<?php include_once(__DIR__ . "/../../includes/autoloader.inc.php"); $ticket = TicketController::loadTicket(); ?>
+<?php include_once(__DIR__ . "/../../Core/Autoloader.php"); $ticket = TicketController::loadTicket(); ?>
 
 <title>Ticket</title>
 <p id="navBarActive" hidden>ticketPage</p>
-<link rel="stylesheet" href="../Css/ticketPage.css">
+<link rel="stylesheet" href="/Style/ticketPage.css">
 
 	<div id="ticketActions"></div>
 
