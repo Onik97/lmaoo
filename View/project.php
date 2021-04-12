@@ -12,8 +12,15 @@
               <label class="custom-control-label" for="featureToggle"><h1>Feature</h1></label>
             </div>
           </div>
-          <ul id="activeFeatures" class="list-unstyled components" style="display: none;"><li value="1">Active Feature Static Data<l class="far fa-edit"></l></li></ul>
-          <ul id="inactiveFeatures" class="list-unstyled components" style="display: none;"><li value="1">Inactive Feature Static Data<l class="far fa-edit"></l></li></ul>
+
+          <ul id="activeFeatures" class="list-unstyled components" style="display: none;">
+            <?php Render::Features("1"); ?>
+          </ul>
+
+          <ul id="inactiveFeatures" class="list-unstyled components" style="display: none;">
+            <?php Render::Features("0"); ?>
+          </ul>
+
         </nav>
       </div>
   

@@ -67,4 +67,14 @@ class Render
         echo "<button id='searchBarBtn' class='btn btn-outline-success my-sm-0' onclick='searchBar()'>Search</button>";
         echo "</div>";
     }
+
+    public static function Features($active)
+    {
+        $features = FeatureController::getFeatures($_GET["projectId"], $active);
+
+        foreach($features as $feature)
+        {
+            echo "<li value='$feature->featureId'>$feature->name<l class='far fa-edit'></l></li>";
+        }
+    }
 }
