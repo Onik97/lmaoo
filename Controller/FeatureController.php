@@ -2,6 +2,19 @@
 
 class FeatureController
 {
+    public static function getFeatures($projectId, $active)
+    {
+        $features = Feature::withProjectId($projectId);
+        $returnFeatures = array();
+        foreach ($features as $feature)
+        {
+            if ($feature->active == $active) {
+                array_push($returnFeatures, $feature);
+            }
+        }
+        return $returnFeatures;
+    }
+
     public static function loadActiveFeatures($projectId)
     {
         $pdo = Library::logindb();

@@ -6,12 +6,24 @@
     <div class="d-flex">
       <div id="projectDiv"> 
         <nav id="sidebar">
-          <div id="sidebar-header" class="sidebar-header"><h1>Features<h1></div>
-          <ul id="listOfFeatures" class="list-unstyled components">
+          <div id="sidebar-header" class="sidebar-header">
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" id="featureToggle" onclick='featureToggle()' checked>
+              <label class="custom-control-label" for="featureToggle"><h1>Feature</h1></label>
+            </div>
+          </div>
+
+          <ul id="activeFeatures" class="list-unstyled components" style="display: none;">
+            <?php Render::Features("1"); ?>
           </ul>
+
+          <ul id="inactiveFeatures" class="list-unstyled components" style="display: none;">
+            <?php Render::Features("0"); ?>
+          </ul>
+
         </nav>
       </div>
-      
+  
       <div id="createProject"></div>
 
       <div class="content">

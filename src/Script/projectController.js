@@ -5,13 +5,13 @@ $(document).ready(function()
 
 function loadFeatures()
 {
-    $("#listOfFeatures").find("li:gt(0)").remove();
+    $("#activeFeatures").find("li:gt(0)").remove();
     var projectId = new URL(window.location.href).searchParams.get("projectId");
     loadFeaturesFromServer(projectId)
     .then(response =>
     {
 
-        if (userLevel >= 3) $("#listOfFeatures").append($("<div>", { id : "createFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" , onclick : "createFeaturePrompt()"}).html(" + Create Feature"));
+        if (userLevel >= 3) $("#activeFeatures").append($("<div>", { id : "createFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" , onclick : "createFeaturePrompt()"}).html(" + Create Feature"));
 
         var json = response.data;
         for (i = 0; i < json.length; i++)
@@ -20,7 +20,7 @@ function loadFeatures()
             var icon = $("<l>", { class : "far fa-edit", onclick : ""});
             var featureinfo = $("<li>", { value : json[i].featureId , onclick : `getProjectName("${json[i].name}", this.value); loadTicketsWithProgress('Open');`}).html(json[i].name)
             var feature = featureinfo.append(icon);
-            $("#listOfFeatures").append(feature);
+            $("#activeFeatures").append(feature);
         }
     })
 }
