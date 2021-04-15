@@ -10,5 +10,21 @@ export default class FragmentUrl
         console.log(i);
         return this.urlFragment = i;
     }
+
+    static readFragment()
+    {
+        alert(this.urlFragment);
+    }
+
+    static updateFragment()
+    {
+        let b = location.hash
+        console.log(b)
+        return this.urlFragment = b;
+    }
+
+    static deleteFragment()
+    {
+        return this.urlFragment = 'unknown'
     }
 }
