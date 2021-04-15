@@ -6,7 +6,9 @@ export default class FragmentUrl
 
     static createFragment()
     {
-        let currentHTML = location.hash;
-        console.log(currentHTML);
+        let i = location.hash;
+        console.log(i);
+        return this.urlFragment = i;
+    }
     }
 }
