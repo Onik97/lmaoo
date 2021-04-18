@@ -56,11 +56,6 @@
             </table>
 
             <div id="ticketBtnDiv"></div>
-            <button id="fragmentCreate">Create Fragment</button>
-            <button id="fragmentRead">Read Fragment</button>
-            <button id="fragmentUpdate">Update Fragment</button>
-            <button id="fragmentDelete">Delete Fragment</button>
-
           </div>
       </div>
     </div>
