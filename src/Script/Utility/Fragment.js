@@ -1,3 +1,4 @@
+export default class Fragment
 {
     static createFragment(currentLocationHash)
     {
