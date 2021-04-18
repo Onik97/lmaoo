@@ -24,5 +24,6 @@ export default class FragmentUrl
     static deleteFragment()
     {
         return this.urlFragment = 'unknown'
+        window.location.hash = ''
     }
 }
