@@ -7,7 +7,6 @@ export default class Fragment
 
     static readFragment()
     {
-        if (window.location.hash == '') { return('No Url Fragment loaded')}
         return(window.location.hash);
     }
 
