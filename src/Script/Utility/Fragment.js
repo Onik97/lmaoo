@@ -8,7 +8,6 @@ export default class Fragment
     static readFragment()
     {
         if (window.location.hash == '') { return('No Url Fragment loaded')}
-        console.log(window.location.hash);
         return(window.location.hash);
     }
 
@@ -19,12 +18,7 @@ export default class Fragment
 
     static deleteFragment()
     {
-        window.location.hash = ''
-        this.removeHash();        
-    }
-
-    static removeHash() 
-    { 
-        history.pushState("", document.title, window.location.pathname + window.location.search);
+        window.location.hash = '';
+        history.pushState("", document.title, window.location.pathname + window.location.search);       
     }
 }
