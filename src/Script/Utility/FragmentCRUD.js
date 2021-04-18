@@ -6,9 +6,8 @@ export default class FragmentUrl
 
     static createFragment(currentLocationHash)
     {
-        let i = location.hash;
-        console.log(i);
-        return this.urlFragment = i;
+        window.location.hash = currentLocationHash;
+        return this.urlFragment = currentLocationHash;
     }
 
     static readFragment()
@@ -18,9 +17,8 @@ export default class FragmentUrl
 
     static updateFragment(currentLocationHash)
     {
-        let b = location.hash
-        console.log(b)
-        return this.urlFragment = b;
+        window.location.hash = currentLocationHash
+        return this.urlFragment = currentLocationHash;
     }
 
     static deleteFragment()
