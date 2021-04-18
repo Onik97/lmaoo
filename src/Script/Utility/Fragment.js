@@ -1,8 +1,8 @@
 export default class Fragment
 {
-    static createFragment(currentLocationHash)
+    static createFragment(urlFragment)
     {
-        window.location.hash = `#${currentLocationHash}`;
+        window.location.hash = `#${urlFragment}`;
     }
 
     static readFragment()
@@ -12,9 +12,9 @@ export default class Fragment
         return(window.location.hash);
     }
 
-    static updateFragment(currentLocationHash)
+    static updateFragment(urlFragment)
     {
-        window.location.hash = `#${currentLocationHash}`;
+        window.location.hash = `#${urlFragment}`;
     }
 
     static deleteFragment()
