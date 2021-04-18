@@ -5,7 +5,10 @@ export default class FragmentUrl
         window.location.hash = currentLocationHash;
     }
 
+    static readFragment(currentLocationHash)
     {
+        if (window.location.hash == '') { alert('No Url Fragment loaded')}
+        alert(currentLocationHash);
     }
 
     static updateFragment(currentLocationHash)
