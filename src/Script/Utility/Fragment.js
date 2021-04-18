@@ -20,5 +20,8 @@ export default class Fragment
     static deleteFragment()
     {
         window.location.hash = ''
+    static removeHash() 
+    { 
+        history.pushState("", document.title, window.location.pathname + window.location.search);
     }
 }
