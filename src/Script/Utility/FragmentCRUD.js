@@ -4,7 +4,7 @@ export default class FragmentUrl
     this.urlFragment = 'unknown';
     }
 
-    static createFragment()
+    static createFragment(currentLocationHash)
     {
         let i = location.hash;
         console.log(i);
@@ -16,7 +16,7 @@ export default class FragmentUrl
         alert(this.urlFragment);
     }
 
-    static updateFragment()
+    static updateFragment(currentLocationHash)
     {
         let b = location.hash
         console.log(b)
