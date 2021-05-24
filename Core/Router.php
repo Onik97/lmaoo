@@ -15,6 +15,15 @@ class Router
         $method = $_SERVER["REQUEST_METHOD"];
 
         ($method == "GET") ? $fn = $this->getRoutes[$url] ?? null : $fn = $this->postRoutes[$url] ?? null;
-        $fn ? call_user_func($fn, $this) : include __DIR__ . "/../View/notFound.php";
+        
+        if($fn) 
+        {
+            call_user_func($fn, $this);
+        }
+        else 
+        {
+            http_response_code(404);
+            include __DIR__ . "/../View/notFound.php";
+        }
     }
 }
