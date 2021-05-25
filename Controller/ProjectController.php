@@ -22,7 +22,7 @@ class ProjectController
     {
         $projects = Project::withProjectId($projectId);
         $returnProjects = array();
-        foreach ($features as $feature)
+        foreach ($projects as $projects)
         {
             if ($projects->active == $active) {
                 array_push($returnProjects, $projects);
@@ -37,6 +37,7 @@ class ProjectController
         Project::update($projectId, $data);
     }
 
+    public static function deactivateProject($projectId)
     {
         $data = array("active" => "0");
         Project::update($projectId, $data);
