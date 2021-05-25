@@ -13,10 +13,10 @@ class ProjectController
 
     public static function createNewProject($projectName, $projectStatus)
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("INSERT INTO project (name, status, owner) VALUES (?, ?, ?)");
-        $stmt->execute([$projectName, $projectStatus, unserialize($_SESSION['userLoggedIn'])->userId]);
+        if (Library::hasNull($projectName, $projectStatus)) return Library::redirectWithMessage("Something went wrong, please try again later", "/Project");
+        $data = array("name" => $projectName, "status" => $projectStatus);
+        Project::create($data);
+    }
     }
 
     {
