@@ -31,7 +31,10 @@ class ProjectController
         return $returnProjects;
     }
 
+    public static function activateProject($projectId)
     {
+        $data = array("active" => "1");
+        Project::update($projectId, $data);
     }
 
     {
