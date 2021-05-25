@@ -2,16 +2,13 @@
 
 class ProjectController
 {
-    public static function projectExistance($name)
+    public static function getProjectList()
     {
-        if ($name == null) return;
-
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("SELECT name FROM project WHERE name = ?");
-        $stmt->execute([$name]);
-
-        return $stmt->rowCount() != 0 ? true : false;
+        $stmt = $pdo->prepare("SELECT projectId, name, status FROM project");
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
     public static function createNewProject($projectName, $projectStatus)
@@ -22,21 +19,10 @@ class ProjectController
         $stmt->execute([$projectName, $projectStatus, unserialize($_SESSION['userLoggedIn'])->userId]);
     }
 
-    public static function createNewTicket($featureId, $summary, $reporterKey)
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("INSERT INTO ticket (summary, featureId, reporter_key) VALUES (?, ?, ?)");
-        $stmt->execute([$summary, $featureId, $reporterKey]);
     }
 
-    public static function getProjectList()
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("SELECT projectId, name, status FROM project");
-        $stmt->execute();
-        return $stmt->fetchAll();
     }
 
     public static function getAccessibleProjectList($userLoggedIn)
@@ -64,5 +50,25 @@ class ProjectController
 
         $stmt->execute([$featureId, $progress]);
         return $stmt->fetchAll();
+    }
+
+    public static function createNewTicket($featureId, $summary, $reporterKey)
+    {
+        $pdo = Library::logindb();
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("INSERT INTO ticket (summary, featureId, reporter_key) VALUES (?, ?, ?)");
+        $stmt->execute([$summary, $featureId, $reporterKey]);
+    }
+
+    public static function projectExistance($name)
+    {
+        if ($name == null) return;
+
+        $pdo = Library::logindb();
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $stmt = $pdo->prepare("SELECT name FROM project WHERE name = ?");
+        $stmt->execute([$name]);
+
+        return $stmt->rowCount() != 0 ? true : false;
     }
 }
