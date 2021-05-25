@@ -17,6 +17,18 @@ class ProjectController
         $data = array("name" => $projectName, "status" => $projectStatus);
         Project::create($data);
     }
+
+    public static function readProjects($projectId, $active)
+    {
+        $projects = Project::withProjectId($projectId);
+        $returnProjects = array();
+        foreach ($features as $feature)
+        {
+            if ($projects->active == $active) {
+                array_push($returnProjects, $projects);
+            }
+        }
+        return $returnProjects;
     }
 
     {
