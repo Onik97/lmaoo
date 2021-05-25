@@ -70,7 +70,7 @@ class Render
 
     public static function Features($active)
     {
-        $features = FeatureController::getFeatures($_GET["projectId"], $active);
+        $features = FeatureController::readFeatures($_GET["projectId"], $active);
 
         foreach($features as $feature)
         {
