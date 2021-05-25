@@ -38,6 +38,8 @@ class ProjectController
     }
 
     {
+        $data = array("active" => "0");
+        Project::update($projectId, $data);
     }
 
     public static function getAccessibleProjectList($userLoggedIn)
