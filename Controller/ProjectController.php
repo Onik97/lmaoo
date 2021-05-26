@@ -12,9 +12,9 @@ class ProjectController
     }
 
     public static function createNewProject($projectName, $projectStatus)
-    {
-        if (Library::hasNull($projectName, $projectStatus)) return Library::redirectWithMessage("Something went wrong, please try again later", "/Project");
+    {   if (Library::hasNull($projectName, $projectStatus)) return Library::redirectWithMessage("Something went wrong, please try again later", "/Project");
         $data = array("name" => $projectName, "status" => $projectStatus);
+
         Project::create($data);
     }
 
@@ -33,14 +33,12 @@ class ProjectController
 
     public static function activateProject($projectId)
     {
-        $data = array("active" => "1");
-        Project::update($projectId, $data);
+        Project::update($projectId);
     }
 
     public static function deactivateProject($projectId)
     {
-        $data = array("active" => "0");
-        Project::update($projectId, $data);
+        Project::update($projectId);
     }
 
     public static function getAccessibleProjectList($userLoggedIn)
