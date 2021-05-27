@@ -1,21 +1,25 @@
-<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../Core/Autoloader.php");
+<?php include_once "../../vendor/autoload.php";
+
+if (session_status() == PHP_SESSION_NONE) session_start();
+
+use App\Core\Router;
+use App\Core\Render;
 
 $router = new Router();
 
 // Render Views
 
-$router->get("/", [Render::class, "index"]);
-$router->get("/login", [Render::class, "login"]);
-$router->get("/register", [Render::class, "register"]);
-$router->get("/project", [Render::class, "project"]);
-$router->get("/manager", [Render::class, "manager"]);
-$router->get("/admin", [Render::class, "admin"]);
+$router->get("/", 0, [Render::class, "index"]);
+$router->get("/login", 0, [Render::class, "login"]);
+$router->get("/register", 0, [Render::class, "register"]);
+$router->get("/project", 1, [Render::class, "project"]);
+$router->get("/manager", 2, [Render::class, "manager"]);
+$router->get("/admin", 4, [Render::class, "admin"]);
 
 // User Routes
 
-$router->post("/login", [UserController::class, "standardLogin"]);
-$router->get("/logout", [UserController::class, "logout"]);
-
+$router->post("/login", 0, [UserController::class, "standardLogin"]);
+$router->get("/logout", 1, [UserController::class, "logout"]);
 
 $router->resolve();
 
