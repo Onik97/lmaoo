@@ -1,0 +1,9 @@
+{
+    "name": "otal/lmaoo",
+    "require": {},
+    "autoload": { 
+        "psr-4": {
+            "app\\" : "./App"
+            }
+        }
+}

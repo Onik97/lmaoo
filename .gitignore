@@ -4,3 +4,4 @@ Test/Vendor
 src/Images/profilePictures/*
 debug.log
 config.php
+/vendor/
