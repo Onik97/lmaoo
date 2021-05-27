@@ -1,6 +1,11 @@
-<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../Core/Autoloader.php");
+<?php
+namespace App\Utility;
 
-class Library 
+use PDO;
+use PDOException;
+use Exception;
+
+class Library
 {
     public static function logindb() // To be removed once all Controllers has been updated
 	{

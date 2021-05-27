@@ -1,4 +1,8 @@
-<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/Autoloader.php");
+<?php
+namespace App\Core;
+
+use PDO;
+use PDOException;
 
 abstract class Database
 {

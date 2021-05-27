@@ -1,3 +1,5 @@
+<?php use App\Core\Render; ?>
+
 <link rel="stylesheet" href="/Style/navbar.css">
 <nav class="navbar navbar-expand-lg">
 
