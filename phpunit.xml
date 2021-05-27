@@ -16,10 +16,7 @@
 
     <testsuites>
         <testsuite name="lmaoo">
-            <file>ProjectTest.php</file>
-            <file>TicketTest.php</file>
-            <file>UserTest.php</file>
-            <file>AdminTest.php</file>
+            <file>Test/Integration/UserModel.php</file>
         </testsuite>
     </testsuites>
 
