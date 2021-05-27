@@ -14,7 +14,7 @@ class Router
 
         if (isset($_SESSION["userLoggedIn"]))
         {
-            $this->userLoggedIn->level = $_SESSION["userLoggedIn"];
+            $this->userLoggedIn->level = $_SESSION["userLoggedIn"]->level;
         }
         else 
         {
