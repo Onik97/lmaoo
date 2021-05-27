@@ -1,5 +1,3 @@
-<?php include_once(__DIR__ . "/../Core/Autoloader.php"); if (!isset($_SESSION['userLoggedIn'])) return; ?>
-
 <link rel="stylesheet" href="../Css/allModals.css">
             
 <div class="modal fade" id="view-modal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
