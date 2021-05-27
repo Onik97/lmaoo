@@ -29,17 +29,17 @@
                 <form action="../User/target.php" method="POST" onkeyup="userEditValidation(); checkUserDup();">
                     <div class="form-group">
                         <label>Forename</label>
-                        <input class="form-control" value=<?php echo unserialize($_SESSION['userLoggedIn'])->forename; ?>  id="editForename" name="editForename" required>
+                        <input class="form-control" value=<?php echo $_SESSION['userLoggedIn']->forename; ?>  id="editForename" name="editForename" required>
                     </div>
 
                     <div class="form-group">
                         <label>Surname</label>
-                        <input class="form-control" value=<?php echo unserialize($_SESSION['userLoggedIn'])->surname; ?>  id="editSurname" name="editSurname" required>
+                        <input class="form-control" value=<?php echo $_SESSION['userLoggedIn']->surname; ?>  id="editSurname" name="editSurname" required>
                     </div>
 
                     <div class="form-group">
                         <label>Username</label>
-                        <input class="form-control" value=<?php echo unserialize($_SESSION['userLoggedIn'])->username; ?> id="editUsername" name="editUsername" required>
+                        <input class="form-control" value=<?php echo $_SESSION['userLoggedIn']->username; ?> id="editUsername" name="editUsername" required>
                         <small id="editUsernameMessage" hidden></small> 
                     </div>
 

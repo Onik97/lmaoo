@@ -65,13 +65,13 @@ class GithubController extends APIClient
         $pdo = Library::logindb();
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("UPDATE user SET github_id = ?, github_accessToken = ? WHERE userId = ?");
-        $stmt->execute([$githubUser['id'], $this->getAccessToken(), unserialize($_SESSION['userLoggedIn'])->userId]);
+        $stmt->execute([$githubUser['id'], $this->getAccessToken(), $_SESSION['userLoggedIn']->userId]);
 
-        $userLoggedIn = unserialize($_SESSION['userLoggedIn']);
+        $userLoggedIn = $_SESSION['userLoggedIn'];
         $userLoggedIn->setGithubId($githubUser['id']);
         $userLoggedIn->profileToObject($githubUser);
         
-        $_SESSION['userLoggedIn'] = serialize($userLoggedIn);
+        $_SESSION['userLoggedIn'] = $userLoggedIn;
         Library::redirectWithMessage("Github Registration Successful!", "../Home/index.php");
     }
 

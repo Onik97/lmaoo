@@ -26,7 +26,7 @@ class UserController
 			$_SESSION['githubProfile'] = $github;
 		}
 
-		$_SESSION['userLoggedIn'] = serialize($user);
+		$_SESSION['userLoggedIn'] = $user;
 		header("Location: /");
 	}
 
@@ -55,11 +55,11 @@ class UserController
 		$stmt = $pdo->prepare("UPDATE user SET forename = ?, surname = ?, username = ? WHERE userId = ?");
 		$stmt->execute([$forename, $surname, $username, $userId]);
 
-		$userLoggedIn = unserialize($_SESSION["userLoggedIn"]);
+		$userLoggedIn = $_SESSION(["userLoggedIn"]);
 		$userLoggedIn->setForename($forename);
 		$userLoggedIn->setSurname($surname);
 		$userLoggedIn->setUsername($username);
-		$_SESSION['userLoggedIn'] = serialize($userLoggedIn);
+		$_SESSION['userLoggedIn'] = $userLoggedIn;
 		Library::redirectWithMessage("Your User Details has been updated", "../Home/index.php"); 
 	}
 
@@ -135,7 +135,6 @@ class UserController
 
 	public static function loadDarkModeToggle($toggle, $userLoggedIn)
 	{ 
-		$userLoggedIn = unserialize($userLoggedIn);
 		if ($toggle == null) 
 		{
 			if ($userLoggedIn == null) 

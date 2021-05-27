@@ -11,7 +11,7 @@ class ManagerController
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT * FROM project WHERE owner = ?");
-        $stmt->execute([unserialize($_SESSION['userLoggedIn'])->userId]);
+        $stmt->execute([$_SESSION['userLoggedIn']->userId]);
         return $stmt->fetchAll();
     }
 
@@ -21,7 +21,7 @@ class ManagerController
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("SELECT pa.userId, pa.projectId, p.name, p.status FROM projectAccess pa INNER JOIN project p
                                ON pa.projectId = p.projectId WHERE pa.managerAccess = 1 AND pa.userId = ?");
-        $stmt->execute([unserialize($_SESSION['userLoggedIn'])->userId]);
+        $stmt->execute([$_SESSION['userLoggedIn']->userId]);
         return $stmt->fetchAll();
     }
 

@@ -23,7 +23,7 @@ class ProjectController
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $stmt = $pdo->prepare("INSERT INTO project (name, status, owner) VALUES (?, ?, ?)");
-        $stmt->execute([$projectName, $projectStatus, unserialize($_SESSION['userLoggedIn'])->userId]);
+        $stmt->execute([$projectName, $projectStatus, $_SESSION['userLoggedIn']->userId]);
     }
 
     public static function createNewTicket($featureId, $summary, $reporterKey)
@@ -50,7 +50,7 @@ class ProjectController
         $stmt = $pdo->prepare("SELECT DISTINCT p.projectId, p.name, p.owner FROM projectAccess pa 
                                RIGHT JOIN project p ON pa.projectId = p.projectId 
                                WHERE pa.allowAccess = 1 AND pa.userId = ? OR p.owner = ?");
-        $stmt->execute([unserialize($userLoggedIn)->userId, unserialize($userLoggedIn)->userId]);
+        $stmt->execute([$userLoggedIn->userId, $userLoggedIn->userId]);
         return $stmt->fetchAll();
     }
 

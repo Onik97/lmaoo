@@ -28,7 +28,7 @@ class Render
 
     public static function DropdownItems($userLoggedIn)
     {
-        $userLoggedIn = unserialize($userLoggedIn);
+        $userLoggedIn = $userLoggedIn;
         if($userLoggedIn == null)
         {
             echo "<a class='dropdown-item' id='registerNav' href='/register'>Register</a>";
