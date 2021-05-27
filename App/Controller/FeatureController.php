@@ -1,4 +1,8 @@
-<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../Core/Autoloader.php");
+<?php
+namespace App\Controller;
+
+use App\Utility\Library;
+use App\Model\Feature;
 
 class FeatureController
 {

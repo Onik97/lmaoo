@@ -1,4 +1,10 @@
-<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../Core/Autoloader.php");
+<?php
+namespace App\Controller;
+
+use PDO;
+use App\Model\User;
+use App\Model\GithubUser;
+use App\Utility\Library;
 
 class UserController 
 {
