@@ -16,9 +16,8 @@
 
     <testsuites>
         <testsuite name="lmaoo">
-            <file>Test/Integration/UserModel.php</file>
-            <file>Test/Unit/Core/RouterCore.php</file>
-            <file>Test/Unit/Utility/LibraryUtility.php</file>
+            <file>Test/Integration/*</file>
+            <file>Test/Unit/*</file>
         </testsuite>
     </testsuites>
 
