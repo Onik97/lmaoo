@@ -1,4 +1,8 @@
-<?php if(!defined('PHPUNIT_COMPOSER_INSTALL')) include_once(__DIR__ . "/../Core/Autoloader.php");
+<?php
+namespace App\Model;
+
+use App\Core\Database;
+use App\Utility\Library;
 
 class User extends Database implements IModel
 {
