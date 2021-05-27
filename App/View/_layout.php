@@ -30,27 +30,8 @@
 <script src="../Script/navBar.js"></script>
 
 <script>
+
 const darkmode =  new Darkmode();
-
-<?php
-include_once(__DIR__ . "/../Core/Autoloader.php");
-$userController = new UserController();
-if(isset($_SESSION['userLoggedIn'])) 
-{
-  $userLoggedIn = unserialize($_SESSION['userLoggedIn']);
-  
-  echo "const userId = '" . $userLoggedIn->userId . "'\n";
-  echo "const userForename = '" . $userLoggedIn->forename. "'\n";
-  echo "const userSurname = '" . $userLoggedIn->surname. "'\n";
-  echo "const userUsername = '" . $userLoggedIn->username. "'\n";
-  echo "const userLevel = '" . $userLoggedIn->level. "'\n";
-
-  if ($userLoggedIn->level > 1)
-  {
-      echo "const users = " . json_encode($userController->getActiveUsers()) . "\n";
-  }
-}
-?>
 
 function overHang(type, message)
 {
