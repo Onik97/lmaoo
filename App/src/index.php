@@ -2,8 +2,9 @@
 
 if (session_status() == PHP_SESSION_NONE) session_start();
 
-use App\Core\Router;
-use App\Core\Render;
+use Lmaoo\Core\Router;
+use Lmaoo\Core\Render;
+use Lmaoo\Controller\UserController;
 
 $router = new Router();
 

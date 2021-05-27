@@ -1,8 +1,8 @@
 <?php
-namespace App\Model;
+namespace Lmaoo\Model;
 
-use App\Core\Database;
-use App\Utility\Library;
+use Lmaoo\Core\Database;
+use Lmaoo\Utility\Library;
 
 class Ticket extends Database implements IModel
 {

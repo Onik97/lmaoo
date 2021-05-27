@@ -1,8 +1,8 @@
 <?php
-namespace App\Controller;
+namespace Lmaoo\Controller;
 
-use App\Utility\Library;
-use App\Model\Feature;
+use Lmaoo\Utility\Library;
+use Lmaoo\Model\Feature;
 
 class FeatureController
 {

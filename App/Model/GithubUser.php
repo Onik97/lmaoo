@@ -1,7 +1,7 @@
 <?php
-namespace App\Model;
+namespace Lmaoo\Model;
 
-use App\Core\Database;
+use Lmaoo\Core\Database;
 
 class GithubUser extends Database
 {

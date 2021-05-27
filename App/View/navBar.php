@@ -1,4 +1,4 @@
-<?php use App\Core\Render; ?>
+<?php use Lmaoo\Core\Render; use Lmaoo\Controller\UserController; ?>
 
 <link rel="stylesheet" href="/Style/navbar.css">
 <nav class="navbar navbar-expand-lg">

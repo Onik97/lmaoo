@@ -1,5 +1,8 @@
 <?php
-namespace App\Core;
+namespace Lmaoo\Core;
+
+use Lmaoo\Controller\ProjectController;
+use Lmaoo\Controller\FeatureController;
 
 class Render
 {

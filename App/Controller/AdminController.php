@@ -1,8 +1,8 @@
 <?php
-namespace App\Controller;
+namespace Lmaoo\Controller;
 
 use PDO;
-use App\Utility\Library;
+use Lmaoo\Utility\Library;
 
 class AdminController
 {

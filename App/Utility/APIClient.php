@@ -1,5 +1,5 @@
 <?php
-namespace App\Utility;
+namespace Lmaoo\Utility;
 
 class APIClient 
 {

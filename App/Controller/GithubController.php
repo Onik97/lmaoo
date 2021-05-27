@@ -1,9 +1,9 @@
 <?php
-namespace App\Controller;
+namespace Lmaoo\Controller;
 
 use PDO;
-use App\Utility\Library;
-use App\Utility\APIClient;
+use Lmaoo\Utility\Library;
+use Lmaoo\Utility\APIClient;
 
 class GithubController extends APIClient
 {

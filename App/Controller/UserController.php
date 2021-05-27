@@ -1,10 +1,10 @@
 <?php
-namespace App\Controller;
+namespace Lmaoo\Controller;
 
 use PDO;
-use App\Model\User;
-use App\Model\GithubUser;
-use App\Utility\Library;
+use Lmaoo\Model\User;
+use Lmaoo\Model\GithubUser;
+use Lmaoo\Utility\Library;
 
 class UserController 
 {
