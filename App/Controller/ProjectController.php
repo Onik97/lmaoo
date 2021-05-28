@@ -17,7 +17,6 @@ class ProjectController
 
     public static function createNewProject($projectName, $projectStatus)
     {
-        if (Library::hasNull($projectName, $projectStatus)) return Library::redirectWithMessage("Something went wrong, please try again later", "/Project");
         $data = array("name" => $projectName, "status" => $projectStatus);
         Project::create($data);
     }
