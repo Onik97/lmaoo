@@ -1,0 +1,12 @@
+{
+    "name": "otal/lmaoo",
+    "require": {
+        "phpunit/phpunit": "^9.4"
+    },
+    "autoload": { 
+        "psr-4": {
+            "Lmaoo\\" : "./App",
+            "Test\\" : "./Test"
+            }
+        }
+}

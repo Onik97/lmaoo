@@ -1,2 +1,0 @@
-ALTER TABLE feature DROP COLUMN `status`;
-ALTER TABLE feature ADD COLUMN `active` INT DEFAULT 1;
