@@ -8,7 +8,6 @@ class Project extends Database implements IModel
 {
     public static function create(array $data)
     {
-        if (Library::hasNull("projectName", "projectStatus")) return Library::redirectWithMessage("Something went wrong, please try again later", "/Project");
         $sql = Library::arrayToInsertQuery("project", $data);
         self::db()::query($sql)::parameters([])::exec();
     }
