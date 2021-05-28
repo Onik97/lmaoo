@@ -2,48 +2,18 @@
 namespace Lmaoo\Controller;
 
 use PDO;
+use Lmaoo\Model\Project;
 use Lmaoo\Utility\Library;
 
 class ProjectController
 {
-    public static function projectExistance($name)
+    public static function createProject($projectName, $projectStatus)
     {
-        if ($name == null) return;
-
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("SELECT name FROM project WHERE name = ?");
-        $stmt->execute([$name]);
-
-        return $stmt->rowCount() != 0 ? true : false;
+        $data = array("name" => $projectName, "status" => $projectStatus);
+        Project::create($data);
     }
 
-    public static function createNewProject($projectName, $projectStatus)
-    {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("INSERT INTO project (name, status, owner) VALUES (?, ?, ?)");
-        $stmt->execute([$projectName, $projectStatus, $_SESSION['userLoggedIn']->userId]);
-    }
-
-    public static function createNewTicket($featureId, $summary, $reporterKey)
-    {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("INSERT INTO ticket (summary, featureId, reporter_key) VALUES (?, ?, ?)");
-        $stmt->execute([$summary, $featureId, $reporterKey]);
-    }
-
-    public static function getProjectList()
-    {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("SELECT projectId, name, status FROM project");
-        $stmt->execute();
-        return $stmt->fetchAll();
-    }
-
-    public static function getAccessibleProjectList($userLoggedIn)
+    public static function readAccessibleProject($userLoggedIn)
     {
         $pdo = Library::logindb();
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
@@ -53,20 +23,36 @@ class ProjectController
         $stmt->execute([$userLoggedIn->userId, $userLoggedIn->userId]);
         return $stmt->fetchAll();
     }
-
-    public static function getTicketListWithProgress($featureId, $progress)
+    
+    public static function readProject($projectId, $active)
     {
-        $sql = "SELECT ticket.ticketId, ticket.summary, ticket.progress, user.forename, user.surname 
-        FROM ticket LEFT JOIN user on user.userId = ticket.assignee_key
-        WHERE featureId = ? AND (ticket.progress = ?";
-        // TODO: When re-writing this, ensure that a better way is used for this
-        if($progress == "In Progress") $sql = $sql . "OR ticket.progress = 'In Automation')";
-        else $sql = $sql .")";
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare($sql);
+        $projects = Project::withProjectId($projectId);
+        $returnProjects = array();
+        foreach ($projects as $projects)
+        {
+            if ($projects->active == $active) {
+                array_push($returnProjects, $projects);
+            }
+        }
+        return $returnProjects;
+    }
 
-        $stmt->execute([$featureId, $progress]);
-        return $stmt->fetchAll();
+    public static function updateProject()
+    {
+        Library::validatePostValues("projectId", "name", "status", "owner");
+        $data = array("name" => $_POST["name"], "status" => $_POST["status"], "owner" => $_POST["owner"]);
+        Project::update($_POST["projectId"], $data);
+    }
+
+    public static function activateProject($projectId)
+    {
+        $data = array("active" => "1");
+        Project::update($projectId, $data);
+    }
+
+    public static function deactivateProject($projectId)
+    {
+        $data = array("active" => "0");
+        Project::update($projectId, $data);
     }
 }
