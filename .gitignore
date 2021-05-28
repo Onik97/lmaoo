@@ -3,4 +3,5 @@ Test/Vendor
 *.cache
 src/Images/profilePictures/*
 debug.log
-config.php
+App/config.php
+/vendor/
