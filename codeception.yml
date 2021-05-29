@@ -33,7 +33,11 @@ extensions:
 params: 
     - env
 
-gherkin: []    
+gherkin:
+    contexts:
+        default:
+            - AcceptanceTester
+            - LoginSteps
 
 # additional paths
 paths:
