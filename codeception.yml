@@ -1,0 +1,48 @@
+suites:
+    acceptance:
+        actor: AcceptanceTester
+        path: .
+        modules:
+            enabled:
+                # - PhpBrowser:
+                #     url: http://lmaoo.local
+                # - \Helper\Acceptance
+                - WebDriver:
+                    url: http://lmaoo.local
+                    # window_size: false # disabled in ChromeDriver
+                    port: 9515
+                    browser: chrome
+                    capabilities:
+                        chromeOptions:
+                            args: ["--incognito", "--start-maximized", "--disable-logging"] # Run Chrome Maximised
+                            # args: ["--headless"] # Run Chrome in the background
+                - \Helper\Acceptance
+                
+        # add Codeception\Step\Retry trait to AcceptanceTester to enable retries
+        step_decorators:
+            - Codeception\Step\ConditionalAssertion
+            - Codeception\Step\TryTo
+            - Codeception\Step\Retry
+                
+extensions:
+    enabled: 
+            - Codeception\Extension\RunFailed
+            - Codeception\Extension\RunProcess:
+                - Test\Automation\Tools\_chromedriver\chromedriver.exe --url-base=wd/hub
+
+params: 
+    - env
+
+gherkin: []    
+
+# additional paths
+paths:
+    tests: Test/Automation
+    output: Test/Automation/Tools/_output
+    data: Test/Automation/Tools/_data
+    support: Test/Automation/Tools/_support
+    envs: Test/Automation/Tools/_envs
+
+settings:
+    shuffle: false
+    lint: true
