@@ -5,3 +5,5 @@ src/Images/profilePictures/*
 debug.log
 App/config.php
 /vendor/
+Test/Automation/Tools/_output/*
+Test/Automation/Tools/_support/_generated/*
