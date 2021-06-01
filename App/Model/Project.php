@@ -12,7 +12,7 @@ class Project extends Database implements IModel
         self::db()::query($sql)::parameters([])::exec();
     }
 
-    public static function withId($projectId, $columns = null)
+    public static function withId($data, $columns = null)
     {
         $sql = $columns == null ? "SELECT * FROM project WHERE projectId = ?" : "SELECT $columns FROM project WHERE projectId = ?";
         return self::db()::query($sql)::parameters([$projectId])::fetchObject();
