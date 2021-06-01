@@ -1,7 +1,6 @@
 <?php
 namespace Lmaoo\Controller;
 
-use PDO;
 use Lmaoo\Model\Project;
 use Lmaoo\Utility\Library;
 
@@ -13,15 +12,9 @@ class ProjectController
         Project::create($data);
     }
 
-    public static function readAccessibleProject($userLoggedIn)
-    {
-        $data = array("userId" => $userLoggedIn);
-        Project::withId($data);
-    }
-    
     public static function readProject($projectId, $active)
     {
-        $projects = Project::withProjectId($projectId);
+        $projects = Project::withId($projectId);
         $returnProjects = array();
         foreach ($projects as $projects)
         {

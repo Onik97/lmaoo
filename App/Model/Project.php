@@ -12,16 +12,10 @@ class Project extends Database implements IModel
         self::db()::query($sql)::parameters([])::exec();
     }
 
-    public static function withId($data, $columns = null)
-    {
-        $sql = ($columns == "SELECT DISTINCT p.projectId, p.name, p.owner FROM projectAccess pa RIGHT JOIN project p ON pa.projectId = p.projectId WHERE pa.allowAccess = 1 AND pa.userId = ? OR p.owner = ?");
-        return self::db()::query($sql)::parameters([$data])::fetchObject();
-    }
-
-    public static function withProjectId($projectId, $columns = null)
+    public static function withId($projectId, $columns = null)
     {
         $sql = $columns == null ? "SELECT * FROM project WHERE projectId = ?" : "SELECT $columns FROM project WHERE projectId = ?";
-        return self::db()::query($sql)::parameters([$projectId])::fetchAll();
+        return self::db()::query($sql)::parameters([$projectId])::fetchObject();
     }
 
     public static function update($projectId, array $data)
