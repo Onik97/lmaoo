@@ -22,6 +22,8 @@ class ProjectController
                                WHERE pa.allowAccess = 1 AND pa.userId = ? OR p.owner = ?");
         $stmt->execute([$userLoggedIn->userId, $userLoggedIn->userId]);
         return $stmt->fetchAll();
+        $data = array("userId" => $userLoggedIn);
+        Project::withId($data);
     }
     
     public static function readProject($projectId, $active)
