@@ -3,6 +3,7 @@ namespace Lmaoo\Core;
 
 use Lmaoo\Controller\ProjectController;
 use Lmaoo\Controller\FeatureController;
+use Lmaoo\Model\ProjectAccess;
 
 class Render
 {
@@ -46,8 +47,7 @@ class Render
     public static function ProjectsInNavBar($userLoggedIn)
     {
         if ($userLoggedIn == null) return; 
-        $projectController = new projectController();
-        $projects = $projectController->readAccessibleProject($userLoggedIn);
+        $projects = ProjectAccess::Navbar($userLoggedIn->userId);
 
         echo "<li class='nav-item dropdown'>";
         echo "<a id='projectNav' href='#' class='nav-link dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Project<span class='caret'></span></a>";
