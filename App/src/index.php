@@ -2,6 +2,7 @@
 
 if (session_status() == PHP_SESSION_NONE) session_start();
 
+use Lmaoo\Controller\ProjectController;
 use Lmaoo\Core\Router;
 use Lmaoo\Core\Render;
 use Lmaoo\Controller\UserController;
