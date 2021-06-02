@@ -23,6 +23,14 @@ $router->get("/admin", 4, [Render::class, "admin"]);
 $router->post("/login", 0, [UserController::class, "standardLogin"]);
 $router->get("/logout", 1, [UserController::class, "logout"]);
 
+// Project Routes
+
+$router->post("createProject", 2, [ProjectController::class, "createProject"]);
+$router->post("readProject", 1, [ProjectController::class, "readProject"]);
+$router->post("updateProject", 1, [ProjectController::class, "updateProject"]);
+$router->post("activateProject", 1, [ProjectController::class, "activateProject"]);
+$router->post("deleteProject", 2, [ProjectController::class, "deleteProject"]);
+
 $router->resolve();
 
 // RouteController::Post("loadOwnerProjects", Validator::validateDeveloper(), 'ManagerController::loadOwnerProjects', array());
