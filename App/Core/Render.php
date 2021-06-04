@@ -1,7 +1,6 @@
 <?php
 namespace Lmaoo\Core;
 
-use Lmaoo\Controller\ProjectController;
 use Lmaoo\Controller\FeatureController;
 use Lmaoo\Model\ProjectAccess;
 
@@ -29,7 +28,6 @@ class Render
 
     public static function DropdownItems($userLoggedIn)
     {
-        $userLoggedIn = $userLoggedIn;
         if($userLoggedIn == null)
         {
             echo "<a class='dropdown-item' id='registerNav' href='/register'>Register</a>";
@@ -80,5 +78,10 @@ class Render
         {
             echo "<li value='$feature->featureId'>$feature->name<l class='far fa-edit'></l></li>";
         }
+    }
+
+    public static function NotFound()
+    {
+        echo file_get_contents("../View/notFound.php");
     }
 }
