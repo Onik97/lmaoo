@@ -1,28 +1,46 @@
 <?php include_once "../../vendor/autoload.php";
 
+use Lmaoo\Core\Middleware;
+
 if (session_status() == PHP_SESSION_NONE) session_start();
 
-use Lmaoo\Core\Router;
-use Lmaoo\Core\Render;
-use Lmaoo\Controller\UserController;
+// Documentation: https://github.com/bramus/router
+$router = new Bramus\Router\Router();
 
-$router = new Router();
+// Secure all Endpoints using Middleware
+$router->before('GET|POST', '/project.*', fn() => Middleware::verifyUser($router, 1));
+$router->before('GET|POST', '/manager.*', fn() => Middleware::verifyUser($router, 2));
+$router->before('GET|POST', '/admin.*', fn() => Middleware::verifyUser($router, 4));
 
-// Render Views
+// Set 404 Page
+$router->set404("Lmaoo\Core\Render::NotFound");
 
-$router->get("/", 0, [Render::class, "index"]);
-$router->get("/login", 0, [Render::class, "login"]);
-$router->get("/register", 0, [Render::class, "register"]);
-$router->get("/project", 1, [Render::class, "project"]);
-$router->get("/manager", 2, [Render::class, "manager"]);
-$router->get("/admin", 4, [Render::class, "admin"]);
+// Non-secure routes
+$router->get('/', "Lmaoo\Core\Render::index" );
+$router->get('/register', "Lmaoo\Core\Render::register" );
+$router->get('/login', "Lmaoo\Core\Render::login" );
+$router->post('/login', "Lmaoo\Controller\UserController::standardLogin" );
+$router->get('/logout', "Lmaoo\Controller\UserController::logout" );
 
-// User Routes
+// All /project requests
+$router->mount('/project', function() use ($router)
+{
+    $router->get('/', "Lmaoo\Core\Render::project");
+});
 
-$router->post("/login", 0, [UserController::class, "standardLogin"]);
-$router->get("/logout", 1, [UserController::class, "logout"]);
+// All /manager requests
+$router->mount('/manager', function() use ($router)
+{
+    $router->get('/', "Lmaoo\Core\Render::manager");
+});
 
-$router->resolve();
+// All /admin requests
+$router->mount('/admin', function() use ($router)
+{
+    $router->get('/', "Lmaoo\Core\Render::admin");
+});
+
+$router->run();
 
 // RouteController::Post("loadOwnerProjects", Validator::validateDeveloper(), 'ManagerController::loadOwnerProjects', array());
 // RouteController::Post("loadManagerProjects", Validator::validateDeveloper(), 'ManagerController::loadManagerProjects', array());
