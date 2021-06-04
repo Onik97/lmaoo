@@ -14,11 +14,11 @@
           </div>
 
           <ul id="activeFeatures" class="list-unstyled components" style="display: none;">
-            <?php Render::Features("1"); ?>
+            <?php Lmaoo\Core\Render::Features("1"); ?>
           </ul>
 
           <ul id="inactiveFeatures" class="list-unstyled components" style="display: none;">
-            <?php Render::Features("0"); ?>
+            <?php Lmaoo\Core\Render::Features("0"); ?>
           </ul>
 
         </nav>
