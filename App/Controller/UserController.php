@@ -6,7 +6,7 @@ use Lmaoo\Model\User;
 use Lmaoo\Model\GithubUser;
 use Lmaoo\Utility\Library;
 
-class UserController 
+class UserController extends BaseController
 {
 	public static function standardLogin()
 	{

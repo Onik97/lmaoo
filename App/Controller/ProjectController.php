@@ -4,7 +4,7 @@ namespace Lmaoo\Controller;
 use Lmaoo\Model\Project;
 use Lmaoo\Utility\Library;
 
-class ProjectController
+class ProjectController extends BaseController
 {
     public static function createProject($projectName, $projectStatus)
     {

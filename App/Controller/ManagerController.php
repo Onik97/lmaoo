@@ -1,28 +1,20 @@
 <?php
 namespace Lmaoo\Controller;
 
-use PDO;
+use Lmaoo\Model\Project;
+use Lmaoo\Model\ProjectAccess;
 use Lmaoo\Utility\Library;
 
-class ManagerController
+class ManagerController extends BaseController
 {
-    public static function loadOwnerProjects()
+    public static function readOwnerProjects()
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("SELECT * FROM project WHERE owner = ?");
-        $stmt->execute([$_SESSION['userLoggedIn']->userId]);
-        return $stmt->fetchAll();
+        return Project::withOwnerId(self::$userLoggedIn->userId);
     }
 
-    public static function loadManagerProjects()
+    public static function readManagerProjects()
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("SELECT pa.userId, pa.projectId, p.name, p.status FROM projectAccess pa INNER JOIN project p
-                               ON pa.projectId = p.projectId WHERE pa.managerAccess = 1 AND pa.userId = ?");
-        $stmt->execute([$_SESSION['userLoggedIn']->userId]);
-        return $stmt->fetchAll();
+        return ProjectAccess::withManagerAccess(self::$userLoggedIn->userId);
     }
 
     public static function removeUsersFromProject($projectId)

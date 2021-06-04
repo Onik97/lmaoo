@@ -4,7 +4,7 @@ namespace Lmaoo\Controller;
 use Lmaoo\Utility\Library;
 use Lmaoo\Model\Feature;
 
-class FeatureController
+class FeatureController extends BaseController
 {
     public static function createFeature($featureName, $projectId)
     {
