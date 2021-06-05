@@ -25,4 +25,10 @@ class ProjectAccess extends Database
                 WHERE pa.managerAccess = 1 AND pa.userId = ?";
         return self::db()::query($sql)::parameters([$userId])::fetchAll();
     }
+
+    public static function delete($projectId)
+    {
+        $sql = "DELETE FROM projectAccess WHERE projectId = ?";
+        return self::db()::query($sql)::parameters([$projectId])::exec();
+    }
 }
