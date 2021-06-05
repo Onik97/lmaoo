@@ -11,6 +11,9 @@ $router = new Bramus\Router\Router();
 $router->before('GET|POST', '/project.*', fn() => Middleware::verifyUser($router, 1));
 $router->before('GET|POST', '/manager.*', fn() => Middleware::verifyUser($router, 2));
 $router->before('GET|POST', '/admin.*', fn() => Middleware::verifyUser($router, 4));
+$router->before('POST', '/project.*', fn() => Middleware::verifyJson($router, file_get_contents('php://input')));
+$router->before('POST', '/manager.*', fn() => Middleware::verifyJson($router, file_get_contents('php://input')));
+$router->before('POST', '/admin.*', fn() => Middleware::verifyJson($router, file_get_contents('php://input')));
 
 // Set 404 Page
 $router->set404("Lmaoo\Core\Render::NotFound");
