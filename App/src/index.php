@@ -43,6 +43,9 @@ $router->mount('/admin', function() use ($router)
     $router->get('/', "Lmaoo\Core\Render::admin");
 });
 
+// For Testing Purposes
+// $router->post("/test", fn() => Lmaoo\Controller\ManagerController::addUsersToProject(file_get_contents('php://input')));
+
 $router->run();
 
 // RouteController::Post("loadOwnerProjects", Validator::validateDeveloper(), 'ManagerController::loadOwnerProjects', array());
