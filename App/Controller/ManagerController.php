@@ -4,41 +4,29 @@ namespace Lmaoo\Controller;
 use Lmaoo\Model\Project;
 use Lmaoo\Model\ProjectAccess;
 use Lmaoo\Utility\Library;
+use Lmaoo\Utility\Validation;
 
 class ManagerController extends BaseController
 {
     public static function readOwnerProjects()
     {
-        return Project::withOwnerId(self::$userLoggedIn->userId);
+        echo json_encode(Project::withOwnerId(self::$userLoggedIn->userId));
     }
 
     public static function readManagerProjects()
     {
-        return ProjectAccess::withManagerAccess(self::$userLoggedIn->userId);
+        echo json_encode(ProjectAccess::withManagerAccess(self::$userLoggedIn->userId));
     }
 
     public static function removeUsersFromProject($projectId)
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("DELETE FROM projectAccess WHERE projectId = ?");
-        $stmt->execute([$projectId]);
+        echo json_encode(ProjectAccess::delete($projectId));
     }
 
     public static function addUsersToProject($json)
     {
-        $sql = "INSERT INTO projectAccess (userId, projectId, allowAccess, managerAccess) VALUES";
-        $data = json_decode($json);
-
-        foreach ($data as $value) {
-            $sql = $sql . " ($value->userId, $value->projectId, $value->allowAccess, $value->managerAccess),";
-        }
-        $finalSql = substr($sql, 0, -1); // Removes , at the end of the SQL 
-
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare($finalSql);
-        $stmt->execute();
+        // If Null means no errors
+        echo Validation::ProgressAccess(json_decode($json, true)) ?? null;
     }
 
     public static function loadUsersOnProject($projectId)
