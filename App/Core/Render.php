@@ -82,6 +82,7 @@ class Render
 
     public static function NotFound()
     {
+        http_response_code(404);
         echo file_get_contents("../View/notFound.php");
     }
 }
