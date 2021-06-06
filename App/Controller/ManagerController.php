@@ -8,6 +8,18 @@ use Lmaoo\Utility\ErrorMessage;
 
 class ManagerController extends BaseController
 {
+    public static function createUsersToProject($json)
+    {
+        $data = json_decode($json, true); $validation = Validation::ProgressAccess($data);
+
+        $validation == null ? ProjectAccess::create($data): ErrorMessage::BadRequest($validation);
+    }
+
+    public static function readUsersOnProject($projectId)
+    {
+        echo json_encode(ProjectAccess::withProjectId($projectId));
+    }
+
     public static function readOwnerProjects()
     {
         echo json_encode(Project::withOwnerId(self::$userLoggedIn->userId));
@@ -18,20 +30,8 @@ class ManagerController extends BaseController
         echo json_encode(ProjectAccess::withManagerAccess(self::$userLoggedIn->userId));
     }
 
-    public static function removeUsersFromProject($projectId)
+    public static function deleteUsersFromProject($projectId)
     {
         echo json_encode(ProjectAccess::delete($projectId));
-    }
-
-    public static function addUsersToProject($json)
-    {
-        $data = json_decode($json, true); $validation = Validation::ProgressAccess($data);
-
-        $validation == null ? ProjectAccess::create($data): ErrorMessage::BadRequest($validation);
-    }
-
-    public static function loadUsersOnProject($projectId)
-    {
-        echo json_encode(ProjectAccess::withProjectId($projectId));
     }
 }
