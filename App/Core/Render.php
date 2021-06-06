@@ -6,11 +6,12 @@ use Lmaoo\Model\ProjectAccess;
 
 class Render
 {
-    public static function layout(string $view, string $js)
+    public static function layout(string $view, string $file)
     {
+        ob_start(); echo "<link rel='stylesheet' type='text/css' href='/Style/$file.css'/>"; $style = ob_get_clean();
         ob_start(); include_once __DIR__ . "/../View/$view.php"; $content = ob_get_clean();
         ob_start(); include_once __DIR__ . "/../View/navbar.php"; $navbar = ob_get_clean();
-        ob_start(); echo "<script type='module' src='/Script/public/$js.js'></script>"; $script = ob_get_clean();
+        ob_start(); echo "<script type='module' src='/Script/public/$file.js'></script>"; $script = ob_get_clean();
         include_once __DIR__ . "/../View/_layout.php";
     }
     
