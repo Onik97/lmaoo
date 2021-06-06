@@ -4,7 +4,7 @@ namespace Lmaoo\Controller;
 use Lmaoo\Model\Project;
 use Lmaoo\Model\ProjectAccess;
 use Lmaoo\Utility\Validation;
-use Lmaoo\Utility\ErrorMessage;
+use Lmaoo\Utility\APIResponse;
 
 class ManagerController extends BaseController
 {
@@ -12,7 +12,7 @@ class ManagerController extends BaseController
     {
         $data = json_decode($json, true); $validation = Validation::ProgressAccess($data);
 
-        $validation == null ? ProjectAccess::create($data): ErrorMessage::BadRequest($validation);
+        $validation == null ? ProjectAccess::create($data): APIResponse::BadRequest($validation);
     }
 
     public static function readUsersOnProject($projectId)
