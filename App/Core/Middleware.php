@@ -4,6 +4,7 @@ namespace Lmaoo\Core;
 use Respect\Validation\Validator as v;
 use Respect\Validation\Exceptions\NestedValidationException;
 use Exception;
+use Lmaoo\Utility\APIResponse;
 
 class Middleware
 {
@@ -14,14 +15,12 @@ class Middleware
         if ($userLoggedIn == null)
         {
             $router->trigger404();
-            http_response_code(404);
             return exit();
         }
          
         if ($userLoggedIn->level < $userLevel)
         {
             $router->trigger404();
-            http_response_code(404);
             return exit();
         }
     }
@@ -31,8 +30,7 @@ class Middleware
         try {
             v::json()->assert($body);
         } catch(NestedValidationException $e) {
-            http_response_code(400);
-            exit(json_encode(array("Message" => "Only JSON body accepted")));
+            APIResponse::BadRequest("JSON Data Only");
         }
     }
 }
