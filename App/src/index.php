@@ -1,7 +1,8 @@
 <?php include_once "../../vendor/autoload.php";
 
-use Lmaoo\Controller\ManagerController;
 use Lmaoo\Core\Middleware;
+
+use Lmaoo\Controller\ManagerController;
 
 if (session_status() == PHP_SESSION_NONE) session_start();
 
@@ -41,7 +42,7 @@ $router->mount("/manager", function() use ($router)
     $router->get("/", "Lmaoo\Core\Render::manager");
     $router->get("/project/(\d+)", fn($projectId) => ManagerController::readUsersOnProject($projectId));
 
-    $router->post("/", fn() => Lmaoo\Controller\ManagerController::createUsersToProject($json));
+    $router->post("/", fn() => ManagerController::createUsersToProject($json));
 
     $router->delete("/project/(\d+)", fn($projectId) => ManagerController::deleteUsersFromProject($projectId));
 });
