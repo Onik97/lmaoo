@@ -86,4 +86,17 @@ class Library
 
         return "INSERT INTO $tableName SET $updates";
     }
+
+    public static function multiArrayToInsertQuery(string $tableName, $multiArray)
+    {
+        $stmt = "";
+
+        foreach($multiArray as $x)
+        {
+            $query = self::arrayToInsertQuery($tableName, $x);
+            $stmt = $stmt . " $query;";
+        }
+
+        return $stmt;
+    }
 }
