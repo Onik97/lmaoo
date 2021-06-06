@@ -33,12 +33,16 @@ $router->mount('/project', function() use ($router)
 });
 
 // All /manager requests
-$router->mount('/manager', function() use ($router)
+$router->mount("/manager", function() use ($router)
 {
-    $json = file_get_contents('php://input'); // Need to find a better way to handle this
+    $json = file_get_contents("php://input"); // Need to find a better way to handle this
 
-    $router->get('/', "Lmaoo\Core\Render::manager");
-    $router->post("/", fn() => Lmaoo\Controller\ManagerController::addUsersToProject($json));
+    $router->get("/", "Lmaoo\Core\Render::manager");
+    $router->get("/project/(\d+)", fn($projectId) => ManagerController::readUsersOnProject($projectId));
+
+    $router->post("/", fn() => Lmaoo\Controller\ManagerController::createUsersToProject($json));
+
+    $router->delete("/project/(\d+)", fn($projectId) => ManagerController::deleteUsersFromProject($projectId));
 });
 
 // All /admin requests
