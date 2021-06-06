@@ -35,7 +35,10 @@ $router->mount('/project', function() use ($router)
 // All /manager requests
 $router->mount('/manager', function() use ($router)
 {
+    $json = file_get_contents('php://input'); // Need to find a better way to handle this
+
     $router->get('/', "Lmaoo\Core\Render::manager");
+    $router->post("/", fn() => Lmaoo\Controller\ManagerController::addUsersToProject($json));
 });
 
 // All /admin requests

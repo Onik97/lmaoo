@@ -3,8 +3,8 @@ namespace Lmaoo\Controller;
 
 use Lmaoo\Model\Project;
 use Lmaoo\Model\ProjectAccess;
-use Lmaoo\Utility\Library;
 use Lmaoo\Utility\Validation;
+use Lmaoo\Utility\ErrorMessage;
 
 class ManagerController extends BaseController
 {
@@ -25,17 +25,13 @@ class ManagerController extends BaseController
 
     public static function addUsersToProject($json)
     {
-        // If Null means no errors
-        echo Validation::ProgressAccess(json_decode($json, true)) ?? null;
+        $data = json_decode($json, true); $validation = Validation::ProgressAccess($data);
+
+        $validation == null ? ProjectAccess::create($data): ErrorMessage::BadRequest($validation);
     }
 
     public static function loadUsersOnProject($projectId)
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("SELECT pa.projectId, pa.managerAccess, u.userId, u.username, u.forename, u.surname FROM projectAccess pa INNER JOIN user u
-                               ON pa.userId = u.userId WHERE pa.allowAccess = 1 AND projectId = ?");
-        $stmt->execute([$projectId]);
-        return $stmt->fetchAll();
+        echo json_encode(ProjectAccess::withProjectId($projectId));
     }
 }
