@@ -6,14 +6,15 @@ if (session_status() == PHP_SESSION_NONE) session_start();
 
 // Documentation: https://github.com/bramus/router
 $router = new Bramus\Router\Router();
+$json = file_get_contents('php://input'); // Need to find a better way to handle this
 
 // Secure all Endpoints using Middleware
 $router->before('GET|POST', '/project.*', fn() => Middleware::verifyUser($router, 1));
 $router->before('GET|POST', '/manager.*', fn() => Middleware::verifyUser($router, 2));
 $router->before('GET|POST', '/admin.*', fn() => Middleware::verifyUser($router, 4));
-$router->before('POST', '/project.*', fn() => Middleware::verifyJson($router, file_get_contents('php://input')));
-$router->before('POST', '/manager.*', fn() => Middleware::verifyJson($router, file_get_contents('php://input')));
-$router->before('POST', '/admin.*', fn() => Middleware::verifyJson($router, file_get_contents('php://input')));
+$router->before('POST', '/project.*', fn() => Middleware::verifyJson($router, $json));
+$router->before('POST', '/manager.*', fn() => Middleware::verifyJson($router, $json));
+$router->before('POST', '/admin.*', fn() => Middleware::verifyJson($router, $json));
 
 // Set 404 Page
 $router->set404("Lmaoo\Core\Render::NotFound");
