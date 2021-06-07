@@ -1,12 +1,11 @@
 <?php include_once "../../vendor/autoload.php";
 
 use Lmaoo\Core\Middleware;
-use Lmaoo\Core\Config;
 
+use Lmaoo\Controller\GithubController;
 use Lmaoo\Controller\ManagerController;
 
 if (session_status() == PHP_SESSION_NONE) session_start();
-$config = new Config();
 
 // Documentation: https://github.com/bramus/router
 $router = new Bramus\Router\Router();
@@ -53,6 +52,15 @@ $router->mount("/manager", function() use ($router)
 $router->mount("/admin", function() use ($router)
 {
     $router->get("/", "Lmaoo\Core\Render::admin");
+});
+
+// All Github OAuth
+$router->mount("/github", function() use ($router)
+{
+    // GET github/authorize/login OR GET github/authorize/register 
+    $router->get("/authorize/(\w+)", fn($function) => (new GithubController)->authorise($function));
+    $router->post("/callback", "Lmaoo\Controller\GithubController@callback");
+    $router->get("/callback", "Lmaoo\Controller\GithubController@callback");
 });
 
 // For Testing Purposes
