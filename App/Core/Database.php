@@ -5,7 +5,7 @@ use PDO;
 use PDOException;
 use Lmaoo\Core\Config;
 
-abstract class Database extends Config
+class Database extends Config
 {
     public static PDO $pdo;
     public static string $query;
