@@ -1,7 +1,9 @@
 <?php
 namespace Lmaoo\Utility;
 
-class APIClient 
+use Lmaoo\Core\Config;
+
+class APIClient extends Config
 {
     public static function getRequest(string $url, array $headers = null)
     {

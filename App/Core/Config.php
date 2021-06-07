@@ -1,9 +1,7 @@
 <?php
 namespace Lmaoo\Core;
 
-use Exception;
-
-class Config 
+abstract class Config 
 {
     public function __construct()
     {
