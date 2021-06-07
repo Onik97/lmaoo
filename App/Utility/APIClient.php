@@ -4,7 +4,6 @@ namespace Lmaoo\Utility;
 use Lmaoo\Core\Config;
 use GuzzleHttp\Client;
 
-
 class APIClient extends Config
 {
     public static function getRequest(string $url, ?array $params, ?array $headers, bool $assoc = true)

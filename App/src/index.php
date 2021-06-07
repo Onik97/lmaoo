@@ -59,7 +59,6 @@ $router->mount("/github", function() use ($router)
 {
     // GET github/authorize/login OR GET github/authorize/register 
     $router->get("/authorize/(\w+)", fn($function) => (new GithubController)->authorise($function));
-    $router->post("/callback", "Lmaoo\Controller\GithubController@callback");
     $router->get("/callback", "Lmaoo\Controller\GithubController@callback");
 });
 
