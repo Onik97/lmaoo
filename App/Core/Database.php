@@ -3,6 +3,7 @@ namespace Lmaoo\Core;
 
 use PDO;
 use PDOException;
+use Lmaoo\Core\Config;
 
 abstract class Database
 {
@@ -12,8 +13,8 @@ abstract class Database
 
     public static function db()
     {
-        $config = include(__DIR__ . "/../config.php");
-        self::$pdo = new PDO("mysql:host={$config['db_host']};dbname={$config['db_table']}", $config['db_username'],  $config['db_password']);
+        $config = new Config();
+        self::$pdo = new PDO("mysql:host={$config->db_host};dbname={$config->db_table}", $config->db_username,  $config->db_password);
         return new static;
     }
 

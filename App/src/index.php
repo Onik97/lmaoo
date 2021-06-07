@@ -1,10 +1,12 @@
 <?php include_once "../../vendor/autoload.php";
 
 use Lmaoo\Core\Middleware;
+use Lmaoo\Core\Config;
 
 use Lmaoo\Controller\ManagerController;
 
 if (session_status() == PHP_SESSION_NONE) session_start();
+$config = new Config();
 
 // Documentation: https://github.com/bramus/router
 $router = new Bramus\Router\Router();
