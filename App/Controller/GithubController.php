@@ -31,7 +31,7 @@ class GithubController extends BaseController
         unset($_SESSION['state']);
         
         $auth = new OAuth();
-        
+
         switch ($_GET['function']) 
         {
             case "login":
@@ -40,12 +40,14 @@ class GithubController extends BaseController
                 $_SESSION["userLoggedIn"] = User::withGithubId($github->user->id);
                 header("Location: /");
                 break;
+
             case "register":
                 $accessToken = $auth->getAccessToken($_GET['code']);
                 $github = new Github\User($accessToken); $_SESSION["githubUser"] = $github;
-                User::update($this->userId, array("github_id" => $github->user->id));
+                User::update($this->userLoggedIn->userId, array("github_id" => $github->user->id, "github_accessToken" => $accessToken));
                 header("Location: /");
                 break;
+
             default:
                 APIResponse::Forbidden("Attack detected, aborting...");
         }
