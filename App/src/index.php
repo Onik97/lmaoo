@@ -2,6 +2,7 @@
 
 use Lmaoo\Core\Middleware;
 
+use Lmaoo\Controller\GithubController;
 use Lmaoo\Controller\ManagerController;
 
 if (session_status() == PHP_SESSION_NONE) session_start();
@@ -51,6 +52,14 @@ $router->mount("/manager", function() use ($router)
 $router->mount("/admin", function() use ($router)
 {
     $router->get("/", "Lmaoo\Core\Render::admin");
+});
+
+// All Github OAuth
+$router->mount("/github", function() use ($router)
+{
+    // GET github/authorize/login OR GET github/authorize/register 
+    $router->get("/authorize/(\w+)", fn($function) => (new GithubController)->authorise($function));
+    $router->get("/callback", "Lmaoo\Controller\GithubController@callback");
 });
 
 // For Testing Purposes

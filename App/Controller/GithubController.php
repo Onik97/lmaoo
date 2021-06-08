@@ -1,78 +1,56 @@
 <?php
 namespace Lmaoo\Controller;
 
-use PDO;
+use Lmaoo\Model\Github\OAuth;
+use Lmaoo\Model\Github;
+use Lmaoo\Model\User;
+use Lmaoo\Utility\APIResponse;
 use Lmaoo\Utility\Library;
-use Lmaoo\Utility\APIClient;
 
-class GithubController extends APIClient
-{
-    public static $ACCESS_TOKEN_URL = "https://github.com/login/oauth/access_token";
-    public static $USER_URL = "https://api.github.com/user";
-
-    public function __construct() { $this->config = include_once(__DIR__ . "/../config.php"); }
-
-    public function getAccessToken() { return $this->accessToken; }
-
-    public function getAccessTokenFromDatabase($userId) 
+class GithubController extends BaseController
+{  
+    public static $AUTHORIZE_URL = "https://github.com/login/oauth/authorize";
+    
+    public function authorise($function)
     {
-        $pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT github_accessToken FROM user WHERE userId = ?");
-		$stmt->execute([$userId]);
-		return $stmt->fetchColumn();
-    }
-
-    public function setAccessToken()
-    {
-        $postFields = array(
-            'client_id' => $this->config['github_clientId'],
-            'client_secret' => $this->config['github_secret'],
-            'code' => $_GET['code'],
+        $_SESSION['state'] = Library::generateString(10); // To prevent CSRF attacks
+        $query = array(
+            "client_id" => $this->github_clientId,
+            "scope" => "user repo admin:public_key admin:repo_hook admin:org_hook gist notifications",
+            "state" => $_SESSION['state'],
+            "redirect_uri" => $this->github_request_uri . "?function=$function"
         );
-
-        $headers = array('Accept: application/json');
-
-        $accessTokenResponse = self::postRequest(self::$ACCESS_TOKEN_URL, $postFields, $headers);
-        $jsonAccessTokenResponse = json_decode($accessTokenResponse, true);
-        $this->accessToken = $jsonAccessTokenResponse["access_token"];
+        $header = self::$AUTHORIZE_URL . "?" . http_build_query($query);
+        header("Location:" . $header);
     }
 
-    public function saveAccessToken($githubUser)
+    public function callback()
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("UPDATE user SET github_accessToken = ? WHERE github_id = ?");
-        $stmt->execute([$this->getAccessToken(), $githubUser['id']]);
-        return $stmt->fetchColumn();
-    }
-
-    public function getGithubUser($accessToken)
-    {
-        $headers = array(
-            "Authorization: token {$accessToken}",
-            "User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0"
-        );
-
-        $accessTokenResponse = self::postRequest(self::$USER_URL, null, $headers);
-        return json_decode($accessTokenResponse, true);
-    }
-
-    public function registerGithub()
-    {
-        $githubUser = $this->getGithubUser($this->accessToken);
-
-        $pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("UPDATE user SET github_id = ?, github_accessToken = ? WHERE userId = ?");
-        $stmt->execute([$githubUser['id'], $this->getAccessToken(), $_SESSION['userLoggedIn']->userId]);
-
-        $userLoggedIn = $_SESSION['userLoggedIn'];
-        $userLoggedIn->setGithubId($githubUser['id']);
-        $userLoggedIn->profileToObject($githubUser);
+        if(!isset($_GET['code']) || !isset($_GET['state'])) APIResponse::Unauthorized("Attack detected, aborting...");
+        if ($_GET['state'] != $_SESSION['state']) APIResponse::Forbidden("URL change detected, aborting...");
+        unset($_SESSION['state']);
         
-        $_SESSION['userLoggedIn'] = $userLoggedIn;
-        Library::redirectWithMessage("Github Registration Successful!", "../Home/index.php");
+        $auth = new OAuth();
+
+        switch ($_GET['function']) 
+        {
+            case "login":
+                $accessToken = $auth->getAccessToken($_GET['code']);
+                $github = new Github\User($accessToken); $_SESSION["githubUser"] = $github;
+                $_SESSION["userLoggedIn"] = User::withGithubId($github->user->id);
+                header("Location: /");
+                break;
+
+            case "register":
+                $accessToken = $auth->getAccessToken($_GET['code']);
+                $github = new Github\User($accessToken); $_SESSION["githubUser"] = $github;
+                User::update($this->userLoggedIn->userId, array("github_id" => $github->user->id, "github_accessToken" => $accessToken));
+                header("Location: /");
+                break;
+
+            default:
+                APIResponse::Forbidden("Attack detected, aborting...");
+        }
     }
 
     public static function loadProfile($githubProfile)
