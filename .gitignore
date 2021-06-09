@@ -7,3 +7,4 @@ App/config.php
 /vendor/
 Test/Automation/Tools/_output/*
 Test/Automation/Tools/_support/_generated/*
+.DS_Store

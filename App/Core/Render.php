@@ -1,17 +1,17 @@
 <?php
 namespace Lmaoo\Core;
 
-use Lmaoo\Controller\ProjectController;
 use Lmaoo\Controller\FeatureController;
 use Lmaoo\Model\ProjectAccess;
 
 class Render
 {
-    public static function layout(string $view, string $js)
+    public static function layout(string $view, string $file)
     {
+        ob_start(); echo "<link rel='stylesheet' type='text/css' href='/Style/$file.css'/>"; $style = ob_get_clean();
         ob_start(); include_once __DIR__ . "/../View/$view.php"; $content = ob_get_clean();
         ob_start(); include_once __DIR__ . "/../View/navbar.php"; $navbar = ob_get_clean();
-        ob_start(); echo "<script type='module' src='/Script/public/$js.js'></script>"; $script = ob_get_clean();
+        ob_start(); echo "<script type='module' src='/Script/public/$file.js'></script>"; $script = ob_get_clean();
         include_once __DIR__ . "/../View/_layout.php";
     }
     
@@ -29,7 +29,6 @@ class Render
 
     public static function DropdownItems($userLoggedIn)
     {
-        $userLoggedIn = $userLoggedIn;
         if($userLoggedIn == null)
         {
             echo "<a class='dropdown-item' id='registerNav' href='/register'>Register</a>";
@@ -80,5 +79,11 @@ class Render
         {
             echo "<li value='$feature->featureId'>$feature->name<l class='far fa-edit'></l></li>";
         }
+    }
+
+    public static function NotFound()
+    {
+        http_response_code(404);
+        echo file_get_contents("../View/notFound.php");
     }
 }

@@ -4,7 +4,7 @@ namespace Lmaoo\Controller;
 use PDO;
 use Lmaoo\Utility\Library;
 
-class TicketController
+class TicketController extends BaseController
 {
     public static function getTicket($ticketId)
     {

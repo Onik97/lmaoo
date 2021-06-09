@@ -4,7 +4,7 @@ namespace Lmaoo\Controller;
 use PDO;
 use Lmaoo\Utility\Library;
 
-class AdminController
+class AdminController extends BaseController
 {
     public function validateAdmin(?string $unitUserId)
     {

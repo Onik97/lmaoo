@@ -1,61 +1,37 @@
 <?php
 namespace Lmaoo\Controller;
 
-use PDO;
-use Lmaoo\Utility\Library;
+use Lmaoo\Model\Project;
+use Lmaoo\Model\ProjectAccess;
+use Lmaoo\Utility\Validation;
+use Lmaoo\Utility\APIResponse;
 
-class ManagerController
+class ManagerController extends BaseController
 {
-    public static function loadOwnerProjects()
+    public static function createUsersToProject($json)
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("SELECT * FROM project WHERE owner = ?");
-        $stmt->execute([$_SESSION['userLoggedIn']->userId]);
-        return $stmt->fetchAll();
+        $data = json_decode($json, true); $validation = Validation::ProgressAccess($data);
+
+        $validation == null ? ProjectAccess::create($data): APIResponse::BadRequest($validation);
     }
 
-    public static function loadManagerProjects()
+    public static function readUsersOnProject($projectId)
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("SELECT pa.userId, pa.projectId, p.name, p.status FROM projectAccess pa INNER JOIN project p
-                               ON pa.projectId = p.projectId WHERE pa.managerAccess = 1 AND pa.userId = ?");
-        $stmt->execute([$_SESSION['userLoggedIn']->userId]);
-        return $stmt->fetchAll();
+        echo json_encode(ProjectAccess::withProjectId($projectId));
     }
 
-    public static function removeUsersFromProject($projectId)
+    public static function readOwnerProjects()
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("DELETE FROM projectAccess WHERE projectId = ?");
-        $stmt->execute([$projectId]);
+        echo json_encode(Project::withOwnerId(self::$userLoggedIn->userId));
     }
 
-    public static function addUsersToProject($json)
+    public static function readManagerProjects()
     {
-        $sql = "INSERT INTO projectAccess (userId, projectId, allowAccess, managerAccess) VALUES";
-        $data = json_decode($json);
-
-        foreach ($data as $value) {
-            $sql = $sql . " ($value->userId, $value->projectId, $value->allowAccess, $value->managerAccess),";
-        }
-        $finalSql = substr($sql, 0, -1); // Removes , at the end of the SQL 
-
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare($finalSql);
-        $stmt->execute();
+        echo json_encode(ProjectAccess::withManagerAccess(self::$userLoggedIn->userId));
     }
 
-    public static function loadUsersOnProject($projectId)
+    public static function deleteUsersFromProject($projectId)
     {
-        $pdo = Library::logindb();
-        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $stmt = $pdo->prepare("SELECT pa.projectId, pa.managerAccess, u.userId, u.username, u.forename, u.surname FROM projectAccess pa INNER JOIN user u
-                               ON pa.userId = u.userId WHERE pa.allowAccess = 1 AND projectId = ?");
-        $stmt->execute([$projectId]);
-        return $stmt->fetchAll();
+        echo json_encode(ProjectAccess::delete($projectId));
     }
 }
