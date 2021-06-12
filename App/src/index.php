@@ -4,6 +4,7 @@ use Lmaoo\Core\Middleware;
 
 use Lmaoo\Controller\GithubController;
 use Lmaoo\Controller\ManagerController;
+use Lmaoo\Controller\ProjectController;
 
 if (session_status() == PHP_SESSION_NONE) session_start();
 
