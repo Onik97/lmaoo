@@ -34,6 +34,15 @@ $router->get("/logout", "Lmaoo\Controller\UserController::logout" );
 $router->mount("/project", function() use ($router)
 {
     $router->get("/", "Lmaoo\Core\Render::project");
+
+    $router->post("/", fn($projectName, $projectStatus) => ProjectController::createProject($projectName, $projectStatus));
+    $router->get("/", fn($projectId, $active) => ProjectController::readProject($projectId, $active));
+
+    $router->post("/", fn() => ProjectController::updateProject());
+
+    $router->post("/", fn($projectId) => ProjectController::activateProject($projectId));
+    $router->post("/", fn($projectId) => ProjectController::deactivateProject($projectId));
+
 });
 
 // All /manager requests
