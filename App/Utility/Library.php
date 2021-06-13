@@ -68,7 +68,7 @@ class Library
 
         foreach($data as $x => $y) {
             $keys = $keys . "$x,";
-            $values = $values . "$y,";
+            $values = $values . "'$y',";
         }
         $keys = substr($keys, 0, -1);
         $values = substr($values, 0, -1);
