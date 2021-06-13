@@ -2,14 +2,16 @@
 namespace Lmaoo\Controller;
 
 use Lmaoo\Model\Project;
+use Lmaoo\Utility\APIResponse;
 use Lmaoo\Utility\Library;
+use Lmaoo\Utility\Validation;
 
 class ProjectController extends BaseController
 {
-    public static function createProject($projectName, $projectStatus)
+    public static function createProject($json)
     {
-        $data = array("name" => $projectName, "status" => $projectStatus);
-        Project::create($data);
+        $data = json_decode($json, true); $validation = Validation::createProject($data);
+        $validation == null ? Project::create($data) : APIResponse::BadRequest($validation);
     }
 
     public static function readProject($projectId, $active)
