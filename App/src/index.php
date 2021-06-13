@@ -33,9 +33,11 @@ $router->get("/logout", "Lmaoo\Controller\UserController::logout" );
 // All /project requests
 $router->mount("/project", function() use ($router)
 {
+    $json = file_get_contents("php://input"); // Need to find a better way to handle this
+
     $router->get("/", "Lmaoo\Core\Render::project");
 
-    $router->post("/", fn($projectName, $projectStatus) => ProjectController::createProject($projectName, $projectStatus));
+    $router->post("/", fn() => ProjectController::createProject($json));
     $router->get("/", fn($projectId, $active) => ProjectController::readProject($projectId, $active));
 
     $router->post("/", fn() => ProjectController::updateProject());
