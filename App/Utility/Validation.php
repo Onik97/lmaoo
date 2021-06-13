@@ -20,4 +20,17 @@ class Validation
             return json_encode($e->getMessages());
         }
     }
+
+    public static function createProject($data)
+    {
+        try {
+            v::key("name", v::NotOptional()->stringVal())
+             ->key("status", v::NotOptional()->stringVal())
+             ->key("owner", v::NotOptional()->intval())
+             ->key("active", v::NotOptional()->boolVal())
+             ->assert($data);
+        } catch(NestedValidationException $e) {
+            return json_encode($e->getMessages());
+        }
+    }
 }
