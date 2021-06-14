@@ -9,6 +9,7 @@ class Validation
     public static function ProgressAccess($data)
     {
         try {
+            v::notEmpty()->setName("JSON Data")->assert($data);
             foreach($data as $d) {
                 v::key("userId", v::intval())
                  ->key("projectId", v::intval())
