@@ -1,5 +1,4 @@
 <p id="navBarActive" hidden>loginPage</p>
-<link rel="stylesheet" href="/Style/LoginRegister.css">
 
 <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
 	<div class="container">
@@ -24,7 +23,7 @@
 								<a class="register" href="/register">Not Registered? Click here!</a>
 							</div>
 						</form>
-						<a href="../Github/authorize.php?function=login" class="github"><i class="fab fa-github"></i> Sign in with Github</a>
+						<a href="/github/authorize/login" class="github"><i class="fab fa-github"></i> Sign in with Github</a>
 					</div>
 				</div>
 			</div>

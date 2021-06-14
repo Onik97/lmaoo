@@ -3,78 +3,80 @@ namespace Lmaoo\Core;
 
 use PDO;
 use PDOException;
+use Lmaoo\Core\Config;
 
-abstract class Database
+class Database extends Config
 {
     public static PDO $pdo;
     public static string $query;
     public static array $parameters;
 
-    public static function db()
+    public function db()
     {
-        $config = include(__DIR__ . "/../config.php");
-        self::$pdo = new PDO("mysql:host={$config['db_host']};dbname={$config['db_table']}", $config['db_username'],  $config['db_password']);
-        return new static;
+        $this::$pdo = new PDO("mysql:host=" . $this->db_host . ";dbname=" . $this->db_table,
+                        $this->db_username, 
+                        $this->db_password);
+        return $this;
     }
 
-    public static function query($sql)
+    public function query($sql)
     {
-        self::$query = $sql;
-        return new static;
+        $this::$query = $sql;
+        return $this;
     }
 
-    public static function parameters($parameters)
+    public function parameters($parameters)
     {
-        self::$parameters = $parameters;
-        return new static;
+        $this::$parameters = $parameters;
+        return $this;
     }
 
-    public static function fetchAll()
+    public function fetchAll()
     {
         try {
-            $pdo = self::$pdo;
+            $pdo = $this::$pdo;
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-            $stmt = $pdo->prepare(self::$query);
-            $stmt->execute(self::$parameters);
+            $stmt = $pdo->prepare($this::$query);
+            $stmt->execute($this::$parameters);
             $pdo = null; // Closes Connection
             return $stmt->fetchAll();
         }
         catch(PDOException $e) { die("ERROR ID: 102"); }
     }
 
-    public static function fetchObject()
+    public function fetchObject()
     {
         try {
-            $pdo = self::$pdo;
+            $pdo = $this::$pdo;
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-            $stmt = $pdo->prepare(self::$query);
-            $stmt->execute(self::$parameters);
+            $stmt = $pdo->prepare($this::$query);
+            $stmt->execute($this::$parameters);
             $pdo = null; // Closes Connection
             return $stmt->fetchObject();
         }
         catch(PDOException $e) { die("ERROR ID: 102"); }
     }
 
-    public static function rowCount()
+    public function rowCount()
     {
         try {
-            $pdo = self::$pdo;
+            $pdo = $this::$pdo;
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-            $stmt = $pdo->prepare(self::$query);
-            $stmt->execute(self::$parameters);
+            $stmt = $pdo->prepare($this::$query);
+            $stmt->execute($this::$parameters);
             $pdo = null; // Closes Connection
             return $stmt->rowCount();
         }
         catch(PDOException $e) { die("ERROR ID: 102"); }
     }
 
-    public static function exec()
+    public function exec()
     {
         try {
-            $pdo = self::$pdo;
+            $pdo = $this::$pdo;
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-            $stmt = $pdo->prepare(self::$query);
-            $stmt->execute(self::$parameters);
+            $stmt = $pdo->prepare($this::$query);
+            $stmt->execute($this::$parameters);
             $pdo = null; // Closes Connection
         }
         catch(PDOException $e) { die("ERROR ID: 102"); }

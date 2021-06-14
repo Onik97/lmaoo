@@ -1,30 +1,22 @@
 <?php
 namespace Lmaoo\Utility;
 
-class APIClient 
-{
-    public static function getRequest(string $url, array $headers = null)
-    {
-        $cURLConnection = curl_init();
-        curl_setopt($cURLConnection, CURLOPT_URL, $url);
-        curl_setopt($cURLConnection, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
-        if ($headers != null) curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, $headers);
+use Lmaoo\Core\Config;
+use GuzzleHttp\Client;
 
-        $response = curl_exec($cURLConnection);
-        curl_close($cURLConnection);
-        return $response;
+class APIClient extends Config
+{
+    public static function getRequest(string $url, ?array $params, ?array $headers, bool $assoc = true)
+    {
+        $client = new Client();
+        $response = $client->request("GET", $url, ['form_params' => $params, 'headers' => $headers]);
+        return json_decode($response->getBody(), $assoc);
     }
 
-    public static function postRequest(string $url, array $postFields = null, array $headers = null)
+    public static function postRequest(string $url, ?array $params, ?object $body, ?array $headers, bool $assoc = true)
     {
-        $cURLConnection = curl_init($url);
-        if($postFields != null) curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $postFields);
-        if($headers != null) curl_setopt($cURLConnection, CURLOPT_HTTPHEADER, $headers);
-        
-        curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($cURLConnection);
-        curl_close($cURLConnection);
-        return $response;
+        $client = new Client();
+        $response = $client->request("POST", $url, ["form_params" => $params, "body" => json_encode($body), "headers" => $headers]);
+        return json_decode($response->getBody(), $assoc);
     }
 }

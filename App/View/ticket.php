@@ -1,6 +1,5 @@
 <title>Ticket</title>
 <p id="navBarActive" hidden>ticketPage</p>
-<link rel="stylesheet" href="/Style/ticketPage.css">
 
 	<div id="ticketActions"></div>
 

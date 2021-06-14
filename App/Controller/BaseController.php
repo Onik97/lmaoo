@@ -1,12 +1,15 @@
 <?php
 namespace Lmaoo\Controller;
 
-abstract class BaseController
+use Lmaoo\Core\Config;
+
+abstract class BaseController extends Config
 {
-    public object $userLoggedIn; 
+    public $userLoggedIn; 
     
     function __construct()
     {
-        $this->userLoggedIn = $_SESSION["userLoggedIn"];
+        parent::__construct();
+        $this->userLoggedIn = $_SESSION["userLoggedIn"] ?? null;
     }
 }

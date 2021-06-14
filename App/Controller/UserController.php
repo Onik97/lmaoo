@@ -3,7 +3,6 @@ namespace Lmaoo\Controller;
 
 use PDO;
 use Lmaoo\Model\User;
-use Lmaoo\Model\GithubUser;
 use Lmaoo\Utility\Library;
 
 class UserController extends BaseController
@@ -18,13 +17,6 @@ class UserController extends BaseController
 
 		if ($user->userId == null || !password_verify($password, $user->password)) return Library::redirectWithMessage("Username and Password did not match", "../User/login.php");
 		if ($user->isActive == 0) return Library::redirectWithMessage("User deactivated, contact the administrator", "../User/login.php");
-
-		if($user->github_id != null)
-		{
-			$githubController = new GithubController();
-			$github = new GithubUser($githubController->getGithubUser($user->github_accessToken));
-			$_SESSION['githubProfile'] = $github;
-		}
 
 		$_SESSION['userLoggedIn'] = $user;
 		header("Location: /");

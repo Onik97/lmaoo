@@ -1,7 +1,5 @@
   <title>Home</title>
-
-      <p id="navBarActive" hidden>projectPage</p>
-      <link rel="stylesheet" href="/Style/projectPage.css">
+    <p id="navBarActive" hidden>projectPage</p>
 
     <div class="d-flex">
       <div id="projectDiv"> 
