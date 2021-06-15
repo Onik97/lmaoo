@@ -1,28 +1,35 @@
 export default class AxiosWrapper {
-
-    static async QuickGetRequest(endpoint, functionValue, dataKey, dataValue) {
-        var data = new FormData();
-        data.append("function", functionValue);
-        data.append(dataKey, dataValue);
-
+    static async Get(endpoint) {
         try { 
-            return await axios.get(endpoint, data, {'Content-Type': 'multipart/form-data' }); 
-        }
-        catch(err) { 
-            console.log(err); 
-        }
+            let results = await axios.get(endpoint);
+            return results.data;
+        } 
+        catch(err) { handleError(err); }
     }
     
-    static async QuickPostRequest(endpoint, functionValue, dataKey, dataValue) {
-        var data = new FormData();
-        data.append("function", functionValue);
-        data.append(dataKey, dataValue);
-
+    static async Post(endpoint, json) {
         try { 
-            return await axios.post(endpoint, data, {'Content-Type': 'multipart/form-data' }); 
+            let results = axios.post(endpoint, json, {'Content-Type': 'application/json' });
+            return results.data;
         }
-        catch(err) { 
-            console.log(err); 
-        }
+        catch(err) { handleError(err); }
     }
+}
+
+function handleError(err)
+{
+    let response = "";
+
+    switch(err.response.status) 
+    {
+        case 404:
+            response = "Endpoint not found or you do not have the privileges to access this enpoint";
+          break;
+        case 400:
+          response = err.response.data.Message;
+          break;
+        default:
+          response = `Something went wrong.. Status Code: ${error.response.status} Report to Back end developer`;
+    }
+    throw response;
 }

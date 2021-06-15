@@ -41,7 +41,7 @@ gherkin:
 
 # additional paths
 paths:
-    tests: Test/Automation
+    tests: Test/Automation/Cest
     output: Test/Automation/Tools/_output
     data: Test/Automation/Tools/_data
     support: Test/Automation/Tools/_support
