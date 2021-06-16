@@ -40,7 +40,7 @@ $router->mount("/project", function() use ($router)
     $router->put("/", fn() => ProjectController::updateProject());
 
     $router->get("/activate/(\d+)", fn($projectId) => ProjectController::activateProject($projectId));
-    $router->post("/deactivate/(\d+)", fn($projectId) => ProjectController::deactivateProject($projectId));
+    $router->get("/deactivate/(\d+)", fn($projectId) => ProjectController::deactivateProject($projectId));
 
 });
 
