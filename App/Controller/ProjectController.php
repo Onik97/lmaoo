@@ -43,7 +43,6 @@ class ProjectController extends BaseController
 
     public static function deactivateProject($projectId)
     {
-        $data = array("projectId" => $projectId);
-        Project::update($projectId, $data);
+        Project::delete($projectId);
     }
 }
