@@ -26,7 +26,7 @@ class Project extends Database implements IModel
 
     public static function update($projectId, array $data)
     {
-        $sql = Library::arrayToUpdateQuery("project", $data);
+        $sql = Library::arrayToUpdateQuery("project", "projectId", $data);
         (new Database())->db()->query($sql)->parameters([$projectId])->exec();
     }
 

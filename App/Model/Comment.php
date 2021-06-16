@@ -27,7 +27,7 @@ class Comment extends Database implements IModel
 
     public static function update($commentId, array $data)
     {
-        $sql = Library::arrayToUpdateQuery("comment", $data);
+        $sql = Library::arrayToUpdateQuery("comment", "commentId", $data);
         (new Database())->db()->query($sql)->parameters([$commentId])->exec();
     }
 

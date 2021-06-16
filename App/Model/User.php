@@ -14,7 +14,7 @@ class User extends Database implements IModel
 
     public static function update($userId, array $data)
     {
-        $sql = Library::arrayToUpdateQuery("user", $data);
+        $sql = Library::arrayToUpdateQuery("user", "userId", $data);
         (new Parent())->db()->query($sql)->parameters([])->exec();
     }
 

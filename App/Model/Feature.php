@@ -26,7 +26,7 @@ class Feature extends Database implements IModel
 
     public static function update($featureId, array $data)
     {
-        $sql = Library::arrayToUpdateQuery("feature", $data);
+        $sql = Library::arrayToUpdateQuery("feature", "featureId", $data);
         (new Database())->db()->query($sql)->parameters([$featureId])->exec();
     }
 
