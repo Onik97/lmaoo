@@ -4,6 +4,7 @@ use Lmaoo\Core\Middleware;
 
 use Lmaoo\Controller\GithubController;
 use Lmaoo\Controller\ManagerController;
+use Lmaoo\Controller\ProjectController;
 
 if (session_status() == PHP_SESSION_NONE) session_start();
 
@@ -32,7 +33,15 @@ $router->get("/logout", "Lmaoo\Controller\UserController::logout" );
 // All /project requests
 $router->mount("/project", function() use ($router)
 {
+    $json = file_get_contents("php://input"); // Need to find a better way to handle this
+
     $router->get("/", "Lmaoo\Core\Render::project");
+    $router->post("/", fn() => ProjectController::createProject($json));
+    $router->put("/", fn() => ProjectController::updateProject());
+
+    $router->get("/activate/(\d+)", fn($projectId) => ProjectController::activateProject($projectId));
+    $router->get("/deactivate/(\d+)", fn($projectId) => ProjectController::deactivateProject($projectId));
+
 });
 
 // All /manager requests

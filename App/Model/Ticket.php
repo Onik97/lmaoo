@@ -26,7 +26,7 @@ class Ticket extends Database implements IModel
 
     public static function update($ticketId, array $data)
     {
-        $sql = Library::arrayToUpdateQuery("ticket", $data);
+        $sql = Library::arrayToUpdateQuery("ticket", "ticketId", $data);
         (new Database())->db()->query($sql)->parameters([$ticketId])->exec();
     }
 
