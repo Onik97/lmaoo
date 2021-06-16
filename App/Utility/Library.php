@@ -84,7 +84,7 @@ class Library
             $updates = $updates . "$x = $y,";
         }
 
-        return substr("INSERT INTO $tableName SET $updates", 0, -1) . " WHERE $columnId = ?";
+        return substr("UPDATE $tableName SET $updates", 0, -1) . " WHERE $columnId = ?";
     }
 
     public static function multiArrayToInsertQuery(string $tableName, $multiArray)
