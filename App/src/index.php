@@ -37,9 +37,10 @@ $router->mount("/project", function() use ($router)
 
     $router->get("/", "Lmaoo\Core\Render::project");
     $router->post("/", fn() => ProjectController::createProject($json));
+    $router->put("/", fn() => ProjectController::updateProject());
 
-    $router->post("/", fn($projectId) => ProjectController::activateProject($projectId));
-    $router->post("/", fn($projectId) => ProjectController::deactivateProject($projectId));
+    $router->get("/activate/(\d+)", fn($projectId) => ProjectController::activateProject($projectId));
+    $router->post("/deactivate/(\d+)", fn($projectId) => ProjectController::deactivateProject($projectId));
 
 });
 
