@@ -1,6 +1,3 @@
-<script type="text/javascript" src='../Script/Controller/ManagerController.js'></script>
-<script type="text/javascript" src='../Script/Utility/AxiosWrapper.js'></script>
-
 <title>Manager</title>
 <p id="navBarActive" hidden>managerPage</p>
 
