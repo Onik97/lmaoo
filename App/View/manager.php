@@ -9,7 +9,7 @@
             <h3 href="#">Projects <span id="projectSize" class="badge"></span></h3>
         </div>
         <div class="col-sm-2">
-            <button type="button" class="btn btn-success" data-toggle='modal' data-target='#managerModal' onclick="createProjectPrompt()">New Project</button>
+            <button type="button" class="btn btn-success" data-toggle='modal' data-target='#createProjectModal' onclick="createProjectPrompt()">New Project</button>
         </div>
     </div>
     
@@ -17,19 +17,58 @@
     <hr><ul id="projectUl" class="list-group list-group-flush project-list"></ul>
 </div>
 
-<!-- MODAL -->
-<div class="modal fade" id="managerModal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
+<!-- CREATE NEW PROJECT MODAL -->
+<div class="modal fade" id="createProjectModal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title modal-title-custom ml-9 mr-auto text-black" id="managerModalHead">Choose Role</h5>
+                <h5 class="modal-title modal-title-custom ml-9 mr-auto text-black" id="createProjectHead">Create Project</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="createProjectBody">
+                <div class="wrapper">
+                    <label>Project name:</label>
+                    <input type="text" class="search-input form-control" id="projectName" placeholder="Project name" onkeyup="projectValidation()">
+                    <div class="autocom-box"><!-- here list are inserted from javascript --></div>
+                </div>
+                <div class="wrapper">
+                    <label>Status:</label>
+                    <select id="projectStatus" class="form-control" onchange="projectValidation()" required="">
+                        <option value="0" disabled=""></option>
+                        <option value="Back-log">Back-log</option>
+                        <option value="Development">Development</option>
+                        <option value="QA">QA</option>
+                        <option value="Releasing">Releasing</option>
+                        <option value="Released">Released</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="modal-footer" id="createProjectFooter">
+                <button class="btn btn-success" type="button" id="saveProjectBtn" onclick="postRequest()" data-toggle='modal' data-target='#managerModal'>Save Project</button>
+                <!-- <button type="button" class="btn btn-success" data-toggle='modal' data-target='#managerModal' onclick="postRequest()">Save</button> -->
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Choose Role Modal -->
+<div class="modal fade" id="chooseRoleModal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title modal-title-custom ml-9 mr-auto text-black" id="chooseRoleHead">Choose Role</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <!-- Search bar to look for members on the platform -->
-            <div class="modal-body" id="managerModalBody">
+            <div class="modal-body" id="chooseRoleBody">
                 <div class="wrapper">
                     <input type="text" class="search-input form-control" placeholder="User's name">
                     <div class="autocom-box"><!-- here list are inserted from javascript --></div>
@@ -39,7 +78,9 @@
                 <ul class="list-group list-group-flush user-list"></ul>
             </div>
 
-            <div class="modal-footer" id="managerModalFooter"></div>
+            <div class="modal-footer" id="chooseRoleFooter">
+                <button type="button" class="btn btn-success" data-toggle='modal' data-target='#managerModal' onclick="postRequest()">Post</button>
+            </div>
 
         </div>
     </div>

@@ -37,7 +37,7 @@ class Render
         else
         {
             if ($userLoggedIn->level > 1) echo "<a class='dropdown-item' id='managerNav' href='/manager'>Manager</a>"; 
-            echo "<a class='dropdown-item' id='editAccountNav' data-toggle='modal' data-target='#view-modal' role='button'>Edit Account</a>";
+            echo "<a class='dropdown-item' id='editAccountNav' data-toggle='modal' data-target='#editAccountModal' role='button'>Edit Account</a>";
             echo "<a class='dropdown-item' id='logoutNav' href='/logout'>Logout</a>";
             if($userLoggedIn->level > 3) echo "<a class='dropdown-item' id='adminNav' href='/admin'>Admin</a>";
         }
@@ -77,7 +77,7 @@ class Render
 
         foreach($features as $feature)
         {
-            echo "<li value='$feature->featureId'>$feature->name<l class='far fa-edit'></l></li>";
+            echo "<li value='$feature->featureId'>$feature->name<i value='$feature->featureId' class='far fa-edit' data-toggle='modal' data-target='#editFeatureModal'></i></li>";
         }
     }
 

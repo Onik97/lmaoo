@@ -184,3 +184,25 @@ line-height: 1.4;
 	color: #fff;
 	background-color: #000;
 }
+
+#featureModal {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	font-weight: 400;
+	line-height: 1.5;
+	text-align: center;
+	box-sizing: border-box;
+	background: #fff;
+	color: #000;
+	cursor: pointer;
+	padding: 10px;
+	font-size: 1.1em;
+	display: block;
+	width: 350px;
+}
+
+.darkmode--activated #featureModal {
+	background: rgb(114, 114, 114);
+	color: #fff;
+}
