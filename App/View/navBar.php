@@ -1,10 +1,10 @@
-<?php use Lmaoo\Core\Render; use Lmaoo\Controller\UserController; ?>
+<?php use Lmaoo\Core\Render; ?>
 
 <link rel="stylesheet" href="/Style/navbar.css">
 <nav class="navbar navbar-expand-lg">
 
     <?php if(!isset($_COOKIE["lmaooDarkMode"])) $_COOKIE["lmaooDarkMode"] = 0; ?>
-    <?php UserController::loadDarkModeToggle($_COOKIE["lmaooDarkMode"], $_SESSION['userLoggedIn'] ?? null); ?>
+    <?php Render::loadDarkModeToggle($_COOKIE["lmaooDarkMode"], $_SESSION['userLoggedIn'] ?? null); ?>
 
     <div class="container">
 
