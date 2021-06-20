@@ -11,7 +11,7 @@ if (session_status() == PHP_SESSION_NONE) session_start();
 
 // Documentation: https://github.com/bramus/router
 $router = new Bramus\Router\Router();
-$json = file_get_contents("php://input"); // Need to find a better way to handle this
+$json = file_get_contents("php://input");
 
 // Secure all Endpoints using Middleware
 $router->before("GET|POST", "/project.*", fn() => Middleware::verifyUser($router, 1));
@@ -32,10 +32,8 @@ $router->post("/login", "Lmaoo\Controller\UserController::standardLogin" );
 $router->get("/logout", "Lmaoo\Controller\UserController::logout" );
 
 // All /project requests
-$router->mount("/project", function() use ($router)
+$router->mount("/project", function() use ($router, $json)
 {
-    $json = file_get_contents("php://input"); // Need to find a better way to handle this
-
     $router->get("/", "Lmaoo\Core\Render::project");
     $router->post("/", fn() => ProjectController::createProject($json));
     $router->put("/", fn() => ProjectController::updateProject());
@@ -46,10 +44,8 @@ $router->mount("/project", function() use ($router)
 });
 
 // All /manager requests
-$router->mount("/manager", function() use ($router)
+$router->mount("/manager", function() use ($router, $json)
 {
-    $json = file_get_contents("php://input"); // Need to find a better way to handle this
-
     $router->get("/", "Lmaoo\Core\Render::manager");
     $router->get("/project/(\d+)", fn($projectId) => ManagerController::readUsersOnProject($projectId));
 
@@ -59,7 +55,7 @@ $router->mount("/manager", function() use ($router)
 });
 
 // All /admin requests
-$router->mount("/admin", function() use ($router)
+$router->mount("/admin", function() use ($router, $json)
 {
     $router->get("/", "Lmaoo\Core\Render::admin");
     
