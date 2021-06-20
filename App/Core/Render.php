@@ -77,7 +77,7 @@ class Render
 
         foreach($features as $feature)
         {
-            echo "<li value='$feature->featureId'>$feature->name<l class='far fa-edit'></l></li>";
+            echo "<li value='$feature->featureId'>$feature->name<i value='$feature->featureId' class='far fa-edit' data-toggle='modal' data-target='#editFeatureModal'></i></li>";
         }
     }
 
