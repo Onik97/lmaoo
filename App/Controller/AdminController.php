@@ -3,6 +3,7 @@ namespace Lmaoo\Controller;
 
 use Lmaoo\Model\User;
 use Lmaoo\Utility\APIResponse;
+use Lmaoo\Utility\Validation;
 
 class AdminController extends BaseController
 {
@@ -13,14 +14,10 @@ class AdminController extends BaseController
         echo json_encode(User::withActive($active));
     }
 
-    public function updateUser()
+    public static function updateUser($json)
     {
-
-    }
-
-    // Actually deactivating a user
-    public static function deleteUser()
-    {
-
+        $data = json_decode($json, true); $validation = Validation::updateUser($data);
+        $userId = $data["userId"]; unset($data["userId"]);
+        $validation == null ? User::update($userId, $data): APIResponse::BadRequest($validation);
     }
 }

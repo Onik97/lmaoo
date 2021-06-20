@@ -61,6 +61,8 @@ $router->mount("/admin", function() use ($router, $json)
     
     $router->get("/user/active", fn() => AdminController::readUser("1"));
     $router->get("/user/inactive", fn() => AdminController::readUser("0"));
+
+    $router->put("/user", fn() => AdminController::updateUser($json));
 });
 
 // All Github OAuth
