@@ -1,5 +1,6 @@
 <?php include_once "../../vendor/autoload.php";
 
+use Lmaoo\Controller\AdminController;
 use Lmaoo\Core\Middleware;
 
 use Lmaoo\Controller\GithubController;
@@ -61,6 +62,9 @@ $router->mount("/manager", function() use ($router)
 $router->mount("/admin", function() use ($router)
 {
     $router->get("/", "Lmaoo\Core\Render::admin");
+    
+    $router->get("/user/active", fn() => AdminController::readUser("1"));
+    $router->get("/user/inactive", fn() => AdminController::readUser("0"));
 });
 
 // All Github OAuth
