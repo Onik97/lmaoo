@@ -37,7 +37,7 @@ class Render
         else
         {
             if ($userLoggedIn->level > 1) echo "<a class='dropdown-item' id='managerNav' href='/manager'>Manager</a>"; 
-            echo "<a class='dropdown-item' id='editAccountNav' data-toggle='modal' data-target='#view-modal' role='button'>Edit Account</a>";
+            echo "<a class='dropdown-item' id='editAccountNav' data-toggle='modal' data-target='#editAccountModal' role='button'>Edit Account</a>";
             echo "<a class='dropdown-item' id='logoutNav' href='/logout'>Logout</a>";
             if($userLoggedIn->level > 3) echo "<a class='dropdown-item' id='adminNav' href='/admin'>Admin</a>";
         }
