@@ -15,7 +15,7 @@ class User extends Database implements IModel
     public static function update($userId, array $data)
     {
         $sql = Library::arrayToUpdateQuery("user", "userId", $data);
-        (new Parent())->db()->query($sql)->parameters([])->exec();
+        (new Parent())->db()->query($sql)->parameters([$userId])->exec();
     }
 
     public static function delete($userId)
@@ -44,7 +44,7 @@ class User extends Database implements IModel
 
     public static function withActive($isActive)
     {
-        $sql = $isActive == null ? "SELECT * FROM user" : "SELECT * FROM user WHERE isActive = ?";
+        $sql = "SELECT userId, username, forename, surname, level, isActive, picture, github_id, github_accessToken FROM user WHERE isActive = ?";
         return (new Parent())->db()->query($sql)->parameters([$isActive])->fetchAll();
     }
 

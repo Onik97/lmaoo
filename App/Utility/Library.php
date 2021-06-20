@@ -46,6 +46,7 @@ class Library
         return false;
     }
 
+    // Will be removed as Validation Class deals with validation
     public static function validatePostValues(...$args) 
     {
         $post = array_keys($_POST);
@@ -81,7 +82,7 @@ class Library
         $updates = "";
 
         foreach($data as $x => $y) {
-            $updates = $updates . "$x = $y,";
+            $updates = $updates . "$x = '$y',";
         }
 
         return substr("UPDATE $tableName SET $updates", 0, -1) . " WHERE $columnId = ?";

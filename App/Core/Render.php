@@ -81,6 +81,29 @@ class Render
         }
     }
 
+    
+	public static function loadDarkModeToggle($toggle, $userLoggedIn)
+	{ 
+		if ($toggle == null) 
+		{
+			if ($userLoggedIn == null) 
+			{
+				$toggle = false;
+				setcookie("lmaooDarkMode", false, 0, "/");
+			}
+			else if ($userLoggedIn != null)
+			{
+				$toggle = $userLoggedIn->darkMode;
+				setcookie("lmaooDarkMode", $userLoggedIn->darkMode, 0, "/");
+			}
+		}
+		
+		echo "<div class='custom-control custom-switch'>";
+		echo $toggle == true ? "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' onclick='darkModeToggle()' checked>" : "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' onclick='darkModeToggle()'>";
+		echo "<label class='custom-control-label' for='darkModeSwitch'>Dark Mode</label>";
+		echo "</div>";
+	}
+
     public static function NotFound()
     {
         http_response_code(404);
