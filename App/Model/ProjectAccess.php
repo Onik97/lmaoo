@@ -21,8 +21,9 @@ class ProjectAccess extends Database
 
     public static function withProjectId(string $projectId)
     {
-        $sql = "SELECT pa.userId, pa.projectId, p.name, p.status FROM projectAccess pa INNER JOIN project p ON pa.projectId = p.projectId 
-                WHERE p.projectId = ?";
+        $sql = "SELECT DISTINCT pa.projectId, pa.managerAccess, u.userId, u.forename, u.surname, u.username 
+                FROM projectAccess pa INNER JOIN user u ON pa.userId = u.userId 
+                WHERE pa.projectId = ?";
         return (new Database)->db()->query($sql)->parameters([$projectId])->fetchAll();
     }
 
@@ -33,7 +34,7 @@ class ProjectAccess extends Database
         return (new Database)->db()->query($sql)->parameters([$userId])->fetchAll();
     }
 
-    public static function delete($projectId)
+    public static function delete(int $projectId)
     {
         $sql = "DELETE FROM projectAccess WHERE projectId = ?";
         return (new Database)->db()->query($sql)->parameters([$projectId])->exec();

@@ -1,14 +1,14 @@
 <?php
 namespace Lmaoo\Core;
 
+use Bramus\Router\Router;
 use Respect\Validation\Validator as v;
 use Respect\Validation\Exceptions\NestedValidationException;
-use Exception;
 use Lmaoo\Utility\APIResponse;
 
 class Middleware
 {
-    public static function verifyUser($router, $userLevel)
+    public static function verifyUser(Router $router, int $userLevel)
     {
         $userLoggedIn = $_SESSION["userLoggedIn"] ?? null;
         
@@ -25,7 +25,7 @@ class Middleware
         }
     }
 
-    public static function verifyJson($router, $body)
+    public static function verifyJson(Router $router, $body)
     {
         try {
             v::json()->assert($body);
