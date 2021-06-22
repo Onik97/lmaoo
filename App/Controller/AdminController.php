@@ -11,7 +11,9 @@ class AdminController extends BaseController
     {
         if ($active == null) return APIResponse::BadRequest("Active is required");
 
-        echo json_encode(User::withActive($active));
+        echo json_encode(User::read(
+            ["userId", "username", "forename", "surname", "level", "isActive", "picture", "github_id", "github_accessToken"], 
+            array("isActive" => $active)));
     }
 
     public static function updateUser($json)
