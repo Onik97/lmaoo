@@ -1,6 +1,7 @@
 <?php
 namespace Lmaoo\Controller;
 
+use Lmaoo\Core\Constant;
 use Lmaoo\Model\Project;
 use Lmaoo\Model\ProjectAccess;
 use Lmaoo\Utility\Validation;
@@ -22,7 +23,7 @@ class ManagerController extends BaseController
 
     public function readOwnerProjects()
     {
-        return (Project::withOwnerId($this->userLoggedIn->userId));
+        return Project::read(Constant::$PROJECT_COLUMNS, array("owner" => $this->userLoggedIn->userId));
     }
 
     public function readManagerProjects()

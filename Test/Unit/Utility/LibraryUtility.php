@@ -30,6 +30,27 @@ class LibraryUtility extends TestCase
         $this->assertTrue($actual);
     }
 
+    public function test_arrayToSelectQuery_singleColumn_noCondition()
+    {
+        $expected = "SELECT column1 FROM unitTest";
+        $actual = Library::arrayToSelectQuery("unitTest", ["column1"]);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function test_arrayToSelectQuery_singleColumn_singleCondition()
+    {
+        $expected = "SELECT column1 FROM unitTest WHERE key1 = 'value1'";
+        $actual = Library::arrayToSelectQuery("unitTest", ["column1"], array("key1" => "value1"));
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function test_arrayToSelectQuery_multipleColumns_multipleConditions()
+    {
+        $expected = "SELECT column1,column2 FROM unitTest WHERE key1 = 'value1' AND key2 = 'value2'";
+        $actual = Library::arrayToSelectQuery("unitTest", ["column1", "column2"], array("key1" => "value1", "key2" => "value2"));
+        $this->assertEquals($expected, $actual);
+    }
+
     public function test_arrayToInsertQuery_single()
     {
         $expected = "INSERT INTO unitTest (column1) VALUES ('value1')";

@@ -139,4 +139,14 @@ class Render
         http_response_code(404);
         echo file_get_contents("../View/notFound.php");
     }
+    
+    public static function RedirectedMessage()
+    {
+        $message = $_SESSION["message"] ?? null;
+        if ($message != null)
+        {
+            echo "<div class='alert alert-warning' role='alert'>$message</div>";
+            unset($_SESSION["message"]); // Message goes after refresh
+        }
+    }
 }

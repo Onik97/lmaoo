@@ -1,6 +1,7 @@
 <?php
 namespace Lmaoo\Controller;
 
+use Lmaoo\Core\Constant;
 use Lmaoo\Model\Project;
 use Lmaoo\Utility\APIResponse;
 use Lmaoo\Utility\Library;
@@ -16,7 +17,7 @@ class ProjectController extends BaseController
 
     public static function readProject($projectId, $active)
     {
-        $projects = Project::withId($projectId);
+        $projects = Project::read(Constant::$PROJECT_COLUMNS, array("projectId" => $projectId));
         $returnProjects = array();
         foreach ($projects as $projects)
         {

@@ -14,6 +14,22 @@ export default class AxiosWrapper {
         }
         catch(err) { handleError(err); }
     }
+
+    static async Put(endpoint, json) {
+        try { 
+            let results = axios.put(endpoint, json, {'Content-Type': 'application/json' });
+            return results.data;
+        }
+        catch(err) { handleError(err); }
+    }
+
+    static async Delete(endpoint) {
+        try { 
+            let results = axios.delete(endpoint);
+            return results.data;
+        }
+        catch(err) { handleError(err); }
+    }
 }
 
 function handleError(err)
@@ -23,7 +39,7 @@ function handleError(err)
     switch(err.response.status) 
     {
         case 404:
-            response = "Endpoint not found or you do not have the privileges to access this enpoint";
+            response = "Endpoint not found or you do not have the privileges to access this endpoint";
           break;
         case 400:
           response = err.response.data.Message;
