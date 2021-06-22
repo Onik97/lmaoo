@@ -15,8 +15,8 @@ class UserController extends BaseController
 
 		$user = User::withUsername($username);
 
-		if ($user->userId == null || !password_verify($password, $user->password)) return Library::redirectWithMessage("Username and Password did not match", "../User/login.php");
-		if ($user->isActive == 0) return Library::redirectWithMessage("User deactivated, contact the administrator", "../User/login.php");
+		if ($user->userId == null || !password_verify($password, $user->password)) return Library::redirectWithMessage("Username and Password did not match", "/login");
+		if ($user->isActive == 0) return Library::redirectWithMessage("User deactivated, contact the administrator", "/login");
 
 		$_SESSION['userLoggedIn'] = $user;
 		header("Location: /");
