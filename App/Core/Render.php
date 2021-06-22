@@ -84,8 +84,8 @@ class Render
 
     public static function Projects($userLoggedIn)
     {
-        $managerProjects = ManagerController::readManagerProjects($userLoggedIn);
-        $ownerProjects = ManagerController::readOwnerProjects($userLoggedIn);
+        $managerProjects = (new ManagerController())->readManagerProjects();
+        $ownerProjects = (new ManagerController())->readOwnerProjects();
 
         foreach($ownerProjects as $project)
         {

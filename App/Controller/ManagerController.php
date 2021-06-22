@@ -20,14 +20,14 @@ class ManagerController extends BaseController
         echo json_encode(ProjectAccess::withProjectId($projectId));
     }
 
-    public static function readOwnerProjects($userLoggedIn)
+    public function readOwnerProjects()
     {
-        return (Project::withOwnerId($userLoggedIn->userId));
+        return (Project::withOwnerId($this->userLoggedIn->userId));
     }
 
-    public static function readManagerProjects($userLoggedIn)
+    public function readManagerProjects()
     {
-        return ProjectAccess::withManagerAccess($userLoggedIn->userId);
+        return ProjectAccess::withManagerAccess($this->userLoggedIn->userId);
     }
 
     public static function deleteUsersFromProject($projectId)
