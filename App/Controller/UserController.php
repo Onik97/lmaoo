@@ -9,7 +9,7 @@ use Lmaoo\Utility\Validation;
 
 class UserController extends BaseController
 {
-	public static function standardLogin()
+	public function standardLogin()
 	{
 		$validation = Validation::login($_POST);
 		if ($validation != null) return APIResponse::BadRequest($validation);
@@ -28,23 +28,14 @@ class UserController extends BaseController
 		session_unset(); session_destroy(); header("Location: /");
 	}
 
-	public function register($forename, $surname, $username, $password)
+	public function register()
 	{
-		if (Library::hasNull($forename, $surname, $username, $password)) return Library::redirectWithMessage("All Fields must be filled", "../User/register.php");
-		$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+		$validation = Validation::register($_POST);
+		if ($validation != null) return APIResponse::BadRequest($validation);
+		$_POST["password"] = password_hash($_POST["password"], PASSWORD_BCRYPT);
 
-		$user = new User();
-		$checker = $user->registerUser($forename, $surname, $username, $hashedPassword);
-		
-		if ($checker == 1) 
-		{
-			return Library::redirectWithMessage("Register Successful, Login!", "../User/login.php");
-		}
-		else
-		{
-			// TODO: Implement Logging
-			return Library::redirectWithMessage("Something went wrong... Try Again later", "../User/login.php");
-		}
+		User::create($_POST);
+		Library::redirectWithMessage("Registeration Succcess, please login!", "/login");
 	}
 
 	public function uploadImage($userId)
