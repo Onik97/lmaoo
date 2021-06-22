@@ -49,4 +49,15 @@ class Validation
             return json_encode($e->getMessages());
         }
     }
+    
+    public static function login($data)
+    {
+        try {
+            v::key("username", v::NotOptional()->stringVal())
+             ->key("password", v::NotOptional()->stringVal())
+             ->assert($data);
+        } catch(NestedValidationException $e) {
+            return json_encode($e->getMessages());
+        }
+    }
 }
