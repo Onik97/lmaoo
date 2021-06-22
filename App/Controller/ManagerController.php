@@ -25,7 +25,7 @@ class ManagerController extends BaseController
         echo json_encode(Project::withOwnerId(self::$userLoggedIn->userId));
     }
 
-    public static function readManagerProjects()
+    public static function readManagerProjects($userLoggedIn)
     {
         echo json_encode(ProjectAccess::withManagerAccess(self::$userLoggedIn->userId));
     }
