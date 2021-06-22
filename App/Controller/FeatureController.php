@@ -1,6 +1,7 @@
 <?php
 namespace Lmaoo\Controller;
 
+use Lmaoo\Core\Constant;
 use Lmaoo\Utility\Library;
 use Lmaoo\Model\Feature;
 
@@ -15,7 +16,7 @@ class FeatureController extends BaseController
 
     public static function readFeatures($projectId, $active)
     {
-        $features = Feature::withProjectId($projectId);
+        $features = Feature::read(Constant::$FEATURE_COLUMNS, array("projectId" => $projectId));
         $returnFeatures = array();
         foreach ($features as $feature)
         {

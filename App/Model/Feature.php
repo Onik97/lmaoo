@@ -18,12 +18,6 @@ class Feature extends Database implements IModel
         return (new Parent())->db()->query($sql)->parameters([])->fetchAll();
     }
 
-    public static function withProjectId($projectId, $columns = null)
-    {
-        $sql = $columns == null ? "SELECT * FROM feature WHERE projectId = ?" : "SELECT $columns FROM feature WHERE projectId = ?";
-        return (new Database())->db()->query($sql)->parameters([$projectId])->fetchAll();
-    }
-
     public static function update($featureId, array $data)
     {
         $sql = Library::arrayToUpdateQuery("feature", "featureId", $data);

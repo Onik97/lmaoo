@@ -18,12 +18,6 @@ class Project extends Database implements IModel
         return (new Parent())->db()->query($sql)->parameters([])->fetchAll();
     }
 
-    public static function withOwnerId($ownerId, $columns = null)
-    {
-        $sql = $columns == null ? "SELECT * FROM project WHERE owner = ?" : "SELECT $columns FROM project WHERE owner = ?";
-        return (new Database())->db()->query($sql)->parameters([$ownerId])->fetchAll();
-    }
-
     public static function update($projectId, array $data)
     {
         $sql = Library::arrayToUpdateQuery("project", "projectId", $data);
