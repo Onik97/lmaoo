@@ -47,7 +47,6 @@ $router->mount("/project", function() use ($router, $json)
 $router->mount("/manager", function() use ($router, $json)
 {
     $router->get("/", "Lmaoo\Core\Render::manager");
-    $router->get("/project/(\d+)", fn($projectId) => ManagerController::readUsersOnProject($projectId));
 
     $router->post("/", fn() => ManagerController::createUsersToProject($json));
 
