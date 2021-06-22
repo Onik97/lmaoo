@@ -56,4 +56,11 @@ class UserController extends BaseController
 		}
 		else echo false;
 	}
+
+	public function deactivateOwnUser()
+	{
+		User::delete($this->userLoggedIn->userId);
+		session_unset(); session_destroy();
+		Library::redirectWithMessage("You have deactivated your user!", "/");
+	}
 }
