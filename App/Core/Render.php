@@ -82,6 +82,9 @@ class Render
         }
     }
 
+    public static function Projects($userLoggedIn)
+    {
+        $projects = ManagerController::readManagerProjects($userLoggedIn);
     
 	public static function loadDarkModeToggle($toggle, $userLoggedIn)
 	{ 
