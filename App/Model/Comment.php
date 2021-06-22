@@ -18,12 +18,6 @@ class Comment extends Database implements IModel
         return (new Parent())->db()->query($sql)->parameters([])->fetchAll();
     }
 
-    public static function withId($commentId, $columns = null)
-    {
-        $sql = $columns == null ? "SELECT * FROM comment WHERE commentId = ?" : "SELECT $columns FROM comment WHERE commentId = ?";
-        return (new Database())->db()->query($sql)->parameters([$commentId])->fetchObject();
-    }
-
     public static function withTicketId($ticketId)
     {
         $sql = "SELECT comment.ticketId, comment.commentId, comment.commentContent, comment.commentCreated, user.userId, user.forename, user.surname, user.picture

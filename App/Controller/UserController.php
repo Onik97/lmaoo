@@ -55,11 +55,6 @@ class UserController extends BaseController
 		Library::redirectWithMessage("Your User Details has been updated", "../Home/index.php"); 
 	}
 
-	public function userInfoById($userId) // Should be used for Unit Testing and Admin Only!
-	{
-		return User::withId($userId);
-	}
-
 	public function register($forename, $surname, $username, $password)
 	{
 		if (Library::hasNull($forename, $surname, $username, $password)) return Library::redirectWithMessage("All Fields must be filled", "../User/register.php");

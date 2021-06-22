@@ -30,12 +30,6 @@ class User extends Database implements IModel
         (new Parent())->db()->query($sql)->parameters([$userId])->exec();
     }
 
-    public static function withId($userId, $columns = null)
-    {
-        $sql = $columns == null ? "SELECT * FROM user WHERE userId = ?" : "SELECT $columns FROM user";
-        return (new Parent())->db()->query($sql)->parameters([$userId])->fetchObject();
-    }
-
     public static function withUsername($username)
     {
         $sql = "SELECT * FROM user WHERE username = ?";
@@ -59,18 +53,6 @@ class User extends Database implements IModel
         $sql = "INSERT INTO user (userId, username, password, forename, surname) VALUES (null, ?, ?, ?, ?)";
         $checker =  (new Parent())->db()->query($sql)->parameters([$username, $hashedPassword, $forename, $surname])->rowCount();
         return $checker == 1 ? true : false;
-    }
-
-    public function activateUser($userId)
-    {
-        $sql = "UPDATE user SET active = 1 WHERE userId = ?";
-        (new Parent())->db()->query($sql)->parameters([$userId])->exec();
-    }
-
-    public function deactivateUser($userId)
-    {
-        $sql = "UPDATE user SET active = 0 WHERE userId = ?";
-        (new Parent())->db()->query($sql)->parameters([$userId])->exec();
     }
 
     public function getDarkMode($userId)

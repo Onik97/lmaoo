@@ -18,12 +18,6 @@ class Project extends Database implements IModel
         return (new Parent())->db()->query($sql)->parameters([])->fetchAll();
     }
 
-    public static function withId($projectId, $columns = null)
-    {
-        $sql = $columns == null ? "SELECT * FROM project WHERE projectId = ?" : "SELECT $columns FROM project WHERE projectId = ?";
-        return (new Database())->db()->query($sql)->parameters([$projectId])->fetchObject();
-    }
-
     public static function withOwnerId($ownerId, $columns = null)
     {
         $sql = $columns == null ? "SELECT * FROM project WHERE owner = ?" : "SELECT $columns FROM project WHERE owner = ?";
