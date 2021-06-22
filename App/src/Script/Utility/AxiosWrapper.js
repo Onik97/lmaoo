@@ -14,6 +14,22 @@ export default class AxiosWrapper {
         }
         catch(err) { handleError(err); }
     }
+
+    static async Put(endpoint, json) {
+        try { 
+            let results = axios.put(endpoint, json, {'Content-Type': 'application/json' });
+            return results.data;
+        }
+        catch(err) { handleError(err); }
+    }
+
+    static async Delete(endpoint) {
+        try { 
+            let results = axios.delete(endpoint, json, {'Content-Type': 'application/json' });
+            return results.data;
+        }
+        catch(err) { handleError(err); }
+    }
 }
 
 function handleError(err)
