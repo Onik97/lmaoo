@@ -2,6 +2,7 @@
 namespace Lmaoo\Core;
 
 use Lmaoo\Controller\FeatureController;
+use Lmaoo\Controller\ManagerController;
 use Lmaoo\Model\ProjectAccess;
 
 class Render
@@ -79,6 +80,35 @@ class Render
         {
             echo "<li value='$feature->featureId'>$feature->name<i value='$feature->featureId' class='far fa-edit' data-toggle='modal' data-target='#editFeatureModal'></i></li>";
         }
+    }
+
+    public static function Projects()
+    {
+        $managerProjects = (new ManagerController())->readManagerProjects();
+        $ownerProjects = (new ManagerController())->readOwnerProjects();
+
+        foreach($ownerProjects as $project)
+        {
+            echo "<li class='list-group-item'>
+                    <div class='project-info'>$project->name
+                        <div class='project-status'>$project->status</div>
+                        <div class='owner-role'>Owner</div>
+                        <button type='button' class='btn btn-warning' data-toggle='modal' data-target='#managerModal' onclick='rolePrompt(1)'>Roles</button>
+                    </div>
+                </li>";
+        }
+
+        foreach($managerProjects as $project)
+        {
+            echo "<li class='list-group-item'>
+                    <div class='project-info'>$project->name
+                        <div class='project-status'>$project->status</div>
+                        <div class='manager-role'>Manager</div>
+                        <button type='button' class='btn btn-warning' data-toggle='modal' data-target='#managerModal' onclick='rolePrompt(1)'>Roles</button>
+                    </div>
+                </li>";
+        }
+
     }
 
     

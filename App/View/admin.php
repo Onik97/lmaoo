@@ -23,21 +23,45 @@
     </table>
 </div>
 
-<!-- ADMIN MODAL -->
-<div class="modal fade" id="admin-modal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
+<!-- ADMIN (EDIT USER) MODAL -->
+<div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title modal-title-custom ml-9 mr-auto text-white" id="admin-modal-title"></h5>
+                <h5 class="modal-title modal-title-custom ml-9 mr-auto text-black" id="adminModalTitle">Edit User</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span></button>
             </div>
 
-            <div id="admin-modal-header"></div>
+            <div id="adminModalHeader"></div>
 
-            <div class="modal-body" id="admin-modal-body"></div>
+            <div class="modal-body" id="adminModalBody">
+                <div class="wrapper">
+                    <label>Full name:</label>
+                    <input type="text" class="search-input form-control" id="adminFullname" placeholder="Full name" onkeyup="projectValidation()" disabled>
+                </div>
+                <div class="wrapper">
+                    <label id="adminUsernameHeader">Username:</label>
+                    <input type="text" class="search-input form-control" id="adminUsername" placeholder="User name" onkeyup="projectValidation()" disabled>
+                </div>
+                <div class="wrapper">
+                    <label id="activeUserToggle"></label>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="adminUserToggle">
+                        <label class="custom-control-label" for="adminUserToggle">Toggle to activate user</label>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <button id="resetAdminPassword" type="button" class="btn btn-primary btn-block">Reset password</button>
+                    <small id="passwordHelpBlock" class="form-text text-muted">Feature limit exceeded (limit number)</small>
+                </div>
 
-            <div class="modal-footer" id="admin-modal-footer"></div>
+            </div>
+
+            <div class="modal-footer" id="adminModalFooter">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success">Save changes</button>
+            </div>
 
         </div>
     </div>
