@@ -2,6 +2,7 @@
 namespace Lmaoo\Core;
 
 use Lmaoo\Controller\FeatureController;
+use Lmaoo\Controller\ManagerController;
 use Lmaoo\Model\ProjectAccess;
 
 class Render
