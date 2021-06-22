@@ -2,10 +2,18 @@
     margin-left: 10px;
 }
 
+#editUser {
+    cursor: pointer;
+}
+
 #admin-modal-header {
     text-align: center;
 }
 
 #userLevelSelecter {
     margin-left: 175px;
+}
+
+#adminUsernameHeader, #activeUserToggle, #resetAdminPassword {
+    margin-top: 10px;
 }
