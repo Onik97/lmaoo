@@ -25,7 +25,7 @@ export default class AxiosWrapper {
 
     static async Delete(endpoint) {
         try { 
-            let results = axios.delete(endpoint, json, {'Content-Type': 'application/json' });
+            let results = axios.delete(endpoint);
             return results.data;
         }
         catch(err) { handleError(err); }
