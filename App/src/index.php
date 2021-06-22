@@ -34,7 +34,6 @@ $router->post("/login", fn() => (new UserController)->standardLogin());
 $router->post("/register", fn() => (new UserController)->register());
 $router->get("/logout", fn() => (new UserController)->logout());
 
-
 // All /project requests
 $router->mount("/project", function() use ($router, $json)
 {
