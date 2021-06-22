@@ -42,12 +42,6 @@ class User extends Database implements IModel
         return (new Parent())->db()->query($sql)->parameters([$githubId])->fetchObject();
     }
 
-    public static function withActive($isActive)
-    {
-        $sql = "SELECT userId, username, forename, surname, level, isActive, picture, github_id, github_accessToken FROM user WHERE isActive = ?";
-        return (new Parent())->db()->query($sql)->parameters([$isActive])->fetchAll();
-    }
-
     public function registerUser($forename, $surname, $username, $hashedPassword)
     {
         $sql = "INSERT INTO user (userId, username, password, forename, surname) VALUES (null, ?, ?, ?, ?)";

@@ -24,20 +24,7 @@ class UserController extends BaseController
 
 	public static function logout()
 	{
-		session_unset();
-		session_destroy();
-		header("Location: /");
-	}
-
-	public function hasDup(?string $unitTest)
-	{
-		$username = $unitTest == null ? $_POST['username'] : $unitTest;
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT username FROM user WHERE username = ?");
-		$stmt->execute([$username]);
-
-		return $stmt->rowCount() > 0 ? true : false;
+		session_unset(); session_destroy(); header("Location: /");
 	}
 
 	public function updateUser($forename, $surname, $username, $userId)
@@ -73,28 +60,6 @@ class UserController extends BaseController
 			return Library::redirectWithMessage("Something went wrong... Try Again later", "../User/login.php");
 		}
 	}
-	
-	public function getActiveUsers()
-	{
-		return User::withActive(1);
-	}
-
-	public function getInactiveUsers()
-	{
-		return User::withActive(0);
-	}
-
-	public function darkModeToggle($toggle, $userId)
-	{
-		$user = new User();
-		$user->setDarkMode($toggle, $userId);
-	}
-
-	public static function loadDarkMode($userId) // Keeping for Unit Testing
-	{
-		$user = new User();
-		return $user->getDarkMode($userId);
-	}
 
 	public function uploadImage($userId)
 	{
@@ -112,11 +77,5 @@ class UserController extends BaseController
 			echo true;
 		}
 		else echo false;
-	}
-
-	public function updatePicture($target, $userId)
-	{
-		$user = new User();
-		$user->setPicture($target, $userId);
 	}
 }
