@@ -38,6 +38,8 @@ class UserController extends BaseController
 		Library::redirectWithMessage("Registeration Succcess, please login!", "/login");
 	}
 
+	// TODO: Update User -> Will need /profile page first before starting this
+
 	// Keeping this code for now, will be updated soon!
 	public function uploadImage($userId)
 	{
