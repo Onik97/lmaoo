@@ -16,7 +16,7 @@ class ProjectController extends BaseController
 
     public static function readProject($projectId, $active)
     {
-        $projects = Project::withId($projectId);
+        $projects = Project::read(["projectId", "name", "status", "owner", "active"], array("projectId" => $projectId));
         $returnProjects = array();
         foreach ($projects as $projects)
         {
