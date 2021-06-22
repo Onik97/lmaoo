@@ -13,8 +13,11 @@
         </div>
     </div>
     
+    
     <!-- Projects List -->
-    <hr><ul id="projectUl" class="list-group list-group-flush project-list"></ul>
+    <hr><ul id="projectUl" class="list-group list-group-flush project-list">
+        <?php Lmaoo\Core\Render::Projects($_SESSION['userLoggedIn'] ?? null);?>
+        </ul>
 </div>
 
 <!-- CREATE NEW PROJECT MODAL -->
