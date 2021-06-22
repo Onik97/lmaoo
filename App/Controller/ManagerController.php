@@ -27,7 +27,7 @@ class ManagerController extends BaseController
 
     public static function readManagerProjects($userLoggedIn)
     {
-        echo json_encode(ProjectAccess::withManagerAccess(self::$userLoggedIn->userId));
+        $projects = ProjectAccess::withManagerAccess($userLoggedIn->userId);
     }
 
     public static function deleteUsersFromProject($projectId)
