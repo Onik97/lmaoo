@@ -45,6 +45,15 @@ $router->mount("/project", function() use ($router, $json)
 
 });
 
+// All /feature requests
+
+$router->mount("/feature", function() use ($router, $json)
+{
+
+    $router->put("/(\d+)", fn($featureId) => FeatureController::activateFeature($featureId)); //:D
+    $router->delete("/(\d+)", fn($featureId) => FeatureController::deactivateFeature($featureId)); //:D
+});
+
 // All /manager requests
 $router->mount("/manager", function() use ($router, $json)
 {
