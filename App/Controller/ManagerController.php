@@ -27,14 +27,7 @@ class ManagerController extends BaseController
 
     public static function readManagerProjects($userLoggedIn)
     {
-        $projects = ProjectAccess::withManagerAccess($userLoggedIn->userId);
-        $returnProjects = array();
-        {
-            {
-                array_push($returnProjects, $projects);
-            }
-        }
-        return $returnProjects;
+        return ProjectAccess::withManagerAccess($userLoggedIn->userId);
     }
 
     public static function deleteUsersFromProject($projectId)
