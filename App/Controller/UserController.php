@@ -28,21 +28,6 @@ class UserController extends BaseController
 		session_unset(); session_destroy(); header("Location: /");
 	}
 
-	public function updateUser($forename, $surname, $username, $userId)
-	{
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("UPDATE user SET forename = ?, surname = ?, username = ? WHERE userId = ?");
-		$stmt->execute([$forename, $surname, $username, $userId]);
-
-		$userLoggedIn = $_SESSION(["userLoggedIn"]);
-		$userLoggedIn->setForename($forename);
-		$userLoggedIn->setSurname($surname);
-		$userLoggedIn->setUsername($username);
-		$_SESSION['userLoggedIn'] = $userLoggedIn;
-		Library::redirectWithMessage("Your User Details has been updated", "../Home/index.php"); 
-	}
-
 	public function register($forename, $surname, $username, $password)
 	{
 		if (Library::hasNull($forename, $surname, $username, $password)) return Library::redirectWithMessage("All Fields must be filled", "../User/register.php");
@@ -64,8 +49,6 @@ class UserController extends BaseController
 
 	public function uploadImage($userId)
 	{
-		$user = new User();
-
 		$target_dir = "../Images/profilePictures/";
 		$target_file = $target_dir . basename($_FILES["image"]["name"]);
 		$ext = pathinfo($target_file, PATHINFO_EXTENSION);
@@ -74,7 +57,7 @@ class UserController extends BaseController
 		if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) 
 		{
 			rename($target_file, $rename);
-			$user->setPicture($rename, $userId);
+			User::update($rename, ["userId" => $userId]);
 			echo true;
 		}
 		else echo false;
