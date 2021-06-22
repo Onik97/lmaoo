@@ -84,7 +84,33 @@ class Render
 
     public static function Projects($userLoggedIn)
     {
-        $projects = ManagerController::readManagerProjects($userLoggedIn);
+        $managerProjects = ManagerController::readManagerProjects($userLoggedIn);
+        $ownerProjects = ManagerController::readOwnerProjects($userLoggedIn);
+
+        foreach($ownerProjects as $project)
+        {
+            echo "<li class='list-group-item'>
+                    <div class='project-info'>$project->name
+                        <div class='project-status'>$project->status</div>
+                        <div class='owner-role'>Owner</div>
+                        <button type='button' class='btn btn-warning' data-toggle='modal' data-target='#managerModal' onclick='rolePrompt(1)'>Roles</button>
+                    </div>
+                </li>";
+        }
+
+        foreach($managerProjects as $project)
+        {
+            echo "<li class='list-group-item'>
+                    <div class='project-info'>$project->name
+                        <div class='project-status'>$project->status</div>
+                        <div class='manager-role'>Manager</div>
+                        <button type='button' class='btn btn-warning' data-toggle='modal' data-target='#managerModal' onclick='rolePrompt(1)'>Roles</button>
+                    </div>
+                </li>";
+        }
+
+    }
+
     
 	public static function loadDarkModeToggle($toggle, $userLoggedIn)
 	{ 
