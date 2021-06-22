@@ -11,6 +11,7 @@
 <body>
 
 <?php echo $navbar; ?>
+<?php Lmaoo\Core\Render::RedirectedMessage() ?>
 <?php echo $content; ?>
 
 </body>
