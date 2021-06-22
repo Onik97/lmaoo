@@ -38,6 +38,7 @@ class UserController extends BaseController
 		Library::redirectWithMessage("Registeration Succcess, please login!", "/login");
 	}
 
+	// Keeping this code for now, will be updated soon!
 	public function uploadImage($userId)
 	{
 		$target_dir = "../Images/profilePictures/";
