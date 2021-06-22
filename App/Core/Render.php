@@ -82,7 +82,7 @@ class Render
         }
     }
 
-    public static function Projects($userLoggedIn)
+    public static function Projects()
     {
         $managerProjects = (new ManagerController())->readManagerProjects();
         $ownerProjects = (new ManagerController())->readOwnerProjects();
