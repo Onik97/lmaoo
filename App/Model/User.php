@@ -12,6 +12,12 @@ class User extends Database implements IModel
         (new Parent())->db()->query($sql)->parameters([])->exec();
     }
 
+    public static function read(array $columns, array $conditions)
+    {
+        $sql = Library::arrayToSelectQuery("user", $columns, $conditions);
+        (new Parent())->db()->query($sql)->parameters([])->fetchAll();
+    }
+
     public static function update($userId, array $data)
     {
         $sql = Library::arrayToUpdateQuery("user", "userId", $data);

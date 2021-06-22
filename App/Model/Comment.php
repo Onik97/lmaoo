@@ -12,6 +12,12 @@ class Comment extends Database implements IModel
         (new Database())->db()->query($sql)->parameters([])->exec();
     }
 
+    public static function read(array $columns, array $conditions)
+    {
+        $sql = Library::arrayToSelectQuery("comment", $columns, $conditions);
+        (new Parent())->db()->query($sql)->parameters([])->fetchAll();
+    }
+
     public static function withId($commentId, $columns = null)
     {
         $sql = $columns == null ? "SELECT * FROM comment WHERE commentId = ?" : "SELECT $columns FROM comment WHERE commentId = ?";
