@@ -1,20 +1,21 @@
 <?php
 namespace Lmaoo\Controller;
 
-use PDO;
+use Lmaoo\Core\Constant;
 use Lmaoo\Model\User;
+use Lmaoo\Utility\APIResponse;
 use Lmaoo\Utility\Library;
+use Lmaoo\Utility\Validation;
 
 class UserController extends BaseController
 {
 	public static function standardLogin()
 	{
-		Library::validatePostValues("username", "password");
+		$validation = Validation::login($_POST);
+		if ($validation != null) return APIResponse::BadRequest($validation);
 		$username = $_POST["username"]; $password = $_POST["password"];
-		if (Library::hasNull($username, $password)) return Library::redirectWithMessage("Username and Password must be filled in", "/login");
 
-		$user = User::withUsername($username);
-
+		$user = User::read(Constant::$USER_COLUMNS, ["username" => $username])[0];
 		if ($user->userId == null || !password_verify($password, $user->password)) return Library::redirectWithMessage("Username and Password did not match", "/login");
 		if ($user->isActive == 0) return Library::redirectWithMessage("User deactivated, contact the administrator", "/login");
 
