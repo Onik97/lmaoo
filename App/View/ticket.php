@@ -1,3 +1,4 @@
+<?php use Lmaoo\Utility\Session; ?>
 <title>Ticket</title>
 <p id="navBarActive" hidden>ticketPage</p>
 
@@ -12,14 +13,14 @@
 			
 				<div class="reporterName mb-3">
 					<h6>Reporter: </h6>
-						<label id="reporter"><?php echo "$ticket->reporter ($ticket->reporterUsername)" ?></label>
-						<p id="reporterUserId" hidden><?php echo $ticket->reporterId ?></p>
+						<label id="reporter"><?php echo Session::Get('ticket')->reporter ."(". Session::Get('ticket')->reporterUsername . ")"?></label>
+						<p id="reporterUserId" hidden><?php echo Session::Get('ticket')->reporterId ?></p>
 				</div>
 
 				<div class="assigneeName">
 					<h6>Assignee: </h6>
-					<label id="assignee"><?php echo "$ticket->assignee ($ticket->assigneeUsername)"?></label>
-					<p id="assigneeUserId" hidden><?php echo "$ticket->assigneeId"?></p>
+					<label id="assignee"><?php echo Session::Get('ticket')->assignee ." (". Session::Get('ticket')->assigneeUsername . ")"?></label>
+					<p id="assigneeUserId" hidden><?php echo "Session::Get('ticket')->assigneeId"?></p>
 				</div>
 
 				<div class="assigneeBtn">
@@ -34,12 +35,12 @@
 
 				<div ID="dates1" class="mt-4">
 					<h6>Date created:</h6>
-					<label id="createDate"><?php echo $ticket->created ?></label>
+					<label id="createDate"><?php echo Session::Get('ticket')->created ?></label>
 				</div>
 
 				<div ID="dates2" class="mt-4">
 					<h6>Date updated:</h6>
-					<label id="updateDate"><?php echo $ticket->updated ?></label>
+					<label id="updateDate"><?php echo Session::Get('ticket')->updated ?></label>
 				</div>
 			
 			</div>
@@ -47,7 +48,7 @@
 			<!-- Progress Section -->
 
 			<div class="p-4">
-				<label>Ticket Status: <span id="ticketProgress"><?php echo $ticket->progress ?></span></label>
+				<label>Ticket Status: <span id="ticketProgress"><?php echo Session::Get('ticket')->progress ?></span></label>
 				<button id="changeProgressBtn" class="btn btn-sm" onclick="changeProgress()"></button>
 			</div>
 		</div>
@@ -57,7 +58,7 @@
 			<!-- Summary Section -->
 
 			<div class="row no-gutters mt-3">
-				<div id="ticketHeader"><h1 id="ticketSummaryHeader"><?php echo $ticket->summary ?></h1></div>
+				<div id="ticketHeader"><h1 id="ticketSummaryHeader"><?php echo Session::Get('ticket')->summary ?></h1></div>
 			</div>
 
 			<!-- Comment Section -->
