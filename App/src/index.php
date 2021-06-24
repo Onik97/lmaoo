@@ -49,6 +49,7 @@ $router->mount("/project", function() use ($router, $json)
 
 $router->mount("/feature", function() use ($router, $json)
 {
+    $router->post("/(\d+)", fn($projectId) => FeatureController::createFeature($projectId, $json));
 
     $router->put("/(\d+)", fn($featureId) => FeatureController::activateFeature($featureId)); //:D
     $router->delete("/(\d+)", fn($featureId) => FeatureController::deactivateFeature($featureId)); //:D
