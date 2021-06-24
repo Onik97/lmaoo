@@ -9,7 +9,9 @@ class TicketController extends BaseController
 {
     public function createTicket($json)
     {
-        $data = json_decode($json, true); $validation = Validation::createTicket($data);
+        $data = json_decode($json, true); $data["reporter_key"] = $this->userLoggedIn->userId;
+        $validation = Validation::createTicket($data);
+        
         $validation == null ? Ticket::create($data) : APIResponse::BadRequest($validation);
     }
 }

@@ -7,6 +7,7 @@ use Lmaoo\Controller\AdminController;
 use Lmaoo\Controller\GithubController;
 use Lmaoo\Controller\ManagerController;
 use Lmaoo\Controller\ProjectController;
+use Lmaoo\Controller\TicketController;
 use Lmaoo\Controller\UserController;
 
 if (session_status() == PHP_SESSION_NONE) session_start();
@@ -61,6 +62,7 @@ $router->mount("/manager", function() use ($router, $json)
 $router->mount("/ticket", function() use ($router, $json)
 {
     $router->get("/(\d+)", fn($ticketId) => Render::ticket($ticketId));
+    $router->post("/", fn() => (new TicketController)->createTicket($json));
 });
 
 // All /admin requests
