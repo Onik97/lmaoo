@@ -17,6 +17,7 @@ $json = file_get_contents("php://input");
 
 // Secure all Endpoints using Middleware
 $router->before("GET|POST", "/project.*", fn() => Middleware::verifyUser($router, 1));
+$router->before("GET|POST", "/ticket.*", fn() => Middleware::verifyUser($router, 1));
 $router->before("GET|POST", "/manager.*", fn() => Middleware::verifyUser($router, 2));
 $router->before("GET|POST", "/admin.*", fn() => Middleware::verifyUser($router, 4));
 $router->before("POST", "/project.*", fn() => Middleware::verifyJson($router, $json));
@@ -54,6 +55,12 @@ $router->mount("/manager", function() use ($router, $json)
     $router->post("/", fn() => ManagerController::createUsersToProject($json));
 
     $router->delete("/project/(\d+)", fn($projectId) => ManagerController::deleteUsersFromProject($projectId));
+});
+
+// All /manager requests
+$router->mount("/ticket", function() use ($router, $json)
+{
+    $router->get("/(\d+)", fn($ticketId) => Render::ticket($ticketId));
 });
 
 // All /admin requests

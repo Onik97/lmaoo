@@ -4,6 +4,9 @@ namespace Lmaoo\Core;
 use Lmaoo\Controller\FeatureController;
 use Lmaoo\Controller\ManagerController;
 use Lmaoo\Model\ProjectAccess;
+use Lmaoo\Model\Ticket;
+use Lmaoo\Utility\Library;
+use Lmaoo\Utility\Session;
 
 class Render
 {
@@ -27,6 +30,14 @@ class Render
     public static function manager() { self::layout("manager", "manager"); }
     public static function project() { self::layout("project", "project"); }
     public static function admin() { self::layout("admin", "admin"); }
+
+    public static function ticket($ticketId) 
+    {
+        $ticket = Ticket::withId($ticketId);
+        if ($ticket == null) return Library::redirectWithMessage("Ticket ID not valid!", "/");
+        Session::Set("ticket", $ticket);
+        self::layout("ticket", "ticket");
+    }
 
     public static function DropdownItems($userLoggedIn)
     {
