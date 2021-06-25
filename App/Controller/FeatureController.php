@@ -7,11 +7,9 @@ use Lmaoo\Model\Feature;
 
 class FeatureController extends BaseController
 {
-    public static function createFeature($projectId, $json)
+    public static function createFeature($json)
     {
-        $jsondc = json_decode($json, true);
-		if (Library::hasNull($jsondc, $projectId)) return Library::redirectWithMessage("Something went wrong, please try again later", "/feature");
-        $data = array($jsondc, "projectId" => $projectId);
+        $data = json_decode($json, true);
         Feature::create($data);
     }
 
