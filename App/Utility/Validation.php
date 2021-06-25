@@ -9,7 +9,14 @@ class Validation
     public static function validate(callable $cp)
     {
         try { $cp(); }
-        catch(NestedValidationException $e) { return json_encode($e->getMessages()); }
+        catch(NestedValidationException $e) 
+        { 
+            $results = ""; $messages = $e->getMessages();
+            foreach ($messages as $key => $value) {
+                $results = $results . " $value,";
+            }
+            return trim(substr($results, 0, -1));
+        }
     }
 
     public static function ProgressAccess($data)
