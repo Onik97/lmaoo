@@ -85,4 +85,15 @@ class Validation
             return json_encode($e->getMessages());
         }
     }
+
+    public static function createFeature($data)
+    {
+        try {
+            v::key("name", v::NotOptional()->stringVal())
+             ->key("projectId", v::NotOptional()->intval())
+             ->assert($data);
+        } catch(NestedValidationException $e) {
+            return json_encode($e->getMessages());
+        }
+    }
 }
