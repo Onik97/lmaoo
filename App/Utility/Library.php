@@ -62,17 +62,33 @@ class Library
         exit($message);
     }
 
+    public static function arrayToSelectQuery(string $table, array $columns, array $conditions = null)
+    {
+        $stringColumns = "";
+        foreach($columns as $column) { $stringColumns = $stringColumns . "$column,"; }
+        $stringColumns = substr($stringColumns, 0, -1);
+
+        if ($conditions != null)
+        {
+            $stringConditions = "";
+            foreach($conditions as $x => $y) { $stringConditions = $stringConditions . "$x = '$y' AND "; }
+            $stringConditions = substr($stringConditions, 0, -4);
+        }
+
+        return $conditions == null 
+        ? "SELECT $stringColumns FROM $table"
+        : trim("SELECT $stringColumns FROM $table WHERE $stringConditions");
+    }
+
     public static function arrayToInsertQuery(string $tableName, array $data)
     {
-        $keys = "";
-        $values = "";
+        $keys = ""; $values = "";
 
         foreach($data as $x => $y) {
             $keys = $keys . "$x,";
             $values = $values . "'$y',";
         }
-        $keys = substr($keys, 0, -1);
-        $values = substr($values, 0, -1);
+        $keys = substr($keys, 0, -1); $values = substr($values, 0, -1);
 
         return "INSERT INTO $tableName ($keys) VALUES ($values)";
     }

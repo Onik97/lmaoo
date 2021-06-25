@@ -1,6 +1,7 @@
 <?php
 namespace Lmaoo\Controller;
 
+use Lmaoo\Core\Constant;
 use Lmaoo\Model\User;
 use Lmaoo\Utility\APIResponse;
 use Lmaoo\Utility\Validation;
@@ -10,8 +11,9 @@ class AdminController extends BaseController
     public static function readUser($active)
     {
         if ($active == null) return APIResponse::BadRequest("Active is required");
+        $columns = Constant::$USER_COLUMNS; unset($columns[2]); // Removes password on Column
 
-        echo json_encode(User::withActive($active));
+        echo json_encode(User::read($columns, array("isActive" => $active)));
     }
 
     public static function updateUser($json)

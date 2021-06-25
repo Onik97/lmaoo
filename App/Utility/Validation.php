@@ -49,4 +49,40 @@ class Validation
             return json_encode($e->getMessages());
         }
     }
+    
+    public static function login($data)
+    {
+        try {
+            v::key("username", v::NotOptional()->stringVal())
+             ->key("password", v::NotOptional()->stringVal())
+             ->assert($data);
+        } catch(NestedValidationException $e) {
+            return json_encode($e->getMessages());
+        }
+    }
+
+    public static function register($data)
+    {
+        try {
+            v::key("forename", v::NotOptional()->stringVal())
+             ->key("surname", v::NotOptional()->stringVal())
+             ->key("username", v::NotOptional()->stringVal())
+             ->key("password", v::NotOptional()->stringVal())
+             ->assert($data);
+        } catch(NestedValidationException $e) {
+            return json_encode($e->getMessages());
+        }
+    }
+
+    public static function createTicket($data)
+    {
+        try {
+            v::key("summary", v::NotOptional()->stringVal())
+             ->key("featureId", v::NotOptional()->stringVal())
+             ->key("reporter_key", v::NotOptional()->stringVal())
+             ->assert($data);
+        } catch(NestedValidationException $e) {
+            return json_encode($e->getMessages());
+        }
+    }
 }

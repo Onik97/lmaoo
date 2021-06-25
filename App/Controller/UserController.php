@@ -1,22 +1,23 @@
 <?php
 namespace Lmaoo\Controller;
 
-use PDO;
+use Lmaoo\Core\Constant;
 use Lmaoo\Model\User;
+use Lmaoo\Utility\APIResponse;
 use Lmaoo\Utility\Library;
+use Lmaoo\Utility\Validation;
 
 class UserController extends BaseController
 {
-	public static function standardLogin()
+	public function standardLogin()
 	{
-		Library::validatePostValues("username", "password");
+		$validation = Validation::login($_POST);
+		if ($validation != null) return APIResponse::BadRequest($validation);
 		$username = $_POST["username"]; $password = $_POST["password"];
-		if (Library::hasNull($username, $password)) return Library::redirectWithMessage("Username and Password must be filled in", "/login");
 
-		$user = User::withUsername($username);
-
-		if ($user->userId == null || !password_verify($password, $user->password)) return Library::redirectWithMessage("Username and Password did not match", "../User/login.php");
-		if ($user->isActive == 0) return Library::redirectWithMessage("User deactivated, contact the administrator", "../User/login.php");
+		$user = User::read(Constant::$USER_COLUMNS, ["username" => $username])[0];
+		if ($user->userId == null || !password_verify($password, $user->password)) return Library::redirectWithMessage("Username and Password did not match", "/login");
+		if ($user->isActive == 0) return Library::redirectWithMessage("User deactivated, contact the administrator", "/login");
 
 		$_SESSION['userLoggedIn'] = $user;
 		header("Location: /");
@@ -24,87 +25,24 @@ class UserController extends BaseController
 
 	public static function logout()
 	{
-		session_unset();
-		session_destroy();
-		header("Location: /");
+		session_unset(); session_destroy(); header("Location: /");
 	}
 
-	public function hasDup(?string $unitTest)
+	public function register()
 	{
-		$username = $unitTest == null ? $_POST['username'] : $unitTest;
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("SELECT username FROM user WHERE username = ?");
-		$stmt->execute([$username]);
+		$validation = Validation::register($_POST);
+		if ($validation != null) return APIResponse::BadRequest($validation);
+		$_POST["password"] = password_hash($_POST["password"], PASSWORD_BCRYPT);
 
-		return $stmt->rowCount() > 0 ? true : false;
+		User::create($_POST);
+		Library::redirectWithMessage("Registeration Succcess, please login!", "/login");
 	}
 
-	public function updateUser($forename, $surname, $username, $userId)
-	{
-		$pdo = Library::logindb();
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-		$stmt = $pdo->prepare("UPDATE user SET forename = ?, surname = ?, username = ? WHERE userId = ?");
-		$stmt->execute([$forename, $surname, $username, $userId]);
+	// TODO: Update User -> Will need /profile page first before starting this
 
-		$userLoggedIn = $_SESSION(["userLoggedIn"]);
-		$userLoggedIn->setForename($forename);
-		$userLoggedIn->setSurname($surname);
-		$userLoggedIn->setUsername($username);
-		$_SESSION['userLoggedIn'] = $userLoggedIn;
-		Library::redirectWithMessage("Your User Details has been updated", "../Home/index.php"); 
-	}
-
-	public function userInfoById($userId) // Should be used for Unit Testing and Admin Only!
-	{
-		return User::withId($userId);
-	}
-
-	public function register($forename, $surname, $username, $password)
-	{
-		if (Library::hasNull($forename, $surname, $username, $password)) return Library::redirectWithMessage("All Fields must be filled", "../User/register.php");
-		$hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-
-		$user = new User();
-		$checker = $user->registerUser($forename, $surname, $username, $hashedPassword);
-		
-		if ($checker == 1) 
-		{
-			return Library::redirectWithMessage("Register Successful, Login!", "../User/login.php");
-		}
-		else
-		{
-			// TODO: Implement Logging
-			return Library::redirectWithMessage("Something went wrong... Try Again later", "../User/login.php");
-		}
-	}
-	
-	public function getActiveUsers()
-	{
-		return User::withActive(1);
-	}
-
-	public function getInactiveUsers()
-	{
-		return User::withActive(0);
-	}
-
-	public function darkModeToggle($toggle, $userId)
-	{
-		$user = new User();
-		$user->setDarkMode($toggle, $userId);
-	}
-
-	public static function loadDarkMode($userId) // Keeping for Unit Testing
-	{
-		$user = new User();
-		return $user->getDarkMode($userId);
-	}
-
+	// Keeping this code for now, will be updated soon!
 	public function uploadImage($userId)
 	{
-		$user = new User();
-
 		$target_dir = "../Images/profilePictures/";
 		$target_file = $target_dir . basename($_FILES["image"]["name"]);
 		$ext = pathinfo($target_file, PATHINFO_EXTENSION);
@@ -113,15 +51,16 @@ class UserController extends BaseController
 		if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) 
 		{
 			rename($target_file, $rename);
-			$user->setPicture($rename, $userId);
+			User::update($rename, ["userId" => $userId]);
 			echo true;
 		}
 		else echo false;
 	}
 
-	public function updatePicture($target, $userId)
+	public function deactivateOwnUser()
 	{
-		$user = new User();
-		$user->setPicture($target, $userId);
+		User::delete($this->userLoggedIn->userId);
+		session_unset(); session_destroy();
+		Library::redirectWithMessage("You have deactivated your user!", "/");
 	}
 }

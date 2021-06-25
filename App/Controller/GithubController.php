@@ -1,6 +1,7 @@
 <?php
 namespace Lmaoo\Controller;
 
+use Lmaoo\Core\Constant;
 use Lmaoo\Model\Github\OAuth;
 use Lmaoo\Model\Github;
 use Lmaoo\Model\User;
@@ -37,7 +38,8 @@ class GithubController extends BaseController
             case "login":
                 $accessToken = $auth->getAccessToken($_GET['code']);
                 $github = new Github\User($accessToken); $_SESSION["githubUser"] = $github;
-                $_SESSION["userLoggedIn"] = User::withGithubId($github->user->id);
+                $columns = Constant::$USER_COLUMNS; unset($columns[2]); // Removes password on Column
+                $_SESSION["userLoggedIn"] = User::read($columns, array("github_id" => $github->user->id));
                 header("Location: /");
                 break;
 

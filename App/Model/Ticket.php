@@ -12,6 +12,12 @@ class Ticket extends Database implements IModel
         (new Database())->db()->query($sql)->parameters([])->exec();
     }
 
+    public static function read(array $columns, array $conditions)
+    {
+        $sql = Library::arrayToSelectQuery("ticket", $columns, $conditions);
+        return (new Parent())->db()->query($sql)->parameters([])->fetchAll();
+    }
+
     public static function withId($ticketId, $columns = null)
     {
         $sql = $columns != null 
