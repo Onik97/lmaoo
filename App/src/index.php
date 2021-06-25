@@ -7,6 +7,7 @@ use Lmaoo\Controller\AdminController;
 use Lmaoo\Controller\GithubController;
 use Lmaoo\Controller\ManagerController;
 use Lmaoo\Controller\ProjectController;
+use Lmaoo\Controller\FeatureController;
 use Lmaoo\Controller\TicketController;
 use Lmaoo\Controller\UserController;
 
@@ -21,9 +22,11 @@ $router->before("GET|POST", "/project.*", fn() => Middleware::verifyUser($router
 $router->before("GET|POST", "/ticket.*", fn() => Middleware::verifyUser($router, 1));
 $router->before("GET|POST", "/manager.*", fn() => Middleware::verifyUser($router, 2));
 $router->before("GET|POST", "/admin.*", fn() => Middleware::verifyUser($router, 4));
+$router->before("GET|POST", "/feature.*", fn() => Middleware::verifyUser($router, 2));
 $router->before("POST", "/project.*", fn() => Middleware::verifyJson($router, $json));
 $router->before("POST", "/manager.*", fn() => Middleware::verifyJson($router, $json));
 $router->before("POST", "/admin.*", fn() => Middleware::verifyJson($router, $json));
+$router->before("POST", "/feature.*", fn() => Middleware::verifyJson($router, $json,));
 
 // Set 404 Page
 $router->set404("Lmaoo\Core\Render::NotFound");
@@ -46,6 +49,16 @@ $router->mount("/project", function() use ($router, $json)
     $router->get("/activate/(\d+)", fn($projectId) => ProjectController::activateProject($projectId));
     $router->get("/deactivate/(\d+)", fn($projectId) => ProjectController::deactivateProject($projectId));
 
+});
+
+// All /feature requests
+
+$router->mount("/feature", function() use ($router, $json)
+{
+    $router->post("/", fn() => FeatureController::createFeature($json));
+
+    $router->put("/(\d+)", fn($featureId) => FeatureController::activateFeature($featureId));
+    $router->delete("/(\d+)", fn($featureId) => FeatureController::deactivateFeature($featureId));
 });
 
 // All /manager requests

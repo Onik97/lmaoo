@@ -3,15 +3,16 @@ namespace Lmaoo\Controller;
 
 use Lmaoo\Core\Constant;
 use Lmaoo\Utility\Library;
+use Lmaoo\Utility\APIResponse;
 use Lmaoo\Model\Feature;
+use Lmaoo\Utility\Validation;
 
 class FeatureController extends BaseController
 {
-    public static function createFeature($featureName, $projectId)
+    public static function createFeature($json)
     {
-		if (Library::hasNull($featureName, $projectId)) return Library::redirectWithMessage("Something went wrong, please try again later", "/feature");
-        $data = array("name" => $featureName, "projectId" => $projectId);
-        Feature::create($data);
+        $data = json_decode($json, true); $validation = Validation::createFeature($data);
+        $validation == null ? Feature::create($data) : APIResponse::BadRequest($validation);
     }
 
     public static function readFeatures($projectId, $active)
