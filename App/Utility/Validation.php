@@ -73,4 +73,16 @@ class Validation
             return json_encode($e->getMessages());
         }
     }
+
+    public static function createTicket($data)
+    {
+        try {
+            v::key("summary", v::NotOptional()->stringVal())
+             ->key("featureId", v::NotOptional()->stringVal())
+             ->key("reporter_key", v::NotOptional()->stringVal())
+             ->assert($data);
+        } catch(NestedValidationException $e) {
+            return json_encode($e->getMessages());
+        }
+    }
 }
