@@ -11,8 +11,8 @@ class FeatureController extends BaseController
 {
     public static function createFeature($json)
     {
-        $data = json_decode($json, true);
-        Feature::create($data);
+        $data = json_decode($json, true); $validation = Validation::createFeature($data);
+        $validation == null ? Feature::create($data) : APIResponse::BadRequest($validation);
     }
 
     public static function readFeatures($projectId, $active)
