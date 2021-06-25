@@ -22,10 +22,11 @@ $router->before("GET|POST", "/project.*", fn() => Middleware::verifyUser($router
 $router->before("GET|POST", "/ticket.*", fn() => Middleware::verifyUser($router, 1));
 $router->before("GET|POST", "/manager.*", fn() => Middleware::verifyUser($router, 2));
 $router->before("GET|POST", "/admin.*", fn() => Middleware::verifyUser($router, 4));
+$router->before("GET|POST", "/feature.*", fn() => Middleware::verifyUser($router, 2));
 $router->before("POST", "/project.*", fn() => Middleware::verifyJson($router, $json));
 $router->before("POST", "/manager.*", fn() => Middleware::verifyJson($router, $json));
 $router->before("POST", "/admin.*", fn() => Middleware::verifyJson($router, $json));
-$router->before("POST", "/feature.*", fn() => Middleware::verifyJson($router, $json));
+$router->before("POST", "/feature.*", fn() => Middleware::verifyJson($router, $json,));
 
 // Set 404 Page
 $router->set404("Lmaoo\Core\Render::NotFound");
