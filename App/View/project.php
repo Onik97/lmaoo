@@ -126,6 +126,16 @@
             <label>New feature name:</label>
             <input type="text" class="search-input form-control" id="projectName" placeholder="Feature name" onkeyup="projectValidation()">
           </div>
+          <div class="wrapper">
+            <small id="passwordHelpBlock" class="form-text text-muted">Feature limit exceeded (limit number)</small>
+          </div>
+          <div class="wrapper">
+            <label id="activeUserToggle"></label>
+            <div class="custom-control custom-switch">
+              <input type="checkbox" class="custom-control-input" id="adminUserToggle">
+              <label class="custom-control-label" for="adminUserToggle">Toggle to activate feature</label>
+            </div>
+          </div>
         </div>
 
         <div class="modal-footer" id="editFeatureFooter">
