@@ -31,7 +31,15 @@
     <div id="createProject"></div>
 
     <div class="content">
-      <h1 id="ticketMessage">Tickets</h1>
+      <div class="row">
+        <div class="col-sm-9">
+          <h1 id="ticketMessage">Tickets</h1>
+        </div>
+        <div class="col-sm-3" id="ticketButtonDiv">
+          <button type="button" id="createTicketButton" data-toggle="modal" data-target="#createTicketModal" class="btn btn-success">Create Ticket</button>
+        </div>
+      </div>
+
       <p id="selectedFeatureId" hidden>0</p>
       <div id="ticketDiv">
 
@@ -64,21 +72,29 @@
     </div>
   </div>
 
-  <!-- MODAL -->
-  <div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
+  <!-- CREATE TICKET MODAL -->
+  <div class="modal fade" id="createTicketModal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
 
         <div class="modal-header">
-          <h5 class="modal-title modal-title-custom ml-9 mr-auto text-white" id="projectModalHead"></h5>
+          <h5 class="modal-title modal-title-custom ml-9 mr-auto" id="createTicketHead">Create Ticket</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
 
-        <div class="modal-body" id="projectModalBody"></div>
+        <div class="modal-body" id="createTicketBody">
+          <div class="wrapper">
+            <label>Ticket name:</label>
+            <input type="text" class="search-input form-control" id="projectName" onkeyup="projectValidation()">
+          </div>
+        </div>
 
-        <div class="modal-footer" id="projectModalFooter"></div>
+        <div class="modal-footer" id="createTicketFooter">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success">Save changes</button>
+        </div>
 
       </div>
     </div>
