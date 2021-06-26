@@ -12,11 +12,11 @@
             <button type="button" class="btn btn-success" data-toggle='modal' data-target='#createProjectModal' onclick="createProjectPrompt()">New Project</button>
         </div>
     </div>
-    
+
     <!-- Projects List -->
     <hr>
-    <ul id="projectUl" class="list-group list-group-flush project-list"> 
-        <?php Lmaoo\Core\Render::Projects(); ?> 
+    <ul id="projectUl" class="list-group list-group-flush project-list">
+        <?php Lmaoo\Core\Render::Projects(); ?>
     </ul>
 </div>
 
@@ -35,7 +35,9 @@
                 <div class="wrapper">
                     <label>Project name:</label>
                     <input type="text" class="search-input form-control" id="projectName" placeholder="Project name" onkeyup="projectValidation()">
-                    <div class="autocom-box"><!-- here list are inserted from javascript --></div>
+                    <div class="autocom-box">
+                        <!-- here list are inserted from javascript -->
+                    </div>
                 </div>
                 <div class="wrapper">
                     <label>Status:</label>
@@ -59,32 +61,39 @@
     </div>
 </div>
 
-<!-- Choose Role Modal -->
-<div class="modal fade" id="chooseRoleModal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
+<!-- Edit Project Modal -->
+<div class="modal fade" id="editProjectModal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-
             <div class="modal-header">
-                <h5 class="modal-title modal-title-custom ml-9 mr-auto text-black" id="chooseRoleHead">Choose Role</h5>
+                <h5 class="modal-title modal-title-custom ml-9 mr-auto text-black" id="editProjectHead">Edit Project</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!-- Search bar to look for members on the platform -->
-            <div class="modal-body" id="chooseRoleBody">
+            <div class="modal-body" id="editFeatureBody">
+                <div class="wrapper">
+                    <label>New project name:</label>
+                    <input type="text" class="search-input form-control" id="projectName" placeholder="Project name" onkeyup="projectValidation()">
+                </div>
+                <div class="wrapper">
+                    <small id="passwordHelpBlock" class="form-text text-muted">Project limit exceeded (limit number)</small>
+                </div>
+                <!-- Search bar to look for members on the platform -->
                 <div class="wrapper">
                     <input type="text" class="search-input form-control" placeholder="User's name">
-                    <div class="autocom-box"><!-- here list are inserted from javascript --></div>
+                    <div class="autocom-box">
+                        <!-- here list are inserted from javascript -->
+                    </div>
                 </div>
-
                 <!-- List of members on the platform  -->
                 <ul class="list-group list-group-flush user-list"></ul>
             </div>
 
-            <div class="modal-footer" id="chooseRoleFooter">
-                <button type="button" class="btn btn-success" data-toggle='modal' data-target='#managerModal' onclick="postRequest()">Post</button>
+            <div class="modal-footer" id="editProjectFooter">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success">Save changes</button>
             </div>
-
         </div>
     </div>
 </div>
