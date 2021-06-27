@@ -129,7 +129,7 @@ use Lmaoo\Utility\Session; ?>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
 			</div>
 			<div class="modal-body" id="ticketPageBody">
-				<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" data-width="75%">
+				<select id="assigneeSelect" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
 					<option selected>Select user</option>
 					<option value="1">Tufan</option>
 					<option value="2">Onik</option>
