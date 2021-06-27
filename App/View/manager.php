@@ -70,14 +70,15 @@
             <div class="modal-body" id="editFeatureBody">
                 <div class="wrapper">
                     <label>New project name:</label>
-                    <input type="text" class="search-input form-control" id="projectName" placeholder="Project name" onkeyup="projectValidation()">
+                    <input type="text" class="search-input form-control" id="projectName" onkeyup="projectValidation()">
                 </div>
                 <div class="wrapper">
                     <small id="passwordHelpBlock" class="form-text text-muted">Project limit exceeded (limit number)</small>
                 </div>
                 <!-- Search bar to look for members on the platform -->
                 <div class="wrapper">
-                    <input type="text" class="search-input form-control" placeholder="User's name">
+                    <label>Enter user's name:</label>
+                    <input type="text" class="search-input form-control">
                     <div class="autocom-box">
                         <!-- here a users list is inserted from javascript -->
                     </div>

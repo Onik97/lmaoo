@@ -106,7 +106,7 @@
       <div class="modal-content">
 
         <div class="modal-header">
-          <h5 class="modal-title modal-title-custom ml-9 mr-auto text-black" id="createFeatureHead">Create Project</h5>
+          <h5 class="modal-title modal-title-custom ml-9 mr-auto text-black" id="createFeatureHead">Create Feature</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -114,7 +114,7 @@
         <div class="modal-body" id="createFeatureBody">
           <div class="wrapper">
             <label>Feature name:</label>
-            <input type="text" class="search-input form-control" id="featureName" placeholder=" name" onkeyup="projectValidation()">
+            <input type="text" class="search-input form-control" id="featureName" onkeyup="projectValidation()">
           </div>
         </div>
 
@@ -140,7 +140,7 @@
         <div class="modal-body" id="editFeatureBody">
           <div class="wrapper">
             <label>New feature name:</label>
-            <input type="text" class="search-input form-control" id="projectName" placeholder="Feature name" onkeyup="projectValidation()">
+            <input type="text" class="search-input form-control" id="newFeatureName" onkeyup="projectValidation()">
           </div>
           <div class="wrapper">
             <small id="passwordHelpBlock" class="form-text text-muted">Feature limit exceeded (limit number)</small>
