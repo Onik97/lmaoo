@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<p id="navBarActive" hidden>notfoundPage</p>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +13,7 @@
 <div class="main">
     <h1>404</h1>
     <h2>Page Not Found</h2>
-    <p>Yikes...I Promise There Is Nothing To See Here...</p>
+    <p>Nothing To See Here...</p>
     <a href="/"><button class="btn">Go Home</button>
     </div>
 

@@ -27,6 +27,7 @@ $router->before("POST", "/project.*", fn() => Middleware::verifyJson($router, $j
 $router->before("POST", "/manager.*", fn() => Middleware::verifyJson($router, $json));
 $router->before("POST", "/admin.*", fn() => Middleware::verifyJson($router, $json));
 $router->before("POST", "/feature.*", fn() => Middleware::verifyJson($router, $json,));
+$router->before("GET|POST", "/profile.*", fn() => Middleware);
 
 // Set 404 Page
 $router->set404("Lmaoo\Core\Render::NotFound");
