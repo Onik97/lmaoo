@@ -34,10 +34,7 @@
             <div class="modal-body" id="createProjectBody">
                 <div class="wrapper">
                     <label>Project name:</label>
-                    <input type="text" class="search-input form-control" id="projectName" placeholder="Project name" onkeyup="projectValidation()">
-                    <div class="autocom-box">
-                        <!-- here list are inserted from javascript -->
-                    </div>
+                    <input type="text" class="search-input form-control" id="projectName" onkeyup="projectValidation()">
                 </div>
                 <div class="wrapper">
                     <label>Status:</label>
@@ -53,7 +50,7 @@
             </div>
 
             <div class="modal-footer" id="createProjectFooter">
-                <button class="btn btn-success" type="button" id="saveProjectBtn" data-toggle='modal' data-target='#managerModal'>Save Project</button>
+                <button type="button" class="btn btn-success" id="saveProjectBtn">Save Project</button>
             </div>
 
         </div>
@@ -82,7 +79,7 @@
                 <div class="wrapper">
                     <input type="text" class="search-input form-control" placeholder="User's name">
                     <div class="autocom-box">
-                        <!-- here list are inserted from javascript -->
+                        <!-- here a users list is inserted from javascript -->
                     </div>
                 </div>
                 <!-- List of members on the platform  -->
