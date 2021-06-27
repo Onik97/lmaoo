@@ -1,6 +1,4 @@
-<?php
-
-use Lmaoo\Utility\Session; ?>
+<?php use Lmaoo\Utility\Session; ?>
 <title>Ticket</title>
 <p id="navBarActive" hidden>ticketPage</p>
 
