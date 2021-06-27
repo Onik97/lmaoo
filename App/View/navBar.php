@@ -48,7 +48,7 @@
                 <label>Upload Profile Picture</label>
                 <div class="input-group my-2">
                     <div class="input-group-prepend">
-                        <button class="input-group-text" id="uploadImageBtn" disabled onclick="uploadImage()">Upload</button>
+                        <button class="input-group-text" id="uploadImageBtn" disabled >Upload</button>
                     </div>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="uploadImage" aria-describedby="uploadImageBtn" onchange="validateImage()">
