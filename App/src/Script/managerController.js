@@ -53,7 +53,7 @@ async function loadProjects()
         var projectInfo = $("<div>", {"class" : "project-info"});
         var projectStatus = $("<div>", {"class" : "project-status"}).append(json.status);
         var role = $("<div>", {"class" : "owner-role"}).append("Owner");
-        var roleBtn = $("<button>", { type:"button", class : "btn btn-warning", "data-toggle" : "modal", "data-target" : "#managerModal", "onclick" : `rolePrompt(${json.projectId})`}).append("Roles");
+        var roleBtn = $("<button>", { type:"button", class : "btn btn-warning", "data-toggle" : "modal", "data-target" : "#managerModal" }).append("Roles");
         
         $(projectInfo).append(json.name);
         $(projectInfo).append(projectStatus);
@@ -71,7 +71,7 @@ async function loadProjects()
         var projectInfo = $("<div>", {"class" : "project-info"});
         var projectStatus = $("<div>", {"class" : "project-status"}).append(json.status);
         var role = $("<div>", {"class" : "manager-role"}).append("Manager");
-        var roleBtn = $("<button>", { type:"button", class : "btn btn-warning", "data-toggle" : "modal", "data-target" : "#managerModal", "onclick" : `rolePrompt(${json.projectId})` }).append("Roles");
+        var roleBtn = $("<button>", { type:"button", class : "btn btn-warning", "data-toggle" : "modal", "data-target" : "#managerModal" }).append("Roles");
         
         $(projectInfo).append(json.name);
         $(projectInfo).append(projectStatus);
@@ -121,7 +121,7 @@ async function rolePrompt(projectId)
         addUser(json.data[i].userId, json.data[i].forename, json.data[i].surname, json.data[i].username, json.data[i].managerAccess)
     }
 
-    var saveBtn = $("<button>", { type:"button", class : "btn btn-success", "onclick" : `saveUsers(${projectId})`}).html("Save changes");
+    var saveBtn = $("<button>", { type:"button", class : "btn btn-success" }).html("Save changes");
     var closeBtn = $("<button>", { type:"button", class : "btn btn-secondary", "data-dismiss" : "modal" }).html("Close");
     $("#managerModalFooter").html("").append(saveBtn).append(closeBtn);
 }
@@ -221,7 +221,7 @@ function createProjectPrompt()
     $(statusDiv).append(statusLabel);
     $(statusDiv).append(statusSelect);
 
-    $("#globalModalFooter").html("").append($("<button>", { class: "btn btn-primary", type: "text", id: "saveProjectBtn", onclick: "createProject()" }).html("Save"));
+    $("#globalModalFooter").html("").append($("<button>", { class: "btn btn-primary", type: "text", id: "saveProjectBtn" }).html("Save"));
     $('#saveProjectBtn').prop('disabled', true);
 }
 
