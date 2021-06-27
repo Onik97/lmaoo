@@ -18,6 +18,7 @@ $router = new Bramus\Router\Router();
 $json = file_get_contents("php://input");
 
 // Secure all Endpoints using Middleware
+$router->before("GET|POST", "/profile.*", fn() => Middleware::verifyUser($router, 1));
 $router->before("GET|POST", "/project.*", fn() => Middleware::verifyUser($router, 1));
 $router->before("GET|POST", "/ticket.*", fn() => Middleware::verifyUser($router, 1));
 $router->before("GET|POST", "/manager.*", fn() => Middleware::verifyUser($router, 2));
@@ -27,7 +28,7 @@ $router->before("POST", "/project.*", fn() => Middleware::verifyJson($router, $j
 $router->before("POST", "/manager.*", fn() => Middleware::verifyJson($router, $json));
 $router->before("POST", "/admin.*", fn() => Middleware::verifyJson($router, $json));
 $router->before("POST", "/feature.*", fn() => Middleware::verifyJson($router, $json,));
-$router->before("GET|POST", "/profile.*", fn() => Middleware);
+$router->before("POST", "/profile*", fn() => Middleware::verifyJson($router, $json,));
 
 // Set 404 Page
 $router->set404("Lmaoo\Core\Render::NotFound");
@@ -96,6 +97,13 @@ $router->mount("/github", function() use ($router)
     // GET github/authorize/login OR GET github/authorize/register 
     $router->get("/authorize/(\w+)", fn($function) => (new GithubController)->authorise($function));
     $router->get("/callback", fn() => (new GithubController())->callback());
+});
+
+// profile router
+$router->mount("/profile", function() use ($router, $json)
+{
+    $router->get("/", fn() => Render::profile());
+
 });
 
 $router->run();
