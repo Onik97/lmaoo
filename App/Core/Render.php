@@ -79,7 +79,7 @@ class Render
 
         echo "<div class='navbar-brand form-inline lg-1'>";
         echo "<input id='searchBarInput' class='form-control mr-sm-2' type='search' placeholder='Search Ticket' aria-label='Search'>";
-        echo "<button id='searchBarBtn' class='btn btn-outline-success my-sm-0' onclick='searchBar()'>Search</button>";
+        echo "<button id='searchBarBtn' class='btn btn-outline-success my-sm-0'>Search</button>";
         echo "</div>";
     }
 
@@ -140,7 +140,7 @@ class Render
 		}
 		
 		echo "<div class='custom-control custom-switch'>";
-		echo $toggle == true ? "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' onclick='darkModeToggle()' checked>" : "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' onclick='darkModeToggle()'>";
+		echo $toggle == true ? "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' checked>" : "<input type='checkbox' class='custom-control-input' id='darkModeSwitch'>";
 		echo "<label class='custom-control-label' for='darkModeSwitch'>Dark Mode</label>";
 		echo "</div>";
 	}
