@@ -49,7 +49,7 @@
 
 			<div class="p-4">
 				<label>Ticket Status: <span id="ticketProgress"><?php echo Session::Get('ticket')->progress ?></span></label>
-				<button id="changeProgressBtn" class="btn btn-sm" onclick="changeProgress()"></button>
+				<button id="changeProgressBtn" class="btn btn-sm" onclick="changeProgress()">Update Status</button>
 			</div>
 		</div>
 
