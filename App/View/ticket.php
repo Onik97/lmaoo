@@ -138,7 +138,7 @@ use Lmaoo\Utility\Session; ?>
 			</div>
 			<div class="modal-footer" id="ticketPageFooter">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-success">Save changes</button>
+				<button type="button" class="btn btn-success" id="saveButton">Save changes</button>
 			</div>
 		</div>
 	</div>

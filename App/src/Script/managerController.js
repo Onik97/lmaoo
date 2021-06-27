@@ -221,8 +221,8 @@ function createProjectPrompt()
     $(statusDiv).append(statusLabel);
     $(statusDiv).append(statusSelect);
 
-    $("#globalModalFooter").html("").append($("<button>", { class: "btn btn-primary", type: "text", id: "saveProjectBtn" }).html("Save"));
-    $('#saveProjectBtn').prop('disabled', true);
+    $("#globalModalFooter").html("").append($("<button>", { class: "btn btn-primary", type: "text", id: "saveButton" }).html("Save"));
+    $('#saveButton').prop('disabled', true);
 }
 
 function projectValidation() 
@@ -235,11 +235,11 @@ function projectValidation()
     {
         $("#projectValidationSmall").html("Project name too large!");
         $("#projectValidationSmall").addClass("text-danger");
-        $('#saveProjectBtn').prop('disabled', true);
+        $('#saveButton').prop('disabled', true);
         return;
     }
 
-    if ($("#projectStatus").val() == null || $.trim($("#projectName").val()) == "") { $('#saveProjectBtn').prop('disabled', true); }
+    if ($("#projectStatus").val() == null || $.trim($("#projectName").val()) == "") { $('#saveButton').prop('disabled', true); }
     else 
     {
         axios.post("../Project/target.php", data)
@@ -250,14 +250,14 @@ function projectValidation()
                     $("#projectName").addClass("is-invalid");
                     $("#projectValidationSmall").html("Project name not available, must already exist!");
                     $("#projectValidationSmall").addClass("text-danger");
-                    $('#saveProjectBtn').prop('disabled', true);
+                    $('#saveButton').prop('disabled', true);
                 }
                 else 
                 {
                     $("#projectName").removeClass("is-invalid");
                     $("#projectValidationSmall").html("");
                     $("#projectValidationSmall").removeClass("text-danger");
-                    $('#saveProjectBtn').prop('disabled', false);
+                    $('#saveButton').prop('disabled', false);
                 }
             })
     }

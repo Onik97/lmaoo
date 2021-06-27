@@ -50,7 +50,7 @@
             </div>
 
             <div class="modal-footer" id="createProjectFooter">
-                <button type="button" class="btn btn-success" id="saveProjectBtn">Save Project</button>
+                <button type="button" class="btn btn-success" id="saveButton">Save Project</button>
             </div>
 
         </div>
@@ -70,7 +70,7 @@
             <div class="modal-body" id="editFeatureBody">
                 <div class="wrapper">
                     <label>New project name:</label>
-                    <input type="text" class="search-input form-control" id="projectName" onkeyup="projectValidation()">
+                    <input type="text" class="search-input form-control" id="newProjectName" onkeyup="projectValidation()">
                 </div>
                 <div class="wrapper">
                     <small id="passwordHelpBlock" class="form-text text-muted">Project limit exceeded (limit number)</small>
@@ -89,7 +89,7 @@
 
             <div class="modal-footer" id="editProjectFooter">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Save changes</button>
+                <button type="button" class="btn btn-success" id="saveButton">Save changes</button>
             </div>
         </div>
     </div>

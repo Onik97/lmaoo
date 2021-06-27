@@ -93,7 +93,7 @@
 
         <div class="modal-footer" id="createTicketFooter">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success">Save changes</button>
+          <button type="button" class="btn btn-success" id="saveButton">Save changes</button>
         </div>
 
       </div>
@@ -120,7 +120,7 @@
 
         <div class="modal-footer" id="createFeatureFooter">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success">Save changes</button>
+          <button type="button" class="btn btn-success" id="saveButton">Save changes</button>
         </div>
       </div>
     </div>
@@ -146,7 +146,7 @@
             <small id="passwordHelpBlock" class="form-text text-muted">Feature limit exceeded (limit number)</small>
           </div>
           <div class="wrapper">
-            <label id="activeUserToggle"></label>
+            <label id="activeFeatureToggle"></label>
             <div class="custom-control custom-switch">
               <input type="checkbox" class="custom-control-input" id="editFeatureToggle">
               <label class="custom-control-label" for="editFeatureToggle">Toggle to activate feature</label>
@@ -156,7 +156,7 @@
 
         <div class="modal-footer" id="editFeatureFooter">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success">Save changes</button>
+          <button type="button" class="btn btn-success" id="saveButton">Save changes</button>
         </div>
       </div>
     </div>
