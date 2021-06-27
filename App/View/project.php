@@ -87,7 +87,7 @@
         <div class="modal-body" id="createTicketBody">
           <div class="wrapper">
             <label>Ticket name:</label>
-            <input type="text" class="search-input form-control" id="projectName" onkeyup="projectValidation()">
+            <input type="text" class="search-input form-control" id="ticketName" onkeyup="projectValidation()">
           </div>
         </div>
 
@@ -114,7 +114,7 @@
         <div class="modal-body" id="createFeatureBody">
           <div class="wrapper">
             <label>Feature name:</label>
-            <input type="text" class="search-input form-control" id="projectName" placeholder="Feature name" onkeyup="projectValidation()">
+            <input type="text" class="search-input form-control" id="featureName" placeholder=" name" onkeyup="projectValidation()">
           </div>
         </div>
 
@@ -148,8 +148,8 @@
           <div class="wrapper">
             <label id="activeUserToggle"></label>
             <div class="custom-control custom-switch">
-              <input type="checkbox" class="custom-control-input" id="adminUserToggle">
-              <label class="custom-control-label" for="adminUserToggle">Toggle to activate feature</label>
+              <input type="checkbox" class="custom-control-input" id="editFeatureToggle">
+              <label class="custom-control-label" for="editFeatureToggle">Toggle to activate feature</label>
             </div>
           </div>
         </div>
