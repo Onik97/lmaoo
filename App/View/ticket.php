@@ -26,8 +26,8 @@ use Lmaoo\Utility\Session; ?>
 			</div>
 
 			<div class="assigneeBtn">
-				<button id="ticketPeopleChooseAssignee" class="btn btn-sm" data-toggle="modal" data-target="#ticketPageModal" onclick="peoplePrompt()">Choose Assignee</button>
-				<button id="ticketPeopleSelfAssignee" class="btn btn-sm" onclick="saveAssigneeAsYourself()">Assigned to myself</button>
+				<button id="ticketPeopleChooseAssignee" class="btn btn-sm" data-toggle="modal" data-target="#ticketPageModal">Choose Assignee</button>
+				<button id="ticketPeopleSelfAssignee" class="btn btn-sm">Assigned to myself</button>
 			</div>
 		</div>
 
@@ -51,7 +51,7 @@ use Lmaoo\Utility\Session; ?>
 
 		<div class="p-4">
 			<label>Ticket Status: <span id="ticketProgress"><?php echo Session::Get('ticket')->progress ?></span></label>
-			<button id="changeProgressBtn" class="btn btn-sm" onclick="changeProgress()"></button>
+			<button id="changeProgressBtn" class="btn btn-sm"></button>
 		</div>
 	</div>
 

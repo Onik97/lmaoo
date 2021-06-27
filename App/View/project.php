@@ -6,7 +6,7 @@
       <nav id="sidebar">
         <div id="sidebar-header" class="sidebar-header">
           <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="featureToggle" onclick='featureToggle()' checked>
+            <input type="checkbox" class="custom-control-input" id="featureToggle" checked>
             <label class="custom-control-label" for="featureToggle">
               <h1>Feature</h1>
             </label>
@@ -45,13 +45,13 @@
 
         <ul class="nav nav-tabs nav-fill" id="projectProgressTab" role="tablist">
           <li class="nav-item">
-            <a class="nav-link" id="open-tab" data-toggle="tab" href="#open-content" role="tab" onclick="loadTicketsWithProgress(this.innerHTML)">Open</a>
+            <a class="nav-link" id="open-tab" data-toggle="tab" href="#open-content" role="tab">Open</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="progress-tab" data-toggle="tab" href="#progress-content" role="tab" onclick="loadTicketsWithProgress(this.innerHTML)">In Progress</a>
+            <a class="nav-link" id="progress-tab" data-toggle="tab" href="#progress-content" role="tab">In Progress</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="complete-tab" data-toggle="tab" href="#complete-content" role="tab" onclick="loadTicketsWithProgress(this.innerHTML)">Complete</a>
+            <a class="nav-link" id="complete-tab" data-toggle="tab" href="#complete-content" role="tab">Complete</a>
           </li>
         </ul>
 

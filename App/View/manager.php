@@ -9,7 +9,7 @@
             <h3 href="#">Projects <span id="projectSize" class="badge"></span></h3>
         </div>
         <div class="col-sm-2">
-            <button type="button" class="btn btn-success" data-toggle='modal' data-target='#createProjectModal' onclick="createProjectPrompt()">New Project</button>
+            <button type="button" class="btn btn-success" data-toggle='modal' data-target='#createProjectModal'>New Project</button>
         </div>
     </div>
 
@@ -53,8 +53,7 @@
             </div>
 
             <div class="modal-footer" id="createProjectFooter">
-                <button class="btn btn-success" type="button" id="saveProjectBtn" onclick="postRequest()" data-toggle='modal' data-target='#managerModal'>Save Project</button>
-                <!-- <button type="button" class="btn btn-success" data-toggle='modal' data-target='#managerModal' onclick="postRequest()">Save</button> -->
+                <button class="btn btn-success" type="button" id="saveProjectBtn" data-toggle='modal' data-target='#managerModal'>Save Project</button>
             </div>
 
         </div>

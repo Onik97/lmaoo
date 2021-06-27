@@ -104,7 +104,7 @@ class Render
                     <div class='project-info'>$project->name
                         <div class='project-status'>$project->status</div>
                         <div class='owner-role'>Owner</div>
-                        <i id='editProjectIcon' class='fas fa-user-edit' data-toggle='modal' data-target='#editProjectModal' onclick='rolePrompt(1)'></i>
+                        <i id='editProjectIcon' class='fas fa-user-edit' data-toggle='modal' data-target='#editProjectModal'></i>
                     </div>
                 </li>";
         }
@@ -115,7 +115,7 @@ class Render
                     <div class='project-info'>$project->name
                         <div class='project-status'>$project->status</div>
                         <div class='manager-role'>Manager</div>
-                        <i id='editProjectIcon' class='fas fa-user-edit' data-toggle='modal' data-target='#editProjectModal' onclick='rolePrompt(1)'></i>
+                        <i id='editProjectIcon' class='fas fa-user-edit' data-toggle='modal' data-target='#editProjectModal'></i>
                     </div>
                 </li>";
         }
