@@ -30,6 +30,7 @@ class Render
     public static function manager() { self::layout("manager", "manager"); }
     public static function project() { self::layout("project", "project"); }
     public static function admin() { self::layout("admin", "admin"); }
+    public static function profile() { self::layout("profile", "profile"); }
 
     public static function ticket($ticketId) 
     {
@@ -49,7 +50,7 @@ class Render
         else
         {
             if ($userLoggedIn->level > 1) echo "<a class='dropdown-item' id='managerNav' href='/manager'>Manager</a>"; 
-            echo "<a class='dropdown-item' id='editAccountNav' data-toggle='modal' data-target='#editAccountModal' role='button'>Edit Account</a>";
+            echo "<a class='dropdown-item' id='editAccountNav' href='/profile' role='button'>Edit Account</a>";
             echo "<a class='dropdown-item' id='logoutNav' href='/logout'>Logout</a>";
             if($userLoggedIn->level > 3) echo "<a class='dropdown-item' id='adminNav' href='/admin'>Admin</a>";
         }
