@@ -3,6 +3,7 @@ namespace Lmaoo\Core;
 
 use Lmaoo\Controller\FeatureController;
 use Lmaoo\Controller\ManagerController;
+use Lmaoo\Model\Project;
 use Lmaoo\Model\ProjectAccess;
 use Lmaoo\Model\Ticket;
 use Lmaoo\Utility\Library;
@@ -28,9 +29,16 @@ class Render
     public static function login() { self::layout("login", "login"); }
     public static function register() { self::layout("register", "register"); }
     public static function manager() { self::layout("manager", "manager"); }
-    public static function project() { self::layout("project", "project"); }
-    public static function admin() { self::layout("admin", "admin"); }
     public static function profile() { self::layout("profile", "profile"); }
+    public static function admin() { self::layout("admin", "admin"); }
+
+    public static function project($projectId) 
+    {
+        $project = Project::read(Constant::$PROJECT_COLUMNS, ["projectId" => $projectId])[0];
+        if ($project == null) return Library::redirectWithMessage("Project ID not valid!", "/");
+        Session::Set("project", $project);
+        self::layout("project", "project");
+    }
 
     public static function ticket($ticketId) 
     {
@@ -67,7 +75,7 @@ class Render
         
         foreach ($projects as $project) 
         { 
-            echo "<a class='dropdown-item' href='/project?projectId=$project->projectId'>$project->name</a>";
+            echo "<a class='dropdown-item' href='/project/$project->projectId'>$project->name</a>";
         } 
         
         echo "</div>";
@@ -86,7 +94,7 @@ class Render
 
     public static function Features($active)
     {
-        $features = FeatureController::readFeatures($_GET["projectId"], $active);
+        $features = FeatureController::readFeatures(Session::Get("project")->projectId, $active);
 
         foreach($features as $feature)
         {

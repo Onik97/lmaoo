@@ -44,7 +44,7 @@ $router->get("/logout", fn() => (new UserController)->logout());
 // All /project requests
 $router->mount("/project", function() use ($router, $json)
 {
-    $router->get("/", fn() => Render::project());
+    $router->get("/(\d+)", fn($projectId) => Render::project($projectId));
     $router->post("/", fn() => ProjectController::createProject($json));
     $router->put("/", fn() => ProjectController::updateProject());
 
