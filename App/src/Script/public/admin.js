@@ -1,5 +1,6 @@
 import Navbar from "./navbar.js";
 import AdminController from "../Controller/AdminController.js";
+import notification from "../Utility/NotificationWrapper.js";
 
 Navbar.accountActiveTab();
 
@@ -27,11 +28,12 @@ $('#adminSelect').change(async function() {
 // Load user on User Modal when clicking on Edit User Icon
 $(document).on('click', '.fas.fa-user-edit', async function() {
     let userId = $(this).attr('value');
-    let user = await AdminController.getUserById(userId);
+    let {forename, surname, username, level, isActive} = await AdminController.getUserById(userId);
 
-    $("#adminFullname").val(`${user.forename} ${user.surname}`);
-    $("#adminUsername").val(`${user.username}`);
-    user.isActive == 1 ? $("#adminUserToggle").attr("checked", true) : $("#adminUserToggle").attr("checked", false)
-    $("#userLevelSelect").val(user.level);
+    $("#adminFullname").val(`${forename} ${surname}`);
+    $("#adminUsername").val(`${username}`);
+    isActive == 1 ? $("#adminUserToggle").attr("checked", true) : $("#adminUserToggle").attr("checked", false)
+    $("#userLevelSelect").val(level);
+    $("#userIdParagraph").html(userId);
 });
 
