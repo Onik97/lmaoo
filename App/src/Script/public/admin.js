@@ -10,17 +10,17 @@ $('#adminSelect').change(async function() {
     for (let i = 0; i < json.length; i++)
     {
         let newRow = document.getElementById("admin-table").insertRow(-1);
-        let cell2 = newRow.insertCell(0);
-        let cell3 = newRow.insertCell(1);
-        let cell4 = newRow.insertCell(2);
-        let cell5 = newRow.insertCell(3);
-        let cell6 = newRow.insertCell(4);
+        let cell1 = newRow.insertCell(0);
+        let cell2 = newRow.insertCell(1);
+        let cell3 = newRow.insertCell(2);
+        let cell4 = newRow.insertCell(3);
+        let cell5 = newRow.insertCell(4);
 
-        $(cell2).append(document.createTextNode(json[i].username));
-        $(cell3).append(document.createTextNode(json[i].forename));
-        $(cell4).append(document.createTextNode(json[i].surname));
-        $(cell5).append(document.createTextNode(json[i].level));
-        $(cell6).append($("<i>", { class:"fas fa-user-edit", value: `${json[i].userId}`, "data-toggle": "modal", "data-target": "#adminModal" }));
+        $(cell1).append(document.createTextNode(json[i].username));
+        $(cell2).append(document.createTextNode(json[i].forename));
+        $(cell3).append(document.createTextNode(json[i].surname));
+        $(cell4).append(document.createTextNode(json[i].level));
+        $(cell5).append($("<i>", { class:"fas fa-user-edit", value: `${json[i].userId}`, "data-toggle": "modal", "data-target": "#adminModal" }));
     }
 });
 
