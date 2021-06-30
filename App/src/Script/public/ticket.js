@@ -1,17 +1,16 @@
 import TicketController from "../Controller/TicketController.js";
 import Navbar from "../public/navbar.js";
-import axios from "../Utility/AxiosWrapper.js";
 import NotificationWrapper from "../Utility/NotificationWrapper.js";
 import Summernote from "../Utility/SummernoteWrapper.js";
 import WebComponent from "../Utility/WebComponent.js";
 
 Navbar.projectActiveTab();
+let ticketId = window.location.href.split('?')[0].split("/").reverse()[0];
 
 // Create Comment Summernote
 let createCommentSummernote = new Summernote(".createComment", "Enter your comment here, CTRL + Enter to save")
 createCommentSummernote.onKeyDown(async (commentContent) => {
-    let ticketId = window.location.href.split('?')[0].split("/").reverse()[0];
-    let result = await axios.Post("/ticket/comment", { commentContent, ticketId });
+    let result = await TicketController.createComment({ commentContent, ticketId });
     createCommentSummernote.setValue("");
     WebComponent.Comment("#commentList", result);
     NotificationWrapper.successMessage("New Comment added Successfully!")
