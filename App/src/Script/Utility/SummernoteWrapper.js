@@ -35,8 +35,8 @@ export default class SummernoteWrapper {
         return this;
     }
 
-    Close(selector) {
-        $(selector).summernote("destroy");
+    Close() {
+        $(this.selector).summernote("destroy");
         return this;
     }
 }

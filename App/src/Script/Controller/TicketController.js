@@ -5,4 +5,14 @@ export default class TicketController {
         let results = await axios.Get("/ticket/assignee");
         return results;
     }
+
+    static async createComment(json) {
+        let result = axios.Post("/ticket/comment", json);
+        return result;
+    }
+    
+    static async updateComment(json) {
+        let result = axios.Put("/ticket/comment", json);
+        return result;
+    }
 }

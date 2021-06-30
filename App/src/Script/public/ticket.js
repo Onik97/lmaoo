@@ -16,6 +16,17 @@ createCommentSummernote.onKeyDown(async (commentContent) => {
     NotificationWrapper.successMessage("New Comment added Successfully!")
 });
 
+// Edit Comment Summernote
+$(".CommentImages.editComment").click(async function() {
+    let commentId = $(this).attr("value");
+    let editCommentSummernote = new Summernote(`#mainComment${commentId}`);
+    editCommentSummernote.onKeyDown(async (commentContent) => {
+        await TicketController.updateComment({ commentContent, ticketId, commentId });
+        NotificationWrapper.successMessage("Comment adjusted successfully!")
+        editCommentSummernote.Close();
+    }, (initalValue) => editCommentSummernote.setValue(initalValue).Close());
+});
+
 // Loads users on Choose Assignee Modal
 $("#chooseAssigneeBtn").click(async function() {
     let assignees = await TicketController.loadAssignees();

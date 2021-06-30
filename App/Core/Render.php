@@ -151,12 +151,12 @@ class Render
                             <span>$comment->commentCreated</span>
                         </div>
 
-                        <div id='mainComment' class='ml-2'>$comment->commentContent</div>
+                        <div id='mainComment$comment->commentId' class='ml-2'>$comment->commentContent</div>
                     </div>
                 
                     <div class='col-2 mt-2 ml-5' id='commentActions'>
                         <img class='CommentImages' src='/Images/trash.svg' data-toggle='modal' data-target='#ticketPageModal' value='$comment->commentId' role='button'>
-                        <img class='CommentImages' src='/Images/pencilsquare.svg' value='$comment->commentId' role='button'>
+                        <img class='CommentImages editComment' src='/Images/pencilsquare.svg' value='$comment->commentId' role='button'>
                     </div>
                 </div>";
         }
