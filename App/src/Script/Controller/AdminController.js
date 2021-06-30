@@ -8,4 +8,9 @@ export default class AdminController
         let result = await axios.Get(endpoint);
         return result;
     }
+
+    static async getUserById(userId) {
+        let result = await axios.Get(`admin/user/id/${userId}`);
+        return result[0];
+    }
 }

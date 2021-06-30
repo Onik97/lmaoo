@@ -85,8 +85,9 @@ $router->mount("/admin", function() use ($router, $json)
 {
     $router->get("/", fn() => Render::admin());
     
-    $router->get("/user/active", fn() => AdminController::readUser("1"));
-    $router->get("/user/inactive", fn() => AdminController::readUser("0"));
+    $router->get("/user/id/(\d+)", fn($userId) => AdminController::readUserWithId($userId));
+    $router->get("/user/active", fn() => AdminController::readUserwithActive("1"));
+    $router->get("/user/inactive", fn() => AdminController::readUserwithActive("0"));
 
     $router->put("/user", fn() => AdminController::updateUser($json));
 });

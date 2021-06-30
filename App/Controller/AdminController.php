@@ -8,12 +8,18 @@ use Lmaoo\Utility\Validation;
 
 class AdminController extends BaseController
 {
-    public static function readUser($active)
+    public static function readUserwithActive($active)
     {
         if ($active == null) return APIResponse::BadRequest("Active is required");
         $columns = Constant::$USER_COLUMNS; unset($columns[2]); // Removes password on Column
-
         echo json_encode(User::read($columns, array("isActive" => $active)));
+    }
+
+    public static function readUserWithId($userId)
+    {
+        if ($userId == null) return APIResponse::BadRequest("UserId is required");
+        $columns = Constant::$USER_COLUMNS; unset($columns[2]); // Removes password on Column
+        echo json_encode(User::read($columns, array("userId" => $userId)));
     }
 
     public static function updateUser($json)
