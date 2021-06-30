@@ -1,4 +1,4 @@
-<?php use Lmaoo\Utility\Session; ?>
+<?php use Lmaoo\Core\Render; use Lmaoo\Utility\Session; ?>
 <title>Ticket</title>
 <p id="navBarActive" hidden>ticketPage</p>
 
@@ -63,7 +63,7 @@
 			</div>
 		</div>
 
-		<!-- Comment Section -->
+		<!-- Create Comment Section -->
 
 		<div class="row no-gutters mt-3">
 			<div id="ticketCreate">
@@ -95,7 +95,9 @@
 				<div class="row no-gutters mt-3">
 					<div id="ticketComments">
 						<h4>All comments</h4>
-						<div id="commentList"></div>
+						<div id="commentList">
+							<?php Render::Comment(Session::Get("ticket")->ticketId); ?>
+						</div>
 					</div>
 				</div>
 			</div>

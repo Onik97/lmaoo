@@ -3,6 +3,7 @@ namespace Lmaoo\Core;
 
 use Lmaoo\Controller\FeatureController;
 use Lmaoo\Controller\ManagerController;
+use Lmaoo\Model\Comment;
 use Lmaoo\Model\Project;
 use Lmaoo\Model\ProjectAccess;
 use Lmaoo\Model\Ticket;
@@ -129,6 +130,36 @@ class Render
                 </li>";
         }
 
+    }
+
+    public static function Comment($ticketId)
+    {
+        $comments = Comment::withTicketId($ticketId);
+
+        foreach($comments as $comment)
+        {
+            echo "<div class='row'>
+                    <div class='col-1'>
+                    <div id='commentThumbnail'>
+                        <img class='profilePicture mt-1' src='$comment->picture'>
+                    </div>
+                    </div>
+
+                    <div class='col-8'>
+                        <div id='commentBody' class='mt-2 ml-2'>
+                            <h6>$comment->forename $comment->surname</h6>
+                            <span>$comment->commentCreated</span>
+                        </div>
+
+                        <div id='mainComment' class='ml-2'>$comment->commentContent</div>
+                    </div>
+                
+                    <div class='col-2 mt-2 ml-5' id='commentActions'>
+                        <img class='CommentImages' src='/Images/trash.svg' data-toggle='modal' data-target='#ticketPageModal' value='$comment->commentId' role='button'>
+                        <img class='CommentImages' src='/Images/pencilsquare.svg' value='$comment->commentId' role='button'>
+                    </div>
+                </div>";
+        }
     }
 
     
