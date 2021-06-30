@@ -78,6 +78,13 @@ $router->mount("/ticket", function() use ($router, $json)
 {
     $router->get("/(\d+)", fn($ticketId) => Render::ticket($ticketId));
     $router->post("/", fn() => (new TicketController)->createTicket($json));
+
+    $router->mount("/comment", function() use ($router, $json)
+    {
+        $router->post("/", fn() => (new TicketController)->createComment($json));
+        $router->put("/", fn() => (new TicketController)->updateComment($json));
+        $router->delete("/(\d+)", fn($commentId) => (new TicketController)->deleteComment($commentId));
+    });
 });
 
 // All /admin requests

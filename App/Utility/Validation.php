@@ -92,4 +92,23 @@ class Validation
             ->assert($data);
         });
     }
+
+    public static function createComment($data)
+    {
+        return self::validate(function() use ($data) {
+            v::key("commentContent", v::NotOptional()->stringVal())
+            ->key("ticketId", v::NotOptional()->intval())
+            ->assert($data);
+        });
+    }
+
+    public static function updateComment($data)
+    {
+        return self::validate(function() use ($data) {
+            v::key("commentContent", v::NotOptional()->stringVal())
+            ->key("ticketId", v::NotOptional()->intval())
+            ->key("commentId", v::NotOptional()->intval())
+            ->assert($data);
+        });
+    }
 }
