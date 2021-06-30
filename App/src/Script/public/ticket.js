@@ -8,12 +8,6 @@ import WebComponent from "../Utility/WebComponent.js";
 Navbar.projectActiveTab();
 let createCommentSummernote = new Summernote(".createComment", "Enter your comment here, CTRL + Enter to save");
 
-// Loads users on Choose Assignee Modal
-$("#chooseAssigneeBtn").click(async function() {
-    let assignees = await TicketController.loadAssignees();
-    WebComponent.Assignee("#assigneeSelect", assignees);
-});
-
 // Create Comment Summernote
 createCommentSummernote.onKeyDown(async () => {
     let commentContent = createCommentSummernote.getValue();
@@ -22,4 +16,10 @@ createCommentSummernote.onKeyDown(async () => {
     createCommentSummernote.setValue("");
     WebComponent.Comment("#commentList", result);
     NotificationWrapper.successMessage("New Comment added Successfully!")
+});
+
+// Loads users on Choose Assignee Modal
+$("#chooseAssigneeBtn").click(async function() {
+    let assignees = await TicketController.loadAssignees();
+    WebComponent.Assignee("#assigneeSelect", assignees);
 });
