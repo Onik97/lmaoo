@@ -22,7 +22,15 @@ class TicketController extends BaseController
         $data = json_decode($json, true); $data["userId"] = $this->userLoggedIn->userId;
         $validation = Validation::createComment($data);
 
-        $validation == null ? Comment::create($data) : APIResponse::BadRequest($validation);
+        if ($validation == null) 
+        {
+            $latestId = Comment::create($data);
+            echo json_encode(Comment::read(Constant::$COMMENT_COLUMNS, ["commentId" => $latestId])[0]);
+        }
+        else 
+        {
+            APIResponse::BadRequest($validation);
+        }
     }
 
     public function updateComment($json)
