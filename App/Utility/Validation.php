@@ -48,8 +48,6 @@ class Validation
         return self::validate(function() use ($data) {
             v::key("userId", v::NotOptional()->intval())
             ->key("username", v::NotOptional()->stringVal())
-            ->key("forename", v::NotOptional()->stringVal())
-            ->key("surname", v::NotOptional()->stringVal())
             ->key("level", v::NotOptional()->intval())
             ->key("isActive", v::NotOptional()->boolVal())
             ->assert($data);

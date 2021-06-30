@@ -63,12 +63,11 @@
                     <button id="resetAdminPassword" type="button" class="btn btn-primary btn-block">Reset password</button>
                     <small id="passwordMessage" class="form-text text-muted"></small>
                 </div>
-                
             </div>
-
+            <p id="userIdParagraph" hidden></p>
             <div class="modal-footer" id="adminModalFooter">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" id="saveAdminBtn">Save changes</button>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                <button id="saveAdminBtn" class="btn btn-success" type="button">Save changes</button>
             </div>
 
         </div>

@@ -25,7 +25,7 @@ class AdminController extends BaseController
     public static function updateUser($json)
     {
         $data = json_decode($json, true); $validation = Validation::updateUser($data);
-        $userId = $data["userId"]; unset($data["userId"]);
+        if ($data["userId"] ?? null != null) $userId = $data["userId"]; unset($data["userId"]);
         $validation == null ? User::update($userId, $data): APIResponse::BadRequest($validation);
     }
 }

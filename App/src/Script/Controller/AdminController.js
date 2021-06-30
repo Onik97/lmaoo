@@ -13,4 +13,9 @@ export default class AdminController
         let result = await axios.Get(`admin/user/id/${userId}`);
         return result[0];
     }
+
+    static async updateUser(json) {
+        let result = await axios.Put("/admin/user", json);
+        return result;
+    }
 }

@@ -37,3 +37,14 @@ $(document).on('click', '.fas.fa-user-edit', async function() {
     $("#userIdParagraph").html(userId);
 });
 
+// Update User
+$("#saveAdminBtn").click(async function() {
+    let username = $("#adminUsername").val();
+    let isActive = $("#adminUserToggle").is(":checked") ? "1" : "0";
+    let level = $("#userLevelSelect").val();
+    let userId = $("#userIdParagraph").html();
+
+    let result = await AdminController.updateUser({username, isActive, level, userId});
+    result == null ? notification.successMessage("User has been updated!") : notification.errorMessage("Something went wrong!");
+    $("#adminModal").modal("hide");
+});
