@@ -155,7 +155,7 @@ class Render
                     </div>
                 
                     <div class='col-2 mt-2 ml-5' id='commentActions'>
-                        <img class='CommentImages' src='/Images/trash.svg' data-toggle='modal' data-target='#ticketPageModal' value='$comment->commentId' role='button'>
+                        <img class='CommentImages deleteComment' src='/Images/trash.svg' value='$comment->commentId' role='button'>
                         <img class='CommentImages editComment' src='/Images/pencilsquare.svg' value='$comment->commentId' role='button'>
                     </div>
                 </div>";

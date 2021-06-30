@@ -15,4 +15,9 @@ export default class TicketController {
         let result = axios.Put("/ticket/comment", json);
         return result;
     }
+
+    static async deleteComment(id) {
+        let result = axios.Delete(`/ticket/comment/${id}`);
+        return result;
+    }
 }

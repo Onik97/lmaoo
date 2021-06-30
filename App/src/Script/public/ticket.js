@@ -17,7 +17,7 @@ createCommentSummernote.onKeyDown(async (commentContent) => {
 });
 
 // Edit Comment Summernote
-$(".CommentImages.editComment").click(async function() {
+$(document).on('click', '.CommentImages.editComment', async function() {
     let commentId = $(this).attr("value");
     let editCommentSummernote = new Summernote(`#mainComment${commentId}`);
     editCommentSummernote.onKeyDown(async (commentContent) => {
@@ -25,6 +25,14 @@ $(".CommentImages.editComment").click(async function() {
         NotificationWrapper.successMessage("Comment adjusted successfully!")
         editCommentSummernote.Close();
     }, (initalValue) => editCommentSummernote.setValue(initalValue).Close());
+});
+
+// Delete Comment
+$(document).on('click', '.CommentImages.deleteComment', async function() {
+    let commentId = $(this).attr("value");
+    await TicketController.deleteComment(commentId);
+    NotificationWrapper.successMessage("Comment removed!")
+    $(this).parent().parent().remove();
 });
 
 // Loads users on Choose Assignee Modal
