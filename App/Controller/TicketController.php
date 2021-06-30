@@ -35,7 +35,8 @@ class TicketController extends BaseController
 
     public function deleteComment($commentId)
     {
-        $comment = Comment::read(Constant::$COMMENT_COLUMNS, ["commentId" => $commentId])[0];
+        $comment = Comment::read(Constant::$COMMENT_COLUMNS, ["commentId" => $commentId])[0] ?? null;
+        if ($comment == null) return APIResponse::BadRequest("Comment does not exist");
         if ($comment->userId != $this->userLoggedIn->userId) return APIResponse::Forbidden("You do not have rights to do this action");
         Comment::delete($commentId);
     }
