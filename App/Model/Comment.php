@@ -9,7 +9,7 @@ class Comment extends Database implements IModel
     public static function create(array $data)
     {
         $sql = Library::arrayToInsertQuery("comment", $data);
-        (new Database())->db()->query($sql)->parameters([])->exec();
+        return (new Database())->db()->query($sql)->parameters([])->getLast();
     }
 
     public static function read(array $columns, array $conditions)
