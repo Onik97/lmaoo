@@ -4,6 +4,7 @@ namespace Lmaoo\Controller;
 use Lmaoo\Core\Constant;
 use Lmaoo\Model\Comment;
 use Lmaoo\Model\Ticket;
+use Lmaoo\Model\User;
 use Lmaoo\Utility\APIResponse;
 use Lmaoo\Utility\Validation;
 
@@ -47,5 +48,11 @@ class TicketController extends BaseController
         if ($comment == null) return APIResponse::BadRequest("Comment does not exist");
         if ($comment->userId != $this->userLoggedIn->userId) return APIResponse::Forbidden("You do not have rights to do this action");
         Comment::delete($commentId);
+    }
+
+    public function getAssignees()
+    {
+        $users = User::read(["userId", "forename", "surname", "username"], ["isActive" => "1"]);
+        echo json_encode($users);
     }
 }

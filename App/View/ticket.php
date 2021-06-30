@@ -24,8 +24,8 @@
 			</div>
 
 			<div class="assigneeBtn">
-				<button id="ticketPeopleChooseAssignee" class="btn btn-sm" data-toggle="modal" data-target="#ticketPageModal">Choose Assignee</button>
-				<button id="ticketPeopleSelfAssignee" class="btn btn-sm">Assigned to myself</button>
+				<button id="chooseAssigneeBtn" class="btn btn-sm" data-toggle="modal" data-target="#ticketPageModal">Choose Assignee</button>
+				<button id="selfAssigneeBtn" class="btn btn-sm">Assigned to myself</button>
 			</div>
 		</div>
 
@@ -129,11 +129,8 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
 			</div>
 			<div class="modal-body" id="ticketPageBody">
-				<select id="assigneeSelect" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-					<option selected>Select user</option>
-					<option value="1">Tufan</option>
-					<option value="2">Onik</option>
-					<option value="3">Jewell</option>
+				<select id="assigneeSelect" class="form-control" >
+					<option value="0" selected disabled>Select user</option>
 				</select>
 			</div>
 			<div class="modal-footer" id="ticketPageFooter">
