@@ -23,3 +23,15 @@ $('#adminSelect').change(async function() {
         $(cell6).append($("<i>", { class:"fas fa-user-edit", value: `${json[i].userId}`, "data-toggle": "modal", "data-target": "#adminModal" }));
     }
 });
+
+// Load user on User Modal when clicking on Edit User Icon
+$(document).on('click', '.fas.fa-user-edit', async function() {
+    let userId = $(this).attr('value');
+    let user = await AdminController.getUserById(userId);
+
+    $("#adminFullname").val(`${user.forename} ${user.surname}`);
+    $("#adminUsername").val(`${user.username}`);
+    user.isActive == 1 ? $("#adminUserToggle").attr("checked", true) : $("#adminUserToggle").attr("checked", false)
+    $("#userLevelSelect").val(user.level);
+});
+
