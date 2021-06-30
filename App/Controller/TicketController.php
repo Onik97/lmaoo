@@ -25,7 +25,7 @@ class TicketController extends BaseController
         if ($validation == null) 
         {
             $latestId = Comment::create($data);
-            echo json_encode(Comment::read(Constant::$COMMENT_COLUMNS, ["commentId" => $latestId])[0]);
+            echo json_encode(Comment::withId($latestId));
         }
         else 
         {
