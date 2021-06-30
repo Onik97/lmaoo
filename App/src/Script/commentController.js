@@ -73,8 +73,8 @@ function loadComments()
           if (userId == json[i].userId || userLevel == 4) $(`#comments${json[i].commentId}`).append(
           `
             <div class="col-2 mt-2 ml-5" id="commentActions">
-              <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#ticketPageModal" onclick="deletePrompt(${json[i].commentId})" role="button"></img>
-              <img class="CommentImages" src="../Images/pencilsquare.svg" onclick=editComment(${json[i].commentId}) role="button"></img>
+              <img class="CommentImages" src="../Images/trash.svg" data-toggle="modal" data-target="#ticketPageModal" role="button"></img>
+              <img class="CommentImages" src="../Images/pencilsquare.svg" role="button"></img>
             </div>
           `);
       }
@@ -136,7 +136,7 @@ function deletePrompt(commentId)
 {
   $("#Modal-head").html("Delete Comment");
   $("#modal-body").html("Are you sure you want to delete this comment?")
-  $("#modal-footer").html("").append($("<button>", { class : "btn btn-primary", type : "submit", onclick : `deleteComment(${commentId})` }).html("Delete Comment"))
+  $("#modal-footer").html("").append($("<button>", { class : "btn btn-primary", type : "submit" }).html("Delete Comment"))
 }
 
 function deleteComment(commentId)

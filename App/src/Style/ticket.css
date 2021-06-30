@@ -162,3 +162,7 @@
 	padding: 10px;
 	text-align: center;
 }
+
+#assigneeSelect {
+	width: 100%;
+}
