@@ -17,9 +17,8 @@ export default class SummernoteWrapper {
     onKeyDown(saveCallback, cancelCallback = null) {
         $(this.selector).on('summernote.keydown', (we, e) => {
             if(e.ctrlKey && e.code == "Enter") {
-                this.value = $(this.selector).summernote('code');
                 e.preventDefault();
-                saveCallback();
+                saveCallback($(this.selector).summernote('code'));
             }
             if (cancelCallback != null) { 
                 if(e.code == "Escape") cancelCallback(this.initalValue); 
