@@ -84,6 +84,16 @@ class Validation
         });
     }
 
+    public static function updateTicket($data)
+    {
+        return self::validate(function() use ($data) {
+            v::key("ticketId", v::NotOptional()->intval())->assert($data);
+            v::optional(v::intval())->assert(@$data["reporter_key"]);
+            v::optional(v::stringVal())->assert(@$data["summary"]);
+            v::optional(v::stringVal())->assert(@$data["progress"]);
+        });
+    }
+
     public static function createFeature($data)
     {
         return self::validate(function() use ($data) {

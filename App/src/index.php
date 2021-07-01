@@ -77,8 +77,10 @@ $router->mount("/manager", function() use ($router, $json)
 $router->mount("/ticket", function() use ($router, $json)
 {
     $router->get("/(\d+)", fn($ticketId) => Render::ticket($ticketId));
-    $router->get("/assignee", fn() => (new TicketController)->getAssignees());
     $router->post("/", fn() => (new TicketController)->createTicket($json));
+    $router->put("/", fn() => (new TicketController)->updateTicket($json));
+    
+    $router->get("/assignee", fn() => (new TicketController)->getAssignees());
 
     $router->mount("/comment", function() use ($router, $json)
     {

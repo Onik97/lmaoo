@@ -18,6 +18,22 @@ class TicketController extends BaseController
         $validation == null ? Ticket::create($data) : APIResponse::BadRequest($validation);
     }
 
+    public function updateTicket($json)
+    {
+        $data = json_decode($json, true); $validation = Validation::updateTicket($data);
+
+        if ($validation == null) 
+        {
+            $ticketId = $data["ticketId"]; unset($data["ticketId"]);
+            Ticket::update($ticketId, $data);
+            echo json_encode(Ticket::withId($ticketId));
+        }
+        else
+        {
+            APIResponse::BadRequest($validation);
+        }
+    }
+
     public function createComment($json)
     {
         $data = json_decode($json, true); $data["userId"] = $this->userLoggedIn->userId;
