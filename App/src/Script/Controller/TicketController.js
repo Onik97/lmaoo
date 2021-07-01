@@ -1,6 +1,11 @@
 import axios from "../Utility/AxiosWrapper.js";
 
 export default class TicketController {
+    static async updateTicket(json) {
+        let results = await axios.Put("/ticket", json);
+        return results;
+    }
+
     static async loadAssignees() {
         let results = await axios.Get("/ticket/assignee");
         return results;

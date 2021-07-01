@@ -31,7 +31,7 @@ $(document).on('click', '.CommentImages.editComment', async function() {
 $(document).on('click', '.CommentImages.deleteComment', async function() {
     let commentId = $(this).attr("value");
     await TicketController.deleteComment(commentId);
-    Notification.successMessage("Comment removed!")
+    Notification.successMessage("Comment removed!");
     $(this).parent().parent().remove();
 });
 
@@ -42,3 +42,11 @@ $("#chooseAssigneeBtn").click(async function() {
 });
 
 // Save Assignee on Choose Assignee Modal
+$("#saveAssigneeBtn").click(async function() {
+    let assignee_key = $("#assigneeSelect").val();
+    let result = await TicketController.updateTicket({ ticketId, assignee_key })
+    let { assignee, assigneeUsername, assigneeId } = result;
+    $("#assignee").val(assigneeId).html(`${assignee} (${assigneeUsername})`);
+    Notification.successMessage("Assignee Updated!");
+    $("#ticketPageModal").modal('hide');
+});

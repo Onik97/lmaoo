@@ -14,7 +14,7 @@
 			<div class="reporterName mb-3">
 				<h6>Reporter: </h6>
 				<label id="reporter" value="<?php echo Session::Get('ticket')->reporterId ?>">
-					<?php echo Session::Get('ticket')->reporter . "(" . Session::Get('ticket')->reporterUsername . ")" ?>
+					<?php echo Session::Get('ticket')->reporter . " (" . Session::Get('ticket')->reporterUsername . ")" ?>
 				</label>
 			</div>
 

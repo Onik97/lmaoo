@@ -88,7 +88,7 @@ class Validation
     {
         return self::validate(function() use ($data) {
             v::key("ticketId", v::NotOptional()->intval())->assert($data);
-            v::optional(v::intval())->assert(@$data["reporter_key"]);
+            v::optional(v::intval())->assert(@$data["assignee_key"]);
             v::optional(v::stringVal())->assert(@$data["summary"]);
             v::optional(v::stringVal())->assert(@$data["progress"]);
         });
