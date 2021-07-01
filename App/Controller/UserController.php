@@ -38,7 +38,15 @@ class UserController extends BaseController
 		Library::redirectWithMessage("Registeration Succcess, please login!", "/login");
 	}
 
-	// TODO: Update User -> Will need /profile page first before starting this
+	public function updateUser()
+	{
+		$validation = Validation::updateLoggedInUser($_POST);
+		if ($validation != null) return APIResponse::BadRequest($validation);
+		User::update($this->userLoggedIn->userId, $_POST);
+		session_unset(); session_destroy();
+		Library::redirectWithMessage("User has been updated, please login again!", "/login");
+	}
+
 
 	// Keeping this code for now, will be updated soon!
 	public function uploadImage($userId)
@@ -61,6 +69,6 @@ class UserController extends BaseController
 	{
 		User::delete($this->userLoggedIn->userId);
 		session_unset(); session_destroy();
-		Library::redirectWithMessage("You have deactivated your user!", "/");
+		Library::redirectWithMessage("You have deactivated your account!", "/");
 	}
 }

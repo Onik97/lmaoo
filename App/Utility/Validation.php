@@ -121,4 +121,15 @@ class Validation
             ->assert($data);
         });
     }
+
+    public static function updateLoggedInUser($data)
+    {
+        return self::validate(function() use ($data) {
+            v::key("forename", v::NotOptional()->stringVal())
+            ->key("surname", v::NotOptional()->stringVal())
+            ->key("username", v::NotOptional()->stringVal())
+            ->assert($data);
+        });
+    }
+
 }
