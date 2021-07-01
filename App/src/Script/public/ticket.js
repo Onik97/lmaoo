@@ -50,3 +50,11 @@ $("#saveAssigneeBtn").click(async function() {
     Notification.successMessage("Assignee Updated!");
     $("#ticketPageModal").modal('hide');
 });
+
+$("#selfAssigneeBtn").click(async function() {
+    let selfAssignee = $("#assigneeSelect").val();
+    let result = await TicketController.updateTicket({ ticketId, selfAssignee })
+    let { assignee, assigneeUsername, assigneeId } = result;
+    $("#assignee").val(assigneeId).html(`${assignee} (${assigneeUsername})`);
+    Notification.successMessage("Assigned to self!");
+});

@@ -25,7 +25,8 @@ class TicketController extends BaseController
         if ($validation == null) 
         {
             $ticketId = $data["ticketId"]; unset($data["ticketId"]);
-            Ticket::update($ticketId, $data);
+            if (@$data["selfAssignee"] == null ) { Ticket::update($ticketId, $data); }
+            else { Ticket::update($ticketId, ["assignee_key" => $this->userLoggedIn->userId]); } 
             echo json_encode(Ticket::withId($ticketId));
         }
         else
