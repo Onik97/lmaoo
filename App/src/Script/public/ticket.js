@@ -51,6 +51,7 @@ $("#saveAssigneeBtn").click(async function() {
     $("#ticketPageModal").modal('hide');
 });
 
+// Self Assignee Button
 $("#selfAssigneeBtn").click(async function() {
     let selfAssignee = $("#assigneeSelect").val();
     let result = await TicketController.updateTicket({ ticketId, selfAssignee })
@@ -59,6 +60,7 @@ $("#selfAssigneeBtn").click(async function() {
     Notification.successMessage("Assigned to self!");
 });
 
+// Update Status Button
 $("#changeProgressBtn").click(async function() {
     let progress = "";
     switch ($("#ticketProgress").html()) {
@@ -71,4 +73,14 @@ $("#changeProgressBtn").click(async function() {
     let { progress : currentstatus } = result;
     $("#ticketProgress").html(currentstatus);
     Notification.successMessage("Progress updated!");
+});
+
+// Edit Summary
+$("#ticketSummaryHeader").click(async function() {
+    let summarySummernote = new Summernote("#ticketSummaryHeader", "", true, 50);
+    summarySummernote.onKeyDown(async (summary) => {
+        await TicketController.updateTicket({ ticketId, summary })
+        Notification.successMessage("Summary updated!")
+        summarySummernote.Close();
+    }, (oldSummary) => summarySummernote.setValue(oldSummary).Close());
 });

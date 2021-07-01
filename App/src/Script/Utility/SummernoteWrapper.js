@@ -1,9 +1,9 @@
 export default class SummernoteWrapper {
-    constructor(selector, placeholder, simple = false) {
+    constructor(selector, placeholder, simple = false, height = 125) {
         this.selector = selector;
         $(selector).summernote({
             placeholder: placeholder, 
-            height: 125,
+            height: height,
             toolbar: simple == false 
                      ? [ ['style', ['bold', 'italic', 'underline', 'clear']], ['font', ['strikethrough' ]], ['para', ['ul', 'ol']] ]
                      : [] ,
