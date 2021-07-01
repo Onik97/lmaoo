@@ -13,14 +13,16 @@
 
 			<div class="reporterName mb-3">
 				<h6>Reporter: </h6>
-				<label id="reporter"><?php echo Session::Get('ticket')->reporter . "(" . Session::Get('ticket')->reporterUsername . ")" ?></label>
-				<p id="reporterUserId" hidden><?php echo Session::Get('ticket')->reporterId ?></p>
+				<label id="reporter" value="<?php echo Session::Get('ticket')->reporterId ?>">
+					<?php echo Session::Get('ticket')->reporter . "(" . Session::Get('ticket')->reporterUsername . ")" ?>
+				</label>
 			</div>
 
 			<div class="assigneeName">
 				<h6>Assignee: </h6>
-				<label id="assignee"><?php echo Session::Get('ticket')->assignee . " (" . Session::Get('ticket')->assigneeUsername . ")" ?></label>
-				<p id="assigneeUserId" hidden><?php echo "Session::Get('ticket')->assigneeId" ?></p>
+				<label id="assignee" value="<?php echo Session::Get('ticket')->assigneeId ?>">
+					<?php echo Session::Get('ticket')->assignee . " (" . Session::Get('ticket')->assigneeUsername . ")" ?>
+				</label>
 			</div>
 
 			<div class="assigneeBtn">
@@ -135,7 +137,7 @@
 			</div>
 			<div class="modal-footer" id="ticketPageFooter">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-success" id="saveButton">Save changes</button>
+				<button id="saveAssigneeBtn" type="button" class="btn btn-success">Save changes</button>
 			</div>
 		</div>
 	</div>
