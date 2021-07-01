@@ -58,3 +58,17 @@ $("#selfAssigneeBtn").click(async function() {
     $("#assignee").val(assigneeId).html(`${assignee} (${assigneeUsername})`);
     Notification.successMessage("Assigned to self!");
 });
+
+$("#changeProgressBtn").click(async function() {
+    let progress = "";
+    switch ($("#ticketProgress").html()) {
+        case "Open": progress = "In Progress"; break;
+        case "In Progress": progress = "In Automation"; break;
+        case "In Automation": progress = "Completed"; break;
+        case "Completed": progress = "Open"; break;
+    }
+    let result = await TicketController.updateTicket({ ticketId, progress })
+    let { progress : currentstatus } = result;
+    $("#ticketProgress").html(currentstatus);
+    Notification.successMessage("Progress updated!");
+});
