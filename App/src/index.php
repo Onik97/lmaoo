@@ -115,6 +115,7 @@ $router->mount("/profile", function() use ($router, $json)
 {
     $router->get("/", fn() => Render::profile());
     $router->post("/", fn() => (new UserController)->updateUser());
+    $router->put("/", fn() => (new UserController)->changePassword($json));
 });
 
 $router->run();

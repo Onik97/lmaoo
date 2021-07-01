@@ -47,6 +47,21 @@ class UserController extends BaseController
 		Library::redirectWithMessage("User has been updated, please login again!", "/login");
 	}
 
+	public function changePassword($json)
+	{
+		$data = json_decode($json, true); $validation = Validation::changePassword($data);
+		if ($validation != null) return APIResponse::BadRequest($validation);
+		$actualOldPassword = user::read(["password"], ["userId" => $this->userLoggedIn->userId]);
+		if (password_verify($actualOldPassword, $data["oldPassword"]))
+		{
+			user::update($this->userLoggedIn->userId, ["password" => password_hash($data["newPassword"], PASSWORD_BCRYPT)]);
+			return APIResponse::Ok("Password changed successfully");
+		}
+		else
+		{
+			return APIResponse::BadRequest("Password did not match");
+		}
+	}
 
 	// Keeping this code for now, will be updated soon!
 	public function uploadImage($userId)

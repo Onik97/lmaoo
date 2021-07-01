@@ -132,4 +132,12 @@ class Validation
         });
     }
 
+    public static function changePassword($data)
+    {
+        return self::validate(function() use ($data) {
+            v::key("oldPassword", v::NotOptional()->stringVal())
+            ->key("newPassword", v::NotOptional()->stringVal())
+            ->assert($data);
+        });
+    }
 }
