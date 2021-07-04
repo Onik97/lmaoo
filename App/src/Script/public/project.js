@@ -20,16 +20,12 @@ $("#createFeatureButton").click(async function() {
 });
 
 // read Features (active & inactive)
-$("#featureToggle").click(function(){
-    if ($('#featureToggle').is(":checked"))
-    {
-        $("#inactiveFeatures").hide();
-        $("#activeFeatures").show();
+$("#featureToggle").click(function() {
+    if ($(this).is(":checked")) {
+        $("#inactiveFeatures").hide(); $("#activeFeatures").show();
     }
-    else
-    {
-        $("#activeFeatures").hide();
-        $("#inactiveFeatures").show();
+    else {
+        $("#activeFeatures").hide(); $("#inactiveFeatures").show();
     }
 });
 
