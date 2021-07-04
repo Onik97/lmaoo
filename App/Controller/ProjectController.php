@@ -3,6 +3,7 @@ namespace Lmaoo\Controller;
 
 use Lmaoo\Core\Constant;
 use Lmaoo\Model\Project;
+use Lmaoo\Model\User;
 use Lmaoo\Utility\APIResponse;
 use Lmaoo\Utility\Library;
 use Lmaoo\Utility\Validation;
