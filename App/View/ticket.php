@@ -1,4 +1,4 @@
-<?php use Lmaoo\Utility\Session; ?>
+<?php use Lmaoo\Core\Render; use Lmaoo\Utility\Session; ?>
 <title>Ticket</title>
 <p id="navBarActive" hidden>ticketPage</p>
 
@@ -13,19 +13,21 @@
 
 			<div class="reporterName mb-3">
 				<h6>Reporter: </h6>
-				<label id="reporter"><?php echo Session::Get('ticket')->reporter . "(" . Session::Get('ticket')->reporterUsername . ")" ?></label>
-				<p id="reporterUserId" hidden><?php echo Session::Get('ticket')->reporterId ?></p>
+				<label id="reporter" value="<?php echo Session::Get('ticket')->reporterId ?>">
+					<?php echo Session::Get('ticket')->reporter . " (" . Session::Get('ticket')->reporterUsername . ")" ?>
+				</label>
 			</div>
 
 			<div class="assigneeName">
 				<h6>Assignee: </h6>
-				<label id="assignee"><?php echo Session::Get('ticket')->assignee . " (" . Session::Get('ticket')->assigneeUsername . ")" ?></label>
-				<p id="assigneeUserId" hidden><?php echo "Session::Get('ticket')->assigneeId" ?></p>
+				<label id="assignee" value="<?php echo Session::Get('ticket')->assigneeId ?>">
+					<?php echo Session::Get('ticket')->assignee . " (" . Session::Get('ticket')->assigneeUsername . ")" ?>
+				</label>
 			</div>
 
 			<div class="assigneeBtn">
-				<button id="ticketPeopleChooseAssignee" class="btn btn-sm" data-toggle="modal" data-target="#ticketPageModal">Choose Assignee</button>
-				<button id="ticketPeopleSelfAssignee" class="btn btn-sm">Assigned to myself</button>
+				<button id="chooseAssigneeBtn" class="btn btn-sm" data-toggle="modal" data-target="#ticketPageModal">Choose Assignee</button>
+				<button id="selfAssigneeBtn" class="btn btn-sm">Assigned to myself</button>
 			</div>
 		</div>
 
@@ -49,7 +51,7 @@
 
 		<div class="p-4">
 			<label>Ticket Status: <span id="ticketProgress"><?php echo Session::Get('ticket')->progress ?></span></label>
-			<button id="changeProgressBtn" class="btn btn-sm"></button>
+			<button id="changeProgressBtn" class="btn btn-sm">Update Status</button>
 		</div>
 	</div>
 
@@ -63,7 +65,7 @@
 			</div>
 		</div>
 
-		<!-- Comment Section -->
+		<!-- Create Comment Section -->
 
 		<div class="row no-gutters mt-3">
 			<div id="ticketCreate">
@@ -95,7 +97,9 @@
 				<div class="row no-gutters mt-3">
 					<div id="ticketComments">
 						<h4>All comments</h4>
-						<div id="commentList"></div>
+						<div id="commentList">
+							<?php Render::Comment(Session::Get("ticket")->ticketId); ?>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -127,16 +131,13 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
 			</div>
 			<div class="modal-body" id="ticketPageBody">
-				<select id="assigneeSelect" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-					<option selected>Select user</option>
-					<option value="1">Tufan</option>
-					<option value="2">Onik</option>
-					<option value="3">Jewell</option>
+				<select id="assigneeSelect" class="form-control" >
+					<option value="0" selected disabled>Select user</option>
 				</select>
 			</div>
 			<div class="modal-footer" id="ticketPageFooter">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-success" id="saveButton">Save changes</button>
+				<button id="saveAssigneeBtn" type="button" class="btn btn-success">Save changes</button>
 			</div>
 		</div>
 	</div>

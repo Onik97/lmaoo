@@ -31,23 +31,6 @@
 <script src="../Script/notifications.js"></script>
 <script src="../Script/navBar.js"></script>
 
-<script>
-
-const darkmode =  new Darkmode();
-
-function overHang(type, message)
-{
-  const myNotification = window.createNotification(
-  {
-    theme: type,
-    showDuration: 3500,
-    displayCloseButton: true,
-    closeOnClick: true
-  });
-  
-  myNotification({ message: message });
-}
-
-</script>
+<script> const darkmode =  new Darkmode(); </script>
 <?php echo $script; ?>
 </html>

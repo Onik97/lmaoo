@@ -1,8 +1,10 @@
 import Navbar from "./navbar.js";
 import AdminController from "../Controller/AdminController.js";
+import notification from "../Utility/NotificationWrapper.js";
 
 Navbar.accountActiveTab();
 
+// Load users according to what element is selected
 $('#adminSelect').change(async function() {
     $("#admin-table").find("tr:gt(0)").remove();
     let json = await AdminController.getUsers(this.value);
@@ -14,13 +16,35 @@ $('#adminSelect').change(async function() {
         let cell3 = newRow.insertCell(2);
         let cell4 = newRow.insertCell(3);
         let cell5 = newRow.insertCell(4);
-        let cell6 = newRow.insertCell(5);
 
-        $(cell1).append(document.createTextNode(json[i].userId));
-        $(cell2).append(document.createTextNode(json[i].username));
-        $(cell3).append(document.createTextNode(json[i].forename));
-        $(cell4).append(document.createTextNode(json[i].surname));
-        $(cell5).append(document.createTextNode(json[i].level));
-        $(cell6).append($("<i>", { class:"fas fa-user-edit", id: "editUser", "data-toggle": "modal", "data-target": "#adminModal" }).html(""));
+        $(cell1).append(document.createTextNode(json[i].username));
+        $(cell2).append(document.createTextNode(json[i].forename));
+        $(cell3).append(document.createTextNode(json[i].surname));
+        $(cell4).append(document.createTextNode(json[i].level));
+        $(cell5).append($("<i>", { class:"fas fa-user-edit", value: `${json[i].userId}`, "data-toggle": "modal", "data-target": "#adminModal" }));
     }
+});
+
+// Load user on User Modal when clicking on Edit User Icon
+$(document).on('click', '.fas.fa-user-edit', async function() {
+    let userId = $(this).attr('value');
+    let {forename, surname, username, level, isActive} = await AdminController.getUserById(userId);
+
+    $("#adminFullname").val(`${forename} ${surname}`);
+    $("#adminUsername").val(`${username}`);
+    isActive == 1 ? $("#adminUserToggle").attr("checked", true) : $("#adminUserToggle").attr("checked", false)
+    $("#userLevelSelect").val(level);
+    $("#userIdParagraph").html(userId);
+});
+
+// Update User
+$("#saveAdminBtn").click(async function() {
+    let username = $("#adminUsername").val();
+    let isActive = $("#adminUserToggle").is(":checked") ? "1" : "0";
+    let level = $("#userLevelSelect").val();
+    let userId = $("#userIdParagraph").html();
+
+    let result = await AdminController.updateUser({username, isActive, level, userId});
+    result == null ? notification.successMessage("User has been updated!") : notification.errorMessage("Something went wrong!");
+    $("#adminModal").modal("hide");
 });

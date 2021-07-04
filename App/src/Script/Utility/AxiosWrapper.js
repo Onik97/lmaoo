@@ -9,7 +9,7 @@ export default class AxiosWrapper {
     
     static async Post(endpoint, json) {
         try { 
-            let results = axios.post(endpoint, json, {'Content-Type': 'application/json' });
+            let results = await axios.post(endpoint, json, {'Content-Type': 'application/json' });
             return results.data;
         }
         catch(err) { handleError(err); }
@@ -17,7 +17,7 @@ export default class AxiosWrapper {
 
     static async Put(endpoint, json) {
         try { 
-            let results = axios.put(endpoint, json, {'Content-Type': 'application/json' });
+            let results = await axios.put(endpoint, json, {'Content-Type': 'application/json' });
             return results.data;
         }
         catch(err) { handleError(err); }
@@ -25,7 +25,7 @@ export default class AxiosWrapper {
 
     static async Delete(endpoint) {
         try { 
-            let results = axios.delete(endpoint);
+            let results = await axios.delete(endpoint);
             return results.data;
         }
         catch(err) { handleError(err); }
