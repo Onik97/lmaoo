@@ -28,6 +28,16 @@ class FeatureController extends BaseController
         return $returnFeatures;
     }
 
+    public static function updateFeatures($json)
+    {
+        $data = json_decode($json, true); $validation = Validation::updateFeature($data);
+        $featureIddata = $data['featureId'];
+        $featureId = (int) $featureIddata;
+        
+
+        $validation == null ? Feature::update($featureId,$data) : APIResponse::BadRequest($validation);
+    }
+
     public static function activateFeature($featureId)
     {
         $data = array("active" => "1");
