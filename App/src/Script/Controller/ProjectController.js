@@ -13,4 +13,9 @@ export default class Project
         let result = await axios.Post("/feature/",json);
         return result;
     }
+    static async updateFeature(json)
+    {
+        let result = await axios.Put("/feature/", json);
+        return result;
+    }
 }
