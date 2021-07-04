@@ -48,8 +48,6 @@ class Validation
         return self::validate(function() use ($data) {
             v::key("userId", v::NotOptional()->intval())
             ->key("username", v::NotOptional()->stringVal())
-            ->key("forename", v::NotOptional()->stringVal())
-            ->key("surname", v::NotOptional()->stringVal())
             ->key("level", v::NotOptional()->intval())
             ->key("isActive", v::NotOptional()->boolVal())
             ->assert($data);
@@ -86,11 +84,59 @@ class Validation
         });
     }
 
+    public static function updateTicket($data)
+    {
+        return self::validate(function() use ($data) {
+            v::key("ticketId", v::NotOptional()->intval())->assert($data);
+            v::optional(v::intval())->assert(@$data["assignee_key"]);
+            v::optional(v::stringVal())->assert(@$data["summary"]);
+            v::optional(v::stringVal())->assert(@$data["progress"]);
+        });
+    }
+
     public static function createFeature($data)
     {
         return self::validate(function() use ($data) {
             v::key("name", v::NotOptional()->stringType()->stringVal())
             ->key("projectId", v::NotOptional()->intType()->intval())
+            ->assert($data);
+        });
+    }
+
+    public static function createComment($data)
+    {
+        return self::validate(function() use ($data) {
+            v::key("commentContent", v::NotOptional()->stringVal())
+            ->key("ticketId", v::NotOptional()->intval())
+            ->assert($data);
+        });
+    }
+
+    public static function updateComment($data)
+    {
+        return self::validate(function() use ($data) {
+            v::key("commentContent", v::NotOptional()->stringVal())
+            ->key("ticketId", v::NotOptional()->intval())
+            ->key("commentId", v::NotOptional()->intval())
+            ->assert($data);
+        });
+    }
+
+    public static function updateLoggedInUser($data)
+    {
+        return self::validate(function() use ($data) {
+            v::key("forename", v::NotOptional()->stringVal())
+            ->key("surname", v::NotOptional()->stringVal())
+            ->key("username", v::NotOptional()->stringVal())
+            ->assert($data);
+        });
+    }
+
+    public static function changePassword($data)
+    {
+        return self::validate(function() use ($data) {
+            v::key("oldPassword", v::NotOptional()->stringVal())
+            ->key("newPassword", v::NotOptional()->stringVal())
             ->assert($data);
         });
     }

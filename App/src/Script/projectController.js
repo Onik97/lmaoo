@@ -11,14 +11,14 @@ function loadFeatures()
     .then(response =>
     {
 
-        if (userLevel >= 3) $("#activeFeatures").append($("<div>", { id : "createFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" , onclick : "createFeaturePrompt()"}).html(" + Create Feature"));
+        if (userLevel >= 3) $("#activeFeatures").append($("<div>", { id : "createFeatureBtn" , "data-toggle" : "modal" , "data-target" : "#featureModal" }).html(" + Create Feature"));
 
         var json = response.data;
         for (i = 0; i < json.length; i++)
         {
             // TODO: Write this on PHP side, no point doing load features -> May do it in the Javascript Rework Branch (Onik)
-            var icon = $("<l>", { class : "far fa-edit", onclick : ""});
-            var featureinfo = $("<li>", { value : json[i].featureId , onclick : `getProjectName("${json[i].name}", this.value); loadTicketsWithProgress('Open');`}).html(json[i].name)
+            var icon = $("<l>", { class : "far fa-edit" });
+            var featureinfo = $("<li>", { value : json[i].featureId }).html(json[i].name)
             var feature = featureinfo.append(icon);
             $("#activeFeatures").append(feature);
         }
@@ -44,7 +44,7 @@ function createFeaturePrompt()
     $(featureNameDiv).append(featureNameInput);
     $(featureNameDiv).append(featureValidationSmall);
 
-    $("#featureModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveFeatureBtn", onclick : "createFeature()"}).html("Save"));
+    $("#featureModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "saveFeatureBtn" }).html("Save"));
     $('#saveFeatureBtn').prop('disabled', true); 
 }
 
@@ -110,7 +110,7 @@ function activateFeaturePrompt()
     $("#featureModalBody").html("").append(featureEditDiv);
     $(featureEditDiv).append(featureSelectLabel);
 
-    $("#featureModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "activateFeatureBtn", onclick : "activateFeature(featureId)"}).html("Save"));
+    $("#featureModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "activateFeatureBtn" }).html("Save"));
 
 }
 
@@ -141,7 +141,7 @@ function deactivateFeaturePrompt()
     $("#featureModalBody").html("").append(featureEditDiv);
     $(featureEditDiv).append(featureSelectLabel);
 
-    $("#featureModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "deactivateFeatureBtn", onclick : "deactivateFeature(featureId)"}).html("Save"));
+    $("#featureModalFooter").html("").append($("<button>", {class : "btn btn-primary", type : "text", id : "deactivateFeatureBtn" }).html("Save"));
 
 }
 
@@ -176,7 +176,7 @@ function createTicketPrompt(projectId)
     
     $("#projectModalBody").html("").append(createTicketDiv);
     $("#projectModalBody").append(ticketValidationSmall);
-    $("#projectModalFooter").html("").append($("<button>", { id : "saveTicketBtn", class : "btn btn-primary", type : "submit" , onclick : "createTicket()"}).html("Save"));
+    $("#projectModalFooter").html("").append($("<button>", { id : "saveTicketBtn", class : "btn btn-primary", type : "submit" }).html("Save"));
     $('#saveTicketBtn').prop('disabled', true);
 }
 
@@ -242,7 +242,7 @@ function loadTicketsWithProgress(progress)
     if (selectedFeatureId == 0) return false;
 
     $("#ticketBtnDiv").html("");
-    if (userLevel >= 2) $("#ticketBtnDiv").append($("<button>", { "data-toggle" : "modal" , "data-target" : "#projectModal" , onclick : createTicketPrompt(selectedFeatureId)}).html("Create Ticket"));
+    if (userLevel >= 2) $("#ticketBtnDiv").append($("<button>", { "data-toggle" : "modal" , "data-target" : "#projectModal" }).html("Create Ticket"));
     loadTicketsWithProgressFromServer(selectedFeatureId, progress)
     .then (response => 
     {

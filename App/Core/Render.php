@@ -3,6 +3,8 @@ namespace Lmaoo\Core;
 
 use Lmaoo\Controller\FeatureController;
 use Lmaoo\Controller\ManagerController;
+use Lmaoo\Model\Comment;
+use Lmaoo\Model\Project;
 use Lmaoo\Model\ProjectAccess;
 use Lmaoo\Model\Ticket;
 use Lmaoo\Utility\Library;
@@ -28,9 +30,16 @@ class Render
     public static function login() { self::layout("login", "login"); }
     public static function register() { self::layout("register", "register"); }
     public static function manager() { self::layout("manager", "manager"); }
-    public static function project() { self::layout("project", "project"); }
-    public static function admin() { self::layout("admin", "admin"); }
     public static function profile() { self::layout("profile", "profile"); }
+    public static function admin() { self::layout("admin", "admin"); }
+
+    public static function project($projectId) 
+    {
+        $project = Project::read(Constant::$PROJECT_COLUMNS, ["projectId" => $projectId])[0];
+        if ($project == null) return Library::redirectWithMessage("Project ID not valid!", "/");
+        Session::Set("project", $project);
+        self::layout("project", "project");
+    }
 
     public static function ticket($ticketId) 
     {
@@ -67,7 +76,7 @@ class Render
         
         foreach ($projects as $project) 
         { 
-            echo "<a class='dropdown-item' href='/project?projectId=$project->projectId'>$project->name</a>";
+            echo "<a class='dropdown-item' href='/project/$project->projectId'>$project->name</a>";
         } 
         
         echo "</div>";
@@ -80,13 +89,13 @@ class Render
 
         echo "<div class='navbar-brand form-inline lg-1'>";
         echo "<input id='searchBarInput' class='form-control mr-sm-2' type='search' placeholder='Search Ticket' aria-label='Search'>";
-        echo "<button id='searchBarBtn' class='btn btn-outline-success my-sm-0' onclick='searchBar()'>Search</button>";
+        echo "<button id='searchBarBtn' class='btn btn-outline-success my-sm-0'>Search</button>";
         echo "</div>";
     }
 
     public static function Features($active)
     {
-        $features = FeatureController::readFeatures($_GET["projectId"], $active);
+        $features = FeatureController::readFeatures(Session::Get("project")->projectId, $active);
 
         foreach($features as $feature)
         {
@@ -105,7 +114,7 @@ class Render
                     <div class='project-info'>$project->name
                         <div class='project-status'>$project->status</div>
                         <div class='owner-role'>Owner</div>
-                        <button type='button' class='btn btn-warning' data-toggle='modal' data-target='#managerModal' onclick='rolePrompt(1)'>Roles</button>
+                        <i id='editProjectIcon' class='fas fa-user-edit' data-toggle='modal' data-target='#editProjectModal' value='$project->projectId'></i>
                     </div>
                 </li>";
         }
@@ -116,11 +125,41 @@ class Render
                     <div class='project-info'>$project->name
                         <div class='project-status'>$project->status</div>
                         <div class='manager-role'>Manager</div>
-                        <button type='button' class='btn btn-warning' data-toggle='modal' data-target='#managerModal' onclick='rolePrompt(1)'>Roles</button>
+                        <i id='editProjectIcon' class='fas fa-user-edit' data-toggle='modal' data-target='#editProjectModal' value='$project->projectId'></i>
                     </div>
                 </li>";
         }
 
+    }
+
+    public static function Comment($ticketId)
+    {
+        $comments = Comment::withTicketId($ticketId);
+
+        foreach($comments as $comment)
+        {
+            echo "<div class='row'>
+                    <div class='col-1'>
+                    <div id='commentThumbnail'>
+                        <img class='profilePicture mt-1' src='$comment->picture'>
+                    </div>
+                    </div>
+
+                    <div class='col-8'>
+                        <div id='commentBody' class='mt-2 ml-2'>
+                            <h6>$comment->forename $comment->surname</h6>
+                            <span>$comment->commentCreated</span>
+                        </div>
+
+                        <div id='mainComment$comment->commentId' class='ml-2'>$comment->commentContent</div>
+                    </div>
+                
+                    <div class='col-2 mt-2 ml-5' id='commentActions'>
+                        <img class='CommentImages deleteComment' src='/Images/trash.svg' value='$comment->commentId' role='button'>
+                        <img class='CommentImages editComment' src='/Images/pencilsquare.svg' value='$comment->commentId' role='button'>
+                    </div>
+                </div>";
+        }
     }
 
     
@@ -141,7 +180,7 @@ class Render
 		}
 		
 		echo "<div class='custom-control custom-switch'>";
-		echo $toggle == true ? "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' onclick='darkModeToggle()' checked>" : "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' onclick='darkModeToggle()'>";
+		echo $toggle == true ? "<input type='checkbox' class='custom-control-input' id='darkModeSwitch' checked>" : "<input type='checkbox' class='custom-control-input' id='darkModeSwitch'>";
 		echo "<label class='custom-control-label' for='darkModeSwitch'>Dark Mode</label>";
 		echo "</div>";
 	}

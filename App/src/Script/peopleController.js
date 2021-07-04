@@ -16,7 +16,6 @@ function peoplePrompt()
   input.setAttribute("class", "btn btn-primary");
   input.setAttribute("type", "submit");
   input.setAttribute("value", "Save");
-  input.setAttribute("onclick", "saveSelectedAssignee()");
 
   modalFooter.appendChild(input);
 }

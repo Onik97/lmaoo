@@ -144,12 +144,12 @@
 	border-radius: 50px;
 }
 
-#ticketPeopleChooseAssignee, #ticketPeopleSelfAssignee, #changeProgressBtn {
+#chooseAssigneeBtn, #selfAssigneeBtn, #changeProgressBtn {
 	float: right;
 	background-color: rgb(230, 230, 230);
 }
 
-#ticketPeopleChooseAssignee:hover, #ticketPeopleSelfAssignee:hover {
+#chooseAssigneeBtn:hover, #selfAssigneeBtn:hover {
 	background-color: rgb(179, 179, 179);
 }
 
@@ -161,4 +161,8 @@
 #ticketSummaryHeader {
 	padding: 10px;
 	text-align: center;
+}
+
+#assigneeSelect {
+	width: 100%;
 }

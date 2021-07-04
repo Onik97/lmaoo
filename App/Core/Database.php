@@ -81,4 +81,18 @@ class Database extends Config
         }
         catch(PDOException $e) { die("ERROR ID: 102"); }
     }
+
+    public function getLast()
+    {
+        try {
+            $pdo = $this::$pdo;
+            $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+            $stmt = $pdo->prepare($this::$query);
+            $stmt->execute($this::$parameters);
+            $id = $pdo->lastInsertId();
+            $pdo = null; // Closes Connection
+            return $id;
+        }
+        catch(PDOException $e) { die("ERROR ID: 102"); }
+    }
 }

@@ -1,31 +1,42 @@
 export default class SummernoteWrapper {
-    static Load(selector, placeholder) {
+    constructor(selector, placeholder, simple = false, height = 125) {
+        this.selector = selector;
         $(selector).summernote({
             placeholder: placeholder, 
-            height: 125,
-            toolbar: [ ['style', ['bold', 'italic', 'underline', 'clear']], ['font', ['strikethrough' ]], ['para', ['ul', 'ol']] ],
+            height: height,
+            toolbar: simple == false 
+                     ? [ ['style', ['bold', 'italic', 'underline', 'clear']], ['font', ['strikethrough' ]], ['para', ['ul', 'ol']] ]
+                     : [] ,
             popover: { image: [], link: [], air: [] }
         });
         $('.note-statusbar').hide();
+        this.initalValue = this.getValue();
+        return this;
+    }
+    
+    onKeyDown(saveCallback, cancelCallback = null) {
+        $(this.selector).on('summernote.keydown', (we, e) => {
+            if(e.ctrlKey && e.code == "Enter") {
+                e.preventDefault();
+                saveCallback($(this.selector).summernote('code'));
+            }
+            if (cancelCallback != null) { 
+                if(e.code == "Escape") cancelCallback(this.initalValue); 
+            }
+        });
+    }
+
+    getValue() {
+        return $(this.selector).summernote('code');
+    }
+
+    setValue(value) {
+        $(this.selector).summernote('code', value);
         return this;
     }
 
-    static onKeyDown(selector, callback) {
-        $(selector).on('summernote.keydown', (we, e) => callback());
-        return this;
-    }
-
-    static getValue(selector) {
-        return $(selector).summernote('code');
-    }
-
-    static setValue(selector, value) {
-        $(selector).summernote('code', value);
-        return this;
-    }
-
-    static Close(selector) {
-        $(selector).summernote("destroy");
+    Close() {
+        $(this.selector).summernote("destroy");
         return this;
     }
 }
