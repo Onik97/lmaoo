@@ -38,7 +38,6 @@ class Validation
             v::key("name", v::NotOptional()->stringVal())
              ->key("status", v::NotOptional()->stringVal())
              ->key("owner", v::NotOptional()->intval())
-             ->key("active", v::NotOptional()->boolVal())
              ->assert($data);
         });
     }
