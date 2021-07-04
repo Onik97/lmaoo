@@ -41,13 +41,12 @@ $(document).on('click', '.far.fa-edit', async function() {
 })
 
 // Edit Feature
-$("#editFeatureButton").click(async function(){
-    let name = $("#newFeatureName").val();
-    let data = $(this).attr('value');
-    var featureId = parseInt(data, 10);
+$("#editFeatureButton").click(async function() {
+    let name = $("#editFeatureName").val();
+    let featureId = parseInt($(this).attr('value'));
     let active = $("#editFeatureToggle").is(":checked") ? 1 : 0;
     
-    let result = await Project.updateFeature({featureId,name, active})
+    let result = await Feature.updateFeature({ featureId, name, active })
     result == null ? notification.errorMessage("Something went wrong!"): notification.successMessage("Feature has been updated!");
     $("#editFeatureModal").modal("hide");
 });
