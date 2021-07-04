@@ -8,7 +8,9 @@ export default class Project
         return result;
     }
 
-        let result = await axios.Post(endpoint, data);
+    static async createFeature(json)
+    {
+        let result = await axios.Post("/feature/",json);
         return result;
     }
 }
