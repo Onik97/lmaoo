@@ -14,3 +14,19 @@ $("#createFeatureButton").click(async function(){
     result == null ? notification.errorMessage("Something went wrong!") : notification.successMessage("Feature has been created!");
     $("#createFeatureModal").modal("hide");
 });
+
+$(document).on('click', '.far.fa-edit', function() {
+    let featureIddata = $(this).attr('value');
+    $("#editFeatureButton").val(featureIddata)
+})
+
+$("#editFeatureButton").click(async function(){
+    let name = $("#newFeatureName").val();
+    let data = $(this).attr('value');
+    var featureId = parseInt(data, 10);
+    let active = $("#editFeatureToggle").is(":checked") ? 1 : 0;
+    
+    let result = await Project.updateFeature({featureId,name, active})
+    result == null ? notification.errorMessage("Something went wrong!"): notification.successMessage("User has been updated!");
+    $("#editFeatureModal").modal("hide");
+});
