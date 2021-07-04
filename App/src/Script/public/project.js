@@ -1,9 +1,7 @@
 import Navbar from "../public/navbar.js";
 import Fragment from "../Utility/Fragment.js";
-import Project from "../Controller/ProjectController.js";
 import notification from "../Utility/NotificationWrapper.js";
 
-$(document).ready(() => { Navbar.projectActiveTab(); });
 let projectIdData = window.location.href.split('?')[0].split("/").reverse()[0]; // gets ProjectId form URL
 let projectId = Number(projectIdData); // converts into a Int to pass validation
 
@@ -46,13 +44,4 @@ $("#editFeatureButton").click(async function(){
     let result = await Project.updateFeature({featureId,name, active})
     result == null ? notification.errorMessage("Something went wrong!"): notification.successMessage("Feature has been updated!");
     $("#editFeatureModal").modal("hide");
-});
-
-$("#deleteFeatureButton").click(async function(){
-    let data = $(this).attr('value');
-    var featureId = parseInt(data, 10);
-
-    let result = await Project.deleteFeature({featureId})
-    result == null ?notification.successMessage("Feature has been Deleted!") : notification.errorMessage("Something went wrong!");
-
 });
