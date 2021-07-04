@@ -6,8 +6,7 @@ import Feature from "../Controller/featureController.js";
 
 Navbar.projectActiveTab();
 
-let projectIdData = window.location.href.split('?')[0].split("/").reverse()[0]; // gets ProjectId form URL
-let projectId = Number(projectIdData); // converts into a Int to pass validation
+let projectId = window.location.href.split('?')[0].split("/").reverse()[0]; // gets ProjectId form URL
 
 // create Feature
 $("#createFeatureButton").click(async function() {
