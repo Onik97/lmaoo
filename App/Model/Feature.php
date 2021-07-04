@@ -9,7 +9,7 @@ class Feature extends Database implements IModel
     public static function create(array $data)
     {
         $sql = Library::arrayToInsertQuery("feature", $data);
-        (new Database())->db()->query($sql)->parameters([])->exec();
+        return (new Database())->db()->query($sql)->parameters([])->getLast();
     }
 
     public static function read(array $columns, array $conditions)
