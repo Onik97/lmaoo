@@ -114,7 +114,7 @@
         <div class="modal-body" id="createFeatureBody">
           <div class="wrapper">
             <label>Feature name:</label>
-            <input type="text" class="search-input form-control" id="featureName" onkeyup="projectValidation()">
+            <input type="text" class="search-input form-control" id="featureName">
           </div>
         </div>
 
