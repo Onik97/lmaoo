@@ -38,8 +38,11 @@ class FeatureController extends BaseController
         $validation == null ? Feature::update($featureId,$data) : APIResponse::BadRequest($validation);
     }
 
+    public static function deactivateFeature($json)
     {
         $data = array("active" => "0");
+        $featureIddata = $json['featureId'];
+        $featureId = (int) $featureIddata;
         Feature::update($featureId, $data);
     }
 }
