@@ -7,6 +7,7 @@ $(document).ready(() => { Navbar.projectActiveTab(); });
 let projectIdData = window.location.href.split('?')[0].split("/").reverse()[0];
 let projectId = Number(projectIdData);
 
+// create Feature
 $("#createFeatureButton").click(async function(){
     let name = $("#featureName").val();
     let result = await Project.createFeature({projectId, name});
@@ -15,11 +16,14 @@ $("#createFeatureButton").click(async function(){
     $("#createFeatureModal").modal("hide");
 });
 
+// read Features (active & inactive)
+// using this to getthe featureId for editFeatures
 $(document).on('click', '.far.fa-edit', function() {
     let featureIddata = $(this).attr('value');
     $("#editFeatureButton").val(featureIddata)
 })
 
+// Edit Feature
 $("#editFeatureButton").click(async function(){
     let name = $("#newFeatureName").val();
     let data = $(this).attr('value');
