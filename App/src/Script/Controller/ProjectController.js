@@ -4,7 +4,7 @@ export default class Project
 {
     static async createProject(json)
     {
-        let result = await axios.Post("/project/", json)
+        let result = await axios.Post("/project", json)
         return result;
     }
 }
