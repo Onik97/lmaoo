@@ -10,9 +10,10 @@ use Lmaoo\Utility\Validation;
 
 class ProjectController extends BaseController
 {
-    public static function createProject($json)
+    public function createProject($json)
     {
-        $data = json_decode($json, true); $validation = Validation::createProject($data);
+        $data = json_decode($json, true); $data["owner"] = $this->userLoggedIn->userId;
+        $validation = Validation::createProject($data);
         $validation == null ? Project::create($data) : APIResponse::BadRequest($validation);
     }
 
