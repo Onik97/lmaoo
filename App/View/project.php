@@ -137,10 +137,10 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body" id="editFeatureBody">
+        <div id="editFeatureBody" class="modal-body">
           <div class="wrapper">
             <label>New feature name:</label>
-            <input type="text" class="search-input form-control" id="newFeatureName" onkeyup="projectValidation()">
+            <input type="text" id="editFeatureName" class="search-input form-control">
           </div>
           <div class="wrapper">
             <small id="passwordHelpBlock" class="form-text text-muted">Feature limit exceeded (limit number)</small>
