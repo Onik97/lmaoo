@@ -17,6 +17,19 @@ $("#createFeatureButton").click(async function(){
 });
 
 // read Features (active & inactive)
+$("#featureToggle").click(function(){
+    if ($('#featureToggle').is(":checked"))
+    {
+        $("#inactiveFeatures").hide();
+        $("#activeFeatures").show();
+    }
+    else
+    {
+        $("#activeFeatures").hide();
+        $("#inactiveFeatures").show();
+    }
+});
+
 // using this to getthe featureId for editFeatures
 $(document).on('click', '.far.fa-edit', function() {
     let featureIddata = $(this).attr('value');
