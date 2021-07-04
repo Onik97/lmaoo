@@ -2,13 +2,11 @@ import axios from "../Utility/AxiosWrapper.js";
 
 export default class Project 
 {
-    static async createFeature()
+    static async createProject(json)
     {
-        let projectId = new URL(window.location.href).searchParams.get("projectId");
-        let name = $("#projectName").text();
-
-        let data = [{"name" : name, "projectId" : projectId}]
-        let endpoint = "/feature/"
+        let result = await axios.Post("/project/", json)
+        return result;
+    }
 
         let result = await axios.Post(endpoint, data);
         return result;
