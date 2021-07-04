@@ -4,8 +4,8 @@ import Project from "../Controller/ProjectController.js";
 import notification from "../Utility/NotificationWrapper.js";
 
 $(document).ready(() => { Navbar.projectActiveTab(); });
-let projectIdData = window.location.href.split('?')[0].split("/").reverse()[0];
-let projectId = Number(projectIdData);
+let projectIdData = window.location.href.split('?')[0].split("/").reverse()[0]; // gets ProjectId form URL
+let projectId = Number(projectIdData); // converts into a Int to pass validation
 
 // create Feature
 $("#createFeatureButton").click(async function(){
@@ -30,7 +30,7 @@ $("#featureToggle").click(function(){
     }
 });
 
-// using this to getthe featureId for editFeatures
+// using this to get the featureId for editFeatures
 $(document).on('click', '.far.fa-edit', function() {
     let featureIddata = $(this).attr('value');
     $("#editFeatureButton").val(featureIddata)
