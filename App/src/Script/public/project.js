@@ -30,8 +30,7 @@ $("#featureToggle").click(function() {
 
 // using this to get the featureId for editFeatures
 $(document).on('click', '.far.fa-edit', async function() {
-    let featureIddata = $(this).attr('value');
-    var featureId = parseInt(featureIddata, 10);
+    let featureId = $(this).attr('value');
     $("#editFeatureBtn").val(featureId)
 
     let { name, active }  = await Feature.readFeature(featureId);
