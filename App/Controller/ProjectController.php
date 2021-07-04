@@ -17,7 +17,7 @@ class ProjectController extends BaseController
         $validation == null ? Project::create($data) : APIResponse::BadRequest($validation);
     }
 
-    public static function readProject($projectId, $active)
+    public function readProject($projectId, $active)
     {
         $projects = Project::read(Constant::$PROJECT_COLUMNS, array("projectId" => $projectId));
         $returnProjects = array();
@@ -30,21 +30,21 @@ class ProjectController extends BaseController
         return $returnProjects;
     }
 
-    public static function updateProject()
+    public function updateProject()
     {
         Library::validatePostValues("projectId", "name", "status", "owner");
         $data = array("name" => $_POST["name"], "status" => $_POST["status"], "owner" => $_POST["owner"]);
         Project::update($_POST["projectId"], $data);
     }
 
-    public static function activateProject($projectId)
+    public function activateProject($projectId)
     {
         $data = array("active" => 1);
         
         Project::update($projectId, $data);
     }
 
-    public static function deactivateProject($projectId)
+    public function deactivateProject($projectId)
     {
         Project::delete($projectId);
     }
