@@ -8,7 +8,7 @@ use Lmaoo\Utility\Validation;
 
 class FeatureController extends BaseController
 {
-    public static function createFeature($json)
+    public function createFeature($json)
     {
         $data = json_decode($json, true); $validation = Validation::createFeature($data);
         if ($validation == null)
@@ -22,7 +22,7 @@ class FeatureController extends BaseController
         }
     }
 
-    public static function readFeatures($projectId, $active)
+    public function readFeatures($projectId, $active)
     {
         $features = Feature::read(Constant::$FEATURE_COLUMNS, array("projectId" => $projectId));
         $returnFeatures = array();
@@ -35,12 +35,12 @@ class FeatureController extends BaseController
         return $returnFeatures;
     }
 
-    public static function readWithId($featureId)
+    public function readWithId($featureId)
     {
         echo json_encode(Feature::read(Constant::$FEATURE_COLUMNS , array("featureId" => $featureId)));
     }
 
-    public static function updateFeatures($json)
+    public function updateFeatures($json)
     {
         $data = json_decode($json, true); $validation = Validation::updateFeature($data);
         $featureIddata = $data['featureId'];
