@@ -15,6 +15,7 @@ $("#createFeatureButton").click(async function() {
     let result = await Feature.createFeature({ projectId, name });
 
     result == null ? notification.errorMessage("Something went wrong!") : notification.successMessage("Feature has been created!");
+    WebComponent.Feature("#activeFeatures", result[0]);
     $("#createFeatureModal").modal("hide");
 });
 
