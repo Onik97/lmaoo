@@ -19,10 +19,4 @@ export default class Feature
         let result = await axios.Put("/feature", json);
         return result;
     }
-    
-    static async deleteFeature(featureId)
-    {
-        let result = await axios.Delete("/feature", featureId);
-        return result;
-    }
 }
