@@ -9,7 +9,7 @@ Navbar.projectActiveTab();
 let projectId = window.location.href.split('?')[0].split("/").reverse()[0]; // gets ProjectId form URL
 
 // create Feature
-$("#createFeatureButton").click(async function() {
+$("#createFeatureBtn").click(async function() {
     let name = $("#featureName").val();
     let result = await Feature.createFeature({ projectId, name });
 
@@ -32,7 +32,7 @@ $("#featureToggle").click(function() {
 $(document).on('click', '.far.fa-edit', async function() {
     let featureIddata = $(this).attr('value');
     var featureId = parseInt(featureIddata, 10);
-    $("#editFeatureButton").val(featureId)
+    $("#editFeatureBtn").val(featureId)
 
     let { name, active }  = await Feature.readFeature(featureId);
     $("#editFeatureName").val(name);
@@ -40,7 +40,7 @@ $(document).on('click', '.far.fa-edit', async function() {
 })
 
 // Edit Feature
-$("#editFeatureButton").click(async function() {
+$("#editFeatureBtn").click(async function() {
     let name = $("#editFeatureName").val();
     let featureId = parseInt($(this).attr('value'));
     let active = $("#editFeatureToggle").is(":checked") ? 1 : 0;
