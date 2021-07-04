@@ -1,6 +1,10 @@
 import Navbar from "../public/navbar.js";
 import Fragment from "../Utility/Fragment.js";
 import notification from "../Utility/NotificationWrapper.js";
+import WebComponent from "../Utility/WebComponent.js";
+import Feature from "../Controller/featureController.js";
+
+Navbar.projectActiveTab();
 
 let projectIdData = window.location.href.split('?')[0].split("/").reverse()[0]; // gets ProjectId form URL
 let projectId = Number(projectIdData); // converts into a Int to pass validation
