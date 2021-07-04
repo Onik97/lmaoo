@@ -140,4 +140,14 @@ class Validation
             ->assert($data);
         });
     }
+
+    public static function updateFeature($data)
+    {
+        return self::validate(function() use ($data) {
+            v::key("featureId", v::NotOptional()->intType()->intval())
+            ->key("name", v::NotOptional()->stringType()->stringVal())
+            ->key("active", v::NotOptional()->intType()->intval())
+            ->assert($data);
+        });
+    }
 }
