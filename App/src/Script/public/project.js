@@ -44,6 +44,6 @@ $("#editFeatureButton").click(async function(){
     let active = $("#editFeatureToggle").is(":checked") ? 1 : 0;
     
     let result = await Project.updateFeature({featureId,name, active})
-    result == null ? notification.errorMessage("Something went wrong!"): notification.successMessage("User has been updated!");
+    result == null ? notification.errorMessage("Something went wrong!"): notification.successMessage("Feature has been updated!");
     $("#editFeatureModal").modal("hide");
 });
