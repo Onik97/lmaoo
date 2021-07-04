@@ -95,7 +95,7 @@ class Render
 
     public static function Features($active)
     {
-        $features = FeatureController::readFeatures(Session::Get("project")->projectId, $active);
+        $features = (new FeatureController)->readFeatures(Session::Get("project")->projectId, $active);
 
         foreach($features as $feature)
         {
