@@ -47,3 +47,12 @@ $("#editFeatureButton").click(async function(){
     result == null ? notification.errorMessage("Something went wrong!"): notification.successMessage("Feature has been updated!");
     $("#editFeatureModal").modal("hide");
 });
+
+$("#deleteFeatureButton").click(async function(){
+    let data = $(this).attr('value');
+    var featureId = parseInt(data, 10);
+
+    let result = await Project.deleteFeature({featureId})
+    result == null ?notification.successMessage("Feature has been Deleted!") : notification.errorMessage("Something went wrong!");
+
+});
