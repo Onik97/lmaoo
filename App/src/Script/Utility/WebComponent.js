@@ -33,4 +33,9 @@ export default class WebComponent {
             $(selector).append(`<option value="${userId}">${forename} ${surname} (${username})</option>`);
         });
     }
+
+    static Feature(selector, feature) {
+        let { featureId, name } = feature;
+        $(selector).append(`<li value="${featureId}">${name}<i value="${featureId}" class="far fa-edit" data-toggle="modal" data-target="#editFeatureModal"></i></li>`);
+    }
 }
