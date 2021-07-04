@@ -50,7 +50,7 @@
             </div>
 
             <div class="modal-footer" id="createProjectFooter">
-                <button type="button" class="btn btn-success" id="saveButton">Save Project</button>
+                <button type="button" class="btn btn-success" id="createProjectButton">Save Project</button>
             </div>
 
         </div>
