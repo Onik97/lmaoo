@@ -43,9 +43,7 @@ class FeatureController extends BaseController
     public function updateFeatures($json)
     {
         $data = json_decode($json, true); $validation = Validation::updateFeature($data);
-        $featureIddata = $data['featureId'];
-        $featureId = (int) $featureIddata;
-        
+        $featureId = $data['featureId'];
 
         $validation == null ? Feature::update($featureId,$data) : APIResponse::BadRequest($validation);
     }
