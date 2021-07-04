@@ -60,8 +60,7 @@ $router->mount("/feature", function() use ($router, $json)
     $router->post("/", fn() => FeatureController::createFeature($json));
     $router->put("/", fn() => FeatureController::updateFeatures($json));
 
-    $router->put("/(\d+)", fn($featureId) => FeatureController::activateFeature($featureId));
-    $router->delete("/(\d+)", fn($featureId) => FeatureController::deactivateFeature($featureId));
+    $router->delete("/", fn() => FeatureController::deactivateFeature($json));
 });
 
 // All /manager requests
