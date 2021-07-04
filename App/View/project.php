@@ -13,7 +13,7 @@
           </div>
         </div>
 
-        <ul id="activeFeatures" class="list-unstyled components" style="display: none;">
+        <ul id="activeFeatures" class="list-unstyled components">
           <?php Lmaoo\Core\Render::Features("1"); ?>
         </ul>
 
