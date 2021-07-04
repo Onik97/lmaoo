@@ -1,4 +1,4 @@
-$(document).ready(() => { darkModeToggleValidator(); featureToggle(); });
+$(document).ready(() => { darkModeToggleValidator(); });
 
 $('#searchBarInput').on("keypress", (e) => { if (e.keyCode == 13) searchBar(); });
 
@@ -55,16 +55,4 @@ function saveUserDarkMode(toggle)
     data.append("userId", userId);
 
     axios.post("../User/target.php", data);
-}
-
-function featureToggle()
-{
-    if ($("#featureToggle").prop("checked")) {
-        $("#activeFeatures").css("display", "block");
-        $("#inactiveFeatures").css("display", "none");
-    }
-    else {
-        $("#inactiveFeatures").css("display", "block");
-        $("#activeFeatures").css("display", "none");
-    }
 }
