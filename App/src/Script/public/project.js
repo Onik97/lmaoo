@@ -10,9 +10,9 @@ let projectIdData = window.location.href.split('?')[0].split("/").reverse()[0]; 
 let projectId = Number(projectIdData); // converts into a Int to pass validation
 
 // create Feature
-$("#createFeatureButton").click(async function(){
+$("#createFeatureButton").click(async function() {
     let name = $("#featureName").val();
-    let result = await Project.createFeature({projectId, name});
+    let result = await Feature.createFeature({ projectId, name });
 
     result == null ? notification.errorMessage("Something went wrong!") : notification.successMessage("Feature has been created!");
     $("#createFeatureModal").modal("hide");
