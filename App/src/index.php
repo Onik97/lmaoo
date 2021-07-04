@@ -58,6 +58,7 @@ $router->mount("/project", function() use ($router, $json)
 $router->mount("/feature", function() use ($router, $json)
 {
     $router->post("/", fn() => FeatureController::createFeature($json));
+    $router->get("/(\d+)", fn($featureId) => FeatureController::readWithId($featureId));
     $router->put("/", fn() => FeatureController::updateFeatures($json));
 
     $router->delete("/", fn() => FeatureController::deactivateFeature($json));
