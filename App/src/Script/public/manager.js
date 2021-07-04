@@ -4,7 +4,7 @@ import notification from "../Utility/NotificationWrapper.js";
 
 $(document).ready(() => { Navbar.accountActiveTab(); })
 
-$("#createProjectButton").click(async function() {
+$("#createProjectBtn").click(async function() {
     let name = $("#projectName").val();
     let status = $("#projectStatus").children("option:selected").val();
     let owner = "";
