@@ -38,7 +38,30 @@ class UserController extends BaseController
 		Library::redirectWithMessage("Registeration Succcess, please login!", "/login");
 	}
 
-	// TODO: Update User -> Will need /profile page first before starting this
+	public function updateUser()
+	{
+		$validation = Validation::updateLoggedInUser($_POST);
+		if ($validation != null) return APIResponse::BadRequest($validation);
+		User::update($this->userLoggedIn->userId, $_POST);
+		session_unset(); session_destroy();
+		Library::redirectWithMessage("User has been updated, please login again!", "/login");
+	}
+
+	public function changePassword($json)
+	{
+		$data = json_decode($json, true); $validation = Validation::changePassword($data);
+		if ($validation != null) return APIResponse::BadRequest($validation);
+		$actualOldPassword = user::read(["password"], ["userId" => $this->userLoggedIn->userId]);
+		if (password_verify($actualOldPassword, $data["oldPassword"]))
+		{
+			user::update($this->userLoggedIn->userId, ["password" => password_hash($data["newPassword"], PASSWORD_BCRYPT)]);
+			return APIResponse::Ok("Password changed successfully");
+		}
+		else
+		{
+			return APIResponse::BadRequest("Password did not match");
+		}
+	}
 
 	// Keeping this code for now, will be updated soon!
 	public function uploadImage($userId)
@@ -61,6 +84,6 @@ class UserController extends BaseController
 	{
 		User::delete($this->userLoggedIn->userId);
 		session_unset(); session_destroy();
-		Library::redirectWithMessage("You have deactivated your user!", "/");
+		Library::redirectWithMessage("You have deactivated your account!", "/");
 	}
 }
