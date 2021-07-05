@@ -53,7 +53,7 @@ class navBar
     public function toProfilePage()
     {
         $this->acceptanceTester->click($this->accountDropdown);
-        $this->acceptanceTester->click($this->profileDropdownItem);
+        $this->acceptanceTester->click($this->editAccountDropdownItem);
     }
 
     public function toLogoutPage()

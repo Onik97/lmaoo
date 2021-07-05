@@ -26,10 +26,40 @@ class navBarCest
     public function navigateToManagerPage(AcceptanceTester $I, Page\Acceptance\navBar $n, Page\Acceptance\Login $l)
     {
         $n->toLoginPage();
+        $I->wait(0.5);
         $l->login("od", "od");
-        $I->wait(2);
         $n->toManagerPage();
         $url = $I->grabFromCurrentUrl();
         $I->assertEquals("/manager", $url);
+    }
+
+    public function navigateToAdminPage(AcceptanceTester $I, Page\Acceptance\navBar $n, Page\Acceptance\Login $l)
+    {
+        $n->toLoginPage();
+        $I->wait(0.5);
+        $l->login("od", "od");
+        $n->toAdminPage();
+        $url = $I->grabFromCurrentUrl();
+        $I->assertEquals("/admin", $url);
+    }
+
+    public function navigateToProfilePage(AcceptanceTester $I, Page\Acceptance\navBar $n, Page\Acceptance\Login $l)
+    {
+        $n->toLoginPage();
+        $I->wait(0.5);
+        $l->login("od", "od");
+        $n->toProfilePage();
+        $url = $I->grabFromCurrentUrl();
+        $I->assertEquals("/profile", $url);
+    }
+
+    public function navigateToLogoutPage(AcceptanceTester $I, Page\Acceptance\navBar $n, Page\Acceptance\Login $l)
+    {
+        $n->toLoginPage();
+        $I->wait(0.5);
+        $l->login("od", "od");
+        $n->toLogoutPage();
+        $url = $I->grabFromCurrentUrl();
+        $I->assertEquals("/", $url);
     }
 }
