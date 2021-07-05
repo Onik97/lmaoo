@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Inherited Methods
  * @method void wantToTest($text)
@@ -16,11 +15,22 @@
  *
  * @SuppressWarnings(PHPMD)
 */
+
+use \Codeception\Test\Unit;
+
 class AcceptanceTester extends \Codeception\Actor
 {
     use _generated\AcceptanceTesterActions;
 
-    /**
-     * Define custom actions here
-     */
+    public function click($link, $context = NULL)
+    {
+        $this->wait(0.5);
+        return $this->getScenario()->runStep(new \Codeception\Step\Action('click', func_get_args()));
+    }
+
+    public function assertEquals($expected, $actual, $message = "")
+    {
+        (new Unit)->assertEquals($expected, $actual, $message);
+    }
+
 }
