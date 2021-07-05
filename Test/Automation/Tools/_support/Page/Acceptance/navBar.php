@@ -12,6 +12,8 @@ class navBar
     public $searchTextbox = "#searchBarInput";
     public $searchButton = "#searchBarBtn";
     public $homeLink = "#homeNav";
+    public $loginDropdownItem = "#loginNav";
+    public $registerDropdownItem = "#registerNav";
     public $projectDropdown = "#projectNav";
     public $accountDropdown = "#accountNav";
     public $managerDropdownItem = "#managerNav";
@@ -22,6 +24,18 @@ class navBar
     public function __construct(\AcceptanceTester $I)
     {
         $this->acceptanceTester = $I;
+    }
+
+    public function navigateToLoginPage()
+    {
+        $this->acceptanceTester->click($this->accountDropdown);
+        $this->acceptanceTester->click($this->loginDropdownItem);
+    }
+
+    public function navigateToRegisterPage()
+    {
+        $this->acceptanceTester->click($this->accountDropdown);
+        $this->acceptanceTester->click($this->registerDropdownItem);
     }
 
     public function navigateToManagerPage()
