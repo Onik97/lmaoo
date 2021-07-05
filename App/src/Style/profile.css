@@ -1,3 +1,68 @@
 .darkmode--activated label {
-    color: #fff
+    color: grey
+}
+
+.modal-body {
+    width: 60%;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    margin: auto;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.heading {
+    position: center;
+    text-align: center;
+}
+
+.col-sm-2 {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+    margin: auto;
+    display: block;
+    padding-bottom:30px; 
+}
+
+.form-control {
+    background-color: grey;
+}
+
+.password-modal-footer {
+    text-align: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    padding-bottom:30px; 
+    letter-spacing: 1px;
+}
+
+.modal-footer {
+    text-align: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    padding-bottom:30px; 
+    letter-spacing: 1px;
+}
+
+.link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    padding-bottom:30px; 
+    letter-spacing: 1px;
+}
+
+.icon{ 
+    margin-left: 10px;
 }
