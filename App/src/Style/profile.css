@@ -3,7 +3,7 @@
 }
 
 .modal-body {
-    width: 85%;
+    width: 60%;
     align-items: center;
     justify-content: center;
     padding: 12px 20px;
@@ -29,7 +29,22 @@
     display: block;
     padding-bottom:30px; 
 }
+
+.form-control {
+    background-color: grey;
+}
+
 .password-modal-footer {
+    text-align: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    padding-bottom:30px; 
+    letter-spacing: 1px;
+}
+
+.modal-footer {
     text-align: right;
     display: flex;
     justify-content: center;

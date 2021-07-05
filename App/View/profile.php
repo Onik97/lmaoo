@@ -32,12 +32,12 @@
                 <input class="form-control" id="editUsername" name="editUsername" required>
                 <small id="editUsernameMessage" hidden></small> 
             </div>
-    </div>
             <input type="hidden" name="function" value="update">
             <input type="hidden" name="editUserId">
 
             <div class="modal-footer">
                 <input id="editUserBtn" class="btn btn-primary" type="submit" value="Save Changes" disabled>
+            </div>
             </div>
         </form>
     </div>
@@ -74,10 +74,11 @@
             <div class="wrapper">
             <label>Confirm Password Update:</label>
                 <input type="text" class="search-input form-control" id="confirmpasswordName" placeholder="Confirm New Password" onkeyup="passwordValidation()">    
-            </div>
-            <div class="password-modal-footer" id="editPasswordFooter">
-                <button class="btn btn-success" type="button" id="savePasswordBtn" onclick="postRequest()" data-toggle='modal' data-target='#passwordModal'>Update Password</button>
-            </div>
+            </div> 
+        </div>
+
+        <div class="password-modal-footer" id="editPasswordFooter">
+             <button class="btn btn-success" type="button" id="savePasswordBtn" onclick="postRequest()" data-toggle='modal' data-target='#passwordModal'>Update Password</button>
         </div>
     </div>
 </div>
