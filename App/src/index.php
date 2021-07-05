@@ -44,7 +44,7 @@ $router->get("/logout", fn() => (new UserController)->logout());
 // All /project requests
 $router->mount("/project", function() use ($router, $json)
 {
-    $router->get("/", fn() => Render::project());
+    $router->get("/(\d+)", fn($projectId) => Render::project($projectId));
     $router->post("/", fn() => ProjectController::createProject($json));
     $router->put("/", fn() => ProjectController::updateProject());
 
@@ -78,6 +78,16 @@ $router->mount("/ticket", function() use ($router, $json)
 {
     $router->get("/(\d+)", fn($ticketId) => Render::ticket($ticketId));
     $router->post("/", fn() => (new TicketController)->createTicket($json));
+    $router->put("/", fn() => (new TicketController)->updateTicket($json));
+    
+    $router->get("/assignee", fn() => (new TicketController)->getAssignees());
+
+    $router->mount("/comment", function() use ($router, $json)
+    {
+        $router->post("/", fn() => (new TicketController)->createComment($json));
+        $router->put("/", fn() => (new TicketController)->updateComment($json));
+        $router->delete("/(\d+)", fn($commentId) => (new TicketController)->deleteComment($commentId));
+    });
 });
 
 // All /admin requests
@@ -85,8 +95,9 @@ $router->mount("/admin", function() use ($router, $json)
 {
     $router->get("/", fn() => Render::admin());
     
-    $router->get("/user/active", fn() => AdminController::readUser("1"));
-    $router->get("/user/inactive", fn() => AdminController::readUser("0"));
+    $router->get("/user/id/(\d+)", fn($userId) => AdminController::readUserWithId($userId));
+    $router->get("/user/active", fn() => AdminController::readUserwithActive("1"));
+    $router->get("/user/inactive", fn() => AdminController::readUserwithActive("0"));
 
     $router->put("/user", fn() => AdminController::updateUser($json));
 });
@@ -103,6 +114,8 @@ $router->mount("/github", function() use ($router)
 $router->mount("/profile", function() use ($router, $json)
 {
     $router->get("/", fn() => Render::profile());
+    $router->post("/", fn() => (new UserController)->updateUser());
+    $router->put("/", fn() => (new UserController)->changePassword($json));
 });
 
 $router->run();

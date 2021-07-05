@@ -13,7 +13,6 @@
 <div class="container pt-4" id="adminContainer">
     <table class="table table-hover" id="admin-table">
         <tr>
-            <th>User ID</th>
             <th>Username</th>
             <th>Forename</th>
             <th>Surname</th>
@@ -23,7 +22,7 @@
     </table>
 </div>
 
-<!-- ADMIN (EDIT USER) MODAL -->
+<!-- ADMIN MODAL -->
 <div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="view-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -38,29 +37,37 @@
             <div class="modal-body" id="adminModalBody">
                 <div class="wrapper">
                     <label>Full name:</label>
-                    <input type="text" class="search-input form-control" id="adminFullname" placeholder="Full name" onkeyup="projectValidation()" disabled>
+                    <input id="adminFullname" class="search-input form-control" type="text" disabled>
                 </div>
                 <div class="wrapper">
-                    <label id="adminUsernameHeader">Username:</label>
-                    <input type="text" class="search-input form-control" id="adminUsername" placeholder="User name" onkeyup="projectValidation()" disabled>
+                    <label>Username:</label>
+                    <input id="adminUsername" class="search-input form-control" type="text" >
+                </div>
+                <div class="wrapper">
+                    <label>User Level:</label>
+                    <select id="userLevelSelect" class="form-control">
+                        <option value="1">Junior Developer</option>
+                        <option value="2">Senior Developer</option>
+                        <option value="3">Product Owner</option>
+                        <option value="4">Administrator</option>
+				    </select>
                 </div>
                 <div class="wrapper">
                     <label id="activeUserToggle"></label>
                     <div class="custom-control custom-switch">
                         <input type="checkbox" class="custom-control-input" id="adminUserToggle">
-                        <label class="custom-control-label" for="adminUserToggle">Toggle to activate user</label>
+                        <label class="custom-control-label" for="adminUserToggle">User Activation Status</label>
                     </div>
                 </div>
                 <div class="wrapper">
                     <button id="resetAdminPassword" type="button" class="btn btn-primary btn-block">Reset password</button>
-                    <small id="passwordHelpBlock" class="form-text text-muted">Feature limit exceeded (limit number)</small>
+                    <small id="passwordMessage" class="form-text text-muted"></small>
                 </div>
-
             </div>
-
+            <p id="userIdParagraph" hidden></p>
             <div class="modal-footer" id="adminModalFooter">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success">Save changes</button>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+                <button id="saveAdminBtn" class="btn btn-success" type="button">Save changes</button>
             </div>
 
         </div>

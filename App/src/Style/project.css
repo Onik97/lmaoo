@@ -100,15 +100,17 @@
 
 #ticketMessage {
 	padding: 24px;
-	background: rgb(247,250,243);
+	color: #000;
 }
 
 .darkmode--activated #ticketMessage {
-	background: rgba(105, 105, 105, 0.24);
+	padding: 24px;
+	color: rgb(247, 250, 243);
 }
 
-#ticketDiv {
-	padding: 10px;
+#ticketButtonDiv {
+	display: flex;
+	align-items: center;
 }
 
 .table {
@@ -166,23 +168,6 @@ font-family: Arial, Helvetica, sans-serif;
 font-size: 15px;
 color: #000;
 line-height: 1.4;
-}
-
-#ticketBtnDiv button {
-	width: 15%;
-	border: none;
-	border-radius: 10px;
-	font-size: 17px;
-	padding: 14px;
-	background-color: #629632;
-	color: #fff;
-	margin-left: auto;
-	float: right;
-}
-
-.darkmode--activated #ticketBtnDiv button {
-	color: #fff;
-	background-color: #000;
 }
 
 #featureModal {
