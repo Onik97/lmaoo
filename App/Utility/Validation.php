@@ -38,7 +38,6 @@ class Validation
             v::key("name", v::NotOptional()->stringVal())
              ->key("status", v::NotOptional()->stringVal())
              ->key("owner", v::NotOptional()->intval())
-             ->key("active", v::NotOptional()->boolVal())
              ->assert($data);
         });
     }
@@ -98,7 +97,7 @@ class Validation
     {
         return self::validate(function() use ($data) {
             v::key("name", v::NotOptional()->stringType()->stringVal())
-            ->key("projectId", v::NotOptional()->intType()->intval())
+            ->key("projectId", v::NotOptional()->intval())
             ->assert($data);
         });
     }
@@ -137,6 +136,16 @@ class Validation
         return self::validate(function() use ($data) {
             v::key("oldPassword", v::NotOptional()->stringVal())
             ->key("newPassword", v::NotOptional()->stringVal())
+            ->assert($data);
+        });
+    }
+
+    public static function updateFeature($data)
+    {
+        return self::validate(function() use ($data) {
+            v::key("featureId", v::NotOptional()->intval())
+            ->key("name", v::NotOptional()->stringType()->stringVal())
+            ->key("active", v::NotOptional()->intval())
             ->assert($data);
         });
     }

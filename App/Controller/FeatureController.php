@@ -2,20 +2,27 @@
 namespace Lmaoo\Controller;
 
 use Lmaoo\Core\Constant;
-use Lmaoo\Utility\Library;
 use Lmaoo\Utility\APIResponse;
 use Lmaoo\Model\Feature;
 use Lmaoo\Utility\Validation;
 
 class FeatureController extends BaseController
 {
-    public static function createFeature($json)
+    public function createFeature($json)
     {
         $data = json_decode($json, true); $validation = Validation::createFeature($data);
-        $validation == null ? Feature::create($data) : APIResponse::BadRequest($validation);
+        if ($validation == null)
+        {
+            $latestId = Feature::create($data);
+            echo json_encode(Feature::read(Constant::$FEATURE_COLUMNS, array("featureId" => $latestId)));
+        }
+        else
+        {
+            APIResponse::BadRequest($validation);
+        }
     }
 
-    public static function readFeatures($projectId, $active)
+    public function readFeatures($projectId, $active)
     {
         $features = Feature::read(Constant::$FEATURE_COLUMNS, array("projectId" => $projectId));
         $returnFeatures = array();
@@ -28,15 +35,16 @@ class FeatureController extends BaseController
         return $returnFeatures;
     }
 
-    public static function activateFeature($featureId)
+    public function readWithId($featureId)
     {
-        $data = array("active" => "1");
-        Feature::update($featureId, $data);
+        echo json_encode(Feature::read(Constant::$FEATURE_COLUMNS , array("featureId" => $featureId)));
     }
 
-    public static function deactivateFeature($featureId)
+    public function updateFeatures($json)
     {
-        $data = array("active" => "0");
-        Feature::update($featureId, $data);
+        $data = json_decode($json, true); $validation = Validation::updateFeature($data);
+        $featureId = $data['featureId'];
+
+        $validation == null ? Feature::update($featureId,$data) : APIResponse::BadRequest($validation);
     }
 }

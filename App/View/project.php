@@ -13,7 +13,7 @@
           </div>
         </div>
 
-        <ul id="activeFeatures" class="list-unstyled components" style="display: none;">
+        <ul id="activeFeatures" class="list-unstyled components">
           <?php Lmaoo\Core\Render::Features("1"); ?>
         </ul>
 
@@ -114,13 +114,13 @@
         <div class="modal-body" id="createFeatureBody">
           <div class="wrapper">
             <label>Feature name:</label>
-            <input type="text" class="search-input form-control" id="featureName" onkeyup="projectValidation()">
+            <input type="text" class="search-input form-control" id="featureName">
           </div>
         </div>
 
         <div class="modal-footer" id="createFeatureFooter">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success" id="saveButton">Save changes</button>
+          <button type="button" class="btn btn-success" id="createFeatureBtn">Save changes</button>
         </div>
       </div>
     </div>
@@ -137,10 +137,10 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body" id="editFeatureBody">
+        <div id="editFeatureBody" class="modal-body">
           <div class="wrapper">
             <label>New feature name:</label>
-            <input type="text" class="search-input form-control" id="newFeatureName" onkeyup="projectValidation()">
+            <input type="text" id="editFeatureName" class="search-input form-control">
           </div>
           <div class="wrapper">
             <small id="passwordHelpBlock" class="form-text text-muted">Feature limit exceeded (limit number)</small>
@@ -156,7 +156,7 @@
 
         <div class="modal-footer" id="editFeatureFooter">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success" id="saveButton">Save changes</button>
+          <button type="button" class="btn btn-success" id="editFeatureBtn">Save changes</button>
         </div>
       </div>
     </div>

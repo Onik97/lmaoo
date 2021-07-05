@@ -10,6 +10,7 @@ use Lmaoo\Controller\ProjectController;
 use Lmaoo\Controller\FeatureController;
 use Lmaoo\Controller\TicketController;
 use Lmaoo\Controller\UserController;
+use Lmaoo\Model\Feature;
 
 if (session_status() == PHP_SESSION_NONE) session_start();
 
@@ -45,11 +46,11 @@ $router->get("/logout", fn() => (new UserController)->logout());
 $router->mount("/project", function() use ($router, $json)
 {
     $router->get("/(\d+)", fn($projectId) => Render::project($projectId));
-    $router->post("/", fn() => ProjectController::createProject($json));
-    $router->put("/", fn() => ProjectController::updateProject());
+    $router->post("/", fn() => (new ProjectController)->createProject($json));
+    $router->put("/", fn() => (new ProjectController)->updateProject());
 
-    $router->get("/activate/(\d+)", fn($projectId) => ProjectController::activateProject($projectId));
-    $router->get("/deactivate/(\d+)", fn($projectId) => ProjectController::deactivateProject($projectId));
+    $router->get("/activate/(\d+)", fn($projectId) => (new ProjectController)->activateProject($projectId));
+    $router->get("/deactivate/(\d+)", fn($projectId) => (new ProjectController)->deactivateProject($projectId));
 
 });
 
@@ -57,10 +58,9 @@ $router->mount("/project", function() use ($router, $json)
 
 $router->mount("/feature", function() use ($router, $json)
 {
-    $router->post("/", fn() => FeatureController::createFeature($json));
-
-    $router->put("/(\d+)", fn($featureId) => FeatureController::activateFeature($featureId));
-    $router->delete("/(\d+)", fn($featureId) => FeatureController::deactivateFeature($featureId));
+    $router->post("/", fn() => (new FeatureController)->createFeature($json));
+    $router->get("/(\d+)", fn($featureId) => (new FeatureController)->readWithId($featureId));
+    $router->put("/", fn() => (new FeatureController)->updateFeatures($json));
 });
 
 // All /manager requests
