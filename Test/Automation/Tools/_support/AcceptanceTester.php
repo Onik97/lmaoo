@@ -16,11 +16,15 @@
  *
  * @SuppressWarnings(PHPMD)
 */
+
+use \Codeception\Test\Unit;
+
 class AcceptanceTester extends \Codeception\Actor
 {
     use _generated\AcceptanceTesterActions;
 
-    /**
-     * Define custom actions here
-     */
+    public function assertEquals($expected, $actual, $message = "")
+    {
+        (new Unit)->assertEquals($expected, $actual, $message);
+    }
 }
