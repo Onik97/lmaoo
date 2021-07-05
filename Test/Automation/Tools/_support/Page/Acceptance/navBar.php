@@ -26,37 +26,37 @@ class navBar
         $this->acceptanceTester = $I;
     }
 
-    public function navigateToLoginPage()
+    public function toLoginPage()
     {
         $this->acceptanceTester->click($this->accountDropdown);
         $this->acceptanceTester->click($this->loginDropdownItem);
     }
 
-    public function navigateToRegisterPage()
+    public function toRegisterPage()
     {
         $this->acceptanceTester->click($this->accountDropdown);
         $this->acceptanceTester->click($this->registerDropdownItem);
     }
 
-    public function navigateToManagerPage()
+    public function toManagerPage()
     {
         $this->acceptanceTester->click($this->accountDropdown);
         $this->acceptanceTester->click($this->managerDropdownItem);
     }
 
-    public function navigateToAdminPage()
+    public function toAdminPage()
     {
         $this->acceptanceTester->click($this->accountDropdown);
         $this->acceptanceTester->click($this->adminDropdownItem);
     }
 
-    public function navigateToProfilePage()
+    public function toProfilePage()
     {
         $this->acceptanceTester->click($this->accountDropdown);
         $this->acceptanceTester->click($this->profileDropdownItem);
     }
 
-    public function navigateToLogoutPage()
+    public function toLogoutPage()
     {
         $this->acceptanceTester->click($this->accountDropdown);
         $this->acceptanceTester->click($this->logoutDropdownItem);

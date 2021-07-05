@@ -9,11 +9,10 @@ class navBarCest
         $I->amOnPage('/');
     }
 
-    // tests
     public function navigateToLoginPage(AcceptanceTester $I, Page\Acceptance\navBar $n)    
     {
-        $n->navigateToLoginPage();
+        $n->toLoginPage();
         $uri = $I->grabFromCurrentUrl();
-        $I->assertEquals($uri, "logi", "");
+        $I->assertEquals($uri, "/login");
     }
 }
