@@ -27,10 +27,9 @@ class navBarCest
     {
         $n->toLoginPage();
         $l->login("od", "od");
+        $I->wait(2);
         $n->toManagerPage();
         $url = $I->grabFromCurrentUrl();
         $I->assertEquals("/manager", $url);
-    }  
-
-
+    }
 }

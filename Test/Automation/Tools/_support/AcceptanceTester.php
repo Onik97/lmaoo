@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Inherited Methods
  * @method void wantToTest($text)
@@ -27,4 +26,5 @@ class AcceptanceTester extends \Codeception\Actor
     {
         (new Unit)->assertEquals($expected, $actual, $message);
     }
+
 }
