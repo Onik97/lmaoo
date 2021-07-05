@@ -1,6 +1,6 @@
 <p id="navBarActive" hidden>profilePage</p>
 
-<h1 class="headings">Profile Page</h1>
+<h1 class="heading">Profile Page</h1>
     <div class="modal-body">    
         <label>Upload Profile Picture</label>
         <div class="input-group my-2">
@@ -32,7 +32,6 @@
                 <input class="form-control" id="editUsername" name="editUsername" required>
                 <small id="editUsernameMessage" hidden></small> 
             </div>
-
 
         <h2>Reset Password</h2>
             <div class="form-group">
@@ -66,8 +65,10 @@
 </div>
 
 <div class="link">
-    <p1>Linked With Github</p1> &nbsp <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" style=”width:40px;height:20px;">  
+    <p1>Linked With Github</p1>
+    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" style=”width:40px;height:20px;" class="icon">  
 </div>
 <div class="link"> 
-    <p2>Linked With Discord</p2> &nbsp <img src="https://preview.redd.it/s9biyhs4lix61.jpg?auto=webp&s=c600a95eff95b3e9406a8b913c6aa3988b5e3a8b" style=”width:40px;height:20px;">   
+    <p2>Linked With Discord</p2>
+    <img src="https://preview.redd.it/s9biyhs4lix61.jpg?auto=webp&s=c600a95eff95b3e9406a8b913c6aa3988b5e3a8b" style=”width:40px;height:20px;" class="icon">   
 </div>

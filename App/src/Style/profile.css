@@ -1,5 +1,5 @@
 .darkmode--activated label {
-    color: #fff
+    color: grey
 }
 
 .modal-body {
@@ -14,14 +14,20 @@
     box-sizing: border-box;
 }
 
-.headings {
+.heading {
     position: center;
     text-align: center;
 }
 
-.link{
+.link {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 40px;
+    padding-bottom:40px; 
+    letter-spacing: 1px;
+}
+
+.icon{ 
+    margin-left: 10px;
 }
