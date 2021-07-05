@@ -1,3 +1,27 @@
 .darkmode--activated label {
     color: #fff
 }
+
+.modal-body {
+    width: 85%;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    margin: auto;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.headings {
+    position: center;
+    text-align: center;
+}
+
+.link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+}
