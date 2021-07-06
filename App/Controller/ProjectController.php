@@ -39,9 +39,7 @@ class ProjectController extends BaseController
 
     public function activateProject($projectId)
     {
-        $data = array("active" => 1);
-        
-        Project::update($projectId, $data);
+        Project::update($projectId, array("active" => 1));
     }
 
     public function deactivateProject($projectId)
