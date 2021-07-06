@@ -43,6 +43,7 @@ $("#editFeatureBtn").on("click",async function() {
     let name = $("#editFeatureName").val();
     let featureId = $(this).attr('value');
     let active = $("#editFeatureToggle").is(":checked") ? 1 : 0;
+    let test = {featureId, name,}
     
     let result = await Feature.updateFeature({ featureId, name, active })
     result == null ? notification.errorMessage("Something went wrong!"): notification.successMessage("Feature has been updated!");
