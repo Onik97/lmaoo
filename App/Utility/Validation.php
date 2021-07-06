@@ -149,4 +149,14 @@ class Validation
             ->assert($data);
         });
     }
+
+    public static function updateProject($data)
+    {
+        return self::validate(function() use ($data) {
+            v::key("projectId", v::NotOptional()->intval())
+            ->key("name", v::NotOptional()->stringVal())
+            ->key("status", v::NotOptional()->intval())
+            ->assert($data);
+        });
+    }
 }

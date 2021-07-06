@@ -30,11 +30,11 @@ class ProjectController extends BaseController
         return $returnProjects;
     }
 
-    public function updateProject()
+    public function updateProject($json)
     {
-        Library::validatePostValues("projectId", "name", "status", "owner");
-        $data = array("name" => $_POST["name"], "status" => $_POST["status"], "owner" => $_POST["owner"]);
-        Project::update($_POST["projectId"], $data);
+        $data = json_decode($json, true); $validation = Validation::updateProject($data);
+        $projectId = $data['projectId'];
+        $validation == null ? Project::update($projectId, $data) : APIResponse::BadRequest($validation);
     }
 
     public function activateProject($projectId)
