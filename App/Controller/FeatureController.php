@@ -26,11 +26,9 @@ class FeatureController extends BaseController
     {
         $features = Feature::read(Constant::$FEATURE_COLUMNS, array("projectId" => $projectId));
         $returnFeatures = array();
-        foreach ($features as $feature)
+        foreach ($features as $feature) 
         {
-            if ($feature->active == $active) {
-                array_push($returnFeatures, $feature);
-            }
+            if ($feature->active == $active) array_push($returnFeatures, $feature);
         }
         return $returnFeatures;
     }
