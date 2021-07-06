@@ -46,6 +46,9 @@ $("#editFeatureBtn").on("click",async function() {
     let test = {featureId, name,}
     
     let result = await Feature.updateFeature({ featureId, name, active })
+    if (active == 1) { $(this).parent().parent().remove(); WebComponent.Feature("#activeFeatures", test); $("#featureToggle").prop("checked", true); }
+    if (active == 0) { WebComponent.Feature("#inactiveFeatures", test); $("#featureToggle").prop("checked", false); }
+
     result == null ? notification.errorMessage("Something went wrong!"): notification.successMessage("Feature has been updated!");
     $("#editFeatureModal").modal("hide");
 });
