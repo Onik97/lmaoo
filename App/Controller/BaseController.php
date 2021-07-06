@@ -5,7 +5,7 @@ use Lmaoo\Core\Config;
 
 abstract class BaseController extends Config
 {
-    public $userLoggedIn; 
+    protected $userLoggedIn; 
     
     function __construct()
     {
