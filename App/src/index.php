@@ -10,7 +10,6 @@ use Lmaoo\Controller\ProjectController;
 use Lmaoo\Controller\FeatureController;
 use Lmaoo\Controller\TicketController;
 use Lmaoo\Controller\UserController;
-use Lmaoo\Model\Feature;
 
 if (session_status() == PHP_SESSION_NONE) session_start();
 
