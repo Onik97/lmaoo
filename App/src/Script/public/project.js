@@ -39,7 +39,7 @@ $(document).on('click', '.far.fa-edit', async function() {
 })
 
 // Edit Feature
-$("#editFeatureBtn").click(async function() {
+$("#editFeatureBtn").on("click",async function() {
     let name = $("#editFeatureName").val();
     let featureId = parseInt($(this).attr('value'));
     let active = $("#editFeatureToggle").is(":checked") ? 1 : 0;
