@@ -96,7 +96,7 @@ class Validation
     public static function createFeature($data)
     {
         return self::validate(function() use ($data) {
-            v::key("name", v::NotOptional()->stringType()->stringVal())
+            v::key("name", v::NotOptional()->stringVal())
             ->key("projectId", v::NotOptional()->intval())
             ->assert($data);
         });
@@ -144,8 +144,18 @@ class Validation
     {
         return self::validate(function() use ($data) {
             v::key("featureId", v::NotOptional()->intval())
-            ->key("name", v::NotOptional()->stringType()->stringVal())
+            ->key("name", v::NotOptional()->stringVal())
             ->key("active", v::NotOptional()->intval())
+            ->assert($data);
+        });
+    }
+
+    public static function updateProject($data)
+    {
+        return self::validate(function() use ($data) {
+            v::key("projectId", v::NotOptional()->intval())
+            ->key("name", v::NotOptional()->stringVal())
+            ->key("status", v::NotOptional()->intval())
             ->assert($data);
         });
     }

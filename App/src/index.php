@@ -10,7 +10,6 @@ use Lmaoo\Controller\ProjectController;
 use Lmaoo\Controller\FeatureController;
 use Lmaoo\Controller\TicketController;
 use Lmaoo\Controller\UserController;
-use Lmaoo\Model\Feature;
 
 if (session_status() == PHP_SESSION_NONE) session_start();
 
@@ -47,7 +46,7 @@ $router->mount("/project", function() use ($router, $json)
 {
     $router->get("/(\d+)", fn($projectId) => Render::project($projectId));
     $router->post("/", fn() => (new ProjectController)->createProject($json));
-    $router->put("/", fn() => (new ProjectController)->updateProject());
+    $router->put("/", fn() => (new ProjectController)->updateProject($json));
 
     $router->get("/activate/(\d+)", fn($projectId) => (new ProjectController)->activateProject($projectId));
     $router->get("/deactivate/(\d+)", fn($projectId) => (new ProjectController)->deactivateProject($projectId));

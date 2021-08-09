@@ -6,7 +6,7 @@ class navBar
     /**
      * @var \AcceptanceTester;
      */
-    protected $acceptanceTester;
+    protected \AcceptanceTester $acceptanceTester;
 
     public $darkmodeToggle = "body > nav > div.custom-control.custom-switch";
     public $searchTextbox = "#searchBarInput";

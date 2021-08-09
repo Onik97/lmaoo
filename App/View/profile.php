@@ -86,10 +86,10 @@
 
 <div class="link">
     <p1>Linked With Github</p1>
-    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" style=”width:40px;height:20px;" class="icon">  
+    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" style="width:40px;height:20px;" class="icon">  
 </div>
 <div class="link"> 
     <p2>Linked With Discord</p2>
-    <img src="https://preview.redd.it/s9biyhs4lix61.jpg?auto=webp&s=c600a95eff95b3e9406a8b913c6aa3988b5e3a8b" style=”width:40px;height:20px;" class="icon">   
+    <img src="https://preview.redd.it/s9biyhs4lix61.jpg?auto=webp&s=c600a95eff95b3e9406a8b913c6aa3988b5e3a8b" style="width:40px;height:20px;" class="icon">   
 </div>
 
